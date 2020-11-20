@@ -14,8 +14,7 @@
 
 	</author>
 
-<!--	<content src="openWin.html"/>-->
-	<content src="html/main.html"/>
+	<content src="openWin.html"/>
 
 	<access origin="*"/>
 
