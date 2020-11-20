@@ -32,7 +32,7 @@
 		this.smoothness = 80;
 
 		this.img = new Image();
-		this.img.src = options.brushUrl || 'images/drawingBoard/pen1.png';
+		this.img.src = options.brushUrl || 'image/drawingBoard/pen1.png';
 	}
 	Brush.prototype.clear = function () {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -161,7 +161,7 @@
 					$el: $box.find('canvas'), //canvas 选择器
 					width: $canvas.width(),
 					height: $canvas.height(),
-					brushUrl: 'images/drawingBoard/pen1.png' //选择笔刷
+					brushUrl: 'image/drawingBoard/pen1.png' //选择笔刷
 				});
 
 				$box.find('button.dwz-btn-reset').click(function () {

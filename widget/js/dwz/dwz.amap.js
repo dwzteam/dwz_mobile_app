@@ -83,7 +83,7 @@
 				map: null,
 				position: null,
 				offset: new AMap.Pixel(0, 0),
-				content: '<div class="dwz-marker icon-md"><img src="./images/icon/marker-end.svg"></div>',
+				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>',
 				zIndex: 100
 			}, options);
 

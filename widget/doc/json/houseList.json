@@ -9,7 +9,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house01.png"
+      "img_url_sm": "image/pic/house01.png"
     },
     {
       "id":2,
@@ -17,7 +17,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house02.png"
+      "img_url_sm": "image/pic/house02.png"
     },
     {
       "id":3,
@@ -25,7 +25,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house03.png"
+      "img_url_sm": "image/pic/house03.png"
     },
     {
       "id":4,
@@ -33,7 +33,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house04.png"
+      "img_url_sm": "image/pic/house04.png"
     },
     {
       "id":5,
@@ -41,7 +41,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house05.png"
+      "img_url_sm": "image/pic/house05.png"
     },
     {
       "id":6,
@@ -49,7 +49,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house06.png"
+      "img_url_sm": "image/pic/house06.png"
     },
     {
       "id":7,
@@ -57,7 +57,7 @@
       "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
       "tags":["精装修", "押一付三"],
       "price":7000,
-      "img_url_sm": "images/pic/house01.png"
+      "img_url_sm": "image/pic/house01.png"
     }
   ]
 }

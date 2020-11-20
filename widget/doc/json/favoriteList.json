@@ -10,7 +10,7 @@
                 "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
                 "tags":["精装修", "押一付三"],
                 "price":7000,
-                "img_url_sm": "images/favorite-empty-bg.svg"
+                "img_url_sm": "image/favorite-empty-bg.svg"
             },
             {
                 "id":2,
@@ -18,7 +18,7 @@
                 "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
                 "tags":["精装修", "押一付三"],
                 "price":7000,
-                "img_url_sm": "images/favorite-empty-bg.svg"
+                "img_url_sm": "image/favorite-empty-bg.svg"
             }
         ]
     }

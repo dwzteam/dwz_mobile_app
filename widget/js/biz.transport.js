@@ -70,7 +70,7 @@ biz.transport = {
 			car: $.amap.addMarker({
 				map: map,
 				position: [biz.location.lng, biz.location.lat],
-				content: '<div class="center-marker"><img src="./images/icon/marker-car.svg" class="icon-md"></div>'
+				content: '<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>'
 			}),
 			start: null,
 			end: null
@@ -189,13 +189,13 @@ biz.transport = {
 					markers.start = $.amap.addMarker({
 						map: map,
 						position: pointStart,
-						content: '<div class="center-marker"><img src="./images/icon/marker-start.svg" class="icon-md"></div>'
+						content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
 					});
 					// 创建终点图标
 					markers.end = $.amap.addMarker({
 						map: map,
 						position: [parseFloat(json.data.receive.lng), parseFloat(json.data.receive.lat)],
-						content: '<div class="dwz-marker icon-md"><img src="./images/icon/marker-end.svg"></div>'
+						content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
 					});
 
 					$(document).trigger('location.change', biz.location); // 测试路线
@@ -228,13 +228,13 @@ biz.transport = {
 			start: $.amap.addMarker({
 				map: map,
 				position: pointStart,
-				content: '<div class="center-marker"><img src="./images/icon/marker-start.svg" class="icon-md"></div>'
+				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
 			}),
 			// 创建终点图标
 			end: $.amap.addMarker({
 				map: map,
 				position: pointEnd,
-				content: '<div class="dwz-marker icon-md"><img src="./images/icon/marker-end.svg"></div>'
+				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
 			})
 		};
 
