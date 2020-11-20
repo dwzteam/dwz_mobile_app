@@ -132,28 +132,6 @@
 
 	.sheet-box {
 
-		.sheet-content {
-			transition: all .5s ease;
-			max-height: 500px;
-			overflow: hidden;
-		}
-		&.sheet-top {
-			position: absolute;
-			left: 0px;
-			right: 0px;
-			bottom: 0px;
-			top:0;
-			overflow: hidden;
-			background: @defaultBackground;
-			&.fold {
-				height: 0;
-			}
-		}
-		&.fold {
-			.sheet-content {
-				max-height: 0px;
-			}
-		}
 		.widget-box {
 			overflow: hidden;
 			background: rgba(255,255,255,1);

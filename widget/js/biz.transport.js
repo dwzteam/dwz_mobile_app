@@ -1,22 +1,23 @@
 biz.transport = {
 	indexRender: function (tpl, params) {
-		var $box = this;
+		const $box = this;
 
-		var html = template.render(tpl, {params: params});
+		let html = template.render(tpl, { params: params });
 		$box.html(html).initUI();
 	},
 
 	listRender: function (tpl, params) {
-		var $box = this, tplWrap = $.templateWrap(tpl);
+		const $box = this,
+			tplWrap = $.templateWrap(tpl);
 
-		var html = template.render(tplWrap.tpl, {
+		let html = template.render(tplWrap.tpl, {
 			UserInfo: UserInfo,
-			params: params
+			params: params,
 		});
 		$box.html(html).initUI();
 
-		var $form = $box.find("form.dwz-list-form"),
-			$listBox = $form.find('ul.dwz-list-box');
+		const $form = $box.find("form.dwz-list-form"),
+			$listBox = $form.find("ul.dwz-list-box");
 
 		$form.requestList = function (loadMore) {
 			$.ajax({
@@ -32,73 +33,84 @@ biz.transport = {
 					}
 
 					if ($.isAjaxOkStatus(json)) {
-						$form.total = json.data.total || json.data.list ? json.data.list.length : 0;
+						$form.total =
+							json.data.total || json.data.list
+								? json.data.list.length
+								: 0;
 						if ($form.total) {
-							$form.find('.empty_box').hide();
+							$form.find(".empty_box").hide();
 						}
 
-						var _html = template.render(tplWrap['tpl-list'], json.data);
+						let _html = template.render(
+							tplWrap["tpl-list"],
+							json.data
+						);
 						if (loadMore) {
 							$listBox.append(_html);
 						} else {
 							$listBox.html(_html);
 						}
 					}
-
 				},
-				error: ajaxError
+				error: ajaxError,
 			});
 		};
 
 		$.listForm($form);
 	},
 	detailRender: function (tpl, params) {
-		var $box = this, tplWrap = $.templateWrap(tpl);
-		var html = template.render(tplWrap.tpl, {params: params});
+		const $box = this,
+			tplWrap = $.templateWrap(tpl);
+		let html = template.render(tplWrap.tpl, { params: params });
 		$box.html(html).initUI();
 
-		var $sheetBox = $box.find('.sheet-box');
+		const $sheetBox = $box.find(".sheet-box");
 
-		var $mapBox = $box.find('.dwz-map-box');
-		var map = new AMap.Map($mapBox.get(0), {
+		const $mapBox = $box.find(".dwz-map-box");
+		const map = new AMap.Map($mapBox.get(0), {
 			// mapStyle: "amap://styles/grey",
-			zoom: biz.location.zoom
+			zoom: biz.location.zoom,
 		});
 
 		// 创建小车图标
-		var markers = {
+		const markers = {
 			car: $.amap.addMarker({
 				map: map,
 				position: [biz.location.lng, biz.location.lat],
-				content: '<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>'
+				content:
+					'<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>',
 			}),
 			start: null,
-			end: null
+			end: null,
 		};
 
-		$(document).on('location.change', function (event) {
+		$(document).on("location.change", function (event) {
 			// console.log(JSON.stringify(event.data));
 
-			var point = new AMap.LngLat(biz.location.lng, biz.location.lat);
+			const gpsPos = new AMap.LngLat(biz.location.lng, biz.location.lat);
 			// 创建标注对象并添加到地图
 
-			markers.car.setPosition(point);
-			map.setCenter(point);
+			markers.car.setPosition(gpsPos);
+			if (!markers._inited) {
+				markers._inited = true;
+				setTimeout(() => {
+					map.setCenter(gpsPos);
+				}, 500);
+			}
 
 			if (markers.start && (biz.location.lng || biz.location.lat)) {
-				var startPos = markers.start.getPosition();
-				var endPos = markers.end.getPosition();
-				var gpsPos = new AMap.LngLat(biz.location.lng, biz.location.lat);
+				const startPos = markers.start.getPosition();
+				const endPos = markers.end.getPosition();
 
 				// 设置小车角度
-				var deg = $.amap.calRotation({map: map, startPos: gpsPos, endPos: endPos});
+				let deg = $.amap.calRotation({
+					map: map,
+					startPos: gpsPos,
+					endPos: endPos,
+				});
 				markers.car.setAngle(deg);
 
-				var path = [
-					startPos,
-					gpsPos,
-					endPos
-				];
+				const path = [startPos, gpsPos, endPos];
 				if (markers.polyline) {
 					markers.polyline.setPath(path);
 				} else {
@@ -106,33 +118,31 @@ biz.transport = {
 					markers.polyline = new AMap.Polyline({
 						map: map,
 						path: path,
-						lineCap: 'round',
+						lineCap: "round",
 						isOutline: true,
-						outlineColor: 'white',
+						outlineColor: "white",
 						showDir: true,
 						strokeColor: "blue",
 						strokeWeight: 4,
 						borderWeight: 2,
-						strokeOpacity: 0.5
+						strokeOpacity: 0.5,
 					});
 				}
 			}
 		});
 
 		$box.on(dwz.event.type.pageClear, function () {
-			$(document).off('location.change');
+			$(document).off("location.change");
 		});
 
-		var $receiveBox = $box.find('ul.receive-box');
-		var $sheetBox = $box.find('div.sheet-box');
-		var $form = $box.find('form.dwz-list-form');
-		$form.on('submit', function () {
-
+		const $receiveBox = $box.find("ul.receive-box");
+		const $form = $box.find("form.dwz-list-form");
+		$form.on("submit", function () {
 			$.ajax({
 				type: "POST",
 				url: biz.server.getUrl(biz.server.transportDetail),
 				dataType: "json",
-				data: {transport_id: params.id},
+				data: { transport_id: params.id },
 				cache: false,
 				global: false,
 				success: function (json) {
@@ -141,185 +151,231 @@ biz.transport = {
 						return;
 					}
 
-					var _data = {
+					const _data = {
 						UserInfo: UserInfo,
 						vo: json.data,
 						receive: json.data.receive || {},
-						ship: json.data.ship || {}
+						ship: json.data.ship || {},
 					};
-					var html = template.render(tplWrap['tpl-sheet-box'], _data);
+					let html = template.render(tplWrap["tpl-sheet-box"], _data);
 					$sheetBox.html(html).initUI();
 
-					var html2 = template.render(tplWrap['tpl-receive-box'], _data);
+					let html2 = template.render(
+						tplWrap["tpl-receive-box"],
+						_data
+					);
 					$receiveBox.html(html2);
 
-					$box.find('.dwz-btn-start').touchwipe({
+					$box.find(".dwz-btn-start").touchwipe({
 						wipeRight: function () {
-							var $btn = $(this);
-							if (!$btn.hasClass('wipe-hover')) {
-								$btn.addClass('wipe-hover');
+							const $btn = $(this);
+							if (!$btn.hasClass("wipe-hover")) {
+								$btn.addClass("wipe-hover");
 								setTimeout(function () {
-									$btn.removeClass('wipe-hover');
+									$btn.removeClass("wipe-hover");
 								}, 3000);
 
 								biz.transport.transportStart(json.data);
 							}
-						}
+						},
 					});
-					$box.find('.dwz-btn-finish').touchwipe({
+					$box.find(".dwz-btn-finish").touchwipe({
 						wipeRight: function () {
-							var $btn = $(this);
-							if (!$btn.hasClass('wipe-hover')) {
-								$btn.addClass('wipe-hover');
+							const $btn = $(this);
+							if (!$btn.hasClass("wipe-hover")) {
+								$btn.addClass("wipe-hover");
 								setTimeout(function () {
-									$btn.removeClass('wipe-hover');
+									$btn.removeClass("wipe-hover");
 								}, 3000);
 
 								biz.transport.transportFinish(json.data);
 							}
-						}
+						},
 					});
 
 					// 缓存当前运输单
 					biz.transport.vo = json.data;
 
-					var pointStart = new AMap.LngLat(parseFloat(json.data.ship.lng), parseFloat(json.data.ship.lat));
-					map.setCenter(pointStart);
+					const pointStart = new AMap.LngLat(
+						json.data.ship.lng,
+						json.data.ship.lat
+					);
+
 					// 创建起点图标
 					markers.start = $.amap.addMarker({
 						map: map,
 						position: pointStart,
-						content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+						content:
+							'<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>',
 					});
 					// 创建终点图标
 					markers.end = $.amap.addMarker({
 						map: map,
-						position: [parseFloat(json.data.receive.lng), parseFloat(json.data.receive.lat)],
-						content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
+						position: [
+							json.data.receive.lng,
+							json.data.receive.lat,
+						],
+						content:
+							'<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>',
 					});
 
-					$(document).trigger('location.change', biz.location); // 测试路线
+					// 缩放地图到合适的视野级别
+					map.setFitView([markers.start, markers.end]);
+
+					$(document).trigger("location.change", biz.location); // 测试路线
 				},
-				error: ajaxError
+				error: ajaxError,
 			});
 
 			return false;
 		});
 
-		$form.trigger('submit')
+		$form.trigger("submit");
 	},
 
 	driving: function (tpl, params) {
-		var $box = this, tplWrap = $.templateWrap(tpl);
-		var html = template.render(tplWrap.tpl, {params: params});
+		const $box = this,
+			tplWrap = $.templateWrap(tpl);
+		const html = template.render(tplWrap.tpl, { params: params });
 		$box.html(html).initUI();
 
-		var $mapBox = $box.find('.dwz-map-box');
-		var map = new AMap.Map($mapBox.get(0), {
-			zoom: biz.location.zoom
+		const $mapBox = $box.find(".dwz-map-box");
+		const map = new AMap.Map($mapBox.get(0), {
+			zoom: biz.location.zoom,
 		});
 
-		var pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
-		var pointEnd = new AMap.LngLat(parseFloat(params.lng), parseFloat(params.lat));
+		const pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
+		const pointEnd = new AMap.LngLat(
+			parseFloat(params.lng),
+			parseFloat(params.lat)
+		);
 		map.setCenter(pointStart);
 
-		var markers = {
+		const markers = {
 			// 创建起点图标
 			start: $.amap.addMarker({
 				map: map,
 				position: pointStart,
-				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+				content:
+					'<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>',
 			}),
 			// 创建终点图标
 			end: $.amap.addMarker({
 				map: map,
 				position: pointEnd,
-				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
-			})
+				content:
+					'<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>',
+			}),
 		};
 
 		// 路线导航
-		let driving = biz.createDriving({map: map, pointStart: pointStart, pointEnd: pointEnd}, function (route) {
-			var _html = template.render(tplWrap['tpl-nav-info'], route);
-			$box.find('.dwz-nav-info').html(_html);
-		});
+		let driving = biz.createDriving(
+			{ map: map, pointStart: pointStart, pointEnd: pointEnd },
+			function (route) {
+				let _html = template.render(tplWrap["tpl-nav-info"], route);
+				$box.find(".dwz-nav-info").html(_html);
+			}
+		);
 
-		var $form = $box.find('form.dwz-form');
-		var $sheetBox = $form.find('div.sheet-box');
-		var $inputEnd = $form.find('input[name=end]');
-		var $list = $form.find('ul.dwz-list');
-		$form.on('submit', function (event) {
-			console.log('search poi...');
+		const $form = $box.find("form.dwz-form");
+		const $sheetBox = $form.find("div.sheet-box");
+		const $inputEnd = $form.find("input[name=end]");
+		const $list = $form.find("ul.dwz-list");
+		$form.on("submit", function (event) {
+			console.log("search poi...");
 			event.preventDefault();
 
-			$sheetBox.removeClass('fold');
+			$sheetBox.removeClass("fold");
 
-			var keywords = $inputEnd.val().trim();
+			let keywords = $inputEnd.val().trim();
 			if (keywords) {
-				api.ajax({
-					url: $form.attr("action"),
-					method: 'get',
-					data: {
-						values: {
-							keywords: keywords
+				api.ajax(
+					{
+						url: $form.attr("action"),
+						method: "get",
+						data: {
+							values: {
+								keywords: keywords,
+							},
+						},
+					},
+					function (json, err) {
+						// console.log(JSON.stringify(json));
+						if (json.status == 1) {
+							let _list = [
+								{
+									name: params.name,
+									address: params.address,
+									lng: params.lng,
+									lat: params.lat,
+								},
+							];
+							json.pois.forEach(function (item) {
+								let location = item.location.split(",");
+								_list.push({
+									name:
+										item.cityname + item.adname + item.name,
+									address: item.address,
+									lng: parseFloat(location[0]),
+									lat: parseFloat(location[1]),
+								});
+							});
+							let _html = template.render(tplWrap["tpl-list"], {
+								list: _list,
+							});
+							$list.html(_html);
+
+							$list.find("li.item").touchwipe({
+								touch: function () {
+									let $li = $(this);
+									$inputEnd.val($li.attr("data-name"));
+									$sheetBox.addClass("fold");
+
+									// 路线导航
+									driving && driving.clear();
+									let _pointEnd = new AMap.LngLat(
+										parseFloat($li.attr("data-lng")),
+										parseFloat($li.attr("data-lat"))
+									);
+									driving = biz.createDriving(
+										{
+											map: map,
+											pointStart: pointStart,
+											pointEnd: _pointEnd,
+										},
+										function (route) {
+											let _html = template.render(
+												tplWrap["tpl-nav-info"],
+												route
+											);
+											$box.find(".dwz-nav-info").html(
+												_html
+											);
+										}
+									);
+								},
+							});
 						}
 					}
-				}, function (json, err) {
-					// console.log(JSON.stringify(json));
-					if (json.status == 1) {
-						var _list = [
-							{
-								name: params.name,
-								address: params.address,
-								lng: params.lng,
-								lat: params.lat
-							}
-						];
-						json.pois.forEach(function (item) {
-							var location = item.location.split(',');
-							_list.push({
-								name: item.cityname + item.adname + item.name,
-								address: item.address,
-								lng: parseFloat(location[0]),
-								lat: parseFloat(location[1])
-							});
-						});
-						var _html = template.render(tplWrap['tpl-list'], {list: _list});
-						$list.html(_html);
-
-						$list.find('li.item').touchwipe({
-							touch: function () {
-								var $li = $(this);
-								$inputEnd.val($li.attr('data-name'));
-								$sheetBox.addClass('fold');
-
-								// 路线导航
-								driving && driving.clear();
-								var _pointEnd = new AMap.LngLat(parseFloat($li.attr('data-lng')), parseFloat($li.attr('data-lat')));
-								driving = biz.createDriving({map: map, pointStart: pointStart, pointEnd: _pointEnd}, function (route) {
-									var _html = template.render(tplWrap['tpl-nav-info'], route);
-									$box.find('.dwz-nav-info').html(_html);
-								});
-							}
-						});
-					}
-				});
+				);
 			}
 		});
 
 		// 判断中文输入完成或者英文输入，触发事件
-		var isInputZh = false;
-		$inputEnd.on('compositionstart compositionend input focus', function (event) {
+		let isInputZh = false;
+		$inputEnd.on("compositionstart compositionend input focus", function (
+			event
+		) {
 			console.log(event.type, isInputZh);
 
 			switch (event.type) {
-				case 'compositionstart':
+				case "compositionstart":
 					isInputZh = true;
 					break;
-				case 'compositionend':
+				case "compositionend":
 					isInputZh = false;
 				default:
-					if (!isInputZh) $form.trigger('submit');
+					if (!isInputZh) $form.trigger("submit");
 					break;
 			}
 		});
@@ -327,13 +383,13 @@ biz.transport = {
 
 	// 录入发货过磅信息
 	firstRender: function (tpl, params) {
-		var $box = this;
+		const $box = this;
 
 		$.ajax({
 			type: "POST",
 			url: biz.server.getUrl(biz.server.transportDetail),
 			dataType: "json",
-			data: {transport_id: params.id},
+			data: { transport_id: params.id },
 			cache: false,
 			global: false,
 			success: function (json) {
@@ -341,27 +397,27 @@ biz.transport = {
 					return;
 				}
 
-				var html = template.render(tpl, {
+				let html = template.render(tpl, {
 					vo: json.data,
 					location: biz.location,
-					form_url: biz.server.getUrl(biz.server.transportFirst)
+					form_url: biz.server.getUrl(biz.server.transportFirst),
 				});
 				$box.html(html).initUI();
 
-				$box.find('a.old-img-del').click(biz.transport.delPic);
-			}
+				$box.find("a.old-img-del").click(biz.transport.delPic);
+			},
 		});
 	},
 
 	// 录入卸货过磅信息
 	lastRender: function (tpl, params) {
-		var $box = this;
+		const $box = this;
 
 		$.ajax({
 			type: "POST",
 			url: biz.server.getUrl(biz.server.transportDetail),
 			dataType: "json",
-			data: {transport_id: params.id},
+			data: { transport_id: params.id },
 			cache: false,
 			global: false,
 			success: function (json) {
@@ -369,31 +425,33 @@ biz.transport = {
 					return;
 				}
 
-				var html = template.render(tpl, {
+				let html = template.render(tpl, {
 					vo: json.data,
 					location: biz.location,
-					form_url: biz.server.getUrl(biz.server.transportLast)
+					form_url: biz.server.getUrl(biz.server.transportLast),
 				});
 				$box.html(html).initUI();
 
-				$box.find('a.old-img-del').click(biz.transport.delPic);
-			}
+				$box.find("a.old-img-del").click(biz.transport.delPic);
+			},
 		});
 	},
 
 	delPic: function (event) {
-		var $link = $(this);
-		var $li = $link.parentsUntil(function () {
-			return $(this).is('li.thumbnail');
+		const $link = $(this);
+		const $li = $link.parentsUntil(function () {
+			return $(this).is("li.thumbnail");
 		});
 
-		var transport_id = $link.attr('data-id'), imgUrl = $link.attr('data-img-url'), field = $link.attr('data-field');
+		let transport_id = $link.attr("data-id"),
+			imgUrl = $link.attr("data-img-url"),
+			field = $link.attr("data-field");
 		if (imgUrl) {
 			$.ajax({
 				type: "POST",
 				url: biz.server.getUrl(biz.server.transportPicDel),
 				dataType: "json",
-				data: {id: transport_id, imgUrl: imgUrl, field: field},
+				data: { id: transport_id, imgUrl: imgUrl, field: field },
 				cache: false,
 				global: false,
 				success: function (json) {
@@ -406,7 +464,7 @@ biz.transport = {
 						$li.remove();
 					}
 				},
-				error: ajaxError
+				error: ajaxError,
 			});
 		} else {
 			$li.remove();
@@ -417,10 +475,15 @@ biz.transport = {
 
 	// 弹出发货过磅确认
 	confirmFirst: function (vo) {
-		$.alert.confirm('出发前先录入发货过磅信息', {
+		$.alert.confirm("出发前先录入发货过磅信息", {
 			okCall: function (event) {
-				$.navView.open({url: 'tpl/transport/first.html?dwz_callback=biz.transport.firstRender', data: vo, rel: 'transportFirst'});
-			}
+				$.navView.open({
+					url:
+						"tpl/transport/first.html?dwz_callback=biz.transport.firstRender",
+					data: vo,
+					rel: "transportFirst",
+				});
+			},
 		});
 		return false;
 	},
@@ -434,7 +497,7 @@ biz.transport = {
 			type: "POST",
 			url: biz.server.getUrl(biz.server.transportStart),
 			dataType: "json",
-			data: {transport_id: vo.id},
+			data: { transport_id: vo.id },
 			cache: false,
 			global: false,
 			success: function (json) {
@@ -445,15 +508,20 @@ biz.transport = {
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},
-			error: ajaxError
+			error: ajaxError,
 		});
 	},
 	// 弹出收货过磅确认
 	confirmFinish: function (vo) {
-		$.alert.confirm('完成前先录入卸货过磅信息', {
+		$.alert.confirm("完成前先录入卸货过磅信息", {
 			okCall: function (event) {
-				$.navView.open({url: 'tpl/transport/last.html?dwz_callback=biz.transport.lastRender', data: vo, rel: 'transportFinish'});
-			}
+				$.navView.open({
+					url:
+						"tpl/transport/last.html?dwz_callback=biz.transport.lastRender",
+					data: vo,
+					rel: "transportFinish",
+				});
+			},
 		});
 		return false;
 	},
@@ -467,7 +535,7 @@ biz.transport = {
 			type: "POST",
 			url: biz.server.getUrl(biz.server.transportFinish),
 			dataType: "json",
-			data: {transport_id: vo.id},
+			data: { transport_id: vo.id },
 			cache: false,
 			global: false,
 			success: function (json) {
@@ -478,30 +546,30 @@ biz.transport = {
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},
-			error: ajaxError
+			error: ajaxError,
 		});
 	},
 
 	formSubmitWeigh: function (form) {
-		console.log('formSubmitWeigh()....')
-		var $form = $(form);
-		var $pic = $('#upload-weigh_pic');
-		var $sitePic = $('#upload-weigh_site_pic');
+		console.log("formSubmitWeigh()....");
+		const $form = $(form);
+		const $pic = $("#upload-weigh_pic");
+		const $sitePic = $("#upload-weigh_site_pic");
 
-		if ($pic.size() && $pic.find('.thumbnail').size() == 0) {
-			$.alert.error('请选择上传磅单图片');
+		if ($pic.size() && $pic.find(".thumbnail").size() == 0) {
+			$.alert.error("请选择上传磅单图片");
 			return false;
 		}
-		if ($sitePic.size() && $sitePic('.thumbnail').size() == 0) {
-			$.alert.error('请选择上传现场图片');
+		if ($sitePic.size() && $sitePic(".thumbnail").size() == 0) {
+			$.alert.error("请选择上传现场图片");
 			return false;
 		}
 
 		// 电子签名
-		var $sign_url = $form.find('input.dwz-sign-input');
+		const $sign_url = $form.find("input.dwz-sign-input");
 		if ($sign_url.size()) {
-			if (!$sign_url.val() && $form.find('.dwz-sign-box').size()) {
-				$.alert.error('您还没有完成签字！');
+			if (!$sign_url.val() && $form.find(".dwz-sign-box").size()) {
+				$.alert.error("您还没有完成签字！");
 				return false;
 			}
 		}
@@ -518,47 +586,50 @@ biz.transport = {
 	},
 
 	mapNav: function () {
-		var vo = biz.transport.vo;
+		const vo = biz.transport.vo;
 		if (!vo) {
 			return;
 		}
 
 		$.navView.close(true, true);
 
-		// var startPos = $.gps.bd_decrypt(biz.location.lat, biz.location.lng);
-		// var endPos = $.gps.bd_decrypt(vo.receive.lat, vo.receive.lng);
-		var startPos = biz.location;
-		var endPos = vo.receive;
-		var aMapNavigation = api.require('aMapNavigation');
-		aMapNavigation.start({
-			start: {
-				lon: startPos.lng,
-				lat: startPos.lat
+		// let startPos = $.gps.bd_decrypt(biz.location.lat, biz.location.lng);
+		// let endPos = $.gps.bd_decrypt(vo.receive.lat, vo.receive.lng);
+		let startPos = biz.location;
+		let endPos = vo.receive;
+		let aMapNavigation = api.require("aMapNavigation");
+		aMapNavigation.start(
+			{
+				start: {
+					lon: startPos.lng,
+					lat: startPos.lat,
+				},
+				end: {
+					lon: endPos.lng,
+					lat: endPos.lat,
+				},
+				type: "drive",
+				strategy: "fast",
+				mode: "GPS",
+				styles: {
+					preference: {
+						night: false,
+						compass: false,
+						crossImg: false,
+						degree: 30,
+						yawReCal: false,
+						jamReCal: false,
+						alwaysBright: false,
+					},
+				},
 			},
-			end: {
-				lon: endPos.lng,
-				lat: endPos.lat
-			},
-			type: 'drive',
-			strategy: 'fast',
-			mode: 'GPS',
-			styles: {
-				preference: {
-					night: false,
-					compass: false,
-					crossImg: false,
-					degree: 30,
-					yawReCal: false,
-					jamReCal: false,
-					alwaysBright: false
+			function (ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+				} else {
+					console.log(JSON.stringify(err));
 				}
 			}
-		}, function (ret, err) {
-			if (ret) {
-				console.log(JSON.stringify(ret));
-			} else {
-				console.log(JSON.stringify(err));
-			}
-		});
-	}
+		);
+	},
 };

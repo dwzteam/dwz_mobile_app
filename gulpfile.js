@@ -78,6 +78,11 @@ gulp.task('script-min', () => {
 		.pipe(gulp.dest('widget/script'));
 });
 
+/* del */
+gulp.task('clean-build', (cb) => {
+	return del(['widget/script/**/*', 'widget/css/ui.css'], cb)
+});
+
 /* serve */
 gulp.task('serve-dev', () => {
     browserSync.init({

@@ -8,9 +8,6 @@ var UserInfo = {
 	mobile: '',
     realname: '',
 	sex: 1,
-	idcard: '',
-	isauth: false,
-	logins: 0,
 	address: '',
 	user_type: '',
 	headimgurl: ''
@@ -23,7 +20,6 @@ var UserInfoUtil = {
 		if (data.uid != undefined) UserInfo.uid = data.uid;
 		if (data.realname != undefined) UserInfo.realname = data.realname;
 		if (data.mobile != undefined) UserInfo.mobile = data.mobile;
-		if (data.mobile_hidden != undefined) UserInfo.mobile_hidden = data.mobile_hidden;
 		if (data.token != undefined) UserInfo.token = data.token;
 		if (data.user_type != undefined) {
 			UserInfo.user_type = data.user_type;
@@ -32,10 +28,7 @@ var UserInfoUtil = {
 			UserInfo.sex = data.sex == 1 ? 1 : 2;
 		}
 
-		if (data.photo != undefined) UserInfo.headimgurl = data.photo;
-		if (data.isauth != undefined) UserInfo.isauth = data.isauth;
-		if (data.logins != undefined) UserInfo.logins = data.logins;
-		if (data.idcard != undefined) UserInfo.idcard = data.idcard;
+		if (data.headimgurl != undefined) UserInfo.headimgurl = data.headimgurl;
 		if (data.address != undefined) UserInfo.address = data.address;
 
 		$.setStorage('APP_USER_INFO', UserInfo);

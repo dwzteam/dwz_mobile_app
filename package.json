@@ -8,7 +8,8 @@
         "start": "apicloud wifiStart",
         "log": "apicloud wifiLog",
         "dev": "gulp dev",
-        "build": "gulp build"
+        "build": "gulp build",
+        "clean": "gulp clean-build"
     },
     "author": "张慧华",
     "license": "ISC",
