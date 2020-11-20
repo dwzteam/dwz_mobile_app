@@ -1,0 +1,76 @@
+<widget id="A6043699378194" version="0.0.1">
+
+	<name>DwzMobileApp</name>
+
+	<description>
+
+		Example For APICloud.
+
+	</description>
+
+	<author email="developer@apicloud.com" href="http://www.apicloud.com">
+
+		Developer
+
+	</author>
+
+<!--	<content src="openWin.html"/>-->
+	<content src="html/main.html"/>
+
+	<access origin="*"/>
+
+	<preference name="pageBounce" value="false"/>
+
+	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="hScrollBarEnabled" value="false"/>
+
+	<preference name="vScrollBarEnabled" value="false"/>
+
+	<preference name="autoLaunch" value="true"/>
+
+	<preference name="fullScreen" value="false"/>
+
+	<preference name="autoUpdate" value="true"/>
+
+	<preference name="smartUpdate" value="false"/>
+
+	<preference name="debug" value="true"/>
+
+	<preference name="statusBarAppearance" value="true"/>
+
+	<permission name="readPhoneState"/>
+
+	<permission name="camera"/>
+
+	<permission name="record"/>
+
+	<permission name="location"/>
+
+	<permission name="fileSystem"/>
+
+	<permission name="internet"/>
+
+	<permission name="bootCompleted"/>
+
+	<permission name="hardware"/>
+
+	<!--配置一个后台定位功能：-->
+	<preference name="backgroundMode" value="audio | location"/>
+
+	<feature name="bmLocation">
+		<param name="android_api_key" value="e4iq3bUaFzwgOorjFzIxYBMEi7rN9xup"/>
+		<param name="ios_api_key" value="teD5QxzcFnY3VEQ0TY144PG7Q87dLOCb"/>
+	</feature>
+	<meta-data name="com.baidu.lbsapi.API_KEY" value="e4iq3bUaFzwgOorjFzIxYBMEi7rN9xup"/>
+
+	<feature name="aMapNavigation">
+		<param name="android_api_key" value="a872c2cfa3c41ffca6b32ddac6edc447" />
+		<param name="ios_api_key" value="" />
+	</feature>
+</widget>
+

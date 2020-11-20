@@ -1,0 +1,261 @@
+// Color
+@titleColor: rgba(0, 0, 0, .8);
+@txtColor: rgba(0, 0, 0, .6);
+@labelColor: rgba(0, 0, 0, .8);
+@infoColor: rgba(0, 0, 0, .6);
+@linkColor: #222;
+@linkColorActive: #E5625C;
+@borderColor: rgba(0, 0, 0, .2);
+@headerButtonTxt: #666;
+@tabTxtColor: #555;
+@tabTxtColorActive: #E5625C;
+@btnTxtColor: #fff;
+@btnTxtColorActive: #fff;
+
+// Background
+@defaultBackground: #F6F7FB;
+
+@hoverBackground: rgba(240, 240, 240, .8);
+@inputBackground: #f6f6f6;
+@btnBackground: #31455A;
+@btnBackgroundActive: #E5625C;
+@tableBackground: rgba(216, 233, 255, .5);
+
+@l1: 18px; // 一级标题
+@l2: 16px; // 二级标题
+@l3: 14px; // 三级标题
+@l4: 13px; // 正文
+@l5: 11px; // 备注
+
+.margin-h {
+	margin: 0 10px;
+}
+
+.margin-v {
+	margin: 10px 0;
+}
+
+.padding-h {
+	padding: 0 10px;
+}
+
+.padding-v {
+	padding: 10px 0;
+}
+.padding-all {
+	padding: 10px;
+}
+
+.background-color(@color: #fff) {
+	background-color: @color;
+}
+
+.tapColor(@color:rgba(0,0,0,0)) {
+	-webkit-tap-highlight-color: @color;
+}
+
+.filterBlur {
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
+	backdrop-filter: saturate(180%) blur(20px);
+}
+
+// Icon Background Color
+.color-blue {
+	background-color: #34b7f7;
+}
+
+.color-green {
+	background-color: #65c730;
+}
+
+.color-orange {
+	background-color: #ff6966;
+}
+
+.color-yellow {
+	background-color: #f0dd3a;
+}
+
+// Line
+.boxLine(@b-width:"1px 1px 1px 1px", @c:rgba(204,204,204,.5)) {
+	border-style: solid;
+	border-width: @b-width;
+	border-color: @c;
+}
+
+.t-line {
+	.boxLine(1px 0 0 0);
+}
+
+.r-line {
+	.boxLine(0 1px 0 0);
+}
+
+.b-line {
+	.boxLine(0 0 1px 0);
+}
+
+.l-line {
+	.boxLine(0 0 0 1px);
+}
+
+.tb-line {
+	.boxLine(1px 0 1px 0);
+}
+
+.box-line {
+	.boxLine(1px 1px 1px 1px);
+}
+
+.no-line {
+	border:none;
+}
+
+// Fonts
+@fontEN: -apple-system-font, "Helvetica Neue", "Roboto", "Segoe UI";
+@fontCN: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+@fontSans: sans-serif;
+@fontDefault: @fontEN, @fontCN, @fontSans;
+
+// Size
+.full-size {
+	width: 100%;
+	height: 100%;
+}
+
+.full-abs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.full-fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.divider {
+	display: flex;
+	overflow: hidden;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 10px;
+	background: @defaultBackground;
+}
+
+.pre-wrap {
+	white-space: pre-wrap;
+}
+
+// Item
+.align-items(@val:center) {
+	align-items: @val;
+}
+
+.justify-content(@val:center) {
+	justify-content: @val;
+}
+
+.flex(@val:1) {
+	flex: @val;
+}
+
+.flex-wrap {
+	display: flex;
+}
+
+.flex-vertical {
+	flex-flow: column;
+}
+
+.flex-item {
+	position: relative;
+	.flex();
+}
+.flex-item2 {
+	position: relative;
+	.flex(2);
+}
+.align-center {
+	.align-items();
+}
+
+.align-start {
+	.align-items(flex-start);
+}
+
+.align-end {
+	.align-items(flex-end);
+}
+
+.justify-center {
+	.justify-content();
+}
+
+.justify-start {
+	.justify-content(flex-start);
+}
+
+.justify-end {
+	.justify-content(flex-end);
+}
+
+.justify-between {
+	.justify-content(space-between);
+}
+
+.justify-around {
+	.justify-content(space-around);
+}
+
+.flex-all-center {
+	.flex-wrap;
+	.align-center;
+	.justify-center;
+}
+
+.clearfix {
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+}
+
+//边框
+.border(@s:1px,@c:#f36143) {
+	border: @s solid @c;
+}
+
+.content-font {
+	line-height: 24px;
+	font-size: 14px;
+	color: #777;
+	text-align: justify;
+
+	h2 {
+		position: relative;
+		line-height: 30px;
+		font-size: 15px;
+		color: #333;
+		text-align: left;
+	}
+}
+
+.backdrop-filter {
+	background: rgba(0, 0, 0, 0.05);
+	backdrop-filter: blur(3px);
+	//filter: blur(3px);
+}
+
+.box-shadow {
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+}

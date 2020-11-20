@@ -1,0 +1,115 @@
+
+.row {
+	.flex-wrap;
+	width: 100%;
+	.col {
+		display: block;
+		.flex-item;
+	}
+	.col-3, .col-3-3, .col-4, .col-4-4, .col-5, .col-5-5 {
+		width: 100%;
+	}
+	.col-3-1 {
+		width: 33.333333%;
+	}
+	.col-3-2 {
+		width: 66.666666%;
+	}
+	.col-4-1 {
+		width: 25%;
+	}
+	.col-4-2 {
+		width: 50%;
+	}
+	.col-4-3 {
+		width: 75%;
+	}
+	.col-5-1 {
+		width: 20%;
+	}
+	.col-5-2 {
+		width: 40%;
+	}
+	.col-5-3 {
+		width: 60%;
+	}
+	.col-5-4 {
+		width: 80%;
+	}
+}
+
+
+// 九宫格
+.grids-contant, .grids-contant2{
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	&:before{
+		content: '';
+		position: absolute;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		left: 0;
+		top: 0;
+		border-bottom: 1px solid #cfcfcf;
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+		-webkit-transform: scale(0.5);
+		transform: scale(0.5);
+	}
+
+	.grids-grid{
+		display: inline-block;
+		position: relative;
+		float: left;
+		padding: 20px 10px;
+		box-sizing: border-box;
+		&:before{
+			content: '';
+			position: absolute;
+			box-sizing: border-box;
+			width: 200%;
+			height: 200%;
+			left: 0;
+			top: 0;
+			border-bottom: 1px solid #cfcfcf;
+			border-right: 1px solid #cfcfcf;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scale(0.5);
+			transform: scale(0.5)
+		}
+		.grids-grid-icon{
+			width: 50px;
+			height: 50px;
+			margin: 0 auto;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		.grids-grid-label{
+			display: block;
+			text-align: center;
+			color: #666;
+			font-size: 14px;
+		}
+	}
+}
+.grids-contant {
+	.grids-grid:nth-child(3n):before {
+		border-right-width: 0;
+	}
+	.grids-grid{
+		width: 33.333333%;
+	}
+}
+.grids-contant2 {
+	.grids-grid:nth-child(2n):before {
+		border-right-width: 0;
+	}
+	.grids-grid{
+		width: 50%;
+	}
+}

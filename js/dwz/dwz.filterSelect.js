@@ -1,0 +1,90 @@
+/**
+ * Created by zhanghuihua on 2016/12/19.
+ */
+$.filterSelect = {
+	config: {
+		box$: '#filter-select',
+		openClass: 'open',
+		frag: '<div id="filter-select" class="unitBox"></div>',
+		bgBox$: '#mask-filter-select',
+		bgFrag: '<div id="mask-filter-select" class="mask-background"></div>'
+	},
+	isOpen: false,
+	$box: null,
+	$bgBox: null,
+
+	init: function (options) {
+		if (!this.$box) {
+			$.extend($.filterSelect.config, options);
+
+			$('body').append($.filterSelect.config.frag);
+			$('body').append($.filterSelect.config.bgFrag);
+			this.$box = $($.filterSelect.config.box$);
+			this.$bgBox = $($.filterSelect.config.bgBox$);
+
+			this.$bgBox.on($.event.hasTouch ? 'touchstart' : 'click', function () {
+				$.filterSelect.close();
+			});
+		}
+	},
+	open: function (options) {
+		this.init(options);
+
+		// default, fullscreen
+		var op = $.extend({type: 'GET', url: '', data: {}, callback: null, pop: 'default', top: 0}, options);
+		var $box = this.$box, $bgBox = this.$bgBox;
+
+		var boxH = document.documentElement.clientHeight - op.top;
+		if (op.pop != 'fullscreen') {
+			boxH = boxH * 0.7;
+		}
+
+		$bgBox.addClass($.filterSelect.config.openClass);
+		$box.addClass($.filterSelect.config.openClass);
+		setTimeout(function () {
+			$box.css({top: op.top + 'px', height: boxH + 'px'});
+			$bgBox.css({top: op.top + 'px'});
+		}, 20);
+
+		if (op.url) {
+
+			var params = op.url.getParams();
+			$.ajax({
+				type: 'GET', url: op.url, data: params, success: function (html) {
+					$box.triggerPageClear();
+
+					if (!op.callback) {
+						op.callback = dwz.getUrlCallback(op.url);
+					}
+
+					if (op.callback) {
+						op.callback.call($box, html, $.extend(params, op.data));
+					} else {
+						$box.html(html).initUI();
+					}
+				}, error: dwz.ajaxError
+			});
+
+		}
+
+		this.isOpen = true;
+	},
+	close: function () {
+		var $box = $.filterSelect.$box, $bgBox = $.filterSelect.$bgBox;
+
+		if ($bgBox) {
+			$bgBox.removeClass($.filterSelect.config.openClass);
+		}
+		if ($box) {
+			$box.css({height: '0px'});
+			setTimeout(function () {
+				$box.removeClass($.filterSelect.config.openClass)
+			}, 500);
+		}
+
+		this.isOpen = false;
+	},
+	getBox: function () {
+		return this.$box;
+	}
+};

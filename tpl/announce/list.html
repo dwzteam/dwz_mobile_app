@@ -1,0 +1,56 @@
+<form class="dwz-list-form page-wrap">
+	<input type="hidden" name="pageNum" value="1">
+
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">通知资讯</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-list">
+			<div class="scroll">
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+				</div>
+				<div class="empty_box" style="{{(list && list.length ? 'display:none' : '')}}">
+					<div class="empty-img">
+						<img src="images/browse-empty-bg.svg">
+					</div>
+					<p style="color:#999; text-align:center;">暂时还没有数据哦~</p>
+				</div>
+				<ul class="list pic-list dwz-list-box">
+
+				</ul>
+				<div class="pullUp">
+					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中...">更多...</span>
+				</div>
+			</div>
+
+			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
+		</div>
+	</div>
+</form>
+
+<script id="tpl-list" type="text/html">
+	{{each data as item}}
+	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-content">
+			<div class="item-title1">{{item.title}}</div>
+			<div class="item-info2">{{item.content}}</div>
+			<div class="flex-item"></div>
+			<div class="flex-wrap">
+				<div class="txt-info txt-line1 flex-item">{{item.area_dept_short_name}}</div>
+				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</script>

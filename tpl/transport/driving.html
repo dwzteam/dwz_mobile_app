@@ -1,0 +1,54 @@
+<form class="page-wrap page-transport dwz-form" method="get" action="https://restapi.amap.com/v3/place/text?key=682d127014e6e6ab17de8b4100977868">
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="search-box">
+				<div class="flex-wrap">
+					<label for="input-driving-end" style="color:#E5625C; white-space: nowrap;">起点·</label>
+					<input type="text" name="start" value="我的位置" class="flex-item b-line" readonly>
+				</div>
+				<div class="flex-wrap">
+					<label for="input-driving-end" style="color:#F5A623; white-space: nowrap;">终点·</label>
+					<input id="input-driving-end" type="search" name="end" value="{{params.address}}" class="flex-item">
+				</div>
+			</div>
+<!--			<button class="button" type="submit" style="background: #31455A; line-height: 40px; border-radius: 20px; color: #fff; padding: 0 10px; margin: 0 5px; white-space: nowrap;">搜索</button>-->
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="dwz-map-box"></div>
+
+		<div class="sheet-box sheet-top fold">
+			<div class="scroll-content dwz-scroll">
+				<div class="scroll">
+					<ul class="list icon-list2 dwz-list"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="bleed-margin flex-all-center dwz-nav-info" style="background: #fff;">
+
+	</div>
+</form>
+
+<script id="tpl-list" type="text/html">
+	{{each list as item}}
+	<li class="item" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
+		<div class="icon-address"></div>
+		<div class="item-content">
+			<p class="item-title1">{{item.name}}</p>
+			<p class="item-info1">{{item.address}}</p>
+		</div>
+	</li>
+	{{/each}}
+</script>
+
+<script id="tpl-nav-info" type="text/html">
+	<div class="flex-item flex-all-center flex-vertical">
+		<p class="item-title1">{{time|formatTime}}</p>
+		<p class="item-info1">{{distance|formatDistance}}</p>
+	</div>
+	<button class="button active flex-item" type="button" onclick="biz.transport.mapNav()">开始导航</button>
+</script>

@@ -1,0 +1,98 @@
+const gulp = require('gulp'),
+    babel = require("gulp-babel"),    // 用于ES6转化ES5
+    uglify = require('gulp-uglify'), // 用于压缩 JS
+    changed = require('gulp-changed'),
+    browserSync = require('browser-sync').create(),
+    del = require('del'),
+    concat = require('gulp-concat'),   //合并文件
+    rename = require('gulp-rename'),   //文件重命名
+    cache = require('gulp-cache'), //图片缓存
+    errors = require('gulp-util'),
+    plumber = require('gulp-plumber');
+
+const less = require('gulp-less'),
+    cssmin = require('gulp-clean-css'), // 用于压缩 CSS
+    autoprefixer = require('gulp-autoprefixer'),
+    autoprefixer_opts = {
+        browsers: ['last 2 versions', 'Android >= 4.0'],
+        cascade: true, //是否美化属性值 默认：true 像这样：
+        //-webkit-transform: rotate(45deg);
+        //        transform: rotate(45deg);
+        remove: true //是否去掉不必要的前缀 默认：true
+    };
+
+const js_src = require("./js/index");
+
+
+/* less */
+gulp.task('less-dev', () => {
+    return gulp.src(['less/ui.less']) //多个文件以数组形式传入
+        .pipe(changed('css', {
+            hasChanged: changed.compareSha1Digest
+        }))
+        // .pipe(plumber())
+        .pipe(less({dumpLineNumbers: "comments", env: 'development', relativeUrls: true}))
+        // .pipe(px2rem(px2rem_opts))
+        .pipe(autoprefixer(autoprefixer_opts))
+        .on('error', function (err) {
+            errors.log(errors.colors.red('[Error]'), err.toString());
+        })
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
+});
+
+gulp.task('less-prod', () => {
+    return gulp.src(['less/ui.less']) //多个文件以数组形式传入
+        .pipe(changed('css', {
+            hasChanged: changed.compareSha1Digest
+        }))
+        .pipe(plumber())
+        .pipe(less({env: 'production', relativeUrls: true}))
+        // .pipe(px2rem(px2rem_opts))
+        .pipe(autoprefixer(autoprefixer_opts))
+        .on('error', function (err) {
+            errors.log(errors.colors.red('[Error]'), err.toString());
+        })
+        .pipe(cssmin({keepSpecialComments: '*'})) //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀
+        .pipe(gulp.dest('css'));
+});
+
+gulp.task('script-min', () => {
+	return gulp
+		.src(js_src.dev)
+		.pipe(babel())
+		.pipe(concat('all.min.js'))
+		.pipe(uglify())
+		.on('error', function (err) {
+			errors.log(errors.colors.red('[Error]'), err.toString());
+		})
+		.pipe(gulp.dest('script'));
+});
+
+/* serve */
+gulp.task('serve-dev', () => {
+    browserSync.init({
+        port: 2020,
+        server: {
+            baseDir: ['./'],
+            index: "index.html"
+        }
+    });
+    gulp.watch('less/**/*', gulp.series('less-dev'));
+});
+
+/* dev */
+gulp.task('dev', gulp.series(
+    'less-dev',
+    'serve-dev')
+);
+
+/* prod */
+gulp.task('prod',
+    gulp.series(
+        'less-prod',
+        'script-min'
+    )
+);

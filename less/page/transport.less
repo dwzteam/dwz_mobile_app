@@ -1,0 +1,255 @@
+// 运输任务卡片
+#transport-card-box {
+	padding: 0 10px 10px 10px;
+}
+.transport-card {
+	display: block;
+	position: relative;
+	background: #292F4C;
+	color: #9CA4B4;
+	border-radius: 8px;
+	overflow: hidden;
+	.padding-all;
+	.box-shadow;
+	margin-top: 10px;
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		top:0;
+		left:0;
+		bottom:0;
+		width:6px;
+		z-index: 2;
+		background-image: linear-gradient(-90deg, #292F4C 0%, #F04242 70%, #F85252 100%);
+	}
+	.item-title1, .item-info1, .item-info2, .item-info3 {
+		color: #9CA4B4;
+		line-height: 24px;
+		span{
+			color: #fff;
+		}
+	}
+	.item-title1 {
+		font-weight: bold;
+	}
+	.dot-path {
+		width: 9px;
+		position: relative;
+		margin-right: 5px;
+		padding: 5px 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		.dot-start, .dot-end {
+			width: 9px;
+			height: 9px;
+			display: block;
+		}
+		.dot-start {
+			background: url("../../images/icon/dot-start.svg") no-repeat center;
+			background-size: 100% 100%;
+		}
+		.dot-end {
+			background: url("../../images/icon/dot-end.svg") no-repeat center;
+			background-size: 100% 100%;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 13px;
+			bottom: 13px;
+			left: 4px;
+			width: 1px;
+			background: #F24646;
+		}
+	}
+}
+
+.page-transport {
+
+	.icon-receive, .icon-ship {
+		display: inline-block;
+		width: 32px;
+		height: 32px;
+		line-height: 32px;
+		text-align: center;
+		border-radius: 50%;
+		color: #fff;
+		margin-right: 10px;
+	}
+
+	.icon-receive {
+		background: #F5A623;
+	}
+	.icon-ship {
+		background: #E5625C;
+	}
+
+	.receive-box {
+		.item {
+			.align-center;
+
+			.btn-group {
+				height: 36px;
+				border-radius: 18px;
+				background: #31455A;
+				padding: 0 5px;
+				.flex-all-center;
+
+				.btn {
+					.flex-all-center;
+					font-size: @l4;
+					min-width: 60px;
+					color: #fff;
+					border-right: 1px solid rgba(255,255,255,0.8);
+					line-height: 16px;
+					&:last-child {
+						border: none;
+					}
+					.icon {
+						margin: 0 5px 0 0;
+						width: 12px;
+						height: 12px;
+					}
+					.icon-phone {
+						background-image: url(../../images/icon/transport/icon-phone.svg);
+					}
+					.icon-map-nav {
+						background-image: url(../../images/icon/transport/icon-map-nav.svg);
+					}
+				}
+			}
+		}
+	}
+
+	.sheet-box {
+
+		.sheet-content {
+			transition: all .5s ease;
+			max-height: 500px;
+			overflow: hidden;
+		}
+		&.sheet-top {
+			position: absolute;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			top:0;
+			overflow: hidden;
+			background: @defaultBackground;
+			&.fold {
+				height: 0;
+			}
+		}
+		&.fold {
+			.sheet-content {
+				max-height: 0px;
+			}
+		}
+		.widget-box {
+			overflow: hidden;
+			background: rgba(255,255,255,1);
+			.item-bar {
+				.flex-wrap;
+				.txt-desc;
+				position: relative;
+				background: #F6F7FB;
+				clear: both;
+				padding: 10px 10px;
+				.split {
+					height: 20px;
+					width: 1px;
+					background: #CCCCCC;
+				}
+				a {
+					font-weight: bold;
+				}
+			}
+		}
+
+		.icon-list2 {
+			.item {
+				margin: 0;
+				box-shadow: none;
+			}
+		}
+
+		.bleed-margin {
+			height: 48px;
+			background: #31455A;
+			color: #fff;
+			font-size: @l4;
+			position: relative;
+			.flex-all-center;
+			.form-submit {
+				margin: 0;
+				width: 100px;
+				position: absolute;
+				left: 1%;
+				top: 4px;
+				height: 40px;
+				transition: all 0.5s ease;
+				&.wipe-hover {
+					width: 98%;
+				}
+			}
+
+			.icon-wipe-right {
+				background: url(../../images/icon/transport/icon-wipe-right.svg) center no-repeat;
+				background-size: cover;
+				display: block;
+				width: 13px;
+				height: 13px;
+			}
+		}
+	}
+
+	.search-box {
+		.flex-item;
+		background: @defaultBackground;
+		border-radius: 5px;
+
+		label {margin: 5px;}
+		.flex-wrap {
+			input {
+				padding: 5px;
+				color: #333333;
+			}
+			margin: 0 5px;
+		}
+	}
+
+	.icon-address {
+		background: url(../../images/icon/transport/icon-address.svg) center no-repeat;
+		background-size: cover;
+		display: block;
+		width: 18px;
+		height: 22px;
+		margin-right: 5px;
+	}
+	.icon-cert, .icon-yes, .icon-no {
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		display: block;
+		width: 12px;
+		height: 12px;
+		margin-right: 5px;
+	}
+	.icon-cert {
+		background-image: url(../../images/icon/transport/icon-cert.svg);
+	}
+	.icon-yes {
+		background-image: url(../../images/icon/transport/icon-yes.svg);
+	}
+	.icon-no {
+		background-image: url(../../images/icon/transport/icon-no.svg);
+	}
+}

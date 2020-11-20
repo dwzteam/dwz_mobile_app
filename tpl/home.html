@@ -1,0 +1,98 @@
+<form id="home_form">
+	<input type="hidden" name="pageNum" value="1">
+
+	<div class="scroll-content dwz-list">
+
+		<div class="scroll">
+			<div class="pullDown">
+				<span class="pullDownIcon">&nbsp;</span>
+				<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+			</div>
+
+			<header class="home-header drak">
+				<div class="toolbar">
+					<div class="bar-button"></div>
+					<a class="bar-button back-button" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="icon icon-user"></i></a>
+					<div class="header-title">
+						<div class="title">{{UserInfo.nickname}}</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="m-panel">
+				<div class="panel-header padding-h">
+					<label class="panel-title">我的行程</label>
+					<a class="panel-title-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.transport.indexRender" rel="transport">查看更多<i class="icon icon-list-r"></i></a>
+				</div>
+				<div class="panel-content" id="transport-card-box">
+<!--					<div class="transport-card">-->
+<!--						<div class="flex-wrap">-->
+<!--							<div class="item-title1 flex-item"><span>明天</span> · 浙ADJ8779</div>-->
+<!--							<div class="item-info1">待出发</div>-->
+<!--						</div>-->
+<!--						<div class="item-content">-->
+<!--							<div class="item-info1">收货单位：嘉兴市港区艾格菲化工有限公司</div>-->
+<!--							<div class="item-info3">运输路线：自 衢州巨化 经 龙游-建德-富阳-杭州 至 嘉兴</div>-->
+<!--							<div class="item-info1">发货单位：浙江巨化股份有限公司电化厂</div>-->
+<!--						</div>-->
+<!--					</div>-->
+				</div>
+			</div>
+
+
+			<div class="m-panel" style="margin-top: 10px;">
+				<div class="panel-header padding-h">
+					<label class="panel-title">通知资讯</label>
+					<a class="panel-title-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="icon icon-list-r"></i></a>
+				</div>
+				<div class="panel-content">
+					<ul id="home-announce-box" class="list pic-list">
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</form>
+
+<script id="tpl-transport" type="text/html">
+	{{each data as item}}
+	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
+		<div class="flex-wrap">
+			<div class="item-title1 flex-item"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
+			<div class="item-info1">{{item.status|showTransportStatus}}</div>
+		</div>
+
+		<div class="flex-wrap">
+			<div class="dot-path">
+				<div class="dot-start"></div>
+				<div class="dot-end"></div>
+			</div>
+			<div class="flex-item">
+				<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
+				<div class="item-info3">运输路线：{{item.transport_way}}</div>
+				<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
+			</div>
+		</div>
+	</a>
+	{{/each}}
+</script>
+
+<script id="tpl-list" type="text/html">
+	{{each data as item}}
+	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-content">
+			<div class="item-title1">{{item.title}}</div>
+			<div class="item-info2">{{item.content}}</div>
+			<div class="flex-item"></div>
+			<div class="flex-wrap">
+				<div class="txt-info txt-line1 flex-item">{{item.area_dept_short_name}}</div>
+				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</script>

@@ -1,0 +1,118 @@
+.tab-item {
+	.flex-item;
+	display: block;
+	height: 41px;
+	white-space: nowrap;
+	font-weight: 400;
+	font-size: @l5;
+	text-overflow: ellipsis;
+	text-align: center;
+	border: none;
+	background: none;
+	//.r-line;
+	&:last-child {
+		.no-line;
+	}
+
+	.icon {
+		height: 26px;
+		background-size: 20px;
+	}
+
+	&.active {
+		color: @tabTxtColorActive;
+	}
+}
+
+#nav-tab, .w-tabbar {
+	.flex-wrap;
+	.flex-vertical;
+
+	.tab-panel {
+		.flex-item;
+		position: relative;
+		overflow: hidden;
+
+		.panel-item {
+			position: relative;
+			.full-size;
+			display: none;
+
+			&.active {
+				display: block;
+			}
+		}
+	}
+}
+
+.w-tabbar {
+	.tab-bar {
+		.flex-wrap;
+		.flex-all-center;
+		height: 44px;
+		.b-line;
+
+		.tab-item {
+			position: relative;
+			.flex-item;
+			.flex-all-center;
+			max-width: 150px;
+			height: 100%;
+			white-space: nowrap;
+			text-align: center;
+			line-height: 44px;
+			font-size: 15px;
+			color: @tabTxtColor;
+
+			&:before {
+				position: absolute;
+				margin-top: -7px;
+				height: 14px;
+				.r-line;
+			}
+
+			&:last-child:before {
+				display: none;
+			}
+
+			.icon {
+				display: inline-block;
+				margin: 0;
+			}
+		}
+
+		.active {
+			display: -webkit-flex;
+			display: flex;
+			color: @tabTxtColorActive;
+
+			span {
+				position: relative;
+
+				&:before {
+					content: " ";
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					height: 3px;
+					background: @tabTxtColorActive;
+				}
+			}
+		}
+	}
+}
+
+#nav-tab {
+	.tab-bar {
+		.flex-wrap;
+		.justify-center;
+		.align-center;
+		width: 100%;
+		height: 49px;
+		color: @tabTxtColor;
+		.t-line;
+		//display: none;
+	}
+}
+

@@ -1,0 +1,46 @@
+html {
+	-webkit-touch-callout: none;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	touch-action: pan-y;
+	-webkit-user-select:none;
+	user-select:none;
+}
+body {
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+	font-family: @fontDefault;
+	text-rendering: optimizeLegibility;
+	-webkit-backface-visibility: hidden;
+	-webkit-user-drag: none;
+	overflow: hidden;
+	.full-size;
+}
+
+html, body {
+	height: 100%;
+	background: @defaultBackground;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+*, *:before, *:after {
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+a img {border:0;}
+a {
+	text-decoration: none;
+	.tapColor;
+	color: @linkColor;
+}
+
+iframe {
+	border: none;
+	background: #fff;
+	display:block;
+}

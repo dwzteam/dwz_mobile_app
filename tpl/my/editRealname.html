@@ -1,0 +1,40 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">修改姓名</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
+
+			<div class="scroll-content dwz-scroll">
+				<div class="scroll">
+
+					<div class="divider"></div>
+					<!-- bleed-margin -->
+					<div class="pageFormContent unitBox">
+						<div class="item">
+							<div class="item-content">
+								<input type="text" name="realname" placeholder="请输昵称" maxlength="20" pattern=".{2,20}" data-error="请输入合法昵称">
+							</div>
+						</div>
+
+					</div>
+
+					<div class="bleed-margin">
+						<button class="form-submit" type="submit">保存</button>
+					</div>
+
+				</div>
+			</div>
+		</form>
+
+
+	</div>
+
+</main>

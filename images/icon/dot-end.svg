@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>终点圆</title>
+    <g id="司机端2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-56.000000, -703.000000)" fill="#F24646">
+            <g id="Item-3" transform="translate(24.000000, 436.000000)">
+                <g id="终点圆" transform="translate(32.000000, 267.000000)">
+                    <circle id="椭圆形备份-2" fill-opacity="0.4" cx="8" cy="8" r="8"></circle>
+                    <circle id="椭圆形备份" cx="8" cy="8" r="6"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

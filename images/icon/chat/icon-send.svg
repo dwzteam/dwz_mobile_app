@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>语音</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="飞机稿2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="聊天界面" transform="translate(-654.000000, -1248.000000)">
+            <g id="语音" transform="translate(654.000000, 1248.000000)">
+                <circle id="Oval" fill="#5867C4" cx="36" cy="36" r="36"></circle>
+                <path d="M59.5259664,36.941211 L21.532172,54.5653196 C20.8144436,54.8980431 20,54.3708043 20,53.5773867 L20,39.5415732 C20,39.229325 20.2392428,38.968265 20.5497494,38.9426709 L53.896125,36.2245757 C53.9928402,36.214338 53.9928402,36.0761298 53.896125,36.071011 L20.55993,33.6702829 C20.2443331,33.6498076 20.0050903,33.3836288 20.0050903,33.0713805 L20.0050903,19.0867553 C20.0050903,18.2984565 20.8144436,17.7712177 21.532172,18.0988224 L59.5310567,35.4567522 C60.1571602,35.7434063 60.1571602,36.649438 59.5259664,36.941211 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

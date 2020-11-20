@@ -1,0 +1,45 @@
+<form class="dwz-list-form page-wrap">
+	<input type="hidden" name="pageNum" value="1">
+	<input type="hidden" name="status" value="{{params.status}}">
+
+	<div class="scroll-content dwz-list">
+		<div class="scroll">
+			<div class="pullDown">
+				<span class="pullDownIcon">&nbsp;</span>
+				<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+			</div>
+			<div class="empty_box" style="{{(list && list.length ? 'display:none' : '')}}">
+				<div class="empty-img">
+					<img src="images/browse-empty-bg.svg">
+				</div>
+				<p style="color:#999; text-align:center;">暂时还没有数据哦~</p>
+			</div>
+			<ul class="list icon-list2 dwz-list-box">
+
+			</ul>
+			<div class="pullUp">
+				<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中...">更多...</span>
+			</div>
+		</div>
+
+		<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
+	</div>
+
+</form>
+
+<script id="tpl-list" type="text/html">
+	{{each list as item}}
+	<li class="item" onclick="$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'})">
+		<div class="item-content">
+			<div class="flex-wrap">
+				<div class="item-title1 flex-item">{{item.transport_time}}<span class="txt-h3">· {{item.truck_num}}</span> </div>
+				<div class="item-status2 {{item.status|showTransportStatus 'icon'}}">{{item.status|showTransportStatus}}</div>
+			</div>
+			<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
+			<div class="item-info3">运输路线：{{item.transport_way}}</div>
+			<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
+		</div>
+	</li>
+	{{/each}}
+
+</script>

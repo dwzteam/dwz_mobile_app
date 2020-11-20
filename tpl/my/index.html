@@ -1,0 +1,61 @@
+<main>
+    <header class="float-header">
+        <div class="toolbar">
+            <button class="bar-button"></button>
+            <div class="header-title">
+                <div class="title">我是房东</div>
+            </div>
+<!--            <a class="bar-button txt-button">切换为租客</a>-->
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="scroll-content dwz-scroll">
+            <div class="scroll">
+
+                <div class="my-info" id="my_info_box">
+                    <div class="my-info-background"></div>
+                    <a target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
+                        <img id="my_user_icon_img" class="my-avatar" src="{{UserInfo.headimgurl|showUserIcon}}">
+                    </a>
+                    <span class="name">{{UserInfo.realname}}</span>
+                </div>
+
+                <!--<div class="divider"></div>-->
+                <ul class="list">
+<!--                    <li class="item">-->
+<!--                        <img src="./images/icon/my/icon-rent.svg" class="icon">-->
+<!--                        <a target="navView" data-href="tpl/my/rent/rent_list.html?dwz_callback=biz.rent.rentListRender" rel="myRent"><p>我租住的</p><i class="arrow-right"></i></a>-->
+<!--                    </li>-->
+                    <li class="item">
+                        <img src="./images/icon/my/icon-publish.svg" class="icon">
+                        <a target="navView" data-href="tpl/my/rent/publish_list.html?dwz_callback=biz.rent.publishListRender" rel="myPublish"><p>房屋管理</p><i class="arrow-right"></i></a>
+                    </li>
+<!--                    <li class="item">-->
+<!--                        <img src="./images/icon/my/icon-browse.svg" class="icon">-->
+<!--                        <a target="navView" data-href="tpl/my/rent/browse_history.html?dwz_callback=biz.rent.browseHistoryRender" rel="myBorwse"><p>浏览记录</p><i class="arrow-right"></i></a>-->
+<!--                    </li>-->
+                    <li class="item">
+                        <img src="./images/icon/my/icon-auth.svg" class="icon">
+                        <a target="navView" data-href="tpl/my/auth.html?dwz_callback=biz.my.authRender" rel="auth"><p>我的认证</p><i class="arrow-right"></i></a>
+                    </li>
+<!--                    <li class="item">-->
+<!--                        <img src="./images/icon/my/icon-feedback.svg" class="icon">-->
+<!--                        <a target="navView" data-href="tpl/my/feedback.html" rel="feedback"><p>意见反馈</p><i class="arrow-right"></i></a>-->
+<!--                    </li>-->
+<!--                    <li class="item">-->
+<!--                        <img src="./images/icon/my/icon-about.svg" class="icon">-->
+<!--                        <a target="navView" data-href="tpl/about.html?dwz_callback=renderAbout" rel="about"><p>关于我们</p><i class="arrow-right"></i></a>-->
+<!--                    </li>-->
+
+                    <li class="item">
+                        <img src="./images/icon/my/icon-setting.svg" class="icon">
+                        <a target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><p>设置</p><i class="arrow-right"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</main>
