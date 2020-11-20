@@ -12,6 +12,14 @@ const gulp = require('gulp'),
 
 const less = require('gulp-less'),
     cssmin = require('gulp-clean-css'), // 用于压缩 CSS
+    // px2rem = require('gulp-px2rem-plugin'),
+	// px2rem_opts = {
+	// 	width_design: 750,	// 设计稿宽度。默认值640
+	// 	pieces: 10,	// 将整屏切份（750/75=10）。默认为10，相当于10rem = width_design(设计稿宽度)
+	// 	valid_num: 6,	// 生成rem后的小数位数。默认值4
+	// 	ignore_px: [],	// 让部分px不在转换成rem。默认为空数组
+	// 	ignore_selector: []	// 让部分选择器不在转换为rem。默认为空数组
+	// },
     autoprefixer = require('gulp-autoprefixer'),
     autoprefixer_opts = {
         browsers: ['last 2 versions', 'Android >= 4.0'],
@@ -21,13 +29,13 @@ const less = require('gulp-less'),
         remove: true //是否去掉不必要的前缀 默认：true
     };
 
-const js_src = require("./js/index");
+const js_src = require("./widget/js/index");
 
 
 /* less */
 gulp.task('less-dev', () => {
-    return gulp.src(['less/ui.less']) //多个文件以数组形式传入
-        .pipe(changed('css', {
+    return gulp.src(['widget/less/ui.less']) //多个文件以数组形式传入
+        .pipe(changed('widget/css', {
             hasChanged: changed.compareSha1Digest
         }))
         // .pipe(plumber())
@@ -37,15 +45,15 @@ gulp.task('less-dev', () => {
         .on('error', function (err) {
             errors.log(errors.colors.red('[Error]'), err.toString());
         })
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('widget/css'))
         .pipe(browserSync.reload({
             stream: true
         }));
 });
 
 gulp.task('less-prod', () => {
-    return gulp.src(['less/ui.less']) //多个文件以数组形式传入
-        .pipe(changed('css', {
+    return gulp.src(['widget/less/ui.less']) //多个文件以数组形式传入
+        .pipe(changed('widget/css', {
             hasChanged: changed.compareSha1Digest
         }))
         .pipe(plumber())
@@ -56,19 +64,19 @@ gulp.task('less-prod', () => {
             errors.log(errors.colors.red('[Error]'), err.toString());
         })
         .pipe(cssmin({keepSpecialComments: '*'})) //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀
-        .pipe(gulp.dest('css'));
+        .pipe(gulp.dest('widget/css'));
 });
 
 gulp.task('script-min', () => {
 	return gulp
-		.src(js_src.dev)
+		.src(js_src.dev.map((item)=>{return 'widget/'+item}))
 		.pipe(babel())
 		.pipe(concat('all.min.js'))
 		.pipe(uglify())
 		.on('error', function (err) {
 			errors.log(errors.colors.red('[Error]'), err.toString());
 		})
-		.pipe(gulp.dest('script'));
+		.pipe(gulp.dest('widget/script'));
 });
 
 /* serve */
@@ -76,11 +84,11 @@ gulp.task('serve-dev', () => {
     browserSync.init({
         port: 2020,
         server: {
-            baseDir: ['./'],
+            baseDir: ['./widget'],
             index: "index.html"
         }
     });
-    gulp.watch('less/**/*', gulp.series('less-dev'));
+    gulp.watch('widget/less/**/*', gulp.series('less-dev'));
 });
 
 /* dev */
@@ -90,7 +98,7 @@ gulp.task('dev', gulp.series(
 );
 
 /* prod */
-gulp.task('prod',
+gulp.task('build',
     gulp.series(
         'less-prod',
         'script-min'

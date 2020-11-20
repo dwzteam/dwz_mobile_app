@@ -4,11 +4,11 @@
     "description": "DWZ Mobile",
     "main": "index.html",
     "scripts": {
-        "sync": "apicloud wifiSync --project ./ --updateAll false",
+        "sync": "apicloud wifiSync --project ./widget --updateAll false",
         "start": "apicloud wifiStart",
         "log": "apicloud wifiLog",
         "dev": "gulp dev",
-        "prod": "gulp prod"
+        "build": "gulp build"
     },
     "author": "张慧华",
     "license": "ISC",
@@ -20,7 +20,6 @@
         "babel-preset-env": "^1.7.0",
         "browser-sync": "^2.26.3",
         "del": "^4.0.0",
-        "eslint": "^7.13.0",
         "gulp": "^4.0.0",
         "gulp-autoprefixer": "^6.0.0",
         "gulp-babel": "^7.0.1",
