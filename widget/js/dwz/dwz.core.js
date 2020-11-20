@@ -865,6 +865,9 @@ dwz.extend(String.prototype, {
  * 扩展Number方法
  */
 dwz.extend(Number.prototype, {
+	roundFloat: function (n = 3) {
+		return Math.round(this * Math.pow(10, n)) / Math.pow(10, n);
+	},
 	formatCurrency: function (useComma) {
 		var num = this;
 

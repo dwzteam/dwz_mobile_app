@@ -360,12 +360,6 @@ function pageRender(tpl, param) {
 	$box.html(html).initUI();
 }
 
-function phpDateFormat(phpTimestamp, format) {
-	if (!phpTimestamp) return "";
-	const date = new Date(phpTimestamp * 1000);
-	return date.formatDate(format || "yyyy-MM-dd HH:mm:ss");
-}
-
 // Store 基类
 const CommonStore = {
 	data: [],
@@ -404,25 +398,52 @@ const TransportStatus = $.extend({}, CommonStore, {
 	],
 });
 
-$.extend(template.defaults.imports, {
-	phpDateFormat: function (value) {
-		return phpDateFormat(value, "yyyy-MM-dd");
+
+
+biz.format = {
+	formatDateTime: function (timestamp, format) {
+		if (!timestamp) return "";
+		const date = new Date(timestamp);
+		return date.formatDate(format || "yyyy-MM-dd HH:mm:ss");
 	},
-	filterInputNum: function (value) {
-		return value ? value : "";
+	formatTime: function (second) {
+		if (!second) return '--';
+		else if (second<60) return second + '秒';
+		else if (second<3600) return (second/60).roundFloat(0) + '分钟';
+
+		var hour = (second/3600).roundFloat(0);
+		var minute = ((second%3600)/60).roundFloat(0);
+		return hour + '小时' + minute + '分钟'
+	},
+	formatDistance: function (m) {
+		if (!m) return '--';
+		if (m < 1000) {
+			return parseInt(m) + '米';
+		}
+		return (m/1000).toFixed(1) + '公里';
+	},
+	percent: function (num, fractionDigits) {
+		var percentNum = num * 100;
+		return percentNum.toFixed(fractionDigits);
+	}
+};
+$.extend(template.defaults.imports, {
+	filterInputNum: function(value) {
+		return value ? value : '';
 	},
 	showSex: function (value) {
-		const item = SexStore.getItem(value);
+		var item = SexStore.getItem(value);
 		return item.name;
 	},
 	showTransportStatus: function (value, fieldName) {
-		const item = TransportStatus.getItem(value);
-		return item[fieldName || "name"];
+		var item = TransportStatus.getItem(value);
+		return item[fieldName || 'name'];
 	},
 	showImg: function (url, defaultImg) {
-		return url || defaultImg || "image/pic/laws01.png";
+		return url || defaultImg || 'image/pic/laws01.png';
 	},
 	showUserIcon: function (url) {
-		return url || "image/my-photo-default.png";
-	},
-});
+		return url || 'image/my-photo-default.png';
+	}
+}, biz.format);
+

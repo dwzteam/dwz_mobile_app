@@ -201,4 +201,7 @@ function loadScripts(options) {
 	}, {passive: false});//passive 参数不能省略，用来兼容ios和android
 }
 
-module.exports = js_src;
+// 用于gulpfile.js编译js
+if (typeof(module) != 'undefined') {
+	module.exports = js_src;
+}

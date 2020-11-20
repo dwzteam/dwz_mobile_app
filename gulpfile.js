@@ -31,7 +31,6 @@ const less = require('gulp-less'),
 
 const js_src = require("./widget/js/index");
 
-
 /* less */
 gulp.task('less-dev', () => {
     return gulp.src(['widget/less/ui.less']) //多个文件以数组形式传入
