@@ -821,6 +821,7 @@ main,
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
 /* line 152, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/content.less */
@@ -921,6 +922,7 @@ main,
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
@@ -1082,50 +1084,30 @@ footer .button.inactive {
   border: none;
 }
 /* line 91, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
-.icon-list-r {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZD0iTTEzLjY5LDIzLjVsLS43LS43MUwxOS42MSwxNiwxMyw5LjIxbC43LS43MUwyMSwxNloiIHN0eWxlPSJmaWxsOmdyYXk7ZmlsbC1ydWxlOmV2ZW5vZGQiLz48L3N2Zz4=');
-}
-/* line 95, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
-.icon-list-d,
-.icon-list-u {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZD0iTTguNSwxMi42OWwuNzEtLjdMMTYsMTguNjEsMjIuNzksMTJsLjcxLjdMMTYsMjBaIiBzdHlsZT0iZmlsbDpncmF5O2ZpbGwtcnVsZTpldmVub2RkIi8+PC9zdmc+');
-}
-/* line 99, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
-.icon-list-u {
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-/* line 105, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
 .icon-close {
   background-image: url('../image/icon/icon-del-x.svg');
 }
-/* line 110, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
-.icon-star {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHRpdGxlPmljb24tc3RhcjwvdGl0bGU+PHBhdGggZD0iTTE2LDZsLS40MSwxLTIuMzcsNi4xNy02LjYyLjM3LTEuMTMuMDUuODguNzEsNS4xMyw0LjE4LTEuNyw2LjM5TDkuNTEsMjZsLjk0LS42MUwxNiwyMS43OWw1LjU1LDMuNTkuOTQuNjEtLjI5LTEuMDktMS43LTYuMzksNS4xMy00LjE4Ljg4LS43MS0xLjEzLS4wNS02LjYyLS4zN0wxNi40MSw3Wm0wLDIuNDIsMi4wNyw1LjM4LjExLjI2aC4yOWw1Ljc2LjMxTDE5Ljc0LDE4bC0uMjIuMTguMDcuMjdMMjEuMDYsMjRsLTQuODMtMy4xMkwxNiwyMC43NmwtLjIzLjE1TDEwLjk0LDI0bDEuNDctNS41NS4wNy0uMjdMMTIuMjYsMTgsNy43OCwxNC4zOWw1Ljc2LS4zMWguMjlsLjExLS4yNloiIHN0eWxlPSJmaWxsOiM2NjYiLz48L3N2Zz4=');
-}
-/* line 114, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
-.active .icon-star {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZD0iTTE2LDZsLS40MSwxLTIuMzcsNi4xNy02LjYyLjM3LTEuMTMuMDUuODguNzEsNS4xMyw0LjE4LTEuNyw2LjM5TDkuNTEsMjZsLjk0LS42MUwxNiwyMS43OWw1LjU1LDMuNTkuOTQuNjFMMjIuMiwyNC45bC0xLjctNi4zOSw1LjEzLTQuMTguODgtLjcxLTEuMTMtLjA1LTYuNjItLjM3TDE2LjQxLDdaIiBzdHlsZT0iZmlsbDojZTg0YzNkIi8+PC9zdmc+');
-}
-/* line 118, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
+/* line 95, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
 .icon-del {
   background-image: url("../image/icon/icon-del.svg");
   background-size: 60%;
 }
-/* line 123, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
+/* line 100, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
 .icon-search {
   background-image: url("../image/icon/icon-search.svg");
   background-size: 60%;
 }
-/* line 128, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
+/* line 105, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
 .icon-i {
   background-image: url("../image/icon/icon-i.svg");
-  background-size: 100%;
 }
-/* line 133, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
+/* line 109, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
 .icon-user {
   background-image: url("../image/icon/icon-user.svg");
-  background-size: 100%;
+}
+/* line 113, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/icon.less */
+.icon-setting {
+  background-image: url("../image/icon/icon-setting.svg");
 }
 /* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/badge.less */
 .badge {
@@ -1630,18 +1612,19 @@ ul.pic-list .item .item-pic {
   height: 75px;
   overflow: hidden;
   background: #eee;
-  border-radius: 4px;
+  border: solid 1px #ddd;
+  border-radius: 5px;
 }
-/* line 406, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 407, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-pic.user-icon {
   width: 90px;
 }
-/* line 410, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 411, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-pic img {
   display: block;
   width: 100%;
 }
-/* line 418, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 419, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1656,7 +1639,7 @@ ul.pic-list .item .item-content {
   position: relative;
   overflow: hidden;
 }
-/* line 424, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 425, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content .item-tag {
   color: #777;
   background-color: #f6f6f6;
@@ -1666,7 +1649,7 @@ ul.pic-list .item .item-content .item-tag {
   font-size: 12px;
   display: inline-block;
 }
-/* line 434, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 435, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content .item-price,
 ul.pic-list .item .item-content .item-phone {
   line-height: 24px;
@@ -3412,13 +3395,6 @@ table.grid tbody tr:last-child {
   font-size: 14px;
 }
 /* line 10, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
-.home-header {
-  height: 150px;
-  background: url(../image/home-header-bg.jpg) center center no-repeat !important;
-  background-size: 100% auto;
-  position: relative;
-}
-/* line 17, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .chart-percent {
   display: block;
   width: 150px;
@@ -3426,7 +3402,7 @@ table.grid tbody tr:last-child {
   float: left;
   position: relative;
 }
-/* line 27, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .empty_box .empty-img {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3439,11 +3415,11 @@ table.grid tbody tr:last-child {
       -ms-flex-pack: center;
           justify-content: center;
 }
-/* line 33, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 26, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .empty_box .empty-img img {
   width: 60%;
 }
-/* line 38, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 31, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .empty_box .btn-bar {
   padding: 0 10px;
   margin-top: 30px;
@@ -3454,16 +3430,16 @@ table.grid tbody tr:last-child {
       -ms-flex-pack: center;
           justify-content: center;
 }
-/* line 44, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 37, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .empty_box .btn-bar .button {
   min-width: 45%;
 }
-/* line 52, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 45, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .my-info {
   position: relative;
   overflow: hidden;
 }
-/* line 56, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 49, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .my-info .my-avatar {
   position: absolute;
   top: 50%;
@@ -3475,7 +3451,7 @@ table.grid tbody tr:last-child {
   border: solid 2px rgba(255, 255, 255, 0.5);
   overflow: hidden;
 }
-/* line 68, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 61, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .my-info .name {
   position: absolute;
   top: 50%;
@@ -3487,7 +3463,7 @@ table.grid tbody tr:last-child {
   text-shadow: rgba(0, 0, 0, 0.5) 0 0 1px;
   color: #333;
 }
-/* line 81, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 74, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .my-info-background {
   width: 100%;
   min-height: 220px;
@@ -3495,7 +3471,7 @@ table.grid tbody tr:last-child {
   background: url(../image/my-info-bg.png) center no-repeat;
   background-size: cover;
 }
-/* line 90, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 83, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-check .my-avatar {
   width: 94px;
   height: 94px;
@@ -3511,11 +3487,11 @@ table.grid tbody tr:last-child {
       -ms-flex-pack: center;
           justify-content: center;
 }
-/* line 98, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 91, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-check .my-avatar img {
   width: 100%;
 }
-/* line 104, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 97, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-result {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3531,7 +3507,7 @@ table.grid tbody tr:last-child {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-/* line 108, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 101, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-result .icon {
   width: 140px;
   height: 140px;
@@ -3539,140 +3515,35 @@ table.grid tbody tr:last-child {
   background-position: center center;
   background-repeat: no-repeat;
 }
-/* line 117, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 110, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-result.ok .icon {
   background-image: url('../image/icon/auth-ok.svg');
 }
-/* line 123, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 116, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-result.error .icon {
   background-image: url('../image/icon/auth-error.svg');
 }
-/* line 128, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
+/* line 121, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/common.less */
 .auth-result .item-info2 {
   font-size: 16px;
   padding: 16px;
-}
-/* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-bar {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
-  padding: 0 15px;
-  text-align: right;
-  background: rgba(0, 0, 0, 0.5);
-}
-/* line 11, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-bar .news-more {
-  font-size: 12px;
-  color: #fff;
-}
-/* line 18, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-hero {
-  position: relative;
-}
-/* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-hero a {
-  display: block;
-  font-size: 15px;
-  coloro: #fff;
-}
-/* line 24, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-hero a .hero-pic {
-  display: block;
-  width: 100%;
-}
-/* line 28, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-hero a .hero-txt {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  padding: 0 15px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.6);
-}
-/* line 42, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail {
-  position: relative;
-  padding: 15px;
-  color: #333;
-}
-/* line 46, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail .title {
-  font-size: 18px;
-  font-weight: 500;
-}
-/* line 50, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail .news-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 26px;
-  margin: 10px 0;
-  font-size: 12px;
-}
-/* line 55, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail .news-info .data {
-  width: 50%;
-}
-/* line 58, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail .news-info .publi {
-  width: 50%;
-  text-align: right;
-}
-/* line 63, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail img {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-}
-/* line 68, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.news-detail .new-content {
-  color: #333;
-  font-size: 13px;
-}
-/* line 76, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.m-article {
-  background: #fff;
-  padding: 10px;
-}
-/* line 81, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.m-article .pic img {
-  width: 100%;
-}
-/* line 86, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.m-article .title {
-  font-size: 16px;
-  color: #333;
-}
-/* line 91, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.m-article .time {
-  font-size: 14px;
-  color: #999;
-}
-/* line 96, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/news.less */
-.m-article .info {
-  font-size: 15px;
-  line-height: 22px;
-  text-align: justify;
-  color: #666;
 }
 /* line 4, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 #home-announce-box.pic-list .item:first-child {
   padding-top: 0;
 }
-/* line 16, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 11, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .m-article {
   background: #fff;
   padding: 10px;
 }
-/* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 16, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+.m-article .pic img {
+  width: 100%;
+}
+/* line 21, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .m-article .title {
-  font-size: 20px;
+  font-size: 16px;
   color: #333;
 }
 /* line 25, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
@@ -3694,252 +3565,11 @@ table.grid tbody tr:last-child {
 }
 /* line 40, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .m-article .info {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 22px;
-  text-align: justify;
   color: #666;
 }
-/* line 51, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item {
-  background: transparent;
-  margin: 10px 0;
-  white-space: pre-wrap;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  border: none;
-}
-/* line 60, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item .item-pic {
-  display: block;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border: 1px solid #eee;
-  overflow: hidden;
-}
-/* line 71, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item .item-pic img {
-  display: block;
-  max-height: 44px;
-  max-width: 44px;
-}
-/* line 78, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item .item-content {
-  font-size: 16px;
-  color: #333;
-  margin: 0 10px;
-  padding: 9px 14px;
-  line-height: 25px;
-  background: white;
-  max-width: 75%;
-  border-radius: 0 22px 22px 22px;
-}
-/* line 88, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item .item-content.bar-voice {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-/* line 92, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item .item-content.bar-voice:before {
-  content: ' ';
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url("../image/icon/chat/icon-bar-voice.svg") center;
-  background-size: 100%;
-  margin-right: 30px;
-}
-/* line 104, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.item-me {
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-/* line 108, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.item-me .item-content {
-  color: #fff;
-  background: #5867C4;
-  border-radius: 22px 22px 0 22px;
-}
-/* line 114, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.item-me .item-content.bar-voice:before {
-  display: none;
-}
-/* line 118, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.item-me .item-content.bar-voice:after {
-  content: ' ';
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url("../image/icon/chat/icon-bar-voice-me.svg") center no-repeat;
-  background-size: 70%;
-  margin-left: 30px;
-}
-/* line 131, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.time {
-  min-height: 20px;
-  line-height: 20px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-/* line 136, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-list .item.time span {
-  background: rgba(0, 0, 0, 0.1);
-  color: white;
-  padding: 0 5px;
-}
-/* line 145, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 10px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-/* line 155, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .icon-keyboard {
-  background: url("../image/icon/chat/icon-keyboard.svg");
-}
-/* line 159, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .icon-voice {
-  background: url("../image/icon/chat/icon-voice.svg");
-}
-/* line 163, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .icon-send {
-  background: url("../image/icon/chat/icon-send.svg");
-}
-/* line 167, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .icon {
-  display: block;
-  width: 36px;
-  height: 36px;
-  background-position: center;
-  background-size: 100%;
-  margin: 0 10px;
-}
-/* line 176, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-keyboard,
-.chat-footer .chat-voice {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  color: #333;
-}
-/* line 182, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-keyboard .textarea-box,
-.chat-footer .chat-voice .textarea-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-/* line 187, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-keyboard .textarea-box .placeholder,
-.chat-footer .chat-voice .textarea-box .placeholder {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: #aaa;
-  line-height: 24px;
-  padding: 5px 15px;
-}
-/* line 199, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-keyboard .textarea,
-.chat-footer .chat-voice .textarea {
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  min-height: 36px;
-  line-height: 20px;
-  max-height: 110px;
-  padding: 5px 15px;
-  word-wrap: break-word;
-  overflow-x: hidden;
-  overflow-y: auto;
-  border-radius: 18px;
-  background: #F7F8FD;
-  outline: 0;
-  -webkit-user-select: text;
-}
-/* line 216, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-voice {
-  display: none;
-}
-/* line 219, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer .chat-voice .voice {
-  height: 36px;
-  border-radius: 18px;
-  border: 1px solid #CCC;
-  white-space: nowrap;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-/* line 232, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer.open-voice .chat-keyboard {
-  display: none;
-}
-/* line 236, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
-.chat-footer.open-voice .chat-voice {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-/* line 242, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 47, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .sign-box.pic {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3953,11 +3583,11 @@ table.grid tbody tr:last-child {
   margin-bottom: 10px;
   position: relative;
 }
-/* line 246, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 51, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .sign-box.pic img {
   width: 25vmin;
 }
-/* line 249, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 54, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .sign-box.pic .btn-txt {
   position: absolute;
   bottom: 0px;
@@ -3968,7 +3598,7 @@ table.grid tbody tr:last-child {
   padding: 5px 10px;
   border-radius: 5px;
 }
-/* line 261, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
+/* line 66, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/page/page.less */
 .page-sign {
   background: #F6F7FB;
 }

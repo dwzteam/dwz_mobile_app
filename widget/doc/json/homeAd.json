@@ -1,0 +1,14 @@
+{
+    "status": 1,
+    "info": "",
+    "data": [
+        {
+            "title": "轮播图1",
+            "pic_url": "image/pic/car_1.jpg"
+        },
+        {
+            "title": "轮播图2",
+            "pic_url": "image/pic/car_2.jpg"
+        }
+    ]
+}

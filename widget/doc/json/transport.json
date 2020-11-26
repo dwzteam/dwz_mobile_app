@@ -4,23 +4,13 @@
     "data": [
         {
             "transport_time": "2020.09.23",
-            "id": 4,
-            "truck_id": 4,
-            "truck_num": "\u6d59AQP165",
-            "status": 0,
-            "ship_company_name": "\u6d59\u6c5f\u5de8\u9f99\u80a1\u4efd\u6709\u9650\u516c\u53f8\u7535\u5316\u5382",
-            "transport_way": "\u81ea\u8862\u5dde\u5de8\u5316 \u7ecf \u9f99\u6e38-\u5efa\u5fb7-\u5bcc\u9633-\u676d\u5dde  \u81f3\u5609\u5174\u5e02",
-            "receive_company_name": "\u827e\u683c\u83f2\u5316\u5de5\u5382\u6709\u9650\u516c\u53f8"
-        },
-        {
-            "transport_time": "2020.09.23",
             "id": 5,
             "truck_id": 5,
-            "truck_num": "\u6d59AQP765",
+            "truck_num": "浙A8888",
             "status": 1,
-            "ship_company_name": "\u6d59\u6c5f\u5de8\u9f99\u80a1\u4efd\u6709\u9650\u516c\u53f8\u7535\u5316\u5382",
-            "transport_way": "\u81ea\u8862\u5dde\u5de8\u5316 \u7ecf \u9f99\u6e38-\u5efa\u5fb7-\u5bcc\u9633-\u676d\u5dde  \u81f3\u5609\u5174\u5e02",
-            "receive_company_name": "\u827e\u683c\u83f2\u5316\u5de5\u5382\u6709\u9650\u516c\u53f8"
+            "ship_company_name": "DWZ团队",
+            "transport_way": "北京-上海-杭州",
+            "receive_company_name": "大前端工作室"
         }
     ]
 }

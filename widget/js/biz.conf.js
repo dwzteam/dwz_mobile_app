@@ -22,104 +22,110 @@ var biz = window.biz || {
         },
         _login:{
             DEV:"./doc/json/login.json",
-            REMOTE:"/company/driver/login"
+            REMOTE:"/login"
         },
 		loginSms:{
             DEV:"./doc/json/login.json",
-            REMOTE:"/company/driver/login/verify"
+            REMOTE:"/login/verify"
         },
 
 		register: {
 			DEV: "./doc/json/register.json",
-			REMOTE: "/company/driver/register"
+			REMOTE: "/register"
 		},
 		forgetPwd: {
 			DEV: "./doc/json/ajaxDone.json",
-			REMOTE: "/company/driver/forget"
+			REMOTE: "/forget"
 		},
 		changePwd: {
 			DEV: "./doc/json/ajaxDone.json",
-			REMOTE: "/company/driver/user/password"
+			REMOTE: "/user/password"
 		},
 		changeMobile: {
 			DEV: "./doc/json/ajaxDone.json",
-			REMOTE: "/company/driver/user/phone"
+			REMOTE: "/user/phone"
 		},
 		userProfile: {
 			DEV: "./doc/json/login.json",
-			REMOTE: "/company/driver/user"
+			REMOTE: "/user"
 		},
 		sendSmsCode:{
 			DEV:"./doc/json/ajaxDone.json",
-			REMOTE:"/company/driver/code"
+			REMOTE:"/code"
 		},
 		// 公安实名验证
 		userRealVerify: {
 			DEV: "./doc/json/login.json",
 			REMOTE: "/user/realVerify"
-		},
+        },
+        
+        // 首页-轮播图
+        homeAd: {
+			DEV: "./doc/json/homeAd.json",
+			REMOTE: "/homeAd"
+        },
 
 		// 通知列表-首页
 		announce:{
             DEV:"./doc/json/announce.json",
-            REMOTE:"/company/driver/announce"
+            REMOTE:"/announce/index"
         },
 		// 通知列表
 		announceList:{
             DEV:"./doc/json/announce.json",
-            REMOTE:"/company/driver/announce/list"
+            REMOTE:"/announce/list"
         },
 		// 通知详情
 		announceDetail:{
             DEV:"./doc/json/announceDetail.json",
-            REMOTE:"/company/driver/announce/detail"
+            REMOTE:"/announce/detail"
         },
 		// 运输单-首页
 		transport:{
             DEV:"./doc/json/transport.json",
-            REMOTE:"/company/driver/transport"
+            REMOTE:"/transport"
         },
 		// 运输单列表
 		transportList:{
             DEV:"./doc/json/transportList.json",
-            REMOTE:"/company/driver/transport/list"
+            REMOTE:"/transport/list"
         },
 		// 运输单详情
 		transportDetail:{
             DEV:"./doc/json/transportDetail.json",
-            REMOTE:"/company/driver/transport/detail"
+            REMOTE:"/transport/detail"
         },
 
 		// 运输单开始运输
 		transportStart:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/start"
+            REMOTE:"/transport/start"
         },
 		// 运输单 完成
 		transportFinish:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/finish"
+            REMOTE:"/transport/finish"
         },
 
 		// 运输单发货过磅
 		transportFirst:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/first"
+            REMOTE:"/transport/first"
         },
 		// 运输单卸货过磅
 		transportLast:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/last"
+            REMOTE:"/transport/last"
         },
 		// 运输单过磅图图片上传，type: 1 发货过磅 2 卸货过磅 3 电子签名
 		transportUpload:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/upload"
+            REMOTE:"/transport/upload"
         },
 		// 运输单位置上报
 		transportPoint:{
             DEV:"./doc/json/ajaxDone.json",
-            REMOTE:"/company/driver/transport/point"
+            REMOTE:"/transport/point"
         },
 
         messageList:{
@@ -143,7 +149,7 @@ var biz = window.biz || {
 		// type: 图片类别 1 身份证正面，2 身份证反面 3 人脸识别 4 个人照片， 5 运输许可证
 		uploadUserIcon: {
 			DEV: "./doc/json/ajaxDone.json",
-			REMOTE: "/company/driver/upload"
+			REMOTE: "/upload"
 		},
         getUrl:function(type){
             return this.baseUrl[this.ENV] + type[this._flag()].replace('{token}', UserInfo.token);

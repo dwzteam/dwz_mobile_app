@@ -60,7 +60,7 @@ function ajaxError(xhr, ajaxOptions, thrownError) {
 $.extend(biz, {
 	safeAreaTop: 0,
 	fixStatusBar: function ($p) {
-		$p.find("header").css({ "padding-top": biz.safeAreaTop + "px" });
+		$p.find("header, dwz-fix-status-bar").css({ "padding-top": biz.safeAreaTop + "px" });
 	},
 	hasPermission: function (perms) {
 		const ret = api.hasPermission({

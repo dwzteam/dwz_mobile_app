@@ -6,11 +6,30 @@ function renderHome(tpl, params) {
 	var html = template.render(tplWrap.tpl, data);
 	$box.html(html).initUI();
 
-	var $form = $("#home_form");
+	var $form = $box.find("form.dwz-list-form");
 	var $listBox = $('#home-announce-box');
 
 	$form.requestList = function (loadMore) {
 		var data = $form.serializeArray();
+
+		// 轮播图
+		$.ajax({
+			type: "POST",
+			url: biz.server.getUrl(biz.server.homeAd),
+			dataType: "json",
+			data: data,
+			cache: false,
+			global: false,
+			success: function (json) {
+
+				if ($.isAjaxOkStatus(json)) {
+					var _html = template.render(tplWrap['tpl-home-ad'], json);
+					$box.find('#home-ad-box').html(_html).initUI();
+				}
+
+			},
+			error: ajaxError
+		});
 
 		// 运输单
 		$.ajax({
