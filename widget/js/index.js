@@ -49,7 +49,6 @@ function loadScripts(options) {
 	var scripts = js_src[op.env];
 
 	scripts.forEach(function (path) {
-		// document.head.appendChild(document.createElement('script')).src = BASE_URL + path;
 		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"><\/script>');
 	});
 
