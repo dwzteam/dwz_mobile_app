@@ -22,7 +22,7 @@
 					</div>
 					<p style="color:#999; text-align:center;">暂时还没有数据哦~</p>
 				</div>
-				<ul class="list icon-list2">
+				<ul class="list">
 
 				</ul>
 
@@ -40,12 +40,14 @@
 <script id="tpl-list" type="text/html">
 	{{each list as item}}
 	<li class="item dwz-open-right" data-id="{{item.id}}">
-		<div class="item-pic"><img src="./images/icon/icon-notice.svg"></div>
+		<div class="item-icon"><img src="./image/icon/icon-notice.svg"></div>
 		<div class="item-content">
-			<p class="item-title1">{{item.title}}</p>
+			<div class="flex-wrap">
+				<p class="item-title1 flex-item">{{item.title}}</p>
+				<p class="item-info1">{{item.created_at}}</p>
+			</div>
 			<p class="item-info1">{{item.content}}~</p>
 		</div>
-		<span class="item-right">{{item.created_at}}</span>
 		<a class="del-btn" href="javascript:biz.message.removeItem({{item}})"><span>删除</span></a>
 	</li>
 	{{/each}}
