@@ -2,9 +2,8 @@
  * Created by zhanghuihua on 2016/12/30.
  */
 (function ($) {
-
 	$.fn.extend({
-		touchSlide: function (options) {
+		slide: function (options) {
 			var op = $.extend({
 				titActive: 'on', // 导航指示圆点活跃class name
 				titSelector: '.hd > ul', // 导航指示圆点选择器
@@ -70,7 +69,7 @@
 				}
 
 				// 处理横竖屏切换适配
-				$box.on('touchSlide-resize', function () {
+				$box.on('slide-resize', function () {
 					setTimeout(function () {
 						wrapW = $wrapCell.width();
 						slideW = wrapW;

@@ -1129,81 +1129,49 @@ footer .button.inactive {
   display: inline-block;
 }
 @-webkit-keyframes loading {
-  /* line 3, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+  /* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
   from {
     -webkit-transform: rotate(0deg) translateZ(0);
             transform: rotate(0deg) translateZ(0);
   }
-  /* line 6, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+  /* line 5, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
   to {
     -webkit-transform: rotate(360deg) translateZ(0);
             transform: rotate(360deg) translateZ(0);
   }
 }
 @keyframes loading {
-  /* line 3, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+  /* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
   from {
     -webkit-transform: rotate(0deg) translateZ(0);
             transform: rotate(0deg) translateZ(0);
   }
-  /* line 6, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+  /* line 5, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
   to {
     -webkit-transform: rotate(360deg) translateZ(0);
             transform: rotate(360deg) translateZ(0);
   }
 }
-/* line 11, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 10, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 .pullDown,
 .pullUp {
   height: 40px;
   line-height: 40px;
   font-weight: bold;
   font-size: 0.8em;
-  color: #888;
+  color: rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 /* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
-.pullDown {
-  position: absolute;
-  top: -45px;
-  left: 50%;
-  margin-left: -50px;
-}
-/* line 25, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
-.pullDown.loading {
-  position: relative;
-  top: 0;
-  left: 0;
-  margin-left: 0;
-}
-/* line 31, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
-.pullDown .pullDownIcon {
-  -webkit-transform: rotate(0deg) translateZ(0);
-          transform: rotate(0deg) translateZ(0);
-}
-/* line 36, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
-.pullDown.flip .pullDownIcon {
-  -webkit-transform: rotate(-180deg) translateZ(0);
-          transform: rotate(-180deg) translateZ(0);
-}
-/* line 42, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
-.pullDown .pullDownIcon,
-.pullUp.loading .pullUpIcon {
-  display: inline-block;
-  opacity: 0.4;
-  width: 40px;
-  height: 40px;
-  background: url("data:image/png;base64,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") 0 0 no-repeat;
-  background-size: 40px 80px;
-  -webkit-transition: -webkit-transform 250ms;
-  transition: -webkit-transform 250ms;
-  transition: transform 250ms;
-  transition: transform 250ms, -webkit-transform 250ms;
-}
-/* line 52, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 .pullDown.loading .pullDownIcon,
 .pullUp.loading .pullUpIcon {
-  background-position: 0 100%;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: url("../image/icon/loading/loading.svg") center center no-repeat;
+  background-size: 75% 75%;
+  -webkit-transition: all 250ms;
+  transition: all 250ms;
   -webkit-transform: rotate(0deg) translateZ(0);
           transform: rotate(0deg) translateZ(0);
   -webkit-transition-duration: 0ms;
@@ -1211,22 +1179,53 @@ footer .button.inactive {
   -webkit-animation: loading 1s infinite linear;
           animation: loading 1s infinite linear;
 }
-/* line 59, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 34, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+.pullDown {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  margin-left: -50px;
+}
+/* line 39, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+.pullDown.loading {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+}
+/* line 45, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+.pullDown .pullDownIcon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  -webkit-transform: rotate(0deg) translateZ(0);
+          transform: rotate(0deg) translateZ(0);
+  background: url("../image/icon/loading/arrow-down.svg") center center no-repeat;
+  background-size: 60% 60%;
+  -webkit-transition: all 250ms;
+  transition: all 250ms;
+}
+/* line 57, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+.pullDown.flip .pullDownIcon {
+  -webkit-transform: rotate(-180deg) translateZ(0);
+          transform: rotate(-180deg) translateZ(0);
+}
+/* line 63, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 .pullUp {
   display: none;
 }
-/* line 61, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 65, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 .pullUp.loading {
   display: block;
 }
-/* line 66, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 70, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 .pullDownLabel,
 .pullUpLabel {
-  color: #999;
+  color: rgba(0, 0, 0, 0.4);
   line-height: 40px;
   display: inline-block;
 }
-/* line 72, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 77, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 #progressBar {
   background: rgba(0, 0, 0, 0.05);
   -webkit-backdrop-filter: blur(2px);
@@ -1234,13 +1233,13 @@ footer .button.inactive {
   display: block;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2000;
 }
-/* line 83, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 88, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 #progressBar .loading {
   display: block;
   width: 220px;
@@ -1258,15 +1257,15 @@ footer .button.inactive {
   color: #fff;
   position: relative;
 }
-/* line 99, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
+/* line 104, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/loading.less */
 #progressBar .loading::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
   width: 50px;
   height: 100%;
-  background: url("../image/icon/loading.svg") center center no-repeat;
+  background: url("../image/icon/loading/loading-light.svg") center center no-repeat;
   background-size: 80% 80%;
   -webkit-animation: loading 2s infinite linear;
           animation: loading 2s infinite linear;
@@ -1596,12 +1595,12 @@ ul.pic-list .item .item-content .item-phone {
           transform: translate3d(0px, 70px, 0px);
 }
 /* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel {
+.dwz-panel {
   position: relative;
   background: #fff;
 }
 /* line 6, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel .panel-header {
+.dwz-panel .panel-header {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1620,7 +1619,7 @@ ul.pic-list .item .item-content .item-phone {
   color: #666;
 }
 /* line 14, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel .panel-header .panel-title {
+.dwz-panel .panel-header .panel-title {
   position: relative;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -1629,7 +1628,7 @@ ul.pic-list .item .item-content .item-phone {
   font-size: 16px;
 }
 /* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel .panel-header .panel-title-right {
+.dwz-panel .panel-header .panel-title-right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1643,13 +1642,13 @@ ul.pic-list .item .item-content .item-phone {
   color: #929292;
 }
 /* line 25, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel .panel-header .panel-title-right .icon {
+.dwz-panel .panel-header .panel-title-right .icon {
   margin-right: -8px;
   width: 25px;
   height: 32px;
 }
 /* line 33, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/panel.less */
-.m-panel .panel-content {
+.dwz-panel .panel-content {
   position: relative;
   line-height: 24px;
   font-size: 14px;
@@ -1657,7 +1656,7 @@ ul.pic-list .item .item-content .item-phone {
   text-align: justify;
 }
 /* line 244, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/variables.less */
-.m-panel .panel-content h2 {
+.dwz-panel .panel-content h2 {
   position: relative;
   line-height: 30px;
   font-size: 15px;
@@ -2554,14 +2553,14 @@ ul.imgs li img {
   overflow: hidden;
 }
 /* line 101, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/upload.less */
-#preview-big-img .slideBox,
-#preview-big-img .slideBox .bd,
+#preview-big-img .dwz-slide,
+#preview-big-img .dwz-slide .bd,
 #preview-big-img .tab-content {
   width: 100%;
   height: 100%;
 }
 /* line 106, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/upload.less */
-#preview-big-img .slideBox .pop-inner {
+#preview-big-img .dwz-slide .pop-inner {
   position: absolute;
   top: 0;
   left: 0;
@@ -2842,13 +2841,13 @@ table.grid tbody tr:last-child {
   background-size: contain;
 }
 /* line 2, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox {
+.dwz-slide {
   position: relative;
   overflow: hidden;
   /* 设置焦点图最大宽度 */
 }
 /* line 6, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .hd {
+.dwz-slide .hd {
   position: absolute;
   height: 20px;
   line-height: 20px;
@@ -2858,7 +2857,7 @@ table.grid tbody tr:last-child {
   z-index: 1;
 }
 /* line 14, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .hd ul {
+.dwz-slide .hd ul {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2871,7 +2870,7 @@ table.grid tbody tr:last-child {
           justify-content: center;
 }
 /* line 20, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .hd li {
+.dwz-slide .hd li {
   display: block;
   width: 10px;
   height: 10px;
@@ -2882,43 +2881,43 @@ table.grid tbody tr:last-child {
   opacity: 0.5;
 }
 /* line 30, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .hd li.on {
+.dwz-slide .hd li.on {
   border: none;
   opacity: 1;
 }
 /* line 35, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd {
+.dwz-slide .bd {
   position: relative;
   z-index: 0;
   overflow: hidden;
 }
 /* line 39, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd ul {
+.dwz-slide .bd ul {
   position: relative;
   overflow: hidden;
   padding: 0;
   margin: 0;
 }
 /* line 44, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd ul li {
+.dwz-slide .bd ul li {
   position: relative;
   display: table-cell;
   vertical-align: top;
   text-align: center;
 }
 /* line 49, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd ul li img {
+.dwz-slide .bd ul li img {
   display: block;
   vertical-align: top;
   width: 100%;
   /* 图片宽度100%，达到自适应效果 */
 }
 /* line 56, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd ul li a {
+.dwz-slide .bd ul li a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 /* line 59, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .bd ul li .tit {
+.dwz-slide .bd ul li .tit {
   display: block;
   width: 100%;
   position: absolute;
@@ -2930,7 +2929,7 @@ table.grid tbody tr:last-child {
   text-align: left;
 }
 /* line 74, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/slide.less */
-.slideBox .semi-full {
+.dwz-slide .semi-full {
   max-height: 320px;
   overflow: hidden;
   display: -webkit-box;

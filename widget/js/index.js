@@ -17,7 +17,7 @@ var js_src = {
 		'js/dwz/dwz.dialog.js',
 		'js/dwz/dwz.panel.js',
 		'js/dwz/dwz.tabs.js',
-		'js/dwz/dwz.touchSlide.js',
+		'js/dwz/dwz.slide.js',
 		'js/dwz/dwz.filterSelect.js',
 		'js/dwz/dwz.filterPanel.js',
 		'js/dwz/dwz.croppic.js',

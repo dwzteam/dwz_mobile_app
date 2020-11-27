@@ -9,9 +9,9 @@
 
 	dwz.regPlugins.push(function($p){
 
-		if ($.fn.touchSlide) $('div.slideBox', $p).each(function(){
+		if ($.fn.slide) $('div.dwz-slide', $p).each(function(){
 			var $box = $(this);
-			$box.touchSlide({
+			$box.slide({
 				currentIndex: $box.attr('data-open-index') || 0,
 				autoCss: false,
 				autoPlay: $box.attr('data-auto-play') == 'false' ? false : true,
@@ -107,7 +107,7 @@
 		}
 
 		if ($.fn.panel) {
-			$('div.m-panel.dwz-collapse', $p).panel();
+			$('div.dwz-panel.dwz-collapse', $p).panel();
 		}
 		if ($.altPanel) {
 			$('a[target=altPanel]', $p).touchwipe({

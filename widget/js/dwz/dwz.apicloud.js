@@ -311,7 +311,7 @@
 			}
 
 			var screenW = document.body.offsetWidth,
-				tpl = '<div class="slideBox" data-auto-play="false" data-loop="false" data-zoom="true" data-open-index="#currentIndex#"><div class="bd"><ul>#li#</ul></div><div class="hd"><ul>#item#</ul></div></div>';
+				tpl = '<div class="dwz-slide" data-auto-play="false" data-loop="false" data-zoom="true" data-open-index="#currentIndex#"><div class="bd"><ul>#li#</ul></div><div class="hd"><ul>#item#</ul></div></div>';
 
 			var fragLi = '', fragItem = '';
 			var currentIndex = 0;
