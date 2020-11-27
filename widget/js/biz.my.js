@@ -15,14 +15,7 @@ biz.my = {
 			touch: function () {
 				$.alert.confirm('确定要退出登录吗？', {
 					okCall:function(){
-
 						UserInfoUtil.clear();
-						// var $myInfo = $('#my_info_box');
-						// if ($myInfo.size()>0) {
-						//     $myInfo.find('span.name').text('登录/注册');
-						//     $myInfo.find('img.my-avatar').attr('src', 'img/my-photo-default.jpg');
-						// }
-
 						$.gotoLogin();
 					},
 					cancelCall:function(){
@@ -168,19 +161,5 @@ biz.my = {
 				});
 			}
 		});
-	},
-
-	authRender: function(tpl, params) {
-		var $box = this;
-
-		var json = {
-			UserInfo: UserInfo,
-			// form_url: biz.server.getUrl(biz.server.userRealInfo),
-			sex_list: SexStore.getData({selectedId: UserInfo.sex}),
-			user_type: params.user_type
-		};
-
-		var html = template.render(tpl, json);
-		$box.html(html).initUI();
 	}
 };

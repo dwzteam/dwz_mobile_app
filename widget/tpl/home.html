@@ -21,7 +21,7 @@
 			<div class="m-panel">
 				<div class="panel-header padding-h">
 					<label class="panel-title">我的行程</label>
-					<a class="panel-title-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.transport.indexRender" rel="transport">查看更多<i class="icon icon-list-r"></i></a>
+					<a class="panel-title-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.transport.indexRender" rel="transport">查看更多<i class="arrow-right"></i></a>
 				</div>
 				<div class="panel-content" id="transport-card-box"></div>
 			</div>
@@ -30,7 +30,7 @@
 			<div class="m-panel" style="margin-top: 10px;">
 				<div class="panel-header padding-h">
 					<label class="panel-title">通知资讯</label>
-					<a class="panel-title-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="icon icon-list-r"></i></a>
+					<a class="panel-title-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="arrow-right"></i></a>
 				</div>
 				<div class="panel-content">
 					<ul id="home-announce-box" class="list pic-list">
@@ -86,7 +86,7 @@
 <script id="tpl-list" type="text/html">
 	{{each data as item}}
 	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
-		<div class="item-pic box-shadow"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
 		<div class="item-content">
 			<div class="item-title1">{{item.title}}</div>
 			<div class="item-info2">{{item.content}}</div>

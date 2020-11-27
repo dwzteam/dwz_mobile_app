@@ -14,24 +14,19 @@
 
                 <!--<div class="divider"></div>-->
                 <ul class="list">
-                    <li class="item item-pic dwz-user-icon">
-                        <p>头像</p><span class="item-right"><img id="setting_user_icon_img" src="{{UserInfo.headimgurl|showUserIcon}}"></span><i class="arrow-right"></i>
-                    </li>
-<!--                    <li class="item">-->
-<!--                        <a target="navView" data-href="tpl/my/editRealname.html" rel="edit_realname"><p>昵称</p><span class="item-right">张慧华</span><i class="arrow-right"></i></a>-->
-<!--                    </li>-->
-					<li class="item">
-						<a target="navView" data-href="tpl/my/auth.html?dwz_callback=biz.my.authRender" rel="auth"><p>姓名</p><span class="item-right">{{UserInfo.realname}}</span><i class="arrow-right"></i></a>
-					</li>
-					<li class="item">
-						<a target="navView" data-href="tpl/my/auth.html?dwz_callback=biz.my.authRender" rel="auth"><p>身份证号</p><span class="item-right">{{UserInfo.idcard}}</span><i class="arrow-right"></i></a>
-					</li>
-                    <li class="item">
-                        <a target="navView" data-href="tpl/my/changeMobile.html?dwz_callback=changeMobileRender" rel="changeMobile"><p>手机号</p><span class="item-right">{{UserInfo.mobile}}</span><i class="arrow-right"></i></a>
+                    <li class="item icon-wrap dwz-user-icon">
+                        <p class="flex-item">头像</p><img id="setting_user_icon_img" src="{{UserInfo.headimgurl|showUserIcon}}"><i class="arrow-right"></i>
                     </li>
 
-                    <li class="item">
-                        <a target="navView" data-href="tpl/my/changePwd.html?dwz_callback=changePwdRender" rel="changePwd"><p>修改密码</p><i class="arrow-right"></i></a>
+					<li class="item" target="navView" data-href="tpl/my/editRealname.html" rel="edit_realname">
+						<p class="flex-item">姓名</p><span class="item-info1">{{UserInfo.realname}}</span><i class="arrow-right"></i>
+					</li>
+                    <li class="item" target="navView" data-href="tpl/my/changeMobile.html?dwz_callback=changeMobileRender" rel="changeMobile">
+                        <p class="flex-item">手机号</p><span class="item-info1">{{UserInfo.mobile}}</span><i class="arrow-right"></i>
+                    </li>
+
+                    <li class="item" target="navView" data-href="tpl/my/changePwd.html?dwz_callback=changePwdRender" rel="changePwd">
+                        <p class="flex-item">修改密码</p><i class="arrow-right"></i>
                     </li>
 
                 </ul>

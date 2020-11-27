@@ -1,9 +1,15 @@
-<form class="dwz-list-form page-wrap">
+<form class="dwz-list-form page-wrap hideBarCtl">
 	<input type="hidden" name="pageNum" value="1">
 	<header>
+		<!-- <div class="toolbar">
+			<div class="header-title"><div class="title">我的收藏</div></div>
+		</div> -->
 		<div class="toolbar">
-			<div class="header-title">
-				<div class="title">我的收藏</div>
+			<div class="bar search-bar">
+				<label class="item-input filter-keywords">
+					<button class="icon icon-search" type="button"></button>
+					<input type="search" class="dwz-disable-autofocus" name="keyword" value="" placeholder="搜索关键字">
+				</label>
 			</div>
 		</div>
 	</header>
@@ -19,7 +25,7 @@
 
 					<div class="empty_box">
 						<div class="empty-img">
-							<img src="image/favorite-empty-bg.svg">
+							<img src="image/browse-empty-bg.svg">
 						</div>
 						<p style="color:#999; text-align:center;">暂时还没有相关收藏哦~</p>
 					</div>
@@ -45,8 +51,8 @@
 		<div class="item-content">
 			<div class="item-title1">{{item.title}}</div>
 			<div class="item-info1">{{@ item.sub_title}}</div>
-			<div class="item-info1">{{each item.tags}}<span class="item-tag">{{$value}}</span>{{/each}}></div>
-			<div class="item-price">￥{{item.price}}</div>
+			<div class="item-info1">{{each item.tags}}<span class="item-tag">{{$value}}</span>{{/each}}</div>
+			<div class="item-price">{{item.price}}</div>
 			<a class="del-btn" href="javascript:biz.favorite.removeItem({{item}})"><span>删除</span></a>
 		</div>
 	</li>

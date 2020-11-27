@@ -440,10 +440,10 @@ $.extend(template.defaults.imports, {
 		return item[fieldName || 'name'];
 	},
 	showImg: function (url, defaultImg) {
-		return url || defaultImg || 'image/pic/laws01.png';
+		return url || defaultImg || 'image/browse-empty-bg.svg';
 	},
 	showUserIcon: function (url) {
-		return url || 'image/my-photo-default.png';
+		return url || 'image/dwz-logo.svg';
 	}
 }, biz.format);
 
