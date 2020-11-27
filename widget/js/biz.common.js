@@ -328,7 +328,7 @@ $.extend(biz, {
 							lng: biz.location.lng,
 							lat: biz.location.lat,
 						};
-						// $.alert.toast(_url + '\n' + JSON.stringify(_data));
+						$.alert.toast(_url + '\n' + JSON.stringify(_data));
 
 						biz.location.lastTime = biz.location.timestamp;
 

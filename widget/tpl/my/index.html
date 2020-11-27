@@ -47,45 +47,14 @@
                     </div>
                     <div class="panel-content">
                         <div class="grids-contant">
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/dialog/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/dialog.svg"></div>
-                                <p class="grids-grid-label">dialog</p>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/alert/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/alert.svg"></div>
-                                <p class="grids-grid-label">alert</p>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/table/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/table.svg"></div>
-                                <p class="grids-grid-label">table</p>
-                            </a>
 
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/form/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/form.svg"></div>
-                                <p class="grids-grid-label">form</p>
+                            {{each widgetList as item}}
+                            <a class="grids-grid" target="navView" data-href="tpl/widget/{{item}}/index.html" rel="widget">
+                                <div class="grids-grid-icon"><img src="image/icon/widget/{{item}}.svg"></div>
+                                <p class="grids-grid-label">{{item}}</p>
                             </a>
-
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/brush/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/brush.svg"></div>
-                                <p class="grids-grid-label">brush</p>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/tabs/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/tabs.svg"></div>
-                                <p class="grids-grid-label">tabs</p>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/slide/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/slide.svg"></div>
-                                <p class="grids-grid-label">slide</p>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/slideTab/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/slideTab.svg"></div>
-                                <p class="grids-grid-label">slideTab</p>
-                            </a>
-                            </a>
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/panel/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/panel.svg"></div>
-                                <p class="grids-grid-label">panel</p>
-                            </a>
+                            {{/each}}
+                            
                         </div>
                     </div>
                 </div>
