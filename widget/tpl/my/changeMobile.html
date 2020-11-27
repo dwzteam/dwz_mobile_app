@@ -16,39 +16,40 @@
 				<div class="scroll">
 
 					<div class="divider"></div>
-					<!-- bleed-margin -->
+
 					<div class="pageFormContent unitBox">
-<!--						<div class="item">-->
-<!--							<div class="item-content">-->
-<!--								<input type="password" name="password" placeholder="登录密码" maxlength="20" class="required" data-error="请输入密码">-->
-<!--							</div>-->
-<!--						</div>-->
+						
 						<div class="item">
 							<div class="item-content">
-								<input type="text" name="mobile" value="{{UserInfo.mobile}}" placeholder="请输入旧手机号" maxlength="11" data-pattern="[0-9]{11,11}" data-error="请输入11位旧手机号">
+								<input class="required" type="text" name="mobile" value="{{UserInfo.mobile}}" placeholder="请输入旧手机号" maxlength="11" data-pattern="[0-9]{11,11}" data-error="请输入11位旧手机号">
 							</div>
 						</div>
+						<!-- <div class="item">
+							<div class="item-content">
+								<input class="required" type="text" name="mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
+								<a target="sendVerifyMs" data-href="{{sms_code_url}}" rel="input[name=mobile]" data-op="5">获取验证码</a>
+							</div>
+						</div> -->
 						<div class="item">
 							<div class="item-content">
-								<input type="text" name="mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
-								<a target="sendVerifyMs" data-href="{{sms_code_url}}" rel="input[name=mobile]" data-op="5">获取验证码</a>
+								<input class="required" type="password" name="password" placeholder="登录密码" maxlength="20" data-error="请输入密码">
 							</div>
 						</div>
 
 						<div class="item">
 							<div class="item-content">
-								<input type="text" name="new_mobile" placeholder="请输入新手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位新手机号">
+								<input class="required" type="text" name="new_mobile" placeholder="请输入新手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位新手机号">
 							</div>
 						</div>
 						<div class="item">
 							<div class="item-content">
-								<input type="text" name="new_mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
+								<input class="required" type="text" name="new_mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
 								<a target="sendVerifyMs" data-href="{{sms_code_url}}" rel="input[name=new_mobile]" data-op="1">获取验证码</a>
 							</div>
 						</div>
 					</div>
 
-					<div class="bleed-margin">
+					<div class="padding-all">
 						<button class="form-submit" type="submit">提交</button>
 					</div>
 

@@ -6,7 +6,8 @@
 	.flex-vertical;
 }
 
-main, .page-wrap {
+main,
+.page-wrap {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
@@ -16,18 +17,15 @@ main, .page-wrap {
 
 // 相当于panel，独立完整的内容
 article {
-
 }
 
 // 有联系的内容组
 section {
-
 }
 
 // 标签规定独立的流内容（图像、图表、照片、代码等等）
 figure {
 	figcaption {
-
 	}
 }
 
@@ -63,16 +61,10 @@ figure {
 		.item {
 			display: table-cell;
 			padding: 0 10px;
-			.item-pic {margin: 0;}
+			.item-pic {
+				margin: 0;
+			}
 		}
-	}
-}
-
-.bleed-margin {
-	padding: 0 10px;
-
-	.form-submit {
-		margin: 10px 0;
 	}
 }
 
@@ -89,7 +81,7 @@ figure {
 		position: absolute;
 		z-index: 0;
 	}
-}
+}ß
 
 .detail-content {
 	background: #fff;
@@ -133,7 +125,11 @@ figure {
 	line-height: 20px;
 }
 
-.txt-h1, .txt-h2, .txt-h3, .txt-desc, .txt-info {
+.txt-h1,
+.txt-h2,
+.txt-h3,
+.txt-desc,
+.txt-info {
 	&.center {
 		text-align: center;
 	}
@@ -143,7 +139,15 @@ figure {
 	}
 }
 
-.item-title1, .item-title2, .item-title3, .item-info1, .item-info2, .item-info3, .txt-line1, .txt-line2, .txt-line3 {
+.item-title1,
+.item-title2,
+.item-title3,
+.item-info1,
+.item-info2,
+.item-info3,
+.txt-line1,
+.txt-line2,
+.txt-line3 {
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -160,21 +164,29 @@ figure {
 	}
 }
 
-.item-title1, .item-title2, .item-title3 {
+.item-title1,
+.item-title2,
+.item-title3 {
 	font-size: @l3;
 	color: @titleColor;
 }
 
-.item-info1, .item-info2, .item-info3 {
+.item-info1,
+.item-info2,
+.item-info3 {
 	font-size: @l4;
 	color: @infoColor;
 }
 
-.item-title2, .item-info2, .txt-line2 {
+.item-title2,
+.item-info2,
+.txt-line2 {
 	-webkit-line-clamp: 2;
 }
 
-.item-title3, .item-info3, .txt-line3 {
+.item-title3,
+.item-info3,
+.txt-line3 {
 	-webkit-line-clamp: 3;
 }
 
@@ -190,15 +202,15 @@ figure {
 	background: #999999;
 
 	&.status-pass {
-		background: #7EBB66;
+		background: #7ebb66;
 	}
 
 	&.status-fail {
-		background: #9EADCB;
+		background: #9eadcb;
 	}
 
 	&.status-pending {
-		background: #F5A623;
+		background: #f5a623;
 	}
 
 	&.status-cancel {
@@ -212,15 +224,15 @@ figure {
 	padding: 0;
 
 	&.status-pass {
-		color: #F5A623;
+		color: #f5a623;
 	}
 
 	&.status-fail {
-		color: #9EADCB;
+		color: #9eadcb;
 	}
 
 	&.status-pending {
-		color: #F7AF56;
+		color: #f7af56;
 	}
 
 	&.status-cancel {
@@ -231,8 +243,8 @@ figure {
 .alert-box {
 	.item-title1;
 	padding: 10px 10px;
-	background: #DFF8D4;
-	color: #7EBB66;
+	background: #dff8d4;
+	color: #7ebb66;
 	.button {
 		background: none;
 		border-radius: 15px;
@@ -250,7 +262,7 @@ figure {
 	.align-center;
 	padding: 5px 0;
 	&:before {
-		content: ' ';
+		content: " ";
 		width: 19px;
 		height: 22px;
 		background: url("../../image/icon/icon-pos.svg") no-repeat center center;

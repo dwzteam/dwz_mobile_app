@@ -1,12 +1,11 @@
 // 运输任务卡片
 #transport-card-box {
-	padding: 0 10px 10px 10px;
+	padding: 10px;
 }
 .transport-card {
 	display: block;
 	position: relative;
-	background: #292F4C;
-	color: #9CA4B4;
+	background: @btnBackground;
 	border-radius: 8px;
 	overflow: hidden;
 	.padding-all;
@@ -17,19 +16,27 @@
 	}
 
 	&:before {
-		content: '';
+		content: "";
 		position: absolute;
-		top:0;
-		left:0;
-		bottom:0;
-		width:6px;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 10px;
 		z-index: 2;
-		background-image: linear-gradient(-90deg, #292F4C 0%, #F04242 70%, #F85252 100%);
+		background-image: linear-gradient(
+			-90deg,
+			@btnBackground 0%,
+			rgba(255, 72, 10, 0.8) 70%,
+			rgba(255, 72, 10, 1) 100%
+		);
 	}
-	.item-title1, .item-info1, .item-info2, .item-info3 {
-		color: #9CA4B4;
+	.item-title1,
+	.item-info1,
+	.item-info2,
+	.item-info3 {
+		color: rgba(255, 255, 255, 0.8);
 		line-height: 24px;
-		span{
+		span {
 			color: #fff;
 		}
 	}
@@ -47,7 +54,8 @@
 		align-items: center;
 		position: relative;
 
-		.dot-start, .dot-end {
+		.dot-start,
+		.dot-end {
 			width: 9px;
 			height: 9px;
 			display: block;
@@ -68,14 +76,14 @@
 			bottom: 13px;
 			left: 4px;
 			width: 1px;
-			background: #F24646;
+			background: #f24646;
 		}
 	}
 }
 
 .page-transport {
-
-	.icon-receive, .icon-ship {
+	.icon-receive,
+	.icon-ship {
 		display: inline-block;
 		width: 32px;
 		height: 32px;
@@ -87,12 +95,15 @@
 	}
 
 	.icon-receive {
-		background: #F5A623;
+		background: #f5a623;
 	}
 	.icon-ship {
-		background: #E5625C;
+		background: #e5625c;
 	}
 
+	.bleed-margin {
+		padding: 5px;
+	}
 	.receive-box {
 		.item {
 			.align-center;
@@ -100,7 +111,7 @@
 			.btn-group {
 				height: 36px;
 				border-radius: 18px;
-				background: #31455A;
+				background: @btnBackground;
 				padding: 0 5px;
 				.flex-all-center;
 
@@ -109,7 +120,7 @@
 					font-size: @l4;
 					min-width: 60px;
 					color: #fff;
-					border-right: 1px solid rgba(255,255,255,0.8);
+					border-right: 1px solid rgba(255, 255, 255, 0.8);
 					line-height: 16px;
 					&:last-child {
 						border: none;
@@ -131,21 +142,20 @@
 	}
 
 	.sheet-box {
-
 		.widget-box {
 			overflow: hidden;
-			background: rgba(255,255,255,1);
+			background: rgba(255, 255, 255, 1);
 			.item-bar {
 				.flex-wrap;
 				.txt-desc;
 				position: relative;
-				background: #F6F7FB;
+				background: #f6f7fb;
 				clear: both;
 				padding: 10px 10px;
 				.split {
 					height: 20px;
 					width: 1px;
-					background: #CCCCCC;
+					background: #cccccc;
 				}
 				a {
 					font-weight: bold;
@@ -162,7 +172,7 @@
 
 		.bleed-margin {
 			height: 48px;
-			background: #31455A;
+			background: @btnBackground;
 			color: #fff;
 			font-size: @l4;
 			position: relative;
@@ -181,7 +191,8 @@
 			}
 
 			.icon-wipe-right {
-				background: url(../../image/icon/transport/icon-wipe-right.svg) center no-repeat;
+				background: url(../../image/icon/transport/icon-wipe-right.svg)
+					center no-repeat;
 				background-size: cover;
 				display: block;
 				width: 13px;
@@ -195,7 +206,9 @@
 		background: @defaultBackground;
 		border-radius: 5px;
 
-		label {margin: 5px;}
+		label {
+			margin: 5px;
+		}
 		.flex-wrap {
 			input {
 				padding: 5px;
@@ -206,14 +219,17 @@
 	}
 
 	.icon-address {
-		background: url(../../image/icon/transport/icon-address.svg) center no-repeat;
+		background: url(../../image/icon/transport/icon-address.svg) center
+			no-repeat;
 		background-size: cover;
 		display: block;
 		width: 18px;
 		height: 22px;
 		margin-right: 5px;
 	}
-	.icon-cert, .icon-yes, .icon-no {
+	.icon-cert,
+	.icon-yes,
+	.icon-no {
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		display: block;

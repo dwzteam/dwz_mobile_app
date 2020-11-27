@@ -7,14 +7,6 @@
 	font-size: 14px;
 }
 
-.chart-percent {
-	display: block;
-	width: 150px;
-	height: 150px;
-	float: left;
-	position: relative;
-}
-
 .empty_box {
 
 	.empty-img {
@@ -40,86 +32,3 @@
 	}
 }
 
-
-// My
-.my-info {
-	position: relative;
-	overflow: hidden;
-
-	.my-avatar {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 64px;
-		height: 64px;
-		margin: -20px 0 0 -32px;
-		border-radius: 50%;
-		border: solid 2px rgba(255, 255, 255, .5);
-		overflow: hidden;
-	}
-
-	.name {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 200px;
-		height: 20px;
-		margin: 50px 0 0 -100px;
-		text-align: center;
-		text-shadow: rgba(0, 0, 0, 0.5) 0 0 1px;
-		color: #333;
-	}
-}
-
-.my-info-background {
-	width: 100%;
-	min-height: 220px;
-	overflow: hidden;
-	background: url(../../image/my-info-bg.png) center no-repeat;
-	background-size: cover;
-}
-
-.auth-check {
-	.my-avatar {
-		width: 94px;
-		height: 94px;
-		//border-radius: 50%;
-		border: solid 2px rgba(255, 255, 255, .5);
-		overflow: hidden;
-		.flex-all-center;
-
-		img {
-			width: 100%;
-		}
-	}
-}
-
-.auth-result {
-	.flex-all-center;
-	flex-direction: column;
-
-	.icon {
-		width: 140px;
-		height: 140px;
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-	}
-
-	&.ok {
-		.icon {
-			background-image: url('../../image/icon/auth-ok.svg');
-		}
-	}
-
-	&.error {
-		.icon {
-			background-image: url('../../image/icon/auth-error.svg');
-		}
-	}
-
-	.item-info2 {
-		font-size: 16px;
-		padding: 16px;
-	}
-}
