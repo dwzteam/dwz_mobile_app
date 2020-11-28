@@ -11,9 +11,8 @@ const biz = window.biz || {
 		baseUrl: {
 			DEV: '',
 			TEST: '/app_proxy',
-			// UAT:"http://ui.7788sc.com/_dw_baianinfo/app",
-			UAT: 'http://47.96.239.247/easy_durg/public',
-			LIVE: 'http://47.96.239.247/easy_durg/public'
+			UAT: 'http://mobile.jui.org',
+			LIVE: 'http://mobile.jui.org'
 		},
 		_verifyImg: {
 			DEV: './doc/verify.png',
