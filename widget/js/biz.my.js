@@ -162,7 +162,7 @@ biz.my = {
 												}
 
 												UserInfoUtil.update({
-													photo: strBase64
+													headimgurl: strBase64
 												});
 											}
 										});
