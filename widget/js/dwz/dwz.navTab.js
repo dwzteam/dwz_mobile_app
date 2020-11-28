@@ -163,7 +163,7 @@ $.navTab = {
 			type: op.type,
 			url: op.url,
 			data: op.data,
-			success: function (html) {
+			success: (html) => {
 				$panel.triggerPageClear();
 
 				if (!op.callback) {

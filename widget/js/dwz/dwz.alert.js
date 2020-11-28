@@ -162,13 +162,13 @@
 					type: 'GET',
 					url: url,
 					data: params,
-					success: function (html) {
+					success: (html) => {
 						$box.triggerPageClear();
 
 						let callback = dwz.getUrlCallback(url);
 
 						if (callback) {
-							callback.call($box, html, params
+							callback.call($box, html, params);
 						} else {
 							$box.html(html).initUI();
 						}

@@ -37,8 +37,11 @@ dwz.extend({
 			}
 		}
 	},
-	isAjaxOkStatus: function (json) {
+	isAjaxStatusOk: function (json) {
 		return json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok;
+	},
+	isAjaxStatusError: function (json) {
+		return json[dwz.config.keys.statusCode] == dwz.config.statusCode.error;
 	},
 	gotoLogin: function () {
 		$.dialog.open({
@@ -226,7 +229,7 @@ function navViewAjaxDone(json) {
 function navViewAjaxDoneReload(json) {
 	dwz.ajaxDone(json);
 
-	if ($.isAjaxOkStatus(json)) {
+	if ($.isAjaxStatusOk(json)) {
 		// 如果关闭当前页面后，底部是列表页面，就重新加载
 		var $boxs = $.navView.getBoxs(3);
 		$boxs.forEach(function ($box) {
@@ -239,7 +242,7 @@ function navViewAjaxDoneReload(json) {
 }
 
 function navViewAjaxDoneClose(json) {
-	if ($.isAjaxOkStatus(json)) {
+	if ($.isAjaxStatusOk(json)) {
 		$.navView.close(true, true);
 	}
 	navViewAjaxDoneReload(json);
@@ -372,12 +375,10 @@ function ajaxConfirm(params) {
 								data: { active: beforeActive ? 0 : 1 },
 								dataType: 'json',
 								cache: false,
-								success: function (json) {
-									dwz.ajaxDone(json);
+								success: (json) => {
+									$.ajaxDone(json);
 
-									if (
-										json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok
-									) {
+									if ($.isAjaxStatusOk(json)) {
 										if (beforeActive && !disabledInvert) {
 											$this.removeClass(op.className);
 											changeRelCount(-relCount);

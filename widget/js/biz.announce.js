@@ -1,15 +1,15 @@
 biz.announce = {
 	listRender: function (tpl, params) {
-		var $box = this,
+		let $box = this,
 			tplWrap = $.templateWrap(tpl);
 
-		var html = template.render(tplWrap.tpl, {
+		let html = template.render(tplWrap.tpl, {
 			UserInfo: UserInfo,
 			params: params
 		});
 		$box.html(html).initUI();
 
-		var $form = $box.find('form.dwz-list-form'),
+		let $form = $box.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = function (loadMore) {
@@ -20,18 +20,18 @@ biz.announce = {
 				data: $form.serializeArray(),
 				cache: false,
 				global: false,
-				success: function (json) {
+				success: (json) => {
 					if (!dwz.checkAjaxLogin(json)) {
 						return;
 					}
 
-					if ($.isAjaxOkStatus(json)) {
+					if ($.isAjaxStatusOk(json)) {
 						$form.total = json.total || json.data.length;
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}
 
-						var _html = template.render(tplWrap['tpl-list'], json);
+						let _html = template.render(tplWrap['tpl-list'], json);
 						if (loadMore) {
 							$listBox.append(_html);
 						} else {
@@ -46,7 +46,7 @@ biz.announce = {
 		$.listForm($form);
 	},
 	detailRender: function (tpl, params) {
-		var $box = this;
+		let $box = this;
 
 		$.ajax({
 			type: 'POST',
@@ -55,10 +55,10 @@ biz.announce = {
 			data: { announce_id: params.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				console.log(json);
 
-				var html = template.render(tpl, {
+				let html = template.render(tpl, {
 					UserInfo: UserInfo,
 					vo: json.data
 				});

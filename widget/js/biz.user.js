@@ -3,7 +3,7 @@
  */
 
 // 用户登入信息
-var UserInfo = {
+let UserInfo = {
 	token: '',
 	mobile: '',
 	realname: '',
@@ -12,7 +12,7 @@ var UserInfo = {
 	user_type: '',
 	headimgurl: ''
 };
-var UserInfoUtil = {
+let UserInfoUtil = {
 	update: function (data) {
 		console.log(JSON.stringify(data));
 
@@ -53,7 +53,7 @@ function initUserInfo() {
 			data: {},
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				console.log(JSON.stringify(json));
 
 				if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
@@ -84,23 +84,23 @@ $.fn.extend({
 	sendVerifyMs: function () {
 		return this.each(function () {
 			$(this).click(function () {
-				var $link = $(this),
+				let $link = $(this),
 					rel = $link.attr('rel'),
 					op = $link.attr('data-op');
 
-				var mobile = $link.parentsUnitBox().find(rel).val();
+				let mobile = $link.parentsUnitBox().find(rel).val();
 
 				if (!mobile || !mobile.isMobile()) {
 					$.alert.error('请输入您的11位手机号码');
 					return;
 				}
 
-				var sec = 60;
-				var $altMsg = $(
+				let sec = 60;
+				let $altMsg = $(
 					'<span class="count">重发(' + sec + 's)</span>'
 				).appendTo(this.parentNode);
 				$link.hide();
-				var timer = setInterval(function () {
+				let timer = setInterval(function () {
 					$altMsg.text('重发(' + sec + 's)');
 					sec--;
 
@@ -117,15 +117,13 @@ $.fn.extend({
 					url: $link.attr('data-href'),
 					data: {
 						mobile: mobile,
-						sign: md5(mobile + 'ln-#*UR0QsgY51^2Bz'),
+						sign: $.md5(mobile + 'dwz_mobile'),
 						type: op
 					},
-					success: function (json) {
+					success: (json) => {
 						console.log(JSON.stringify(json));
-						var info = json[dwz.config.keys.message] || json.info;
-						if (
-							json[dwz.config.keys.statusCode] == dwz.config.statusCode.error
-						) {
+						let info = json[dwz.config.keys.message] || json.info;
+						if (isAjaxStatusError(json)) {
 							$.alert.error(info);
 							clearInterval(timer);
 							$altMsg.remove();
@@ -142,10 +140,10 @@ $.fn.extend({
 
 // 检测用户登入状态
 dwz.urlInterceptor = function (url) {
-	var pass = UserInfo.token ? true : false;
+	let pass = UserInfo.token ? true : false;
 
 	if (!pass) {
-		var uris = [
+		let uris = [
 			'tpl/user/login.html',
 			'tpl/user/forgetPwd.html',
 			'tpl/user/register.html'
@@ -168,7 +166,7 @@ dwz.urlInterceptor = function (url) {
 // 检测是否实名认证
 function authCheck(url) {
 	if (!UserInfo.isauth) {
-		var uris = ['tpl/driver.html'];
+		let uris = ['tpl/driver.html'];
 
 		// 判断request URI 是否需要绑定
 		if (!dwz.inArray(url.getRequestURI(), uris)) {
@@ -184,72 +182,72 @@ function authCheck(url) {
 
 // 登入页面
 function loginRender(tpl, params) {
-	var $box = this;
+	let $box = this;
 
-	var json = {
+	let json = {
 		form_url: biz.server.getLoginUrl(),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		login_sms_url: biz.server.getUrl(biz.server.loginSms)
 	};
 
-	var html = template.render(tpl, json);
+	let html = template.render(tpl, json);
 	$box.html(html).initUI();
 }
 
 function forgetPwdRender(tpl, params) {
-	var $box = this;
+	let $box = this;
 
-	var json = {
+	let json = {
 		form_url: biz.server.getUrl(biz.server.forgetPwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
 	};
 
-	var html = template.render(tpl, json);
+	let html = template.render(tpl, json);
 	$box.html(html).initUI();
 }
 
 function changePwdRender(tpl, params) {
-	var $box = this;
+	let $box = this;
 
-	var json = {
+	let json = {
 		form_url: biz.server.getUrl(biz.server.changePwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
 	};
 
-	var html = template.render(tpl, json);
+	let html = template.render(tpl, json);
 	$box.html(html).initUI();
 }
 function changeMobileRender(tpl, params) {
-	var $box = this;
+	let $box = this;
 
-	var json = {
+	let json = {
 		form_url: biz.server.getUrl(biz.server.changeMobile),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
 	};
 
-	var html = template.render(tpl, json);
+	let html = template.render(tpl, json);
 	$box.html(html).initUI();
 }
 
 // 用户注册页面
 function registerRender(tpl, params) {
-	var $box = this;
+	let $box = this;
 
-	var json = {
+	let json = {
 		form_url: biz.server.getUrl(biz.server.register),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
 	};
 
-	var html = template.render(tpl, json);
+	let html = template.render(tpl, json);
 	$box.html(html).initUI();
 }
 
 // 用户注册表单提交回调函数
 function loginAjaxDone(json) {
 	console.log(JSON.stringify(json));
-	if ($.isAjaxOkStatus(json)) {
+	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);
 		// initDict();
 
@@ -265,7 +263,7 @@ function loginAjaxDone(json) {
 
 function forgetAjaxDone(json) {
 	console.log(JSON.stringify(json));
-	if ($.isAjaxOkStatus(json)) {
+	if ($.isAjaxStatusOk(json)) {
 		$.gotoLogin();
 		$.alert.success(json.info);
 	} else {
@@ -278,7 +276,7 @@ function authAjaxDone(json) {
 
 	$.navView.close(true, true); // 关闭认证页面
 
-	if ($.isAjaxOkStatus(json)) {
+	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);
 
 		$.dialog.open({ url: 'tpl/my/authOk.html' });
@@ -298,13 +296,13 @@ function authAjaxDone(json) {
 // }
 
 function submitUserRealInfo(form) {
-	var $form = $(form);
+	let $form = $(form);
 
 	if (!$form.valid()) {
 		return false;
 	}
 
-	var data = $form.serializeMap();
+	let data = $form.serializeMap();
 
 	// $.ajax({
 	// 	global: true,
@@ -313,7 +311,7 @@ function submitUserRealInfo(form) {
 	// 	data: data,
 	// 	dataType: "json",
 	// 	cache: false,
-	// 	success: function (json) {
+	// 	success: (json) => {
 	// 		if (!dwz.checkAjaxLogin(json)) { return; }
 	// 		if (!json.data) json.data = data;
 	// 		userRealInfoAjaxDone(json);
@@ -326,18 +324,18 @@ function submitUserRealInfo(form) {
 	return false;
 }
 
-var bizUtil = {
+let bizUtil = {
 	userRealVerify: function (params, success) {
 		if (!biz.checkPermission('camera', '摄像头')) {
 			return;
 		}
 
-		var baiduFace = api.require('baiduFaceLive');
+		let baiduFace = api.require('baiduFaceLive');
 		baiduFace.closeFaceDetectView(function (ret, err) {
 			// console.log(JSON.stringify(ret));
 		});
 
-		var safeTop = api.safeArea.top;
+		let safeTop = api.safeArea.top;
 		baiduFace.openFaceDetectView(
 			{
 				rect: {

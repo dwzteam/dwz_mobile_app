@@ -102,7 +102,7 @@
 								type: 'GET',
 								url: _href,
 								data: _params,
-								success: function (_tpl) {
+								success: (_tpl) => {
 									$tab.attr('data-loaded', 1);
 									let $img = $tab.find('img');
 									if ($img.size() > 0) {

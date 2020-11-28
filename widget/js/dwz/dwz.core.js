@@ -1505,9 +1505,9 @@ dwz.extend({
 	/**
 	 *
 	 * dwz.ajax({type:'POST', url:'data.html', dataType:'html', data: {name:'test', value:'aaa'},
-	 * 	success: function(result, textStatus, XMLHttpRequest){},
-	 * 	error: function(XMLHttpRequest, textStatus, errorThrown){},
-	 * 	complete: function(XMLHttpRequest, textStatus)
+	 * 	success: (result, textStatus, XMLHttpRequest) => {},
+	 * 	error: (XMLHttpRequest, textStatus, errorThrown) => {},
+	 * 	complete: (XMLHttpRequest, textStatus) => {}
 	 * });
 	 *
 	 */

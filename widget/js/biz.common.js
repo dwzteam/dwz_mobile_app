@@ -31,7 +31,7 @@ $.extend({
 			data: op.data,
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				// console.log(json);
 
 				// 缓存json
@@ -250,8 +250,8 @@ $.extend(biz, {
 				data: { pageNum: 1, status: 1 },
 				cache: false,
 				global: false,
-				success: function (json) {
-					if ($.isAjaxOkStatus(json)) {
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
 						// alert(JSON.stringify(json.data.list));
 						if (json.data.list && json.data.list.length) {
 							biz.location.truck_id = json.data.list[0].truck_id;
@@ -333,7 +333,7 @@ $.extend(biz, {
 								data: _data,
 								cache: false,
 								global: false,
-								success: function (json) {
+								success: (json) => {
 									console.log(JSON.stringify(json));
 								},
 								error: ajaxError

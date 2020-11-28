@@ -2,6 +2,7 @@ var js_src = {
 	public: ['script/template-web.js'],
 	dev: [
 		'js/dwz/dwz.core.js',
+		'js/dwz/dwz.md5.js',
 		'js/dwz/dwz.util.date.js',
 		'js/dwz/dwz.apicloud.js',
 		'js/dwz/dwz.history.js',
@@ -111,26 +112,7 @@ function loadScripts(options) {
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
 
-			$('div.chart-percent', $p).each(function (index) {
-				var $this = $(this);
-				$this.circliful({
-					animation: 1,
-					animationStep: 5,
-					foregroundBorderWidth: 20,
-					backgroundBorderWidth: 20,
-					foregroundColor: $this.attr('data-fg-color') || dwz.randomColor(1),
-					backgroundColor: $this.attr('data-bg-color') || dwz.randomColor(),
-					percent: $this.attr('data-percent') || 0,
-					percentageTextSize: 28,
-					fontColor: '#f00',
-					text: $this.attr('data-txt') || '佰安',
-					textColor: '#999'
-				});
-			});
-
-			$('a.title, a.sub-title, li[data-href], .dwz-ctl-active', $p).activeClass(
-				'active'
-			);
+			$('a.title, a.sub-title, li[data-href], .dwz-ctl-active', $p).activeClass('active');
 			$('input[data-checkbox-radio]', $p).checkboxRadio();
 			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
 
@@ -207,6 +189,6 @@ function loadScripts(options) {
 }
 
 // 用于gulpfile.js编译js
-if (typeof module != 'undefined') {
+if (typeof module === 'object' && module.exports) {
 	module.exports = js_src;
 }

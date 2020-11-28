@@ -61,7 +61,7 @@ $.fn.extend({
 						type: 'GET',
 						url: url,
 						data: _data,
-						success: function (html) {
+						success: (html) => {
 							$panel.triggerPageClear();
 
 							let callback = dwz.getUrlCallback(url);

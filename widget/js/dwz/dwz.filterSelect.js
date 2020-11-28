@@ -63,7 +63,7 @@ $.filterSelect = {
 				type: 'GET',
 				url: op.url,
 				data: params,
-				success: function (html) {
+				success: (html) => {
 					$box.triggerPageClear();
 
 					if (!op.callback) {

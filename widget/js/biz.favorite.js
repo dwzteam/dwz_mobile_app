@@ -3,7 +3,7 @@
  */
 biz.favorite = {
 	removeItem: function (params) {
-		var op = $.extend({ id: 0 }, params);
+		let op = $.extend({ id: 0 }, params);
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.favoriteDel),
@@ -11,10 +11,10 @@ biz.favorite = {
 			data: { id: op.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				console.log(json);
 
-				if ($.isAjaxOkStatus(json)) {
+				if ($.isAjaxStatusOk(json)) {
 					$.navTab
 						.getBox()
 						.find('ul.list li[data-id="' + op.id + '"]')
@@ -25,17 +25,17 @@ biz.favorite = {
 		});
 	},
 	listRender: function (tpl, params) {
-		var $box = this,
+		let $box = this,
 			tplWrap = $.templateWrap(tpl);
 
-		var html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
+		let html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
 		$box.html(html).initUI();
 
-		var $form = $box.find('form.dwz-list-form'),
+		let $form = $box.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.list');
 
 		$form.requestList = function (loadMore) {
-			var data = $form.serializeArray();
+			let data = $form.serializeArray();
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
@@ -44,18 +44,18 @@ biz.favorite = {
 				data: data,
 				cache: false,
 				global: false,
-				success: function (json) {
+				success: (json) => {
 					if (!dwz.checkAjaxLogin(json)) {
 						return;
 					}
 
-					if ($.isAjaxOkStatus(json)) {
+					if ($.isAjaxStatusOk(json)) {
 						$form.total = json.data.total || json.data.length;
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}
 
-						var _html = template.render(tplWrap['tpl-list'], json.data);
+						let _html = template.render(tplWrap['tpl-list'], json.data);
 
 						if (loadMore) {
 							$(_html).appendTo($listBox).touchOpenRight();

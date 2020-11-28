@@ -1,8 +1,6 @@
 biz.my = {
 	render: function (tpl, params) {
-		var $box = this;
-
-		var html = template.render(tpl, {
+		let html = template.render(tpl, {
 			UserInfo: UserInfo,
 			widgetList: [
 				'dialog',
@@ -16,13 +14,11 @@ biz.my = {
 				'panel'
 			]
 		});
-		$box.html(html).initUI();
+		this.html(html).initUI();
 	},
 	settingRender: function (tpl, params) {
-		var $box = this;
-
-		var html = template.render(tpl, { UserInfo: UserInfo });
-		$box.html(html).initUI();
+		let html = template.render(tpl, { UserInfo: UserInfo });
+		this.html(html).initUI();
 
 		$('#exitSystemButton').touchwipe({
 			touch: function () {
@@ -36,7 +32,7 @@ biz.my = {
 			}
 		});
 
-		$box.find('.dwz-user-icon').touchwipe({
+		this.find('.dwz-user-icon').touchwipe({
 			touch: function () {
 				dwz.plus.chooseImage({
 					title: '修改用户头像',
@@ -63,21 +59,19 @@ biz.my = {
 		});
 	},
 	settingIconRender: function (tpl, params) {
-		var $box = this;
+		let html = template.render(tpl, { UserInfo: UserInfo });
+		this.html(html).initUI();
 
-		var html = template.render(tpl, { UserInfo: UserInfo });
-		$box.html(html).initUI();
-
-		// var $croppic = $box.find('.croppic');
+		// let $croppic = this.find('.croppic');
 		// $.croppic.render($croppic);
 		// $croppic.find('.btn-item').touchwipe({
 		// 	touch: function(){
-		// 		var imgCropData = $.croppic.imgCropData($croppic);
+		// 		let imgCropData = $.croppic.imgCropData($croppic);
 		// 		console.log(imgCropData);
 		// 	}
 		// });
 
-		var headerH = biz.safeAreaTop + 44;
+		let headerH = biz.safeAreaTop + 44;
 		FNImageClip = api.require('FNImageClip');
 		FNImageClip.open(
 			{
@@ -115,13 +109,13 @@ biz.my = {
 			}
 		);
 
-		$box.find('header .back-btn').touchwipe({
+		this.find('header .back-btn').touchwipe({
 			touch: function () {
 				$.navView.close(true, true);
 				FNImageClip.close();
 			}
 		});
-		$box.find('header .txt-button').touchwipe({
+		this.find('header .txt-button').touchwipe({
 			touch: function () {
 				FNImageClip.save(
 					{
@@ -155,14 +149,14 @@ biz.my = {
 												type: 4,
 												imgUrl: strBase64
 											},
-											success: function (json) {
+											success: (json) => {
 												if (json.info) $.alert.toast(json.info);
 
-												var $myUserIcon = $('#my_user_icon_img');
+												let $myUserIcon = $('#my_user_icon_img');
 												if ($myUserIcon.size() > 0) {
 													$myUserIcon.attr('src', strBase64);
 												}
-												var $settomgUserIcon = $('#setting_user_icon_img');
+												let $settomgUserIcon = $('#setting_user_icon_img');
 												if ($settomgUserIcon.size() > 0) {
 													$settomgUserIcon.attr('src', strBase64);
 												}

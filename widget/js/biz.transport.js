@@ -27,12 +27,12 @@ biz.transport = {
 				data: $form.serializeArray(),
 				cache: false,
 				global: false,
-				success: function (json) {
-					if (!dwz.checkAjaxLogin(json)) {
+				success: (json) => {
+					if (!$.checkAjaxLogin(json)) {
 						return;
 					}
 
-					if ($.isAjaxOkStatus(json)) {
+					if ($.isAjaxStatusOk(json)) {
 						$form.total =
 							json.data.total || json.data.list ? json.data.list.length : 0;
 						if ($form.total) {
@@ -140,7 +140,7 @@ biz.transport = {
 				data: { transport_id: params.id },
 				cache: false,
 				global: false,
-				success: function (json) {
+				success: (json) => {
 					console.log(json);
 					if (!dwz.checkAjaxLogin(json)) {
 						return;
@@ -380,7 +380,7 @@ biz.transport = {
 			data: { transport_id: params.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				if (!dwz.checkAjaxLogin(json)) {
 					return;
 				}
@@ -408,7 +408,7 @@ biz.transport = {
 			data: { transport_id: params.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				if (!dwz.checkAjaxLogin(json)) {
 					return;
 				}
@@ -442,13 +442,13 @@ biz.transport = {
 				data: { id: transport_id, imgUrl: imgUrl, field: field },
 				cache: false,
 				global: false,
-				success: function (json) {
+				success: (json) => {
 					if (!$.checkAjaxLogin(json)) {
 						return;
 					}
 
 					$.ajaxDone(json);
-					if ($.isAjaxOkStatus(json)) {
+					if ($.isAjaxStatusOk(json)) {
 						$li.remove();
 					}
 				},
@@ -488,7 +488,7 @@ biz.transport = {
 			data: { transport_id: vo.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				if (!$.checkAjaxLogin(json)) {
 					return;
 				}
@@ -525,7 +525,7 @@ biz.transport = {
 			data: { transport_id: vo.id },
 			cache: false,
 			global: false,
-			success: function (json) {
+			success: (json) => {
 				if (!dwz.checkAjaxLogin(json)) {
 					return;
 				}
@@ -564,7 +564,7 @@ biz.transport = {
 		return validateCallback(form, function (json) {
 			console.log(JSON.stringify(json));
 
-			if ($.isAjaxOkStatus(json)) {
+			if ($.isAjaxStatusOk(json)) {
 				navViewAjaxDoneClose(json);
 			} else {
 				$.ajaxDone(json);

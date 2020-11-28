@@ -137,7 +137,7 @@ $.navView = {
 				type: op.type,
 				url: op.url,
 				data: _data,
-				success: function (html) {
+				success: (html) => {
 					$box.triggerPageClear();
 
 					if (!op.callback) {
