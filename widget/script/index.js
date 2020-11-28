@@ -84,8 +84,13 @@ function loadScripts(options) {
 
 		// 默认打开权限 ['camera','contacts','microphone','photos','location','notification','calendar-r','phone-call','phone-r','sms-r','storage-r','starage-w'];
 		if (api.systemType == 'android') {
-			var premsMap = {'storage': '本地存储空间', 'camera': '摄像头', 'photos':'访问相册', 'location':'定位'};
-			biz.initPermission(premsMap);
+			// var premsMap = {'storage': '本地存储空间', 'camera': '摄像头', 'photos':'访问相册', 'location':'定位'};
+			// biz.initPermission(premsMap);
+			api.requestPermission({
+                list: ['camera','photos','location','storage']
+            }, function(res) {
+                console.log(JSON.stringify(res));
+            });
 		}
 
 		// 开启gps
