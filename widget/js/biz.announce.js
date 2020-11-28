@@ -1,6 +1,7 @@
 biz.announce = {
 	listRender: function (tpl, params) {
-		var $box = this, tplWrap = $.templateWrap(tpl);
+		var $box = this,
+			tplWrap = $.templateWrap(tpl);
 
 		var html = template.render(tplWrap.tpl, {
 			UserInfo: UserInfo,
@@ -8,14 +9,14 @@ biz.announce = {
 		});
 		$box.html(html).initUI();
 
-		var $form = $box.find("form.dwz-list-form"),
+		var $form = $box.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = function (loadMore) {
 			$.ajax({
-				type: "POST",
+				type: 'POST',
 				url: biz.server.getUrl(biz.server.announceList),
-				dataType: "json",
+				dataType: 'json',
 				data: $form.serializeArray(),
 				cache: false,
 				global: false,
@@ -37,7 +38,6 @@ biz.announce = {
 							$listBox.html(_html);
 						}
 					}
-
 				},
 				error: ajaxError
 			});
@@ -49,10 +49,10 @@ biz.announce = {
 		var $box = this;
 
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.announceDetail),
-			dataType: "json",
-			data: {announce_id: params.id},
+			dataType: 'json',
+			data: { announce_id: params.id },
 			cache: false,
 			global: false,
 			success: function (json) {

@@ -19,255 +19,368 @@
  *
  * 参数5、fnCallback:可选参数。表示是回调方法
  */
-(function($) {
+(function ($) {
+	$.extend({
+		_randomColorFactor: function (maxColor) {
+			return Math.round(Math.random() * (maxColor || 255));
+		},
 
-    $.extend({
-        _randomColorFactor: function(maxColor) {
-            return Math.round(Math.random() * (maxColor || 255));
-        },
+		randomColor: function (opacity, maxRed, maxGreen, maxBlue) {
+			return `rgba(${this._randomColorFactor(maxRed)}, 
+				${this._randomColorFactor(maxGreen)},
+				${this._randomColorFactor(maxBlue)}, 
+				${opacity || '.3'}`;
+		},
+		animate: function (ele, obj, duration, effectType, callback) {
+			for (let attr in obj) {
+				if (attr == 'width' || attr == 'height') {
+					$.transition(ele, {
+						transitionType: 'all',
+						duration: duration,
+						effectType: effectType
+					});
+					ele.style[attr] = obj[attr] + 'px';
+				} else {
+					let x = obj.x || 0,
+						y = obj.y || 0;
 
-        randomColor: function(opacity, maxRed, maxGreen, maxBlue) {
-            return 'rgba(' + this._randomColorFactor(maxRed) + ',' + this._randomColorFactor(maxGreen) + ',' + this._randomColorFactor(maxBlue) + ',' + (opacity || '.3') + ')';
-        },
-        animate: function(ele, obj, duration, effectType, callback) {
+					if (obj.x !== undefined || obj.y !== undefined) {
+						$(ele).translate({
+							x: x + 'px',
+							y: y + 'px',
+							duration: duration,
+							effectType: effectType
+						});
+					}
+				}
+			}
 
-            for (var attr in obj) {
-                if (attr == 'width' || attr == 'height') {
-                    $.transition(ele, { transitionType: 'all', duration: duration, effectType: effectType });
-                    ele.style[attr] = obj[attr] + 'px';
-                } else {
-                    var x = obj.x || 0,
-                        y = obj.y || 0;
+			if (callback) {
+				setTimeout(function () {
+					callback.call(ele);
+				}, (duration || 1) + 10);
+			}
+		},
+		// 设置transform偏移
+		transition: function (ele, options) {
+			let op = $.extend(
+				{ transitionType: 'all', duration: 0, effectType: 'ease' },
+				options
+			);
+			let $box = $(ele);
+			if (op.duration) {
+				let tranStr =
+					op.transitionType +
+					' ' +
+					op.duration / 1000.0 +
+					's ' +
+					(op.effectType || 'ease');
+				$box.css({
+					'-webkit-transition': '-webkit-' + tranStr,
+					transition: tranStr
+				});
+			} else {
+				$box.css({ '-webkit-transition': '', transition: '' });
+			}
+		}
+	});
 
-                    if (obj.x !== undefined || obj.y !== undefined) {
-                        $(ele).translate({ x: x + 'px', y: y + 'px', duration: duration, effectType: effectType });
-                    }
-                }
+	$.fn.extend({
+		animate: function (obj, duration, effectType, callback) {
+			$.animate(this.get(0), obj, duration, effectType, callback);
+			return this;
+		},
+		fadeOut: function (duration, animationend) {
+			return this.effect(
+				[
+					{
+						className: 'fadeOut animated',
+						after: function () {
+							this.hide();
+						}
+					}
+				],
+				animationend
+			);
+		},
+		fadeIn: function (duration, animationend) {
+			return this.effect(
+				[
+					{
+						className: 'fadeIn animated',
+						before: function () {
+							this.show();
+						},
+						after: function () {
+							this.show();
+						}
+					}
+				],
+				animationend
+			);
+		},
 
-            }
+		// 设置transform偏移
+		translate: function (options) {
+			let op = $.extend(
+				{ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' },
+				options
+			);
+			op.transform = 'translate3d(' + op.x + ',' + op.y + ',' + op.z + ')';
+			return this.translateCss(op);
+		},
+		translateCss: function (options) {
+			let op = $.extend(
+				{ transform: '', duration: 0, effectType: 'ease' },
+				options
+			);
+			return this.each(function () {
+				$.transition(this, {
+					transitionType: 'transform',
+					duration: op.duration,
+					effectType: op.effectType
+				});
+				$(this).css({
+					'-webkit-transform': op.transform,
+					transform: op.transform
+				});
+			});
+		},
+		translateY: function (yStr, duration, effectType) {
+			return this.translate({
+				y: yStr,
+				duration: duration,
+				effectType: effectType
+			});
+		},
+		translateX: function (xStr, duration, effectType) {
+			return this.translate({
+				x: xStr,
+				duration: duration,
+				effectType: effectType
+			});
+		},
+		rotate: function (options) {
+			let op = $.extend(
+				{ deg: '0deg', duration: 0, effectType: 'ease' },
+				options
+			);
+			return this.each(function () {
+				let rotateStr = 'rotate(' + op.deg + ')';
+				$.transition(this, {
+					transitionType: 'transform',
+					duration: op.duration,
+					effectType: op.effectType
+				});
+				$(this).css({ '-webkit-transform': rotateStr, transform: rotateStr });
+			});
+		},
+		getComputedPos: function () {
+			let matrix = window.getComputedStyle(this.get(0), null),
+				x = 0,
+				y = 0,
+				scale = 1;
 
-            if (callback) {
-                setTimeout(function() { callback.call(ele); }, (duration || 1) + 10);
-            }
-        },
-        // 设置transform偏移
-        transition: function(ele, options) {
-            var op = $.extend({ transitionType: 'all', duration: 0, effectType: 'ease' }, options);
-            var $box = $(ele);
-            if (op.duration) {
-                var tranStr = op.transitionType + ' ' + op.duration / 1000.0 + 's ' + (op.effectType || 'ease');
-                $box.css({ '-webkit-transition': '-webkit-' + tranStr, 'transition': tranStr });
-            } else {
-                $box.css({ '-webkit-transition': '', 'transition': '' });
-            }
-        }
-    });
+			let transform = matrix['-webkit-transform'] || matrix['transform'];
+			if (transform && transform != 'none') {
+				matrix = transform.replace('matrix(', '').split(')')[0].split(', ');
+				x = +(matrix[12] || matrix[4]);
+				y = +(matrix[13] || matrix[5]);
+				scale = +matrix[3];
+			}
 
-    $.fn.extend({
-        animate: function(obj, duration, effectType, callback) {
-            $.animate(this.get(0), obj, duration, effectType, callback);
-            return this;
-        },
-        fadeOut: function(duration, animationend) {
-            return this.effect([{ className: 'fadeOut animated', after: function() { this.hide() } }], animationend);
-        },
-        fadeIn: function(duration, animationend) {
-            return this.effect([{ className: 'fadeIn animated', before: function() { this.show() }, after: function() { this.show() } }], animationend);
-        },
+			return { x: x, y: y, scale: scale };
+		},
 
-        // 设置transform偏移
-        translate: function(options) {
-            var op = $.extend({ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' }, options);
-            op.transform = 'translate3d(' + op.x + ',' + op.y + ',' + op.z + ')';
-            return this.translateCss(op);
-        },
-        translateCss: function(options) {
-            var op = $.extend({ transform:'', duration: 0, effectType: 'ease' }, options);
-            return this.each(function() {
-                $.transition(this, {transitionType:'transform', duration: op.duration, effectType: op.effectType });
-                $(this).css({'-webkit-transform':op.transform, 'transform':op.transform});
-            });
-        },
-        translateY: function(yStr, duration, effectType) {
-            return this.translate({ y: yStr, duration: duration, effectType: effectType });
-        },
-        translateX: function(xStr, duration, effectType) {
-            return this.translate({ x: xStr, duration: duration, effectType: effectType });
-        },
-        rotate: function (options) {
-            var op = $.extend({ deg: '0deg', duration: 0, effectType: 'ease' }, options);
-            return this.each(function() {
-                var rotateStr = 'rotate(' + op.deg + ')';
-                $.transition(this, { transitionType: 'transform', duration: op.duration, effectType: op.effectType });
-                $(this).css({'-webkit-transform': rotateStr, 'transform': rotateStr});
-            });
-        },
-        getComputedPos: function() {
-            var matrix = window.getComputedStyle(this.get(0), null),
-                x = 0,
-                y = 0,
-                scale = 1;
+		// 翻牌效果
+		flipCard: function (options) {
+			let op = $.extend({}, options);
 
-            var transform = matrix['-webkit-transform'] || matrix['transform'];
-            if (transform && transform != 'none') {
-                matrix = transform.replace('matrix(', '').split(')')[0].split(', ');
-                x = +(matrix[12] || matrix[4]);
-                y = +(matrix[13] || matrix[5]);
-                scale = +(matrix[3]);
-            }
+			return this.each(function () {
+				let $box = $(this);
+				$box
+					.removeClass('animation-rotate-up')
+					.removeClass('animation-rotate-up-back');
+				$box.addClass('animation-rotate-up');
+				setTimeout(function () {
+					$box.addClass('animation-rotate-up-back');
+					if (op.callback) {
+						op.callback($box);
+					}
+				}, 500);
+			});
+		},
 
-            return { x: x, y: y, scale:scale };
-        },
+		// 文字向上冒泡
+		effectBubble: function (options) {
+			let op = $.extend(
+				{
+					content: '+1',
+					y: -100,
+					duration: 500,
+					effectType: 'ease',
+					className: '',
+					fontSize: 2
+				},
+				options
+			);
 
-        // 翻牌效果
-        flipCard: function(options) {
-            var op = $.extend({}, options);
+			return this.each(function () {
+				let $box = $(this),
+					pos = $box.offset(),
+					width = $box.width(),
+					flyId = 'effect-fly-' + new Date().getTime();
 
-            return this.each(function() {
-                var $box = $(this);
-                $box.removeClass('animation-rotate-up').removeClass('animation-rotate-up-back');
-                $box.addClass("animation-rotate-up");
-                setTimeout(function() {
-                    $box.addClass("animation-rotate-up-back");
-                    if (op.callback) {op.callback($box);}
-                }, 500);
-            });
-        },
+				let tpl =
+					'<span id="#flyId#" class="effect-bubble-fly #class#" style="top:#top#px;left:#left#px;font-size: #fontSize#rem;">#content#</span>';
+				let html = tpl
+					.replaceAll('#left#', pos.left + width / 2)
+					.replaceAll('#top#', pos.top)
+					.replaceAll('#flyId#', flyId)
+					.replaceAll('#content#', op.content)
+					.replaceAll('#class#', op.className)
+					.replaceAll('#fontSize#', op.fontSize);
 
-        // 文字向上冒泡
-        effectBubble: function(options) {
-            var op = $.extend({ content: '+1', y: -100, duration: 500, effectType: 'ease', className: '', fontSize: 2 }, options);
+				let $fly = $(html).appendTo($('body').get(0));
 
-            return this.each(function() {
-                var $box = $(this),
-                    pos = $box.offset(),
-                    width = $box.width(),
-                    flyId = 'effect-fly-' + (new Date().getTime());
+				setTimeout(function () {
+					$fly.css({ top: pos.top + op.y + 'px' });
+				}, 10);
 
-                var tpl = '<span id="#flyId#" class="effect-bubble-fly #class#" style="top:#top#px;left:#left#px;font-size: #fontSize#rem;">#content#</span>';
-                var html = tpl.replaceAll('#left#', pos.left + (width / 2)).replaceAll('#top#', pos.top)
-                    .replaceAll('#flyId#', flyId).replaceAll('#content#', op.content).replaceAll('#class#', op.className).replaceAll('#fontSize#', op.fontSize);
+				setTimeout(function () {
+					$fly.fadeOut(500, function () {
+						$fly.remove();
+					});
+				}, op.duration || 500);
+			});
+		},
 
-                var $fly = $(html).appendTo($('body').get(0));
+		/**
+		 *
+		 * @param eList: [{className:'bounce', styles:'', animationend:null}] 动画列表
+		 * @param animationend: 全部动画完成事件
+		 * @returns {*}
+		 */
+		effect: function (eList, animationend) {
+			return this.each(function () {
+				let $me = $(this);
 
-                setTimeout(function() {
-                    $fly.css({ top: pos.top + op.y + 'px' });
-                }, 10);
+				let eventNames =
+					'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 
-                setTimeout(function() {
-                    $fly.fadeOut(500, function() {
-                        $fly.remove();
-                    });
-                }, op.duration || 500);
-            });
-        },
+				function animateStep(isFirst) {
+					if (eList && eList.length > 0) {
+						let eItem = $.extend(
+							{
+								className: '', // animate.css 动画 class
+								style: '', // css3动画样式
+								before: null, // 自定义单个动画执行前回调
+								after: null // 自定义单个动画完成回调
+							},
+							eList.shift()
+						);
 
-        /**
-         *
-         * @param eList: [{className:'bounce', styles:'', animationend:null}] 动画列表
-         * @param animationend: 全部动画完成事件
-         * @returns {*}
-         */
-        effect: function(eList, animationend) {
-            return this.each(function() {
-                var $me = $(this);
+						// 缓存原始style
+						if (isFirst) {
+							let orig_style = $me.data('orig_style') || $me.attr('style');
+							if (orig_style) $me.data('orig_style', orig_style);
 
-                var eventNames = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
+							$me.off(eventNames);
+							$me.removeClass($.animateCls.all + ' animated');
+						}
 
-                function animateStep(isFirst) {
-                    if (eList && eList.length > 0) {
+						$me.on(eventNames, function () {
+							$me.off(eventNames);
 
-                        var eItem = $.extend({
-                            className: '', // animate.css 动画 class
-                            style: '', // css3动画样式
-                            before: null, // 自定义单个动画执行前回调
-                            after: null // 自定义单个动画完成回调
-                        }, eList.shift());
+							// 动画完成还原原始style
+							if (eList.length == 0) {
+								let orig_style = $me.data('orig_style');
+								if (orig_style) $me.attr('style', orig_style);
 
-                        // 缓存原始style
-                        if (isFirst) {
-                            var orig_style = $me.data('orig_style') || $me.attr('style');
-                            if (orig_style) $me.data('orig_style', orig_style);
+								// 全部动画完成animationend事件
+								if (animationend) {
+									animationend.call($me, eItem);
+								}
+							}
 
-                            $me.off(eventNames);
-                            $me.removeClass($.animateCls.all + ' animated');
-                        }
+							if (eItem.className) {
+								$me.removeClass(eItem.className + ' animated');
+							}
 
-                        $me.on(eventNames, function() {
-                            $me.off(eventNames);
+							// 单个动画完成回调
+							if (eItem.after) {
+								eItem.after.call($me, eItem);
+							}
 
-                            // 动画完成还原原始style
-                            if (eList.length == 0) {
-                                var orig_style = $me.data('orig_style');
-                                if (orig_style) $me.attr('style', orig_style);
+							animateStep();
+						});
 
-                                // 全部动画完成animationend事件
-                                if (animationend) { animationend.call($me, eItem); }
-                            }
+						setTimeout(function () {
+							// 单个动画执行前回调
+							if (eItem.before) {
+								eItem.before.call($me, eItem);
+							}
+							if (eItem.style) {
+								let orig_style = $me.data('orig_style') || '';
+								if (orig_style && !orig_style.endsWith(';')) {
+									orig_style += ';';
+								}
+								$me.attr('style', orig_style + eItem.style);
+							}
+							if (eItem.className) {
+								$me.addClass(eItem.className).addClass('animated');
+							}
+						}, 50);
+					}
+				}
 
-                            if (eItem.className) {
-                                $me.removeClass(eItem.className + ' animated');
-                            }
+				animateStep(true);
+			});
+		}
+	});
 
-                            // 单个动画完成回调
-                            if (eItem.after) {
-                                eItem.after.call($me, eItem);
-                            }
+	$.animateCls = {
+		std_names:
+			'bounce flash pulse rubberBand shake swing tada wobble jello flip hinge jackInTheBox',
+		in_names:
+			'bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp ' +
+			'fadeIn fadeInDown fadeInDownBig fadeInLeft fadeInLeftBig fadeInRight fadeInRightBig fadeInUp fadeInUpBig ' +
+			'flipInX flipInY lightSpeedIn rollIn ' +
+			'rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight ' +
+			'slideInUp slideInDown slideInLeft slideInRight ' +
+			'zoomIn zoomInDown zoomInLeft zoomInRight zoomInUp',
+		out_names:
+			'bounceOut bounceOutDown bounceOutLeft bounceOutRight bounceOutUp ' +
+			'fadeOut fadeOutDown fadeOutDownBig fadeOutLeft fadeOutLeftBig fadeOutRight fadeOutRightBig fadeOutUp fadeOutUpBig ' +
+			'flipOutX flipOutY lightSpeedOut rollOut ' +
+			'rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight ' +
+			'slideOutUp slideOutDown slideOutLeft slideOutRight ' +
+			'zoomOut zoomOutDown zoomOutLeft zoomOutRight zoomOutUp'
+	};
+	$.animateCls.all_names =
+		$.animateCls.std_names +
+		' ' +
+		$.animateCls.in_names +
+		' ' +
+		$.animateCls.out_names;
 
-                            animateStep();
-                        });
-
-
-                        setTimeout(function() {
-                            // 单个动画执行前回调
-                            if (eItem.before) {
-                                eItem.before.call($me, eItem);
-                            }
-                            if (eItem.style) {
-                                var orig_style = $me.data('orig_style') || '';
-                                if (orig_style && !orig_style.endsWith(';')) { orig_style += ';'; }
-                                $me.attr('style', orig_style + eItem.style);
-                            }
-                            if (eItem.className) {
-                                $me.addClass(eItem.className).addClass('animated');
-                            }
-                        }, 50);
-                    }
-                }
-
-                animateStep(true);
-            });
-        }
-
-    });
-
-    $.animateCls = {
-        std_names: 'bounce flash pulse rubberBand shake swing tada wobble jello flip hinge jackInTheBox',
-        in_names: 'bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp ' +
-        'fadeIn fadeInDown fadeInDownBig fadeInLeft fadeInLeftBig fadeInRight fadeInRightBig fadeInUp fadeInUpBig ' +
-        'flipInX flipInY lightSpeedIn rollIn ' +
-        'rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight ' +
-        'slideInUp slideInDown slideInLeft slideInRight ' +
-        'zoomIn zoomInDown zoomInLeft zoomInRight zoomInUp',
-        out_names: 'bounceOut bounceOutDown bounceOutLeft bounceOutRight bounceOutUp ' +
-        'fadeOut fadeOutDown fadeOutDownBig fadeOutLeft fadeOutLeftBig fadeOutRight fadeOutRightBig fadeOutUp fadeOutUpBig ' +
-        'flipOutX flipOutY lightSpeedOut rollOut ' +
-        'rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight ' +
-        'slideOutUp slideOutDown slideOutLeft slideOutRight ' +
-        'zoomOut zoomOutDown zoomOutLeft zoomOutRight zoomOutUp'
-    };
-    $.animateCls.all_names = $.animateCls.std_names + ' ' + $.animateCls.in_names + ' ' + $.animateCls.out_names;
-
-    $.fn.animateCls = function(animateCls, animationend) {
-        var effectItem = { className: animateCls };
-        if ($.inArray(animateCls, $.animateCls.in_names.split(' '))) {
-            effectItem.before = function() { this.show(); }
-            effectItem.after = function() { this.show(); }
-        } else if ($.inArray(animateCls, $.animateCls.out_names.split(' '))) {
-            effectItem.before = function() { this.show(); }
-            effectItem.after = function() { this.hide(); }
-        }
-        return this.effect([effectItem], animationend);
-    };
-
+	$.fn.animateCls = function (animateCls, animationend) {
+		let effectItem = { className: animateCls };
+		if ($.inArray(animateCls, $.animateCls.in_names.split(' '))) {
+			effectItem.before = function () {
+				this.show();
+			};
+			effectItem.after = function () {
+				this.show();
+			};
+		} else if ($.inArray(animateCls, $.animateCls.out_names.split(' '))) {
+			effectItem.before = function () {
+				this.show();
+			};
+			effectItem.after = function () {
+				this.hide();
+			};
+		}
+		return this.effect([effectItem], animationend);
+	};
 })(dwz);

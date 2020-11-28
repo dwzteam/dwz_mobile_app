@@ -2,17 +2,30 @@
  * @author 张慧华 z@j-ui.com
  */
 (function ($) {
-	$.setRegional("alert", {
-		title: {error: "错误", info: "提示", warn: "警告", success: "成功", confirm: "确认提示"},
-		btnMsg: {ok: "确定", yes: "是", no: "否", cancel: "取消"}
+	$.setRegional('alert', {
+		title: {
+			error: '错误',
+			info: '提示',
+			warn: '警告',
+			success: '成功',
+			confirm: '确认提示'
+		},
+		btnMsg: { ok: '确定', yes: '是', no: '否', cancel: '取消' }
 	});
 
 	$.alert = {
 		config: {
-			box$: "#alertMsgBox",
+			box$: '#alertMsgBox',
 
-			types: {error: "error", info: "info", warn: "warn", success: "success", confirm: "confirm"},
-			dialogFrag: '<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
+			types: {
+				error: 'error',
+				info: 'info',
+				warn: 'warn',
+				success: 'success',
+				confirm: 'confirm'
+			},
+			dialogFrag:
+				'<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
 			boxFrag:
 				'<div id="alertMsgBox" class="alert-dialog-#type#">\
 					<div class="alert-mask"></div>\
@@ -22,7 +35,8 @@
 						<div class="alert-dialog-ft">#butFragment#</div>\
 					</div>\
 				</div>',
-			btnFrag: '<a href="javascript:" class="alert_btn_dialog #class#">#butMsg#</a>'
+			btnFrag:
+				'<a href="javascript:" class="alert_btn_dialog #class#">#butMsg#</a>'
 		},
 
 		/**
@@ -33,32 +47,37 @@
 		 */
 		_open: function (type, msg, buttons) {
 			$(this.config.box$).remove();
-			var butsHtml = "";
+			let butsHtml = '';
 			if (buttons) {
-				for (var i = 0; i < buttons.length; i++) {
-					butsHtml += this.config.btnFrag.replace("#butMsg#", buttons[i].name)
-						.replace("#class#", buttons[i].sn == 'ok' ? "primary" : "default");
+				for (let i = 0; i < buttons.length; i++) {
+					butsHtml += this.config.btnFrag
+						.replace('#butMsg#', buttons[i].name)
+						.replace('#class#', buttons[i].sn == 'ok' ? 'primary' : 'default');
 				}
 			}
-			var html = this.config.boxFrag.replace("#type#", type).replace("#title#", $.regional.alert.title[type]).replace("#message#", msg).replace("#butFragment#", butsHtml);
+			let html = this.config.boxFrag
+				.replace('#type#', type)
+				.replace('#title#', $.regional.alert.title[type])
+				.replace('#message#', msg)
+				.replace('#butFragment#', butsHtml);
 			$('body').append(html);
 
-			var $btns = $(this.config.box$).find("a.alert_btn_dialog");
+			let $btns = $(this.config.box$).find('a.alert_btn_dialog');
 
-			for (var i = 0; i < buttons.length; i++) {
+			for (let i = 0; i < buttons.length; i++) {
+				$btns
+					.eq(i)
+					.on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
+						let index = event.data,
+							callback = buttons[index].call;
+						if (callback) {
+							callback(event);
+						}
+						$.alert.close();
 
-				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
-					var index = event.data,
-						callback = buttons[index].call;
-					if (callback) {
-						callback(event);
-					}
-					$.alert.close();
-
-					event.preventDefault();
-					event.stopPropagation();
-				});
-
+						event.preventDefault();
+						event.stopPropagation();
+					});
 			}
 		},
 		close: function () {
@@ -74,7 +93,7 @@
 			this._alert(this.config.types.success, msg, options);
 		},
 		toast: function (msg, options) {
-			var op = $.extend({msg: msg, duration: 4000}, options);
+			let op = $.extend({ msg: msg, duration: 4000 }, options);
 			if (window.api) {
 				api.toast(op);
 				return;
@@ -86,23 +105,26 @@
 				this._timer = null;
 			}
 
-			var $toast = $('<div id="alert-toast">'+op.msg+'</div>').appendTo($('body'));
+			let $toast = $('<div id="alert-toast">' + op.msg + '</div>').appendTo(
+				$('body')
+			);
 			$toast.animateCls('fadeInDown');
 
-			var me = this;
-			me._timer = setTimeout(function() {
+			let me = this;
+			me._timer = setTimeout(function () {
 				clearTimeout(this._timer);
 				me._timer = null;
-				$toast.animateCls('fadeOutUp', function() {
+				$toast.animateCls('fadeOutUp', function () {
 					$toast.remove();
 				});
 			}, op.duration);
 		},
 		_alert: function (type, msg, options) {
-			var op = $.extend({okName: $.regional.alert.btnMsg.ok, okCall: null}, options);
-			var buttons = [
-				{sn: 'ok', name: op.okName, call: op.okCall}
-			];
+			let op = $.extend(
+				{ okName: $.regional.alert.btnMsg.ok, okCall: null },
+				options
+			);
+			let buttons = [{ sn: 'ok', name: op.okName, call: op.okCall }];
 			this._open(type, msg, buttons);
 		},
 		/**
@@ -111,15 +133,18 @@
 		 * @param {Object} options {okName, okCall, cancelName, cancelCall}
 		 */
 		confirm: function (msg, options) {
-			var op = $.extend({
-				okName: $.regional.alert.btnMsg.ok,
-				okCall: null,
-				cancelName: $.regional.alert.btnMsg.cancel,
-				cancelCall: null
-			}, options);
-			var buttons = [
-				{sn: 'cancel', name: op.cancelName, call: op.cancelCall},
-				{sn: 'ok', name: op.okName, call: op.okCall}
+			let op = $.extend(
+				{
+					okName: $.regional.alert.btnMsg.ok,
+					okCall: null,
+					cancelName: $.regional.alert.btnMsg.cancel,
+					cancelCall: null
+				},
+				options
+			);
+			let buttons = [
+				{ sn: 'cancel', name: op.cancelName, call: op.cancelCall },
+				{ sn: 'ok', name: op.okName, call: op.okCall }
 			];
 			this._open(this.config.types.confirm, msg, buttons);
 		},
@@ -127,25 +152,29 @@
 		openDialog: function (url) {
 			$(this.config.box$).remove();
 
-			var $box = $($.alert.config.dialogFrag).appendTo($('body').get(0)).find('.alert-dialog');
+			let $box = $($.alert.config.dialogFrag)
+				.appendTo($('body').get(0))
+				.find('.alert-dialog');
 
 			if (url) {
-
-				var params = url.getParams();
+				let params = url.getParams();
 				$.ajax({
-					type: 'GET', url: url, data: params, success: function (html) {
+					type: 'GET',
+					url: url,
+					data: params,
+					success: function (html) {
 						$box.triggerPageClear();
 
-						var callback = dwz.getUrlCallback(url);
+						let callback = dwz.getUrlCallback(url);
 
 						if (callback) {
-							callback.call($box, html, params);
+							callback.call($box, html, params
 						} else {
 							$box.html(html).initUI();
 						}
-					}, error: dwz.ajaxError
+					},
+					error: dwz.ajaxError
 				});
-
 			}
 		},
 		closeDialog: function () {

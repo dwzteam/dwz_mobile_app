@@ -4,13 +4,15 @@
 
 $.dialog = {
 	config: {
-		box$: "#dialog",
-		fullscreenClass: "fullscreen",
-		openClass: "open",
-		frag:
-			'<div id="dialog" class="pop-window unitBox"><div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div><div class="pop-content"></div></div>',
-		bgBox$: "#mask-background",
-		bgFrag: '<div id="mask-background" class="mask-background"></div>',
+		box$: '#dialog',
+		fullscreenClass: 'fullscreen',
+		openClass: 'open',
+		frag: `<div id="dialog" class="pop-window unitBox">
+				<div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div>
+				<div class="pop-content"></div>
+			</div>`,
+		bgBox$: '#mask-background',
+		bgFrag: '<div id="mask-background" class="mask-background"></div>'
 	},
 	isOpen: false,
 	$box: null,
@@ -19,24 +21,24 @@ $.dialog = {
 	init: function (options) {
 		$.extend($.dialog.config, options);
 
-		$("body").append($.dialog.config.frag).append($.dialog.config.bgFrag);
+		$('body').append($.dialog.config.frag).append($.dialog.config.bgFrag);
 		this.$box = $($.dialog.config.box$);
 		this.$bgBox = $($.dialog.config.bgBox$);
 	},
 	open: function (options) {
 		// default, pic, login
-		var op = $.extend(
+		let op = $.extend(
 			{
-				type: "GET",
-				url: "",
-				pop: "default",
+				type: 'GET',
+				url: '',
+				pop: 'default',
 				external: false,
 				data: {},
-				callback: null,
+				callback: null
 			},
 			options
 		);
-		var $box = this.$box,
+		let $box = this.$box,
 			$bgBox = this.$bgBox;
 
 		if (!op.interceptor) {
@@ -48,15 +50,15 @@ $.dialog = {
 		}
 
 		$bgBox.addClass($.dialog.config.openClass);
-		if (op.pop == "pic" || op.pop == "login" || op.pop == "fullscreen") {
+		if (op.pop == 'pic' || op.pop == 'login' || op.pop == 'fullscreen') {
 			$box.addClass($.dialog.config.fullscreenClass);
 		}
-		$box.addClass($.dialog.config.openClass).translateY(
-			document.documentElement.clientHeight + "px"
-		);
+		$box
+			.addClass($.dialog.config.openClass)
+			.translateY(document.documentElement.clientHeight + 'px');
 
 		setTimeout(function () {
-			$box.animate({ y: 0 }, 300, "ease");
+			$box.animate({ y: 0 }, 300, 'ease');
 		}, 20);
 
 		if (op.url) {
@@ -69,10 +71,10 @@ $.dialog = {
 				op.callback = dwz.getUrlCallback(op.url);
 			}
 
-			var params = op.url.getParams();
+			let params = op.url.getParams();
 			$.ajax({
 				global: !op.callback,
-				type: "GET",
+				type: 'GET',
 				url: op.url,
 				data: params,
 				success: function (html) {
@@ -84,28 +86,28 @@ $.dialog = {
 						$box.html(html).initUI();
 					}
 				},
-				error: dwz.ajaxError,
+				error: dwz.ajaxError
 			});
 		}
 
 		this.isOpen = true;
 	},
 	loadExternal: function (url) {
-		var $box = this.$box.html(
+		let $box = this.$box.html(
 			'<a class="video-close" href="javascript:$.dialog.close()"><i class="icon icon-close-dialog"></i></a><div class="pop-content"></div>'
 		);
 
-		var $content = $box.find(".pop-content");
-		var ih = $content.get(0).offsetHeight;
+		let $content = $box.find('.pop-content');
+		let ih = $content.get(0).offsetHeight;
 		$content.html(
-			$.config.frag["external"]
-				.replaceAll("{url}", url)
-				.replaceAll("{{height}}", ih + "px")
+			$.config.frag['external']
+				.replaceAll('{url}', url)
+				.replaceAll('{{height}}', ih + 'px')
 		);
 	},
 
 	close: function (options) {
-		var op = $.extend({ closeMsg: "" }, options);
+		let op = $.extend({ closeMsg: '' }, options);
 
 		if (!op.closeMsg) {
 			$.dialog._closeDirect();
@@ -115,23 +117,23 @@ $.dialog = {
 		$.alert.confirm(op.closeMsg, {
 			okCall: function () {
 				$.dialog._closeDirect();
-			},
+			}
 		});
 	},
 	_closeDirect: function () {
-		var $box = this.$box,
+		let $box = this.$box,
 			$bgBox = this.$bgBox;
 
 		$box.animate(
 			{ y: document.documentElement.clientHeight },
 			300,
-			"ease",
+			'ease',
 			function () {
-				$box.html("").removeClass(
-					$.dialog.config.fullscreenClass +
-						" " +
-						$.dialog.config.openClass
-				);
+				$box
+					.html('')
+					.removeClass(
+						$.dialog.config.fullscreenClass + ' ' + $.dialog.config.openClass
+					);
 				$box.triggerPageClear();
 			}
 		);
@@ -142,5 +144,5 @@ $.dialog = {
 	},
 	getBox: function () {
 		return this.$box;
-	},
+	}
 };

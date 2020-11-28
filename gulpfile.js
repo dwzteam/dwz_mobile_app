@@ -80,7 +80,7 @@ gulp.task('script-min', () => {
 
 /* del */
 gulp.task('clean-build', (cb) => {
-	return del(['widget/script/**/*', 'widget/css/ui.css'], cb)
+	return del(['widget/script/all.min.js', 'widget/css/ui.css'], cb)
 });
 
 /* serve */

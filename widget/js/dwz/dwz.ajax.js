@@ -3,7 +3,6 @@
  *
  */
 
-
 dwz.extend({
 	ajaxError: function (xhr, ajaxOptions, thrownError) {
 		if (xhr.status == 401) {
@@ -11,21 +10,27 @@ dwz.extend({
 			return;
 		}
 		if ($.alert) {
-			$.alert.error("<div>Http status: " + xhr.status + " " + xhr.statusText + "</div>"
-				+ "<div>ajaxOptions: " + ajaxOptions + "</div>"
-				+ "<div>thrownError: " + thrownError + "</div>"
-				+ "<div>" + xhr.responseText + "</div>");
+			$.alert.error(
+				`<div>Http status: ${xhr.status} ${xhr.statusText}</div>
+				<div>ajaxOptions: ${ajaxOptions}</div>
+				<div>thrownError: ${thrownError}</div>
+				<div>${xhr.responseText}</div>`
+			);
 		} else {
-			alert("Http status: " + xhr.status + " " + xhr.statusText + "\najaxOptions: " + ajaxOptions + "\nthrownError:" + thrownError + "\n" + xhr.responseText);
+			alert(
+				`Http status: ${xhr.status} ${xhr.statusText} \najaxOptions: ${ajaxOptions}\nthrownError: ${thrownError}\n${xhr.responseText}`
+			);
 		}
 	},
 	ajaxDone: function (json) {
 		if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.error) {
-			if (json[dwz.config.keys.message] && $.alert) $.alert.error(json[dwz.config.keys.message]);
+			if (json[dwz.config.keys.message] && $.alert)
+				$.alert.error(json[dwz.config.keys.message]);
 		} else if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-			if (json[dwz.config.keys.message] && $.alert) $.alert.success(json[dwz.config.keys.message]);
+			if (json[dwz.config.keys.message] && $.alert)
+				$.alert.success(json[dwz.config.keys.message]);
 
-			if ("redirect" == json.callbackType && json.forwardUrl) {
+			if ('redirect' == json.callbackType && json.forwardUrl) {
 				setTimeout(function () {
 					window.location = json.forwardUrl;
 				}, 1500);
@@ -43,7 +48,7 @@ dwz.extend({
 	},
 	checkAjaxLogin: function (json) {
 		if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.timeout) {
-			$.alert.toast(json[dwz.config.keys.message] || "用户登入");
+			$.alert.toast(json[dwz.config.keys.message] || '用户登入');
 			$.gotoLogin();
 
 			return false;
@@ -79,7 +84,7 @@ function validateCallback(form, callback, _data) {
 			});
 			data = _data;
 		} else {
-			data.push({name: '_data', value: JSON.stringify(_data)});
+			data.push({ name: '_data', value: JSON.stringify(_data) });
 		}
 	}
 
@@ -87,7 +92,6 @@ function validateCallback(form, callback, _data) {
 
 	// contentType: application/json 方式提交，防止提交json字符转义
 	if ($form.attr('enctype') == 'application/json') {
-
 		var dataMap = {};
 		data.forEach(function (item) {
 			dataMap[item.name] = item.value;
@@ -96,10 +100,10 @@ function validateCallback(form, callback, _data) {
 		$.ajax({
 			global: true,
 			type: form.method || 'POST',
-			url: $form.attr("action"),
+			url: $form.attr('action'),
 			data: JSON.stringify(dataMap),
-			dataType: "json",
-			contentType: "application/json; charset=UTF-8",
+			dataType: 'json',
+			contentType: 'application/json; charset=UTF-8',
 			cache: false,
 			success: callback || dwz.ajaxDone,
 			error: dwz.ajaxError
@@ -108,9 +112,9 @@ function validateCallback(form, callback, _data) {
 		$.ajax({
 			global: true,
 			type: form.method || 'POST',
-			url: $form.attr("action"),
+			url: $form.attr('action'),
 			data: data,
-			dataType: "json",
+			dataType: 'json',
 			cache: false,
 			success: callback || dwz.ajaxDone,
 			error: dwz.ajaxError
@@ -126,32 +130,39 @@ function validateCallback(form, callback, _data) {
  * @param {Object} callback
  */
 function iframeCallback(form, callback) {
-	var $form = $(form), $iframe = $("#callbackframe");
+	var $form = $(form),
+		$iframe = $('#callbackframe');
 	if (!$form.valid()) {
 		return false;
 	}
 
 	if ($iframe.size() == 0) {
-		$('body').append('<iframe id="callbackframe" name="callbackframe" src="about:blank" style="display:none"></iframe>');
-		$iframe = $("#callbackframe");
+		$('body').append(
+			'<iframe id="callbackframe" name="callbackframe" src="about:blank" style="display:none"></iframe>'
+		);
+		$iframe = $('#callbackframe');
 	}
 
-	form.target = "callbackframe";
+	form.target = 'callbackframe';
 
 	_iframeResponse($iframe, callback || dwz.ajaxDone);
 }
 
 function _iframeResponse($iframe, callback) {
-	var iframe = $iframe.get(0), $document = $(document);
+	var iframe = $iframe.get(0),
+		$document = $(document);
 
-	$document.trigger("ajaxStart");
+	$document.trigger('ajaxStart');
 
 	var _onload = function (event) {
-		$iframe.off("load", _onload);
-		$document.trigger("ajaxStop");
+		$iframe.off('load', _onload);
+		$document.trigger('ajaxStop');
 
-		if (iframe.src == "javascript:'%3Chtml%3E%3C/html%3E';" || // For Safari
-			iframe.src == "javascript:'<html></html>';") { // For FF, IE
+		if (
+			iframe.src == "javascript:'%3Chtml%3E%3C/html%3E';" || // For Safari
+			iframe.src == "javascript:'<html></html>';"
+		) {
+			// For FF, IE
 			return;
 		}
 
@@ -160,7 +171,7 @@ function _iframeResponse($iframe, callback) {
 		// fixing Opera 9.26,10.00
 		if (doc.readyState && doc.readyState != 'complete') return;
 		// fixing Opera 9.64
-		if (doc.body && doc.body.innerHTML == "false") return;
+		if (doc.body && doc.body.innerHTML == 'false') return;
 
 		var response;
 
@@ -171,7 +182,8 @@ function _iframeResponse($iframe, callback) {
 			try {
 				response = iframe.contentDocument.body.innerText;
 				response = $.parseJSON(response);
-			} catch (e) { // response is html document or plain text
+			} catch (e) {
+				// response is html document or plain text
 				response = doc.body.innerText;
 			}
 		} else {
@@ -182,7 +194,7 @@ function _iframeResponse($iframe, callback) {
 		callback(response);
 	};
 
-	$iframe.on("load", _onload);
+	$iframe.on('load', _onload);
 }
 
 /**
@@ -196,18 +208,17 @@ function navViewAjaxDone(json) {
 	dwz.ajaxDone(json);
 
 	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-
 		// 当前页面
-		if ("closeCurrent" == json.callbackType) {
+		if ('closeCurrent' == json.callbackType) {
 			$.navView.close(true, true);
-		} else if ("forward" == json.callbackType) {
-			$.navView.reload({url: json.forwardUrl});
+		} else if ('forward' == json.callbackType) {
+			$.navView.reload({ url: json.forwardUrl });
 		}
 
 		if (json.navTabId) {
-			$.navTab.open({tabid: json.navTabId, url: json.forwardUrl});
+			$.navTab.open({ tabid: json.navTabId, url: json.forwardUrl });
 		} else if (json.navViewId) {
-			$.navView.open({rel: json.navViewId, url: json.forwardUrl});
+			$.navView.open({ rel: json.navViewId, url: json.forwardUrl });
 		}
 	}
 }
@@ -216,7 +227,6 @@ function navViewAjaxDoneReload(json) {
 	dwz.ajaxDone(json);
 
 	if ($.isAjaxOkStatus(json)) {
-
 		// 如果关闭当前页面后，底部是列表页面，就重新加载
 		var $boxs = $.navView.getBoxs(3);
 		$boxs.forEach(function ($box) {
@@ -239,24 +249,26 @@ function dialogAjaxDone(json) {
 	dwz.ajaxDone(json);
 
 	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-
 		// 当前页面
-		if ("closeCurrent" == json.callbackType) {
+		if ('closeCurrent' == json.callbackType) {
 			$.dialog.close();
-		} else if ("forward" == json.callbackType) {
-			$.dialog.open({url: json.forwardUrl});
+		} else if ('forward' == json.callbackType) {
+			$.dialog.open({ url: json.forwardUrl });
 		}
 
 		if (json.navTabId) {
-			$.navTab.open({tabid: json.navTabId, url: json.forwardUrl});
+			$.navTab.open({ tabid: json.navTabId, url: json.forwardUrl });
 		} else if (json.navViewId) {
-			$.navView.open({rel: json.navViewId, url: json.forwardUrl});
+			$.navView.open({ rel: json.navViewId, url: json.forwardUrl });
 		}
 	}
 }
 
 function ajaxConfirm(params) {
-	var op = $.extend({msg: '', url: '', data: {}, success: dwz.ajaxDone}, params);
+	var op = $.extend(
+		{ msg: '', url: '', data: {}, success: dwz.ajaxDone },
+		params
+	);
 	$.alert.confirm(op.msg, {
 		okCall: function (event) {
 			$.ajax({
@@ -273,50 +285,64 @@ function ajaxConfirm(params) {
 }
 
 (function ($) {
-
 	$.fn.extend({
-
 		/**
 		 * 表单验证
 		 * @returns {boolean}
 		 */
 		valid: function () {
-			var result = true, $form = this;
+			var result = true,
+				$form = this;
 
-			this.find(':input').filter(function () {
-				var type = this.type;
+			this.find(':input')
+				.filter(function () {
+					var type = this.type;
 
-				// Use .is( ":disabled" ) so that fieldset[disabled] works
-				return this.name && !dwz(this).is(":disabled")
-					&& dwz.config.rsubmittable.test(this.nodeName)
-					&& !dwz.config.rsubmitterTypes.test(type);
-			}).each(function () {
-				var $input = $(this), val = $input.val(),
-					required = this.required || $input.hasClass('required'), pattern = $input.attr('pattern') || $input.attr('data-pattern'), errorMsg = $input.attr('data-error');
+					// Use .is( ":disabled" ) so that fieldset[disabled] works
+					return (
+						this.name &&
+						!dwz(this).is(':disabled') &&
+						dwz.config.rsubmittable.test(this.nodeName) &&
+						!dwz.config.rsubmitterTypes.test(type)
+					);
+				})
+				.each(function () {
+					var $input = $(this),
+						val = $input.val(),
+						required = this.required || $input.hasClass('required'),
+						pattern = $input.attr('pattern') || $input.attr('data-pattern'),
+						errorMsg = $input.attr('data-error');
 
-				if (!$input.hasClass('ignore')) {
-					if (dwz.config.rcheckableType.test(this.type)) {
-						if (!this.checked && required) {
+					if (!$input.hasClass('ignore')) {
+						if (dwz.config.rcheckableType.test(this.type)) {
+							if (!this.checked && required) {
+								result = false;
+							}
+						} else if (!val && required) {
+							result = false;
+						} else if (val && pattern && !new RegExp(pattern).test(val)) {
 							result = false;
 						}
-					} else if (!val && required) {
-						result = false;
-					} else if (val && pattern && !(new RegExp(pattern).test(val))) {
-						result = false;
 					}
-				}
 
-				if (!result && errorMsg && $.alert) {
-					$.alert.error(errorMsg);
-					return false;
-				}
-			});
+					if (!result && errorMsg && $.alert) {
+						$.alert.error(errorMsg);
+						return false;
+					}
+				});
 
 			return result;
 		},
 
 		ajaxTodo: function (params) {
-			var op = $.extend({className: 'active', disabledInvert: 'disabled-invert', relCount$: 'data-rel-count'}, params);
+			var op = $.extend(
+				{
+					className: 'active',
+					disabledInvert: 'disabled-invert',
+					relCount$: 'data-rel-count'
+				},
+				params
+			);
 
 			return this.each(function () {
 				var $this = $(this).hrefFix(),
@@ -330,12 +356,10 @@ function ajaxConfirm(params) {
 							$dataRel.text(oldCount + count);
 						}
 					}
-
 				};
 
 				$this.touchwipe({
 					touch: function (event) {
-
 						var url = $this.attr('data-href'),
 							relCount = parseInt($this.attr('data-count') || 1);
 
@@ -345,13 +369,15 @@ function ajaxConfirm(params) {
 							$.ajax({
 								type: 'POST',
 								url: url,
-								data: {'active': beforeActive ? 0 : 1},
-								dataType: "json",
+								data: { active: beforeActive ? 0 : 1 },
+								dataType: 'json',
 								cache: false,
 								success: function (json) {
 									dwz.ajaxDone(json);
 
-									if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
+									if (
+										json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok
+									) {
 										if (beforeActive && !disabledInvert) {
 											$this.removeClass(op.className);
 											changeRelCount(-relCount);
@@ -360,7 +386,6 @@ function ajaxConfirm(params) {
 											changeRelCount(+relCount);
 										}
 									}
-
 								},
 								error: dwz.ajaxError
 							});
@@ -377,17 +402,16 @@ function ajaxConfirm(params) {
 						event.preventDefault();
 						event.stopPropagation();
 					}
-				})
-
+				});
 			});
 		},
 
 		bringBack: function (args) {
-
 			return this.each(function () {
 				var $form = $(this);
-				$form.find(":input").each(function () {
-					var $input = $(this), inputName = $input.attr("name");
+				$form.find(':input').each(function () {
+					var $input = $(this),
+						inputName = $input.attr('name');
 
 					for (var key in args) {
 						if (key == inputName) {
@@ -397,8 +421,6 @@ function ajaxConfirm(params) {
 					}
 				});
 			});
-
 		}
 	});
-
 })(dwz);

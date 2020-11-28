@@ -1,7 +1,6 @@
-
 var js_src = {
+	public: ['script/template-web.js'],
 	dev: [
-		'js/template-web.js',
 		'js/dwz/dwz.core.js',
 		'js/dwz/dwz.util.date.js',
 		'js/dwz/dwz.apicloud.js',
@@ -35,21 +34,22 @@ var js_src = {
 		'js/biz.favorite.js',
 		'js/biz.my.js'
 	],
-	prod: [
-		'/script/all.min.js'
-	]
+	build: ['script/all.min.js']
 };
 
 function loadScripts(options) {
-	var BASE_URL = options && options.BASE_URL || './';
+	var BASE_URL = (options && options.BASE_URL) || './';
 	var op = {
-		env: options && options.env || 'dev', // env: dev, prod
-		iframe: options && options.iframe || false // 是否iframe嵌入的页面
+		env: (options && options.env) || 'dev', // env: dev, build
+		iframe: (options && options.iframe) || false // 是否iframe嵌入的页面
 	};
-	var scripts = js_src[op.env];
 
-	scripts.forEach(function (path) {
-		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"><\/script>');
+	js_src['public'].forEach(function (path) {
+		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"></script>');
+	});
+
+	js_src[op.env].forEach(function (path) {
+		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"></script>');
 	});
 
 	apiready = function () {
@@ -61,28 +61,30 @@ function loadScripts(options) {
 		});
 
 		$(window).on('hash.empty.pop', function () {
-			api.confirm({
-				title: '退出提示：',
-				msg: '确定要退出程序吗？',
-				buttons: ['确定', '取消']
-			}, function (ret, err) {
-				if (ret.buttonIndex == 1) {
-					api.closeWidget({
-						id: 'A6044188768662',  //填写自己的id
-						retData: {name: 'closeWidget'},
-						silent: true
-					});
+			api.confirm(
+				{
+					title: '退出提示：',
+					msg: '确定要退出程序吗？',
+					buttons: ['确定', '取消']
+				},
+				function (ret, err) {
+					if (ret.buttonIndex == 1) {
+						api.closeWidget({
+							id: 'A6044188768662', //填写自己的id
+							retData: { name: 'closeWidget' },
+							silent: true
+						});
+					}
 				}
-			});
+			);
 		});
 
 		biz.checkUpdate();
 
-
 		// 默认打开权限 ['camera','contacts','microphone','photos','location','notification','calendar-r','phone-call','phone-r','sms-r','storage-r','starage-w'];
-		if (api.systemType == "android") {
+		if (api.systemType == 'android') {
 			// var premsMap = {'storage': '本地存储空间', 'camera': '摄像头', 'photos':'访问相册', 'location':'定位'};
-			var premsMap = {'storage': '本地存储空间'};
+			var premsMap = { storage: '本地存储空间' };
 			biz.initPermission(premsMap);
 		}
 
@@ -90,28 +92,26 @@ function loadScripts(options) {
 		biz.startLocation();
 	};
 
-
-	document.addEventListener("DOMContentLoaded", function () {
-
+	document.addEventListener('DOMContentLoaded', function () {
 		$.extend($.config, {
-			pageInfo: {pageNum: "pageNum"},
-			statusCode: {ok:1, error:0, timeout:301},
-			keys: {statusCode:"status", message:"info"}
+			pageInfo: { pageNum: 'pageNum' },
+			statusCode: { ok: 1, error: 0, timeout: 301 },
+			keys: { statusCode: 'status', message: 'info' }
 		});
 
 		$.dialog.init();
 		initUserInfo(); // 用户信息初始化
 
-		$.navTab.init({openIndex:0});
+		$.navTab.init({ openIndex: 0 });
 		$.navView.init();
 		$.filterPanel.init();
 		$.altPanel.init();
 
 		//插件注册
-		$.regPlugins.push(function($p){
+		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
 
-			$('div.chart-percent', $p).each(function(index){
+			$('div.chart-percent', $p).each(function (index) {
 				var $this = $(this);
 				$this.circliful({
 					animation: 1,
@@ -123,32 +123,35 @@ function loadScripts(options) {
 					percent: $this.attr('data-percent') || 0,
 					percentageTextSize: 28,
 					fontColor: '#f00',
-					text:$this.attr('data-txt') || '佰安',
+					text: $this.attr('data-txt') || '佰安',
 					textColor: '#999'
 				});
 			});
 
-			$('a.title, a.sub-title, li[data-href], .dwz-ctl-active', $p).activeClass('active');
+			$('a.title, a.sub-title, li[data-href], .dwz-ctl-active', $p).activeClass(
+				'active'
+			);
 			$('input[data-checkbox-radio]', $p).checkboxRadio();
 			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
 
+			if ($.fn.previewUploadImg)
+				$('div.upload-wrap', $p).each(function () {
+					var $this = $(this);
+					var options = {
+						maxW: 70,
+						maxH: 70,
+						inputName: $this.attr('data-name') || 'pics[]'
+					};
 
-			if ($.fn.previewUploadImg) $('div.upload-wrap', $p).each(function () {
-				var $this = $(this);
-				var options = {
-					maxW: 70,
-					maxH: 70,
-					inputName: $this.attr('data-name') || 'pics[]'
-				};
+					var maxCount = $this.attr('data-max-count');
+					if (maxCount) {
+						options.maxCount = parseInt(maxCount);
+					}
+					$this.previewUploadImg(options);
+				});
 
-				var maxCount = $this.attr('data-max-count');
-				if (maxCount) {
-					options.maxCount = parseInt(maxCount);
-				}
-				$this.previewUploadImg(options);
-			});
-
-			if ($.fn.previewImg) $('ul.dwz-preview-img, ul.upload-preview', $p).previewImg();
+			if ($.fn.previewImg)
+				$('ul.dwz-preview-img, ul.upload-preview', $p).previewImg();
 
 			if ($.fn.dropdown) $('div.dwz-dropdown', $p).dropdown();
 
@@ -163,44 +166,47 @@ function loadScripts(options) {
 			$('div.dwz-scroll-x', $p).scroll({
 				scrollX: true,
 				scrollY: false,
-				scroll$:'.scroll-x'
+				scroll$: '.scroll-x'
 			});
-
 		});
 
 		//插件初始化
 		$(document).initUI();
 
-		var ajaxbg = $("#progressBar").hide();
-		$(document).on('ajaxStart', function(){
-			ajaxbg.show();
-		}).on('ajaxStop', function(){
-			ajaxbg.hide();
-		});
+		var ajaxbg = $('#progressBar').hide();
+		$(document)
+			.on('ajaxStart', function () {
+				ajaxbg.show();
+			})
+			.on('ajaxStop', function () {
+				ajaxbg.hide();
+			});
 
-		if ($.history) $.history.init(function(hash){
-
-			//浏览器刷新监测地址栏, 根据hash定位
-			if (hash){
-				var args = hash.split(';');
-				if (args.length == 2){
-					$.navTab.open({tabid:args[0], url: args[1]});
-				} else if (args.length == 3) {
-					$.navView.open({url:args[2], rel:args[1]});
+		if ($.history)
+			$.history.init(function (hash) {
+				//浏览器刷新监测地址栏, 根据hash定位
+				if (hash) {
+					var args = hash.split(';');
+					if (args.length == 2) {
+						$.navTab.open({ tabid: args[0], url: args[1] });
+					} else if (args.length == 3) {
+						$.navView.open({ url: args[2], rel: args[1] });
+					}
 				}
-			}
-
-		});
-
+			});
 	});
 
-	document.addEventListener('touchmove', function (event) {
-		dwz.speed.cal(event); // 计算加速度
-		event.preventDefault();//阻止默认的处理方式(阻止下拉滑动的效果)
-	}, {passive: false});//passive 参数不能省略，用来兼容ios和android
+	document.addEventListener(
+		'touchmove',
+		function (event) {
+			dwz.speed.cal(event); // 计算加速度
+			event.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+		},
+		{ passive: false }
+	); //passive 参数不能省略，用来兼容ios和android
 }
 
 // 用于gulpfile.js编译js
-if (typeof(module) != 'undefined') {
+if (typeof module != 'undefined') {
 	module.exports = js_src;
 }

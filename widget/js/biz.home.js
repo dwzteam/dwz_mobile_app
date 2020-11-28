@@ -1,12 +1,13 @@
 function renderHome(tpl, params) {
-	var $box = this, tplWrap = $.templateWrap(tpl);
+	var $box = this,
+		tplWrap = $.templateWrap(tpl);
 	var data = {
 		UserInfo: UserInfo
 	};
 	var html = template.render(tplWrap.tpl, data);
 	$box.html(html).initUI();
 
-	var $form = $box.find("form.dwz-list-form");
+	var $form = $box.find('form.dwz-list-form');
 	var $listBox = $('#home-announce-box');
 
 	$form.requestList = function (loadMore) {
@@ -14,47 +15,43 @@ function renderHome(tpl, params) {
 
 		// 轮播图
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.homeAd),
-			dataType: "json",
+			dataType: 'json',
 			data: data,
 			cache: false,
 			global: false,
 			success: function (json) {
-
 				if ($.isAjaxOkStatus(json)) {
 					var _html = template.render(tplWrap['tpl-home-ad'], json);
 					$box.find('#home-ad-box').html(_html).initUI();
 				}
-
 			},
 			error: ajaxError
 		});
 
 		// 运输单
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.transport),
-			dataType: "json",
+			dataType: 'json',
 			data: data,
 			cache: false,
 			global: false,
 			success: function (json) {
-
 				if ($.isAjaxOkStatus(json)) {
 					var _html = template.render(tplWrap['tpl-transport'], json);
 					$box.find('#transport-card-box').html(_html);
 				}
-
 			},
 			error: ajaxError
 		});
 
 		// 通知
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.announce),
-			dataType: "json",
+			dataType: 'json',
 			data: data,
 			cache: false,
 			global: false,
@@ -67,7 +64,6 @@ function renderHome(tpl, params) {
 					var _html = template.render(tplWrap['tpl-list'], json);
 					$listBox.html(_html);
 				}
-
 			},
 			error: ajaxError
 		});
@@ -85,4 +81,3 @@ function renderAbout(tpl, params) {
 	});
 	$box.html(html).initUI();
 }
-

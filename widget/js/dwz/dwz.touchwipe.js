@@ -6,20 +6,15 @@
  * });
  */
 (function ($) {
-
 	$.fn.extend({
 		touchwipe: function (settings) {
-			var config = {
+			let config = {
 				min_move_x: 30,
 				min_move_y: 30,
-				wipeLeft: function (event, pos) {
-				},
-				wipeRight: function (event, pos) {
-				},
-				wipeUp: function (event, pos) {
-				},
-				wipeDown: function (event, pos) {
-				},
+				wipeLeft: function (event, pos) {},
+				wipeRight: function (event, pos) {},
+				wipeUp: function (event, pos) {},
+				wipeDown: function (event, pos) {},
 				touch: null,
 				touchstart: null,
 				touchmove: null, // touchmove事件触发scroll
@@ -27,19 +22,25 @@
 				direction: 'vertical', // 允许滚动方向：vertical, horizontal, all
 				preventDefaultEvents: false,
 				stopPropagationEvents: false,
-				data: null	// 自定义参数
+				data: null // 自定义参数
 			};
 
 			if (settings) $.extend(config, settings);
 
 			return this.each(function () {
-				var $me = $(this);
-				var startX = 0, startY = 0, startX2 = 0, startY2 = 0,
-					endX = 0, endY = 0, endX2 = 0, endY2 = 0,
+				let $me = $(this);
+				let startX = 0,
+					startY = 0,
+					startX2 = 0,
+					startY2 = 0,
+					endX = 0,
+					endY = 0,
+					endX2 = 0,
+					endY2 = 0,
 					touchType = null, // touch, zoom
 					directionStart = null; // 滚动开始方向：vertical, horizontal
 
-				var maxMove = {dx: 0, dy: 0};
+				let maxMove = { dx: 0, dy: 0 };
 
 				function cancelTouch() {
 					$.event.remove($me.get(0), 'touchmove', onTouchMove);
@@ -47,13 +48,16 @@
 				}
 
 				function onTouchMove(e) {
-
 					if (touchType) {
-						var pos = {
-							startX: startX, startY: startY,
-							endX: endX, endY: endY,
-							startX2: startX2, startY2: startY2,
-							endX2: endX, endY2: endY,
+						let pos = {
+							startX: startX,
+							startY: startY,
+							endX: endX,
+							endY: endY,
+							startX2: startX2,
+							startY2: startY2,
+							endX2: endX,
+							endY2: endY,
 							x: e.type == 'mousemove' ? e.pageX : e.touches[0].pageX,
 							y: e.type == 'mousemove' ? e.pageY : e.touches[0].pageY,
 							touchType: touchType
@@ -72,8 +76,14 @@
 							endY2 = pos.y2;
 						}
 
-						if (!directionStart && (Math.abs(pos.dx) > config.min_move_x || Math.abs(pos.dy) > config.min_move_y)) { // 判断开始滚动方向
-							directionStart = Math.abs(pos.dx) > Math.abs(pos.dy) ? 'horizontal' : 'vertical';
+						if (
+							!directionStart &&
+							(Math.abs(pos.dx) > config.min_move_x ||
+								Math.abs(pos.dy) > config.min_move_y)
+						) {
+							// 判断开始滚动方向
+							directionStart =
+								Math.abs(pos.dx) > Math.abs(pos.dy) ? 'horizontal' : 'vertical';
 						}
 
 						if (Math.abs(pos.dx) > maxMove.dx) {
@@ -83,11 +93,14 @@
 							maxMove.dy = pos.dy;
 						}
 
-						if (config.touchmove) { // 滚动处理函数
-							if (config.direction == directionStart || config.direction == 'all') {
+						if (config.touchmove) {
+							// 滚动处理函数
+							if (
+								config.direction == directionStart ||
+								config.direction == 'all'
+							) {
 								config.touchmove.call(this, e, pos);
 							}
-
 						} else {
 							if (Math.abs(pos.dx) >= config.min_move_x) {
 								cancelTouch(); // touch完成取消touch事件
@@ -110,7 +123,6 @@
 							cancelTouch();
 							onTouchEnd(e);
 						}
-
 					}
 				}
 
@@ -126,12 +138,14 @@
 
 					e.data = config.data; // 自定义传参
 
-					if (e.type == "mousedown") { // 鼠标事件
+					if (e.type == 'mousedown') {
+						// 鼠标事件
 						startX = endX = e.pageX;
 						startY = endY = e.pageY;
 						touchType = 'touch';
 						$.event.add($me.get(0), 'mousemove', onTouchMove);
-					} else { // 解控事件
+					} else {
+						// 解控事件
 						if (!e.touches.length) {
 							return;
 						}
@@ -147,7 +161,7 @@
 					}
 
 					if (config.touchstart) {
-						var pos = {
+						let pos = {
 							x: startX,
 							y: startY,
 							x2: startX2,
@@ -162,13 +176,17 @@
 					e.data = config.data; // 自定义传参
 
 					if (config.touchend) {
-						var pos = {
-							startX: startX, startY: startY,
-							x: endX, y: endY,
+						let pos = {
+							startX: startX,
+							startY: startY,
+							x: endX,
+							y: endY,
 							dx: startX - endX,
 							dy: startY - endY,
-							startX2: startX2, startY2: startY2,
-							x2: endX2, y2: endY2,
+							startX2: startX2,
+							startY2: startY2,
+							x2: endX2,
+							y2: endY2,
 							touchType: touchType
 						};
 
@@ -176,12 +194,17 @@
 					}
 
 					// 判断非滑动操作触发touch
-					if (touchType == 'touch' && Math.abs(maxMove.dx) < config.min_move_x && Math.abs(maxMove.dy) < config.min_move_y) {
-						if (config.touch && this !== window) config.touch.call(this, e, {x: startX, y: startY});
+					if (
+						touchType == 'touch' &&
+						Math.abs(maxMove.dx) < config.min_move_x &&
+						Math.abs(maxMove.dy) < config.min_move_y
+					) {
+						if (config.touch && this !== window)
+							config.touch.call(this, e, { x: startX, y: startY });
 					}
 
 					cancelTouch(); // touch完成取消touch事件
-					maxMove = {dx: 0, dy: 0};
+					maxMove = { dx: 0, dy: 0 };
 				}
 
 				// 禁止重复绑定touch事件
@@ -210,20 +233,19 @@
 					if (config.stopPropagationEvents) {
 						e.stopPropagation();
 					}
-					var pos = {
-						startX: 0, startY: 0,
-						x: 0, y: e.deltaY,
-						dx: 0, dy: -e.deltaY,
+					let pos = {
+						startX: 0,
+						startY: 0,
+						x: 0,
+						y: e.deltaY,
+						dx: 0,
+						dy: -e.deltaY,
 						type: 'mousewheel'
 					};
 
 					config.touchmove && config.touchmove.call(this, e, pos);
 				});
-
 			});
-
 		}
-
 	});
-
 })(dwz);

@@ -5,9 +5,9 @@ biz.favorite = {
 	removeItem: function (params) {
 		var op = $.extend({ id: 0 }, params);
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.favoriteDel),
-			dataType: "json",
+			dataType: 'json',
 			data: { id: op.id },
 			cache: false,
 			global: false,
@@ -21,7 +21,7 @@ biz.favorite = {
 						.remove();
 				}
 			},
-			error: ajaxError,
+			error: ajaxError
 		});
 	},
 	listRender: function (tpl, params) {
@@ -31,16 +31,16 @@ biz.favorite = {
 		var html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
 		$box.html(html).initUI();
 
-		var $form = $box.find("form.dwz-list-form"),
-			$listBox = $form.find("ul.list");
+		var $form = $box.find('form.dwz-list-form'),
+			$listBox = $form.find('ul.list');
 
 		$form.requestList = function (loadMore) {
 			var data = $form.serializeArray();
 			console.log(JSON.stringify(data));
 			$.ajax({
-				type: "POST",
+				type: 'POST',
 				url: biz.server.getUrl(biz.server.favoriteList),
-				dataType: "json",
+				dataType: 'json',
 				data: data,
 				cache: false,
 				global: false,
@@ -52,28 +52,22 @@ biz.favorite = {
 					if ($.isAjaxOkStatus(json)) {
 						$form.total = json.data.total || json.data.length;
 						if ($form.total) {
-							$form.find(".empty_box").hide();
+							$form.find('.empty_box').hide();
 						}
 
-						var _html = template.render(
-							tplWrap["tpl-list"],
-							json.data
-						);
+						var _html = template.render(tplWrap['tpl-list'], json.data);
 
 						if (loadMore) {
 							$(_html).appendTo($listBox).touchOpenRight();
 						} else {
-							$listBox
-								.html(_html)
-								.find(".dwz-open-right")
-								.touchOpenRight();
+							$listBox.html(_html).find('.dwz-open-right').touchOpenRight();
 						}
 					}
 				},
-				error: ajaxError,
+				error: ajaxError
 			});
 		};
 
 		$.listForm($form);
-	},
+	}
 };

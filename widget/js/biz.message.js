@@ -1,43 +1,50 @@
 biz.message = {
 	removeItem: function (params) {
-		var op = $.extend({id: 0}, params);
+		var op = $.extend({ id: 0 }, params);
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: biz.server.getUrl(biz.server.messageDel),
-			dataType: "json",
-			data: {id: op.id},
+			dataType: 'json',
+			data: { id: op.id },
 			cache: false,
 			global: false,
 			success: function (json) {
 				console.log(json);
 
 				if ($.isAjaxOkStatus(json)) {
-					$.navTab.getBox().find('ul.list li[data-id="' + op.id + '"]').remove();
+					$.navTab
+						.getBox()
+						.find('ul.list li[data-id="' + op.id + '"]')
+						.remove();
 				}
 			},
 			error: ajaxError
 		});
 	},
 	listRender: function (tpl, params) {
-		var $box = this, tplWrap = $.templateWrap(tpl);
+		var $box = this,
+			tplWrap = $.templateWrap(tpl);
 
-		var html = template.render(tplWrap.tpl, {UserInfo: UserInfo});
+		var html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
 		$box.html(html).initUI();
 
-		var $form = $box.find('form.dwz-list-form'), $listBox = $form.find('ul.list');
+		var $form = $box.find('form.dwz-list-form'),
+			$listBox = $form.find('ul.list');
 
 		$form.requestList = function (loadMore) {
 			var data = $form.serializeArray();
 			console.log(JSON.stringify(data));
 			$.ajax({
-				type: "GET",
-				url:biz.server.getUrl(biz.server.messageList),
-				dataType:"json",
-				data:data,
+				type: 'GET',
+				url: biz.server.getUrl(biz.server.messageList),
+				dataType: 'json',
+				data: data,
 				cache: false,
 				global: false,
-				success: function(json) {
-					if (!dwz.checkAjaxLogin(json)) { return; }
+				success: function (json) {
+					if (!dwz.checkAjaxLogin(json)) {
+						return;
+					}
 
 					if ($.isAjaxOkStatus(json)) {
 						$form.total = json.data.total || json.data.length;
@@ -52,9 +59,7 @@ biz.message = {
 						} else {
 							$listBox.html(_html).find('.dwz-open-right').touchOpenRight();
 						}
-
 					}
-
 				},
 				error: ajaxError
 			});

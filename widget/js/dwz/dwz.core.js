@@ -12,9 +12,9 @@ window.$ = window.$ || dwz;
 dwz.version = 'mobile 1.0.0';
 dwz.rootNodeRE = /^(?:body|html)$/i;
 dwz.config = {
-	pageInfo: {pageNum: "pageNum"},
-	statusCode: {ok: 200, error: 300, timeout: 301},
-	keys: {statusCode: "statusCode", message: "message"},
+	pageInfo: { pageNum: 'pageNum' },
+	statusCode: { ok: 200, error: 300, timeout: 301 },
+	keys: { statusCode: 'statusCode', message: 'message' },
 	unitBox: 'unitBox',
 
 	rreturn: /\r/g,
@@ -22,8 +22,8 @@ dwz.config = {
 	rCRLF: /\r?\n/g,
 	rsubmitterTypes: /^(?:submit|button|image|reset|file)$/i,
 	rsubmittable: /^(?:input|select|textarea|keygen)/i,
-	rcheckableType: (/^(?:checkbox|radio)$/i),
-	rnotwhite: (/\S+/g),
+	rcheckableType: /^(?:checkbox|radio)$/i,
+	rnotwhite: /\S+/g,
 
 	frag: {} // 页面组件html片段
 };
@@ -36,14 +36,13 @@ dwz.extend = function () {
 		length = arguments.length,
 		options;
 	// Handle a deep copy situation
-	if (typeof target === "boolean") {
-
+	if (typeof target === 'boolean') {
 		target = arguments[1] || {};
 		// skip the boolean and the target
 		i = 2;
 	}
 	// Handle case when target is a string or something (possible in deep copy)
-	if (typeof target !== "object" && !target) target = {};
+	if (typeof target !== 'object' && !target) target = {};
 	// extend dwz itself if only one argument is passed
 	if (length == i) {
 		target = this;
@@ -57,8 +56,7 @@ dwz.extend = function () {
 				let src = target[name],
 					copy = options[name];
 				// Prevent never-ending loop
-				if (target === copy)
-					continue;
+				if (target === copy) continue;
 
 				if (copy !== undefined) target[name] = copy;
 			}
@@ -86,10 +84,10 @@ dwz.extend({
 		return (1, eval)(str);
 	},
 	isFunction: function (obj) {
-		return typeof obj === "function";
+		return typeof obj === 'function';
 	},
 	isArray: function (arr) {
-		return Object.prototype.toString.call(arr) === "[object Array]";
+		return Object.prototype.toString.call(arr) === '[object Array]';
 	},
 
 	instanceOf: function (object) {
@@ -126,7 +124,6 @@ dwz.extend({
 		return first;
 	},
 	each: function (objs, callback, args) {
-
 		if (dwz.isArray(objs)) {
 			let results = [];
 			for (let i = 0; i < objs.length; i++) {
@@ -135,8 +132,9 @@ dwz.extend({
 				if (cbResult === false) break;
 			}
 
-			return results
-		} else { // dwz object
+			return results;
+		} else {
+			// dwz object
 			let elements = [];
 			for (let i = 0; i < objs.length; i++) {
 				let elem = objs.get(i),
@@ -147,7 +145,6 @@ dwz.extend({
 
 			return dwz(elements);
 		}
-
 	},
 	get: function ($obj, index) {
 		return dwz.instanceOf($obj) ? $obj.get(index) : $obj;
@@ -181,8 +178,8 @@ dwz.extend({
 	 * @returns {{tpl: (*|string), 'tpl-xxx1': (*|string), 'tpl-xxx2': (*|string)}}
 	 */
 	templateWrap: function (tpl) {
-		let ret = {tpl: tpl || ''};
-		let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/ig;
+		let ret = { tpl: tpl || '' };
+		let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
 		let jsContained = ret.tpl.match(regDetectJs);
 		if (jsContained) {
 			// 分段取出js正则
@@ -191,7 +188,9 @@ dwz.extend({
 			// 按顺序分段执行js
 			let jsNums = jsContained.length;
 			for (let i = 0; i < jsNums; i++) {
-				let $script = $(jsContained[i]), _type = $script.attr('type'), _id = $script.attr('id');
+				let $script = $(jsContained[i]),
+					_type = $script.attr('type'),
+					_id = $script.attr('id');
 				if (_type == 'text/html' && _id) {
 					let jsSection = jsContained[i].match(regGetJS);
 					ret[_id] = jsSection[2];
@@ -207,19 +206,20 @@ dwz.extend({
 
 dwz.config.selector = {
 	':input': 'input, select, textarea, button',
-	':text': 'input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=reset]):not([type=button]):not([type=file]):not([type=hidden]):not([type=image])',
+	':text':
+		'input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=reset]):not([type=button]):not([type=file]):not([type=hidden]):not([type=image])',
 	':password': 'input[type=password]',
 	':radio': 'input[type=radio]',
 	':checkbox': 'input[type=checkbox]',
 	':submit': 'input[type=submit], button[type=submit]',
 	':reset': 'input[type=reset], button[type=reset]',
-	':button': 'input[type=button], input[type=submit], input[type=reset], input[type=image], button',
+	':button':
+		'input[type=button], input[type=submit], input[type=reset], input[type=image], button',
 	':file': 'input[type=file]',
 	':image': 'input[type=image]',
 	':hidden': 'input[type=hidden]'
 };
 dwz.prototype.init = function (selector, context) {
-
 	this.selector = selector;
 	this.context = context;
 	this.elements = []; //Take an array of elements and push it onto the stack
@@ -232,12 +232,12 @@ dwz.prototype.init = function (selector, context) {
 	let contextSize = 1; // 标记context.elements是否多个
 
 	// Handle HTML strings
-	if (typeof selector === "string") {
+	if (typeof selector === 'string') {
 		if (selector.startsWith('>')) {
-			selector = ":scope" + selector;
+			selector = ':scope' + selector;
 		}
 		if (context) {
-			if (typeof context === "string") {
+			if (typeof context === 'string') {
 				context = document.querySelector(context);
 			} else if (dwz.instanceOf(context)) {
 				contextSize = context.elements.length;
@@ -248,9 +248,10 @@ dwz.prototype.init = function (selector, context) {
 		this.context = context || document;
 
 		if (contextSize > 1) {
-
 			for (let i = 0; i < this.context.length; i++) {
-				let elements = this.context[i].querySelectorAll(dwz.config.selector[selector] || selector);
+				let elements = this.context[i].querySelectorAll(
+					dwz.config.selector[selector] || selector
+				);
 
 				Array.prototype.push.apply(this.elements, elements);
 			}
@@ -258,19 +259,23 @@ dwz.prototype.init = function (selector, context) {
 			if (selector.indexOf('<') >= 0 && selector.indexOf('>') >= 0) {
 				this.elements = dwz.parseHTML(selector, true); // html字符串转dom
 			} else {
-				this.elements = this.context.querySelectorAll(dwz.config.selector[selector] || selector);
+				this.elements = this.context.querySelectorAll(
+					dwz.config.selector[selector] || selector
+				);
 			}
 		}
-
-
 	} else if (dwz.instanceOf(selector)) {
 		return selector;
-	} else if (selector instanceof Element || selector === document || selector === window) {
+	} else if (
+		selector instanceof Element ||
+		selector === document ||
+		selector === window
+	) {
 		this.elements = [selector];
 	} else if (selector instanceof NodeList || dwz.isArray(selector)) {
 		this.elements = selector;
 	} else if (dwz.isFunction(selector)) {
-		document.addEventListener( "DOMContentLoaded", selector );
+		document.addEventListener('DOMContentLoaded', selector);
 		return window.onload;
 	}
 
@@ -282,7 +287,6 @@ dwz.prototype.init = function (selector, context) {
 };
 
 dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
-
 	extend: function (obj) {
 		dwz.extend(dwz.fn, obj);
 	},
@@ -385,13 +389,21 @@ dwz.extend({
 		localStorage.removeItem(key);
 	},
 	clientX: function (event) {
-		return event.pageX || event.clientX || (event.targetTouches ? event.targetTouches[0].clientX : 0);
+		return (
+			event.pageX ||
+			event.clientX ||
+			(event.targetTouches ? event.targetTouches[0].clientX : 0)
+		);
 	},
 	clientY: function (event) {
-		return event.pageY || event.clientY || (event.targetTouches ? event.targetTouches[0].clientY : 0);
+		return (
+			event.pageY ||
+			event.clientY ||
+			(event.targetTouches ? event.targetTouches[0].clientY : 0)
+		);
 	},
 	speed: {
-		pre: {x: 0, y: 0, speedX: 0, speedY: 0, time: 0},
+		pre: { x: 0, y: 0, speedX: 0, speedY: 0, time: 0 },
 		init: false,
 
 		getX: function () {
@@ -421,8 +433,8 @@ dwz.extend({
 				distY = clientY - dwz.speed.pre.y,
 				now = new Date().getTime(),
 				t = now - dwz.speed.pre.time;
-			dwz.speed.pre.speedX = t > 0 ? distX / t * 1000 : distX;
-			dwz.speed.pre.speedY = t > 0 ? distY / t * 1000 : distY;
+			dwz.speed.pre.speedX = t > 0 ? (distX / t) * 1000 : distX;
+			dwz.speed.pre.speedY = t > 0 ? (distY / t) * 1000 : distY;
 
 			// 记录X,Y坐标
 			dwz.speed.pre.x = clientX;
@@ -459,7 +471,7 @@ dwz.extend({
 				};
 
 				_events[type] = _events[type] || [];
-				_events[type].push({handler: handler, fn: fn});
+				_events[type].push({ handler: handler, fn: fn });
 
 				elem.addEventListener(type, handler, false);
 			});
@@ -477,9 +489,9 @@ dwz.extend({
 				}
 
 				for (let i = 0; i < _events[type].length; i++) {
-					if (!fn) {// 解绑全部相同类型的事件
+					if (!fn) {
+						// 解绑全部相同类型的事件
 						elem.removeEventListener(type, _events[type][i].handler, false);
-
 					} else if (fn === _events[type][i].fn) {
 						elem.removeEventListener(type, _events[type][i].handler, false);
 						_events[type].splice(i, 1); // 清理dwz_data._events
@@ -487,7 +499,8 @@ dwz.extend({
 					}
 				}
 
-				if (fn === undefined) { // 清理dwz_data._events
+				if (fn === undefined) {
+					// 清理dwz_data._events
 					_events[type] = [];
 				}
 			});
@@ -517,7 +530,8 @@ dwz.extend({
 			return false;
 		},
 		getDistance: function (x1, y1, x2, y2) {
-			let dx = Math.abs(x2 - x1), dy = Math.abs(y2 - y1),
+			let dx = Math.abs(x2 - x1),
+				dy = Math.abs(y2 - y1),
 				distance = Math.sqrt(dx * dx + dy * dy);
 
 			return distance;
@@ -538,22 +552,23 @@ dwz.extend({
 		}
 	},
 
-	contains: document.documentElement.contains ?
-		function (parent, node) {
-			return parent !== node && parent.contains(node)
-		} : function (parent, node) {
-			while (node && (node = node.parentNode))
-				if (node === parent) return true
-			return false;
-		},
+	contains: document.documentElement.contains
+		? function (parent, node) {
+				return parent !== node && parent.contains(node);
+		  }
+		: function (parent, node) {
+				while (node && (node = node.parentNode))
+					if (node === parent) return true;
+				return false;
+		  },
 	offset: function (elem) {
-		let obj = elem.getBoundingClientRect()
+		let obj = elem.getBoundingClientRect();
 		return {
 			left: obj.left + window.pageXOffset,
 			top: obj.top + window.pageYOffset,
 			width: Math.round(obj.width),
 			height: Math.round(obj.height)
-		}
+		};
 	},
 	position: function (elem) {
 		if (!elem) return;
@@ -562,7 +577,9 @@ dwz.extend({
 		let offsetParent = dwz.offsetParent(elem),
 			// Get correct offsets
 			offset = dwz.offset(elem),
-			parentOffset = dwz.rootNodeRE.test(offsetParent.nodeName) ? {top: 0, left: 0} : dwz.offset(offsetParent);
+			parentOffset = dwz.rootNodeRE.test(offsetParent.nodeName)
+				? { top: 0, left: 0 }
+				: dwz.offset(offsetParent);
 
 		// Subtract element margins
 		// note: when an element has margin: auto the offsetLeft and marginLeft
@@ -578,11 +595,15 @@ dwz.extend({
 		return {
 			top: offset.top - parentOffset.top,
 			left: offset.left - parentOffset.left
-		}
+		};
 	},
 	offsetParent: function (elem) {
 		let parent = elem.offsetParent || document.body;
-		while (parent && !dwz.rootNodeRE.test(parent.nodeName) && parent.style.position == "static")
+		while (
+			parent &&
+			!dwz.rootNodeRE.test(parent.nodeName) &&
+			parent.style.position == 'static'
+		)
 			parent = parent.offsetParent;
 		return parent;
 	},
@@ -646,12 +667,11 @@ dwz.extend({
 		if (value !== undefined) {
 			elem.style[key] = value;
 		} else {
-			if (typeof key === "string") {
-
+			if (typeof key === 'string') {
 				if (elem.currentStyle) {
-					return elem.currentStyle[key];//IE
+					return elem.currentStyle[key]; //IE
 				} else {
-					return document.defaultView.getComputedStyle(elem, null)[key];//标准浏览器
+					return document.defaultView.getComputedStyle(elem, null)[key]; //标准浏览器
 				}
 			} else {
 				for (let k in key) {
@@ -668,14 +688,14 @@ dwz.extend({
 			return elem.dwz_data;
 		}
 
-		if (typeof name === "string") {
+		if (typeof name === 'string') {
 			let dataName = dwz.camelCase(name);
 			if (value === undefined) {
 				return elem.dwz_data[dataName];
 			} else {
 				elem.dwz_data[dataName] = value;
 			}
-		} else if (typeof name === "object") {
+		} else if (typeof name === 'object') {
 			for (let key in name) {
 				let dataName = dwz.camelCase(key);
 				elem.dwz_data[dataName] = name[key];
@@ -705,7 +725,7 @@ dwz.extend({
 			return elem.innerHTML;
 		} else {
 			if (typeof content == 'string') {
-				let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/ig;
+				let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
 				elem.innerHTML = content.replace(regDetectJs, ''); // 插入页面时，删除script标签
 			} else {
 				elem.innerHTML = content;
@@ -726,37 +746,44 @@ dwz.extend({
 	},
 	param: function (data) {
 		let params = '';
-		if (dwz.isArray(data)) { // [{name:"", value:""},{name:"", value:""}]
+		if (dwz.isArray(data)) {
+			// [{name:"", value:""},{name:"", value:""}]
 			for (let i = 0; i < data.length; i++) {
-				params += (params ? '&' : '') + data[i].name + '=' + (data[i].value + '').encodeParam();
+				params +=
+					(params ? '&' : '') +
+					data[i].name +
+					'=' +
+					(data[i].value + '').encodeParam();
 			}
-		} else { // {name1:value1, name2:value2}
+		} else {
+			// {name1:value1, name2:value2}
 			for (let key in data) {
-				params += (params ? '&' : '') + key + '=' + (data[key] + '').encodeParam();
+				params +=
+					(params ? '&' : '') + key + '=' + (data[key] + '').encodeParam();
 			}
 		}
 
 		return params;
 	},
 	parseJSON: function (data) {
-		return JSON.parse(data + "");
+		return JSON.parse(data + '');
 	},
 	parseXML: function (data) {
 		let xml, tmp;
-		if (!data || typeof data !== "string") {
+		if (!data || typeof data !== 'string') {
 			return null;
 		}
 
 		// Support: IE9
 		try {
 			tmp = new DOMParser();
-			xml = tmp.parseFromString(data, "text/xml");
+			xml = tmp.parseFromString(data, 'text/xml');
 		} catch (error) {
 			xml = undefined;
 		}
 
-		if (!xml || xml.getElementsByTagName("parsererror").length) {
-			dwz.error("Invalid XML: " + data);
+		if (!xml || xml.getElementsByTagName('parsererror').length) {
+			dwz.error('Invalid XML: ' + data);
 		}
 		return xml;
 	},
@@ -776,7 +803,7 @@ dwz.extend({
  */
 dwz.extend(String.prototype, {
 	trim: function () {
-		return this.replace(/(^\s*)|(\s*$)|\r|\n/g, "");
+		return this.replace(/(^\s*)|(\s*$)|\r|\n/g, '');
 	},
 	startsWith: function (pattern) {
 		return this.indexOf(pattern) === 0;
@@ -786,21 +813,24 @@ dwz.extend(String.prototype, {
 		return d >= 0 && this.lastIndexOf(pattern) === d;
 	},
 	replaceSuffix: function (index) {
-		return this.replace(/\[[0-9]+\]/, '[' + index + ']').replace('#index#', index);
+		return this.replace(/\[[0-9]+\]/, '[' + index + ']').replace(
+			'#index#',
+			index
+		);
 	},
 	getRequestURI: function () {
-		let indexOf = this.indexOf("?");
-		let uri = (indexOf == -1) ? this : this.substr(0, indexOf);
+		let indexOf = this.indexOf('?');
+		let uri = indexOf == -1 ? this : this.substr(0, indexOf);
 		return uri;
 	},
 	getParams: function (encode) {
 		let params = {},
-			indexOf = this.indexOf("?");
+			indexOf = this.indexOf('?');
 		if (indexOf != -1) {
 			let str = this.substr(indexOf + 1),
-				strs = str.split("&");
+				strs = str.split('&');
 			for (let i = 0; i < strs.length; i++) {
-				let item = strs[i].split("=");
+				let item = strs[i].split('=');
 				let val = encode ? item[1].encodeParam() : item[1];
 				params[item[0]] = item.length > 1 ? val : '';
 			}
@@ -808,10 +838,12 @@ dwz.extend(String.prototype, {
 		return params;
 	},
 	encodeParam: function () {
-		return encodeURIComponent(this).replace(dwz.config.rCRLF, "\r\n").replace(dwz.config.r20, '+');
+		return encodeURIComponent(this)
+			.replace(dwz.config.rCRLF, '\r\n')
+			.replace(dwz.config.r20, '+');
 	},
 	replaceAll: function (os, ns) {
-		return this.replace(new RegExp(os, "gm"), ns);
+		return this.replace(new RegExp(os, 'gm'), ns);
 	},
 	skipChar: function (ch) {
 		if (!this || this.length === 0) {
@@ -823,37 +855,41 @@ dwz.extend(String.prototype, {
 		return this;
 	},
 	isPositiveInteger: function () {
-		return (new RegExp(/^[1-9]\d*$/).test(this));
+		return new RegExp(/^[1-9]\d*$/).test(this);
 	},
 	isInteger: function () {
-		return (new RegExp(/^\d+$/).test(this));
+		return new RegExp(/^\d+$/).test(this);
 	},
 	isNumber: function (value, element) {
-		return (new RegExp(/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/).test(this));
+		return new RegExp(/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/).test(this);
 	},
 	isValidPwd: function () {
-		return (new RegExp(/^([_]|[a-zA-Z0-9]){6,32}$/).test(this));
+		return new RegExp(/^([_]|[a-zA-Z0-9]){6,32}$/).test(this);
 	},
 	isValidMail: function () {
-		return (new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/).test(this.trim()));
+		return new RegExp(
+			/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
+		).test(this.trim());
 	},
 	isSpaces: function () {
 		for (let i = 0; i < this.length; i += 1) {
 			let ch = this.charAt(i);
-			if (ch != ' ' && ch != "\n" && ch != "\t" && ch != "\r") {
+			if (ch != ' ' && ch != '\n' && ch != '\t' && ch != '\r') {
 				return false;
 			}
 		}
 		return true;
 	},
 	isMobile: function () {
-		return (new RegExp(/(^[0-9]{11,11}$)/).test(this));
+		return new RegExp(/(^[0-9]{11,11}$)/).test(this);
 	},
 	isUrl: function () {
-		return (new RegExp(/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/).test(this));
+		return new RegExp(
+			/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/
+		).test(this);
 	},
 	isExternalUrl: function () {
-		return this.isUrl() && this.indexOf("://" + document.domain) == -1;
+		return this.isUrl() && this.indexOf('://' + document.domain) == -1;
 	},
 	parseCurrency: function (num) {
 		let numberValue = parseFloat(this);
@@ -872,25 +908,28 @@ dwz.extend(Number.prototype, {
 
 		num = num.toString().replace(/\$|\,/g, '');
 		if (isNaN(num)) {
-			num = "0";
+			num = '0';
 		}
 
-		let sign = (num == (num = Math.abs(num)));
+		let sign = num == (num = Math.abs(num));
 		num = Math.floor(num * 100 + 0.50000000001);
 		let cents = num % 100;
 		num = Math.floor(num / 100).toString();
 
 		if (cents < 10) {
-			cents = "0" + cents;
+			cents = '0' + cents;
 		}
 
 		if (useComma) {
 			for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-				num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+				num =
+					num.substring(0, num.length - (4 * i + 3)) +
+					',' +
+					num.substring(num.length - (4 * i + 3));
 			}
 		}
 
-		return (((sign) ? '' : '-') + num + '.' + cents);
+		return (sign ? '' : '-') + num + '.' + cents;
 	},
 	parseCurrency: function (num) {
 		return parseFloat(this.toFixed(num || 2));
@@ -901,7 +940,6 @@ dwz.extend(Number.prototype, {
  * 扩展dwz对象方法
  */
 dwz.fn.extend({
-
 	initUI: function () {
 		return this.each(function () {
 			let $this = $(this);
@@ -1002,7 +1040,8 @@ dwz.fn.extend({
 	toggle: function () {
 		return this.each(function () {
 			let defaultCss = dwz.cacheCss(this, 'display', 'none') || 'block';
-			this.style['display'] = (this.style['display'] == 'none') ? defaultCss : 'none';
+			this.style['display'] =
+				this.style['display'] == 'none' ? defaultCss : 'none';
 		});
 	},
 	hasClass: function (className) {
@@ -1064,8 +1103,7 @@ dwz.fn.extend({
 		if (key === undefined) {
 			return this.get(0).style;
 		} else {
-			if (typeof key === "string") {
-
+			if (typeof key === 'string') {
 				return dwz.css(this.get(0), key);
 			} else {
 				return this.each(function () {
@@ -1093,11 +1131,17 @@ dwz.fn.extend({
 		return height;
 	},
 	outerWidth: function (margin) {
-		let width = this.width(margin) + parseFloat(this.css('borderLeft')) + parseFloat(this.css('borderRight'));
+		let width =
+			this.width(margin) +
+			parseFloat(this.css('borderLeft')) +
+			parseFloat(this.css('borderRight'));
 		return width;
 	},
 	outerHeight: function (margin) {
-		let height = this.height(margin) + parseFloat(this.css('borderTop')) + parseFloat(this.css('borderTop'));
+		let height =
+			this.height(margin) +
+			parseFloat(this.css('borderTop')) +
+			parseFloat(this.css('borderTop'));
 		return height;
 	},
 	html: function (content) {
@@ -1166,40 +1210,54 @@ dwz.fn.extend({
 	serializeArray: function () {
 		const arr = [];
 		if (this.is('form')) {
-			this.find(':input').filter(function () {
-				const type = this.type;
+			this.find(':input')
+				.filter(function () {
+					const type = this.type;
 
-				// Use .is( ":disabled" ) so that fieldset[disabled] works
-				return this.name && !dwz(this).is(":disabled") &&
-					dwz.config.rsubmittable.test(this.nodeName) &&
-					!dwz.config.rsubmitterTypes.test(type) &&
-					(this.checked || !dwz.config.rcheckableType.test(type));
-			}).each(function () {
-				const $input = $(this),
-					val = $input.val() || '',
-					name = this.name;
+					// Use .is( ":disabled" ) so that fieldset[disabled] works
+					return (
+						this.name &&
+						!dwz(this).is(':disabled') &&
+						dwz.config.rsubmittable.test(this.nodeName) &&
+						!dwz.config.rsubmitterTypes.test(type) &&
+						(this.checked || !dwz.config.rcheckableType.test(type))
+					);
+				})
+				.each(function () {
+					const $input = $(this),
+						val = $input.val() || '',
+						name = this.name;
 
-				arr.push({
-					name: name,
-					value: val
+					arr.push({
+						name: name,
+						value: val
+					});
 				});
-			});
 		}
 		return arr;
 	},
 	serializeMap: function () {
 		const arr = {};
 		if (this.is('form')) {
-			this.find(':input').filter(function () {
-				const type = this.type;
-				return this.name && !dwz(this).is(":disabled") &&
-					dwz.config.rsubmittable.test(this.nodeName) &&
-					!dwz.config.rsubmitterTypes.test(type) &&
-					(this.checked || !dwz.config.rcheckableType.test(type));
-			}).each(function () {
-				const $input = $(this), val = $input.val() || '';
-				arr[this.name] = this.type == 'number' || this.type == 'range' ? parseFloat(val) || 0 : val;
-			});
+			this.find(':input')
+				.filter(function () {
+					const type = this.type;
+					return (
+						this.name &&
+						!dwz(this).is(':disabled') &&
+						dwz.config.rsubmittable.test(this.nodeName) &&
+						!dwz.config.rsubmitterTypes.test(type) &&
+						(this.checked || !dwz.config.rcheckableType.test(type))
+					);
+				})
+				.each(function () {
+					const $input = $(this),
+						val = $input.val() || '';
+					arr[this.name] =
+						this.type == 'number' || this.type == 'range'
+							? parseFloat(val) || 0
+							: val;
+				});
 		}
 		return arr;
 	},
@@ -1208,31 +1266,43 @@ dwz.fn.extend({
 			form = $form.get(0);
 
 		if (form) {
-			if (typeof pageNum == 'number') form[dwz.config.pageInfo.pageNum].value = pageNum;
-			else if (pageNum == 'next') form[dwz.config.pageInfo.pageNum].value = parseInt(form[dwz.config.pageInfo.pageNum].value) + 1;
+			if (typeof pageNum == 'number')
+				form[dwz.config.pageInfo.pageNum].value = pageNum;
+			else if (pageNum == 'next')
+				form[dwz.config.pageInfo.pageNum].value =
+					parseInt(form[dwz.config.pageInfo.pageNum].value) + 1;
 		}
 
 		return $form;
 	},
 	val: function (value) {
-		let hooks, ret, isFunction,
+		let hooks,
+			ret,
+			isFunction,
 			elem = this.get(0);
 
 		if (!arguments.length) {
 			if (elem) {
-				hooks = dwz.valHooks[elem.type] || dwz.valHooks[elem.nodeName.toLowerCase()];
+				hooks =
+					dwz.valHooks[elem.type] || dwz.valHooks[elem.nodeName.toLowerCase()];
 
-				if (hooks && "get" in hooks && (ret = hooks.get(elem, "value")) !== undefined) {
+				if (
+					hooks &&
+					'get' in hooks &&
+					(ret = hooks.get(elem, 'value')) !== undefined
+				) {
 					return ret;
 				}
 
 				ret = elem.value;
 
-				return typeof ret === "string" ?
-					// Handle most common string cases
-					ret.replace(dwz.config.rreturn, "") :
-					// Handle cases where value is null/undef or number
-					ret == null ? "" : ret;
+				return typeof ret === 'string'
+					? // Handle most common string cases
+					  ret.replace(dwz.config.rreturn, '')
+					: // Handle cases where value is null/undef or number
+					ret == null
+					? ''
+					: ret;
 			}
 
 			return;
@@ -1255,21 +1325,24 @@ dwz.fn.extend({
 
 			// Treat null/undefined as ""; convert numbers to string
 			if (val == null) {
-				val = "";
-
-			} else if (typeof val === "number") {
-				val += "";
-
+				val = '';
+			} else if (typeof val === 'number') {
+				val += '';
 			} else if (dwz.isArray(val)) {
 				val = dwz.each(val, function () {
-					return this == null ? "" : this + "";
+					return this == null ? '' : this + '';
 				});
 			}
 
-			hooks = dwz.valHooks[this.type] || dwz.valHooks[this.nodeName.toLowerCase()];
+			hooks =
+				dwz.valHooks[this.type] || dwz.valHooks[this.nodeName.toLowerCase()];
 
 			// If set returns undefined, fall back to normal setting
-			if (!hooks || !("set" in hooks) || hooks.set(this, val, "value") === undefined) {
+			if (
+				!hooks ||
+				!('set' in hooks) ||
+				hooks.set(this, val, 'value') === undefined
+			) {
 				this.value = val;
 			}
 		});
@@ -1295,25 +1368,26 @@ dwz.extend({
 		},
 		select: {
 			get: function (elem) {
-				let value, option,
+				let value,
+					option,
 					options = elem.options,
 					index = elem.selectedIndex,
-					one = elem.type === "select-one" || index < 0,
+					one = elem.type === 'select-one' || index < 0,
 					values = one ? null : [],
 					max = one ? index + 1 : options.length,
-					i = index < 0 ?
-						max :
-						one ? index : 0;
+					i = index < 0 ? max : one ? index : 0;
 
 				// Loop through all the selected options
 				for (; i < max; i++) {
 					option = options[i];
 
-					if ((option.selected || i === index) &&
+					if (
+						(option.selected || i === index) &&
 						// Don't return options that are disabled or in a disabled optgroup
-						(!option.disabled) &&
-						(!option.parentNode.disabled || !dwz.nodeName(option.parentNode, "optgroup"))) {
-
+						!option.disabled &&
+						(!option.parentNode.disabled ||
+							!dwz.nodeName(option.parentNode, 'optgroup'))
+					) {
 						// Get the specific value for the option
 						value = dwz(option).val();
 
@@ -1331,14 +1405,15 @@ dwz.extend({
 			},
 
 			set: function (elem, value) {
-				let optionSet, option,
+				let optionSet,
+					option,
 					options = elem.options,
 					values = dwz.makeArray(value),
 					i = options.length;
 
 				while (i--) {
 					option = options[i];
-					if (option.selected = dwz.inArray(option.value, values)) {
+					if ((option.selected = dwz.inArray(option.value, values))) {
 						optionSet = true;
 					}
 				}
@@ -1354,10 +1429,10 @@ dwz.extend({
 });
 
 // Radios and checkboxes getter/setter
-dwz.each(["radio", "checkbox"], function () {
+dwz.each(['radio', 'checkbox'], function () {
 	dwz.valHooks[this] = {
 		get: function (elem) {
-			return elem.getAttribute("value") === null ? "1" : elem.value;
+			return elem.getAttribute('value') === null ? '1' : elem.value;
 		},
 		set: function (elem, value) {
 			if (dwz.isArray(value)) {
@@ -1372,37 +1447,37 @@ dwz.extend({
 	active: 0,
 
 	ajaxSettings: {
-		type: "POST",
+		type: 'POST',
 		global: false,
 		cache: false,
-		async: true,   // 默认异步加载
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		dataType: "*",
+		async: true, // 默认异步加载
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		dataType: '*',
 		headers: {
-			"X-Requested-With": "XMLHttpRequest"
+			'X-Requested-With': 'XMLHttpRequest'
 		},
 
 		accepts: {
-			"*": "*/".concat("*"),
-			text: "text/plain",
-			html: "text/html",
-			xml: "application/xml, text/xml",
-			json: "application/json, text/javascript"
+			'*': '*/'.concat('*'),
+			text: 'text/plain',
+			html: 'text/html',
+			xml: 'application/xml, text/xml',
+			json: 'application/json, text/javascript'
 		},
 
 		responseFields: {
-			xml: "responseXML",
-			text: "responseText",
-			json: "responseJSON"
+			xml: 'responseXML',
+			text: 'responseText',
+			json: 'responseJSON'
 		},
 
 		// Data converters
 		converters: {
 			// Evaluate text as a json expression
-			"json": dwz.parseJSON,
+			json: dwz.parseJSON,
 
 			// Parse text as xml
-			"xml": dwz.parseXML
+			xml: dwz.parseXML
 		}
 	},
 
@@ -1449,7 +1524,9 @@ dwz.extend({
 		}
 
 		function createXMLHttp() {
-			return window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+			return window.XMLHttpRequest
+				? new XMLHttpRequest()
+				: new ActiveXObject('Microsoft.XMLHttp');
 		}
 
 		let dwzXHR = createXMLHttp(),
@@ -1457,12 +1534,17 @@ dwz.extend({
 			postData = '';
 
 		if (!op.cache) {
-			url = op.url + (op.url.indexOf('?') == -1 ? '?' : '&') + 't=' + new Date().getTime();
+			url =
+				op.url +
+				(op.url.indexOf('?') == -1 ? '?' : '&') +
+				't=' +
+				new Date().getTime();
 		}
 
 		// 获取get参数
-		if (op.type == "GET" && op.data) {
-			let strParams = typeof op.data === 'string' ? op.data : dwz.param(op.data);
+		if (op.type == 'GET' && op.data) {
+			let strParams =
+				typeof op.data === 'string' ? op.data : dwz.param(op.data);
 			if (strParams) url += (url.indexOf('?') == -1 ? '?' : '&') + strParams;
 		}
 
@@ -1475,33 +1557,38 @@ dwz.extend({
 
 		// Set the Accepts header for the server, depending on the dataType
 		let accept = op.accepts[op.dataType];
-		accept = accept ? accept + ", " + op.accepts['*'] + "; q=0.01" : op.accepts['*'];
-		dwzXHR.setRequestHeader("Accept", accept);
+		accept = accept
+			? accept + ', ' + op.accepts['*'] + '; q=0.01'
+			: op.accepts['*'];
+		dwzXHR.setRequestHeader('Accept', accept);
 
 		// Check for headers option
 		for (let key in op.headers) {
 			dwzXHR.setRequestHeader(key, op.headers[key]);
 		}
 
-		if (op.type == "POST" && op.data) {
+		if (op.type == 'POST' && op.data) {
 			//Set the correct header, if data is being sent
-			if (op.type == "POST" && op.contentType) dwzXHR.setRequestHeader("content-type", op.contentType); //post提交
+			if (op.type == 'POST' && op.contentType)
+				dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
 
 			postData = typeof op.data === 'string' ? op.data : dwz.param(op.data);
 		}
 
 		dwzXHR.onreadystatechange = function () {
-
 			if (dwzXHR.readyState == 4) {
-
-				let protocol = /^([\w-]+:)\/\//.test(op.url) ? RegExp.$1 : window.location.protocol;
-				let isSuccess = dwzXHR.status >= 200 && dwzXHR.status < 300 || dwzXHR.status === 304 || (dwzXHR.status == 0 && protocol == 'file:');
+				let protocol = /^([\w-]+:)\/\//.test(op.url)
+					? RegExp.$1
+					: window.location.protocol;
+				let isSuccess =
+					(dwzXHR.status >= 200 && dwzXHR.status < 300) ||
+					dwzXHR.status === 304 ||
+					(dwzXHR.status == 0 && protocol == 'file:');
 
 				if (isSuccess) {
 					let result = dwz.dataFilter(dwzXHR, op);
 
 					if (op.success) op.success(result, dwzXHR.status, dwzXHR);
-
 				} else if (op.error) {
 					op.error(dwzXHR, dwzXHR.status);
 				}
@@ -1510,11 +1597,10 @@ dwz.extend({
 					op.complete(dwzXHR, dwzXHR.status);
 				}
 
-				if (op.global && !(--dwz.active)) {
+				if (op.global && !--dwz.active) {
 					dwz.event.trigger(document, 'ajaxStop');
 				}
 			}
-
 		};
 
 		dwzXHR.send(postData);

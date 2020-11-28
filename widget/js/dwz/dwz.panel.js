@@ -2,20 +2,20 @@
  * Created by zhanghuihua on 2017/6/14.
  */
 (function ($) {
-	var _config = {
-		panelCentent$: ".panel-content",
-		collapseBtn$: ".panel-title-right",
-		iconUpClass: "icon-list-u",
+	let _config = {
+		panelCentent$: '.panel-content',
+		collapseBtn$: '.panel-title-right',
+		iconUpClass: 'icon-list-u'
 	};
 
 	$.fn.extend({
 		panel: function (options) {
-			var op = $.extend(_config, options);
+			let op = $.extend(_config, options);
 
 			return this.each(function () {
-				var $this = $(this);
-				var $btn = $this.find(op.collapseBtn$);
-				var $icon = $btn.find("i");
+				let $this = $(this);
+				let $btn = $this.find(op.collapseBtn$);
+				let $icon = $btn.find('i');
 				$btn.touchwipe({
 					touch: function (event) {
 						if ($icon.hasClass(op.iconUpClass)) {
@@ -24,45 +24,45 @@
 							$this.panelExpand(op);
 						}
 						event.stopPropagation();
-					},
+					}
 				});
 			});
 		},
 
 		// 展开
 		panelExpand: function (options) {
-			var op = $.extend(_config, options);
+			let op = $.extend(_config, options);
 
 			return this.each(function () {
-				var $this = $(this);
-				var $btn = $this.find(op.collapseBtn$);
-				var $icon = $btn.find("i");
+				let $this = $(this);
+				let $btn = $this.find(op.collapseBtn$);
+				let $icon = $btn.find('i');
 				$this.find(op.panelCentent$).show();
 				$icon.addClass(op.iconUpClass);
 			});
 		},
 		// 折叠
 		panelCollapse: function (options) {
-			var op = $.extend(_config, options);
+			let op = $.extend(_config, options);
 
 			return this.each(function () {
-				var $this = $(this);
-				var $btn = $this.find(op.collapseBtn$);
-				var $icon = $btn.find("i");
+				let $this = $(this);
+				let $btn = $this.find(op.collapseBtn$);
+				let $icon = $btn.find('i');
 				$this.find(op.panelCentent$).hide();
 				$icon.removeClass(op.iconUpClass);
 			});
-		},
+		}
 	});
 
 	// 提示面板
 	$.altPanel = {
 		config: {
-			box$: "#alt-panel",
-			openClass: "open",
+			box$: '#alt-panel',
+			openClass: 'open',
 			frag: '<div id="alt-panel" class="unitBox pop-up"></div>',
-			bgBox$: "#alt-panel-mask-bg",
-			bgFrag: '<div id="alt-panel-mask-bg"></div>',
+			bgBox$: '#alt-panel-mask-bg',
+			bgFrag: '<div id="alt-panel-mask-bg"></div>'
 		},
 		isOpen: false,
 		$box: null,
@@ -71,8 +71,8 @@
 		init: function (options) {
 			$.extend($.dialog.config, options);
 
-			$("body").append($.altPanel.config.frag);
-			$("body").append($.altPanel.config.bgFrag);
+			$('body').append($.altPanel.config.frag);
+			$('body').append($.altPanel.config.bgFrag);
 			this.$box = $($.altPanel.config.box$);
 			this.$bgBox = $($.altPanel.config.bgBox$);
 
@@ -82,35 +82,39 @@
 		},
 		open: function (options) {
 			// default, pic, login
-			var op = $.extend(
-				{ type: "GET", url: "", data: {}, callback: null, pos: null },
+			let op = $.extend(
+				{ type: 'GET', url: '', data: {}, callback: null, pos: null },
 				options
 			);
-			var $box = this.$box,
+			let $box = this.$box,
 				$bgBox = this.$bgBox;
 
 			$bgBox.addClass($.altPanel.config.openClass);
 			$box.addClass($.altPanel.config.openClass);
 
 			if (op.pos) {
-				var screenH = document.documentElement.clientHeight;
+				let screenH = document.documentElement.clientHeight;
 				if (op.pos.y < screenH / 2) {
-					$box.css({
-						top: op.pos.y + 5 + "px",
-						bottom: "auto",
-					}).removeClass("pop-up");
+					$box
+						.css({
+							top: op.pos.y + 5 + 'px',
+							bottom: 'auto'
+						})
+						.removeClass('pop-up');
 				} else {
-					$box.css({
-						top: "auto",
-						bottom: screenH - op.pos.y + 5 + "px",
-					}).addClass("pop-up");
+					$box
+						.css({
+							top: 'auto',
+							bottom: screenH - op.pos.y + 5 + 'px'
+						})
+						.addClass('pop-up');
 				}
 			}
 
 			if (op.url) {
-				var params = op.url.getParams();
+				let params = op.url.getParams();
 				$.ajax({
-					type: "GET",
+					type: 'GET',
 					url: op.url,
 					data: params,
 					success: function (html) {
@@ -121,24 +125,20 @@
 						}
 
 						if (op.callback) {
-							op.callback.call(
-								$box,
-								html,
-								$.extend(params, op.data)
-							);
+							op.callback.call($box, html, $.extend(params, op.data));
 						} else {
 							$box.html(html);
 							$box.initUI();
 						}
 					},
-					error: dwz.ajaxError,
+					error: dwz.ajaxError
 				});
 			}
 
 			this.isOpen = true;
 		},
 		close: function () {
-			var $box = this.$box,
+			let $box = this.$box,
 				$bgBox = this.$bgBox;
 
 			$box.removeClass($.altPanel.config.openClass);

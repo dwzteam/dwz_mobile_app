@@ -6,14 +6,13 @@
 var UserInfo = {
 	token: '',
 	mobile: '',
-    realname: '',
+	realname: '',
 	sex: 1,
 	address: '',
 	user_type: '',
 	headimgurl: ''
 };
 var UserInfoUtil = {
-
 	update: function (data) {
 		console.log(JSON.stringify(data));
 
@@ -39,56 +38,55 @@ var UserInfoUtil = {
 	}
 };
 
-function initUserInfo(){
-
-// 获取localStorage中用户信息
-    if (!UserInfo.token) {
+function initUserInfo() {
+	// 获取localStorage中用户信息
+	if (!UserInfo.token) {
 		UserInfo = $.getStorage('APP_USER_INFO') || {};
-    }
-    console.log(JSON.stringify(UserInfo));
+	}
+	console.log(JSON.stringify(UserInfo));
 	// 检测用户数据
-    if (UserInfo.token) {
+	if (UserInfo.token) {
+		$.ajax({
+			type: 'POST',
+			url: biz.server.getUrl(biz.server.userProfile),
+			dataType: 'json',
+			data: {},
+			cache: false,
+			global: false,
+			success: function (json) {
+				console.log(JSON.stringify(json));
 
-        $.ajax({
-            type: "POST",
-            url:biz.server.getUrl(biz.server.userProfile),
-            dataType:"json",
-            data:{ },
-            cache: false,
-            global: false,
-            success: function(json) {
-                console.log(JSON.stringify(json));
-
-                if(json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-                    UserInfoUtil.update(json.data);
+				if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
+					UserInfoUtil.update(json.data);
 					// initDict();
-                } else {
+				} else {
 					$.alert.toast(json[dwz.config.keys.message]);
 					UserInfoUtil.clear();
-                }
+				}
 
 				dwz.checkAjaxLogin(json);
-            },
-            error: ajaxError
-        });
-
-    }
+			},
+			error: ajaxError
+		});
+	}
 }
 
 $.fn.extend({
-    fleshVerifyImg: function(){
-        return this.each(function(){
-            $(this).touchwipe({
-                touch:function(){
-                    $(this).attr('src', biz.server.getVerifyImgUrl());
-                }
-            })
-        });
-    },
-    sendVerifyMs: function(){
+	fleshVerifyImg: function () {
+		return this.each(function () {
+			$(this).touchwipe({
+				touch: function () {
+					$(this).attr('src', biz.server.getVerifyImgUrl());
+				}
+			});
+		});
+	},
+	sendVerifyMs: function () {
 		return this.each(function () {
 			$(this).click(function () {
-				var $link = $(this), rel = $link.attr('rel'), op = $link.attr('data-op');
+				var $link = $(this),
+					rel = $link.attr('rel'),
+					op = $link.attr('data-op');
 
 				var mobile = $link.parentsUnitBox().find(rel).val();
 
@@ -98,7 +96,9 @@ $.fn.extend({
 				}
 
 				var sec = 60;
-				var $altMsg = $('<span class="count">重发(' + sec + 's)</span>').appendTo(this.parentNode);
+				var $altMsg = $(
+					'<span class="count">重发(' + sec + 's)</span>'
+				).appendTo(this.parentNode);
 				$link.hide();
 				var timer = setInterval(function () {
 					$altMsg.text('重发(' + sec + 's)');
@@ -115,11 +115,17 @@ $.fn.extend({
 					type: 'POST',
 					dataType: 'json',
 					url: $link.attr('data-href'),
-					data: {mobile: mobile, sign:md5(mobile+'ln-#*UR0QsgY51^2Bz'), type: op},
+					data: {
+						mobile: mobile,
+						sign: md5(mobile + 'ln-#*UR0QsgY51^2Bz'),
+						type: op
+					},
 					success: function (json) {
 						console.log(JSON.stringify(json));
 						var info = json[dwz.config.keys.message] || json.info;
-						if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.error) {
+						if (
+							json[dwz.config.keys.statusCode] == dwz.config.statusCode.error
+						) {
 							$.alert.error(info);
 							clearInterval(timer);
 							$altMsg.remove();
@@ -129,51 +135,47 @@ $.fn.extend({
 						}
 					}
 				});
-
 			});
-
 		});
-    }
+	}
 });
 
 // 检测用户登入状态
-dwz.urlInterceptor = function (url){
-    var pass = UserInfo.token ? true : false;
+dwz.urlInterceptor = function (url) {
+	var pass = UserInfo.token ? true : false;
 
-    if (!pass) {
-        var uris = [
-            'tpl/user/login.html',
-            'tpl/user/forgetPwd.html',
-            'tpl/user/register.html'
-        ];
+	if (!pass) {
+		var uris = [
+			'tpl/user/login.html',
+			'tpl/user/forgetPwd.html',
+			'tpl/user/register.html'
+		];
 
-        // 判断request URI 是否需要登入
-        if (dwz.inArray(url.getRequestURI(), uris)) {
-            pass = true;
-        }
-    }
+		// 判断request URI 是否需要登入
+		if (dwz.inArray(url.getRequestURI(), uris)) {
+			pass = true;
+		}
+	}
 
-    if (!pass) {
-        $.gotoLogin();
-        return false;
-    }
+	if (!pass) {
+		$.gotoLogin();
+		return false;
+	}
 
-    return authCheck(url);
+	return authCheck(url);
 };
 
 // 检测是否实名认证
-function authCheck(url){
+function authCheck(url) {
 	if (!UserInfo.isauth) {
-		var uris = [
-			'tpl/driver.html'
-		];
+		var uris = ['tpl/driver.html'];
 
 		// 判断request URI 是否需要绑定
-		if (! dwz.inArray(url.getRequestURI(), uris)) {
+		if (!dwz.inArray(url.getRequestURI(), uris)) {
 			return true;
 		}
 
-		$.dialog.open({url: 'tpl/my/authCheck.html'});
+		$.dialog.open({ url: 'tpl/my/authCheck.html' });
 		return false;
 	}
 
@@ -182,23 +184,23 @@ function authCheck(url){
 
 // 登入页面
 function loginRender(tpl, params) {
-    var $box = this;
+	var $box = this;
 
-    var json = {
-        form_url:biz.server.getLoginUrl(),
+	var json = {
+		form_url: biz.server.getLoginUrl(),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
-        login_sms_url:biz.server.getUrl(biz.server.loginSms)
-    };
+		login_sms_url: biz.server.getUrl(biz.server.loginSms)
+	};
 
-    var html = template.render(tpl, json);
-    $box.html(html).initUI();
+	var html = template.render(tpl, json);
+	$box.html(html).initUI();
 }
 
 function forgetPwdRender(tpl, params) {
 	var $box = this;
 
 	var json = {
-		form_url:biz.server.getUrl(biz.server.forgetPwd),
+		form_url: biz.server.getUrl(biz.server.forgetPwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
 	};
 
@@ -207,57 +209,58 @@ function forgetPwdRender(tpl, params) {
 }
 
 function changePwdRender(tpl, params) {
-    var $box = this;
+	var $box = this;
 
-    var json = {
-        form_url:biz.server.getUrl(biz.server.changePwd),
+	var json = {
+		form_url: biz.server.getUrl(biz.server.changePwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
-    };
+	};
 
-    var html = template.render(tpl, json);
-    $box.html(html).initUI();
+	var html = template.render(tpl, json);
+	$box.html(html).initUI();
 }
 function changeMobileRender(tpl, params) {
-    var $box = this;
+	var $box = this;
 
-    var json = {
-        form_url:biz.server.getUrl(biz.server.changeMobile),
+	var json = {
+		form_url: biz.server.getUrl(biz.server.changeMobile),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
-    };
+	};
 
-    var html = template.render(tpl, json);
-    $box.html(html).initUI();
+	var html = template.render(tpl, json);
+	$box.html(html).initUI();
 }
 
 // 用户注册页面
 function registerRender(tpl, params) {
-    var $box = this;
+	var $box = this;
 
-    var json = {
-        form_url:biz.server.getUrl(biz.server.register),
+	var json = {
+		form_url: biz.server.getUrl(biz.server.register),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
-    };
+	};
 
-    var html = template.render(tpl, json);
-    $box.html(html).initUI();
+	var html = template.render(tpl, json);
+	$box.html(html).initUI();
 }
-
 
 // 用户注册表单提交回调函数
 function loginAjaxDone(json) {
 	console.log(JSON.stringify(json));
-    if ($.isAjaxOkStatus(json)) {
-
+	if ($.isAjaxOkStatus(json)) {
 		UserInfoUtil.update(json.data);
 		// initDict();
 
 		$.dialog.close();
-        $.navTab.open({url:'tpl/home.html?dwz_callback=renderHome', tabid:'home'});
-    } else {
-        $.alert.error(json.info);
-    }
+		$.navTab.open({
+			url: 'tpl/home.html?dwz_callback=renderHome',
+			tabid: 'home'
+		});
+	} else {
+		$.alert.error(json.info);
+	}
 }
 
 function forgetAjaxDone(json) {
@@ -278,10 +281,10 @@ function authAjaxDone(json) {
 	if ($.isAjaxOkStatus(json)) {
 		UserInfoUtil.update(json.data);
 
-		$.dialog.open({url:'tpl/my/authOk.html'});
+		$.dialog.open({ url: 'tpl/my/authOk.html' });
 	} else {
 		json.info && $.alert.error(json.info);
-		$.dialog.open({url:'tpl/my/authError.html'});
+		$.dialog.open({ url: 'tpl/my/authError.html' });
 	}
 }
 
@@ -325,8 +328,7 @@ function submitUserRealInfo(form) {
 
 var bizUtil = {
 	userRealVerify: function (params, success) {
-
-		if(!biz.checkPermission('camera', '摄像头')){
+		if (!biz.checkPermission('camera', '摄像头')) {
 			return;
 		}
 
@@ -336,80 +338,84 @@ var bizUtil = {
 		});
 
 		var safeTop = api.safeArea.top;
-		baiduFace.openFaceDetectView({
-			rect: {
-				x: 0,
-				y: safeTop > 20 ? safeTop : 0,
-				w: api.frameWidth,
-				h: window.screen.availHeight
+		baiduFace.openFaceDetectView(
+			{
+				rect: {
+					x: 0,
+					y: safeTop > 20 ? safeTop : 0,
+					w: api.frameWidth,
+					h: window.screen.availHeight
+				},
+				fixedOn: api.frameName,
+				fixed: true,
+				soundType: 0, // 0中文, 1英文, 2马来文
+				isSound: true
 			},
-			fixedOn: api.frameName,
-			fixed: true,
-			soundType: 0, // 0中文, 1英文, 2马来文
-			isSound: true
-		}, function (ret, err) {
-			console.log(JSON.stringify(ret));
-			console.log(JSON.stringify(err));
-			if (ret.evenType == 'success') {
-				//由于base64数据量大，请不要用JSON.stringify(ret)调试
-				// console.log('最佳图片: '+ret.data.bestImage);
-				// console.log('眨眼睛: '+ret.data.liveEye);
-				// console.log('张张嘴: '+ret.data.liveMouth);
-				// console.log('向右转头: '+ret.data.yawRight);
-				// console.log('向左转头: '+ret.data.yawLeft);
-				// console.log('轻微抬头: '+ret.data.pitchUp);
-				// console.log('轻微低头: '+ret.data.pitchDown);
-				// console.log('摇摇头: '+ret.data.headLeftOrRight);
-				// console.log(JSON.stringify(ret.data.bestImage));
+			function (ret, err) {
+				console.log(JSON.stringify(ret));
+				console.log(JSON.stringify(err));
+				if (ret.evenType == 'success') {
+					//由于base64数据量大，请不要用JSON.stringify(ret)调试
+					// console.log('最佳图片: '+ret.data.bestImage);
+					// console.log('眨眼睛: '+ret.data.liveEye);
+					// console.log('张张嘴: '+ret.data.liveMouth);
+					// console.log('向右转头: '+ret.data.yawRight);
+					// console.log('向左转头: '+ret.data.yawLeft);
+					// console.log('轻微抬头: '+ret.data.pitchUp);
+					// console.log('轻微低头: '+ret.data.pitchDown);
+					// console.log('摇摇头: '+ret.data.headLeftOrRight);
+					// console.log(JSON.stringify(ret.data.bestImage));
 
-				baiduFace.closeFaceDetectView(function (ret, err) {
-					// console.log(JSON.stringify(ret));
-				});
+					baiduFace.closeFaceDetectView(function (ret, err) {
+						// console.log(JSON.stringify(ret));
+					});
 
-				if (success) {
-					success(ret, err);
-					return;
-				}
+					if (success) {
+						success(ret, err);
+						return;
+					}
 
-				api.showProgress({
-					title: '正在上传图片...',
-					text: '先喝杯茶...',
-					modal: true
-				});
+					api.showProgress({
+						title: '正在上传图片...',
+						text: '先喝杯茶...',
+						modal: true
+					});
 
-				if (!params.idcard) {
-					$.alert.error('身份证号必须');
-				}
-				if (!params.realname) {
-					$.alert.error('真实姓名必须');
-				}
+					if (!params.idcard) {
+						$.alert.error('身份证号必须');
+					}
+					if (!params.realname) {
+						$.alert.error('真实姓名必须');
+					}
 
-				api.ajax({
-					url: biz.server.getUrl(biz.server.userRealVerify),
-					method: 'post',
-					data: {
-						values: {
-							img: ret.data.bestImage,
-							idcard: params.idcard,
-							name: params.realname,
-							token: UserInfo.token
+					api.ajax(
+						{
+							url: biz.server.getUrl(biz.server.userRealVerify),
+							method: 'post',
+							data: {
+								values: {
+									img: ret.data.bestImage,
+									idcard: params.idcard,
+									name: params.realname,
+									token: UserInfo.token
+								}
+							}
+						},
+						function (json, err) {
+							console.log(JSON.stringify(json));
+
+							api.hideProgress();
+							if (json) {
+								authAjaxDone(json);
+							} else {
+								console.log(JSON.stringify(err));
+							}
 						}
-					}
-				}, function (json, err) {
-					console.log(JSON.stringify(json));
-
-					api.hideProgress();
-					if (json) {
-						authAjaxDone(json);
-					} else {
-						console.log(JSON.stringify(err));
-					}
-				});
-
-			} else {
-				if (ret.message) $.alert.toast(ret.message);
+					);
+				} else {
+					if (ret.message) $.alert.toast(ret.message);
+				}
 			}
-		});
-
+		);
 	}
 };

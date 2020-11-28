@@ -6,11 +6,11 @@
 		/** 计算两经纬度之间的距离，单位是m
 		 * approx distance between two points on earth ellipsoid
 		 */
-		calDistance: ({lat1, lng1, lat2, lng2}) => {
+		calDistance: ({ lat1, lng1, lat2, lng2 }) => {
 			const PI = Math.PI;
 			const EARTH_RADIUS = 6378137.0;
-			function getRad (d) {
-				return d * PI / 180.0;
+			function getRad(d) {
+				return (d * PI) / 180.0;
 			}
 			let f = getRad((lat1 + lat2) / 2);
 			let g = getRad((lat1 - lat2) / 2);
@@ -47,7 +47,7 @@
 		 * @return deg 角度值
 		 */
 		calRotation: function (options) {
-			var op = $.extend({map: null, startPos: null, endPos: null}, options);
+			var op = $.extend({ map: null, startPos: null, endPos: null }, options);
 			var deg = 0;
 			//这个方法安卓api没有,但根据方法名称可以推断出是将经纬度进行一样倍数的放大或缩小,也忘了
 			//拿小数位比较多的double来计算对精度影响大不大,所以自己写了一个方法,直接将经纬度放大一百万倍
@@ -56,7 +56,7 @@
 			if (endPos.x != startPos.x) {
 				var tan = (endPos.y - startPos.y) / (endPos.x - startPos.x),
 					atan = Math.atan(tan);
-				deg = atan * 360 / (2 * Math.PI);
+				deg = (atan * 360) / (2 * Math.PI);
 				if (endPos.x < startPos.x) {
 					deg = -deg + 90 + 90;
 				} else {
@@ -66,10 +66,8 @@
 			} else {
 				var disy = endPos.y - startPos.y;
 				var bias = 0;
-				if (disy > 0)
-					bias = -1;
-				else
-					bias = 1;
+				if (disy > 0) bias = -1;
+				else bias = 1;
 				deg = -bias * 90;
 			}
 			return deg;
@@ -79,13 +77,17 @@
 		 * @param options
 		 */
 		addMarker: function (options) {
-			var op = $.extend({
-				map: null,
-				position: null,
-				offset: new AMap.Pixel(0, 0),
-				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>',
-				zIndex: 100
-			}, options);
+			var op = $.extend(
+				{
+					map: null,
+					position: null,
+					offset: new AMap.Pixel(0, 0),
+					content:
+						'<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>',
+					zIndex: 100
+				},
+				options
+			);
 
 			// 创建标注对象并添加到地图
 			var marker = new AMap.Marker(op);
