@@ -742,8 +742,8 @@ main,
   position: absolute;
   z-index: 0;
 }
-/* line 84, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/content.less */
-ß .detail-content {
+/* line 86, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/base/content.less */
+.detail-content {
   background: #fff;
   padding: 15px;
   font-size: 14px;

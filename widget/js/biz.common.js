@@ -60,7 +60,9 @@ function ajaxError(xhr, ajaxOptions, thrownError) {
 $.extend(biz, {
 	safeAreaTop: 0,
 	fixStatusBar: function ($p) {
-		$p.find("header, dwz-fix-status-bar").css({ "padding-top": biz.safeAreaTop + "px" });
+		$p.find("header, dwz-fix-status-bar").css({
+			"padding-top": biz.safeAreaTop + "px",
+		});
 	},
 	hasPermission: function (perms) {
 		const ret = api.hasPermission({
@@ -97,10 +99,7 @@ $.extend(biz, {
 			api.confirm(
 				{
 					title: "提醒",
-					msg:
-						"没有获得 " +
-						(msg || permName) +
-						" 权限\n是否前往设置？",
+					msg: "没有获得 " + (msg || permName) + " 权限\n是否前往设置？",
 					buttons: ["去设置", "取消"],
 				},
 				function (ret, err) {
@@ -278,7 +277,6 @@ $.extend(biz, {
 			const audioStreamer = api.require("audioStreamer");
 			audioStreamer.openPlayer(
 				{
-					// path: 'http://7xisq1.com1.z0.glb.clouddn.com/apicloud/0d0b81b8bd5ab81bda9ca54267eb9b98.mp3'
 					path: "http://www.7788sc.com/ui/mp3/1.mp3",
 				},
 				function (ret) {
@@ -314,21 +312,16 @@ $.extend(biz, {
 
 					$box.trigger("location.change", biz.location);
 
-					if (
-						biz.location.lastTime + 10 * 1000 <
-						biz.location.timestamp
-					) {
+					if (biz.location.lastTime + 10 * 1000 < biz.location.timestamp) {
 						const _url = biz.server.getUrl(biz.server.transportPoint);
 						const _data = {
 							transport_id: biz.location.transport_id,
 							truck_id: biz.location.truck_id,
-							gathertime: Math.round(
-								biz.location.timestamp / 1000
-							),
+							gathertime: Math.round(biz.location.timestamp / 1000),
 							lng: biz.location.lng,
 							lat: biz.location.lat,
 						};
-						$.alert.toast(_url + '\n' + JSON.stringify(_data));
+						// $.alert.toast(_url + '\n' + JSON.stringify(_data));
 
 						biz.location.lastTime = biz.location.timestamp;
 
@@ -398,8 +391,6 @@ const TransportStatus = $.extend({}, CommonStore, {
 	],
 });
 
-
-
 biz.format = {
 	formatDateTime: function (timestamp, format) {
 		if (!timestamp) return "";
@@ -407,43 +398,46 @@ biz.format = {
 		return date.formatDate(format || "yyyy-MM-dd HH:mm:ss");
 	},
 	formatTime: function (second) {
-		if (!second) return '--';
-		else if (second<60) return second + '秒';
-		else if (second<3600) return (second/60).roundFloat(0) + '分钟';
+		if (!second) return "--";
+		else if (second < 60) return second + "秒";
+		else if (second < 3600) return (second / 60).roundFloat(0) + "分钟";
 
-		var hour = (second/3600).roundFloat(0);
-		var minute = ((second%3600)/60).roundFloat(0);
-		return hour + '小时' + minute + '分钟'
+		var hour = (second / 3600).roundFloat(0);
+		var minute = ((second % 3600) / 60).roundFloat(0);
+		return hour + "小时" + minute + "分钟";
 	},
 	formatDistance: function (m) {
-		if (!m) return '--';
+		if (!m) return "--";
 		if (m < 1000) {
-			return parseInt(m) + '米';
+			return parseInt(m) + "米";
 		}
-		return (m/1000).toFixed(1) + '公里';
+		return (m / 1000).toFixed(1) + "公里";
 	},
 	percent: function (num, fractionDigits) {
 		var percentNum = num * 100;
 		return percentNum.toFixed(fractionDigits);
-	}
+	},
 };
-$.extend(template.defaults.imports, {
-	filterInputNum: function(value) {
-		return value ? value : '';
+$.extend(
+	template.defaults.imports,
+	{
+		filterInputNum: function (value) {
+			return value ? value : "";
+		},
+		showSex: function (value) {
+			var item = SexStore.getItem(value);
+			return item.name;
+		},
+		showTransportStatus: function (value, fieldName) {
+			var item = TransportStatus.getItem(value);
+			return item[fieldName || "name"];
+		},
+		showImg: function (url, defaultImg) {
+			return url || defaultImg || "image/browse-empty-bg.svg";
+		},
+		showUserIcon: function (url) {
+			return url || "image/dwz-logo.svg";
+		},
 	},
-	showSex: function (value) {
-		var item = SexStore.getItem(value);
-		return item.name;
-	},
-	showTransportStatus: function (value, fieldName) {
-		var item = TransportStatus.getItem(value);
-		return item[fieldName || 'name'];
-	},
-	showImg: function (url, defaultImg) {
-		return url || defaultImg || 'image/browse-empty-bg.svg';
-	},
-	showUserIcon: function (url) {
-		return url || 'image/dwz-logo.svg';
-	}
-}, biz.format);
-
+	biz.format
+);
