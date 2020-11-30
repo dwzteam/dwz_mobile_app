@@ -30,10 +30,6 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
 - 安卓Apk安装设置版 `http://mobile.jui.org/apk/dwz_mobile_dev.apk`
 - 视频演示 `http://mobile.jui.org/video/dwz_mobile.mp4`
 
-<video width="320" controls preload="none" poster="http://mobile.jui.org/video/dwz_mobile.png">
-    <source src="http://mobile.jui.org/video/dwz_mobile.mp4">
-</video>
-
 > ### 联系
 
 - 网站：http://jui.org

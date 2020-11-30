@@ -29,10 +29,6 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
 - `http://mobile.jui.org/apk/dwz_mobile_dev.apk`
 - `http://mobile.jui.org/video/dwz_mobile.mp4`
 
-<video width="320" controls preload="none" poster="http://mobile.jui.org/video/dwz_mobile.png">
-    <source src="http://mobile.jui.org/video/dwz_mobile.mp4">
-</video>
-
 > ### Contact
 
 - Website：http://jui.org
