@@ -22,7 +22,7 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
     - `npm run dev`
 
 > ### [DWZ Mobile Doc](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
-
+- `http://dwzteam.gitee.io/dwz_mobile_doc_v1`
 
 > ### Contact
 

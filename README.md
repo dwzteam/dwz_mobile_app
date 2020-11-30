@@ -23,6 +23,7 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
     - 前端开发模式运行，会自动打开chrome `npm run dev`
 
 > ### [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+- `http://dwzteam.gitee.io/dwz_mobile_doc_v1`
 
 > ### 联系
 
