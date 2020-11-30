@@ -22,7 +22,7 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
     - 第一次运行，需要初始化工程 `npm intall`
     - 前端开发模式运行，会自动打开chrome `npm run dev`
 
-3. [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+> ### [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
 
 > ### 联系
 

@@ -21,4 +21,21 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
     - `npm intall`
     - `npm run dev`
 
-3. [DWZ Mobile Doc](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+> ### [DWZ Mobile Doc](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+
+
+> ### Contact
+
+- Website：http://jui.org
+- Weibo：http://weibo.com/dwzui
+- E-Mail：z@j-ui.com
+
+|Support for Weixin|
+|:---:|
+|![](./widget/image/wx_zhh.jpg?width=200)|
+
+> ### Donate
+
+|Alipay|Weixin|
+|:---:|:---:|
+|![](./widget/image/zfb.png?width=200)|![](./widget/image/wx.png?width=200)|
