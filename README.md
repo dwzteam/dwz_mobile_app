@@ -25,6 +25,15 @@ git clone https://gitee.com/dwzteam/dwz_mobile_app.git
 > ### [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
 - `http://dwzteam.gitee.io/dwz_mobile_doc_v1`
 
+> ### Demo 演示
+- 在线演示版，使用chrome 开发模型设置手机版，`http://mobile.jui.org`
+- 安卓Apk安装设置版 `http://mobile.jui.org/apk/dwz_mobile_dev.apk`
+- 视频演示 `http://mobile.jui.org/video/dwz_mobile.mp4`
+
+<video width="320" controls preload="none" poster="http://mobile.jui.org/video/dwz_mobile.png">
+    <source src="http://mobile.jui.org/video/dwz_mobile.mp4">
+</video>
+
 > ### 联系
 
 - 网站：http://jui.org
