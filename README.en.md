@@ -1,36 +1,24 @@
-# dwz_mobile_app
+## dwz_mobile_app
 
-#### Description
-DWZ 手机版 HTML5 + 原生 混合开发框架
+> ### Description
 
-#### Software Architecture
-Software architecture description
+- DWZ Mobile HTML5 + Hybrid（iOS, Android）
 
-#### Installation
+**Require:**
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+- node\^10.13.0
+- npm\^6.14.5
+- apicloud-cli\^0.2.0
 
-#### Instructions
+> ### Quickstart
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. Download code for DWZ Mobile
+```
+git clone https://gitee.com/dwzteam/dwz_mobile_app.git
+```
+2. run for test
 
-#### Contribution
+    - `npm intall`
+    - `npm run dev`
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
-
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+3. [DWZ Mobile Doc](http://dwzteam.gitee.io/dwz_mobile_doc_v1)

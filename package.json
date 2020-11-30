@@ -4,13 +4,13 @@
 	"description": "DWZ Mobile",
 	"main": "index.html",
 	"scripts": {
-		"sync": "apicloud wifiSync --project ./widget --updateAll false",
-		"start": "apicloud wifiStart",
-		"log": "apicloud wifiLog",
 		"dev": "gulp dev",
 		"build": "gulp build",
 		"clean": "gulp clean-build",
-		"lint": "npx eslint widget"
+		"lint": "npx eslint widget",
+		"sync": "apicloud wifiSync --project ./widget --updateAll false",
+		"start": "apicloud wifiStart",
+		"log": "apicloud wifiLog"
 	},
 	"author": "张慧华",
 	"license": "ISC",
