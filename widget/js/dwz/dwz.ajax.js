@@ -68,13 +68,13 @@ dwz.extend({
  * @param {Object} callback
  */
 function validateCallback(form, callback, _data) {
-	var $form = $(form);
+	let $form = $(form);
 
 	if (!$form.valid()) {
 		return false;
 	}
 
-	var data = $form.serializeArray();
+	let data = $form.serializeArray();
 	if (_data) {
 		if ($.isFunction(_data)) {
 			_data = _data.call(form, $form);
@@ -95,7 +95,7 @@ function validateCallback(form, callback, _data) {
 
 	// contentType: application/json 方式提交，防止提交json字符转义
 	if ($form.attr('enctype') == 'application/json') {
-		var dataMap = {};
+		let dataMap = {};
 		data.forEach(function (item) {
 			dataMap[item.name] = item.value;
 		});
@@ -133,7 +133,7 @@ function validateCallback(form, callback, _data) {
  * @param {Object} callback
  */
 function iframeCallback(form, callback) {
-	var $form = $(form),
+	let $form = $(form),
 		$iframe = $('#callbackframe');
 	if (!$form.valid()) {
 		return false;
@@ -152,12 +152,12 @@ function iframeCallback(form, callback) {
 }
 
 function _iframeResponse($iframe, callback) {
-	var iframe = $iframe.get(0),
+	let iframe = $iframe.get(0),
 		$document = $(document);
 
 	$document.trigger('ajaxStart');
 
-	var _onload = function (event) {
+	let _onload = function (event) {
 		$iframe.off('load', _onload);
 		$document.trigger('ajaxStop');
 
@@ -169,14 +169,14 @@ function _iframeResponse($iframe, callback) {
 			return;
 		}
 
-		var doc = iframe.contentDocument || iframe.document;
+		let doc = iframe.contentDocument || iframe.document;
 
 		// fixing Opera 9.26,10.00
 		if (doc.readyState && doc.readyState != 'complete') return;
 		// fixing Opera 9.64
 		if (doc.body && doc.body.innerHTML == 'false') return;
 
-		var response;
+		let response;
 
 		if (doc.XMLDocument) {
 			// response is a xml document Internet Explorer property
@@ -231,9 +231,9 @@ function navViewAjaxDoneReload(json) {
 
 	if ($.isAjaxStatusOk(json)) {
 		// 如果关闭当前页面后，底部是列表页面，就重新加载
-		var $boxs = $.navView.getBoxs(3);
+		let $boxs = $.navView.getBoxs(3);
 		$boxs.forEach(function ($box) {
-			var $form = $box.find('form.dwz-list-form').trigger('submit');
+			let $form = $box.find('form.dwz-list-form').trigger('submit');
 			if ($form.size() == 0 && $box.data('ajaxDoneReload')) {
 				$.navView.reload();
 			}
@@ -268,7 +268,7 @@ function dialogAjaxDone(json) {
 }
 
 function ajaxConfirm(params) {
-	var op = $.extend(
+	let op = $.extend(
 		{ msg: '', url: '', data: {}, success: dwz.ajaxDone },
 		params
 	);
@@ -294,12 +294,12 @@ function ajaxConfirm(params) {
 		 * @returns {boolean}
 		 */
 		valid: function () {
-			var result = true,
+			let result = true,
 				$form = this;
 
 			this.find(':input')
 				.filter(function () {
-					var type = this.type;
+					let type = this.type;
 
 					// Use .is( ":disabled" ) so that fieldset[disabled] works
 					return (
@@ -310,7 +310,7 @@ function ajaxConfirm(params) {
 					);
 				})
 				.each(function () {
-					var $input = $(this),
+					let $input = $(this),
 						val = $input.val(),
 						required = this.required || $input.hasClass('required'),
 						pattern = $input.attr('pattern') || $input.attr('data-pattern'),
@@ -338,7 +338,7 @@ function ajaxConfirm(params) {
 		},
 
 		ajaxTodo: function (params) {
-			var op = $.extend(
+			let op = $.extend(
 				{
 					className: 'active',
 					disabledInvert: 'disabled-invert',
@@ -348,13 +348,13 @@ function ajaxConfirm(params) {
 			);
 
 			return this.each(function () {
-				var $this = $(this).hrefFix(),
+				let $this = $(this).hrefFix(),
 					$dataRel = $($this.attr(op.relCount$)),
 					disabledInvert = $this.hasClass(op.disabledInvert);
 
-				var changeRelCount = function (count) {
+				let changeRelCount = function (count) {
 					if ($dataRel.size() > 0) {
-						var oldCount = parseInt($dataRel.text());
+						let oldCount = parseInt($dataRel.text());
 						if (oldCount + count >= 0) {
 							$dataRel.text(oldCount + count);
 						}
@@ -363,10 +363,10 @@ function ajaxConfirm(params) {
 
 				$this.touchwipe({
 					touch: function (event) {
-						var url = $this.attr('data-href'),
+						let url = $this.attr('data-href'),
 							relCount = parseInt($this.attr('data-count') || 1);
 
-						var beforeActive = $this.hasClass(op.className);
+						let beforeActive = $this.hasClass(op.className);
 
 						if (url && url != 'javascript:') {
 							$.ajax({
@@ -409,12 +409,12 @@ function ajaxConfirm(params) {
 
 		bringBack: function (args) {
 			return this.each(function () {
-				var $form = $(this);
+				let $form = $(this);
 				$form.find(':input').each(function () {
-					var $input = $(this),
+					let $input = $(this),
 						inputName = $input.attr('name');
 
-					for (var key in args) {
+					for (let key in args) {
 						if (key == inputName) {
 							$input.val(args[key]);
 							break;

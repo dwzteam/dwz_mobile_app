@@ -8,17 +8,17 @@
 		 * @param $box
 		 * @param options
 		 */
-		imgCropData: function ($box, options) {
-			var op = $.extend(
+		imgCropData($box, options) {
+			let op = $.extend(
 				{ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' },
 				options
 			);
-			var $imgWrap = $box.find(op.imgWrap$),
+			let $imgWrap = $box.find(op.imgWrap$),
 				$img = $imgWrap.find('img'),
 				elem = $img.get(0),
 				imgPos = $img.position();
 
-			var data = {
+			let data = {
 				src: $img.attr('src'),
 				left: -imgPos.left,
 				top: -imgPos.top,
@@ -56,12 +56,12 @@
 		 * @param $box
 		 * @param options
 		 */
-		render: function ($box, options) {
-			var op = $.extend(
+		render($box, options) {
+			let op = $.extend(
 				{ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' },
 				options
 			);
-			var $imgWrap = $box.find(op.imgWrap$),
+			let $imgWrap = $box.find(op.imgWrap$),
 				$img = $imgWrap.find('img'),
 				$imgBg = $box.find(op.imgBg$);
 
@@ -73,16 +73,16 @@
 				$imgBg.attr('src', $img.attr('src'));
 			}
 
-			var boxW = $box.width();
+			let boxW = $box.width();
 			if (boxW < $imgWrap.width()) {
 				$imgWrap.css({ width: boxW + 'px', height: boxW + 'px' });
 			}
 
 			$img.on('load', function () {
-				var wrapPos = $imgWrap.position();
+				let wrapPos = $imgWrap.position();
 				$img.css({ width: $imgWrap.width() + 'px' });
 				$imgBg.css({ width: $imgWrap.width() + 'px' });
-				var imgPos = {
+				let imgPos = {
 					top: ($imgWrap.height() - $img.height()) / 2,
 					left: ($imgWrap.width() - $img.width()) / 2
 				};
@@ -96,10 +96,10 @@
 				});
 			});
 
-			var zoomUtil = {
-				getImgStyle: function () {
-					var cpos = $imgBg.position();
-					var elem = $imgBg.get(0);
+			let zoomUtil = {
+				getImgStyle() {
+					let cpos = $imgBg.position();
+					let elem = $imgBg.get(0);
 					return {
 						left: cpos.left,
 						top: cpos.top,
@@ -109,32 +109,32 @@
 						naturalHeight: elem.naturalHeight
 					};
 				},
-				cacheStartStyle: function () {
+				cacheStartStyle() {
 					$imgBg.data('zoom-start', zoomUtil.getImgStyle());
 				},
-				setZoom: function (eventPos) {
-					var distanceStart = $.event.getDistance(
+				setZoom(eventPos) {
+					let distanceStart = $.event.getDistance(
 						eventPos.startX,
 						eventPos.startY,
 						eventPos.startX2,
 						eventPos.startY2
 					);
-					var distance = $.event.getDistance(
+					let distance = $.event.getDistance(
 						eventPos.x,
 						eventPos.y,
 						eventPos.x2,
 						eventPos.y2
 					);
-					// var centerPos = $.event.getCenterPos(eventPos.startX, eventPos.startY, eventPos.startX2, eventPos.startY2);
+					// let centerPos = $.event.getCenterPos(eventPos.startX, eventPos.startY, eventPos.startX2, eventPos.startY2);
 
-					var wrapPos = $imgWrap.position();
-					var startData = $imgBg.data('zoom-start') || zoomUtil.getImgStyle();
-					var width = (startData.width * distance) / distanceStart;
+					let wrapPos = $imgWrap.position();
+					let startData = $imgBg.data('zoom-start') || zoomUtil.getImgStyle();
+					let width = (startData.width * distance) / distanceStart;
 					if (width < $imgWrap.width()) {
 						width = $imgWrap.width();
 					}
 
-					var _pos = {
+					let _pos = {
 						top:
 							startData.top +
 							(startData.height -
@@ -153,15 +153,15 @@
 						width: width + 'px'
 					});
 				},
-				checkRestore: function () {
+				checkRestore() {
 					if ($img.width < $imgWrap.width()) {
 						$img.css({ width: $imgWrap.width() + 'px' });
 						$imgBg.css({ width: $imgWrap.width() + 'px' });
 					}
 
-					var wrapPos = $imgWrap.position();
-					var imgBgPos = $imgBg.position();
-					var imgH = $img.height(),
+					let wrapPos = $imgWrap.position();
+					let imgBgPos = $imgBg.position();
+					let imgH = $img.height(),
 						wrapH = $imgWrap.height();
 
 					if (imgH < wrapH) {
@@ -209,11 +209,11 @@
 						});
 					}
 				},
-				setPos: function (eventPos) {
-					var startData = $imgBg.data('zoom-start') || zoomUtil.getImgStyle(),
+				setPos(eventPos) {
+					let startData = $imgBg.data('zoom-start') || zoomUtil.getImgStyle(),
 						x = -eventPos.dx + startData.left,
 						y = -eventPos.dy + startData.top;
-					var wrapPos = $imgWrap.position();
+					let wrapPos = $imgWrap.position();
 
 					$img.css({
 						top: -wrapPos.top + y + 'px',
@@ -229,10 +229,10 @@
 			$box.touchwipe({
 				// stopPropagationEvents:true,
 				direction: 'all',
-				touchstart: function (event, pos) {
+				touchstart(event, pos) {
 					zoomUtil.cacheStartStyle();
 				},
-				touchmove: function (event, pos) {
+				touchmove(event, pos) {
 					if (pos.touchType == 'zoom') {
 						zoomUtil.setZoom(pos);
 					}
@@ -242,7 +242,7 @@
 						zoomUtil.setPos(pos);
 					}
 				},
-				touchend: function (event, pos) {
+				touchend(event, pos) {
 					zoomUtil.checkRestore();
 				}
 			});

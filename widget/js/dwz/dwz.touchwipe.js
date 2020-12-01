@@ -7,14 +7,14 @@
  */
 (function ($) {
 	$.fn.extend({
-		touchwipe: function (settings) {
+		touchwipe(settings) {
 			let config = {
 				min_move_x: 30,
 				min_move_y: 30,
-				wipeLeft: function (event, pos) {},
-				wipeRight: function (event, pos) {},
-				wipeUp: function (event, pos) {},
-				wipeDown: function (event, pos) {},
+				wipeLeft(event, pos) {},
+				wipeRight(event, pos) {},
+				wipeUp(event, pos) {},
+				wipeDown(event, pos) {},
 				touch: null,
 				touchstart: null,
 				touchmove: null, // touchmove事件触发scroll

@@ -18,7 +18,7 @@ $.navView = {
 	},
 	$list: [],
 
-	init: function (options) {
+	init(options) {
 		$.extend($.navView.config, options);
 	},
 
@@ -28,7 +28,7 @@ $.navView = {
 	 * callback：回调函数如果存在，加载完页面执行回调函数，回调函数中$box.html(html).initUI();
 	 *
 	 */
-	open: function (options) {
+	open(options) {
 		let op = $.extend(
 				{
 					boxId: '',
@@ -79,7 +79,7 @@ $.navView = {
 			// 支持向右滑动返回
 			if (op.wipeClose) {
 				$box.touchwipe({
-					wipeRight: function (event, pos) {
+					wipeRight(event, pos) {
 						$.navView.close(true, true);
 					},
 					min_move_x: 100
@@ -169,7 +169,7 @@ $.navView = {
 				);
 		}
 	},
-	reload: function (options) {
+	reload(options) {
 		let $box = this.$list[this.$list.length - 1];
 		let op = $.extend(
 			{ boxId: $box.attr('id'), history: false },
@@ -178,7 +178,7 @@ $.navView = {
 		);
 		this.open(op);
 	},
-	loadExternal: function (url) {
+	loadExternal(url) {
 		let $box = this.$list[this.$list.length - 1];
 
 		let $content = $box.find('.content');
@@ -189,7 +189,7 @@ $.navView = {
 				.replaceAll('{{height}}', ih + 'px')
 		);
 	},
-	close: function (popHistory, local) {
+	close(popHistory, local) {
 		let size = this.$list.length;
 		if (size <= 0) return;
 
@@ -210,14 +210,14 @@ $.navView = {
 			}
 		);
 	},
-	closeByRel: function (rel) {
+	closeByRel(rel) {
 		let boxData = this._getBoxData(rel);
 		if (boxData.$box) {
 			$.navView.$list.splice(boxData.index, 1);
 			boxData.$box.remove();
 		}
 	},
-	_getBoxData: function (rel) {
+	_getBoxData(rel) {
 		let boxData = { $box: null, index: -1 };
 		if (this.$list.length && rel) {
 			let $box = $('#' + $.navView.config.idStart + rel);
@@ -232,13 +232,13 @@ $.navView = {
 		}
 		return boxData;
 	},
-	getBox: function (rel) {
+	getBox(rel) {
 		if (rel) {
 			this._getBoxData(rel).$box;
 		}
 		return this.$list.length ? this.$list[this.$list.length - 1] : null;
 	},
-	getBoxs: function (level) {
+	getBoxs(level) {
 		level = !level ? 1 : level;
 		let $boxs = [];
 

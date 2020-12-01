@@ -8,7 +8,7 @@ $.fn.extend({
 	 *            panel$[tab panel selector]
 	 *            ajaxClass[ajax load]
 	 */
-	tabs: function (options) {
+	tabs(options) {
 		let op = $.extend(
 			{
 				currentIndex: 0,

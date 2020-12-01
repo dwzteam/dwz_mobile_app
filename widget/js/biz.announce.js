@@ -1,5 +1,5 @@
 biz.announce = {
-	listRender: function (tpl, params) {
+	listRender(tpl, params) {
 		let $box = this,
 			tplWrap = $.templateWrap(tpl);
 
@@ -12,7 +12,7 @@ biz.announce = {
 		let $form = $box.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
-		$form.requestList = function (loadMore) {
+		$form.requestList = (loadMore) => {
 			$.ajax({
 				type: 'POST',
 				url: biz.server.getUrl(biz.server.announceList),
@@ -39,13 +39,13 @@ biz.announce = {
 						}
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		};
 
 		$.listForm($form);
 	},
-	detailRender: function (tpl, params) {
+	detailRender(tpl, params) {
 		let $box = this;
 
 		$.ajax({
@@ -64,7 +64,7 @@ biz.announce = {
 				});
 				$box.html(html).initUI();
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	}
 };

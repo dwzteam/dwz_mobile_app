@@ -18,14 +18,14 @@ $.dialog = {
 	$box: null,
 	$bgBox: null,
 
-	init: function (options) {
+	init(options) {
 		$.extend($.dialog.config, options);
 
 		$('body').append($.dialog.config.frag).append($.dialog.config.bgFrag);
 		this.$box = $($.dialog.config.box$);
 		this.$bgBox = $($.dialog.config.bgBox$);
 	},
-	open: function (options) {
+	open(options) {
 		// default, pic, login
 		let op = $.extend(
 			{
@@ -92,7 +92,7 @@ $.dialog = {
 
 		this.isOpen = true;
 	},
-	loadExternal: function (url) {
+	loadExternal(url) {
 		let $box = this.$box.html(
 			'<a class="video-close" href="javascript:$.dialog.close()"><i class="icon icon-close-dialog"></i></a><div class="pop-content"></div>'
 		);
@@ -106,7 +106,7 @@ $.dialog = {
 		);
 	},
 
-	close: function (options) {
+	close(options) {
 		let op = $.extend({ closeMsg: '' }, options);
 
 		if (!op.closeMsg) {
@@ -115,12 +115,12 @@ $.dialog = {
 		}
 
 		$.alert.confirm(op.closeMsg, {
-			okCall: function () {
+			okCall() {
 				$.dialog._closeDirect();
 			}
 		});
 	},
-	_closeDirect: function () {
+	_closeDirect() {
 		let $box = this.$box,
 			$bgBox = this.$bgBox;
 
@@ -142,7 +142,7 @@ $.dialog = {
 
 		this.isOpen = false;
 	},
-	getBox: function () {
+	getBox() {
 		return this.$box;
 	}
 };

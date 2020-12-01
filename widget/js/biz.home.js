@@ -26,7 +26,7 @@ function renderHome(tpl, params) {
 					this.find('#home-ad-box').html(_html).initUI();
 				}
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 
 		// 运输单
@@ -43,7 +43,7 @@ function renderHome(tpl, params) {
 					this.find('#transport-card-box').html(_html);
 				}
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 
 		// 通知
@@ -64,7 +64,7 @@ function renderHome(tpl, params) {
 					$listBox.html(_html);
 				}
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	};
 

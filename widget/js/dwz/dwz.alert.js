@@ -45,7 +45,7 @@
 		 * @param {Object} msg
 		 * @param {Object} buttons [button1, button2]
 		 */
-		_open: function (type, msg, buttons) {
+		_open(type, msg, buttons) {
 			$(this.config.box$).remove();
 			let butsHtml = '';
 			if (buttons) {
@@ -80,19 +80,19 @@
 					});
 			}
 		},
-		close: function () {
+		close() {
 			$(this.config.box$).remove();
 		},
-		error: function (msg, options) {
+		error(msg, options) {
 			this._alert(this.config.types.error, msg, options);
 		},
-		warn: function (msg, options) {
+		warn(msg, options) {
 			this._alert(this.config.types.warn, msg, options);
 		},
-		success: function (msg, options) {
+		success(msg, options) {
 			this._alert(this.config.types.success, msg, options);
 		},
-		toast: function (msg, options) {
+		toast(msg, options) {
 			let op = $.extend({ msg: msg, duration: 4000 }, options);
 			if (window.api) {
 				api.toast(op);
@@ -119,7 +119,7 @@
 				});
 			}, op.duration);
 		},
-		_alert: function (type, msg, options) {
+		_alert(type, msg, options) {
 			let op = $.extend(
 				{ okName: $.regional.alert.btnMsg.ok, okCall: null },
 				options
@@ -132,7 +132,7 @@
 		 * @param {Object} msg
 		 * @param {Object} options {okName, okCall, cancelName, cancelCall}
 		 */
-		confirm: function (msg, options) {
+		confirm(msg, options) {
 			let op = $.extend(
 				{
 					okName: $.regional.alert.btnMsg.ok,
@@ -149,7 +149,7 @@
 			this._open(this.config.types.confirm, msg, buttons);
 		},
 
-		openDialog: function (url) {
+		openDialog(url) {
 			$(this.config.box$).remove();
 
 			let $box = $($.alert.config.dialogFrag)
@@ -177,7 +177,7 @@
 				});
 			}
 		},
-		closeDialog: function () {
+		closeDialog() {
 			$('#alertDialogBox').remove();
 		}
 	};

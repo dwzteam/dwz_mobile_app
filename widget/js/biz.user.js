@@ -13,7 +13,7 @@ let UserInfo = {
 	headimgurl: ''
 };
 let UserInfoUtil = {
-	update: function (data) {
+	update(data) {
 		console.log(JSON.stringify(data));
 
 		if (data.uid != undefined) UserInfo.uid = data.uid;
@@ -32,7 +32,7 @@ let UserInfoUtil = {
 
 		$.setStorage('APP_USER_INFO', UserInfo);
 	},
-	clear: function () {
+	clear() {
 		UserInfo = {};
 		$.setStorage('APP_USER_INFO', UserInfo);
 	}
@@ -66,22 +66,22 @@ function initUserInfo() {
 
 				dwz.checkAjaxLogin(json);
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	}
 }
 
 $.fn.extend({
-	fleshVerifyImg: function () {
+	fleshVerifyImg() {
 		return this.each(function () {
 			$(this).touchwipe({
-				touch: function () {
+				touch() {
 					$(this).attr('src', biz.server.getVerifyImgUrl());
 				}
 			});
 		});
 	},
-	sendVerifyMs: function () {
+	sendVerifyMs() {
 		return this.each(function () {
 			$(this).click(function () {
 				let $link = $(this),
@@ -325,7 +325,7 @@ function submitUserRealInfo(form) {
 }
 
 let bizUtil = {
-	userRealVerify: function (params, success) {
+	userRealVerify(params, success) {
 		if (!biz.checkPermission('camera', '摄像头')) {
 			return;
 		}

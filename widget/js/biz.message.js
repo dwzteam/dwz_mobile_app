@@ -1,5 +1,5 @@
 biz.message = {
-	removeItem: function (params) {
+	removeItem(params) {
 		const op = $.extend({ id: 0 }, params);
 		$.ajax({
 			type: 'POST',
@@ -18,10 +18,10 @@ biz.message = {
 						.remove();
 				}
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	},
-	listRender: function (tpl, params) {
+	listRender(tpl, params) {
 		let tplWrap = $.templateWrap(tpl);
 		let html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
 		this.html(html).initUI();
@@ -29,7 +29,7 @@ biz.message = {
 		let $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.list');
 
-		$form.requestList = function (loadMore) {
+		$form.requestList = (loadMore) => {
 			let data = $form.serializeArray();
 			console.log(JSON.stringify(data));
 			$.ajax({
@@ -59,7 +59,7 @@ biz.message = {
 						}
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		};
 

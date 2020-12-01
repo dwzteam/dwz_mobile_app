@@ -1,6 +1,6 @@
 $._ajax = $.ajax;
 $.extend({
-	ajax: function (options) {
+	ajax(options) {
 		// token统一放到header中，可以根据后台接口要求定义
 		const header = { token: UserInfo.token || '' };
 		const op = $.extend({ data: {}, header: header }, options);
@@ -13,7 +13,7 @@ $.extend({
 		$._ajax(op);
 	},
 	// 配合离线缓存serviceWorker，实现断网访问展示类接口
-	fetchAjax: function (options) {
+	fetchAjax(options) {
 		const op = $.extend(
 			{ key: '', url: '', data: {}, type: 'GET', success: null },
 			options
@@ -38,7 +38,7 @@ $.extend({
 				$.setStorage(cache_key, json);
 				op.success && op.success(json);
 			},
-			error: function () {
+			error() {
 				// 网络请求失败，从缓存中取数据
 				const json = $.getStorage(cache_key);
 				if (json) {
@@ -49,15 +49,14 @@ $.extend({
 	}
 });
 
-function ajaxError(xhr, ajaxOptions, thrownError) {
-	if (xhr.status == 401) {
-		$.gotoLogin();
-		return;
-	}
-	$.alert.toast('网络异常，请稍后再试！');
-}
-
 $.extend(biz, {
+	ajaxError(xhr, ajaxOptions, thrownError) {
+		if (xhr.status == 401) {
+			$.gotoLogin();
+			return;
+		}
+		$.alert.toast('操作失败，请稍后再试！');
+	},
 	safeAreaTop: 0,
 	fixStatusBar($p) {
 		$p.find('header, dwz-fix-status-bar').css({
@@ -242,7 +241,7 @@ $.extend(biz, {
 		lng: 120,
 		lat: 30,
 		zoom: 8,
-		updTransport: function () {
+		updTransport() {
 			$.ajax({
 				type: 'POST',
 				url: biz.server.getUrl(biz.server.transportList),
@@ -259,7 +258,7 @@ $.extend(biz, {
 						}
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		}
 	},
@@ -336,7 +335,7 @@ $.extend(biz, {
 								success: (json) => {
 									console.log(JSON.stringify(json));
 								},
-								error: ajaxError
+								error: biz.ajaxError
 							});
 						}
 					}
@@ -355,7 +354,7 @@ $.extend(biz, {
 // Store 基类
 const CommonStore = {
 	data: [],
-	getData: function (params) {
+	getData(params) {
 		const op = $.extend({ selectedId: '' }, params);
 		const data = [];
 		for (let i = 0; i < this.data.length; i++) {
@@ -364,7 +363,7 @@ const CommonStore = {
 		}
 		return data;
 	},
-	getItem: function (id) {
+	getItem(id) {
 		for (let i = 0; i < this.data.length; i++) {
 			if (this.data[i].id == id) {
 				return this.data[i];
@@ -391,12 +390,12 @@ const TransportStatus = $.extend({}, CommonStore, {
 });
 
 biz.format = {
-	formatDateTime: function (timestamp, format) {
+	formatDateTime(timestamp, format) {
 		if (!timestamp) return '';
 		const date = new Date(timestamp);
 		return date.formatDate(format || 'yyyy-MM-dd HH:mm:ss');
 	},
-	formatTime: function (second) {
+	formatTime(second) {
 		if (!second) return '--';
 		else if (second < 60) return second + '秒';
 		else if (second < 3600) return (second / 60).roundFloat(0) + '分钟';
@@ -405,14 +404,14 @@ biz.format = {
 		var minute = ((second % 3600) / 60).roundFloat(0);
 		return hour + '小时' + minute + '分钟';
 	},
-	formatDistance: function (m) {
+	formatDistance(m) {
 		if (!m) return '--';
 		if (m < 1000) {
 			return parseInt(m) + '米';
 		}
 		return (m / 1000).toFixed(1) + '公里';
 	},
-	percent: function (num, fractionDigits) {
+	percent(num, fractionDigits) {
 		var percentNum = num * 100;
 		return percentNum.toFixed(fractionDigits);
 	}
@@ -420,21 +419,21 @@ biz.format = {
 $.extend(
 	template.defaults.imports,
 	{
-		filterInputNum: function (value) {
+		filterInputNum(value) {
 			return value ? value : '';
 		},
-		showSex: function (value) {
+		showSex(value) {
 			var item = SexStore.getItem(value);
 			return item.name;
 		},
-		showTransportStatus: function (value, fieldName) {
+		showTransportStatus(value, fieldName) {
 			var item = TransportStatus.getItem(value);
 			return item[fieldName || 'name'];
 		},
-		showImg: function (url, defaultImg) {
+		showImg(url, defaultImg) {
 			return url || defaultImg || 'image/browse-empty-bg.svg';
 		},
-		showUserIcon: function (url) {
+		showUserIcon(url) {
 			return url || 'image/dwz-logo.svg';
 		}
 	},

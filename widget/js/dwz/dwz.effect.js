@@ -21,17 +21,17 @@
  */
 (function ($) {
 	$.extend({
-		_randomColorFactor: function (maxColor) {
+		_randomColorFactor(maxColor) {
 			return Math.round(Math.random() * (maxColor || 255));
 		},
 
-		randomColor: function (opacity, maxRed, maxGreen, maxBlue) {
+		randomColor(opacity, maxRed, maxGreen, maxBlue) {
 			return `rgba(${this._randomColorFactor(maxRed)}, 
 				${this._randomColorFactor(maxGreen)},
 				${this._randomColorFactor(maxBlue)}, 
 				${opacity || '.3'}`;
 		},
-		animate: function (ele, obj, duration, effectType, callback) {
+		animate(ele, obj, duration, effectType, callback) {
 			for (let attr in obj) {
 				if (attr == 'width' || attr == 'height') {
 					$.transition(ele, {
@@ -62,7 +62,7 @@
 			}
 		},
 		// 设置transform偏移
-		transition: function (ele, options) {
+		transition(ele, options) {
 			let op = $.extend(
 				{ transitionType: 'all', duration: 0, effectType: 'ease' },
 				options
@@ -86,16 +86,16 @@
 	});
 
 	$.fn.extend({
-		animate: function (obj, duration, effectType, callback) {
+		animate(obj, duration, effectType, callback) {
 			$.animate(this.get(0), obj, duration, effectType, callback);
 			return this;
 		},
-		fadeOut: function (duration, animationend) {
+		fadeOut(duration, animationend) {
 			return this.effect(
 				[
 					{
 						className: 'fadeOut animated',
-						after: function () {
+						after() {
 							this.hide();
 						}
 					}
@@ -103,15 +103,15 @@
 				animationend
 			);
 		},
-		fadeIn: function (duration, animationend) {
+		fadeIn(duration, animationend) {
 			return this.effect(
 				[
 					{
 						className: 'fadeIn animated',
-						before: function () {
+						before() {
 							this.show();
 						},
-						after: function () {
+						after() {
 							this.show();
 						}
 					}
@@ -121,7 +121,7 @@
 		},
 
 		// 设置transform偏移
-		translate: function (options) {
+		translate(options) {
 			let op = $.extend(
 				{ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' },
 				options
@@ -129,7 +129,7 @@
 			op.transform = 'translate3d(' + op.x + ',' + op.y + ',' + op.z + ')';
 			return this.translateCss(op);
 		},
-		translateCss: function (options) {
+		translateCss(options) {
 			let op = $.extend(
 				{ transform: '', duration: 0, effectType: 'ease' },
 				options
@@ -146,21 +146,21 @@
 				});
 			});
 		},
-		translateY: function (yStr, duration, effectType) {
+		translateY(yStr, duration, effectType) {
 			return this.translate({
 				y: yStr,
 				duration: duration,
 				effectType: effectType
 			});
 		},
-		translateX: function (xStr, duration, effectType) {
+		translateX(xStr, duration, effectType) {
 			return this.translate({
 				x: xStr,
 				duration: duration,
 				effectType: effectType
 			});
 		},
-		rotate: function (options) {
+		rotate(options) {
 			let op = $.extend(
 				{ deg: '0deg', duration: 0, effectType: 'ease' },
 				options
@@ -175,7 +175,7 @@
 				$(this).css({ '-webkit-transform': rotateStr, transform: rotateStr });
 			});
 		},
-		getComputedPos: function () {
+		getComputedPos() {
 			let matrix = window.getComputedStyle(this.get(0), null),
 				x = 0,
 				y = 0,
@@ -193,7 +193,7 @@
 		},
 
 		// 翻牌效果
-		flipCard: function (options) {
+		flipCard(options) {
 			let op = $.extend({}, options);
 
 			return this.each(function () {
@@ -212,7 +212,7 @@
 		},
 
 		// 文字向上冒泡
-		effectBubble: function (options) {
+		effectBubble(options) {
 			let op = $.extend(
 				{
 					content: '+1',
@@ -261,7 +261,7 @@
 		 * @param animationend: 全部动画完成事件
 		 * @returns {*}
 		 */
-		effect: function (eList, animationend) {
+		effect(eList, animationend) {
 			return this.each(function () {
 				let $me = $(this);
 

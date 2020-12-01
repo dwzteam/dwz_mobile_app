@@ -21,7 +21,7 @@ biz.favorite = {
 						.remove();
 				}
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	},
 	listRender: function (tpl, params) {
@@ -64,7 +64,7 @@ biz.favorite = {
 						}
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		};
 

@@ -13,7 +13,7 @@ $.filterSelect = {
 	$box: null,
 	$bgBox: null,
 
-	init: function (options) {
+	init(options) {
 		if (!this.$box) {
 			$.extend($.filterSelect.config, options);
 
@@ -27,7 +27,7 @@ $.filterSelect = {
 			});
 		}
 	},
-	open: function (options) {
+	open(options) {
 		this.init(options);
 
 		// default, fullscreen
@@ -82,7 +82,7 @@ $.filterSelect = {
 
 		this.isOpen = true;
 	},
-	close: function () {
+	close() {
 		let $box = $.filterSelect.$box,
 			$bgBox = $.filterSelect.$bgBox;
 
@@ -98,7 +98,7 @@ $.filterSelect = {
 
 		this.isOpen = false;
 	},
-	getBox: function () {
+	getBox() {
 		return this.$box;
 	}
 };

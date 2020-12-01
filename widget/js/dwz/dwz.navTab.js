@@ -14,7 +14,7 @@ $.navTab = {
 	$box: null,
 	_currentIndex: 0,
 
-	init: function (options) {
+	init(options) {
 		let op = $.extend($.navTab.config, options);
 
 		this.$box = $($.navTab.config.box$);
@@ -67,10 +67,10 @@ $.navTab = {
 			});
 		}
 	},
-	getBox: function () {
+	getBox() {
 		return this.getPanels().eq(this._currentIndex);
 	},
-	_open: function (index) {
+	_open(index) {
 		let op = $.navTab.config,
 			$items = this.getTabs(),
 			$contents = this.getPanels();
@@ -92,7 +92,7 @@ $.navTab = {
 	 * callback：回调函数如果存在，加载完页面执行回调函数，回调函数中$panel.html(html).initUI();
 	 * @param args {tabid:'', index:-1, external:false, type:'GET', url:'', data:{}, interceptor: function(){}, callback: function(){}}
 	 */
-	open: function (args) {
+	open(args) {
 		let index = args.index >= 0 ? args.index : this._indexTabId(args.tabid);
 
 		if (-1 == index) return;
@@ -139,7 +139,7 @@ $.navTab = {
 	 *
 	 * @param args {tabid:'', index:-1, external:false, type:'GET', url:'', data:{}, callback: function(){}}
 	 */
-	load: function (args) {
+	load(args) {
 		let op = $.extend(
 				{
 					type: 'GET',
@@ -182,10 +182,10 @@ $.navTab = {
 			error: dwz.ajaxError
 		});
 	},
-	reload: function (url) {
+	reload(url) {
 		this.load({ index: $.navTab._currentIndex, url: url });
 	},
-	loadExternal: function ($panel, url) {
+	loadExternal($panel, url) {
 		let ih = this.$box.get(0).offsetHeight;
 		$panel.html(
 			$.config.frag['external']
@@ -193,7 +193,7 @@ $.navTab = {
 				.replaceAll('{{height}}', ih + 'px')
 		);
 	},
-	_indexTabId: function (tabid) {
+	_indexTabId(tabid) {
 		if (!tabid) return -1;
 		let iOpenIndex = -1;
 		this.getTabs().each(function (index) {
@@ -204,10 +204,10 @@ $.navTab = {
 		});
 		return iOpenIndex;
 	},
-	getTabs: function () {
+	getTabs() {
 		return this.$box.find(this.config.items$);
 	},
-	getPanels: function () {
+	getPanels() {
 		return this.$box.find(this.config.contents$);
 	}
 };

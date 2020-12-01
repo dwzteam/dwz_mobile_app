@@ -3,7 +3,7 @@
  */
 (function ($) {
 	$.fn.extend({
-		scrollTo: function (options) {
+		scrollTo(options) {
 			return this.each(function () {
 				let $main = $(this).children().eq(0);
 				if (options.y == 'end') {
@@ -17,7 +17,7 @@
 				}
 			});
 		},
-		scroll: function (options) {
+		scroll(options) {
 			let op = $.extend(
 				{
 					scrollX: false,
@@ -67,7 +67,7 @@
 				$wrap.touchwipe({
 					direction: direction,
 					stopPropagationEvents: op.stopPropagationEvents,
-					touchstart: function (event, pos) {
+					touchstart(event, pos) {
 						currentPos = $main.getComputedPos();
 						if (op.scrollY) {
 							$main.translateY(currentPos.y + 'px', 0);
@@ -78,7 +78,7 @@
 
 						if (op.touchstart) op.touchstart.call($main, event, pos);
 					},
-					touchmove: function (event, pos) {
+					touchmove(event, pos) {
 						let timestamp = new Date().getTime();
 
 						// We need to move at least 10 pixels for the scrolling to initiate
@@ -135,7 +135,7 @@
 
 						if (op.touchmove) op.touchmove.call($main, event, pos);
 					},
-					touchend: function (event, pos) {
+					touchend(event, pos) {
 						endTime = new Date().getTime();
 
 						if (endTime - topBtnTime < 300) {

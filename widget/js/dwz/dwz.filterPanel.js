@@ -14,7 +14,7 @@ $.filterPanel = {
 	$box: null,
 	$bgBox: null,
 
-	init: function (options) {
+	init(options) {
 		$.extend($.filterPanel.config, options);
 
 		$('body')
@@ -27,7 +27,7 @@ $.filterPanel = {
 			$.filterPanel.close();
 		});
 	},
-	open: function (options) {
+	open(options) {
 		// default, pic, login
 		let op = $.extend(
 			{ type: 'GET', url: '', pop: 'default', data: {}, callback: null },
@@ -68,7 +68,7 @@ $.filterPanel = {
 
 		this.isOpen = true;
 	},
-	close: function () {
+	close() {
 		let $box = this.$box,
 			$bgBox = this.$bgBox;
 
@@ -80,7 +80,7 @@ $.filterPanel = {
 
 		this.isOpen = false;
 	},
-	getBox: function () {
+	getBox() {
 		return this.$box;
 	}
 };

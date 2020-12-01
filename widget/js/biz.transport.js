@@ -45,7 +45,7 @@ biz.transport = {
 						}
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		};
 
@@ -159,7 +159,7 @@ biz.transport = {
 					$receiveBox.html(html2);
 
 					$box.find('.dwz-btn-start').touchwipe({
-						wipeRight: function () {
+						wipeRight() {
 							const $btn = $(this);
 							if (!$btn.hasClass('wipe-hover')) {
 								$btn.addClass('wipe-hover');
@@ -172,7 +172,7 @@ biz.transport = {
 						}
 					});
 					$box.find('.dwz-btn-finish').touchwipe({
-						wipeRight: function () {
+						wipeRight() {
 							const $btn = $(this);
 							if (!$btn.hasClass('wipe-hover')) {
 								$btn.addClass('wipe-hover');
@@ -213,7 +213,7 @@ biz.transport = {
 
 					$(document).trigger('location.change', biz.location); // 测试路线
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 
 			return false;
@@ -314,7 +314,7 @@ biz.transport = {
 							$list.html(_html);
 
 							$list.find('li.item').touchwipe({
-								touch: function () {
+								touch() {
 									let $li = $(this);
 									$inputEnd.val($li.attr('data-name'));
 									$sheetBox.addClass('fold');
@@ -452,7 +452,7 @@ biz.transport = {
 						$li.remove();
 					}
 				},
-				error: ajaxError
+				error: biz.ajaxError
 			});
 		} else {
 			$li.remove();
@@ -464,7 +464,7 @@ biz.transport = {
 	// 弹出发货过磅确认
 	confirmFirst(vo) {
 		$.alert.confirm('出发前先录入发货过磅信息', {
-			okCall: function (event) {
+			okCall(event) {
 				$.navView.open({
 					url:
 						'tpl/transport/first.html?dwz_callback=biz.transport.firstRender',
@@ -496,13 +496,13 @@ biz.transport = {
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	},
 	// 弹出收货过磅确认
 	confirmFinish(vo) {
 		$.alert.confirm('完成前先录入卸货过磅信息', {
-			okCall: function (event) {
+			okCall(event) {
 				$.navView.open({
 					url: 'tpl/transport/last.html?dwz_callback=biz.transport.lastRender',
 					data: vo,
@@ -533,7 +533,7 @@ biz.transport = {
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},
-			error: ajaxError
+			error: biz.ajaxError
 		});
 	},
 

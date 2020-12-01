@@ -23,7 +23,7 @@
 		if ($.navTab) {
 			$('a[target=navTab]', $p)
 				.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						let $link = $(this),
 							url = $link.attr('data-href');
 						$.navTab.open({
@@ -39,7 +39,7 @@
 		if ($.navView) {
 			$('a[target=navView], li[target=navView]', $p)
 				.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						let $link = $(this),
 							url = $link.attr('data-href');
 						$.navView.open({
@@ -62,7 +62,7 @@
 		if ($.dialog) {
 			$('a[target=dialog], li[target=dialog]', $p)
 				.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						let $link = $(this);
 						$.dialog.open({
 							url: $link.attr('data-href'),
@@ -74,7 +74,7 @@
 				.hrefFix();
 
 			$('img[target=dialog], a[target=dialog-pic]', $p).touchwipe({
-				touch: function (event) {
+				touch(event) {
 					let $img = $(this);
 					$.dialog.open({
 						url: $img.attr('data-href'),
@@ -96,7 +96,7 @@
 		if ($.alert) {
 			$('a[target=alertDialog]', $p)
 				.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						let $link = $(this);
 						$.alert.openDialog($link.attr('data-href'));
 						event.stopPropagation();
@@ -128,7 +128,7 @@
 		if ($.altPanel) {
 			$('a[target=altPanel]', $p)
 				.touchwipe({
-					touch: function (event, pos) {
+					touch(event, pos) {
 						let $link = $(this);
 						$.altPanel.open({ url: $link.attr('data-href'), pos: pos });
 						event.stopPropagation();
@@ -150,7 +150,7 @@
 	});
 
 	$.fn.extend({
-		disableAutofocus: function () {
+		disableAutofocus() {
 			return this.each(function () {
 				let $input = $(this);
 				$input.attr('readonly', 'readonly');
@@ -159,10 +159,10 @@
 				}, 600);
 			});
 		},
-		redirect: function () {
+		redirect() {
 			return this.each(function () {
 				$(this).touchwipe({
-					touch: function (event) {
+					touch(event) {
 						let href = $(this).attr('href');
 						if (href) window.location = href;
 						event.preventDefault();
@@ -170,7 +170,7 @@
 				});
 			});
 		},
-		activeClass: function (className) {
+		activeClass(className) {
 			if (!className) className = 'active';
 
 			return this.each(function () {
@@ -196,7 +196,7 @@
 				}
 			});
 		},
-		touchOpenRight: function (option) {
+		touchOpenRight(option) {
 			let op = $.extend({
 				ctlClass: 'dwz-open-right',
 				openClass: 'open-right'
@@ -207,11 +207,11 @@
 					$parent = $this.parent();
 
 				$this.touchwipe({
-					wipeLeft: function () {
+					wipeLeft() {
 						$parent.find('.' + op.ctlClass).removeClass(op.openClass);
 						$this.addClass(op.openClass);
 					},
-					wipeRight: function () {
+					wipeRight() {
 						$this.removeClass(op.openClass);
 					}
 				});
@@ -226,7 +226,7 @@
 			});
 		},
 
-		checkboxRadio: function () {
+		checkboxRadio() {
 			return this.each(function () {
 				let $this = $(this),
 					parent$ = $this.attr('data-checkbox-radio') || 'form',
@@ -253,7 +253,7 @@
 		 * @param options
 		 * @returns {*}
 		 */
-		toggleSelectRef: function (options) {
+		toggleSelectRef(options) {
 			let op = $.extend(
 				{
 					ref: 'data-ref-box',

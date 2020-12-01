@@ -9,7 +9,7 @@
 	};
 
 	$.fn.extend({
-		panel: function (options) {
+		panel(options) {
 			let op = $.extend(_config, options);
 
 			return this.each(function () {
@@ -17,7 +17,7 @@
 				let $btn = $this.find(op.collapseBtn$);
 				let $icon = $btn.find('i');
 				$btn.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						if ($icon.hasClass(op.iconUpClass)) {
 							$this.panelCollapse(op);
 						} else {
@@ -30,7 +30,7 @@
 		},
 
 		// 展开
-		panelExpand: function (options) {
+		panelExpand(options) {
 			let op = $.extend(_config, options);
 
 			return this.each(function () {
@@ -42,7 +42,7 @@
 			});
 		},
 		// 折叠
-		panelCollapse: function (options) {
+		panelCollapse(options) {
 			let op = $.extend(_config, options);
 
 			return this.each(function () {
@@ -68,7 +68,7 @@
 		$box: null,
 		$bgBox: null,
 
-		init: function (options) {
+		init(options) {
 			$.extend($.dialog.config, options);
 
 			$('body').append($.altPanel.config.frag);
@@ -80,7 +80,7 @@
 				$.altPanel.close();
 			});
 		},
-		open: function (options) {
+		open(options) {
 			// default, pic, login
 			let op = $.extend(
 				{ type: 'GET', url: '', data: {}, callback: null, pos: null },
@@ -137,7 +137,7 @@
 
 			this.isOpen = true;
 		},
-		close: function () {
+		close() {
 			let $box = this.$box,
 				$bgBox = this.$bgBox;
 

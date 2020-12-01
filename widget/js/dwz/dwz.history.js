@@ -9,7 +9,7 @@
 			_currentHash: '',
 			_isPop: false,
 			_isHis: true,
-			init: function (callback, hash) {
+			init(callback, hash) {
 				let current_hash = hash || location.hash;
 
 				if (current_hash) {
@@ -24,7 +24,7 @@
 
 				window.onhashchange = $.history._check;
 			},
-			_check: function () {
+			_check() {
 				let current_hash = location.hash.skipChar('#').replace('?', '|');
 				if (!current_hash) $(window).trigger('hash.empty');
 
@@ -38,7 +38,7 @@
 				}
 				$.history._isHis = true;
 			},
-			add: function (hash, fun, args) {
+			add(hash, fun, args) {
 				hash = hash.replace('?', '|').replace(/\?.*$/, '');
 
 				$.history._isPop = false;
@@ -46,7 +46,7 @@
 				$.history._hash.push([hash, fun, args]);
 				location.hash = hash;
 			},
-			pop: function (local) {
+			pop(local) {
 				if (local) {
 					$.history._isPop = true;
 					$.history._isHis = false;
@@ -65,7 +65,7 @@
 					$(window).trigger('hash.empty.pop');
 				}
 			},
-			load: function (hash) {
+			load(hash) {
 				for (let i = 0; i < $.history._hash.length; i += 1) {
 					let fun = $.history._hash[i][1];
 					if ($.history._hash[i][0] == hash && fun) {

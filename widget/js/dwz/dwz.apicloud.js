@@ -4,7 +4,7 @@
  */
 (function ($) {
 	$.plus = {
-		openImg: function (callback) {
+		openImg(callback) {
 			let FNPhotograph = api.require('FNPhotograph');
 			let imageFilter = api.require('imageFilter');
 
@@ -48,7 +48,7 @@
 		 * 从摄像头或相册获取图片 {title:'', maximum:4, maxWidth:800, maxHeight:800, callback: null}
 		 * 使用miscCallback时需要自己处理，忽略maxWidth, maxHeight, callback
 		 */
-		chooseImage: function (options) {
+		chooseImage(options) {
 			let me = this;
 			// if(biz.checkPermission && !biz.checkPermission('camera', '摄像头')){
 			// 	return;
@@ -80,7 +80,7 @@
 			);
 		},
 		// 拍照
-		captureImage: function (options) {
+		captureImage(options) {
 			let op = $.extend(
 				{
 					sourceType: 'camera',
@@ -132,11 +132,11 @@
 			);
 		},
 		// 压缩图片
-		compressImage: function compressImage(options, callback) {
+		compressImage(options, callback) {
 			return this.getBase64Image(options);
 		},
 		// 转换base64编码
-		getBase64Image: function (options) {
+		getBase64Image(options) {
 			let op = $.extend(
 				{ imgPath: '', maxWidth: 800, maxHeight: 800, callback: null },
 				options
@@ -222,7 +222,7 @@
 		 * 选择上传图片缩略图列表预览
 		 * @param options
 		 */
-		previewUploadImg: function (options) {
+		previewUploadImg(options) {
 			let op = $.extend(
 				{
 					maxW: 80,
@@ -244,18 +244,18 @@
 					$uploadWrap.hide();
 				}
 				$button.touchwipe({
-					touch: function () {
+					touch() {
 						selectCount = $previewElem.find('li').size();
 						if (selectCount < op.maxCount) {
 							dwz.plus.chooseImage({
 								maximum: op.maxCount - selectCount,
 								destinationType: 'base64',
-								callback: function (base64Data) {
+								callback(base64Data) {
 									$.plus.getBase64Image({
 										imgPath: base64Data,
 										maxWidth: op.maxWidth,
 										maxHeight: op.maxHeight,
-										callback: function (strBase64) {
+										callback(strBase64) {
 											// console.log(strBase64)
 											previewUploadImg(
 												previewElem,
@@ -285,7 +285,7 @@
 		 * 查看大图片预览
 		 * @param options
 		 */
-		previewImg: function (options) {
+		previewImg(options) {
 			let op = $.extend(
 				{ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' },
 				options
@@ -294,7 +294,7 @@
 				let $wrap = $(this);
 
 				$wrap.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						event.preventDefault();
 						event.stopPropagation();
 
@@ -308,7 +308,7 @@
 
 	$.previewBigImg = {
 		isOpen: false,
-		autoLayout: function (event) {
+		autoLayout(event) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 
@@ -321,7 +321,7 @@
 			$previewBox.find('.bd ul').css({ width: _screenW * $lis.size() + 'px' });
 		},
 
-		open: function ($imgs, touchEvent) {
+		open($imgs, touchEvent) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 			if ($previewBox.size() == 0) {
@@ -331,7 +331,7 @@
 				$previewBox = $('#preview-big-img');
 
 				$previewBox.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						event.preventDefault();
 						event.stopPropagation();
 
@@ -380,7 +380,7 @@
 			this.isOpen = true;
 		},
 
-		close: function (popHistory) {
+		close(popHistory) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 

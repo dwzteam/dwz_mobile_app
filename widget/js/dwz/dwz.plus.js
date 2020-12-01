@@ -8,7 +8,7 @@
 		 * 从摄像头或相册获取图片 {title:'', maximum:4, maxWidth:1280, maxHeight:1280, callback: null, miscCallback: null}
 		 * 使用miscCallback时需要自己处理，忽略maxWidth, maxHeight, callback
 		 */
-		chooseImage: function (options) {
+		chooseImage(options) {
 			let me = this;
 
 			let buttons = [
@@ -43,7 +43,7 @@
 			);
 		},
 		// 拍照
-		captureImage: function (options) {
+		captureImage(options) {
 			let op = $.extend(
 				{ maxWidth: 1280, maxHeight: 1280, callback: null, miscCallback: null },
 				options
@@ -65,7 +65,7 @@
 								imgPath: entry.toLocalURL(),
 								maxWidth: op.maxWidth,
 								maxHeight: op.maxHeight,
-								callback: function (strBase64) {
+								callback(strBase64) {
 									if (op.callback) {
 										op.callback([strBase64]);
 									}
@@ -85,7 +85,7 @@
 			);
 		},
 		// 打开相册
-		galleryImage: function (options) {
+		galleryImage(options) {
 			let op = $.extend(
 				{
 					maximum: 1,
@@ -116,7 +116,7 @@
 									imgPath: entry.toLocalURL(),
 									maxWidth: op.maxWidth,
 									maxHeight: op.maxHeight,
-									callback: function (strBase64) {
+									callback(strBase64) {
 										arrayBase64.push(strBase64);
 										if (e.files.length == arrayBase64.length && op.callback) {
 											op.callback(arrayBase64);
@@ -137,14 +137,14 @@
 					multiple: true,
 					maximum: op.maximum,
 					system: false,
-					onmaxed: function () {
+					onmaxed() {
 						plus.nativeUI.alert('最多只能选择' + op.maximum + '张图片');
 					}
 				}
 			);
 		},
 		// 压缩图片 暂时没有用到
-		compressImage: function compressImage(options, callback) {
+		compressImage(options, callback) {
 			let me = this;
 			let op = $.extend(
 				{
@@ -184,7 +184,7 @@
 			);
 		},
 		// 转换base64编码
-		getBase64Image: function (options) {
+		getBase64Image(options) {
 			let op = $.extend(
 				{ imgPath: '', maxWidth: 1280, maxHeight: 1280, callback: null },
 				options
@@ -264,7 +264,7 @@
 		 * 选择上传图片缩略图列表预览
 		 * @param options
 		 */
-		previewUploadImg: function (options) {
+		previewUploadImg(options) {
 			let op = $.extend(
 				{ maxW: 80, maxH: 80, maxCount: 4, inputName: 'pics[]' },
 				options
@@ -277,12 +277,12 @@
 				let $button = $uploadWrap.find('button');
 
 				$button.touchwipe({
-					touch: function () {
+					touch() {
 						let selectCount = $previewElem.find('li').size();
 						if (selectCount < op.maxCount) {
 							dwz.plus.chooseImage({
 								maximum: op.maxCount - selectCount,
-								callback: function (arrayBase64) {
+								callback(arrayBase64) {
 									for (let index = 0; index < arrayBase64.length; index++) {
 										previewUploadImg(
 											previewElem,
@@ -307,7 +307,7 @@
 		 * 查看大图片预览
 		 * @param options
 		 */
-		previewImg: function (options) {
+		previewImg(options) {
 			let op = $.extend(
 				{ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' },
 				options
@@ -316,7 +316,7 @@
 				let $wrap = $(this);
 
 				$wrap.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						event.preventDefault();
 						event.stopPropagation();
 
@@ -330,7 +330,7 @@
 
 	$.previewBigImg = {
 		isOpen: false,
-		autoLayout: function (event) {
+		autoLayout(event) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 
@@ -343,7 +343,7 @@
 			$previewBox.find('.bd ul').css({ width: _screenW * $lis.size() + 'px' });
 		},
 
-		open: function ($imgs, touchEvent) {
+		open($imgs, touchEvent) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 			if ($previewBox.size() == 0) {
@@ -353,7 +353,7 @@
 				$previewBox = $('#preview-big-img');
 
 				$previewBox.touchwipe({
-					touch: function (event) {
+					touch(event) {
 						event.preventDefault();
 						event.stopPropagation();
 
@@ -403,7 +403,7 @@
 			this.isOpen = true;
 		},
 
-		close: function (popHistory) {
+		close(popHistory) {
 			let me = this,
 				$previewBox = $('#preview-big-img');
 

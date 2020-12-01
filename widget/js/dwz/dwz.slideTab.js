@@ -1,6 +1,6 @@
 (function ($) {
 	$.fn.extend({
-		slideTab: function (options) {
+		slideTab(options) {
 			let op = $.extend(
 				{
 					activeClass: 'on', // 导航指示圆点活跃class name
@@ -133,7 +133,7 @@
 						let $tab = $(this);
 						$tab.touchwipe({
 							data: index,
-							touch: function (event, pos) {
+							touch(event, pos) {
 								currentIndex = event.data;
 								switchTab(true);
 								switchSlide();
@@ -145,12 +145,12 @@
 						stopPropagationEvents: true,
 						direction: 'horizontal',
 
-						touchstart: function (event, pos) {},
-						touchmove: function (event, pos) {
+						touchstart(event, pos) {},
+						touchmove(event, pos) {
 							let index = op.loop ? 1 : 0;
 							$contentUl.translateX(-currentIndex * slideW - pos.dx + 'px');
 						},
-						touchend: function (event, pos) {
+						touchend(event, pos) {
 							if (pos.dx > 40) {
 								if (currentIndex < count - 1) {
 									currentIndex++;

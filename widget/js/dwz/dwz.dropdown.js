@@ -4,7 +4,7 @@
 
 (function ($) {
 	$.fn.extend({
-		dropdown: function (options) {
+		dropdown(options) {
 			let op = $.extend(
 				{
 					toggle$: '.dropdown-toggle > span',
@@ -19,13 +19,13 @@
 					$menus = $self.find(op.menu$);
 
 				$self.touchwipe({
-					touch: function () {
+					touch() {
 						$self.toggleClass(op.toggleClass);
 					}
 				});
 
 				$menus.touchwipe({
-					touch: function () {
+					touch() {
 						let $menu = $(this);
 						let value = $menu.attr('data-value'),
 							name = $menu.text();

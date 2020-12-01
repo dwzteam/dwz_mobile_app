@@ -1,5 +1,5 @@
 biz.my = {
-	render: function (tpl, params) {
+	render(tpl, params) {
 		let html = template.render(tpl, {
 			UserInfo: UserInfo,
 			widgetList: [
@@ -16,28 +16,28 @@ biz.my = {
 		});
 		this.html(html).initUI();
 	},
-	settingRender: function (tpl, params) {
+	settingRender(tpl, params) {
 		let html = template.render(tpl, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
 		$('#exitSystemButton').touchwipe({
-			touch: function () {
+			touch() {
 				$.alert.confirm('确定要退出登录吗？', {
-					okCall: function () {
+					okCall() {
 						UserInfoUtil.clear();
 						$.gotoLogin();
 					},
-					cancelCall: function () {}
+					cancelCall() {}
 				});
 			}
 		});
 
 		this.find('.dwz-user-icon').touchwipe({
-			touch: function () {
+			touch() {
 				dwz.plus.chooseImage({
 					title: '修改用户头像',
 					maximum: 1,
-					callback: function (imgPath) {
+					callback(imgPath) {
 						if (!imgPath) {
 							return;
 						}
@@ -58,14 +58,14 @@ biz.my = {
 			}
 		});
 	},
-	settingIconRender: function (tpl, params) {
+	settingIconRender(tpl, params) {
 		let html = template.render(tpl, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
 		// let $croppic = this.find('.croppic');
 		// $.croppic.render($croppic);
 		// $croppic.find('.btn-item').touchwipe({
-		// 	touch: function(){
+		// 	touch(){
 		// 		let imgCropData = $.croppic.imgCropData($croppic);
 		// 		console.log(imgCropData);
 		// 	}
@@ -110,13 +110,13 @@ biz.my = {
 		);
 
 		this.find('header .back-btn').touchwipe({
-			touch: function () {
+			touch() {
 				$.navView.close(true, true);
 				FNImageClip.close();
 			}
 		});
 		this.find('header .txt-button').touchwipe({
-			touch: function () {
+			touch() {
 				FNImageClip.save(
 					{
 						destPath: 'fs://image/croppic_' + new Date().getTime() + '.jpg',
@@ -135,7 +135,7 @@ biz.my = {
 								imgPath: ret.destPath,
 								maxWidth: 300,
 								maxHeight: 300,
-								callback: function (strBase64) {
+								callback(strBase64) {
 									console.log(strBase64);
 									if ($.isFunction(params.callbackFn)) {
 										params.callbackFn(strBase64);

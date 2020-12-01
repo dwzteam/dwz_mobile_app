@@ -1,11 +1,7 @@
 const biz = window.biz || {
-	ajaxError: function () {
-		$.alert.toast('操作失败，请稍后再试！');
-	},
-
 	server: {
 		ENV: 'DEV', // DEV,TEST,UAT,LIVE
-		_flag: function () {
+		_flag() {
 			return $.inArray(this.ENV, ['TEST', 'UAT', 'LIVE']) ? 'REMOTE' : this.ENV;
 		},
 		baseUrl: {
@@ -149,13 +145,13 @@ const biz = window.biz || {
 			DEV: './doc/json/ajaxDone.json',
 			REMOTE: '/upload'
 		},
-		getUrl: function (type) {
+		getUrl(type) {
 			return (
 				this.baseUrl[this.ENV] +
 				type[this._flag()].replace('{token}', UserInfo.token)
 			);
 		},
-		getVerifyImgUrl: function () {
+		getVerifyImgUrl() {
 			return (
 				this.baseUrl[this.ENV] +
 				this._verifyImg[this._flag()] +
@@ -163,7 +159,7 @@ const biz = window.biz || {
 				new Date().getTime()
 			);
 		},
-		getLoginUrl: function () {
+		getLoginUrl() {
 			return this.baseUrl[this.ENV] + this._login[this._flag()];
 		}
 	}

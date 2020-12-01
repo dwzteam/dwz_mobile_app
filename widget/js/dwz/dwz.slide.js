@@ -3,7 +3,7 @@
  */
 (function ($) {
 	$.fn.extend({
-		slide: function (options) {
+		slide(options) {
 			let op = $.extend(
 				{
 					titActive: 'on', // 导航指示圆点活跃class name
@@ -195,7 +195,7 @@
 					if ($tits)
 						$tits.each(function (index) {
 							$(this).touchwipe({
-								touch: function (event) {
+								touch(event) {
 									currentIndex = index;
 									switchSlide();
 								}
@@ -205,16 +205,16 @@
 					$mainCell.touchwipe({
 						// stopPropagationEvents:true,
 						direction: 'horizontal',
-						touchstart: function (event, pos) {
+						touchstart(event, pos) {
 							stop();
 						},
-						touchmove: function (event, pos) {
+						touchmove(event, pos) {
 							let index = op.loop ? 1 : 0;
 							$mainCell.translateX(
 								-(currentIndex + index) * slideW - pos.dx + 'px'
 							);
 						},
-						touchend: function (event, pos) {
+						touchend(event, pos) {
 							if (pos.dx > 40) {
 								if (currentIndex < count - (op.loop ? 0 : 1)) {
 									currentIndex++;
