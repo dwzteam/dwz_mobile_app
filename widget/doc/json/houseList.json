@@ -1,0 +1,63 @@
+{
+  "status":1,
+  "info":"",
+  "total":100,
+  "list":[
+    {
+      "id":1,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house01.png"
+    },
+    {
+      "id":2,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house02.png"
+    },
+    {
+      "id":3,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house03.png"
+    },
+    {
+      "id":4,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house04.png"
+    },
+    {
+      "id":5,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house05.png"
+    },
+    {
+      "id":6,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house06.png"
+    },
+    {
+      "id":7,
+      "title":"拎包入住 押一付三 望京精装2居",
+      "sub_title":"两室一厅一卫 / 80m<sup>2</sup> / 南",
+      "tags":["精装修", "押一付三"],
+      "price":7000,
+      "img_url_sm": "image/pic/house01.png"
+    }
+  ]
+}

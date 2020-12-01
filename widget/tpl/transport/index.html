@@ -1,0 +1,27 @@
+<main>
+
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">行程</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="w-tabbar dwz-tabs full-size">
+			<div class="tab-bar">
+				<a class="tab-item j-ajax" data-href="tpl/transport/list.html?dwz_callback=biz.transport.listRender&status=0"><span>待出发</span></a>
+				<a class="tab-item j-ajax" data-href="tpl/transport/list.html?dwz_callback=biz.transport.listRender&status=1"><span>运输中</span></a>
+				<a class="tab-item j-ajax" data-href="tpl/transport/list.html?dwz_callback=biz.transport.listRender&status=2"><span>已完成</span></a>
+			</div>
+			<div class="tab-panel">
+				<div class="panel-item unitBox"></div>
+				<div class="panel-item unitBox"></div>
+				<div class="panel-item unitBox"></div>
+			</div>
+		</div>
+	</div>
+
+</main>

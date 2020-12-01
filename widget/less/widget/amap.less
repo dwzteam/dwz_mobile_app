@@ -1,0 +1,68 @@
+.dwz-map-box {
+	.full-size;
+	background: transparent !important;
+
+	&.hide-marker {
+		.amap-marker {
+			display: none !important;
+		}
+	}
+}
+
+// 基于中心点居中的marker点
+.center-marker {
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+	span {
+		&.marker-txt {
+			width: 100px;
+		}
+		pointer-events: none;
+		color: transparent;
+		text-align: center;
+		font-size: @l5;
+		color: @btnTxtColor;
+		position: relative;
+		font-family: Microsoft Yahei;
+		text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.85);
+		display: block;
+		img {
+			display: block;
+			width: 100%;
+		}
+	}
+	.icon-sm {
+		display: block;
+		width: 30px;
+		height: 30px;
+	}
+	.icon-md {
+		display: block;
+		width: 42px;
+		height: 42px;
+	}
+}
+
+//基于底部中心点的marker点
+.dwz-marker {
+	display: block;
+	text-align: center;
+	transform: translate(-50%, -100%);
+
+	img {
+		width: 100%;
+	}
+	&.icon-sm {
+		width: 20px;
+		height: 30px;
+	}
+	&.icon-md {
+		width: 28px;
+		height: 42px;
+	}
+}
+
+// 去除高德地图水印
+.amap-logo, .amap-copyright {
+	display: none!important;
+}

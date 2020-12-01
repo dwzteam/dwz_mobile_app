@@ -1,0 +1,31 @@
+{
+    "status": 1,
+    "info": "",
+    "data": {
+        "total": 100,
+        "page": 1,
+        "pagesize": 10,
+        "list": [
+            {
+                "transport_time": "2020.09.23",
+                "id": 4,
+                "truck_id": 4,
+                "truck_num": "浙A8888",
+                "status": 0,
+                "ship_company_name": "DWZ团队",
+                "transport_way": "北京-上海-杭州",
+                "receive_company_name": "杭州大前端网络技术工作室"
+            },
+            {
+                "transport_time": "2020.09.23",
+                "id": 5,
+                "truck_id": 5,
+                "truck_num": "浙A8888",
+                "status": 1,
+                "ship_company_name": "DWZ团队",
+                "transport_way": "北京-上海-杭州",
+                "receive_company_name": "杭州大前端网络技术工作室"
+            }
+        ]
+    }
+}

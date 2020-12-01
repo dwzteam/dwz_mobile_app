@@ -1,0 +1,16 @@
+{
+    "status": 1,
+    "info": "",
+    "data": [
+        {
+            "transport_time": "2020.09.23",
+            "id": 5,
+            "truck_id": 5,
+            "truck_num": "浙A8888",
+            "status": 1,
+            "ship_company_name": "DWZ团队",
+            "transport_way": "北京-上海-杭州",
+            "receive_company_name": "大前端工作室"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+<form class="page-wrap page-transport dwz-list-form">
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">行程</div>
+			</div>
+		</div>
+		<ul class="pic-list receive-box"></ul>
+	</header>
+
+	<div class="content">
+		<div class="dwz-map-box"></div>
+	</div>
+
+	<div class="sheet-box"></div>
+
+</form>
+
+<script id="tpl-receive-box" type="text/html">
+	<li class="item">
+		<div class="icon-receive">收</div>
+		<div class="item-content">
+			<p class="item-title1">{{receive.name || '未知'}}</p>
+			<p class="item-info1">{{receive.address}}</p>
+		</div>
+		<div class="btn-group">
+			{{if receive.mobile}}
+			<a class="btn" href="tel:{{receive.mobile}}" target="redirect"><i class="icon icon-phone"></i><span>电话</span></a>
+			{{/if}}
+			<a class="btn" href="javascript:$.navView.open({url:'tpl/transport/driving.html?dwz_callback=biz.transport.driving', data:{{receive}}, rel:'driving'})"><i class="icon icon-map-nav"></i>导航</a>
+		</div>
+	</li>
+</script>
+
+<script id="tpl-sheet-box" type="text/html">
+	<div class="widget-box">
+		<div class="padding-all">
+			<div class="flex-wrap">
+				<div class="item-title1 flex-item">{{vo.transport_time}}<span class="txt-h3"> · {{vo.truck_num}}</span></div>
+				<div class="item-status2 {{vo.status|showTransportStatus 'icon'}}">{{vo.status|showTransportStatus}}</div>
+			</div>
+			<div class="item-info1">运输路线：{{vo.transport_way}}</div>
+		</div>
+	</div>
+
+	<div class="sheet-content">
+
+		<div class="widget-box">
+
+			<div class="item-bar">
+				<a class="flex-item flex-all-center item-info1"><i class="icon-cert"></i>电子证件</a>
+				<div class="split"></div>
+				<a class="flex-item flex-all-center item-info1" onclick="$.navView.open({url: 'tpl/transport/first.html?dwz_callback=biz.transport.firstRender&id={{vo.id}}', rel: 'transportFirst'})">
+					<i class="{{vo.chemicals_weigh_first_commit ? 'icon-yes' : 'icon-no'}}"></i>发货过磅
+				</a>
+				<div class="split"></div>
+				<a class="flex-item flex-all-center item-info1" onclick="$.navView.open({url: 'tpl/transport/last.html?dwz_callback=biz.transport.lastRender&id={{vo.id}}', rel: 'transportLast'})">
+					<i class="{{vo.chemicals_weigh_last_commit ? 'icon-yes' : 'icon-no'}}"></i>卸货过磅
+				</a>
+			</div>
+		</div>
+
+	</div>
+
+	{{if vo.status == 0}}
+	<div class="bleed-margin">
+		<span class="form-submit active dwz-btn-start">出发</span>
+		向右滑动出发<i class="icon-wipe-right"></i>
+	</div>
+	{{else if vo.status == 1}}
+	<div class="bleed-margin">
+		<span class="form-submit active dwz-btn-finish">完成</span>
+		向右滑动完成<i class="icon-wipe-right"></i>
+	</div>
+	{{/if}}
+</script>

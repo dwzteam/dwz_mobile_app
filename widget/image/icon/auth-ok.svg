@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="290px" height="290px" viewBox="0 0 290 290" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>成功</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-5.4%" y="-5.4%" width="110.8%" height="110.8%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="3.57142857" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <filter x="-1.7%" y="-1.7%" width="103.4%" height="103.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.42857143" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="实名认证-认证成功备份" transform="translate(-227.000000, -317.000000)">
+            <g id="成功" transform="translate(231.000000, 321.000000)">
+                <circle id="Oval" stroke="#59C08A" fill-opacity="0.101449275" fill="#59C08A" opacity="0.4" cx="141" cy="141" r="80"></circle>
+                <circle id="Oval" stroke="#59C08A" opacity="0.347826087" filter="url(#filter-1)" cx="141" cy="141" r="104"></circle>
+                <circle id="Oval" stroke="#59C08A" opacity="0.166666667" filter="url(#filter-2)" cx="141" cy="141" r="141"></circle>
+                <g id="对号-(9)" transform="translate(95.000000, 111.000000)" fill="#59C08A" fill-rule="nonzero">
+                    <path d="M86.6436498,1.72521584 L86.2819564,1.3620125 C84.4734895,-0.454004168 81.5799425,-0.454004168 79.8438142,1.3620125 L32.1002877,49.3048526 L8.15618578,25.2607919 C6.34771887,23.4447752 3.4541718,23.4447752 1.71804357,25.2607919 L1.35635018,25.6239952 C-0.452116728,27.4400119 -0.452116728,30.3456386 1.35635018,32.0890146 L28.8450473,59.692468 C29.7131114,60.564156 30.8705302,61 32.1002877,61 C33.2577065,61 34.4151254,60.564156 35.3555282,59.692468 L86.6436498,8.19023519 C88.4521167,6.37421852 88.4521167,3.46859184 86.6436498,1.72521584 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

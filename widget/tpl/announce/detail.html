@@ -1,0 +1,33 @@
+<main>
+
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title"><div class="title">通知资讯</div></div>
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="m-article">
+					<div class="title">{{vo.title}}</div>
+
+					<div class="flex-wrap">
+						<div class="item-info1">{{vo.author}}</div>
+						<div class="flex-item"></div>
+						<div class="item-info1">阅读({{vo.reading_num}})</div>
+						<div class="flex-item"></div>
+						<div class="item-info1">{{vo.created_at}}</div>
+					</div>
+					<div class="pic"><img src="{{vo.pic_url}}"></div>
+					<div class="info pre-wrap">{{@ vo.content}}</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</main>

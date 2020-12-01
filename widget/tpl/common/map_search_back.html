@@ -1,0 +1,41 @@
+<div class="page-wrap">
+	<div class="header">
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="search-bar flex-item">
+				<label class="item-input filter-keywords">
+					<button class="icon icon-search" type="button"></button>
+					<input type="search" class="dwz-disable-autofocus" name="keyword" value="" placeholder="搜索关键字">
+				</label>
+			</div>
+
+			<a class="bar-button button active dwz-ok-btn">确定</a>
+		</div>
+	</div>
+
+	<div class="dwz-map layout-semi-h"></div>
+
+	<div class="content">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<ul class="list"></ul>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script id="tpl-list" type="text/html">
+	{{each list as item}}
+	<li class="item">
+		<div class="flex-wrap">
+			<div class="icon icon-poi"></div>
+			<div class="flex-item">
+				<p class="item-title1">{{item.title}}</p>
+				<p class="item-info1">{{item.address}}</p>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</script>

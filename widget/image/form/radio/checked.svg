@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>选中</title>
+    <desc>Created with Sketch.</desc>
+    <g id="三期一些零散调整" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我要预约-已选择" transform="translate(-405.000000, -662.000000)" fill="#5867C4">
+            <g id="选中" transform="translate(405.000000, 662.000000)">
+                <path d="M20,0 C8.954305,0 0,8.954305 0,20 C0,31.045695 8.954305,40 20,40 C31.045695,40 40,31.045695 40,20 C40,8.954305 31.045695,0 20,0 Z M20,1.9047619 C29.993724,1.9047619 38.0952381,10.006276 38.0952381,20 C38.0952381,29.993724 29.993724,38.0952381 20,38.0952381 C10.006276,38.0952381 1.9047619,29.993724 1.9047619,20 C1.9047619,10.006276 10.006276,1.9047619 20,1.9047619 Z" id="椭圆形备份-9" fill-rule="nonzero"></path>
+                <circle id="椭圆形备份-9" cx="20" cy="20" r="12"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

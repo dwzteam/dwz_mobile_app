@@ -1,0 +1,66 @@
+<main>
+    <header class="semi-header">
+		<div class="toolbar">
+			<div class="flex-item"></div>
+			<a class="bar-button" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="icon icon-setting"></i></a>
+			<a class="bar-button" target="navView" data-href="tpl/about.html?dwz_callback=renderAbout" rel="about"><i class="icon icon-i"></i></a>
+		</div>
+	</header>
+
+    <div class="content">
+        <div class="scroll-content dwz-scroll">
+            <div class="scroll">
+
+                <a class="my-info" id="my_info_box" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
+                    <img id="my_user_icon_img" class="my-avatar" src="{{UserInfo.headimgurl|showUserIcon}}">
+                    <span class="name">{{UserInfo.realname}}</span>
+                </a>
+
+                <div class="divider"></div>
+                <div class="dwz-panel">
+                    <div class="panel-header padding-h">
+                        <label class="panel-title">服务大厅</label>
+                        <a class="panel-title-right"><i class="icon icon-more"></i></a>
+                    </div>
+                    <div class="panel-content">
+                        <div class="grids-contant">
+                            <a class="grids-grid" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
+                                <div class="grids-grid-icon"><img src="image/icon/service/setting.svg"></div>
+                                <p class="grids-grid-label">设置</p>
+                            </a>
+                            <a class="grids-grid" target="navView" data-href="tpl/my/feedback.html?dwz_callback=" rel="feedback">
+                                <div class="grids-grid-icon"><img src="image/icon/service/feedback.svg"></div>
+                                <p class="grids-grid-label">反馈</p>
+                            </a>
+                            <a class="grids-grid" target="navView" data-href="tpl/about.html?dwz_callback=renderAbout" rel="about">
+                                <div class="grids-grid-icon"><img src="image/icon/service/about.svg"></div>
+                                <p class="grids-grid-label">关于</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="dwz-panel">
+                    <div class="panel-header padding-h">
+                        <label class="panel-title">DWZ Mobile组件</label>
+                    </div>
+                    <div class="panel-content">
+                        <div class="grids-contant">
+
+                            {{each widgetList as item}}
+                            <a class="grids-grid" target="navView" data-href="tpl/widget/{{item}}/index.html" rel="widget">
+                                <div class="grids-grid-icon"><img src="image/icon/widget/{{item}}.svg"></div>
+                                <p class="grids-grid-label">{{item}}</p>
+                            </a>
+                            {{/each}}
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>

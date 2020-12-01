@@ -1,0 +1,55 @@
+.mask-background {
+	display: none;
+	z-index: 999;
+	.full-fixed;
+	.backdrop-filter;
+	background: rgba(0, 0, 0, 0.6) fixed;
+
+	&.open {
+		display: block;
+	}
+}
+
+.pop-header {
+}
+
+.pop-window {
+	.full-fixed;
+	display: none;
+	z-index: 1000;
+
+	.pop-content {
+		width: 80vmin;
+		min-height: 60vmin;
+		max-height: 88vh;
+		border-radius: 5px;
+		background: #fff;
+		position: relative;
+		padding: 10px;
+	}
+
+	.pop-close {
+		display: block;
+		.icon;
+		.icon-close;
+		position: absolute;
+		right: -12px;
+		top: -12px;
+		transform: translate(20px, 20px, 0);
+	}
+
+	&.open {
+		.flex-all-center;
+	}
+
+	&.fullscreen {
+		background: @defaultBackground;
+		.pop-content {
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: none;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"presets": [
+		[
+			"env",
+			{
+				"modules": false,
+				"targets": {
+					"browsers": ["last 2 versions", "Android >= 4.0", "ios >= 6"]
+				},
+				"debug": false,
+				"include": [],
+				"useBuiltIns": false
+			}
+		]
+	],
+	"plugins": ["transform-decorators-legacy"]
+}

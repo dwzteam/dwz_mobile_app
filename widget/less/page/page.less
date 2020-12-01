@@ -1,0 +1,59 @@
+// 文章类详细页面
+.m-article {
+	background: #fff;
+	padding: 10px;
+
+	.pic {
+		img {
+			width: 100%;
+		}
+	}
+
+	.title {
+		font-size: 16px;
+		color: #333;
+	}
+	.sub-title {
+		.flex-wrap;
+		line-height: 24px;
+		font-size: @l3;
+
+		span {
+			margin-right: 5px;
+		}
+	}
+
+	.time {
+		font-size: 14px;
+		color: #999;
+	}
+
+	.info {
+		font-size: @l3;
+		line-height: 22px;
+		color: #666;
+	}
+}
+
+.sign-box.pic {
+	.flex-all-center;
+	margin-bottom: 10px;
+	position: relative;
+	img {
+		width: 25vmin;
+	}
+	.btn-txt {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		color: @linkColorActive;
+		font-size: @l3;
+		background: @defaultBackground;
+		padding: 5px 10px;
+		border-radius: 5px;
+	}
+}
+
+.page-sign {
+	background: @defaultBackground;
+}

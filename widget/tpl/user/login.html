@@ -1,0 +1,88 @@
+<main>
+    <header>
+        <div class="toolbar">
+<!--            <button class="bar-button"><i class="icon icon-back"></i></button>-->
+            <div class="header-title">
+                <div class="title">登录</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <div class="w-tabbar dwz-tabs full-size">
+            <div class="tab-bar">
+                <a class="tab-item active"><span>密码登录</span></a>
+                <a class="tab-item"><span>短信登录</span></a>
+            </div>
+            <div class="tab-panel">
+                <div class="panel-item unitBox">
+
+                    <form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
+                        <div class="scroll-content dwz-scroll">
+                            <div class="scroll">
+
+                                <div class="pageFormContent">
+                                    <div class="item">
+                                        <div class="item-content">
+                                            <input type="text" name="mobile" class="required" placeholder="请输入手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="item-content">
+                                            <input type="password" name="password" class="required" placeholder="请输入密码" maxlength="30" pattern=".{1,30}" data-error="请输入密码">
+                                            <a data-href="tpl/user/forgetPwd.html?dwz_callback=forgetPwdRender" target="dialog" data-pop="fullscreen">忘记密码</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="padding-all">
+                                    <button class="form-submit" type="submit">登录</button>
+                                </div>
+
+                                <a data-href="tpl/user/register.html?dwz_callback=registerRender" target="dialog" data-pop="fullscreen" class="login-footer">还没有账号? 快速注册</a>
+                                <p class="login-footer">测试账号：17767167745，密码：123456</p>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="panel-item unitBox">
+                    <form method="post" action="{{login_sms_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
+                        <div class="scroll-content dwz-scroll">
+                            <div class="scroll">
+
+                                <div class="pageFormContent">
+                                    <div class="item">
+                                        <div class="item-content">
+                                            <input type="text" name="mobile" placeholder="请输入手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="item-content">
+                                            <input type="text" name="mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
+                                            <a target="sendVerifyMs" data-href="{{sms_code_url}}" rel="input[name=mobile]" data-op="2">获取验证码</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="padding-all">
+                                    <button class="form-submit" type="submit">登录</button>
+                                </div>
+
+                                <a data-href="tpl/user/register.html?dwz_callback=registerRender" target="dialog" data-pop="fullscreen" class="login-footer">还没有账号? 快速注册</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>

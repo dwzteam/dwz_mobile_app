@@ -1,0 +1,272 @@
+.view-container {
+	.full-abs;
+	overflow: hidden;
+	background: @defaultBackground;
+	.flex-wrap;
+	.flex-vertical;
+}
+
+main,
+.page-wrap {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	.flex-wrap;
+	.flex-vertical;
+}
+
+// 相当于panel，独立完整的内容
+article {
+}
+
+// 有联系的内容组
+section {
+}
+
+// 标签规定独立的流内容（图像、图表、照片、代码等等）
+figure {
+	figcaption {
+	}
+}
+
+.content {
+	position: relative;
+	.flex-item;
+}
+
+.scroll-content {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+
+	.scroll {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+	}
+}
+
+.scroll-content-x {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+
+	.scroll-x {
+		display: table-row;
+
+		.item {
+			display: table-cell;
+			padding: 0 10px;
+			.item-pic {
+				margin: 0;
+			}
+		}
+	}
+}
+
+.pane {
+	z-index: 5;
+	background: @defaultBackground;
+
+	&.active {
+		position: absolute;
+		z-index: 1;
+	}
+
+	&.cached {
+		position: absolute;
+		z-index: 0;
+	}
+}
+
+.detail-content {
+	background: #fff;
+	padding: 15px;
+	font-size: 14px;
+	color: #333;
+}
+
+/* 一级标题 */
+.txt-h1 {
+	font-size: @l1;
+	color: @titleColor;
+	line-height: 28px;
+}
+
+/* 二级标题 */
+.txt-h2 {
+	font-size: @l2;
+	color: @titleColor;
+	line-height: 26px;
+}
+
+/* 三级标题 */
+.txt-h3 {
+	font-size: @l3;
+	color: @titleColor;
+	line-height: 24px;
+}
+
+/* 正文描述 */
+.txt-desc {
+	font-size: @l4;
+	color: @txtColor;
+	line-height: 22px;
+}
+
+/* 正文备注 */
+.txt-info {
+	font-size: @l5;
+	color: @infoColor;
+	line-height: 20px;
+}
+
+.txt-h1,
+.txt-h2,
+.txt-h3,
+.txt-desc,
+.txt-info {
+	&.center {
+		text-align: center;
+	}
+
+	&.right {
+		text-align: right;
+	}
+}
+
+.item-title1,
+.item-title2,
+.item-title3,
+.item-info1,
+.item-info2,
+.item-info3,
+.txt-line1,
+.txt-line2,
+.txt-line3 {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	.icon {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		margin: 0 5px;
+	}
+	&.flex-all-center {
+		display: flex;
+	}
+}
+
+.item-title1,
+.item-title2,
+.item-title3 {
+	font-size: @l3;
+	color: @titleColor;
+}
+
+.item-info1,
+.item-info2,
+.item-info3 {
+	font-size: @l4;
+	color: @infoColor;
+}
+
+.item-title2,
+.item-info2,
+.txt-line2 {
+	-webkit-line-clamp: 2;
+}
+
+.item-title3,
+.item-info3,
+.txt-line3 {
+	-webkit-line-clamp: 3;
+}
+
+.item-status {
+	display: inline-block;
+	line-height: 20px;
+	width: 50px;
+	overflow: hidden;
+	border-radius: 10px;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+	background: #999999;
+
+	&.status-pass {
+		background: #7ebb66;
+	}
+
+	&.status-fail {
+		background: #9eadcb;
+	}
+
+	&.status-pending {
+		background: #f5a623;
+	}
+
+	&.status-cancel {
+		background: #999999;
+	}
+}
+
+.item-status2 {
+	line-height: 20px;
+	font-weight: bold;
+	padding: 0;
+
+	&.status-pass {
+		color: #f5a623;
+	}
+
+	&.status-fail {
+		color: #9eadcb;
+	}
+
+	&.status-pending {
+		color: #f7af56;
+	}
+
+	&.status-cancel {
+		color: #999999;
+	}
+}
+
+.alert-box {
+	.item-title1;
+	padding: 10px 10px;
+	background: #dff8d4;
+	color: #7ebb66;
+	.button {
+		background: none;
+		border-radius: 15px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0 8px;
+		margin-left: 8px;
+		white-space: nowrap;
+	}
+}
+
+.txt-addr-pos {
+	position: relative;
+	.flex-wrap;
+	.align-center;
+	padding: 5px 0;
+	&:before {
+		content: " ";
+		width: 19px;
+		height: 22px;
+		background: url("../../image/icon/icon-pos.svg") no-repeat center center;
+		background-size: 100% 100%;
+		margin-right: 10px;
+	}
+}

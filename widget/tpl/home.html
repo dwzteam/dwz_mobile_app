@@ -1,0 +1,103 @@
+<form class="dwz-list-form page-wrap">
+	<input type="hidden" name="pageNum" value="1">
+
+	<header class="float-header">
+		<div class="toolbar">
+			<div></div>
+			<a class="bar-button" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="icon icon-user"></i></a>
+		</div>
+	</header>
+
+	<div class="scroll-content dwz-list">
+
+		<div class="scroll">
+			<div class="pullDown">
+				<span class="pullDownIcon">&nbsp;</span>
+				<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+			</div>
+
+			<div id="home-ad-box"></div>
+
+			<div class="dwz-panel">
+				<div class="panel-header padding-h">
+					<label class="panel-title">我的行程</label>
+					<a class="panel-title-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.pageRender" rel="transport">查看更多<i class="arrow-right"></i></a>
+				</div>
+				<div class="panel-content" id="transport-card-box"></div>
+			</div>
+
+			<div class="divider"></div>
+
+			<div class="dwz-panel">
+				<div class="panel-header padding-h">
+					<label class="panel-title">通知资讯</label>
+					<a class="panel-title-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="arrow-right"></i></a>
+				</div>
+				<div class="panel-content">
+					<ul id="home-announce-box" class="list pic-list">
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</form>
+
+<script id="tpl-home-ad" type="text/html">
+	<div class="dwz-slide">
+		<div class="bd">
+			<ul>
+				{{each data as item}}
+				<li>
+					<img src="{{item.pic_url}}" />
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="hd">
+			<ul></ul>
+		</div>
+	</div>
+</script>
+
+<script id="tpl-transport" type="text/html">
+	{{each data as item}}
+	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
+		<div class="flex-wrap">
+			<div class="item-title1 flex-item"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
+			<div class="item-info1">{{item.status|showTransportStatus}}</div>
+		</div>
+
+		<div class="flex-wrap">
+			<div class="dot-path">
+				<div class="dot-start"></div>
+				<div class="dot-end"></div>
+			</div>
+			<div class="flex-item">
+				<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
+				<div class="item-info3">运输路线：{{item.transport_way}}</div>
+				<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
+			</div>
+		</div>
+	</a>
+	{{/each}}
+</script>
+
+<script id="tpl-list" type="text/html">
+	{{each data as item}}
+	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-content">
+			<div class="item-title1">{{item.title}}</div>
+			<div class="item-info2">{{item.content}}</div>
+			<div class="flex-item"></div>
+			<div class="flex-wrap">
+				<div class="txt-info txt-line1 flex-item">{{item.author}}</div>
+				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</script>

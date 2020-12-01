@@ -1,0 +1,68 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">录入发货过磅信息</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<form method="post" action="{{form_url}}" onsubmit="return biz.transport.formSubmitWeigh(this)">
+			<input type="hidden" name="transport_id" value="{{vo.id}}">
+			<input type="hidden" name="type" value="1"><!-- 1 发货过磅 2 卸货过磅 3 电子签名 -->
+			<div class="scroll-content dwz-scroll">
+				<div class="scroll">
+
+					{{if vo.status == 0}}
+					<div class="pageFormContent unitBox">
+						<div class="item">
+							<label class="name">净重(kg)</label>
+							<div class="item-content">
+								<input type="number" name="chemicals_weigh_first_commit" value="{{vo.chemicals_weigh_first_commit|filterInputNum}}" class="required" placeholder="请输入净重" min="0.00" max="100000.00" step="0.01" data-error="请输入净重">
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">磅单照片</label>
+								<ul id="upload-preview-feedback" class="upload-preview dwz-ctl-del">
+									{{each vo.chemicals_weigh_first_pic as item}}<li class="thumbnail"><a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+								</ul>
+								<div class="upload-wrap" rel="#upload-preview-feedback" data-name="__imgUrl[]">
+									<button type="button">Upload</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="bleed-margin">
+						<button class="form-submit" type="submit">提交</button>
+					</div>
+					{{else}}
+					<div class="pageFormContent unitBox">
+						<div class="item">
+							<label class="name">净重(kg)</label>
+							<div class="item-content">
+								<input type="number" name="chemicals_weigh_first_commit" value="{{vo.chemicals_weigh_first_commit}}" readonly>
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">磅单照片</label>
+								<ul class="upload-preview">
+									{{each vo.chemicals_weigh_first_pic as item}}<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+								</ul>
+							</div>
+						</div>
+					</div>
+					{{/if}}
+
+				</div>
+			</div>
+		</form>
+
+	</div>
+</main>
+

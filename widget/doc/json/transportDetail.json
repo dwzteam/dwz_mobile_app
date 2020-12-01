@@ -1,0 +1,39 @@
+{
+    "status": 1,
+    "info": "",
+    "data": {
+        "id": 4,
+        "ship_company_id": 1,
+        "receive_company_id": 1,
+        "chemicals_weigh": 1000,
+        "transport_way": "北京-上海-杭州",
+        "truck_id": 4,
+        "truck_num": "浙A8888",
+        "transport_time": "2020.09.23",
+        "chemicals_weigh_first_commit": 0,
+        "chemicals_weigh_first_pic": [],
+        "chemicals_weigh_first_time": 0,
+        "chemicals_weigh_last_commit": 0,
+        "chemicals_weigh_last_time": 0,
+        "chemicals_weigh_last_pic": [],
+        "receive_chemicals_signature": [],
+        "status": 0,
+        "ship": {
+            "id": 1,
+            "name": "DWZ团队",
+            "address": "北京市朝阳区望京SOHO",
+            "mobile": "17767167745",
+            "lng": 119.905783,
+            "lat": 28.904998
+        },
+        "receive": {
+            "id": 1,
+            "name": "杭州大前端网络技术工作室",
+            "address": "浙江省杭州市余杭区恒生科技园",
+            "mobile": "17767167745",
+            "lat": 30.730488,
+            "lng": 120.796468
+        },
+        "point": []
+    }
+}

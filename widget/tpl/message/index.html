@@ -1,0 +1,54 @@
+<form class="dwz-list-form page-wrap">
+	<input type="hidden" name="pageNum" value="1">
+	<header>
+		<div class="toolbar">
+			<div class="header-title">
+				<div class="title">我的消息</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-list">
+			<div class="scroll">
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+				</div>
+				<div class="empty_box">
+					<div class="empty-img">
+						<img src="image/browse-empty-bg.svg">
+					</div>
+					<p style="color:#999; text-align:center;">暂时还没有数据哦~</p>
+				</div>
+				<ul class="list pic-list">
+
+				</ul>
+
+				<div class="pullUp">
+					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中...">更多...</span>
+				</div>
+
+			</div>
+			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
+		</div>
+
+	</div>
+</form>
+
+<script id="tpl-list" type="text/html">
+	{{each list as item}}
+	<li class="item dwz-open-right" data-id="{{item.id}}">
+		<div class="item-icon"><img src="./image/icon/icon-notice.svg"></div>
+		<div class="item-content">
+			<div class="flex-wrap">
+				<p class="item-title1 flex-item">{{item.title}}</p>
+				<p class="item-info1">{{item.created_at}}</p>
+			</div>
+			<p class="item-info1">{{item.content}}~</p>
+		</div>
+		<a class="del-btn" href="javascript:biz.message.removeItem({{item}})"><span>删除</span></a>
+	</li>
+	{{/each}}
+</script>

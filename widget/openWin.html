@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title>DWZ</title>
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+
+	<script>
+		apiready = function () {
+			api.openWin({
+				name: 'page1',
+				url: './index.html',
+				allowEdit: true,
+				useWKWebView: false // $.ajax 不支持useWKWebView:true
+			});
+
+			// api.openFrame({
+			// 	name: 'page1',
+			// 	url: './index.html',
+			// 	allowEdit: true,
+			// 	useWKWebView: true,
+			// 	historyGestureEnabled: true,
+			// 	singleInstance: true,
+			// 	rect: {x: 0, y: 0, w: api.winWidth, h: api.winHeight}
+			// });
+
+
+			// var frames = [
+			// 	{
+			// 		name: 'index',
+			// 		url: 'index.html',
+			// 		allowEdit: true,
+			// 		useWKWebView: true,
+			// 		historyGestureEnabled:false,
+			// 		bgColor: 'rgba(0,0,0,.2)',
+			// 		bounces: false
+			// 	}
+			// ];
+			// api.openFrameGroup({
+			// 	name: 'indexFrame',
+			// 	scrollEnabled: false,
+			// 	rect: {
+			// 		x: 0,
+			// 		y: 0,
+			// 		w: api.winWidth,
+			// 		h: api.winHeight
+			// 	},
+			// 	index: 0,
+			// 	frames: frames
+			// }, function (ret, err) {});
+		}
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
