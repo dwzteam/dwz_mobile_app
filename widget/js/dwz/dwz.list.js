@@ -106,7 +106,7 @@ $.fn.extend({
 });
 
 $.extend({
-	listForm ($form) {
+	listForm($form) {
 		let $list = $form.find('div.dwz-list');
 		$form.on('submit', function () {
 			$form.requestList();
@@ -119,12 +119,12 @@ $.extend({
 
 		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
 		$list.list({
-			refreshFn () {
+			refreshFn() {
 				console.log('refreshFn...');
 				if ($page.size()) $page.val(1);
 				$form.requestList();
 			},
-			loadMoreFn () {
+			loadMoreFn() {
 				console.log('loadMoreFn...');
 				if (
 					$page.size() &&

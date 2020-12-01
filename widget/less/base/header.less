@@ -15,9 +15,8 @@ header {
 	&.login-header {
 		border: none;
 	}
-	&.float-header {
+	&.float-header, &.semi-float {
 		.icon-back {background-image: url('../../image/icon/icon_back.svg');}
-		background: rgba(255, 255, 255, 0.2);
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -32,6 +31,10 @@ header {
 			}
 		}
 	}
+	&.semi-float {
+		background: rgba(255, 255, 255, 0.2);
+	}
+
 	.header-title {
 		display: -webkit-flex;
 		display: flex;

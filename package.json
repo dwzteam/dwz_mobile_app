@@ -7,7 +7,7 @@
 		"dev": "gulp dev",
 		"build": "gulp build",
 		"clean": "gulp clean-build",
-		"lint": "npx eslint widget",
+		"lint": "npx eslint widget --fix",
 		"sync": "apicloud wifiSync --project ./widget --updateAll false",
 		"start": "apicloud wifiStart",
 		"log": "apicloud wifiLog"
