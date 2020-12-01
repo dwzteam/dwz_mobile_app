@@ -3,7 +3,10 @@ biz.my = {
 		let html = template.render(tpl, {
 			UserInfo: UserInfo,
 			widgetList: [
+				'navTab',
+				'navView',
 				'dialog',
+				'panel',
 				'alert',
 				'table',
 				'form',
@@ -11,7 +14,7 @@ biz.my = {
 				'tabs',
 				'slide',
 				'slideTab',
-				'panel'
+				'charts'
 			]
 		});
 		this.html(html).initUI();
