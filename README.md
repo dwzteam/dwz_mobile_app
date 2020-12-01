@@ -17,6 +17,10 @@
 ```
 git clone https://gitee.com/dwzteam/dwz_mobile_app.git
 ```
+或者
+```
+git clone https://github.com/dwzteam/dwz_mobile_app.git
+```
 2. 开发环境 Chrome 中运行
 
     - 第一次运行，需要初始化工程 `npm intall`
