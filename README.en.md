@@ -16,6 +16,10 @@
 ```
 git clone https://gitee.com/dwzteam/dwz_mobile_app.git
 ```
+or
+```
+git clone https://github.com/dwzteam/dwz_mobile_app.git
+```
 2. run for test
 
     - `npm intall`

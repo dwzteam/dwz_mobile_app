@@ -5,6 +5,15 @@
 - DWZ 手机版 HTML5 + 原生 混合开发框架。
 - 基于原生JS轻量级移动端开发框架，核心代码库dwz.core.js使用方式和jQuery 80%相似，针对移动端精简优化代码（核心库代码相当于jQuery的十分之一）。
 
+> ### 设计思路
+
+1. 灵活定制扩展方便：gulp构建工程，组件html结构、css（使用less）、javascript完全开放，可以实际项目要求灵活定制。
+2. 轻量级：封装精简版核心库dwz.core.js，相当于一个专门针对移动端优化的精简版jQuery，代码量只有jQuery 的十分之一左右，使用方式基本同jQuery。
+3. 统一风格：UI组件不依赖于第三方组件库，都是统一封装的，组件样式可以灵活定制。
+4. 跨平台：Android应用、iOS应用、公众号。
+5. 支持屏幕自适配：手机、平板、PC、大屏（包含非正常比例拼接屏）界面布局可以支持自动适配。
+
+
 **Require:**
 
 - node\^10.13.0 `https://nodejs.org/en/download`
@@ -27,9 +36,12 @@ git clone https://github.com/dwzteam/dwz_mobile_app.git
     - 前端开发模式运行，会自动打开chrome `npm run dev`
 
 > ### [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
-- `http://dwzteam.gitee.io/dwz_mobile_doc_v1`
 
-> ### Demo 演示
+> ### DWZ Mobile 开源项目仓库
+- [Gitee仓库](https://gitee.com/dwzteam/dwz_mobile_app)
+- [Gitbug仓库](https://github.com/dwzteam/dwz_mobile_app)
+
+> ### DWZ Mobile Demo 演示
 - 在线演示版，使用chrome 开发模式设置手机版 `http://mobile.jui.org`
 - 安卓Apk安装设置版 `http://mobile.jui.org/apk/dwz_mobile_dev.apk`
 - 视频演示 `http://mobile.jui.org/video/dwz_mobile.mp4`
