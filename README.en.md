@@ -6,9 +6,9 @@
 
 **Require:**
 
-- node\^10.13.0【https://nodejs.org/en/download/】
-- npm\^6.14.5【nodejs has been integrated into the npm】
-- apicloud-cli\^0.2.0【npm install -g apicloud-cli】
+- node\^10.13.0 `https://nodejs.org/en/download`
+- npm\^6.14.5 `nodejs has been integrated into the npm`
+- apicloud-cli\^0.2.0 `npm install -g apicloud-cli`
 
 > ### Quickstart
 

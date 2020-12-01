@@ -9,6 +9,10 @@
         {
             "title": "轮播图2",
             "pic_url": "image/pic/car_2.jpg"
+        },
+        {
+            "title": "轮播图3",
+            "pic_url": "image/pic/3d_1.jpg"
         }
     ]
 }
