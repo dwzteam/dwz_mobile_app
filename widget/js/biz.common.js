@@ -59,19 +59,19 @@ function ajaxError(xhr, ajaxOptions, thrownError) {
 
 $.extend(biz, {
 	safeAreaTop: 0,
-	fixStatusBar: function ($p) {
+	fixStatusBar ($p) {
 		$p.find('header, dwz-fix-status-bar').css({
 			'padding-top': biz.safeAreaTop + 'px'
 		});
 	},
-	hasPermission: function (perms) {
+	hasPermission (perms) {
 		const ret = api.hasPermission({
 			list: perms
 		});
 		console.log(JSON.stringify(ret));
 		return ret;
 	},
-	requestPermission: function (perms, callback) {
+	requestPermission (perms, callback) {
 		api.requestPermission(
 			{
 				list: perms,
@@ -85,7 +85,7 @@ $.extend(biz, {
 			}
 		);
 	},
-	initPermission: function (premsMap) {
+	initPermission (premsMap) {
 		$.each(Object.keys(premsMap), function (index, permName) {
 			const has = biz.hasPermission([permName]);
 			if (!has || !has[0] || !has[0].granted) {
@@ -93,7 +93,7 @@ $.extend(biz, {
 			}
 		});
 	},
-	checkPermission: function (permName, msg) {
+	checkPermission (permName, msg) {
 		const has = biz.hasPermission([permName]);
 		if (!has || !has[0] || !has[0].granted) {
 			api.confirm(
@@ -112,7 +112,7 @@ $.extend(biz, {
 		}
 		return true;
 	},
-	updateApp: function (result) {
+	updateApp (result) {
 		if (api.systemType == 'android') {
 			api.download(
 				{
@@ -143,7 +143,7 @@ $.extend(biz, {
 			});
 		}
 	},
-	checkUpdate: function () {
+	checkUpdate () {
 		const mam = api.require('mam');
 		mam.checkUpdate(function (ret, err) {
 			if (ret) {
@@ -195,7 +195,7 @@ $.extend(biz, {
 	},
 
 	// 高德地图规划驾车路径
-	createDriving: function (options, callback) {
+	createDriving (options, callback) {
 		const op = $.extend(
 			{
 				map: null,
@@ -264,7 +264,7 @@ $.extend(biz, {
 		}
 	},
 	// 开启gps
-	startLocation: function () {
+	startLocation () {
 		if (biz.location.lastTime) {
 			return;
 		}
@@ -343,15 +343,14 @@ $.extend(biz, {
 				}
 			}
 		);
+	},
+	pageRender (tpl, param) {
+		const $box = this;
+	
+		const html = template.render(tpl, param);
+		$box.html(html).initUI();
 	}
 });
-
-function pageRender(tpl, param) {
-	const $box = this;
-
-	const html = template.render(tpl, param);
-	$box.html(html).initUI();
-}
 
 // Store 基类
 const CommonStore = {

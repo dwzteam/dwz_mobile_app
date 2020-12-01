@@ -1374,51 +1374,52 @@ footer .button.inactive {
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  line-height: 20px;
 }
-/* line 45, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 46, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item.icon-wrap {
   -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
 }
-/* line 47, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 48, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item.icon-wrap img {
   display: block;
   max-width: 66px;
   max-height: 66px;
   border-radius: 50%;
 }
-/* line 54, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 55, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .item-pic {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
-/* line 57, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 58, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .item-icon {
   margin-right: 10px;
 }
-/* line 59, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 60, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .item-icon img {
   display: block;
   max-height: 44px;
   max-width: 44px;
   border-radius: 50%;
 }
-/* line 67, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 68, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item.active {
   background-color: #d9d9d9;
   -webkit-transition: none;
   transition: none;
 }
-/* line 72, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 73, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item img.icon {
   max-height: 21px;
   max-width: 21px;
   float: left;
   margin: 10px 10px 0 0;
 }
-/* line 79, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 80, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .del-btn {
   position: absolute;
   top: 0;
@@ -1434,7 +1435,7 @@ footer .button.inactive {
   color: #fff;
   vertical-align: middle;
 }
-/* line 92, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 93, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .del-btn span {
   position: absolute;
   left: 50%;
@@ -1446,21 +1447,21 @@ footer .button.inactive {
   font-weight: bold;
   margin: auto;
 }
-/* line 104, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 105, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item .del-btn.open-right .del-btn {
   -webkit-transform: translate3d(0px, 0px, 0px);
           transform: translate3d(0px, 0px, 0px);
 }
-/* line 111, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 112, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list .item.open-right .del-btn {
   -webkit-transform: translate3d(0px, 0px, 0px);
           transform: translate3d(0px, 0px, 0px);
 }
-/* line 119, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 120, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .list.scroll-x .item:before {
   border: none;
 }
-/* line 127, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 128, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1472,18 +1473,18 @@ ul.pic-list .item {
   padding: 5px 10px;
   line-height: normal;
 }
-/* line 134, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 135, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item:first-child {
   border: none;
 }
-/* line 137, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 138, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item.tb-line {
   border-style: solid;
   border-width: 1px 0 1px 0;
   border-color: rgba(204, 204, 204, 0.5);
   margin-bottom: 10px;
 }
-/* line 142, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 143, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-pic {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1505,16 +1506,16 @@ ul.pic-list .item .item-pic {
   border: solid 1px #ddd;
   border-radius: 5px;
 }
-/* line 152, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 153, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-pic.user-icon {
   width: 90px;
 }
-/* line 156, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 157, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-pic img {
   display: block;
   width: 100%;
 }
-/* line 164, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 165, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1532,7 +1533,7 @@ ul.pic-list .item .item-content {
   position: relative;
   overflow: hidden;
 }
-/* line 170, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 171, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content .item-tag {
   color: #777;
   background-color: #f6f6f6;
@@ -1542,14 +1543,14 @@ ul.pic-list .item .item-content .item-tag {
   font-size: 12px;
   display: inline-block;
 }
-/* line 180, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 181, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 ul.pic-list .item .item-content .item-price,
 ul.pic-list .item .item-content .item-phone {
   line-height: 24px;
   font-size: 16px;
   color: #ff480a;
 }
-/* line 190, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 191, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .search-bar.bar,
 .dateRange.bar {
   -webkit-transition: all 0.5s ease;
@@ -1558,7 +1559,7 @@ ul.pic-list .item .item-content .item-phone {
           transform: translate3d(0px, 0px, 0px);
   width: 100%;
 }
-/* line 196, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 197, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .search-bar .item-input,
 .dateRange .item-input {
   display: -webkit-box;
@@ -1583,7 +1584,7 @@ ul.pic-list .item .item-content .item-phone {
   padding-left: 8px;
   background: #f6f6f6;
 }
-/* line 205, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 206, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .search-bar .item-input .icon,
 .dateRange .item-input .icon {
   width: 15px;
@@ -1591,7 +1592,7 @@ ul.pic-list .item .item-content .item-phone {
   background-repeat: no-repeat;
   background-position: center;
 }
-/* line 212, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 213, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .search-bar .item-input .icon-search,
 .dateRange .item-input .icon-search {
   background-color: transparent;
@@ -1599,7 +1600,7 @@ ul.pic-list .item .item-content .item-phone {
   background-size: 100%;
   background-image: url('../image/icon/icon-search.svg');
 }
-/* line 219, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 220, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .search-bar .item-input input[type="search"],
 .dateRange .item-input input[type="search"] {
   position: relative;
@@ -1619,22 +1620,22 @@ ul.pic-list .item .item-content .item-phone {
   outline-width: 0;
   background-color: transparent;
 }
-/* line 237, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 238, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .hideBarCtl header,
 .hideBarCtl .content {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-/* line 242, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 243, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .hideBarCtl.hideBar header {
   -webkit-transform: translate3d(0px, -44px, 0px);
           transform: translate3d(0px, -44px, 0px);
 }
-/* line 246, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 247, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .hideBarCtl.hideBar .content {
   margin-top: -44px;
 }
-/* line 252, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 253, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .top-btn {
   position: absolute;
   bottom: 20px;
@@ -1649,7 +1650,7 @@ ul.pic-list .item .item-content .item-phone {
   background: url("../image/icon/top-btn.svg") 0 0 no-repeat;
   background-size: 100%;
 }
-/* line 264, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
+/* line 265, /Users/zhanghuihua/workspace/html5/APICloud/dwz_mobile_app/widget/less/widget/list.less */
 .top-btn.hide {
   -webkit-transform: translate3d(0px, 70px, 0px);
           transform: translate3d(0px, 70px, 0px);

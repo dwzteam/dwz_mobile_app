@@ -10,7 +10,7 @@
 
 	<div class="content">
 
-		<form method="post" action="{{form_url}}" onsubmit="return biz.transport.formSubmitImgs(this)">
+		<form method="post" action="{{form_url}}" onsubmit="return biz.transport.formSubmitWeigh(this)">
 			<input type="hidden" name="transport_id" value="{{vo.id}}">
 			<input type="hidden" name="type" value="2"><!-- 1 发货过磅 2 卸货过磅 3 电子签名 -->
 			<input type="hidden" name="__sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">

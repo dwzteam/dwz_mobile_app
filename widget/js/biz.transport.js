@@ -1,12 +1,11 @@
 biz.transport = {
-	indexRender: function (tpl, params) {
-		const $box = this;
 
-		let html = template.render(tpl, { params: params });
-		$box.html(html).initUI();
-	},
-
-	listRender: function (tpl, params) {
+	/**
+	 * 运输单首页tab切换回调
+	 * @param {*} tpl 
+	 * @param {*} params 
+	 */
+	listRender (tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
 
@@ -19,7 +18,7 @@ biz.transport = {
 		const $form = $box.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
-		$form.requestList = function (loadMore) {
+		$form.requestList = (loadMore) => {
 			$.ajax({
 				type: 'POST',
 				url: biz.server.getUrl(biz.server.transportList),
@@ -53,7 +52,9 @@ biz.transport = {
 
 		$.listForm($form);
 	},
-	detailRender: function (tpl, params) {
+
+	// 运输单详情回调
+	detailRender (tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
 		let html = template.render(tplWrap.tpl, { params: params });
@@ -222,7 +223,7 @@ biz.transport = {
 		$form.trigger('submit');
 	},
 
-	driving: function (tpl, params) {
+	driving (tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
 		const html = template.render(tplWrap.tpl, { params: params });
@@ -370,7 +371,7 @@ biz.transport = {
 	},
 
 	// 录入发货过磅信息
-	firstRender: function (tpl, params) {
+	firstRender (tpl, params) {
 		const $box = this;
 
 		$.ajax({
@@ -398,7 +399,7 @@ biz.transport = {
 	},
 
 	// 录入卸货过磅信息
-	lastRender: function (tpl, params) {
+	lastRender (tpl, params) {
 		const $box = this;
 
 		$.ajax({
@@ -425,7 +426,7 @@ biz.transport = {
 		});
 	},
 
-	delPic: function (event) {
+	delPic (event) {
 		const $link = $(this);
 		const $li = $link.parentsUntil(function () {
 			return $(this).is('li.thumbnail');
@@ -462,7 +463,7 @@ biz.transport = {
 	},
 
 	// 弹出发货过磅确认
-	confirmFirst: function (vo) {
+	confirmFirst (vo) {
 		$.alert.confirm('出发前先录入发货过磅信息', {
 			okCall: function (event) {
 				$.navView.open({
@@ -476,7 +477,7 @@ biz.transport = {
 		return false;
 	},
 	// 运输单开始运输
-	transportStart: function (vo) {
+	transportStart (vo) {
 		if (!vo.chemicals_weigh_first_commit) {
 			return biz.transport.confirmFirst(vo);
 		}
@@ -500,7 +501,7 @@ biz.transport = {
 		});
 	},
 	// 弹出收货过磅确认
-	confirmFinish: function (vo) {
+	confirmFinish (vo) {
 		$.alert.confirm('完成前先录入卸货过磅信息', {
 			okCall: function (event) {
 				$.navView.open({
@@ -513,7 +514,7 @@ biz.transport = {
 		return false;
 	},
 	// 运输单完成运输
-	transportFinish: function (vo) {
+	transportFinish (vo) {
 		if (!vo.chemicals_weigh_last_commit) {
 			return biz.transport.confirmFinish(vo);
 		}
@@ -537,7 +538,7 @@ biz.transport = {
 		});
 	},
 
-	formSubmitWeigh: function (form) {
+	formSubmitWeigh (form) {
 		console.log('formSubmitWeigh()....');
 		const $form = $(form);
 		const $pic = $('#upload-weigh_pic');
@@ -572,7 +573,7 @@ biz.transport = {
 		});
 	},
 
-	mapNav: function () {
+	mapNav () {
 		const vo = biz.transport.vo;
 		if (!vo) {
 			return;

@@ -190,6 +190,12 @@ function loadScripts(options) {
 		},
 		{ passive: false }
 	); //passive 参数不能省略，用来兼容ios和android
+
+	// 处理窗口resize适配
+	window.onresize = function () {
+		$("div.dwz-slide").trigger("slide-resize");
+		$("div.nav-view").trigger("window-resize");
+	};
 }
 
 // 用于gulpfile.js编译js
