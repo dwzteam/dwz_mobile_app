@@ -11,7 +11,7 @@
         "truck_num": "浙A8888",
         "transport_time": "2020.09.23",
         "weigh_first_commit": 100,
-        "weigh_first_pic": ["image/pic/3d_1.jpg","image/pic/3d_2.jpg"],
+        "weigh_first_pic": ["image/pic/3d_1.jpg","image/pic/3d_2.jpg","image/pic/car_1.jpg","image/pic/car_2.jpg"],
         "weigh_last_commit": 0,
         "weigh_last_pic": [],
         "receive_signature": [],
