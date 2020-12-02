@@ -376,7 +376,7 @@
 
 			me.autoLayout();
 
-			// if ($.history) $.history.add('previewBigImg');
+			if ($.history) $.history.add('previewBigImg');
 			this.isOpen = true;
 		},
 

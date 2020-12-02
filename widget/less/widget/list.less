@@ -4,13 +4,13 @@
 	padding: 0 2px;
 
 	&:after {
-		content: " ";
+		content: ' ';
 		display: inline-block;
 		transform: rotate(45deg);
 		height: 10px;
 		width: 10px;
 		border-width: 1px 1px 0 0;
-		border-color: #C8C8CD;
+		border-color: #c8c8cd;
 		border-style: solid;
 	}
 }
@@ -25,7 +25,7 @@
 	font-weight: 400;
 	font-size: 14px;
 	list-style-type: none;
-	text-align: left;;
+	text-align: left;
 
 	.item {
 		display: flex;
@@ -40,11 +40,11 @@
 		.b-line;
 
 		.item-content {
-			flex:1;
+			flex: 1;
 			line-height: 20px;
 			justify-content: center;
 		}
-		&.icon-wrap{
+		&.icon-wrap {
 			.align-center;
 			img {
 				display: block;
@@ -78,40 +78,28 @@
 			margin: 10px 10px 0 0;
 		}
 
-		.del-btn {
+		// 列表元素左滑出现操作按钮
+		.item-right {
 			position: absolute;
 			top: 0;
 			bottom: 0;
 			right: 0;
-			width: 80px;
+			min-width: 80px;
 			transition: all 0.5s ease;
-			transform: translate3d(80px, 0px, 0px);
-			display: block;
-			background: red;
-			color: #fff;
-			vertical-align: middle;
+			transform: translate3d(105%, 0px, 0px);
+			display: flex;
+			justify-content: space-around;
 
-			span {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				display: block;
-				text-align: center;
-				font-weight: bold;
-				margin: auto;
-			}
-
-			&.open-right {
-				.del-btn {
-					transform: translate3d(0px, 0px, 0px)
-				}
+			.del-btn {
+				background: red;
+				color: #fff;
+				.full-size;
+				.flex-all-center;
 			}
 		}
-
 		&.open-right {
-			.del-btn {
-				transform: translate3d(0px, 0px, 0px)
+			.item-right {
+				transform: translate3d(0px, 0px, 0px);
 			}
 		}
 	}
@@ -134,7 +122,7 @@ ul.pic-list {
 		line-height: normal;
 
 		&:first-child {
-			border: none
+			border: none;
 		}
 		&.tb-line {
 			.tb-line;
@@ -179,7 +167,8 @@ ul.pic-list {
 				display: inline-block;
 			}
 
-			.item-price, .item-phone {
+			.item-price,
+			.item-phone {
 				line-height: 24px;
 				font-size: 16px;
 				color: @linkColorActive;
@@ -188,7 +177,8 @@ ul.pic-list {
 	}
 }
 
-.search-bar, .dateRange {
+.search-bar,
+.dateRange {
 	&.bar {
 		transition: all 0.5s ease;
 		transform: translate3d(0px, 0px, 0px);
@@ -198,7 +188,6 @@ ul.pic-list {
 	.item-input {
 		.flex-all-center;
 		flex: 1 0;
-		flex-align: center;
 		border-radius: 5px;
 		padding-right: 8px;
 		padding-left: 8px;
@@ -218,7 +207,7 @@ ul.pic-list {
 			background-image: url('../../image/icon/icon-search.svg');
 		}
 
-		input[type="search"] {
+		input[type='search'] {
 			.flex-item;
 			padding: 2px 5px;
 			height: 28px;
@@ -236,7 +225,8 @@ ul.pic-list {
 }
 
 .hideBarCtl {
-	header, .content {
+	header,
+	.content {
 		transition: all 0.5s ease;
 	}
 
@@ -260,11 +250,10 @@ ul.pic-list {
 	width: 50px;
 	height: 50px;
 	text-indent: -10000px;
-	background: url("../../image/icon/top-btn.svg") 0 0 no-repeat;
+	background: url('../../image/icon/top-btn.svg') 0 0 no-repeat;
 	background-size: 100%;
 
 	&.hide {
 		transform: translate3d(0px, 70px, 0px);
 	}
 }
-

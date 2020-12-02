@@ -14,13 +14,13 @@
 
 // Background
 @defaultBackground: #f6f7fb;
-
 @hoverBackground: rgba(240, 240, 240, 0.8);
 @inputBackground: #f6f6f6;
 @btnBackground: #4eb3ff;
 @btnBackgroundActive: #ff480a;
 @tableBackground: rgba(216, 233, 255, 0.5);
 
+// 字号
 @l1: 18px; // 一级标题
 @l2: 16px; // 二级标题
 @l3: 14px; // 三级标题
@@ -30,15 +30,12 @@
 .margin-h {
 	margin: 0 10px;
 }
-
 .margin-v {
 	margin: 10px 0;
 }
-
 .padding-h {
 	padding: 0 10px;
 }
-
 .padding-v {
 	padding: 10px 0;
 }
@@ -46,17 +43,9 @@
 	padding: 10px;
 }
 
-.background-color(@color: #fff) {
-	background-color: @color;
-}
-
+// 用于iOS (iPhone和iPad)。当你点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景。要重设这个表现，你可以设置-webkit-tap-highlight-color为任何颜色。想要禁用这个高亮，设置颜色的alpha值为0即可
 .tapColor(@color:rgba(0,0,0,0)) {
 	-webkit-tap-highlight-color: @color;
-}
-
-.filterBlur {
-	-webkit-backdrop-filter: saturate(180%) blur(20px);
-	backdrop-filter: saturate(180%) blur(20px);
 }
 
 // Icon Background Color
@@ -77,7 +66,7 @@
 }
 
 // Line
-.boxLine(@b-width:"1px 1px 1px 1px", @c:rgba(204,204,204,0.5)) {
+.boxLine(@b-width:'1px 1px 1px 1px', @c:rgba(204,204,204,0.5)) {
 	border-style: solid;
 	border-width: @b-width;
 	border-color: @c;
@@ -112,17 +101,17 @@
 }
 
 // Fonts
-@fontEN: -apple-system-font, "Helvetica Neue", "Roboto", "Segoe UI";
-@fontCN: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+@fontEN: -apple-system-font, 'Helvetica Neue', 'Roboto', 'Segoe UI';
+@fontCN: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei';
 @fontSans: sans-serif;
 @fontDefault: @fontEN, @fontCN, @fontSans;
 
-// Size
+// 全屏 方案1
 .full-size {
 	width: 100%;
 	height: 100%;
 }
-
+// 全屏 方案2
 .full-abs {
 	position: absolute;
 	top: 0;
@@ -130,7 +119,7 @@
 	bottom: 0;
 	right: 0;
 }
-
+// 全屏 方案3
 .full-fixed {
 	position: fixed;
 	top: 0;
@@ -139,6 +128,72 @@
 	right: 0;
 }
 
+// 文字 保留空白符序列,但是正常地进行换行
+.pre-wrap {
+	white-space: pre-wrap;
+}
+
+// flex 布局
+.flex-wrap {
+	display: flex;
+}
+.flex-vertical {
+	flex-flow: column;
+}
+.flex-item {
+	position: relative;
+	flex: 1;
+}
+.flex-item2 {
+	position: relative;
+	flex: 2;
+}
+.align-center {
+	align-items: center;
+}
+.align-start {
+	align-items: flex-start;
+}
+.align-end {
+	align-items: flex-end;
+}
+.justify-center {
+	justify-content: center;
+}
+.justify-start {
+	justify-content: flex-start;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-around {
+	justify-content: space-around;
+}
+
+// 上下左右居中
+.flex-all-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+// 清除左右浮动元素
+.clearfix {
+	&:after {
+		content: '.';
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+}
+
+// 分隔线
 .divider {
 	display: flex;
 	overflow: hidden;
@@ -149,113 +204,13 @@
 	background: @defaultBackground;
 }
 
-.pre-wrap {
-	white-space: pre-wrap;
-}
-
-// Item
-.align-items(@val:center) {
-	align-items: @val;
-}
-
-.justify-content(@val:center) {
-	justify-content: @val;
-}
-
-.flex(@val:1) {
-	flex: @val;
-}
-
-.flex-wrap {
-	display: flex;
-}
-
-.flex-vertical {
-	flex-flow: column;
-}
-
-.flex-item {
-	position: relative;
-	.flex();
-}
-.flex-item2 {
-	position: relative;
-	.flex(2);
-}
-.align-center {
-	.align-items();
-}
-
-.align-start {
-	.align-items(flex-start);
-}
-
-.align-end {
-	.align-items(flex-end);
-}
-
-.justify-center {
-	.justify-content();
-}
-
-.justify-start {
-	.justify-content(flex-start);
-}
-
-.justify-end {
-	.justify-content(flex-end);
-}
-
-.justify-between {
-	.justify-content(space-between);
-}
-
-.justify-around {
-	.justify-content(space-around);
-}
-
-.flex-all-center {
-	.flex-wrap;
-	.align-center;
-	.justify-center;
-}
-
-.clearfix {
-	&:after {
-		content: ".";
-		display: block;
-		height: 0;
-		visibility: hidden;
-		clear: both;
-	}
-}
-
-//边框
-.border(@s:1px,@c:#f36143) {
-	border: @s solid @c;
-}
-
-.content-font {
-	line-height: 24px;
-	font-size: 14px;
-	color: #777;
-	text-align: justify;
-
-	h2 {
-		position: relative;
-		line-height: 30px;
-		font-size: 15px;
-		color: #333;
-		text-align: left;
-	}
-}
-
+// 毛玻璃
 .backdrop-filter {
 	background: rgba(0, 0, 0, 0.05);
-	backdrop-filter: blur(2px);
+	backdrop-filter: saturate(180%) blur(5px);
 	// filter: blur(2px);
 }
-
+// 阴影
 .box-shadow {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }

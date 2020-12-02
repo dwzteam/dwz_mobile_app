@@ -48,7 +48,10 @@
 			</div>
 			<p class="item-info1">{{item.content}}~</p>
 		</div>
-		<a class="del-btn" href="javascript:biz.message.removeItem({{item}})"><span>删除</span></a>
+
+		<div class="item-right align-center">
+			<a class="del-btn" href="javascript:biz.message.removeItem({{item}})">删除</a>
+		</div>
 	</li>
 	{{/each}}
 </script>

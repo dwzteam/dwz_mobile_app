@@ -26,6 +26,7 @@ var js_src = {
 		'js/dwz/dwz.regional.zh.js',
 		'js/dwz/dwz.ui.js',
 		'js/biz.conf.js',
+		'js/biz.store.js',
 		'js/biz.common.js',
 		'js/biz.user.js',
 		'js/biz.home.js',

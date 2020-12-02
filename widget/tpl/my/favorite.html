@@ -53,7 +53,15 @@
 			<div class="item-info1">{{@ item.sub_title}}</div>
 			<div class="item-info1">{{each item.tags}}<span class="item-tag">{{$value}}</span>{{/each}}</div>
 			<div class="item-price">{{item.price}}</div>
-			<a class="del-btn" href="javascript:biz.favorite.removeItem({{item}})"><span>删除</span></a>
+
+			<!-- <div class="item-right align-center">
+				<a class="del-btn" href="javascript:biz.favorite.removeItem({{item}})">删除</a>
+			</div> -->
+
+			<div class="item-right align-center">
+				<a class="icon icon-edit" href="javascript:"></a>
+				<a class="icon icon-del" href="javascript:biz.favorite.removeItem({{item}})"></a>
+			</div>
 		</div>
 	</li>
 	{{/each}}

@@ -343,79 +343,89 @@ $.extend(biz, {
 			}
 		);
 	},
+
+	/**
+	 * 默认页面渲染回调函数
+	 * @param {*} tpl
+	 * @param {*} param
+	 */
 	pageRender(tpl, param) {
-		const $box = this;
-
 		const html = template.render(tpl, param);
-		$box.html(html).initUI();
-	}
-});
-
-// Store 基类
-const CommonStore = {
-	data: [],
-	getData(params) {
-		const op = $.extend({ selectedId: '' }, params);
-		const data = [];
-		for (let i = 0; i < this.data.length; i++) {
-			data.push(this.data[i]);
-			data[i].selected = data[i].id == op.selectedId;
-		}
-		return data;
+		this.html(html).initUI();
 	},
-	getItem(id) {
-		for (let i = 0; i < this.data.length; i++) {
-			if (this.data[i].id == id) {
-				return this.data[i];
+
+	/**
+	 * 打开PDF
+	 * @param {*} url
+	 */
+	openPdf(url) {
+		const pdfReader = api.require('pdfReader');
+		pdfReader.open({
+			path: url,
+			hidden: {
+				print: true,
+				export: true,
+				bookmark: true,
+				email: true
+			},
+			androidHidden: {
+				topBackButton: true, //布尔类型；返回按钮；默认：true
+				topListButton: true, //布尔类型；是否显示列表按钮；默认：true
+				topSearchButton: true, //布尔类型；搜索按钮；默认：true
+				bottomProgress: true //布尔类型；是否显示书签按钮；默认：true
+			},
+			backBtn: {
+				size: {
+					//JSON对象；左上角按钮的大小配置
+					w: 60, //数字类型；左上角按钮的宽；默认：60
+					h: 40 //数字类型；左上角按钮的高；默认：40
+				},
+				bg: {
+					//JSON 对象；按钮背景配置
+					normal: 'rgba(0,0,0,0)', //字符串类型；常态背景，支持rgb、rgba、#、img（本地图片）；默认：rgba(0,0,0,0)
+					highlight: 'rgba(0,0,0,0)' //字符串类型；高亮背景，支持rgb、rgba、#、img（本地图片）；默认：同normal
+				},
+				title: {
+					//JSON对象；按钮标题配置
+					text: '关闭', //字符串类型；标题文本；默认：‘’
+					size: 13, //数字类型；标题文字大小；默认：13
+					color: api.systemType == 'ios' ? '#000' : '#fff', //字符串类型；标题颜色；默认：#000
+					alignment: 'center' //字符串类型；标题位置，取值范围：left、center、right；默认：center
+				},
+				corner: 5 //数字类型；左上角按钮圆角大小；默认值：5.0
 			}
-		}
-		return {};
-	}
-};
+		});
+	},
 
-const SexStore = $.extend({}, CommonStore, {
-	data: [
-		{ id: 1, name: '男' },
-		{ id: 2, name: '女' }
-	]
+	format: {
+		formatDateTime(timestamp, format) {
+			if (!timestamp) return '';
+			const date = new Date(timestamp);
+			return date.formatDate(format || 'yyyy-MM-dd HH:mm:ss');
+		},
+		formatTime(second) {
+			if (!second) return '--';
+			else if (second < 60) return second + '秒';
+			else if (second < 3600) return (second / 60).roundFloat(0) + '分钟';
+
+			var hour = (second / 3600).roundFloat(0);
+			var minute = ((second % 3600) / 60).roundFloat(0);
+			return hour + '小时' + minute + '分钟';
+		},
+		formatDistance(m) {
+			if (!m) return '--';
+			if (m < 1000) {
+				return parseInt(m) + '米';
+			}
+			return (m / 1000).toFixed(1) + '公里';
+		},
+		percent(num, fractionDigits) {
+			var percentNum = num * 100;
+			return percentNum.toFixed(fractionDigits);
+		}
+	}
 });
 
-// 运输单状态
-const TransportStatus = $.extend({}, CommonStore, {
-	data: [
-		{ id: '0', icon: 'status-pending', name: '待出发' },
-		{ id: '1', icon: 'status-fail', name: '运输中' },
-		{ id: '2', icon: 'status-pass', name: '已完成' }
-	]
-});
-
-biz.format = {
-	formatDateTime(timestamp, format) {
-		if (!timestamp) return '';
-		const date = new Date(timestamp);
-		return date.formatDate(format || 'yyyy-MM-dd HH:mm:ss');
-	},
-	formatTime(second) {
-		if (!second) return '--';
-		else if (second < 60) return second + '秒';
-		else if (second < 3600) return (second / 60).roundFloat(0) + '分钟';
-
-		var hour = (second / 3600).roundFloat(0);
-		var minute = ((second % 3600) / 60).roundFloat(0);
-		return hour + '小时' + minute + '分钟';
-	},
-	formatDistance(m) {
-		if (!m) return '--';
-		if (m < 1000) {
-			return parseInt(m) + '米';
-		}
-		return (m / 1000).toFixed(1) + '公里';
-	},
-	percent(num, fractionDigits) {
-		var percentNum = num * 100;
-		return percentNum.toFixed(fractionDigits);
-	}
-};
 $.extend(
 	template.defaults.imports,
 	{
