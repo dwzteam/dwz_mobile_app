@@ -12,7 +12,7 @@
 			$('div.dwz-slide', $p).each(function () {
 				let $box = $(this);
 				$box.slide({
-					currentIndex: $box.attr('data-open-index') || 0,
+					currentIndex: parseInt($box.attr('data-open-index')) || 0,
 					autoCss: false,
 					autoPlay: $box.attr('data-auto-play') == 'false' ? false : true,
 					loop: $box.attr('data-loop') == 'false' ? false : true,

@@ -477,7 +477,7 @@ biz.transport = {
 	},
 	// 运输单开始运输
 	transportStart(vo) {
-		if (!vo.chemicals_weigh_first_commit) {
+		if (!vo.weigh_first_commit) {
 			return biz.transport.confirmFirst(vo);
 		}
 
@@ -514,7 +514,7 @@ biz.transport = {
 	},
 	// 运输单完成运输
 	transportFinish(vo) {
-		if (!vo.chemicals_weigh_last_commit) {
+		if (!vo.weigh_last_commit) {
 			return biz.transport.confirmFinish(vo);
 		}
 

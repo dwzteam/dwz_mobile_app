@@ -12,7 +12,6 @@
 
 		<form method="post" action="{{form_url}}" onsubmit="return biz.transport.formSubmitWeigh(this)">
 			<input type="hidden" name="transport_id" value="{{vo.id}}">
-			<input type="hidden" name="type" value="2"><!-- 1 发货过磅 2 卸货过磅 3 电子签名 -->
 			<input type="hidden" name="__sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
 
 			<div class="scroll-content dwz-scroll">
@@ -23,14 +22,14 @@
 						<div class="item">
 							<label class="name">净重(kg)</label>
 							<div class="item-content">
-								<input type="number" name="chemicals_weigh_last_commit" value="{{vo.chemicals_weigh_last_commit|filterInputNum}}" class="required" placeholder="请输入净重" min="0.00" max="100000.00" step="0.01" data-error="请输入净重">
+								<input type="number" name="weigh_last_commit" value="{{vo.weigh_last_commit|filterInputNum}}" class="required" placeholder="请输入净重" min="0.00" max="100000.00" step="0.01" data-error="请输入净重">
 							</div>
 						</div>
 						<div class="item">
 							<div class="item-inner"></label>
 								<label class="name">磅单照片</label>
 								<ul id="upload-preview-weight-last" class="upload-preview dwz-ctl-del">
-									{{each vo.chemicals_weigh_last_pic as item}}<li class="thumbnail"><a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+									{{each vo.weigh_last_pic as item}}<li class="thumbnail"><a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
 								</ul>
 								<div class="upload-wrap" rel="#upload-preview-weight-last" data-name="__imgUrl[]">
 									<button type="button">Upload</button>
@@ -40,12 +39,12 @@
 						<div class="item">
 							<div class="item-inner">
 								<label class="name">收货人电子签名</label>
-								{{each vo.receive_chemicals_signature as item}}
+								{{each vo.receive_signature as item}}
 								<div class="sign-box pic">
 									<img src="{{item}}">
 								</div>
 								{{/each}}
-								{{if !vo.receive_chemicals_signature.length}}
+								{{if !vo.receive_signature.length}}
 								<div class="dwz-sign-box sign-box pic">
 									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/common/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
 								</div>
@@ -56,7 +55,7 @@
 						<div class="divider"></div>
 					</div>
 
-					<div class="bleed-margin">
+					<div class="padding-all">
 						<button class="form-submit" type="submit">提交</button>
 					</div>
 
@@ -66,14 +65,14 @@
 						<div class="item">
 							<label class="name">净重(kg)</label>
 							<div class="item-content">
-								<input type="number" name="chemicals_weigh_last_commit" value="{{vo.chemicals_weigh_last_commit}}" class="required" placeholder="请输入净重" min="1" maxlength="20" data-error="请输入净重">
+								<input type="number" name="weigh_last_commit" value="{{vo.weigh_last_commit}}" class="required" placeholder="请输入净重" min="1" maxlength="20" data-error="请输入净重">
 							</div>
 						</div>
 						<div class="item">
 							<div class="item-inner">
 								<label class="name">磅单照片</label>
 								<ul class="upload-preview">
-									{{each vo.chemicals_weigh_last_pic as item}}<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+									{{each vo.weigh_last_pic as item}}<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
 								</ul>
 							</div>
 						</div>
@@ -81,7 +80,7 @@
 							<div class="item-inner">
 								<label class="name">收货人电子签名</label>
 								<div class="sign-box pic">
-									<img src="{{vo.chemicals_weigh_last_sign_url}}">
+									<img src="{{vo.weigh_last_sign_url}}">
 								</div>
 							</div>
 						</div>

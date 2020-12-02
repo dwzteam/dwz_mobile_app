@@ -49,14 +49,12 @@
 		<div class="widget-box">
 
 			<div class="item-bar">
-				<a class="flex-item flex-all-center item-info1"><i class="icon-cert"></i>电子证件</a>
-				<div class="split"></div>
 				<a class="flex-item flex-all-center item-info1" onclick="$.navView.open({url: 'tpl/transport/first.html?dwz_callback=biz.transport.firstRender&id={{vo.id}}', rel: 'transportFirst'})">
-					<i class="{{vo.chemicals_weigh_first_commit ? 'icon-yes' : 'icon-no'}}"></i>发货过磅
+					<i class="{{vo.weigh_first_commit ? 'icon-yes' : 'icon-no'}}"></i>发货过磅
 				</a>
 				<div class="split"></div>
 				<a class="flex-item flex-all-center item-info1" onclick="$.navView.open({url: 'tpl/transport/last.html?dwz_callback=biz.transport.lastRender&id={{vo.id}}', rel: 'transportLast'})">
-					<i class="{{vo.chemicals_weigh_last_commit ? 'icon-yes' : 'icon-no'}}"></i>卸货过磅
+					<i class="{{vo.weigh_last_commit ? 'icon-yes' : 'icon-no'}}"></i>卸货过磅
 				</a>
 			</div>
 		</div>
