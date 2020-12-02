@@ -54,12 +54,12 @@
 			<div class="item-info1">{{each item.tags}}<span class="item-tag">{{$value}}</span>{{/each}}</div>
 			<div class="item-price">{{item.price}}</div>
 
-			<!-- <div class="item-right align-center">
+			<!-- <div class="item-right">
 				<a class="del-btn" href="javascript:biz.favorite.removeItem({{item}})">删除</a>
 			</div> -->
 
-			<div class="item-right align-center">
-				<a class="icon icon-edit" href="javascript:"></a>
+			<div class="item-right align-start"><!-- align-start align-center align-start -->
+				<a class="icon icon-cart" href="javascript:$.alert.success('加入购物车')"></a>
 				<a class="icon icon-del" href="javascript:biz.favorite.removeItem({{item}})"></a>
 			</div>
 		</div>
