@@ -83,13 +83,15 @@ figure {
 	}
 }
 
-.detail-content {
-	background: #fff;
-	padding: 15px;
-	font-size: 14px;
-	color: #333;
+// 文字 保留空白符序列,但是正常地进行换行
+.pre-wrap {
+	white-space: pre-wrap;
 }
 
+// 段落缩进
+.text-indent {
+	text-indent: 26px;
+}
 /* 一级标题 */
 .txt-h1 {
 	font-size: @l1;
@@ -115,14 +117,14 @@ figure {
 .txt-desc {
 	font-size: @l4;
 	color: @txtColor;
-	line-height: 22px;
+	line-height: 24px;
 }
 
 /* 正文备注 */
 .txt-info {
 	font-size: @l5;
 	color: @infoColor;
-	line-height: 20px;
+	line-height: 22px;
 }
 
 .txt-h1,
@@ -206,7 +208,7 @@ figure {
 	}
 
 	&.status-fail {
-		background: #9eadcb;
+		background: #ff0000;
 	}
 
 	&.status-pending {
@@ -224,15 +226,15 @@ figure {
 	padding: 0;
 
 	&.status-pass {
-		color: #f5a623;
+		color: #7ebb66;
 	}
 
 	&.status-fail {
-		color: #9eadcb;
+		color: #ff0000;
 	}
 
 	&.status-pending {
-		color: #f7af56;
+		color: #f5a623;
 	}
 
 	&.status-cancel {
@@ -240,6 +242,7 @@ figure {
 	}
 }
 
+// 提示性文字样式
 .alert-box {
 	.item-title1;
 	padding: 10px 10px;
@@ -256,6 +259,7 @@ figure {
 	}
 }
 
+// 前面带位置图标的文字
 .txt-addr-pos {
 	position: relative;
 	.flex-wrap;
@@ -268,5 +272,21 @@ figure {
 		background: url("../../image/icon/icon-pos.svg") no-repeat center center;
 		background-size: 100% 100%;
 		margin-right: 10px;
+	}
+}
+
+// 文章类详细页面
+.detail-content {
+	background: #fff;
+	padding: 10px;
+
+	.item-pic {
+		img {
+			width: 100%;
+		}
+	}
+	.item-time {
+		font-size: 14px;
+		color: #999;
 	}
 }
