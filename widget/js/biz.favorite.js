@@ -2,8 +2,7 @@
  * Created by zhanghuihua on 2018/4/22.
  */
 biz.favorite = {
-	removeItem: function (params) {
-		let op = $.extend({ id: 0 }, params);
+	removeItem: function ({id = null}) {
 
 		$.alert.confirm('确认删除吗？', {
 			okCall: function (event) {
@@ -11,14 +10,14 @@ biz.favorite = {
 					type: 'POST',
 					url: biz.server.getUrl(biz.server.favoriteDel),
 					dataType: 'json',
-					data: { id: op.id },
+					data: { id: id },
 					cache: false,
 					global: false,
 					success: (json) => {
 						if ($.isAjaxStatusOk(json)) {
 							$.navTab
 								.getBox()
-								.find('ul.list li[data-id="' + op.id + '"]')
+								.find('ul.list li[data-id="' + id + '"]')
 								.remove();
 						}
 					},
@@ -28,13 +27,11 @@ biz.favorite = {
 		});
 	},
 	listRender: function (tpl, params) {
-		let $box = this,
-			tplWrap = $.templateWrap(tpl);
-
+		let tplWrap = $.templateWrap(tpl);
 		let html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
-		$box.html(html).initUI();
+		this.html(html).initUI();
 
-		let $form = $box.find('form.dwz-list-form'),
+		let $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.list');
 
 		$form.requestList = function (loadMore) {
