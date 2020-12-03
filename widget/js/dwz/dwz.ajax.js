@@ -267,26 +267,6 @@ function dialogAjaxDone(json) {
 	}
 }
 
-function ajaxConfirm(params) {
-	let op = $.extend(
-		{ msg: '', url: '', data: {}, success: dwz.ajaxDone },
-		params
-	);
-	$.alert.confirm(op.msg, {
-		okCall: function (event) {
-			$.ajax({
-				type: 'post',
-				url: op.url,
-				data: op.data,
-				dataType: 'json',
-				cache: false,
-				success: op.success,
-				error: dwz.ajaxError
-			});
-		}
-	});
-}
-
 (function ($) {
 	$.fn.extend({
 		/**

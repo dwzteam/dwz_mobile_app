@@ -4,24 +4,27 @@
 biz.favorite = {
 	removeItem: function (params) {
 		let op = $.extend({ id: 0 }, params);
-		$.ajax({
-			type: 'POST',
-			url: biz.server.getUrl(biz.server.favoriteDel),
-			dataType: 'json',
-			data: { id: op.id },
-			cache: false,
-			global: false,
-			success: (json) => {
-				console.log(json);
 
-				if ($.isAjaxStatusOk(json)) {
-					$.navTab
-						.getBox()
-						.find('ul.list li[data-id="' + op.id + '"]')
-						.remove();
-				}
-			},
-			error: biz.ajaxError
+		$.alert.confirm('确认删除吗？', {
+			okCall: function (event) {
+				$.ajax({
+					type: 'POST',
+					url: biz.server.getUrl(biz.server.favoriteDel),
+					dataType: 'json',
+					data: { id: op.id },
+					cache: false,
+					global: false,
+					success: (json) => {
+						if ($.isAjaxStatusOk(json)) {
+							$.navTab
+								.getBox()
+								.find('ul.list li[data-id="' + op.id + '"]')
+								.remove();
+						}
+					},
+					error: biz.ajaxError
+				});
+			}
 		});
 	},
 	listRender: function (tpl, params) {
