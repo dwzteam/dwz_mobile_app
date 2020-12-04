@@ -51,9 +51,9 @@ gulp.task('less-dev', () => {
 					relativeUrls: true
 				})
 			)
-			.pipe(sourcemaps.write())
 			// .pipe(px2rem(px2rem_opts))
 			.pipe(autoprefixer(autoprefixer_opts))
+			.pipe(sourcemaps.write())
 			.on('error', function (err) {
 				errors.log(errors.colors.red('[Error]'), err.toString());
 			})

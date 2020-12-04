@@ -1,23 +1,58 @@
 biz.my = {
 	render(tpl, params) {
-		let html = template.render(tpl, {
-			UserInfo: UserInfo,
-			widgetList: [
-				'navTab',
-				'navView',
-				'dialog',
-				'panel',
-				'alert',
-				'table',
-				'form',
-				'brush',
-				'tabs',
-				'slide',
-				'slideTab',
-				'charts'
-			]
-		});
+		let tplWrap = $.templateWrap(tpl);
+		let data = {
+			UserInfo: UserInfo
+		};
+		let html = template.render(tplWrap.tpl, data);
 		this.html(html).initUI();
+
+		let $form = this.find('form.dwz-list-form');
+		let $listBox = $('#my-announce-box');
+
+		$form.requestList = (loadMore) => {
+			let data = $form.serializeArray();
+
+			// 运输单
+			$.ajax({
+				type: 'POST',
+				url: biz.server.getUrl(biz.server.transport),
+				dataType: 'json',
+				data: data,
+				cache: false,
+				global: false,
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						let _html = template.render(tplWrap['tpl-transport'], json);
+						this.find('#transport-card-box').html(_html);
+					}
+				},
+				error: biz.ajaxError
+			});
+
+			// 通知
+			$.ajax({
+				type: 'POST',
+				url: biz.server.getUrl(biz.server.announce),
+				dataType: 'json',
+				data: data,
+				cache: false,
+				global: false,
+				success: (json) => {
+					if (!dwz.checkAjaxLogin(json)) {
+						return;
+					}
+
+					if ($.isAjaxStatusOk(json)) {
+						let _html = template.render(tplWrap['tpl-announce'], json);
+						$listBox.html(_html);
+					}
+				},
+				error: biz.ajaxError
+			});
+		};
+
+		$.listForm($form);
 	},
 	settingRender(tpl, params) {
 		let html = template.render(tpl, { UserInfo: UserInfo });

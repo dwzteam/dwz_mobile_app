@@ -26,7 +26,7 @@ biz.message = {
 		this.html(html).initUI();
 
 		let $form = this.find('form.dwz-list-form'),
-			$listBox = $form.find('ul.list');
+			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = (loadMore) => {
 			let data = $form.serializeArray();

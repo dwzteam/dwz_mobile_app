@@ -2,8 +2,7 @@
  * Created by zhanghuihua on 2018/4/22.
  */
 biz.favorite = {
-	removeItem: function ({id = null}) {
-
+	removeItem: function ({ id = null }) {
 		$.alert.confirm('确认删除吗？', {
 			okCall: function (event) {
 				$.ajax({
@@ -32,7 +31,7 @@ biz.favorite = {
 		this.html(html).initUI();
 
 		let $form = this.find('form.dwz-list-form'),
-			$listBox = $form.find('ul.list');
+			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = function (loadMore) {
 			let data = $form.serializeArray();

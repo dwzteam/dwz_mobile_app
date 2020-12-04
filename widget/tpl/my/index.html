@@ -1,4 +1,5 @@
-<main>
+<form class="dwz-list-form page-wrap">
+    <input type="hidden" name="pageNum" value="1">
     <header class="semi-header">
 		<div class="toolbar">
 			<div class="flex-item"></div>
@@ -8,19 +9,31 @@
 	</header>
 
     <div class="content">
-        <div class="scroll-content dwz-scroll">
+        <div class="scroll-content dwz-list">
             <div class="scroll">
+                <div class="pullDown">
+                    <span class="pullDownIcon">&nbsp;</span>
+                    <span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+                </div>
 
                 <a class="my-info" id="my_info_box" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
                     <img id="my_user_icon_img" class="my-avatar" src="{{UserInfo.headimgurl|showUserIcon}}">
                     <span class="name">{{UserInfo.realname}}</span>
                 </a>
 
+                <div class="dwz-panel">
+                    <div class="panel-header padding-h">
+                        <label class="panel-title">我的行程</label>
+                        <a class="panel-title-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.pageRender" rel="transport">查看更多<i class="arrow-right"></i></a>
+                    </div>
+                    <div class="panel-content" id="transport-card-box"></div>
+                </div>
+
                 <div class="divider"></div>
                 <div class="dwz-panel">
                     <div class="panel-header padding-h">
                         <label class="panel-title">会员服务</label>
-                        <a class="panel-title-right"><i class="icon icon-more"></i></a>
+                        <a class="panel-title-right">没有更多<i class="icon icon-more"></i></a>
                     </div>
                     <div class="panel-content">
                         <div class="grids-contant">
@@ -41,26 +54,63 @@
                 </div>
 
                 <div class="divider"></div>
+
                 <div class="dwz-panel">
                     <div class="panel-header padding-h">
-                        <label class="panel-title">DWZ Mobile 组件示例</label>
+                        <label class="panel-title">通知资讯</label>
+                        <a class="panel-title-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="arrow-right"></i></a>
                     </div>
                     <div class="panel-content">
-                        <div class="grids-contant">
+                        <ul id="my-announce-box" class="list pic-list">
 
-                            {{each widgetList as item}}
-                            <a class="grids-grid" target="navView" data-href="tpl/widget/{{item}}/index.html" rel="widget">
-                                <div class="grids-grid-icon"><img src="image/icon/widget/{{item}}.svg"></div>
-                                <p class="grids-grid-label">{{item}}</p>
-                            </a>
-                            {{/each}}
-                            
-                        </div>
+                        </ul>
                     </div>
                 </div>
 
             </div>
+
         </div>
 
     </div>
-</main>
+</form>
+
+<script id="tpl-transport" type="text/html">
+	{{each data as item}}
+	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
+		<div class="flex-wrap">
+			<div class="item-title1 flex-item"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
+			<div class="item-info1">{{item.status|showTransportStatus}}</div>
+		</div>
+
+		<div class="flex-wrap">
+			<div class="dot-path">
+				<div class="dot-start"></div>
+				<div class="dot-end"></div>
+			</div>
+			<div class="flex-item">
+				<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
+				<div class="item-info3">运输路线：{{item.transport_way}}</div>
+				<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
+			</div>
+		</div>
+	</a>
+	{{/each}}
+</script>
+
+<script id="tpl-announce" type="text/html">
+	{{each data as item}}
+	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-content">
+			<div class="item-title1">{{item.title}}</div>
+			<div class="item-info2">{{item.content}}</div>
+			<div class="flex-item"></div>
+			<div class="flex-wrap">
+				<div class="txt-info txt-line1 flex-item">{{item.author}}</div>
+				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</script>
