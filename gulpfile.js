@@ -11,6 +11,7 @@ const gulp = require('gulp'),
 	plumber = require('gulp-plumber');
 
 const less = require('gulp-less'),
+	sourcemaps = require('gulp-sourcemaps'),
 	cssmin = require('gulp-clean-css'), // 用于压缩 CSS
 	// px2rem = require('gulp-px2rem-plugin'),
 	// px2rem_opts = {
@@ -42,6 +43,7 @@ gulp.task('less-dev', () => {
 				})
 			)
 			// .pipe(plumber())
+			.pipe(sourcemaps.init())
 			.pipe(
 				less({
 					dumpLineNumbers: 'comments',
@@ -49,6 +51,7 @@ gulp.task('less-dev', () => {
 					relativeUrls: true
 				})
 			)
+			.pipe(sourcemaps.write())
 			// .pipe(px2rem(px2rem_opts))
 			.pipe(autoprefixer(autoprefixer_opts))
 			.on('error', function (err) {

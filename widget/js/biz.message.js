@@ -1,11 +1,10 @@
 biz.message = {
-	removeItem(params) {
-		const op = $.extend({ id: 0 }, params);
+	removeItem({ id = null }) {
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.messageDel),
 			dataType: 'json',
-			data: { id: op.id },
+			data: { id: id },
 			cache: false,
 			global: false,
 			success: (json) => {
@@ -14,7 +13,7 @@ biz.message = {
 				if ($.isAjaxStatusOk(json)) {
 					$.navTab
 						.getBox()
-						.find('ul.list li[data-id="' + op.id + '"]')
+						.find('ul.list li[data-id="' + id + '"]')
 						.remove();
 				}
 			},

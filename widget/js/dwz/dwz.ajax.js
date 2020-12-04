@@ -277,7 +277,8 @@ function dialogAjaxDone(json) {
 			let result = true,
 				$form = this;
 
-			this.find(':input')
+			$form
+				.find(':input')
 				.filter(function () {
 					let type = this.type;
 
@@ -317,20 +318,15 @@ function dialogAjaxDone(json) {
 			return result;
 		},
 
-		ajaxTodo: function (params) {
-			let op = $.extend(
-				{
-					className: 'active',
-					disabledInvert: 'disabled-invert',
-					relCount$: 'data-rel-count'
-				},
-				params
-			);
-
+		ajaxTodo: function ({
+			className = 'active',
+			disabledInvert$ = 'disabled-invert',
+			relCount$ = 'data-rel-count'
+		}) {
 			return this.each(function () {
 				let $this = $(this).hrefFix(),
-					$dataRel = $($this.attr(op.relCount$)),
-					disabledInvert = $this.hasClass(op.disabledInvert);
+					$dataRel = $($this.attr(relCount$)),
+					disabledInvert = $this.hasClass(disabledInvert$);
 
 				let changeRelCount = function (count) {
 					if ($dataRel.size() > 0) {
@@ -346,7 +342,7 @@ function dialogAjaxDone(json) {
 						let url = $this.attr('data-href'),
 							relCount = parseInt($this.attr('data-count') || 1);
 
-						let beforeActive = $this.hasClass(op.className);
+						let beforeActive = $this.hasClass(className);
 
 						if (url && url != 'javascript:') {
 							$.ajax({
@@ -360,10 +356,10 @@ function dialogAjaxDone(json) {
 
 									if ($.isAjaxStatusOk(json)) {
 										if (beforeActive && !disabledInvert) {
-											$this.removeClass(op.className);
+											$this.removeClass(className);
 											changeRelCount(-relCount);
 										} else {
-											$this.addClass(op.className);
+											$this.addClass(className);
 											changeRelCount(+relCount);
 										}
 									}
@@ -372,10 +368,10 @@ function dialogAjaxDone(json) {
 							});
 						} else {
 							if (beforeActive && !disabledInvert) {
-								$this.removeClass(op.className);
+								$this.removeClass(className);
 								changeRelCount(-relCount);
 							} else {
-								$this.addClass(op.className);
+								$this.addClass(className);
 								changeRelCount(+relCount);
 							}
 						}
@@ -387,9 +383,13 @@ function dialogAjaxDone(json) {
 			});
 		},
 
+		/**
+		 * 查找带回
+		 * @param {*} args
+		 */
 		bringBack: function (args) {
 			return this.each(function () {
-				let $form = $(this);
+				const $form = $(this);
 				$form.find(':input').each(function () {
 					let $input = $(this),
 						inputName = $input.attr('name');
