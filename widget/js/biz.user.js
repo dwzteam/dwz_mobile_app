@@ -1,7 +1,6 @@
 /**
- * Created by zhanghuihua on 2016/12/26.
+ * @author 张慧华 z@j-ui.com
  */
-
 // 用户登入信息
 let UserInfo = {
 	token: '',
@@ -253,7 +252,7 @@ function loginAjaxDone(json) {
 
 		$.dialog.close();
 		$.navTab.open({
-			url: 'tpl/home.html?dwz_callback=renderHome',
+			url: 'tpl/home.html?dwz_callback=biz.home.render',
 			tabid: 'home'
 		});
 	} else {

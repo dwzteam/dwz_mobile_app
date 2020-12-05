@@ -1,3 +1,6 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
 biz.my = {
 	render(tpl, params) {
 		let tplWrap = $.templateWrap(tpl);

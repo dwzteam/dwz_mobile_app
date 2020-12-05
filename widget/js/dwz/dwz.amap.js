@@ -1,5 +1,5 @@
 /**
- * Created by zhanghuihua on 2020/10/24.
+ * @author 张慧华 z@j-ui.com
  */
 (function ($) {
 	$.amap = {

@@ -1,3 +1,7 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ * 画笔签字
+ */
 (function ($) {
 	// http://www.qianmoqi.com/home/test/0929/maobizhi/
 	let Brush = function (options) {

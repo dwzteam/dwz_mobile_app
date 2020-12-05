@@ -1,7 +1,7 @@
 /**
- * DWZ Mobile Framework
+ * @author 张慧华 z@j-ui.com
+ * DWZ Mobile Framework 核心库: 相当于一个专门针对移动端优化的精简版jQuery，代码量只有jQuery 的十分之一左右，使用方式基本同jQuery。
  * http://www.w3schools.com/cssref/css_selectors.asp
- * @author z@j-ui.com
  */
 const dwz = function (selector, context) {
 	return new dwz.prototype.init(selector, context);

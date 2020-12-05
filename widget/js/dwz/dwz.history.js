@@ -1,6 +1,6 @@
 /**
+ * @author 张慧华 z@j-ui.com
  * DWZ Mobile Framework: ajax history plugins
- * @author z@j-ui.com
  */
 (function ($) {
 	$.extend({

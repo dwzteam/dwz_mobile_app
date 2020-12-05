@@ -1,6 +1,6 @@
 /**
- * Created by huihuazhang on 2017/4/18.
- * 基于HBuilder文件上传的核心脚本
+ * @author 张慧华 z@j-ui.com
+ * 基于APICloud文件上传的核心脚本
  */
 (function ($) {
 	$.plus = {

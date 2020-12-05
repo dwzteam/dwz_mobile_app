@@ -1,5 +1,5 @@
 /**
- * Created by zhanghuihua on 2017/11/9.
+ * @author 张慧华 z@j-ui.com
  */
 
 (function ($) {

@@ -1,3 +1,6 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
 const biz = window.biz || {
 	server: {
 		ENV: 'DEV', // DEV,TEST,UAT,LIVE

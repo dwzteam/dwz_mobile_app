@@ -1,3 +1,7 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
+
 $._ajax = $.ajax;
 $.extend({
 	ajax(options) {

@@ -1,6 +1,6 @@
 /**
- * @author z@j-ui.com
- *
+ * @author 张慧华 z@j-ui.com
+ * DWZ Mobile ajax交互封装 & 表单验证
  */
 
 dwz.extend({

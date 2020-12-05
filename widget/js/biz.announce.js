@@ -1,3 +1,6 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
 biz.announce = {
 	listRender(tpl, params) {
 		let $box = this,

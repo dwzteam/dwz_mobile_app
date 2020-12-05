@@ -1,5 +1,7 @@
 /**
- * Created by zhanghuihua on 2018/5/7.
+ * @author 张慧华 z@j-ui.com
+ * @deprecated
+ * 头像裁剪JS实现方案，使用APICloud FNImageClip模块代替
  */
 (function ($) {
 	$.croppic = {

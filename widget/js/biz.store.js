@@ -1,3 +1,7 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
+
 // Store 基类
 const CommonStore = {
 	data: [],
@@ -20,6 +24,7 @@ const CommonStore = {
 	}
 };
 
+// 性别
 const SexStore = $.extend({}, CommonStore, {
 	data: [
 		{ id: 1, name: '男' },

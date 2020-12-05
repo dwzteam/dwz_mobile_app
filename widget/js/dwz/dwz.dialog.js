@@ -1,7 +1,6 @@
 /**
- * Created by zhanghuihua on 2016/12/19.
+ * @author 张慧华 z@j-ui.com
  */
-
 $.dialog = {
 	config: {
 		box$: '#dialog',

@@ -1,5 +1,5 @@
 /**
- * Created by zhanghuihua on 2018/4/22.
+ * @author 张慧华 z@j-ui.com
  */
 biz.favorite = {
 	removeItem: function ({ id = null }) {

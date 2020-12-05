@@ -1,6 +1,8 @@
 /**
- * Created by huihuazhang on 2017/4/18.
+ * @author 张慧华 z@j-ui.com
+ * @deprecated
  * 基于HBuilder文件上传的核心脚本, 目前的版本默认使用APICloud打包，如果想要使用HBuilder打包需要index.js中的dwz.apicloud.js换成dwz.plus.js
+ *
  */
 (function ($) {
 	dwz.plus = {

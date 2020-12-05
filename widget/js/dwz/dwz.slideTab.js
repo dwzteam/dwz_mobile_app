@@ -1,3 +1,6 @@
+/**
+ * @author 张慧华 z@j-ui.com
+ */
 (function ($) {
 	$.fn.extend({
 		slideTab(options) {

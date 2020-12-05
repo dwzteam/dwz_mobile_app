@@ -1,4 +1,5 @@
 /**
+ * @author 张慧华 z@j-ui.com
  * $(document).touchwipe({
  *      wipeLeft:function(event, pos){ alert("向左滑动了")},
  *      wipeRight:function(event, pos){alert("向右滑动了")},
