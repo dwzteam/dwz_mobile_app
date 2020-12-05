@@ -4,8 +4,7 @@
  */
 
 (function ($) {
-	$.config.frag.external =
-		'<iframe src="{url}" style="width:100%;height:{{height}};" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>';
+	$.config.frag.external = '<iframe src="{url}" style="width:100%;height:{{height}};" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>';
 
 	dwz.regPlugins.push(function ($p) {
 		if ($.fn.slide)
@@ -85,9 +84,7 @@
 				}
 			});
 
-			$('#dialog .pop-down-close, #dialog .back-button', $p).click(function (
-				event
-			) {
+			$('#dialog .pop-down-close, #dialog .back-button', $p).click(function (event) {
 				$.dialog.close();
 				event.stopPropagation();
 			});
@@ -217,11 +214,9 @@
 				});
 
 				if (!$parent.attr('data-' + op.openClass)) {
-					$parent
-						.attr('data-' + op.openClass, 1)
-						.on($.event.hasTouch ? 'touchstart' : 'click', function () {
-							$parent.find('.' + op.ctlClass).removeClass(op.openClass);
-						});
+					$parent.attr('data-' + op.openClass, 1).on($.event.hasTouch ? 'touchstart' : 'click', function () {
+						$parent.find('.' + op.ctlClass).removeClass(op.openClass);
+					});
 				}
 			});
 		},
@@ -300,12 +295,7 @@
 								let type = this.type;
 
 								// Use .is( ":disabled" ) so that fieldset[disabled] works
-								return (
-									this.name &&
-									!dwz(this).is(':disabled') &&
-									dwz.config.rsubmittable.test(this.nodeName) &&
-									!dwz.config.rsubmitterTypes.test(type)
-								);
+								return this.name && !dwz(this).is(':disabled') && dwz.config.rsubmittable.test(this.nodeName) && !dwz.config.rsubmitterTypes.test(type);
 							})
 							.each(function () {
 								let $input = $(this);
@@ -323,11 +313,7 @@
 							$ref.addClass('ignoreRequired').find(':input').addClass('ignore');
 						}
 					} else {
-						$ref
-							.show()
-							.removeClass('ignoreRequired')
-							.find(':input')
-							.removeClass('ignore');
+						$ref.show().removeClass('ignoreRequired').find(':input').removeClass('ignore');
 					}
 				}
 

@@ -149,18 +149,10 @@ const biz = window.biz || {
 			REMOTE: '/upload'
 		},
 		getUrl(type) {
-			return (
-				this.baseUrl[this.ENV] +
-				type[this._flag()].replace('{token}', UserInfo.token)
-			);
+			return this.baseUrl[this.ENV] + type[this._flag()].replace('{token}', UserInfo.token);
 		},
 		getVerifyImgUrl() {
-			return (
-				this.baseUrl[this.ENV] +
-				this._verifyImg[this._flag()] +
-				'?t=' +
-				new Date().getTime()
-			);
+			return this.baseUrl[this.ENV] + this._verifyImg[this._flag()] + '?t=' + new Date().getTime();
 		},
 		getLoginUrl() {
 			return this.baseUrl[this.ENV] + this._login[this._flag()];

@@ -31,48 +31,8 @@
  * ----------------------------------------------------------
  */
 (function () {
-	let MONTH_NAMES = new Array(
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	);
-	let DAY_NAMES = new Array(
-		'Sunday',
-		'Monday',
-		'Tuesday',
-		'Wednesday',
-		'Thursday',
-		'Friday',
-		'Saturday',
-		'Sun',
-		'Mon',
-		'Tue',
-		'Wed',
-		'Thu',
-		'Fri',
-		'Sat'
-	);
+	let MONTH_NAMES = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+	let DAY_NAMES = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 	function LZ(x) {
 		return (x < 0 || x > 9 ? '' : '0') + x;
 	}
@@ -236,10 +196,7 @@
 				month = 0;
 				for (let i = 0; i < MONTH_NAMES.length; i++) {
 					let month_name = MONTH_NAMES[i];
-					if (
-						val.substring(i_val, i_val + month_name.length).toLowerCase() ==
-						month_name.toLowerCase()
-					) {
+					if (val.substring(i_val, i_val + month_name.length).toLowerCase() == month_name.toLowerCase()) {
 						if (token == 'MMM' || (token == 'NNN' && i > 11)) {
 							month = i + 1;
 							if (month > 12) {
@@ -256,10 +213,7 @@
 			} else if (token == 'EE' || token == 'E') {
 				for (let i = 0; i < DAY_NAMES.length; i++) {
 					let day_name = DAY_NAMES[i];
-					if (
-						val.substring(i_val, i_val + day_name.length).toLowerCase() ==
-						day_name.toLowerCase()
-					) {
+					if (val.substring(i_val, i_val + day_name.length).toLowerCase() == day_name.toLowerCase()) {
 						i_val += day_name.length;
 						break;
 					}
@@ -391,10 +345,7 @@
 		let m = this.getMonth() + 1;
 		let d = this.getDate();
 
-		let sDate = dateFmt
-			.replaceAll('%y', y)
-			.replaceAll('%M', m)
-			.replaceAll('%d', d);
+		let sDate = dateFmt.replaceAll('%y', y).replaceAll('%M', m).replaceAll('%d', d);
 		sDate = replaceTmEval(sDate);
 
 		let _y = 1900,

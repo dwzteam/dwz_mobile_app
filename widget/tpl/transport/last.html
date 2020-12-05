@@ -26,10 +26,13 @@
 							</div>
 						</div>
 						<div class="item">
-							<div class="item-inner"></label>
+							<div class="item-inner">
+								</label>
 								<label class="name">磅单照片</label>
 								<ul id="upload-preview-weight-last" class="upload-preview dwz-ctl-del">
-									{{each vo.weigh_last_pic as item}}<li class="thumbnail"><a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+									{{each vo.weigh_last_pic as item}}
+									<li class="thumbnail">
+										<a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
 								</ul>
 								<div class="upload-wrap" rel="#upload-preview-weight-last" data-name="__imgUrl[]">
 									<button type="button">Upload</button>
@@ -38,13 +41,11 @@
 						</div>
 						<div class="item">
 							<div class="item-inner">
-								<label class="name">收货人电子签名</label>
-								{{each vo.receive_signature as item}}
+								<label class="name">收货人电子签名</label> {{each vo.receive_signature as item}}
 								<div class="sign-box pic">
 									<img src="{{item}}">
 								</div>
-								{{/each}}
-								{{if !vo.receive_signature.length}}
+								{{/each}} {{if !vo.receive_signature.length}}
 								<div class="dwz-sign-box sign-box pic">
 									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/common/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
 								</div>
@@ -72,7 +73,8 @@
 							<div class="item-inner">
 								<label class="name">磅单照片</label>
 								<ul class="upload-preview">
-									{{each vo.weigh_last_pic as item}}<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+									{{each vo.weigh_last_pic as item}}
+									<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
 								</ul>
 							</div>
 						</div>
@@ -94,4 +96,3 @@
 
 	</div>
 </main>
-

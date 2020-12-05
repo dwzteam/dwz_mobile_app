@@ -82,11 +82,7 @@
 						let timestamp = new Date().getTime();
 
 						// We need to move at least 10 pixels for the scrolling to initiate
-						if (
-							timestamp - endTime > 300 &&
-							Math.abs(pos.dx) < 10 &&
-							Math.abs(pos.dy) < 10
-						) {
+						if (timestamp - endTime > 300 && Math.abs(pos.dx) < 10 && Math.abs(pos.dy) < 10) {
 							return;
 						}
 
@@ -147,49 +143,27 @@
 							pos.scrollH = getScrollH();
 							if (pos.dy - currentPos.y < 0) {
 								// 定位到顶部
-								$main.animate(
-									{ y: 0 },
-									op.delayTime,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								);
+								$main.animate({ y: 0 }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else if (pos.dy - currentPos.y > pos.scrollH) {
 								//定位到底部
-								$main.animate(
-									{ y: -pos.scrollH },
-									op.delayTime,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								);
+								$main.animate({ y: -pos.scrollH }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
 								let scrollPos = $main.getComputedPos();
-								let scrollY =
-									dwz.speed.getY() * ($wrap.get(0).clientHeight / 680) +
-									scrollPos.y;
+								let scrollY = dwz.speed.getY() * ($wrap.get(0).clientHeight / 680) + scrollPos.y;
 
 								if (scrollY < -pos.scrollH) scrollY = -pos.scrollH;
 								else if (scrollY > 0) scrollY = 0;
 
-								$main.animate(
-									{ y: scrollY },
-									op.delayTime * 3,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								); // ease, linear
+								$main.animate({ y: scrollY }, op.delayTime * 3, 'cubic-bezier(0.1, 0.57, 0.1, 1)'); // ease, linear
 							}
 						}
 						if (op.scrollX && Math.abs(pos.dx) > 20) {
 							pos.scrollW = getScrollW();
 							if (pos.dx - currentPos.x < 0) {
-								$main.animate(
-									{ x: 0 },
-									op.delayTime,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								);
+								$main.animate({ x: 0 }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else if (pos.dx - currentPos.x > pos.scrollW) {
-								$main.animate(
-									{ x: -pos.scrollW },
-									op.delayTime,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								);
+								$main.animate({ x: -pos.scrollW }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
 								let scrollPos = $main.getComputedPos();
@@ -198,11 +172,7 @@
 								if (scrollX < -pos.scrollW) scrollX = -pos.scrollW;
 								else if (scrollX > 0) scrollX = 0;
 
-								$main.animate(
-									{ x: scrollX },
-									op.delayTime * 3,
-									'cubic-bezier(0.1, 0.57, 0.1, 1)'
-								); // ease, linear
+								$main.animate({ x: scrollX }, op.delayTime * 3, 'cubic-bezier(0.1, 0.57, 0.1, 1)'); // ease, linear
 							}
 						}
 

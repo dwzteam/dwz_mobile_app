@@ -11,10 +11,7 @@
 		 * @param options
 		 */
 		imgCropData($box, options) {
-			let op = $.extend(
-				{ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' },
-				options
-			);
+			let op = $.extend({ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' }, options);
 			let $imgWrap = $box.find(op.imgWrap$),
 				$img = $imgWrap.find('img'),
 				elem = $img.get(0),
@@ -59,18 +56,13 @@
 		 * @param options
 		 */
 		render($box, options) {
-			let op = $.extend(
-				{ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' },
-				options
-			);
+			let op = $.extend({ imgBg$: 'img.croppic-bg', imgWrap$: '.crop-img-wrap' }, options);
 			let $imgWrap = $box.find(op.imgWrap$),
 				$img = $imgWrap.find('img'),
 				$imgBg = $box.find(op.imgBg$);
 
 			if ($imgBg.size() == 0) {
-				$imgBg = $(
-					'<img class="croppic-bg" src="' + $img.attr('src') + '">'
-				).appendTo($box);
+				$imgBg = $('<img class="croppic-bg" src="' + $img.attr('src') + '">').appendTo($box);
 			} else {
 				$imgBg.attr('src', $img.attr('src'));
 			}
@@ -115,18 +107,8 @@
 					$imgBg.data('zoom-start', zoomUtil.getImgStyle());
 				},
 				setZoom(eventPos) {
-					let distanceStart = $.event.getDistance(
-						eventPos.startX,
-						eventPos.startY,
-						eventPos.startX2,
-						eventPos.startY2
-					);
-					let distance = $.event.getDistance(
-						eventPos.x,
-						eventPos.y,
-						eventPos.x2,
-						eventPos.y2
-					);
+					let distanceStart = $.event.getDistance(eventPos.startX, eventPos.startY, eventPos.startX2, eventPos.startY2);
+					let distance = $.event.getDistance(eventPos.x, eventPos.y, eventPos.x2, eventPos.y2);
 					// let centerPos = $.event.getCenterPos(eventPos.startX, eventPos.startY, eventPos.startX2, eventPos.startY2);
 
 					let wrapPos = $imgWrap.position();
@@ -137,11 +119,7 @@
 					}
 
 					let _pos = {
-						top:
-							startData.top +
-							(startData.height -
-								(startData.height * width) / startData.width) /
-								2,
+						top: startData.top + (startData.height - (startData.height * width) / startData.width) / 2,
 						left: startData.left + (startData.width - width) / 2
 					};
 					$imgBg.css({
@@ -180,10 +158,7 @@
 						$imgBg.css({
 							top: wrapPos.top + 'px'
 						});
-					} else if (
-						imgBgPos.top + $imgBg.height() <
-						wrapPos.top + $imgWrap.height()
-					) {
+					} else if (imgBgPos.top + $imgBg.height() < wrapPos.top + $imgWrap.height()) {
 						$img.css({
 							top: $imgWrap.height() - $imgBg.height() + 'px'
 						});
@@ -199,10 +174,7 @@
 						$imgBg.css({
 							left: wrapPos.left + 'px'
 						});
-					} else if (
-						imgBgPos.left + $imgBg.width() <
-						wrapPos.left + $imgWrap.width()
-					) {
+					} else if (imgBgPos.left + $imgBg.width() < wrapPos.left + $imgWrap.width()) {
 						$img.css({
 							left: $imgWrap.width() - $imgBg.width() + 'px'
 						});

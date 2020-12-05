@@ -24,8 +24,7 @@
 				success: 'success',
 				confirm: 'confirm'
 			},
-			dialogFrag:
-				'<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
+			dialogFrag: '<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
 			boxFrag:
 				'<div id="alertMsgBox" class="alert-dialog-#type#">\
 					<div class="alert-mask"></div>\
@@ -35,8 +34,7 @@
 						<div class="alert-dialog-ft">#butFragment#</div>\
 					</div>\
 				</div>',
-			btnFrag:
-				'<a href="javascript:" class="alert_btn_dialog #class#">#butMsg#</a>'
+			btnFrag: '<a href="javascript:" class="alert_btn_dialog #class#">#butMsg#</a>'
 		},
 
 		/**
@@ -50,34 +48,26 @@
 			let butsHtml = '';
 			if (buttons) {
 				for (let i = 0; i < buttons.length; i++) {
-					butsHtml += this.config.btnFrag
-						.replace('#butMsg#', buttons[i].name)
-						.replace('#class#', buttons[i].sn == 'ok' ? 'primary' : 'default');
+					butsHtml += this.config.btnFrag.replace('#butMsg#', buttons[i].name).replace('#class#', buttons[i].sn == 'ok' ? 'primary' : 'default');
 				}
 			}
-			let html = this.config.boxFrag
-				.replace('#type#', type)
-				.replace('#title#', $.regional.alert.title[type])
-				.replace('#message#', msg)
-				.replace('#butFragment#', butsHtml);
+			let html = this.config.boxFrag.replace('#type#', type).replace('#title#', $.regional.alert.title[type]).replace('#message#', msg).replace('#butFragment#', butsHtml);
 			$('body').append(html);
 
 			let $btns = $(this.config.box$).find('a.alert_btn_dialog');
 
 			for (let i = 0; i < buttons.length; i++) {
-				$btns
-					.eq(i)
-					.on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
-						let index = event.data,
-							callback = buttons[index].call;
-						if (callback) {
-							callback(event);
-						}
-						$.alert.close();
+				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
+					let index = event.data,
+						callback = buttons[index].call;
+					if (callback) {
+						callback(event);
+					}
+					$.alert.close();
 
-						event.preventDefault();
-						event.stopPropagation();
-					});
+					event.preventDefault();
+					event.stopPropagation();
+				});
 			}
 		},
 		close() {
@@ -105,9 +95,7 @@
 				this._timer = null;
 			}
 
-			let $toast = $('<div id="alert-toast">' + op.msg + '</div>').appendTo(
-				$('body')
-			);
+			let $toast = $('<div id="alert-toast">' + op.msg + '</div>').appendTo($('body'));
 			$toast.animateCls('fadeInDown');
 
 			let me = this;
@@ -120,10 +108,7 @@
 			}, op.duration);
 		},
 		_alert(type, msg, options) {
-			let op = $.extend(
-				{ okName: $.regional.alert.btnMsg.ok, okCall: null },
-				options
-			);
+			let op = $.extend({ okName: $.regional.alert.btnMsg.ok, okCall: null }, options);
 			let buttons = [{ sn: 'ok', name: op.okName, call: op.okCall }];
 			this._open(type, msg, buttons);
 		},
@@ -152,9 +137,7 @@
 		openDialog(url) {
 			$(this.config.box$).remove();
 
-			let $box = $($.alert.config.dialogFrag)
-				.appendTo($('body').get(0))
-				.find('.alert-dialog');
+			let $box = $($.alert.config.dialogFrag).appendTo($('body').get(0)).find('.alert-dialog');
 
 			if (url) {
 				let params = url.getParams();

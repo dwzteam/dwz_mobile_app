@@ -59,10 +59,7 @@
 				});
 
 				function switchTab(scollCurrent) {
-					let $tab = $tabs
-						.removeClass(op.activeClass)
-						.eq(currentIndex)
-						.addClass(op.activeClass);
+					let $tab = $tabs.removeClass(op.activeClass).eq(currentIndex).addClass(op.activeClass);
 
 					if (scollCurrent) {
 						let leftPos = -currentIndex * tabW,
@@ -72,8 +69,7 @@
 							leftPos += centerPos;
 
 							if (leftPos > 0) leftPos = 0;
-							else if (leftPos < headerW - headerUlW)
-								leftPos = headerW - headerUlW;
+							else if (leftPos < headerW - headerUlW) leftPos = headerW - headerUlW;
 						}
 						$headerUl.animate({ x: leftPos }, op.delayTime, 'ease');
 					}
@@ -82,19 +78,14 @@
 				function switchSlide() {
 					let $slide = $slides.eq(currentIndex);
 					let leftPos = -currentIndex * slideW,
-						centerPos =
-							($header.width() - slideW + (slideW - $slide.width())) / 2;
+						centerPos = ($header.width() - slideW + (slideW - $slide.width())) / 2;
 					if (centerPos > 0) {
 						leftPos += centerPos;
 					}
 					$contentUl.animate({ x: leftPos }, op.delayTime, 'ease');
 
 					// 添加当前activeClass
-					$contentUl
-						.find(':scope>li')
-						.removeClass(op.activeClass)
-						.eq(currentIndex)
-						.addClass(op.activeClass);
+					$contentUl.find(':scope>li').removeClass(op.activeClass).eq(currentIndex).addClass(op.activeClass);
 
 					if (op.onSwitchSlide) {
 						let $tab = $tabs.eq(currentIndex),

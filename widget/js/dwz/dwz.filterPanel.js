@@ -17,9 +17,7 @@ $.filterPanel = {
 	init(options) {
 		$.extend($.filterPanel.config, options);
 
-		$('body')
-			.append($.filterPanel.config.frag)
-			.append($.filterPanel.config.bgFrag);
+		$('body').append($.filterPanel.config.frag).append($.filterPanel.config.bgFrag);
 		this.$box = $($.filterPanel.config.box$);
 		this.$bgBox = $($.filterPanel.config.bgBox$);
 
@@ -29,10 +27,7 @@ $.filterPanel = {
 	},
 	open(options) {
 		// default, pic, login
-		let op = $.extend(
-			{ type: 'GET', url: '', pop: 'default', data: {}, callback: null },
-			options
-		);
+		let op = $.extend({ type: 'GET', url: '', pop: 'default', data: {}, callback: null }, options);
 		let $box = this.$box,
 			$bgBox = this.$bgBox;
 

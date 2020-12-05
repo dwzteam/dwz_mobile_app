@@ -46,10 +46,7 @@
 		},
 		// 拍照
 		captureImage(options) {
-			let op = $.extend(
-				{ maxWidth: 1280, maxHeight: 1280, callback: null, miscCallback: null },
-				options
-			);
+			let op = $.extend({ maxWidth: 1280, maxHeight: 1280, callback: null, miscCallback: null }, options);
 
 			let me = this;
 			let cmr = plus.camera.getCamera();
@@ -187,10 +184,7 @@
 		},
 		// 转换base64编码
 		getBase64Image(options) {
-			let op = $.extend(
-				{ imgPath: '', maxWidth: 1280, maxHeight: 1280, callback: null },
-				options
-			);
+			let op = $.extend({ imgPath: '', maxWidth: 1280, maxHeight: 1280, callback: null }, options);
 			let img = new Image();
 			img.src = op.imgPath;
 			img.onload = function () {
@@ -236,13 +230,7 @@
 		thumb.appendChild(img);
 		previewElem.appendChild(thumb);
 
-		let inputElem = dwz.parseHTML(
-			'<textarea style="display:none" name="' +
-				inputName +
-				'">' +
-				strBase64 +
-				'</textarea>'
-		);
+		let inputElem = dwz.parseHTML('<textarea style="display:none" name="' + inputName + '">' + strBase64 + '</textarea>');
 		previewElem.appendChild(inputElem);
 
 		img.onload = function () {
@@ -267,10 +255,7 @@
 		 * @param options
 		 */
 		previewUploadImg(options) {
-			let op = $.extend(
-				{ maxW: 80, maxH: 80, maxCount: 4, inputName: 'pics[]' },
-				options
-			);
+			let op = $.extend({ maxW: 80, maxH: 80, maxCount: 4, inputName: 'pics[]' }, options);
 			return this.each(function () {
 				let $uploadWrap = $(this),
 					$previewElem = $($uploadWrap.attr('rel')),
@@ -286,13 +271,7 @@
 								maximum: op.maxCount - selectCount,
 								callback(arrayBase64) {
 									for (let index = 0; index < arrayBase64.length; index++) {
-										previewUploadImg(
-											previewElem,
-											arrayBase64[index],
-											op.inputName,
-											op.maxW,
-											op.maxH
-										);
+										previewUploadImg(previewElem, arrayBase64[index], op.inputName, op.maxW, op.maxH);
 
 										if (selectCount + arrayBase64.length >= op.maxCount) {
 											$uploadWrap.hide();
@@ -310,10 +289,7 @@
 		 * @param options
 		 */
 		previewImg(options) {
-			let op = $.extend(
-				{ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' },
-				options
-			);
+			let op = $.extend({ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' }, options);
 			return this.each(function () {
 				let $wrap = $(this);
 
@@ -349,9 +325,7 @@
 			let me = this,
 				$previewBox = $('#preview-big-img');
 			if ($previewBox.size() == 0) {
-				$('body').append(
-					'<div id="preview-big-img" style="display:none"></div>'
-				);
+				$('body').append('<div id="preview-big-img" style="display:none"></div>');
 				$previewBox = $('#preview-big-img');
 
 				$previewBox.touchwipe({
@@ -377,8 +351,7 @@
 				let $img = $(this),
 					src = $img.attr('data-src');
 
-				fragLi +=
-					'<li><div class="pop-inner"><img src="' + src + '"></div></li>';
+				fragLi += '<li><div class="pop-inner"><img src="' + src + '"></div></li>';
 				fragItem += '<li class="' + (index == 0 ? 'on' : '') + '"></li>';
 
 				// 判断打开图片预览时，点击了第几张图片
@@ -387,15 +360,7 @@
 				}
 			});
 
-			$previewBox
-				.html(
-					tpl
-						.replaceAll('#li#', fragLi)
-						.replaceAll('#item#', fragItem)
-						.replaceAll('#currentIndex#', currentIndex)
-				)
-				.show()
-				.initUI();
+			$previewBox.html(tpl.replaceAll('#li#', fragLi).replaceAll('#item#', fragItem).replaceAll('#currentIndex#', currentIndex)).show().initUI();
 
 			window.addEventListener('resize', me.autoLayout, false);
 

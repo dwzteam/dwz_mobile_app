@@ -23,18 +23,13 @@ $.navTab = {
 				href = $tabItem.attr('data-href'),
 				url = href && href.startsWith('#') ? '' : href;
 
-			$tabItem.click(
-				{ index: index, tabid: $tabItem.attr('tabid'), url: url },
-				function (event) {
-					let args = event.data;
-					args.loaded =
-						$tabItem.attr('data-loaded') &&
-						$tabItem.attr('data-cache') == 'true'; //navTab页面缓存
-					$.navTab.open(args);
+			$tabItem.click({ index: index, tabid: $tabItem.attr('tabid'), url: url }, function (event) {
+				let args = event.data;
+				args.loaded = $tabItem.attr('data-loaded') && $tabItem.attr('data-cache') == 'true'; //navTab页面缓存
+				$.navTab.open(args);
 
-					event.preventDefault();
-				}
-			);
+				event.preventDefault();
+			});
 		});
 
 		if (op.openIndex >= 0) {
@@ -101,10 +96,7 @@ $.navTab = {
 			args.interceptor = dwz.getUrlInterceptor(args.url);
 		}
 		// 拦截器，用于验证登入跳转和绑定跳转等
-		if (
-			args.interceptor &&
-			args.interceptor.call(this.getPanels(index), args.url) === false
-		) {
+		if (args.interceptor && args.interceptor.call(this.getPanels(index), args.url) === false) {
 			return false;
 		}
 
@@ -187,11 +179,7 @@ $.navTab = {
 	},
 	loadExternal($panel, url) {
 		let ih = this.$box.get(0).offsetHeight;
-		$panel.html(
-			$.config.frag['external']
-				.replaceAll('{url}', url)
-				.replaceAll('{{height}}', ih + 'px')
-		);
+		$panel.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
 	},
 	_indexTabId(tabid) {
 		if (!tabid) return -1;

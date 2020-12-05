@@ -2,7 +2,9 @@
 	<input type="hidden" name="pageNum" value="1">
 	<header>
 		<div class="toolbar">
-			<div class="header-title"><div class="title">我的收藏</div></div>
+			<div class="header-title">
+				<div class="title">我的收藏</div>
+			</div>
 		</div>
 		<div class="toolbar">
 			<div class="bar search-bar">
@@ -57,7 +59,8 @@
 				<a class="del-btn" href="javascript:biz.favorite.removeItem({{item}})">删除</a>
 			</div> -->
 
-			<div class="item-right align-start"><!-- align-start align-center align-start -->
+			<div class="item-right align-start">
+				<!-- align-start align-center align-start -->
 				<a class="icon icon-cart" href="javascript:$.alert.success('加入购物车')"></a>
 				<a class="icon icon-del" href="javascript:biz.favorite.removeItem({{item}})"></a>
 			</div>

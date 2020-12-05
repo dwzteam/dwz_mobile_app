@@ -102,66 +102,28 @@
 					if (op.loop) {
 						if (currentIndex == -1) {
 							// 滑动到最前面，滑动完成后回到最后一个
-							$mainCell.animate(
-								{ x: -(currentIndex + 1) * slideW + centerW },
-								op.delayTime,
-								'ease',
-								function () {
-									currentIndex = count - 1;
-									$mainCell.translateX(
-										-(currentIndex + 1) * slideW + centerW + 'px'
-									);
-									if ($tits)
-										$tits
-											.removeClass(op.titActive)
-											.eq(currentIndex)
-											.addClass(op.titActive);
-								}
-							);
+							$mainCell.animate({ x: -(currentIndex + 1) * slideW + centerW }, op.delayTime, 'ease', function () {
+								currentIndex = count - 1;
+								$mainCell.translateX(-(currentIndex + 1) * slideW + centerW + 'px');
+								if ($tits) $tits.removeClass(op.titActive).eq(currentIndex).addClass(op.titActive);
+							});
 						} else if (currentIndex >= count) {
 							// 滑动到最后面，滑动完成后回到第一个
-							$mainCell.animate(
-								{ x: -(currentIndex + 1) * slideW + centerW },
-								op.delayTime,
-								'ease',
-								function () {
-									currentIndex = 0;
-									$mainCell.translateX(
-										-(currentIndex + 1) * slideW + centerW + 'px'
-									);
-									if ($tits)
-										$tits
-											.removeClass(op.titActive)
-											.eq(currentIndex)
-											.addClass(op.titActive);
-								}
-							);
+							$mainCell.animate({ x: -(currentIndex + 1) * slideW + centerW }, op.delayTime, 'ease', function () {
+								currentIndex = 0;
+								$mainCell.translateX(-(currentIndex + 1) * slideW + centerW + 'px');
+								if ($tits) $tits.removeClass(op.titActive).eq(currentIndex).addClass(op.titActive);
+							});
 						} else {
-							$mainCell.animate(
-								{ x: -(currentIndex + 1) * slideW + centerW },
-								op.delayTime,
-								'ease'
-							);
-							if ($tits)
-								$tits
-									.removeClass(op.titActive)
-									.eq(currentIndex)
-									.addClass(op.titActive);
+							$mainCell.animate({ x: -(currentIndex + 1) * slideW + centerW }, op.delayTime, 'ease');
+							if ($tits) $tits.removeClass(op.titActive).eq(currentIndex).addClass(op.titActive);
 						}
 					} else {
 						if (currentIndex >= count) {
 							currentIndex = 0;
 						}
-						$mainCell.animate(
-							{ x: -currentIndex * slideW + centerW },
-							op.delayTime,
-							'ease'
-						);
-						if ($tits)
-							$tits
-								.removeClass(op.titActive)
-								.eq(currentIndex)
-								.addClass(op.titActive);
+						$mainCell.animate({ x: -currentIndex * slideW + centerW }, op.delayTime, 'ease');
+						if ($tits) $tits.removeClass(op.titActive).eq(currentIndex).addClass(op.titActive);
 					}
 				}
 				let nIntervId = -1;
@@ -210,9 +172,7 @@
 						},
 						touchmove(event, pos) {
 							let index = op.loop ? 1 : 0;
-							$mainCell.translateX(
-								-(currentIndex + index) * slideW - pos.dx + 'px'
-							);
+							$mainCell.translateX(-(currentIndex + index) * slideW - pos.dx + 'px');
 						},
 						touchend(event, pos) {
 							if (pos.dx > 40) {

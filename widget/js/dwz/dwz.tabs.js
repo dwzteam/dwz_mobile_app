@@ -48,10 +48,7 @@ $.fn.extend({
 			$tabs.removeClass('active');
 			$tab.addClass('active');
 
-			let $panel = $panels
-				.removeClass('active')
-				.eq(op.currentIndex)
-				.addClass('active');
+			let $panel = $panels.removeClass('active').eq(op.currentIndex).addClass('active');
 
 			if ($tab.hasClass(op.ajaxClass)) {
 				let url = $tab.attr('data-href');

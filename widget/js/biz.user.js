@@ -95,9 +95,7 @@ $.fn.extend({
 				}
 
 				let sec = 60;
-				let $altMsg = $(
-					'<span class="count">重发(' + sec + 's)</span>'
-				).appendTo(this.parentNode);
+				let $altMsg = $('<span class="count">重发(' + sec + 's)</span>').appendTo(this.parentNode);
 				$link.hide();
 				let timer = setInterval(function () {
 					$altMsg.text('重发(' + sec + 's)');
@@ -142,11 +140,7 @@ dwz.urlInterceptor = function (url) {
 	let pass = UserInfo.token ? true : false;
 
 	if (!pass) {
-		let uris = [
-			'tpl/user/login.html',
-			'tpl/user/forgetPwd.html',
-			'tpl/user/register.html'
-		];
+		let uris = ['tpl/user/login.html', 'tpl/user/forgetPwd.html', 'tpl/user/register.html'];
 
 		// 判断request URI 是否需要登入
 		if (dwz.inArray(url.getRequestURI(), uris)) {

@@ -206,15 +206,13 @@ dwz.extend({
 
 dwz.config.selector = {
 	':input': 'input, select, textarea, button',
-	':text':
-		'input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=reset]):not([type=button]):not([type=file]):not([type=hidden]):not([type=image])',
+	':text': 'input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=reset]):not([type=button]):not([type=file]):not([type=hidden]):not([type=image])',
 	':password': 'input[type=password]',
 	':radio': 'input[type=radio]',
 	':checkbox': 'input[type=checkbox]',
 	':submit': 'input[type=submit], button[type=submit]',
 	':reset': 'input[type=reset], button[type=reset]',
-	':button':
-		'input[type=button], input[type=submit], input[type=reset], input[type=image], button',
+	':button': 'input[type=button], input[type=submit], input[type=reset], input[type=image], button',
 	':file': 'input[type=file]',
 	':image': 'input[type=image]',
 	':hidden': 'input[type=hidden]'
@@ -249,9 +247,7 @@ dwz.prototype.init = function (selector, context) {
 
 		if (contextSize > 1) {
 			for (let i = 0; i < this.context.length; i++) {
-				let elements = this.context[i].querySelectorAll(
-					dwz.config.selector[selector] || selector
-				);
+				let elements = this.context[i].querySelectorAll(dwz.config.selector[selector] || selector);
 
 				Array.prototype.push.apply(this.elements, elements);
 			}
@@ -259,18 +255,12 @@ dwz.prototype.init = function (selector, context) {
 			if (selector.indexOf('<') >= 0 && selector.indexOf('>') >= 0) {
 				this.elements = dwz.parseHTML(selector, true); // html字符串转dom
 			} else {
-				this.elements = this.context.querySelectorAll(
-					dwz.config.selector[selector] || selector
-				);
+				this.elements = this.context.querySelectorAll(dwz.config.selector[selector] || selector);
 			}
 		}
 	} else if (dwz.instanceOf(selector)) {
 		return selector;
-	} else if (
-		selector instanceof Element ||
-		selector === document ||
-		selector === window
-	) {
+	} else if (selector instanceof Element || selector === document || selector === window) {
 		this.elements = [selector];
 	} else if (selector instanceof NodeList || dwz.isArray(selector)) {
 		this.elements = selector;
@@ -389,18 +379,10 @@ dwz.extend({
 		localStorage.removeItem(key);
 	},
 	clientX(event) {
-		return (
-			event.pageX ||
-			event.clientX ||
-			(event.targetTouches ? event.targetTouches[0].clientX : 0)
-		);
+		return event.pageX || event.clientX || (event.targetTouches ? event.targetTouches[0].clientX : 0);
 	},
 	clientY(event) {
-		return (
-			event.pageY ||
-			event.clientY ||
-			(event.targetTouches ? event.targetTouches[0].clientY : 0)
-		);
+		return event.pageY || event.clientY || (event.targetTouches ? event.targetTouches[0].clientY : 0);
 	},
 	speed: {
 		pre: { x: 0, y: 0, speedX: 0, speedY: 0, time: 0 },
@@ -557,8 +539,7 @@ dwz.extend({
 				return parent !== node && parent.contains(node);
 		  }
 		: function (parent, node) {
-				while (node && (node = node.parentNode))
-					if (node === parent) return true;
+				while (node && (node = node.parentNode)) if (node === parent) return true;
 				return false;
 		  },
 	offset(elem) {
@@ -577,9 +558,7 @@ dwz.extend({
 		let offsetParent = dwz.offsetParent(elem),
 			// Get correct offsets
 			offset = dwz.offset(elem),
-			parentOffset = dwz.rootNodeRE.test(offsetParent.nodeName)
-				? { top: 0, left: 0 }
-				: dwz.offset(offsetParent);
+			parentOffset = dwz.rootNodeRE.test(offsetParent.nodeName) ? { top: 0, left: 0 } : dwz.offset(offsetParent);
 
 		// Subtract element margins
 		// note: when an element has margin: auto the offsetLeft and marginLeft
@@ -599,12 +578,7 @@ dwz.extend({
 	},
 	offsetParent(elem) {
 		let parent = elem.offsetParent || document.body;
-		while (
-			parent &&
-			!dwz.rootNodeRE.test(parent.nodeName) &&
-			parent.style.position == 'static'
-		)
-			parent = parent.offsetParent;
+		while (parent && !dwz.rootNodeRE.test(parent.nodeName) && parent.style.position == 'static') parent = parent.offsetParent;
 		return parent;
 	},
 	hasClass(elem, className) {
@@ -749,17 +723,12 @@ dwz.extend({
 		if (dwz.isArray(data)) {
 			// [{name:"", value:""},{name:"", value:""}]
 			for (let i = 0; i < data.length; i++) {
-				params +=
-					(params ? '&' : '') +
-					data[i].name +
-					'=' +
-					(data[i].value + '').encodeParam();
+				params += (params ? '&' : '') + data[i].name + '=' + (data[i].value + '').encodeParam();
 			}
 		} else {
 			// {name1:value1, name2:value2}
 			for (let key in data) {
-				params +=
-					(params ? '&' : '') + key + '=' + (data[key] + '').encodeParam();
+				params += (params ? '&' : '') + key + '=' + (data[key] + '').encodeParam();
 			}
 		}
 
@@ -813,10 +782,7 @@ dwz.extend(String.prototype, {
 		return d >= 0 && this.lastIndexOf(pattern) === d;
 	},
 	replaceSuffix(index) {
-		return this.replace(/\[[0-9]+\]/, '[' + index + ']').replace(
-			'#index#',
-			index
-		);
+		return this.replace(/\[[0-9]+\]/, '[' + index + ']').replace('#index#', index);
 	},
 	getRequestURI() {
 		let indexOf = this.indexOf('?');
@@ -838,9 +804,7 @@ dwz.extend(String.prototype, {
 		return params;
 	},
 	encodeParam() {
-		return encodeURIComponent(this)
-			.replace(dwz.config.rCRLF, '\r\n')
-			.replace(dwz.config.r20, '+');
+		return encodeURIComponent(this).replace(dwz.config.rCRLF, '\r\n').replace(dwz.config.r20, '+');
 	},
 	replaceAll(os, ns) {
 		return this.replace(new RegExp(os, 'gm'), ns);
@@ -867,9 +831,7 @@ dwz.extend(String.prototype, {
 		return new RegExp(/^([_]|[a-zA-Z0-9]){6,32}$/).test(this);
 	},
 	isValidMail() {
-		return new RegExp(
-			/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
-		).test(this.trim());
+		return new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/).test(this.trim());
 	},
 	isSpaces() {
 		for (let i = 0; i < this.length; i += 1) {
@@ -884,9 +846,7 @@ dwz.extend(String.prototype, {
 		return new RegExp(/(^[0-9]{11,11}$)/).test(this);
 	},
 	isUrl() {
-		return new RegExp(
-			/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/
-		).test(this);
+		return new RegExp(/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/).test(this);
 	},
 	isExternalUrl() {
 		return this.isUrl() && this.indexOf('://' + document.domain) == -1;
@@ -922,10 +882,7 @@ dwz.extend(Number.prototype, {
 
 		if (useComma) {
 			for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-				num =
-					num.substring(0, num.length - (4 * i + 3)) +
-					',' +
-					num.substring(num.length - (4 * i + 3));
+				num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
 			}
 		}
 
@@ -1040,8 +997,7 @@ dwz.fn.extend({
 	toggle() {
 		return this.each(function () {
 			let defaultCss = dwz.cacheCss(this, 'display', 'none') || 'block';
-			this.style['display'] =
-				this.style['display'] == 'none' ? defaultCss : 'none';
+			this.style['display'] = this.style['display'] == 'none' ? defaultCss : 'none';
 		});
 	},
 	hasClass(className) {
@@ -1131,17 +1087,11 @@ dwz.fn.extend({
 		return height;
 	},
 	outerWidth(margin) {
-		let width =
-			this.width(margin) +
-			parseFloat(this.css('borderLeft')) +
-			parseFloat(this.css('borderRight'));
+		let width = this.width(margin) + parseFloat(this.css('borderLeft')) + parseFloat(this.css('borderRight'));
 		return width;
 	},
 	outerHeight(margin) {
-		let height =
-			this.height(margin) +
-			parseFloat(this.css('borderTop')) +
-			parseFloat(this.css('borderTop'));
+		let height = this.height(margin) + parseFloat(this.css('borderTop')) + parseFloat(this.css('borderTop'));
 		return height;
 	},
 	html(content) {
@@ -1215,13 +1165,7 @@ dwz.fn.extend({
 					const type = this.type;
 
 					// Use .is( ":disabled" ) so that fieldset[disabled] works
-					return (
-						this.name &&
-						!dwz(this).is(':disabled') &&
-						dwz.config.rsubmittable.test(this.nodeName) &&
-						!dwz.config.rsubmitterTypes.test(type) &&
-						(this.checked || !dwz.config.rcheckableType.test(type))
-					);
+					return this.name && !dwz(this).is(':disabled') && dwz.config.rsubmittable.test(this.nodeName) && !dwz.config.rsubmitterTypes.test(type) && (this.checked || !dwz.config.rcheckableType.test(type));
 				})
 				.each(function () {
 					const $input = $(this),
@@ -1242,21 +1186,12 @@ dwz.fn.extend({
 			this.find(':input')
 				.filter(function () {
 					const type = this.type;
-					return (
-						this.name &&
-						!dwz(this).is(':disabled') &&
-						dwz.config.rsubmittable.test(this.nodeName) &&
-						!dwz.config.rsubmitterTypes.test(type) &&
-						(this.checked || !dwz.config.rcheckableType.test(type))
-					);
+					return this.name && !dwz(this).is(':disabled') && dwz.config.rsubmittable.test(this.nodeName) && !dwz.config.rsubmitterTypes.test(type) && (this.checked || !dwz.config.rcheckableType.test(type));
 				})
 				.each(function () {
 					const $input = $(this),
 						val = $input.val() || '';
-					arr[this.name] =
-						this.type == 'number' || this.type == 'range'
-							? parseFloat(val) || 0
-							: val;
+					arr[this.name] = this.type == 'number' || this.type == 'range' ? parseFloat(val) || 0 : val;
 				});
 		}
 		return arr;
@@ -1266,11 +1201,8 @@ dwz.fn.extend({
 			form = $form.get(0);
 
 		if (form) {
-			if (typeof pageNum == 'number')
-				form[dwz.config.pageInfo.pageNum].value = pageNum;
-			else if (pageNum == 'next')
-				form[dwz.config.pageInfo.pageNum].value =
-					parseInt(form[dwz.config.pageInfo.pageNum].value) + 1;
+			if (typeof pageNum == 'number') form[dwz.config.pageInfo.pageNum].value = pageNum;
+			else if (pageNum == 'next') form[dwz.config.pageInfo.pageNum].value = parseInt(form[dwz.config.pageInfo.pageNum].value) + 1;
 		}
 
 		return $form;
@@ -1283,14 +1215,9 @@ dwz.fn.extend({
 
 		if (!arguments.length) {
 			if (elem) {
-				hooks =
-					dwz.valHooks[elem.type] || dwz.valHooks[elem.nodeName.toLowerCase()];
+				hooks = dwz.valHooks[elem.type] || dwz.valHooks[elem.nodeName.toLowerCase()];
 
-				if (
-					hooks &&
-					'get' in hooks &&
-					(ret = hooks.get(elem, 'value')) !== undefined
-				) {
+				if (hooks && 'get' in hooks && (ret = hooks.get(elem, 'value')) !== undefined) {
 					return ret;
 				}
 
@@ -1334,15 +1261,10 @@ dwz.fn.extend({
 				});
 			}
 
-			hooks =
-				dwz.valHooks[this.type] || dwz.valHooks[this.nodeName.toLowerCase()];
+			hooks = dwz.valHooks[this.type] || dwz.valHooks[this.nodeName.toLowerCase()];
 
 			// If set returns undefined, fall back to normal setting
-			if (
-				!hooks ||
-				!('set' in hooks) ||
-				hooks.set(this, val, 'value') === undefined
-			) {
+			if (!hooks || !('set' in hooks) || hooks.set(this, val, 'value') === undefined) {
 				this.value = val;
 			}
 		});
@@ -1385,8 +1307,7 @@ dwz.extend({
 						(option.selected || i === index) &&
 						// Don't return options that are disabled or in a disabled optgroup
 						!option.disabled &&
-						(!option.parentNode.disabled ||
-							!dwz.nodeName(option.parentNode, 'optgroup'))
+						(!option.parentNode.disabled || !dwz.nodeName(option.parentNode, 'optgroup'))
 					) {
 						// Get the specific value for the option
 						value = dwz(option).val();
@@ -1524,9 +1445,7 @@ dwz.extend({
 		}
 
 		function createXMLHttp() {
-			return window.XMLHttpRequest
-				? new XMLHttpRequest()
-				: new ActiveXObject('Microsoft.XMLHttp');
+			return window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHttp');
 		}
 
 		let dwzXHR = createXMLHttp(),
@@ -1534,17 +1453,12 @@ dwz.extend({
 			postData = '';
 
 		if (!op.cache) {
-			url =
-				op.url +
-				(op.url.indexOf('?') == -1 ? '?' : '&') +
-				't=' +
-				new Date().getTime();
+			url = op.url + (op.url.indexOf('?') == -1 ? '?' : '&') + 't=' + new Date().getTime();
 		}
 
 		// 获取get参数
 		if (op.type == 'GET' && op.data) {
-			let strParams =
-				typeof op.data === 'string' ? op.data : dwz.param(op.data);
+			let strParams = typeof op.data === 'string' ? op.data : dwz.param(op.data);
 			if (strParams) url += (url.indexOf('?') == -1 ? '?' : '&') + strParams;
 		}
 
@@ -1557,9 +1471,7 @@ dwz.extend({
 
 		// Set the Accepts header for the server, depending on the dataType
 		let accept = op.accepts[op.dataType];
-		accept = accept
-			? accept + ', ' + op.accepts['*'] + '; q=0.01'
-			: op.accepts['*'];
+		accept = accept ? accept + ', ' + op.accepts['*'] + '; q=0.01' : op.accepts['*'];
 		dwzXHR.setRequestHeader('Accept', accept);
 
 		// Check for headers option
@@ -1569,21 +1481,15 @@ dwz.extend({
 
 		if (op.type == 'POST' && op.data) {
 			//Set the correct header, if data is being sent
-			if (op.type == 'POST' && op.contentType)
-				dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
+			if (op.type == 'POST' && op.contentType) dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
 
 			postData = typeof op.data === 'string' ? op.data : dwz.param(op.data);
 		}
 
 		dwzXHR.onreadystatechange = function () {
 			if (dwzXHR.readyState == 4) {
-				let protocol = /^([\w-]+:)\/\//.test(op.url)
-					? RegExp.$1
-					: window.location.protocol;
-				let isSuccess =
-					(dwzXHR.status >= 200 && dwzXHR.status < 300) ||
-					dwzXHR.status === 304 ||
-					(dwzXHR.status == 0 && protocol == 'file:');
+				let protocol = /^([\w-]+:)\/\//.test(op.url) ? RegExp.$1 : window.location.protocol;
+				let isSuccess = (dwzXHR.status >= 200 && dwzXHR.status < 300) || dwzXHR.status === 304 || (dwzXHR.status == 0 && protocol == 'file:');
 
 				if (isSuccess) {
 					let result = dwz.dataFilter(dwzXHR, op);

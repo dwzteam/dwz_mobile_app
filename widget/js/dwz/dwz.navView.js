@@ -52,10 +52,7 @@ $.navView = {
 			op.interceptor = dwz.getUrlInterceptor(op.url);
 		}
 		// 拦截器，用于验证登入跳转和绑定跳转等
-		if (
-			op.interceptor &&
-			op.interceptor.call($box, op.url, op.data) === false
-		) {
+		if (op.interceptor && op.interceptor.call($box, op.url, op.data) === false) {
 			return false;
 		}
 
@@ -68,11 +65,7 @@ $.navView = {
 		}
 
 		if ($box.size() == 0) {
-			$('body').append(
-				$.navView.config.frag
-					.replaceAll('#boxId#', boxId)
-					.replaceAll('#zIndex#', zIndex)
-			);
+			$('body').append($.navView.config.frag.replaceAll('#boxId#', boxId).replaceAll('#zIndex#', zIndex));
 
 			$box = $('#' + boxId).initUI();
 
@@ -171,11 +164,7 @@ $.navView = {
 	},
 	reload(options) {
 		let $box = this.$list[this.$list.length - 1];
-		let op = $.extend(
-			{ boxId: $box.attr('id'), history: false },
-			$box.data('dwz-params'),
-			options
-		);
+		let op = $.extend({ boxId: $box.attr('id'), history: false }, $box.data('dwz-params'), options);
 		this.open(op);
 	},
 	loadExternal(url) {
@@ -183,11 +172,7 @@ $.navView = {
 
 		let $content = $box.find('.content');
 		let ih = $content.get(0).offsetHeight;
-		$content.html(
-			$.config.frag['external']
-				.replaceAll('{url}', url)
-				.replaceAll('{{height}}', ih + 'px')
-		);
+		$content.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
 	},
 	close(popHistory, local) {
 		let size = this.$list.length;
@@ -200,15 +185,10 @@ $.navView = {
 			$.history.pop(local);
 		}
 
-		$box.animate(
-			{ x: document.documentElement.clientWidth },
-			500,
-			'ease',
-			function () {
-				$box.triggerPageClear();
-				$box.remove();
-			}
-		);
+		$box.animate({ x: document.documentElement.clientWidth }, 500, 'ease', function () {
+			$box.triggerPageClear();
+			$box.remove();
+		});
 	},
 	closeByRel(rel) {
 		let boxData = this._getBoxData(rel);

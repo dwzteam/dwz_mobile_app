@@ -3,27 +3,14 @@ biz.home = {
 		let tplWrap = $.templateWrap(tpl);
 		let html = template.render(tpl, {
 			UserInfo: UserInfo,
-			widgetList: [
-				'navTab',
-				'navView',
-				'dialog',
-				'panel',
-				'alert',
-				'table',
-				'form',
-				'brush',
-				'tabs',
-				'slide',
-				'slideTab',
-				'charts'
-			]
+			widgetList: ['navTab', 'navView', 'dialog', 'panel', 'alert', 'table', 'form', 'brush', 'tabs', 'slide', 'slideTab', 'charts']
 		});
 		this.html(html).initUI();
-	
+
 		let $form = this.find('form.dwz-list-form');
 		$form.requestList = (loadMore) => {
 			let data = $form.serializeArray();
-	
+
 			// 轮播图
 			$.ajax({
 				type: 'POST',
@@ -41,7 +28,7 @@ biz.home = {
 				error: biz.ajaxError
 			});
 		};
-	
+
 		$.listForm($form);
 	},
 	aboutRender(tpl, params) {
@@ -52,4 +39,3 @@ biz.home = {
 		this.html(html).initUI();
 	}
 };
-

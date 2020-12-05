@@ -20,11 +20,7 @@
 		this.canvas.onmousemove = this.moveEvent.bind(this);
 		this.canvas.onmouseup = this.upEvent.bind(this);
 		//触摸场景--手机端/触摸屏机
-		this.canvas.addEventListener(
-			'touchstart',
-			this.downEvent.bind(this),
-			false
-		);
+		this.canvas.addEventListener('touchstart', this.downEvent.bind(this), false);
 		this.canvas.addEventListener('touchmove', this.moveEvent.bind(this), false);
 		this.canvas.addEventListener('touchend', this.upEvent.bind(this), false);
 		this.canvas.addEventListener(
@@ -51,12 +47,7 @@
 	};
 	Brush.prototype.toDataURL = function () {
 		// 将canvas的透明背景设置成白色
-		let imageData = this.ctx.getImageData(
-			0,
-			0,
-			this.canvas.width,
-			this.canvas.height
-		);
+		let imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
 		for (let i = 0; i < imageData.data.length; i += 4) {
 			// 当该像素是透明的，则设置成白色
 			if (imageData.data[i + 3] == 0) {
@@ -101,9 +92,7 @@
 			time += this.has[n].time - this.has[n + 1].time;
 			if (dis > this.smoothness) break;
 		}
-		let or =
-			Math.min((time / dis) * this.linePressure + this.lineMin, this.lineMax) /
-			2;
+		let or = Math.min((time / dis) * this.linePressure + this.lineMin, this.lineMax) / 2;
 		this.radius = or;
 		this.upof = of;
 		let len = Math.round(this.has[0].dis / 2) + 1;
@@ -134,13 +123,7 @@
 				// arr[j].y = arr[j].y - 1;
 				this.arr[j].x = this.arr[j].x - this.l / 4;
 				this.arr[j].y = this.arr[j].y - this.l / 4;
-				this.ctx.drawImage(
-					this.img,
-					this.arr[j].x,
-					this.arr[j].y,
-					this.l,
-					this.l
-				);
+				this.ctx.drawImage(this.img, this.arr[j].x, this.arr[j].y, this.l, this.l);
 
 				this.l = this.l - 0.3;
 				if (this.l < 5) this.l = 5;
@@ -150,13 +133,7 @@
 		}
 		if (this.arr.length == 1) {
 			// this.arr[0].x =
-			this.ctx.drawImage(
-				this.img,
-				this.arr[0].x1 - this.l / 2,
-				this.arr[0].y1 - this.l / 2,
-				this.l,
-				this.l
-			);
+			this.ctx.drawImage(this.img, this.arr[0].x1 - this.l / 2, this.arr[0].y1 - this.l / 2, this.l, this.l);
 			this.arr = [];
 		}
 	};
@@ -171,14 +148,8 @@
 		// }
 
 		return {
-			x:
-				x -
-				offset.left +
-				(document.body.scrollLeft || document.documentElement.scrollLeft),
-			y:
-				y -
-				offset.top +
-				(document.body.scrollTop || document.documentElement.scrollTop)
+			x: x - offset.left + (document.body.scrollLeft || document.documentElement.scrollLeft),
+			y: y - offset.top + (document.body.scrollTop || document.documentElement.scrollTop)
 		};
 	};
 	Brush.prototype.distance = function (a, b) {
@@ -212,11 +183,8 @@
 					// console.log(strBase64);
 
 					let $form = $.navView.getBox();
-					let $signInput = $form
-						.find('input.dwz-sign-input')
-						.val(strBase64.replace('data:image/jpeg;base64,', ''));
-					let imgHtml =
-						'<img src="' + strBase64 + '"><a class="btn-txt">重新签名</a>';
+					let $signInput = $form.find('input.dwz-sign-input').val(strBase64.replace('data:image/jpeg;base64,', ''));
+					let imgHtml = '<img src="' + strBase64 + '"><a class="btn-txt">重新签名</a>';
 					let $signBox = $form.find('.dwz-sign-box');
 					if (!$signBox.data('btn_html')) {
 						$signBox.data('btn_html', $signBox.html());

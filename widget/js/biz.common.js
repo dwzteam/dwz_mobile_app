@@ -18,10 +18,7 @@ $.extend({
 	},
 	// 配合离线缓存serviceWorker，实现断网访问展示类接口
 	fetchAjax(options) {
-		const op = $.extend(
-			{ key: '', url: '', data: {}, type: 'GET', success: null },
-			options
-		);
+		const op = $.extend({ key: '', url: '', data: {}, type: 'GET', success: null }, options);
 		const cache_key = 'dwz_json_' + op.key;
 
 		if (!op.key || !op.url) {
@@ -152,13 +149,7 @@ $.extend(biz, {
 			if (ret) {
 				const result = ret.result;
 				if (result.update == true && result.closed == false) {
-					const str =
-						'新版本型号:' +
-						result.version +
-						';更新提示语:' +
-						result.updateTip +
-						';发布时间:' +
-						result.time;
+					const str = '新版本型号:' + result.version + ';更新提示语:' + result.updateTip + ';发布时间:' + result.time;
 
 					if (result.closed) {
 						// 强制更新
@@ -216,24 +207,20 @@ $.extend(biz, {
 		});
 
 		// 根据起终点经纬度规划驾车导航路线
-		driving.search(
-			new AMap.LngLat(op.pointStart.lng, op.pointStart.lat),
-			new AMap.LngLat(op.pointEnd.lng, op.pointEnd.lat),
-			function (status, result) {
-				// result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
-				let route = {};
-				if (result.routes) {
-					route = result.routes[0];
-				}
-				if (status === 'complete') {
-					console.log('绘制驾车路线完成');
-				} else {
-					console.log('获取驾车数据失败：' + result);
-				}
-
-				callback && callback(route);
+		driving.search(new AMap.LngLat(op.pointStart.lng, op.pointStart.lat), new AMap.LngLat(op.pointEnd.lng, op.pointEnd.lat), function (status, result) {
+			// result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+			let route = {};
+			if (result.routes) {
+				route = result.routes[0];
 			}
-		);
+			if (status === 'complete') {
+				console.log('绘制驾车路线完成');
+			} else {
+				console.log('获取驾车数据失败：' + result);
+			}
+
+			callback && callback(route);
+		});
 
 		return driving;
 	},

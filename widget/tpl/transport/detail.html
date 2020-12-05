@@ -26,8 +26,7 @@
 		</div>
 		<div class="btn-group">
 			{{if receive.mobile}}
-			<a class="btn" href="tel:{{receive.mobile}}" target="redirect"><i class="icon icon-phone"></i><span>电话</span></a>
-			{{/if}}
+			<a class="btn" href="tel:{{receive.mobile}}" target="redirect"><i class="icon icon-phone"></i><span>电话</span></a> {{/if}}
 			<a class="btn" href="javascript:$.navView.open({url:'tpl/transport/driving.html?dwz_callback=biz.transport.driving', data:{{receive}}, rel:'driving'})"><i class="icon icon-map-nav"></i>导航</a>
 		</div>
 	</li>
@@ -63,13 +62,13 @@
 
 	{{if vo.status == 0}}
 	<div class="bleed-margin">
-		<span class="form-submit active dwz-btn-start">出发</span>
-		向右滑动出发<i class="icon-wipe-right"></i>
+		<span class="form-submit active dwz-btn-start">出发</span> 向右滑动出发
+		<i class="icon-wipe-right"></i>
 	</div>
 	{{else if vo.status == 1}}
 	<div class="bleed-margin">
-		<span class="form-submit active dwz-btn-finish">完成</span>
-		向右滑动完成<i class="icon-wipe-right"></i>
+		<span class="form-submit active dwz-btn-finish">完成</span> 向右滑动完成
+		<i class="icon-wipe-right"></i>
 	</div>
 	{{/if}}
 </script>

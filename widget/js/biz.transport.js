@@ -34,8 +34,7 @@ biz.transport = {
 					}
 
 					if ($.isAjaxStatusOk(json)) {
-						$form.total =
-							json.data.total || json.data.list ? json.data.list.length : 0;
+						$form.total = json.data.total || json.data.list ? json.data.list.length : 0;
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}
@@ -75,8 +74,7 @@ biz.transport = {
 			car: $.amap.addMarker({
 				map: map,
 				position: [biz.location.lng, biz.location.lat],
-				content:
-					'<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>'
+				content: '<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>'
 			}),
 			start: null,
 			end: null
@@ -185,24 +183,19 @@ biz.transport = {
 					// 缓存当前运输单
 					biz.transport.vo = json.data;
 
-					const pointStart = new AMap.LngLat(
-						json.data.ship.lng,
-						json.data.ship.lat
-					);
+					const pointStart = new AMap.LngLat(json.data.ship.lng, json.data.ship.lat);
 
 					// 创建起点图标
 					markers.start = $.amap.addMarker({
 						map: map,
 						position: pointStart,
-						content:
-							'<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+						content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
 					});
 					// 创建终点图标
 					markers.end = $.amap.addMarker({
 						map: map,
 						position: [json.data.receive.lng, json.data.receive.lat],
-						content:
-							'<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
+						content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
 					});
 
 					// 缩放地图到合适的视野级别
@@ -231,10 +224,7 @@ biz.transport = {
 		});
 
 		const pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
-		const pointEnd = new AMap.LngLat(
-			parseFloat(params.lng),
-			parseFloat(params.lat)
-		);
+		const pointEnd = new AMap.LngLat(parseFloat(params.lng), parseFloat(params.lat));
 		map.setCenter(pointStart);
 
 		const markers = {
@@ -242,26 +232,21 @@ biz.transport = {
 			start: $.amap.addMarker({
 				map: map,
 				position: pointStart,
-				content:
-					'<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
 			}),
 			// 创建终点图标
 			end: $.amap.addMarker({
 				map: map,
 				position: pointEnd,
-				content:
-					'<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
+				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
 			})
 		};
 
 		// 路线导航
-		let driving = biz.createDriving(
-			{ map: map, pointStart: pointStart, pointEnd: pointEnd },
-			function (route) {
-				let _html = template.render(tplWrap['tpl-nav-info'], route);
-				$box.find('.dwz-nav-info').html(_html);
-			}
-		);
+		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
+			let _html = template.render(tplWrap['tpl-nav-info'], route);
+			$box.find('.dwz-nav-info').html(_html);
+		});
 
 		const $form = $box.find('form.dwz-form');
 		const $sheetBox = $form.find('div.sheet-box');
@@ -318,10 +303,7 @@ biz.transport = {
 
 									// 路线导航
 									driving && driving.clear();
-									let _pointEnd = new AMap.LngLat(
-										parseFloat($li.attr('data-lng')),
-										parseFloat($li.attr('data-lat'))
-									);
+									let _pointEnd = new AMap.LngLat(parseFloat($li.attr('data-lng')), parseFloat($li.attr('data-lat')));
 									driving = biz.createDriving(
 										{
 											map: map,
@@ -329,10 +311,7 @@ biz.transport = {
 											pointEnd: _pointEnd
 										},
 										function (route) {
-											let _html = template.render(
-												tplWrap['tpl-nav-info'],
-												route
-											);
+											let _html = template.render(tplWrap['tpl-nav-info'], route);
 											$box.find('.dwz-nav-info').html(_html);
 										}
 									);
@@ -346,24 +325,21 @@ biz.transport = {
 
 		// 判断中文输入完成或者英文输入，触发事件
 		let isInputZh = false;
-		$inputEnd.on(
-			'compositionstart compositionend input focus',
-			function (event) {
-				console.log(event.type, isInputZh);
+		$inputEnd.on('compositionstart compositionend input focus', function (event) {
+			console.log(event.type, isInputZh);
 
-				switch (event.type) {
-					case 'compositionstart':
-						isInputZh = true;
-						break;
-					case 'compositionend':
-						isInputZh = false;
-						break;
-					default:
-						if (!isInputZh) $form.trigger('submit');
-						break;
-				}
+			switch (event.type) {
+				case 'compositionstart':
+					isInputZh = true;
+					break;
+				case 'compositionend':
+					isInputZh = false;
+					break;
+				default:
+					if (!isInputZh) $form.trigger('submit');
+					break;
 			}
-		);
+		});
 	},
 
 	// 录入发货过磅信息
@@ -463,8 +439,7 @@ biz.transport = {
 		$.alert.confirm('出发前先录入发货过磅信息', {
 			okCall(event) {
 				$.navView.open({
-					url:
-						'tpl/transport/first.html?dwz_callback=biz.transport.firstRender',
+					url: 'tpl/transport/first.html?dwz_callback=biz.transport.firstRender',
 					data: vo,
 					rel: 'transportFirst'
 				});

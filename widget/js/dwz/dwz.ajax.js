@@ -17,18 +17,14 @@ dwz.extend({
 				<div>${xhr.responseText}</div>`
 			);
 		} else {
-			alert(
-				`Http status: ${xhr.status} ${xhr.statusText} \najaxOptions: ${ajaxOptions}\nthrownError: ${thrownError}\n${xhr.responseText}`
-			);
+			alert(`Http status: ${xhr.status} ${xhr.statusText} \najaxOptions: ${ajaxOptions}\nthrownError: ${thrownError}\n${xhr.responseText}`);
 		}
 	},
 	ajaxDone: function (json) {
 		if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.error) {
-			if (json[dwz.config.keys.message] && $.alert)
-				$.alert.error(json[dwz.config.keys.message]);
+			if (json[dwz.config.keys.message] && $.alert) $.alert.error(json[dwz.config.keys.message]);
 		} else if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-			if (json[dwz.config.keys.message] && $.alert)
-				$.alert.success(json[dwz.config.keys.message]);
+			if (json[dwz.config.keys.message] && $.alert) $.alert.success(json[dwz.config.keys.message]);
 
 			if ('redirect' == json.callbackType && json.forwardUrl) {
 				setTimeout(function () {
@@ -140,9 +136,7 @@ function iframeCallback(form, callback) {
 	}
 
 	if ($iframe.size() == 0) {
-		$('body').append(
-			'<iframe id="callbackframe" name="callbackframe" src="about:blank" style="display:none"></iframe>'
-		);
+		$('body').append('<iframe id="callbackframe" name="callbackframe" src="about:blank" style="display:none"></iframe>');
 		$iframe = $('#callbackframe');
 	}
 
@@ -283,12 +277,7 @@ function dialogAjaxDone(json) {
 					let type = this.type;
 
 					// Use .is( ":disabled" ) so that fieldset[disabled] works
-					return (
-						this.name &&
-						!dwz(this).is(':disabled') &&
-						dwz.config.rsubmittable.test(this.nodeName) &&
-						!dwz.config.rsubmitterTypes.test(type)
-					);
+					return this.name && !dwz(this).is(':disabled') && dwz.config.rsubmittable.test(this.nodeName) && !dwz.config.rsubmitterTypes.test(type);
 				})
 				.each(function () {
 					let $input = $(this),
@@ -318,11 +307,7 @@ function dialogAjaxDone(json) {
 			return result;
 		},
 
-		ajaxTodo: function ({
-			className = 'active',
-			disabledInvert$ = 'disabled-invert',
-			relCount$ = 'data-rel-count'
-		}) {
+		ajaxTodo: function ({ className = 'active', disabledInvert$ = 'disabled-invert', relCount$ = 'data-rel-count' }) {
 			return this.each(function () {
 				let $this = $(this).hrefFix(),
 					$dataRel = $($this.attr(relCount$)),

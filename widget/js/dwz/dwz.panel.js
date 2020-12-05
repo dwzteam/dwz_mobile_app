@@ -82,10 +82,7 @@
 		},
 		open(options) {
 			// default, pic, login
-			let op = $.extend(
-				{ type: 'GET', url: '', data: {}, callback: null, pos: null },
-				options
-			);
+			let op = $.extend({ type: 'GET', url: '', data: {}, callback: null, pos: null }, options);
 			let $box = this.$box,
 				$bgBox = this.$bgBox;
 

@@ -52,9 +52,7 @@ $.dialog = {
 		if (op.pop == 'pic' || op.pop == 'login' || op.pop == 'fullscreen') {
 			$box.addClass($.dialog.config.fullscreenClass);
 		}
-		$box
-			.addClass($.dialog.config.openClass)
-			.translateY(document.documentElement.clientHeight + 'px');
+		$box.addClass($.dialog.config.openClass).translateY(document.documentElement.clientHeight + 'px');
 
 		setTimeout(function () {
 			$box.animate({ y: 0 }, 300, 'ease');
@@ -92,17 +90,11 @@ $.dialog = {
 		this.isOpen = true;
 	},
 	loadExternal(url) {
-		let $box = this.$box.html(
-			'<a class="video-close" href="javascript:$.dialog.close()"><i class="icon icon-close-dialog"></i></a><div class="pop-content"></div>'
-		);
+		let $box = this.$box.html('<a class="video-close" href="javascript:$.dialog.close()"><i class="icon icon-close-dialog"></i></a><div class="pop-content"></div>');
 
 		let $content = $box.find('.pop-content');
 		let ih = $content.get(0).offsetHeight;
-		$content.html(
-			$.config.frag['external']
-				.replaceAll('{url}', url)
-				.replaceAll('{{height}}', ih + 'px')
-		);
+		$content.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
 	},
 
 	close(options) {
@@ -123,19 +115,10 @@ $.dialog = {
 		let $box = this.$box,
 			$bgBox = this.$bgBox;
 
-		$box.animate(
-			{ y: document.documentElement.clientHeight },
-			300,
-			'ease',
-			function () {
-				$box
-					.html('')
-					.removeClass(
-						$.dialog.config.fullscreenClass + ' ' + $.dialog.config.openClass
-					);
-				$box.triggerPageClear();
-			}
-		);
+		$box.animate({ y: document.documentElement.clientHeight }, 300, 'ease', function () {
+			$box.html('').removeClass($.dialog.config.fullscreenClass + ' ' + $.dialog.config.openClass);
+			$box.triggerPageClear();
+		});
 
 		$bgBox.removeClass($.dialog.config.openClass);
 

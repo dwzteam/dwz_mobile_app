@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -11,34 +12,38 @@
 	<script type="text/javascript" src="script/index.js"></script>
 
 	<script type="text/javascript">
-		loadScripts({env: 'dev'}); // dev, build
+		loadScripts({
+			env: 'dev'
+		}); // dev, build
 	</script>
 
 </head>
 
-<body class="android"><!-- ios & android -->
+<body class="android">
+	<!-- ios & android -->
 
-<div id="nav-tab" class="view-container">
-	<div class="tab-panel">
-		<div class="panel-item cached unitBox"></div>
-		<div class="panel-item cached unitBox"></div>
-		<div class="panel-item cached unitBox"></div>
-		<div class="panel-item cached unitBox"></div>
+	<div id="nav-tab" class="view-container">
+		<div class="tab-panel">
+			<div class="panel-item cached unitBox"></div>
+			<div class="panel-item cached unitBox"></div>
+			<div class="panel-item cached unitBox"></div>
+			<div class="panel-item cached unitBox"></div>
+		</div>
+		<div class="tab-bar">
+			<a class="tab-item" data-href="tpl/home.html?dwz_callback=biz.home.render" tabid="home" data-cache="true"><i class="icon icon-home"></i><span>首页</span></a>
+			<a class="tab-item" data-href="tpl/message/index.html?dwz_callback=biz.message.listRender" tabid="message"><i class="icon icon-message"></i><span>消息</span></a>
+			<a class="tab-item" data-href="tpl/my/favorite.html?dwz_callback=biz.favorite.listRender" tabid="favorite" data-cache="true"><i class="icon icon-favorite"></i><span>收藏</span></a>
+			<a class="tab-item" data-href="tpl/my/index.html?dwz_callback=biz.my.render" tabid="my" data-cache="true"><i class="icon icon-my"></i><span>我的</span></a>
+		</div>
 	</div>
-	<div class="tab-bar">
-		<a class="tab-item" data-href="tpl/home.html?dwz_callback=biz.home.render" tabid="home" data-cache="true"><i class="icon icon-home"></i><span>首页</span></a>
-		<a class="tab-item" data-href="tpl/message/index.html?dwz_callback=biz.message.listRender" tabid="message"><i class="icon icon-message"></i><span>消息</span></a>
-		<a class="tab-item" data-href="tpl/my/favorite.html?dwz_callback=biz.favorite.listRender" tabid="favorite" data-cache="true"><i class="icon icon-favorite"></i><span>收藏</span></a>
-		<a class="tab-item" data-href="tpl/my/index.html?dwz_callback=biz.my.render" tabid="my" data-cache="true"><i class="icon icon-my"></i><span>我的</span></a>
+
+	<div id="progressBar" style="display: none;">
+		<div class="background"></div>
+		<div class="loading">数据加载中，请稍等...</div>
 	</div>
-</div>
 
-<div id="progressBar" style="display: none;">
-	<div class="background"></div>
-	<div class="loading">数据加载中，请稍等...</div>
-</div>
-
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c7cbc87e5443be55786d69246b8f231e&plugin=AMap.Driving"></script>
+	<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c7cbc87e5443be55786d69246b8f231e&plugin=AMap.Driving"></script>
 
 </body>
+
 </html>

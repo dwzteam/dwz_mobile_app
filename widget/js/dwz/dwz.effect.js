@@ -63,18 +63,10 @@
 		},
 		// 设置transform偏移
 		transition(ele, options) {
-			let op = $.extend(
-				{ transitionType: 'all', duration: 0, effectType: 'ease' },
-				options
-			);
+			let op = $.extend({ transitionType: 'all', duration: 0, effectType: 'ease' }, options);
 			let $box = $(ele);
 			if (op.duration) {
-				let tranStr =
-					op.transitionType +
-					' ' +
-					op.duration / 1000.0 +
-					's ' +
-					(op.effectType || 'ease');
+				let tranStr = op.transitionType + ' ' + op.duration / 1000.0 + 's ' + (op.effectType || 'ease');
 				$box.css({
 					'-webkit-transition': '-webkit-' + tranStr,
 					transition: tranStr
@@ -122,18 +114,12 @@
 
 		// 设置transform偏移
 		translate(options) {
-			let op = $.extend(
-				{ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' },
-				options
-			);
+			let op = $.extend({ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' }, options);
 			op.transform = 'translate3d(' + op.x + ',' + op.y + ',' + op.z + ')';
 			return this.translateCss(op);
 		},
 		translateCss(options) {
-			let op = $.extend(
-				{ transform: '', duration: 0, effectType: 'ease' },
-				options
-			);
+			let op = $.extend({ transform: '', duration: 0, effectType: 'ease' }, options);
 			return this.each(function () {
 				$.transition(this, {
 					transitionType: 'transform',
@@ -161,10 +147,7 @@
 			});
 		},
 		rotate(options) {
-			let op = $.extend(
-				{ deg: '0deg', duration: 0, effectType: 'ease' },
-				options
-			);
+			let op = $.extend({ deg: '0deg', duration: 0, effectType: 'ease' }, options);
 			return this.each(function () {
 				let rotateStr = 'rotate(' + op.deg + ')';
 				$.transition(this, {
@@ -198,9 +181,7 @@
 
 			return this.each(function () {
 				let $box = $(this);
-				$box
-					.removeClass('animation-rotate-up')
-					.removeClass('animation-rotate-up-back');
+				$box.removeClass('animation-rotate-up').removeClass('animation-rotate-up-back');
 				$box.addClass('animation-rotate-up');
 				setTimeout(function () {
 					$box.addClass('animation-rotate-up-back');
@@ -231,8 +212,7 @@
 					width = $box.width(),
 					flyId = 'effect-fly-' + new Date().getTime();
 
-				let tpl =
-					'<span id="#flyId#" class="effect-bubble-fly #class#" style="top:#top#px;left:#left#px;font-size: #fontSize#rem;">#content#</span>';
+				let tpl = '<span id="#flyId#" class="effect-bubble-fly #class#" style="top:#top#px;left:#left#px;font-size: #fontSize#rem;">#content#</span>';
 				let html = tpl
 					.replaceAll('#left#', pos.left + width / 2)
 					.replaceAll('#top#', pos.top)
@@ -265,8 +245,7 @@
 			return this.each(function () {
 				let $me = $(this);
 
-				let eventNames =
-					'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
+				let eventNames = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 
 				function animateStep(isFirst) {
 					if (eList && eList.length > 0) {
@@ -340,8 +319,7 @@
 	});
 
 	$.animateCls = {
-		std_names:
-			'bounce flash pulse rubberBand shake swing tada wobble jello flip hinge jackInTheBox',
+		std_names: 'bounce flash pulse rubberBand shake swing tada wobble jello flip hinge jackInTheBox',
 		in_names:
 			'bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp ' +
 			'fadeIn fadeInDown fadeInDownBig fadeInLeft fadeInLeftBig fadeInRight fadeInRightBig fadeInUp fadeInUpBig ' +
@@ -357,12 +335,7 @@
 			'slideOutUp slideOutDown slideOutLeft slideOutRight ' +
 			'zoomOut zoomOutDown zoomOutLeft zoomOutRight zoomOutUp'
 	};
-	$.animateCls.all_names =
-		$.animateCls.std_names +
-		' ' +
-		$.animateCls.in_names +
-		' ' +
-		$.animateCls.out_names;
+	$.animateCls.all_names = $.animateCls.std_names + ' ' + $.animateCls.in_names + ' ' + $.animateCls.out_names;
 
 	$.fn.animateCls = function (animateCls, animationend) {
 		let effectItem = { className: animateCls };

@@ -126,11 +126,7 @@ $.extend({
 			},
 			loadMoreFn() {
 				console.log('loadMoreFn...');
-				if (
-					$page.size() &&
-					$form.total &&
-					$form.total > $list.find('li.item').size()
-				) {
+				if ($page.size() && $form.total && $form.total > $list.find('li.item').size()) {
 					$page.val(parseInt($page.val()) + 1);
 					$form.requestList(true);
 				}

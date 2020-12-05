@@ -93,16 +93,10 @@
 			);
 
 			if (biz.checkPermission) {
-				if (
-					op.sourceType == 'camera' &&
-					!biz.checkPermission('camera', '摄像头')
-				) {
+				if (op.sourceType == 'camera' && !biz.checkPermission('camera', '摄像头')) {
 					return;
 				}
-				if (
-					op.sourceType == 'library' &&
-					!biz.checkPermission('photos', '相册')
-				) {
+				if (op.sourceType == 'library' && !biz.checkPermission('photos', '相册')) {
 					return;
 				}
 			}
@@ -137,10 +131,7 @@
 		},
 		// 转换base64编码
 		getBase64Image(options) {
-			let op = $.extend(
-				{ imgPath: '', maxWidth: 800, maxHeight: 800, callback: null },
-				options
-			);
+			let op = $.extend({ imgPath: '', maxWidth: 800, maxHeight: 800, callback: null }, options);
 			let img = new Image();
 
 			img.src = op.imgPath;
@@ -187,9 +178,7 @@
 		thumb.appendChild(img);
 		previewElem.appendChild(thumb);
 
-		let inputElem = dwz.parseHTML(
-			'<input type="hidden" name="' + inputName + '" value="' + strBase64 + '">'
-		);
+		let inputElem = dwz.parseHTML('<input type="hidden" name="' + inputName + '" value="' + strBase64 + '">');
 		thumb.appendChild(inputElem);
 
 		img.onload = function () {
@@ -257,13 +246,7 @@
 										maxHeight: op.maxHeight,
 										callback(strBase64) {
 											// console.log(strBase64)
-											previewUploadImg(
-												previewElem,
-												strBase64,
-												op.inputName,
-												op.maxW,
-												op.maxH
-											);
+											previewUploadImg(previewElem, strBase64, op.inputName, op.maxW, op.maxH);
 										}
 									});
 
@@ -286,10 +269,7 @@
 		 * @param options
 		 */
 		previewImg(options) {
-			let op = $.extend(
-				{ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' },
-				options
-			);
+			let op = $.extend({ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' }, options);
 			return this.each(function () {
 				let $wrap = $(this);
 
@@ -325,9 +305,7 @@
 			let me = this,
 				$previewBox = $('#preview-big-img');
 			if ($previewBox.size() == 0) {
-				$('body').append(
-					'<div id="preview-big-img" style="display:none"></div>'
-				);
+				$('body').append('<div id="preview-big-img" style="display:none"></div>');
 				$previewBox = $('#preview-big-img');
 
 				$previewBox.touchwipe({
@@ -352,8 +330,7 @@
 				let $img = $(this),
 					src = $img.attr('data-src') || $img.attr('src');
 
-				fragLi +=
-					'<li><div class="pop-inner"><img src="' + src + '"></div></li>';
+				fragLi += '<li><div class="pop-inner"><img src="' + src + '"></div></li>';
 				fragItem += '<li class="' + (index == 0 ? 'on' : '') + '"></li>';
 
 				// 判断打开图片预览时，点击了第几张图片
@@ -362,15 +339,7 @@
 				}
 			});
 
-			$previewBox
-				.html(
-					tpl
-						.replaceAll('#li#', fragLi)
-						.replaceAll('#item#', fragItem)
-						.replaceAll('#currentIndex#', currentIndex)
-				)
-				.show()
-				.initUI();
+			$previewBox.html(tpl.replaceAll('#li#', fragLi).replaceAll('#item#', fragItem).replaceAll('#currentIndex#', currentIndex)).show().initUI();
 
 			window.addEventListener('resize', me.autoLayout, false);
 

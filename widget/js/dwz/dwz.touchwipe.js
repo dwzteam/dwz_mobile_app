@@ -77,14 +77,9 @@
 							endY2 = pos.y2;
 						}
 
-						if (
-							!directionStart &&
-							(Math.abs(pos.dx) > config.min_move_x ||
-								Math.abs(pos.dy) > config.min_move_y)
-						) {
+						if (!directionStart && (Math.abs(pos.dx) > config.min_move_x || Math.abs(pos.dy) > config.min_move_y)) {
 							// 判断开始滚动方向
-							directionStart =
-								Math.abs(pos.dx) > Math.abs(pos.dy) ? 'horizontal' : 'vertical';
+							directionStart = Math.abs(pos.dx) > Math.abs(pos.dy) ? 'horizontal' : 'vertical';
 						}
 
 						if (Math.abs(pos.dx) > maxMove.dx) {
@@ -96,10 +91,7 @@
 
 						if (config.touchmove) {
 							// 滚动处理函数
-							if (
-								config.direction == directionStart ||
-								config.direction == 'all'
-							) {
+							if (config.direction == directionStart || config.direction == 'all') {
 								config.touchmove.call(this, e, pos);
 							}
 						} else {
@@ -195,13 +187,8 @@
 					}
 
 					// 判断非滑动操作触发touch
-					if (
-						touchType == 'touch' &&
-						Math.abs(maxMove.dx) < config.min_move_x &&
-						Math.abs(maxMove.dy) < config.min_move_y
-					) {
-						if (config.touch && this !== window)
-							config.touch.call(this, e, { x: startX, y: startY });
+					if (touchType == 'touch' && Math.abs(maxMove.dx) < config.min_move_x && Math.abs(maxMove.dy) < config.min_move_y) {
+						if (config.touch && this !== window) config.touch.call(this, e, { x: startX, y: startY });
 					}
 
 					cancelTouch(); // touch完成取消touch事件
