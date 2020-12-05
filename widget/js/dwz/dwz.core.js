@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 350863780@qq.com
+ * @author 张慧华 <350863780@qq.com>
  * DWZ Mobile Framework 核心库: 相当于一个专门针对移动端优化的精简版jQuery，代码量只有jQuery 的十分之一左右，使用方式基本同jQuery。
  * http://www.w3schools.com/cssref/css_selectors.asp
  */

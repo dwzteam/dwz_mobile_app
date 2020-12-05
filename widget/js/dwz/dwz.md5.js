@@ -1,5 +1,5 @@
 /** 
- * @author 张慧华 350863780@qq.com
+ * @author 张慧华 <350863780@qq.com>
  * JavaScript MD5 加密
  */
 

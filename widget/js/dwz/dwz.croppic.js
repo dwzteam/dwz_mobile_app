@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 350863780@qq.com
+ * @author 张慧华 <350863780@qq.com>
  * @deprecated
  * 头像裁剪JS实现方案，使用APICloud FNImageClip模块代替
  */

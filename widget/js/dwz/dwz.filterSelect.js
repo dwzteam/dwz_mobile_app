@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 350863780@qq.com
+ * @author 张慧华 <350863780@qq.com>
  */
 $.filterSelect = {
 	config: {
