@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 z@j-ui.com
+ * @author 张慧华 350863780@qq.com
  * $(document).touchwipe({
  *      wipeLeft:function(event, pos){ alert("向左滑动了")},
  *      wipeRight:function(event, pos){alert("向右滑动了")},

@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 z@j-ui.com
+ * @author 张慧华 350863780@qq.com
  */
 (function ($) {
 	let _config = {

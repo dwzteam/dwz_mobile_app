@@ -1,5 +1,5 @@
 /**
- * @author 张慧华 z@j-ui.com on 2015/12/18.
+ * @author 张慧华 350863780@qq.com on 2015/12/18.
  * 这套动画框架是使用Tween算法，目前包括了31种效果。和jQuery中的动画相比，它的体积小，效率高，资源占用少，效果非常丰富。使用上和jquery的animate方法一样。
  * 使用简介
  * $.animate(ele,obj,duration,[effectType],[fnCallback])
