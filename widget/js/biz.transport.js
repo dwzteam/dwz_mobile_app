@@ -86,12 +86,6 @@ biz.transport = {
 			// 创建标注对象并添加到地图
 
 			markers.car.setPosition(gpsPos);
-			if (!markers._inited) {
-				markers._inited = true;
-				setTimeout(() => {
-					map.setCenter(gpsPos);
-				}, 500);
-			}
 
 			if (markers.start && (biz.location.lng || biz.location.lat)) {
 				const startPos = markers.start.getPosition();
@@ -105,7 +99,7 @@ biz.transport = {
 				});
 				markers.car.setAngle(deg);
 
-				const path = [startPos, gpsPos, endPos];
+				const path = [gpsPos, endPos];
 				if (markers.polyline) {
 					markers.polyline.setPath(path);
 				} else {
@@ -209,7 +203,7 @@ biz.transport = {
 					});
 
 					// 缩放地图到合适的视野级别
-					map.setFitView([markers.start, markers.end]);
+					map.setFitView([markers.car, markers.end]);
 
 					$(document).trigger('location.change', biz.location); // 测试路线
 				},
