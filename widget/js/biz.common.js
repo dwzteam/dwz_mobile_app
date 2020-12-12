@@ -262,20 +262,6 @@ $.extend(biz, {
 
 		const $box = $(document);
 
-		// 播放无声音乐
-		if (api.systemType == 'android') {
-			const audioStreamer = api.require('audioStreamer');
-			audioStreamer.openPlayer(
-				{
-					path: 'http://www.7788sc.com/ui/mp3/1.mp3'
-				},
-				function (ret) {
-					console.log(JSON.stringify(ret));
-				}
-			);
-			audioStreamer.setLoop({ loop: true });
-		}
-
 		// 定位
 		const bmLocation = api.require('bmLocation');
 		bmLocation.configManager({

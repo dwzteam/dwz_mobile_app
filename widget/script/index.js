@@ -34,7 +34,8 @@ var js_src = {
 		'js/biz.transport.js',
 		'js/biz.message.js',
 		'js/biz.favorite.js',
-		'js/biz.my.js'
+		'js/biz.my.js',
+		'js/biz.faceDetect.js'
 	],
 	build: ['script/all.min.js']
 };
@@ -87,11 +88,14 @@ function loadScripts(options) {
 		if (api.systemType == 'android') {
 			// var premsMap = {'storage': '本地存储空间', 'camera': '摄像头', 'photos':'访问相册', 'location':'定位'};
 			// biz.initPermission(premsMap);
-			api.requestPermission({
-                list: ['camera','photos','location','storage']
-            }, function(res) {
-                console.log(JSON.stringify(res));
-            });
+			api.requestPermission(
+				{
+					list: ['camera', 'photos', 'location', 'storage']
+				},
+				function (res) {
+					console.log(JSON.stringify(res));
+				}
+			);
 		}
 
 		// 开启gps
@@ -137,8 +141,7 @@ function loadScripts(options) {
 					$this.previewUploadImg(options);
 				});
 
-			if ($.fn.previewImg)
-				$('ul.dwz-preview-img, ul.upload-preview', $p).previewImg();
+			if ($.fn.previewImg) $('ul.dwz-preview-img, ul.upload-preview', $p).previewImg();
 
 			if ($.fn.dropdown) $('div.dwz-dropdown', $p).dropdown();
 
@@ -194,8 +197,8 @@ function loadScripts(options) {
 
 	// 处理窗口resize适配
 	window.onresize = function () {
-		$("div.dwz-slide").trigger("slide-resize");
-		$("div.nav-view").trigger("window-resize");
+		$('div.dwz-slide').trigger('slide-resize');
+		$('div.nav-view').trigger('window-resize');
 	};
 }
 

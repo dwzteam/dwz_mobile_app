@@ -1,4 +1,3 @@
-
 .row {
 	.flex-wrap;
 	width: 100%;
@@ -6,7 +5,12 @@
 		display: block;
 		.flex-item;
 	}
-	.col-3, .col-3-3, .col-4, .col-4-4, .col-5, .col-5-5 {
+	.col-3,
+	.col-3-3,
+	.col-4,
+	.col-4-4,
+	.col-5,
+	.col-5-5 {
 		width: 100%;
 	}
 	.col-3-1 {
@@ -38,13 +42,13 @@
 	}
 }
 
-
 // 九宫格
-.grids-contant, .grids-contant2{
+.grids-contant,
+.grids-contant2 {
 	position: relative;
 	overflow: hidden;
 	text-align: center;
-	&:before{
+	&:before {
 		content: '';
 		position: absolute;
 		box-sizing: border-box;
@@ -59,13 +63,13 @@
 		transform: scale(0.5);
 	}
 
-	.grids-grid{
+	.grids-grid {
 		display: inline-block;
 		position: relative;
 		float: left;
 		padding: 16px 10px;
 		box-sizing: border-box;
-		&:before{
+		&:before {
 			content: '';
 			position: absolute;
 			box-sizing: border-box;
@@ -78,9 +82,9 @@
 			-webkit-transform-origin: 0 0;
 			transform-origin: 0 0;
 			-webkit-transform: scale(0.5);
-			transform: scale(0.5)
+			transform: scale(0.5);
 		}
-		.grids-grid-icon{
+		.grids-grid-icon {
 			width: 50px;
 			height: 50px;
 			margin: 0 auto;
@@ -89,7 +93,7 @@
 				height: 100%;
 			}
 		}
-		.grids-grid-label{
+		.grids-grid-label {
 			display: block;
 			text-align: center;
 			color: #666;
@@ -101,7 +105,7 @@
 	.grids-grid:nth-child(3n):before {
 		border-right-width: 0;
 	}
-	.grids-grid{
+	.grids-grid {
 		width: 33.333333%;
 	}
 }
@@ -109,7 +113,19 @@
 	.grids-grid:nth-child(2n):before {
 		border-right-width: 0;
 	}
-	.grids-grid{
+	.grids-grid {
 		width: 50%;
+	}
+}
+
+// flex 流式布局，根据item宽度适配
+.flex-flow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	.item {
+		flex-shrink: 0;
+		display: flex;
+		width: 48%px;
 	}
 }

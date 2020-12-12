@@ -1,11 +1,14 @@
-.icon {
-	display: block;
-	margin: 0;
-	width: 25px;
-	height: 25px;
+.bg-size(@width:'30px', @height: '30px', @display:'block', @size: '100%') {
+	display: @display;
+	width: @width;
+	height: @height;
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: @size @size;
+}
+
+.icon {
+	.bg-size(25px, 25px , block);
 }
 
 .img-icon {
@@ -95,6 +98,7 @@
 
 .icon-user {
 	background-image: url('../../image/icon/icon-user.svg');
+	background-size: 80%;
 }
 
 .icon-setting {

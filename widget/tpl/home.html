@@ -5,7 +5,7 @@
 		<!-- fload-header or semi-header -->
 		<div class="toolbar">
 			<div></div>
-			<a class="bar-button" target="navView" ßdata-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="icon icon-user"></i></a>
+			<a class="bar-button" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="icon icon-user"></i></a>
 		</div>
 	</header>
 
@@ -23,8 +23,30 @@
 
 			<div class="dwz-panel">
 				<div class="panel-header padding-h">
-					<label class="panel-title">DWZ Mobile 组件示例</label>
-					<a class="icon icon-map-nav" href="javascript:$.navView.open({url:'tpl/transport/driving.html?dwz_callback=biz.transport.driving', data:{name:'杭州大前端网络技术工作室',address:'浙江省杭州市余杭区恒生科技园',mobile:'17767167745',lat:30.278029,lng:120.005807}, rel:'driving'})"></a>
+					<label class="panel-title">原生模块示例（需打包APP后测试）</label>
+				</div>
+				<div class="panel-content">
+					<div class="grids-contant">
+
+						<a class="grids-grid" target="navView" data-href="tpl/module/faceDetect.html?dwz_callback=biz.faceDetect.testFaceRender" rel="faceDetect">
+							<div class="grids-grid-icon"><img src="image/icon/module/faceDetect.svg"></div>
+							<p class="grids-grid-label">人脸识别</p>
+						</a>
+
+						<a class="grids-grid" href="javascript:	$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id=1', rel:'transportDetail'})">
+							<div class="grids-grid-icon"><img src="image/icon/icon-map-nav.svg"></div>
+							<p class="grids-grid-label">高德导航</p>
+						</a>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+
+			<div class="dwz-panel">
+				<div class="panel-header padding-h">
+					<label class="panel-title">DWZ Mobile HTML5组件示例</label>
 				</div>
 				<div class="panel-content">
 					<div class="grids-contant">
