@@ -1,5 +1,4 @@
 <main>
-
 	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
@@ -12,7 +11,8 @@
 	<div class="content">
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
-				<div class="flex-flow dwz-img-box"></div>
+				<div class="flex-flow dwz-img-box">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -21,3 +21,7 @@
 		<button class="form-submit active" type="button">人脸采集测试</button>
 	</div>
 </main>
+
+<script id="tpl-img" type="text/html">
+	<img class="item margin-vh" src="data:image/jpeg;base64,{{crop}}" alt="人脸图片">
+</script>

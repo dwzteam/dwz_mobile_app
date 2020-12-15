@@ -16,14 +16,17 @@ biz.faceDetect = {
 	 * @param {*} params
 	 */
 	testFaceRender(tpl, params) {
-		let html = template.render(tpl, params);
+		const tplWrap = $.templateWrap(tpl);
+
+		let html = template.render(tplWrap.tpl, params);
 		this.html(html).initUI();
 
 		let $imgBox = this.find('div.dwz-img-box');
 		this.find('button.form-submit').click((event) => {
 			biz.faceDetect.liveFaceDetect({ debug: 1 }, (ret) => {
 				if (ret.status) {
-					$imgBox.append(`<img src="data:image/jpeg;base64,${ret.crop}">`);
+					let imgHtml = template.render(tplWrap['tpl-img'], ret);
+					$imgBox.append(imgHtml);
 				}
 			});
 		});
