@@ -57,7 +57,6 @@ function initUserInfo() {
 
 				if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
 					UserInfoUtil.update(json.data);
-					// initDict();
 				} else {
 					$.alert.toast(json[dwz.config.keys.message]);
 					UserInfoUtil.clear();
@@ -242,7 +241,6 @@ function loginAjaxDone(json) {
 	console.log(JSON.stringify(json));
 	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);
-		// initDict();
 
 		$.dialog.close();
 		$.navTab.open({

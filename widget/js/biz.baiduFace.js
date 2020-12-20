@@ -1,24 +1,42 @@
 biz.baiduFace = {
-	faceLiveness({ debug = 0 }, callback) {
+	faceLiveness({ debug = 0, cropType = 1, mouth = false, headRight = false, headLeft = false, headUp = false, headDown = false, headLeftOrRight = false }, callback) {
 		const module = api.require('DwzBaiduFaceLive');
-		module.faceLiveness({ debug: debug }, function (ret, err) {
-			if (!ret.status && ret.message) {
-				$.alert.toast(ret.message);
-			}
+		module.faceLiveness(
+			{
+				debug: debug, // 调试开关(默认:0)：0, 1
+				cropType: cropType, // 抠图类型(默认:1)：1:脸部, 2:大头照, 3:头像+肩膀
+				mouth: mouth, // 活体动作，张嘴(默认:false)
+				headRight: headRight, // 活体动作，向右转头(默认:false)
+				headLeft: headLeft, // 活体动作，向左转头(默认:false)
+				headUp: headUp, // 活体动作，向上抬头(默认:false)
+				headDown: headDown, // 活体动作，向下低头(默认:false)
+				headLeftOrRight: headLeftOrRight // 活体动作，摇头(默认:false)
+			},
+			function (ret, err) {
+				if (!ret.status && ret.message) {
+					$.alert.toast(ret.message);
+				}
 
-			callback && callback(ret);
-		});
+				callback && callback(ret);
+			}
+		);
 	},
 
-	faceDetect({ debug = 0 }, callback) {
+	faceDetect({ debug = 0, cropType = 1 }, callback) {
 		const module = api.require('DwzBaiduFaceLive');
-		module.faceDetect({ debug: debug }, function (ret, err) {
-			if (!ret.status && ret.message) {
-				$.alert.toast(ret.message);
-			}
+		module.faceDetect(
+			{
+				debug: debug, // 调试开关(默认:0)：0, 1
+				cropType: cropType // 抠图类型(默认:1)：1:脸部, 2:大头照, 3:头像+肩膀
+			},
+			function (ret, err) {
+				if (!ret.status && ret.message) {
+					$.alert.toast(ret.message);
+				}
 
-			callback && callback(ret);
-		});
+				callback && callback(ret);
+			}
+		);
 	},
 
 	/**
@@ -80,9 +98,9 @@ biz.baiduFace = {
 			if (ret.status) {
 				$.ajax({
 					type: 'POST',
-					url: biz.server.getUrl(biz.server.getLoginUrl()),
+					url: biz.server.getLoginUrl(),
 					dataType: 'json',
-					data: { faceBase64: ret.crop },
+					data: { faceBase64: ret.face },
 					cache: false,
 					global: false,
 					success: loginAjaxDone,

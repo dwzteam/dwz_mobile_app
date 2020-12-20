@@ -59,7 +59,7 @@
 	<permission name="hardware"/>
 
 	<!--配置一个后台定位功能：-->
-	<preference name="backgroundMode" value="audio | location"/>
+	<!-- <preference name="backgroundMode" value="audio | location"/> -->
 	
     <feature name="DwzBaiduFaceLive">
         <param name="LicenseID_iOS" value="DwzMobileApp-face-ios"/>
