@@ -35,7 +35,7 @@ var js_src = {
 		'js/biz.message.js',
 		'js/biz.favorite.js',
 		'js/biz.my.js',
-		'js/biz.faceDetect.js'
+		'js/biz.baiduFace.js'
 	],
 	build: ['script/all.min.js']
 };
