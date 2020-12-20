@@ -74,9 +74,9 @@
 	</feature>
 	<meta-data name="com.baidu.lbsapi.API_KEY" value="e4iq3bUaFzwgOorjFzIxYBMEi7rN9xup"/>
 
-	<feature name="aMapNavigation">
+	<!-- <feature name="aMapNavigation">
 		<param name="android_api_key" value="a872c2cfa3c41ffca6b32ddac6edc447" />
 		<param name="ios_api_key" value="" />
-	</feature>
+	</feature> -->
 </widget>
 

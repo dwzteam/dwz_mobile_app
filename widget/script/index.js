@@ -21,6 +21,7 @@ var js_src = {
 		'js/dwz/dwz.filterSelect.js',
 		'js/dwz/dwz.filterPanel.js',
 		'js/dwz/dwz.croppic.js',
+		'js/dwz/dwz.gps.js',
 		'js/dwz/dwz.amap.js',
 		'js/dwz/dwz.brush.js',
 		'js/dwz/dwz.regional.zh.js',
@@ -86,16 +87,7 @@ function loadScripts(options) {
 
 		// 默认打开权限 ['camera','contacts','microphone','photos','location','notification','calendar-r','phone-call','phone-r','sms-r','storage-r','starage-w'];
 		if (api.systemType == 'android') {
-			// var premsMap = {'storage': '本地存储空间', 'camera': '摄像头', 'photos':'访问相册', 'location':'定位'};
-			// biz.initPermission(premsMap);
-			api.requestPermission(
-				{
-					list: ['camera', 'photos', 'location', 'storage']
-				},
-				function (res) {
-					console.log(JSON.stringify(res));
-				}
-			);
+			biz.initPermission(['camera', 'photos', 'location', 'storage']);
 		}
 
 		// 开启gps

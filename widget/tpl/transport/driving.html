@@ -47,8 +47,8 @@
 
 <script id="tpl-nav-info" type="text/html">
 	<div class="flex-item flex-all-center flex-vertical">
-		<p class="item-title1">{{time|formatTime}}</p>
-		<p class="item-info1">{{distance|formatDistance}}</p>
+		<p class="item-title1">{{route.time|formatTime}}</p>
+		<p class="item-info1">{{route.distance|formatDistance}}</p>
 	</div>
-	<button class="button active flex-item" type="button" onclick="biz.transport.mapNav()">开始导航</button>
+	<button class="button active flex-item" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
 </script>

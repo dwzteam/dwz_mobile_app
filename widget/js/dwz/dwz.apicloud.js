@@ -50,9 +50,9 @@
 		 */
 		chooseImage(options) {
 			let me = this;
-			// if(biz.checkPermission && !biz.checkPermission('camera', '摄像头')){
-			// 	return;
-			// }
+			if (biz.checkPermission && !biz.checkPermission('camera', '摄像头')) {
+				return;
+			}
 			api.actionSheet(
 				{
 					title: options.title || '上传图片',

@@ -136,7 +136,7 @@ biz.transport = {
 				cache: false,
 				global: false,
 				success: (json) => {
-					console.log(json);
+					// console.log(json);
 					if (!dwz.checkAjaxLogin(json)) {
 						return;
 					}
@@ -210,136 +210,6 @@ biz.transport = {
 		});
 
 		$form.trigger('submit');
-	},
-
-	driving(tpl, params) {
-		const $box = this,
-			tplWrap = $.templateWrap(tpl);
-		const html = template.render(tplWrap.tpl, { params: params });
-		$box.html(html).initUI();
-
-		const $mapBox = $box.find('.dwz-map-box');
-		const map = new AMap.Map($mapBox.get(0), {
-			zoom: biz.location.zoom
-		});
-
-		const pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
-		const pointEnd = new AMap.LngLat(parseFloat(params.lng), parseFloat(params.lat));
-		map.setCenter(pointStart);
-
-		const markers = {
-			// 创建起点图标
-			start: $.amap.addMarker({
-				map: map,
-				position: pointStart,
-				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
-			}),
-			// 创建终点图标
-			end: $.amap.addMarker({
-				map: map,
-				position: pointEnd,
-				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
-			})
-		};
-
-		// 路线导航
-		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
-			let _html = template.render(tplWrap['tpl-nav-info'], route);
-			$box.find('.dwz-nav-info').html(_html);
-		});
-
-		const $form = $box.find('form.dwz-form');
-		const $sheetBox = $form.find('div.sheet-box');
-		const $inputEnd = $form.find('input[name=end]');
-		const $list = $form.find('ul.dwz-list');
-		$form.on('submit', function (event) {
-			console.log('search poi...');
-			event.preventDefault();
-
-			$sheetBox.removeClass('fold');
-
-			let keywords = $inputEnd.val().trim();
-			if (keywords) {
-				api.ajax(
-					{
-						url: $form.attr('action'),
-						method: 'get',
-						data: {
-							values: {
-								keywords: keywords
-							}
-						}
-					},
-					function (json, err) {
-						// console.log(JSON.stringify(json));
-						if (json.status == 1) {
-							let _list = [
-								{
-									name: params.name,
-									address: params.address,
-									lng: params.lng,
-									lat: params.lat
-								}
-							];
-							json.pois.forEach(function (item) {
-								let location = item.location.split(',');
-								_list.push({
-									name: item.cityname + item.adname + item.name,
-									address: item.address,
-									lng: parseFloat(location[0]),
-									lat: parseFloat(location[1])
-								});
-							});
-							let _html = template.render(tplWrap['tpl-list'], {
-								list: _list
-							});
-							$list.html(_html);
-
-							$list.find('li.item').touchwipe({
-								touch() {
-									let $li = $(this);
-									$inputEnd.val($li.attr('data-name'));
-									$sheetBox.addClass('fold');
-
-									// 路线导航
-									driving && driving.clear();
-									let _pointEnd = new AMap.LngLat(parseFloat($li.attr('data-lng')), parseFloat($li.attr('data-lat')));
-									driving = biz.createDriving(
-										{
-											map: map,
-											pointStart: pointStart,
-											pointEnd: _pointEnd
-										},
-										function (route) {
-											let _html = template.render(tplWrap['tpl-nav-info'], route);
-											$box.find('.dwz-nav-info').html(_html);
-										}
-									);
-								}
-							});
-						}
-					}
-				);
-			}
-		});
-
-		// 判断中文输入完成或者英文输入，触发事件
-		let isInputZh = false;
-		$inputEnd.on('compositionstart compositionend input focus', function (event) {
-			console.log(event.type, isInputZh);
-
-			switch (event.type) {
-				case 'compositionstart':
-					isInputZh = true;
-					break;
-				case 'compositionend':
-					isInputZh = false;
-					break;
-				default:
-					if (!isInputZh) $form.trigger('submit');
-					break;
-			}
-		});
 	},
 
 	// 录入发货过磅信息
@@ -544,7 +414,145 @@ biz.transport = {
 		});
 	},
 
+	// 驾车路线页面
+	drivingRender(tpl, params) {
+		const $box = this,
+			tplWrap = $.templateWrap(tpl);
+		const html = template.render(tplWrap.tpl, { params: params });
+		$box.html(html).initUI();
+
+		const $mapBox = $box.find('.dwz-map-box');
+		const map = new AMap.Map($mapBox.get(0), {
+			zoom: biz.location.zoom
+		});
+
+		const pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
+		const pointEnd = new AMap.LngLat(parseFloat(params.lng), parseFloat(params.lat));
+		map.setCenter(pointStart);
+
+		const markers = {
+			// 创建起点图标
+			start: $.amap.addMarker({
+				map: map,
+				position: pointStart,
+				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+			}),
+			// 创建终点图标
+			end: $.amap.addMarker({
+				map: map,
+				position: pointEnd,
+				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
+			})
+		};
+
+		// 路线导航
+		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
+			// console.log(JSON.stringify(route));
+			let _html = template.render(tplWrap['tpl-nav-info'], { route, pointStart, pointEnd });
+			$box.find('.dwz-nav-info').html(_html);
+		});
+
+		const $form = $box.find('form.dwz-form');
+		const $sheetBox = $form.find('div.sheet-box');
+		const $inputEnd = $form.find('input[name=end]');
+		const $list = $form.find('ul.dwz-list');
+		$form.on('submit', function (event) {
+			console.log('search poi...');
+			event.preventDefault();
+
+			$sheetBox.removeClass('fold');
+
+			let keywords = $inputEnd.val().trim();
+			if (keywords) {
+				api.ajax(
+					{
+						url: $form.attr('action'),
+						method: 'get',
+						data: {
+							values: {
+								keywords: keywords
+							}
+						}
+					},
+					function (json, err) {
+						// console.log(JSON.stringify(json));
+						if (json.status == 1) {
+							let _list = [
+								{
+									name: params.name,
+									address: params.address,
+									lng: params.lng,
+									lat: params.lat
+								}
+							];
+							json.pois.forEach(function (item) {
+								let location = item.location.split(',');
+								_list.push({
+									name: item.cityname + item.adname + item.name,
+									address: item.address,
+									lng: parseFloat(location[0]),
+									lat: parseFloat(location[1])
+								});
+							});
+							let _html = template.render(tplWrap['tpl-list'], {
+								list: _list
+							});
+							$list.html(_html);
+
+							$list.find('li.item').touchwipe({
+								touch() {
+									let $li = $(this);
+									$inputEnd.val($li.attr('data-name'));
+									$sheetBox.addClass('fold');
+
+									// 路线导航
+									driving && driving.clear();
+									let _pointEnd = new AMap.LngLat(parseFloat($li.attr('data-lng')), parseFloat($li.attr('data-lat')));
+									driving = biz.createDriving(
+										{
+											map: map,
+											pointStart: pointStart,
+											pointEnd: _pointEnd
+										},
+										function (route) {
+											let _html = template.render(tplWrap['tpl-nav-info'], route);
+											$box.find('.dwz-nav-info').html(_html);
+										}
+									);
+								}
+							});
+						}
+					}
+				);
+			}
+		});
+
+		// 判断中文输入完成或者英文输入，触发事件
+		let isInputZh = false;
+		$inputEnd.on('compositionstart compositionend input focus', function (event) {
+			console.log(event.type, isInputZh);
+
+			switch (event.type) {
+				case 'compositionstart':
+					isInputZh = true;
+					break;
+				case 'compositionend':
+					isInputZh = false;
+					break;
+				default:
+					if (!isInputZh) $form.trigger('submit');
+					break;
+			}
+		});
+	},
+	/**
+	 * 嵌入高德导航
+	 */
 	mapNav() {
+		if (!biz.checkPermission('location', 'GPS定位')) {
+			return;
+		}
+
 		const vo = biz.transport.vo;
 		if (!vo) {
 			return;

@@ -85,13 +85,15 @@ $.extend(biz, {
 			}
 		);
 	},
-	initPermission(premsMap) {
-		$.each(Object.keys(premsMap), function (index, permName) {
-			const has = biz.hasPermission([permName]);
-			if (!has || !has[0] || !has[0].granted) {
-				biz.requestPermission([permName]);
+	initPermission(premsList) {
+		api.requestPermission(
+			{
+				list: premsList
+			},
+			function (res) {
+				console.log(JSON.stringify(res));
 			}
-		});
+		);
 	},
 	checkPermission(permName, msg) {
 		const has = biz.hasPermission([permName]);
@@ -374,6 +376,56 @@ $.extend(biz, {
 		});
 	},
 
+	/**
+	 * 打开高德导航App
+	 */
+	openMapNav({ lng, lat }) {
+		const bmapinstalled = api.appInstalled({
+			sync: true,
+			appBundle: 'com.baidu.BaiduMap'
+		});
+		const amapinstalled = api.appInstalled({
+			sync: true,
+			appBundle: 'com.autonavi.minimap'
+		});
+		api.hideProgress();
+		const btns = [];
+		//按钮
+		const uris = [];
+		if (bmapinstalled) {
+			btns.push('百度地图');
+			uris.push('baidumap://map/direction?destination=name:dwzteam|latlng:' + lat + ',' + lng + '&mode=driving&src=andr.FSDZ');
+		}
+		if (amapinstalled) {
+			//百度地图坐标转高德地图坐标
+			let latlng = $.gps.bd_decrypt(lat, lng);
+			uris.push('androidamap://navi?sourceApplication=FZDZAutoMonitor&lat=' + latlng.lat + '&lon=' + latlng.lng + '&dev=0&style=1');
+			btns.push('高德地图');
+		}
+		if (btns.Length == 0) {
+			alert('手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。');
+		} else {
+			//console.log(bmapinstalled+"-"+amapinstalled);
+			api.actionSheet(
+				{
+					title: '请选择需要跳转的导航软件',
+					cancelTitle: '取消',
+					buttons: btns
+				},
+				function (ret, err) {
+					var index = ret.buttonIndex;
+					if (uris[index - 1] != '' && uris[index - 1] != undefined) {
+						api.openApp(
+							{
+								uri: uris[index - 1]
+							},
+							function (ret, err) {}
+						);
+					}
+				}
+			);
+		}
+	},
 	format: {
 		formatDateTime(timestamp, format) {
 			if (!timestamp) return '';
