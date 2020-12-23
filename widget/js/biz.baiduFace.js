@@ -1,6 +1,6 @@
 biz.baiduFace = {
 	faceLiveness({ debug = 0, cropType = 1, mouth = false, headRight = false, headLeft = false, headUp = false, headDown = false, headLeftOrRight = false }, callback) {
-		const module = api.require('DwzBaiduFaceLive');
+		const module = api.require('dwzBaiduFaceLive');
 		module.faceLiveness(
 			{
 				debug: debug, // 调试开关(默认:0)：0, 1
@@ -23,7 +23,7 @@ biz.baiduFace = {
 	},
 
 	faceDetect({ debug = 0, cropType = 1 }, callback) {
-		const module = api.require('DwzBaiduFaceLive');
+		const module = api.require('dwzBaiduFaceLive');
 		module.faceDetect(
 			{
 				debug: debug, // 调试开关(默认:0)：0, 1

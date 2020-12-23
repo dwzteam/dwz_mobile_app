@@ -379,7 +379,7 @@ $.extend(biz, {
 	/**
 	 * 打开高德导航App
 	 */
-	openMapNav({ lng, lat }) {
+	openMapNav({ lng, lat, name = '' }) {
 		const bmapinstalled = api.appInstalled({
 			sync: true,
 			appBundle: 'com.baidu.BaiduMap'
@@ -394,16 +394,15 @@ $.extend(biz, {
 		const uris = [];
 		if (bmapinstalled) {
 			btns.push('百度地图');
-			uris.push('baidumap://map/direction?destination=name:dwzteam|latlng:' + lat + ',' + lng + '&mode=driving&src=andr.FSDZ');
+			let latlng = $.gps.bd_encrypt(lat, lng); // BD-09 to GCJ-02 高德地图坐标转百度地图坐标
+			uris.push(`baidumap://map/direction?destination=name:${name}|latlng:${latlng.lat},${latlng.lng}&mode=driving&src=andr.FSDZ`);
 		}
 		if (amapinstalled) {
-			//百度地图坐标转高德地图坐标
-			let latlng = $.gps.bd_decrypt(lat, lng);
-			uris.push('androidamap://navi?sourceApplication=FZDZAutoMonitor&lat=' + latlng.lat + '&lon=' + latlng.lng + '&dev=0&style=1');
+			uris.push(`androidamap://navi?sourceApplication=FZDZAutoMonitor&lat=${lat}&lon=${lng}&dev=0&style=1`);
 			btns.push('高德地图');
 		}
 		if (btns.Length == 0) {
-			alert('手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。');
+			$.alert.error('手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。');
 		} else {
 			//console.log(bmapinstalled+"-"+amapinstalled);
 			api.actionSheet(

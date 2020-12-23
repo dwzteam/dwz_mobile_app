@@ -284,7 +284,9 @@ function dialogAjaxDone(json) {
 						val = $input.val(),
 						required = this.required || $input.hasClass('required'),
 						pattern = $input.attr('pattern') || $input.attr('data-pattern'),
-						errorMsg = $input.attr('data-error');
+						errorMsg = $input.attr('data-error'),
+						dataMin = $input.attr('data-min'),
+						dataMax = $input.attr('data-max');
 
 					if (!$input.hasClass('ignore')) {
 						if (dwz.config.rcheckableType.test(this.type)) {
@@ -295,6 +297,16 @@ function dialogAjaxDone(json) {
 							result = false;
 						} else if (val && pattern && !new RegExp(pattern).test(val)) {
 							result = false;
+						} else if (val && dataMin) {
+							result = parseFloat(dataMin) <= parseFloat(val);
+							if (!result) {
+								errorMsg = $input.attr('data-error-min') || errorMsg;
+							}
+						} else if (val && dataMax) {
+							result = parseFloat(dataMax) >= parseFloat(val);
+							if (!result) {
+								errorMsg = $input.attr('data-error-max') || errorMsg;
+							}
 						}
 					}
 
