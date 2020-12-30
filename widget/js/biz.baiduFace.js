@@ -15,7 +15,7 @@ biz.baiduFace = {
 				headDown: headDown, // 活体动作，向下低头(默认:false)
 				headLeftOrRight: headLeftOrRight // 活体动作，摇头(默认:false)
 			},
-			function (ret, err) {
+			(ret, err) => {
 				if (!ret.status && ret.message) {
 					$.alert.toast(ret.message);
 				}
@@ -34,7 +34,7 @@ biz.baiduFace = {
 				cropHeight: cropHeight, // 抠图高的设定，为了保证好的抠图效果，要求高宽比是4:3，所以会在内部进行计算，只需要传入高即可，取值范围50 ~ 1200，默认480
 				quality: quality // 抠图压缩质量，取值范围 20 ~ 100，默认100不压缩
 			},
-			function (ret, err) {
+			(ret, err) => {
 				if (!ret.status && ret.message) {
 					$.alert.toast(ret.message);
 				}
