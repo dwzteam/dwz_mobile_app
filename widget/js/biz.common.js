@@ -122,14 +122,11 @@ $.extend(biz, {
 					report: true
 				},
 				function (ret, err) {
-					if (ret && 0 == ret.state) {
+					if (ret && !ret.state) {
 						/* 下载进度 */
-						api.toast({
-							msg: '正在下载应用' + ret.percent + '%',
-							duration: 2000
-						});
+						$.alert.toast('正在下载应用' + ret.percent + '%');
 					}
-					if (ret && 1 == ret.state) {
+					if (ret && ret.state) {
 						/* 下载完成 */
 						const savePath = ret.savePath;
 						api.installApp({
@@ -138,8 +135,7 @@ $.extend(biz, {
 					}
 				}
 			);
-		}
-		if (api.systemType == 'ios') {
+		} else if (api.systemType == 'ios') {
 			api.installApp({
 				appUri: result.source
 			});
@@ -148,17 +144,16 @@ $.extend(biz, {
 	checkUpdate() {
 		const mam = api.require('mam');
 		mam.checkUpdate(function (ret, err) {
-			if (ret) {
+			if (ret && ret.status) {
 				const result = ret.result;
-				if (result.update == true && result.closed == false) {
-					const str = '新版本型号:' + result.version + ';更新提示语:' + result.updateTip + ';发布时间:' + result.time;
+				if (result.update) {
+					const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
 
 					if (result.closed) {
-						// 强制更新
 						api.alert(
 							{
-								title: '有新的版本,是否下载并安装 ',
-								msg: str,
+								title: '有新的版本，请下载并安装',
+								msg,
 								buttons: ['确定']
 							},
 							function (ret, err) {
@@ -170,8 +165,8 @@ $.extend(biz, {
 					} else {
 						api.confirm(
 							{
-								title: '有新的版本,是否下载并安装 ',
-								msg: str,
+								title: '有新的版本，是否下载并安装',
+								msg,
 								buttons: ['确定', '取消']
 							},
 							function (ret, err) {
@@ -181,8 +176,6 @@ $.extend(biz, {
 							}
 						);
 					}
-				} else if (ret.buttonIndex == 2) {
-					api.closeWidget({ silent: true });
 				}
 			} else {
 				$.alert.toast(err.msg);
