@@ -809,6 +809,12 @@ dwz.extend(String.prototype, {
 	replaceAll(os, ns) {
 		return this.replace(new RegExp(os, 'gm'), ns);
 	},
+	replaceTm: function (params) {
+		if (!params) return this;
+		return this.replace(RegExp('({[A-Za-z_]+[A-Za-z0-9_]*})', 'g'), function ($1) {
+			return params[$1.replace(/[{}]+/g, '')];
+		});
+	},
 	skipChar(ch) {
 		if (!this || this.length === 0) {
 			return '';

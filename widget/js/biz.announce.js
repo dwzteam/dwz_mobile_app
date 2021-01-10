@@ -53,7 +53,7 @@ biz.announce = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.announceDetail),
+			url: biz.server.getUrl(biz.server.announceDetail, params),
 			dataType: 'json',
 			data: { announce_id: params.id },
 			cache: false,

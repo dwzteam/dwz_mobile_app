@@ -1,32 +1,22 @@
 {
-    "status": 1,
-    "data": {
-        "total": 2,
-        "page": 1,
-        "pagesize": 10,
-        "list": [
-            {
-                "id": 6,
-                "title": "\u51fa\u79df\u5c4b\u7533\u62a5\u7ed3\u679c",
-                "content": "\u51fa\u79df\u5c4b\u7533\u62a5\u5ba1\u6838\u901a\u8fc7",
-                "from_id": 0,
-                "to_id": 0,
-                "type": "\u7cfb\u7edf\u6d88\u606f",
-                "data_id": 1,
-                "is_read": 0,
-                "created_at": "2020-01-19 13:21:11"
-            },
-            {
-                "id": 5,
-                "title": "\u51fa\u79df\u5c4b\u7533\u62a5\u7ed3\u679c",
-                "content": "\u51fa\u79df\u5c4b\u7533\u62a5\u5ba1\u6838\u901a\u8fc7",
-                "from_id": 0,
-                "to_id": 0,
-                "type": "\u7cfb\u7edf\u6d88\u606f",
-                "data_id": 1,
-                "is_read": 0,
-                "created_at": "2020-01-17 09:46:19"
-            }
-        ]
-    }
+	"status": 1,
+	"data": {
+		"total": 2,
+		"page": 1,
+		"pagesize": 10,
+		"list": [
+			{
+				"id": 1,
+				"title": "DWZ Mobile v1.0.0发布",
+				"content": "DWZ 手机版 HTML5 + 原生 混合开发框架",
+				"created_at": "2020-11-28"
+			},
+			{
+				"id": 2,
+				"title": "dwzBaiduFaceLive v1.0.1发布",
+				"content": "封装了新版百度开放平台的人脸识别采集 SDK",
+				"created_at": "2020-12-30"
+			}
+		]
+	}
 }
