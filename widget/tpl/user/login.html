@@ -9,13 +9,13 @@
 
 	<div class="content">
 
-		<div class="w-tabbar dwz-tabs full-size">
+		<div class="w-tabbar dwz-tabs full-abs">
 			<div class="tab-bar">
 				<a class="tab-item active"><span>密码登录</span></a>
 				<a class="tab-item"><span>短信登录</span></a>
 			</div>
-			<div class="tab-panel">
-				<div class="panel-item unitBox">
+			<div class="tab-panel flex-wrap-v">
+				<div class="panel-item unitBox flex-item">
 
 					<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
 						<div class="scroll-content dwz-scroll">
@@ -50,7 +50,7 @@
 
 				</div>
 
-				<div class="panel-item unitBox">
+				<div class="panel-item unitBox flex-item">
 					<form method="post" action="{{login_sms_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
 						<div class="scroll-content dwz-scroll">
 							<div class="scroll">

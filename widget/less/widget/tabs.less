@@ -42,7 +42,8 @@
 	}
 }
 
-#nav-tab, .w-tabbar {
+#nav-tab,
+.w-tabbar {
 	.flex-wrap;
 	.flex-vertical;
 
@@ -52,8 +53,8 @@
 		overflow: hidden;
 
 		.panel-item {
+			min-height: 120px;
 			position: relative;
-			.full-size;
 			display: none;
 
 			&.active {
@@ -108,7 +109,7 @@
 				position: relative;
 
 				&:before {
-					content: " ";
+					content: ' ';
 					position: absolute;
 					bottom: 0;
 					left: 0;
@@ -121,3 +122,10 @@
 	}
 }
 
+#nav-tab {
+	.tab-panel {
+		.panel-item {
+			.full-abs;
+		}
+	}
+}
