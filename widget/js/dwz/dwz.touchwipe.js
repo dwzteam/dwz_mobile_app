@@ -20,6 +20,7 @@
 				touchstart: null,
 				touchmove: null, // touchmove事件触发scroll
 				touchend: null,
+				longpress: null, // 长按事件 
 				direction: 'vertical', // 允许滚动方向：vertical, horizontal, all
 				preventDefaultEvents: false,
 				stopPropagationEvents: false,
@@ -39,6 +40,7 @@
 					endX2 = 0,
 					endY2 = 0,
 					touchType = null, // touch, zoom
+					longpressTimer = 0,  // 长按事件 setTimeout 
 					directionStart = null; // 滚动开始方向：vertical, horizontal
 
 				let maxMove = { dx: 0, dy: 0 };
@@ -68,9 +70,7 @@
 						endX = pos.x;
 						endY = pos.y;
 
-						touchType == 'touch';
 						if (e.touches && e.touches.length > 1) {
-							touchType == 'zoom';
 							pos.x2 = e.touches[1].pageX;
 							pos.y2 = e.touches[1].pageY;
 							endX2 = pos.x2;
@@ -116,6 +116,12 @@
 							cancelTouch();
 							onTouchEnd(e);
 						}
+					}
+					
+					// 长按事件
+					if (config.longpress && longpressTimer) {
+						clearTimeout(longpressTimer);
+						longpressTimer = 0;
 					}
 				}
 
@@ -163,6 +169,15 @@
 						};
 						config.touchstart.call(this, e, pos);
 					}
+
+					// 长按事件
+					if (config.longpress) {
+						longpressTimer = setTimeout(() => {
+							config.longpress.call(this, e)
+							longpressTimer = 0;
+						}, 500);
+
+					}
 				}
 
 				function onTouchEnd(e) {
@@ -189,6 +204,11 @@
 					// 判断非滑动操作触发touch
 					if (touchType == 'touch' && Math.abs(maxMove.dx) < config.min_move_x && Math.abs(maxMove.dy) < config.min_move_y) {
 						if (config.touch && this !== window) config.touch.call(this, e, { x: startX, y: startY });
+					}
+					// 长按事件
+					if (config.longpress && longpressTimer) {
+						clearTimeout(longpressTimer);
+						longpressTimer = 0;
 					}
 
 					cancelTouch(); // touch完成取消touch事件
