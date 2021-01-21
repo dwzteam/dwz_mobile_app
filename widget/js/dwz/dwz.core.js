@@ -771,6 +771,20 @@ dwz.extend({
  * 扩展String方法
  */
 dwz.extend(String.prototype, {
+	// 转为unicode 编码
+	encodeUnicode() {
+		const res = [];
+		for (let i = 0; i < this.length; i++) {
+			res[i] = ('00' + this.charCodeAt(i).toString(16)).slice(-4);
+		}
+		return '\\u' + res.join('\\u');
+	},
+	// 解码
+	decodeUnicode() {
+		let str = this.replace(/\\/g, '%');
+		return unescape(str);
+	},
+
 	trim() {
 		return this.replace(/(^\s*)|(\s*$)|\r|\n/g, '');
 	},
@@ -808,6 +822,12 @@ dwz.extend(String.prototype, {
 	},
 	replaceAll(os, ns) {
 		return this.replace(new RegExp(os, 'gm'), ns);
+	},
+	replaceTm: function (params) {
+		if (!params) return this;
+		return this.replace(RegExp('({[A-Za-z_]+[A-Za-z0-9_]*})', 'g'), function ($1) {
+			return params[$1.replace(/[{}]+/g, '')];
+		});
 	},
 	skipChar(ch) {
 		if (!this || this.length === 0) {

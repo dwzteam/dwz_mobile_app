@@ -315,7 +315,46 @@ $.extend(biz, {
 			}
 		);
 	},
+	getGPS: function (geolocationSuccess, geolocationError) {
+		if (!biz.checkPermission('location', 'gps定位')) {
+			geolocationError && geolocationError();
+			return;
+		}
 
+		if (window.api) {
+			const bmLocation = api.require('bmLocation');
+			bmLocation.singleLocation(
+				{
+					reGeocode: false,
+					netWorkState: false
+				},
+				function (ret, err) {
+					if (ret.status) {
+						const gpsPos = { lat: ret.location.latitude, lng: ret.location.longitude };
+						geolocationSuccess && geolocationSuccess(gpsPos);
+					} else {
+						geolocationError && geolocationError();
+					}
+				}
+			);
+		} else {
+			const geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(
+				function (result) {
+					if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+						var point = result.point;
+						var gpsPos = $.gps.bd_encrypt(point.lat, point.lng);
+						geolocationSuccess && geolocationSuccess(gpsPos, result);
+					} else {
+						geolocationError && geolocationError();
+					}
+				},
+				{
+					enableHighAccuracy: true
+				}
+			);
+		}
+	},
 	/**
 	 * 默认页面渲染回调函数
 	 * @param {*} tpl

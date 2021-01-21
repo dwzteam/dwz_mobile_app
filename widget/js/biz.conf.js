@@ -74,7 +74,7 @@ const biz = window.biz || {
 		},
 		// 通知详情
 		announceDetail: {
-			DEV: './doc/json/announceDetail.json',
+			DEV: './doc/json/announceDetail_{id}.json',
 			REMOTE: '/announce/detail'
 		},
 		// 运输单-首页
@@ -143,13 +143,16 @@ const biz = window.biz || {
 			REMOTE: '/favorite/delete'
 		},
 
-		// type: 图片类别 1 身份证正面，2 身份证反面 3 人脸识别 4 个人照片， 5 运输许可证
 		uploadUserIcon: {
 			DEV: './doc/json/ajaxDone.json',
 			REMOTE: '/upload'
 		},
-		getUrl(type) {
-			return this.baseUrl[this.ENV] + type[this._flag()].replace('{token}', UserInfo.token);
+		getUrl(type, params) {
+			let _url = this.baseUrl[this.ENV] + type[this._flag()].replace('{token}', UserInfo.token);
+			if (params) {
+				_url = _url.replaceTm(params);
+			}
+			return _url;
 		},
 		getVerifyImgUrl() {
 			return this.baseUrl[this.ENV] + this._verifyImg[this._flag()] + '?t=' + new Date().getTime();

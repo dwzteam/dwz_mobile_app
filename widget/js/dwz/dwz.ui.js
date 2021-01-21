@@ -214,8 +214,12 @@
 				});
 
 				if (!$parent.attr('data-' + op.openClass)) {
-					$parent.attr('data-' + op.openClass, 1).on($.event.hasTouch ? 'touchstart' : 'click', function () {
-						$parent.find('.' + op.ctlClass).removeClass(op.openClass);
+					$parent.attr('data-' + op.openClass, 1).touchwipe({
+						touch: () => {
+							setTimeout(() => {
+								$parent.find('.' + op.ctlClass).removeClass(op.openClass);
+							}, 500);
+						}
 					});
 				}
 			});

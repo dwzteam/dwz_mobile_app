@@ -1,24 +1,33 @@
 {
-    "status": 1,
-    "info": "",
-    "data": [
-        {
-            "id": 1,
-            "title": "DWZ Mobile v1.0.0发布",
-            "content": "简洁的html结构, 轻量级(核心库代码量相当于jQuery十分之一)，扩展方便，语法格式jQuery类似，降低学习门槛提升移动端运行性能",
-            "pic_url": "./image/pic/3d_1.jpg",
-            "author": "DWZ团队",
-            "reading_num": 600,
-            "created_at": "2020-11-28"
-        },
-        {
-            "id": 2,
-            "title": "DWZ Mobile 文档筹备中",
-            "content": "包含前端框架文档、APICloud打包发布文档、示例分析",
-            "pic_url": "./image/pic/3d_2.jpg",
-            "author": "杭州大前端网络技术工作室",
-            "reading_num": 500,
-            "created_at": "2020-11-28"
-        }
-    ]
+	"status": 1,
+	"info": "",
+	"data": [
+		{
+			"id": 1,
+			"title": "DWZ Mobile v1.0.0发布",
+			"content": "简洁的html结构, 轻量级(核心库代码量相当于jQuery十分之一)，扩展方便，语法格式jQuery类似，降低学习门槛提升移动端运行性能",
+			"pic_url": "./image/pic/3d_1.jpg",
+			"author": "DWZ团队",
+			"reading_num": 600,
+			"created_at": "2020-11-28"
+		},
+		{
+			"id": 2,
+			"title": "DWZ Mobile 官方文档",
+			"content": "包含前端框架文档、APICloud打包发布文档、示例分析",
+			"pic_url": "./image/pic/3d_2.jpg",
+			"author": "杭州大前端网络技术工作室",
+			"reading_num": 500,
+			"created_at": "2020-11-28"
+		},
+		{
+			"id": 3,
+			"title": "dwzBaiduFaceLive v1.0.1发布",
+			"content": "封装了新版百度开放平台的人脸识别采集 SDK",
+			"pic_url": "./image/pic/face_1.png",
+			"author": "杭州大前端网络技术工作室",
+			"reading_num": 800,
+			"created_at": "2020-12-30"
+		}
+	]
 }

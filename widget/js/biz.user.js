@@ -184,6 +184,22 @@ function loginRender(tpl, params) {
 
 	let html = template.render(tpl, json);
 	$box.html(html).initUI();
+
+	$box.find('form').each((index, form) => {
+		let $form = $(form);
+		let checkFormValid = () => {
+			let $btn = $form.find('button.form-submit.active');
+			if ($form.valid(true)) {
+				$btn.removeAttr('disabled').removeClass('disabled');
+			} else {
+				$btn.attr('disabled', 'disabled').addClass('disabled');
+			}
+		};
+
+		checkFormValid();
+
+		$form.find(':input').on('change keyup', checkFormValid);
+	});
 }
 
 function forgetPwdRender(tpl, params) {

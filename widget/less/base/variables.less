@@ -17,7 +17,7 @@
 @hoverBackground: rgba(240, 240, 240, 0.8);
 @inputBackground: #f6f6f6;
 @btnBackground: #4eb3ff;
-@btnBackgroundActive: #4eb3ff;
+@btnBackgroundActive: #ff480a;
 @tableBackground: rgba(216, 233, 255, 0.5);
 
 // 字号
@@ -136,7 +136,11 @@
 	display: flex;
 }
 .flex-vertical {
-	flex-flow: column;
+	flex-direction: column;
+}
+.flex-wrap-v {
+	.flex-wrap;
+	.flex-vertical;
 }
 .flex-item {
 	position: relative;

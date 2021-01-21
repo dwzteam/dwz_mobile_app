@@ -1,0 +1,14 @@
+{
+	"status": 1,
+	"info": "",
+	"data": {
+		"id": 2,
+		"title": "dwzBaiduFaceLive v1.0.1发布",
+		"content": "封装了新版百度开放平台的人脸识别采集 SDK(活体检测)。\n人脸识别后可以精准截取头像，人脸抠图支持压缩比设定，从而解决了某些第三方实名认证接口图像大小不能超过 20K 的问题。\n[详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/apicloud/dwzBaiduFaceLive)",
+		"pic_url": "./image/pic/face_1.png",
+		"author": "杭州大前端网络技术工作室",
+		"reading_num": 600,
+		"status": 1,
+		"created_at": "2020-12-30"
+	}
+}

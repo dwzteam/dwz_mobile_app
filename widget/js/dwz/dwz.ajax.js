@@ -267,7 +267,7 @@ function dialogAjaxDone(json) {
 		 * 表单验证
 		 * @returns {boolean}
 		 */
-		valid: function () {
+		valid: function (disableAlert) {
 			let result = true,
 				$form = this;
 
@@ -310,7 +310,7 @@ function dialogAjaxDone(json) {
 						}
 					}
 
-					if (!result && errorMsg && $.alert) {
+					if (!disableAlert && !result && errorMsg && $.alert) {
 						$.alert.error(errorMsg);
 						return false;
 					}
