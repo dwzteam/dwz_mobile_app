@@ -20,7 +20,7 @@
 				touchstart: null,
 				touchmove: null, // touchmove事件触发scroll
 				touchend: null,
-				longpress: null, // 长按事件 
+				longpress: null, // 长按事件
 				direction: 'vertical', // 允许滚动方向：vertical, horizontal, all
 				preventDefaultEvents: false,
 				stopPropagationEvents: false,
@@ -40,7 +40,7 @@
 					endX2 = 0,
 					endY2 = 0,
 					touchType = null, // touch, zoom
-					longpressTimer = 0,  // 长按事件 setTimeout 
+					longpressTimer = 0, // 长按事件 setTimeout
 					directionStart = null; // 滚动开始方向：vertical, horizontal
 
 				let maxMove = { dx: 0, dy: 0 };
@@ -117,7 +117,7 @@
 							onTouchEnd(e);
 						}
 					}
-					
+
 					// 长按事件
 					if (config.longpress && longpressTimer) {
 						clearTimeout(longpressTimer);
@@ -173,10 +173,9 @@
 					// 长按事件
 					if (config.longpress) {
 						longpressTimer = setTimeout(() => {
-							config.longpress.call(this, e)
+							config.longpress.call(this, e);
 							longpressTimer = 0;
 						}, 500);
-
 					}
 				}
 

@@ -718,6 +718,22 @@ dwz.extend({
 			}
 		}
 	},
+	// 获取光标位置
+	selectionPos(textDom) {
+		const cursorPos = $.extend({ top: 0, left: 0, width: 0, heigth: 0, start: 0, paddingLeft: 0 }, dwz.offset(textDom));
+		cursorPos.paddingLeft = parseInt(dwz.css(textDom, 'padding-left'));
+		if (document.selection) {
+			// IE Support
+			textDom.focus();
+			const selectRange = document.selection.createRange();
+			selectRange.moveStart('character', -textDom.value.length);
+			cursorPos.start = selectRange.text.length;
+		} else if (textDom.selectionStart || textDom.selectionStart == '0') {
+			// Firefox support
+			cursorPos.cursorStart = textDom.selectionStart;
+		}
+		return cursorPos;
+	},
 	param(data) {
 		let params = '';
 		if (dwz.isArray(data)) {
@@ -1173,6 +1189,9 @@ dwz.fn.extend({
 	},
 	clone(deep) {
 		return dwz(this.get(0).cloneNode(true));
+	},
+	selectionPos() {
+		return dwz.selectionPos(this.get(0));
 	},
 	serialize() {
 		return dwz.param(this.serializeArray());

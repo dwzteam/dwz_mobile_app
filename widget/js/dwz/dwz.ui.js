@@ -1,6 +1,3 @@
-
-
-
 /**
  * @author 张慧华 <350863780@qq.com>
  * DWZ Mobile Framework: UI plugins
@@ -149,16 +146,9 @@
 		$('input.dwz-disable-autofocus', $p).disableAutofocus();
 
 		// 长按粘贴
-		// $('input.dwz-longpress, textarea.dwz-longpress', $p).touchwipe({
-		// 	longpress: function(){
-		// 		this.select()
-		// 	}
-		// });
-		
-		$('input.dwz-longpress, textarea.dwz-longpress', $p).on('focus', function(){
-			this.select()
-			$.alert.toast('sssss')
-		});
+		if ($.fn.clipboardTip) {
+			$('input.dwz-clipboard, textarea.dwz-clipboard', $p).clipboardTip();
+		}
 	});
 
 	$.fn.extend({

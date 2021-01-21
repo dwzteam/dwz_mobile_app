@@ -1,119 +1,152 @@
 /* alertMsg */
 .alert-mask {
-  position: fixed;
-  z-index: 1010;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 1010;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
 }
 .alert-dialog {
-  position: fixed;
-  z-index: 1013;
-  width: 80vmin;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  background-color: #FAFAFC;
-  text-align: center;
-  border-radius: 8px;
-  line-height: 24px;
+	position: fixed;
+	z-index: 1013;
+	width: 80vmin;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	background-color: #fafafc;
+	text-align: center;
+	border-radius: 8px;
+	line-height: 24px;
 }
 
 #alertDialogBox .alert-mask {
-  z-index: 1005;
+	z-index: 1005;
 }
 #alertDialogBox .alert-dialog {
-  z-index: 1008;
+	z-index: 1008;
 }
 
 .alert-dialog-hd {
-  padding: 1em 0 .5em;
+	padding: 1em 0 0.5em;
 }
 
 .alert-dialog-title {
-  font-weight: 400;
-  font-size: @l2;
+	font-weight: 400;
+	font-size: @l2;
 }
 
 .alert-dialog-bd {
-  padding: 0 10px;
-  font-size: @l3;
-  max-height: 360px;
-  color: @infoColor;
+	padding: 0 10px;
+	font-size: @l3;
+	max-height: 360px;
+	color: @infoColor;
 }
 .alert-dialog-ft {
-  position: relative;
-  line-height: 44px;
-  margin-top: 10px;
-  font-size: @l2;
-  .flex-wrap;
+	position: relative;
+	line-height: 44px;
+	margin-top: 10px;
+	font-size: @l2;
+	.flex-wrap;
 
-  a {
-    display: block;
-    .flex-item;
-    text-decoration: none;
-    text-align: center;
-  }
+	a {
+		display: block;
+		.flex-item;
+		text-decoration: none;
+		text-align: center;
+	}
 
-  &:after {
-    content: " ";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 1px;
-    border-top: 1px solid @borderColor;
-    transform-origin: 0 0;
-    transform: scaleY(0.5);
-  }
+	&:after {
+		content: ' ';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 1px;
+		border-top: 1px solid @borderColor;
+		transform-origin: 0 0;
+		transform: scaleY(0.5);
+	}
 }
 
 .alert-dialog-confirm a {
-  position: relative;
+	position: relative;
 }
 .alert-dialog-confirm .alert-dialog-ft a:first-child:after {
-  display: none;
+	display: none;
 }
 .alert-dialog-confirm .alert-dialog-ft a:after {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  border-left: 1px solid @borderColor;
-  transform-origin: 0 0;
-  transform: scaleX(0.5);
+	content: ' ';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	border-left: 1px solid @borderColor;
+	transform-origin: 0 0;
+	transform: scaleX(0.5);
 }
 
-.alert_btn_dialog.default { color: @linkColor;}
-.alert_btn_dialog.primary { color: @linkColorActive;}
+.alert_btn_dialog.default {
+	color: @linkColor;
+}
+.alert_btn_dialog.primary {
+	color: @linkColorActive;
+}
 
 #alert-toast {
-  .backdrop-filter;
-  //text-shadow: 0 1px 2px #000;
-  //box-shadow: 0 0 10px #207b9a;
-  background: rgba(100,100,100,0.6);
-  font-size: @l3;
-  line-height: 1.2em;
-  text-align: center;
-  padding: 5px;
-  color: #fff;
-  position: absolute;
-  top: 20vh;
-  left: 50%;
-  width: 60vmin;
-  margin-left: -30vmin;
-  z-index: 1010;
-  border-radius: 5px;
-  display: none;
+	.backdrop-filter;
+	//text-shadow: 0 1px 2px #000;
+	//box-shadow: 0 0 10px #207b9a;
+	background: rgba(100, 100, 100, 0.6);
+	font-size: @l3;
+	line-height: 1.2em;
+	text-align: center;
+	padding: 5px;
+	color: #fff;
+	position: absolute;
+	top: 20vh;
+	left: 50%;
+	width: 60vmin;
+	margin-left: -30vmin;
+	z-index: 1010;
+	border-radius: 5px;
+	display: none;
+}
+
+#input-tip {
+	.backdrop-filter;
+	.box-shadow;
+	border-radius: 3px;
+	background: #fff;
+	position: absolute;
+	display: none;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	user-select: none;
+	list-style-type: none;
+	z-index: 10000;
+	padding: 0 5px;
+
+	&.open {
+		display: flex;
+	}
+
+	.item {
+		padding: 0 10px;
+		line-height: 50px;
+		height: 50px;
+		overflow: hidden;
+		font-size: @l3;
+		font-weight: bold;
+	}
 }
 
 @media screen and (min-width: 1024px) {
-  .alert_dialog {
-    width: 35%;
-  }
+	.alert_dialog {
+		width: 35%;
+	}
 }

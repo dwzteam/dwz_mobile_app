@@ -10,6 +10,7 @@ var js_src = {
 		'js/dwz/dwz.effect.js',
 		'js/dwz/dwz.ajax.js',
 		'js/dwz/dwz.alert.js',
+		'js/dwz/dwz.inputTip.js',
 		'js/dwz/dwz.scroll.js',
 		'js/dwz/dwz.list.js',
 		'js/dwz/dwz.navTab.js',
