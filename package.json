@@ -9,6 +9,7 @@
 		"clean": "gulp clean-build",
 		"lint": "npx eslint widget --fix",
 		"sync": "apicloud wifiSync --project ./widget --updateAll false",
+		"syncAll": "apicloud wifiSync --project ./widget --updateAll true",
 		"start": "apicloud wifiStart",
 		"log": "apicloud wifiLog"
 	},
