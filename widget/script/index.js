@@ -69,7 +69,7 @@ function loadScripts(options) {
 		$(window).on('hash.empty.pop', function () {
 			api.confirm(
 				{
-					title: '退出提示：',
+					title: '退出提示',
 					msg: '确定要退出程序吗？',
 					buttons: ['确定', '取消']
 				},
@@ -84,37 +84,6 @@ function loadScripts(options) {
 				}
 			);
 		});
-
-		// // config.xml openWin.html 加载方式使用
-		// api.addEventListener(
-		// 	{
-		// 		name: 'keyback'
-		// 	},
-		// 	function (ret, err) {
-		// 		// console.log(JSON.stringify(ret));
-		// 		if (!$.navView.getBox()) {
-		// 			api.confirm(
-		// 				{
-		// 					title: '退出提示：',
-		// 					msg: '确定要退出程序吗？',
-		// 					buttons: ['确定', '取消']
-		// 				},
-		// 				function (ret, err) {
-		// 					if (ret.buttonIndex == 1) {
-		// 						api.closeWidget({
-		// 							id: 'A6044188768662', //填写自己的id
-		// 							retData: {
-		// 								name: 'closeWidget'
-		// 							},
-		// 							silent: true
-		// 						});
-		// 					}
-		// 				}
-		// 			);
-		// 		}
-		// 		$.history.pop(true); // 历史记录
-		// 	}
-		// );
 
 		biz.checkUpdate();
 

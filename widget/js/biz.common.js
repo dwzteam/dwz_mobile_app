@@ -423,14 +423,35 @@ $.extend(biz, {
 		api.hideProgress();
 		const btns = [];
 		//按钮
-		const uris = [];
+		const params = [];
 		if (bmapinstalled) {
+			const latlng = $.gps.bd_encrypt(lat, lng); // BD-09 to GCJ-02 高德地图坐标转百度地图坐标
+			params.push({
+				androidPkg: 'android.intent.action.VIEW',
+				appParam: {
+					destination: latlng.lat + ',' + latlng.lng,
+					mode: 'driving',
+					sourceApplication: api.appName
+				},
+				uri: `intent://map/direction?destination=latlng:${latlng.lat},${latlng.lng}|name:${name}&mode=driving&src=${api.appName}#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end`,
+				// uri: `baidumap://map/direction?destination=name:${name}|latlng:${latlng.lat},${latlng.lng}&mode=driving&src=${api.appName}`,
+				iosUrl: 'baidumap://map/direction'
+			});
 			btns.push('百度地图');
-			let latlng = $.gps.bd_encrypt(lat, lng); // BD-09 to GCJ-02 高德地图坐标转百度地图坐标
-			uris.push(`baidumap://map/direction?destination=name:${name}|latlng:${latlng.lat},${latlng.lng}&mode=driving&src=andr.FSDZ`);
 		}
 		if (amapinstalled) {
-			uris.push(`androidamap://navi?sourceApplication=FZDZAutoMonitor&lat=${lat}&lon=${lng}&dev=0&style=1`);
+			params.push({
+				androidPkg: 'android.intent.action.VIEW',
+				appParam: {
+					lat: lat,
+					lon: lng,
+					dev: '0',
+					style: '1',
+					sourceApplication: api.appName
+				},
+				uri: `androidamap://navi?sourceApplication=${api.appName}&poiname=${name}&lat=${lat}&lon=${lng}&dev=0&style=1`,
+				iosUrl: 'iosamap://navi'
+			});
 			btns.push('高德地图');
 		}
 		if (btns.Length == 0) {
@@ -443,15 +464,12 @@ $.extend(biz, {
 					cancelTitle: '取消',
 					buttons: btns
 				},
-				function (ret, err) {
-					var index = ret.buttonIndex;
-					if (uris[index - 1] != '' && uris[index - 1] != undefined) {
-						api.openApp(
-							{
-								uri: uris[index - 1]
-							},
-							function (ret, err) {}
-						);
+				(ret, err) => {
+					const index = ret.buttonIndex;
+					if (params[index - 1]) {
+						api.openApp(params[index - 1], (_ret, _err) => {
+							console.log(JSON.stringify(_ret));
+						});
 					}
 				}
 			);

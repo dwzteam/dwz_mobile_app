@@ -41,22 +41,26 @@
 	$.fn.clipboardTip = function (options) {
 		const op = $.extend({ text: '粘贴' }, options);
 		return this.each(function () {
-			const $input = $(this).touchwipe({
+			$(this).touchwipe({
 				longpress: function () {
+					const $input = $(this);
 					if (window.api && api.systemType == 'android') {
 						const clipBoard = api.require('clipBoard');
-						clipBoard.get((ret, err) => {
-							if (ret && ret.value) {
-								$.inputTip.open($input.selectionPos(), [
-									{
-										text: op.text,
-										fn: () => {
-											$input.val(ret.value).get(0).select();
+
+						if (clipBoard) {
+							clipBoard.get((ret, err) => {
+								if (ret && ret.value) {
+									$.inputTip.open($input.selectionPos(), [
+										{
+											text: op.text,
+											fn: () => {
+												$input.val(ret.value).get(0).select();
+											}
 										}
-									}
-								]);
-							}
-						});
+									]);
+								}
+							});
+						}
 					}
 				}
 			});
