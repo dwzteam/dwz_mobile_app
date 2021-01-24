@@ -207,7 +207,7 @@ function navViewAjaxDone(json) {
 	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
 		// 当前页面
 		if ('closeCurrent' == json.callbackType) {
-			$.navView.close(true, true);
+			$.navView.close();
 		} else if ('forward' == json.callbackType) {
 			$.navView.reload({ url: json.forwardUrl });
 		}
@@ -237,7 +237,7 @@ function navViewAjaxDoneReload(json) {
 
 function navViewAjaxDoneClose(json) {
 	if ($.isAjaxStatusOk(json)) {
-		$.navView.close(true, true);
+		$.navView.close();
 	}
 	navViewAjaxDoneReload(json);
 }

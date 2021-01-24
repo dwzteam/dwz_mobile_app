@@ -53,15 +53,7 @@
 					<label class="panel-title">DWZ Mobile HTML5组件示例</label>
 				</div>
 				<div class="panel-content">
-					<div class="grids-contant">
-
-						{{each widgetList as item}}
-						<a class="grids-grid" target="navView" data-href="tpl/widget/{{item}}/index.html" rel="widget">
-							<div class="grids-grid-icon"><img src="image/icon/widget/{{item}}.svg"></div>
-							<p class="grids-grid-label">{{item}}</p>
-						</a>
-						{{/each}}
-
+					<div class="grids-contant" id="home-widget-box">
 					</div>
 				</div>
 			</div>
@@ -85,4 +77,13 @@
 			<ul></ul>
 		</div>
 	</div>
+</script>
+
+<script id="tpl-home-widget" type="text/html">
+	{{each widgetList as item}}
+	<a class="grids-grid" target="navView" data-href="{{@item.url}}" rel="widget">
+		<div class="grids-grid-icon"><img src="image/icon/widget/{{item.name}}.svg"></div>
+		<p class="grids-grid-label">{{item.name}}</p>
+	</a>
+	{{/each}}
 </script>

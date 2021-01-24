@@ -358,10 +358,22 @@ $.extend(biz, {
 	/**
 	 * 默认页面渲染回调函数
 	 * @param {*} tpl
-	 * @param {*} param
+	 * @param {*} params
 	 */
-	pageRender(tpl, param) {
-		const html = template.render(tpl, param);
+	pageRender(tpl, params) {
+		const html = template.render(tpl, params);
+		this.html(html).initUI();
+	},
+	/**
+	 * ifarme 加载外部页面回调函数
+	 * @param {*} tpl
+	 * @param {*} params
+	 */
+	iframeRender(tpl, params) {
+		const html = template.render(tpl, {
+			page_title: decodeURI(params.page_title || 'iframe外部页面'),
+			page_url: decodeURI(params.page_url)
+		});
 		this.html(html).initUI();
 	},
 

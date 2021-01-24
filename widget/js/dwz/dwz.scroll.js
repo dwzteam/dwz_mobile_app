@@ -98,7 +98,7 @@
 								scrollY = (scrollY + scrollH) / 3 - scrollH;
 							}
 
-							$main.translateY(scrollY + 'px', 0, 'linear');
+							$main.translateY(scrollY + 'px', 0);
 
 							if ($topBtn.size() > 0) {
 								if (scrollY < -100) {
@@ -149,13 +149,17 @@
 								$main.animate({ y: -pos.scrollH }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
-								let scrollPos = $main.getComputedPos();
-								let scrollY = dwz.speed.getY() * ($wrap.get(0).clientHeight / 680) + scrollPos.y;
+								let speedY = $.speed.getY();
+								if (Math.abs(speedY) > 200) {
+									let scrollPos = $main.getComputedPos();
+									let scrollY = speedY * ($wrap.get(0).clientHeight / 812) + scrollPos.y;
+									let dealyRate = Math.min(Math.abs(speedY), 2);
 
-								if (scrollY < -pos.scrollH) scrollY = -pos.scrollH;
-								else if (scrollY > 0) scrollY = 0;
+									if (scrollY < -pos.scrollH) scrollY = -pos.scrollH;
+									else if (scrollY > 0) scrollY = 0;
 
-								$main.animate({ y: scrollY }, op.delayTime * 3, 'cubic-bezier(0.1, 0.57, 0.1, 1)'); // ease, linear
+									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'); // ease, linear
+								}
 							}
 						}
 						if (op.scrollX && Math.abs(pos.dx) > 20) {
@@ -172,7 +176,7 @@
 								if (scrollX < -pos.scrollW) scrollX = -pos.scrollW;
 								else if (scrollX > 0) scrollX = 0;
 
-								$main.animate({ x: scrollX }, op.delayTime * 3, 'cubic-bezier(0.1, 0.57, 0.1, 1)'); // ease, linear
+								$main.animate({ x: scrollX }, op.delayTime * 2, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'); // ease, linear
 							}
 						}
 

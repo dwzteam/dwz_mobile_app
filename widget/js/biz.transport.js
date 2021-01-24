@@ -558,7 +558,7 @@ biz.transport = {
 			return;
 		}
 
-		$.navView.close(true, true);
+		$.navView.close();
 
 		// let startPos = $.gps.bd_decrypt(biz.location.lat, biz.location.lng);
 		// let endPos = $.gps.bd_decrypt(vo.receive.lat, vo.receive.lng);

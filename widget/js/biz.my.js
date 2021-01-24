@@ -152,7 +152,7 @@ biz.my = {
 
 		this.find('header .back-btn').touchwipe({
 			touch() {
-				$.navView.close(true, true);
+				$.navView.close();
 				FNImageClip.close();
 			}
 		});
@@ -169,7 +169,7 @@ biz.my = {
 							console.log(JSON.stringify(ret));
 
 							FNImageClip.close();
-							$.navView.close(true, true);
+							$.navView.close();
 
 							dwz.plus.getBase64Image({
 								destinationType: 'url',

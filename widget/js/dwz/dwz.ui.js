@@ -5,7 +5,12 @@
 
 (function ($) {
 	$.config.frag.external = '<iframe src="{url}" style="width:100%;height:{{height}};" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>';
-
+	var url = 'http://localhost:8080/pro?a=1&b=张三&c=aaa';
+	url = encodeURI(url);
+	console.log(url);
+	url = decodeURI(url);
+	url = decodeURI(url);
+	console.log(url);
 	dwz.regPlugins.push(function ($p) {
 		if ($.fn.slide)
 			$('div.dwz-slide', $p).each(function () {
@@ -53,7 +58,7 @@
 				.hrefFix();
 
 			$('div.nav-view .back-button', $p).click(function (event) {
-				$.navView.close(true, true);
+				$.navView.close();
 				// event.stopPropagation();
 			});
 		}

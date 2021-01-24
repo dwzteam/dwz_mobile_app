@@ -135,14 +135,14 @@ $.fn.extend({
 });
 
 // 检测用户登入状态
-dwz.urlInterceptor = function (url) {
+$.urlInterceptor = function (url) {
 	let pass = UserInfo.token ? true : false;
 
 	if (!pass) {
 		let uris = ['tpl/user/login.html', 'tpl/user/forgetPwd.html', 'tpl/user/register.html'];
 
 		// 判断request URI 是否需要登入
-		if (dwz.inArray(url.getRequestURI(), uris)) {
+		if ($.inArray(url.getRequestURI(), uris)) {
 			pass = true;
 		}
 	}
@@ -281,7 +281,7 @@ function forgetAjaxDone(json) {
 function authAjaxDone(json) {
 	console.log(JSON.stringify(json));
 
-	$.navView.close(true, true); // 关闭认证页面
+	$.navView.close(); // 关闭认证页面
 
 	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);

@@ -61,6 +61,11 @@ const biz = window.biz || {
 			DEV: './doc/json/homeAd.json',
 			REMOTE: '/homeAd'
 		},
+		// 组件列表
+		widgetList: {
+			DEV: './doc/json/widgetList.json',
+			REMOTE: '/widgetList'
+		},
 
 		// 通知列表-首页
 		announce: {

@@ -73,7 +73,7 @@ $.navView = {
 			if (op.wipeClose) {
 				$box.touchwipe({
 					wipeRight(event, pos) {
-						$.navView.close(true, true);
+						$.navView.close();
 					},
 					min_move_x: 100
 				});
@@ -154,7 +154,7 @@ $.navView = {
 						if ($.dialog && $.dialog.isOpen) {
 							$.dialog.close({ popHistory: false });
 						} else {
-							$.navView.close(true);
+							$.navView.close(true, false);
 							$.navView.open({ url: url, rel: op.rel, history: false });
 						}
 					},
@@ -174,7 +174,7 @@ $.navView = {
 		let ih = $content.get(0).offsetHeight;
 		$content.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
 	},
-	close(popHistory, local) {
+	close(popHistory = true, local = true) {
 		let size = this.$list.length;
 		if (size <= 0) return;
 
