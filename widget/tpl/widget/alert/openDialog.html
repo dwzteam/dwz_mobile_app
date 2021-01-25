@@ -1,12 +1,16 @@
 <div class="alert-dialog-hd"><strong class="alert-dialog-title">确定同意请假吗？</strong></div>
 
-<form method="post" action="{{form-url}}" onsubmit="return validateCallback(this, biz.leave.navViewAjaxDone)">
+<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, function (json) {
+    if ($.isAjaxStatusOk(json)) {
+        $.alert.closeDialog();
+    }
+})">
 	<input type="hidden" name="token" value="{{UserInfo.token}}">
 
 	<div class="alert-dialog-bd">
 
 		<div class="flex-wrap">
-			<textarea name="remark" rows="5" class="flex-item textarea" placeholder="请输入同意理由（必填）" required minlength="2" maxlength="200" data-error="请输入同意理由（必填）"></textarea>
+			<textarea name="remark" rows="5" class="required flex-item textarea" placeholder="请输入同意理由（必填）" minlength="2" maxlength="200" data-error="请输入同意理由（必填）"></textarea>
 		</div>
 	</div>
 

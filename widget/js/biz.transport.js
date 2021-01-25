@@ -29,10 +29,6 @@ biz.transport = {
 				cache: false,
 				global: false,
 				success: (json) => {
-					if (!$.checkAjaxLogin(json)) {
-						return;
-					}
-
 					if ($.isAjaxStatusOk(json)) {
 						$form.total = json.data.total || json.data.list ? json.data.list.length : 0;
 						if ($form.total) {
@@ -286,11 +282,6 @@ biz.transport = {
 				cache: false,
 				global: false,
 				success: (json) => {
-					if (!$.checkAjaxLogin(json)) {
-						return;
-					}
-
-					$.ajaxDone(json);
 					if ($.isAjaxStatusOk(json)) {
 						$li.remove();
 					}
@@ -331,10 +322,6 @@ biz.transport = {
 			cache: false,
 			global: false,
 			success: (json) => {
-				if (!$.checkAjaxLogin(json)) {
-					return;
-				}
-
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},
@@ -368,10 +355,6 @@ biz.transport = {
 			cache: false,
 			global: false,
 			success: (json) => {
-				if (!dwz.checkAjaxLogin(json)) {
-					return;
-				}
-
 				navViewAjaxDoneReload(json);
 				biz.location.updTransport();
 			},

@@ -42,10 +42,6 @@ biz.my = {
 				cache: false,
 				global: false,
 				success: (json) => {
-					if (!dwz.checkAjaxLogin(json)) {
-						return;
-					}
-
 					if ($.isAjaxStatusOk(json)) {
 						let _html = template.render(tplWrap['tpl-announce'], json);
 						$listBox.html(_html);

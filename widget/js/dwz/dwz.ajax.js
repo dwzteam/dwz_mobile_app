@@ -34,6 +34,9 @@ dwz.extend({
 		}
 	},
 	isAjaxStatusOk: function (json) {
+		if (!$.checkAjaxLogin(json)) {
+			return false;
+		}
 		return json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok;
 	},
 	isAjaxStatusError: function (json) {
@@ -53,7 +56,6 @@ dwz.extend({
 			return false;
 		}
 
-		$.ajaxDone(json);
 		return true;
 	}
 });
@@ -202,9 +204,9 @@ function _iframeResponse($iframe, callback) {
  *
  */
 function navViewAjaxDone(json) {
-	dwz.ajaxDone(json);
+	$.ajaxDone(json);
 
-	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
+	if ($.isAjaxStatusOk(json)) {
 		// 当前页面
 		if ('closeCurrent' == json.callbackType) {
 			$.navView.close();
@@ -221,8 +223,7 @@ function navViewAjaxDone(json) {
 }
 
 function navViewAjaxDoneReload(json) {
-	dwz.ajaxDone(json);
-
+	$.ajaxDone(json);
 	if ($.isAjaxStatusOk(json)) {
 		// 如果关闭当前页面后，底部是列表页面，就重新加载
 		let $boxs = $.navView.getBoxs(3);
@@ -243,9 +244,8 @@ function navViewAjaxDoneClose(json) {
 }
 
 function dialogAjaxDone(json) {
-	dwz.ajaxDone(json);
-
-	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
+	$.ajaxDone(json);
+	if ($.isAjaxStatusOk(json)) {
 		// 当前页面
 		if ('closeCurrent' == json.callbackType) {
 			$.dialog.close();

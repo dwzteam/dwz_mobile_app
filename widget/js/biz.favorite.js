@@ -44,10 +44,6 @@ biz.favorite = {
 				cache: false,
 				global: false,
 				success: (json) => {
-					if (!dwz.checkAjaxLogin(json)) {
-						return;
-					}
-
 					if ($.isAjaxStatusOk(json)) {
 						$form.total = json.data.total || json.data.length;
 						if ($form.total) {
