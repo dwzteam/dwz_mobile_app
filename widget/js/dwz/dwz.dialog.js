@@ -50,12 +50,10 @@ $.dialog = {
 		}
 
 		$bgBox.addClass($.dialog.config.openClass);
-		if (op.pop == 'pic' || op.pop == 'login' || op.pop == 'fullscreen') {
+		if (op.pop == 'fullscreen') {
 			$box.addClass($.dialog.config.fullscreenClass);
 		} else if (op.pop == 'actionSheet') {
 			$box.addClass($.dialog.config.actionSheetClass);
-		} else {
-			$box.addClass($.dialog.config.popClass);
 		}
 		$box.addClass($.dialog.config.openClass).translateY(document.documentElement.clientHeight + 'px');
 

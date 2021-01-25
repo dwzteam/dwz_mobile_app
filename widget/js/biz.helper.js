@@ -18,7 +18,7 @@ biz.helper = {
 			error: biz.ajaxError
 		});
 	},
-	popRegionRender: function (tpl, params) {
+	selectRegionRender: function (tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
 

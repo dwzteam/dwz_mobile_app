@@ -18,12 +18,6 @@
 	line-height: 44px;
 	width: 100%;
 	.b-line;
-
-	.pop-close {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-	}
 }
 
 .pop-window {
@@ -32,13 +26,9 @@
 	z-index: 1000;
 
 	.pop-content {
-		width: 80vmin;
 		min-height: 60vmin;
 		max-height: 88vh;
-		border-radius: 5px;
-		background: #fff;
 		position: relative;
-		padding: 10px;
 	}
 
 	.pop-close {
@@ -47,18 +37,23 @@
 		.icon-close;
 	}
 
+	.pop-info {
+		padding: 10px;
+		color: #fff;
+		text-align: center;
+	}
+
 	&.open {
 		.flex-all-center;
 	}
 
 	&.fullscreen {
-		background: @defaultBackground;
-		.pop-content {
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			box-shadow: none;
+		.pop-close {
+			.icon-del-x;
+			position: absolute;
+			left: 50%;
+			bottom: 15%;
+			transform: translateX(-50%);
 		}
 	}
 
@@ -72,6 +67,14 @@
 		display: flex;
 		flex-direction: column;
 
+		.pop-header {
+			.pop-close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				bottom: auto;
+			}
+		}
 		.row {
 			.flex-item;
 			.col {

@@ -70,7 +70,7 @@
 						let $link = $(this);
 						$.dialog.open({
 							url: $link.attr('data-href'),
-							pop: $link.attr('data-pop') || ''
+							pop: $link.attr('data-pop') || 'fullscreen'
 						});
 						event.stopPropagation();
 					}
