@@ -16,8 +16,36 @@
 			<div class="scroll">
 				<ul class="list">
 
-					<li class="item">
-						<p class="flex-item">修改密码</p><i class="arrow-right"></i>
+					<li class="item" onclick="$.alert.confirm('确认删除吗？', {
+						okCall: function() {
+							console.log('okCall')
+						},
+						cancelCall: function() {}
+					})">
+						<p class="flex-item">确认（是/否）</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.error('alert组件示例 error')">
+						<p class="flex-item">错误提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.success('alert组件示例 success')">
+						<p class="flex-item">成功提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.warn('alert组件示例 warn')">
+						<p class="flex-item">警告提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.toast('alert组件示例 toast')">
+						<p class="flex-item">toast提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.openDialog('tpl/widget/alert/openDialog.html?dwz_callback=biz.pageRender', {
+						form_url: biz.server.getUrl(biz.server.changePwd),
+						UserInfo: UserInfo
+					});">
+						<p class="flex-item">自定义内容提示</p><i class="arrow-right"></i>
 					</li>
 
 				</ul>
@@ -26,3 +54,12 @@
 
 	</div>
 </main>
+
+<script>
+	$.alert.confirm('确认删除吗？', {
+		okCall: function() {
+			console.log('okCall')
+		},
+		cancelCall: function() {}
+	});
+</script>

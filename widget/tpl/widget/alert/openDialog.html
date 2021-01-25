@@ -1,0 +1,18 @@
+<div class="alert-dialog-hd"><strong class="alert-dialog-title">确定同意请假吗？</strong></div>
+
+<form method="post" action="{{form-url}}" onsubmit="return validateCallback(this, biz.leave.navViewAjaxDone)">
+	<input type="hidden" name="token" value="{{UserInfo.token}}">
+
+	<div class="alert-dialog-bd">
+
+		<div class="flex-wrap">
+			<textarea name="remark" rows="5" class="flex-item textarea" placeholder="请输入同意理由（必填）" required minlength="2" maxlength="200" data-error="请输入同意理由（必填）"></textarea>
+		</div>
+	</div>
+
+	<div class="alert-dialog-ft">
+		<button class="alert-btn-dialog default close" type="button">取消</button>
+		<button class="alert-btn-dialog primary" type="submit">确定</button>
+	</div>
+
+</form>

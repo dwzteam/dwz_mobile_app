@@ -34,7 +34,7 @@
 						<div class="alert-dialog-ft">#butFragment#</div>\
 					</div>\
 				</div>',
-			btnFrag: '<a href="javascript:" class="alert_btn_dialog #class#">#butMsg#</a>'
+			btnFrag: '<a href="javascript:" class="alert-btn-dialog #class#">#butMsg#</a>'
 		},
 
 		/**
@@ -54,7 +54,7 @@
 			let html = this.config.boxFrag.replace('#type#', type).replace('#title#', $.regional.alert.title[type]).replace('#message#', msg).replace('#butFragment#', butsHtml);
 			$('body').append(html);
 
-			let $btns = $(this.config.box$).find('a.alert_btn_dialog');
+			let $btns = $(this.config.box$).find('a.alert-btn-dialog');
 
 			for (let i = 0; i < buttons.length; i++) {
 				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
@@ -134,13 +134,13 @@
 			this._open(this.config.types.confirm, msg, buttons);
 		},
 
-		openDialog(url) {
+		openDialog(url, params) {
 			$(this.config.box$).remove();
 
 			let $box = $($.alert.config.dialogFrag).appendTo($('body').get(0)).find('.alert-dialog');
 
 			if (url) {
-				let params = url.getParams();
+				params = $.extend(url.getParams(), params);
 				$.ajax({
 					type: 'GET',
 					url: url,

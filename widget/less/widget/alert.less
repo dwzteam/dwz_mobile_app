@@ -1,4 +1,3 @@
-/* alertMsg */
 .alert-mask {
 	position: fixed;
 	z-index: 1010;
@@ -51,11 +50,17 @@
 	font-size: @l2;
 	.flex-wrap;
 
-	a {
+	.alert-btn-dialog {
 		display: block;
 		.flex-item;
 		text-decoration: none;
 		text-align: center;
+
+		line-height: 42px;
+		font-size: @l3;
+		position: relative;
+		border: 0;
+		outline: 0;
 	}
 
 	&:after {
@@ -71,29 +76,31 @@
 	}
 }
 
-.alert-dialog-confirm a {
+.alert-btn-dialog {
 	position: relative;
-}
-.alert-dialog-confirm .alert-dialog-ft a:first-child:after {
-	display: none;
-}
-.alert-dialog-confirm .alert-dialog-ft a:after {
-	content: ' ';
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 1px;
-	height: 100%;
-	border-left: 1px solid @borderColor;
-	transform-origin: 0 0;
-	transform: scaleX(0.5);
-}
+	background: transparent;
 
-.alert_btn_dialog.default {
-	color: @linkColor;
-}
-.alert_btn_dialog.primary {
-	color: @linkColorActive;
+	&.default {
+		color: @linkColor;
+	}
+	&.primary {
+		color: @linkColorActive;
+	}
+
+	&:first-child:after {
+		display: none;
+	}
+	&:after {
+		content: ' ';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1px;
+		height: 100%;
+		border-left: 1px solid @borderColor;
+		transform-origin: 0 0;
+		transform: scaleX(0.5);
+	}
 }
 
 #alert-toast {
@@ -145,7 +152,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-	.alert_dialog {
+	.alert-dialog {
 		width: 35%;
 	}
 }
