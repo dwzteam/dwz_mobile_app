@@ -21,7 +21,12 @@
 
 					<li class="item" onclick="$.dialog.open({
 						url: 'tpl/helper/popSelectRegion.html?dwz_callback=biz.helper.popRegionRender',
-						data: {code: '', province:'province', city: 'city', county: 'county', labelField:'destination'},
+						data: {code: '', province:'province', city: 'city', county: 'county', labelField:'region_names', 
+							callback: function(data) {
+								$.alert.toast(JSON.stringify(data));
+								$.dialog.close();
+							}
+						},
 						pop: 'actionSheet'
 					})">
 						<p class="flex-item">actionSheet选择省、市、区</p><i class="arrow-right"></i>
