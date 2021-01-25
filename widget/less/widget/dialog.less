@@ -47,7 +47,8 @@
 		.flex-all-center;
 	}
 
-	&.fullscreen {
+	&.fullscreen,
+	&.pic {
 		.pop-close {
 			.icon-del-x;
 			position: absolute;
@@ -55,6 +56,9 @@
 			bottom: 15%;
 			transform: translateX(-50%);
 		}
+	}
+	&.fullscreen {
+		background: @defaultBackground;
 	}
 
 	&.actionSheet {
