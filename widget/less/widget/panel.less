@@ -1,4 +1,3 @@
-
 .dwz-panel {
 	position: relative;
 	background: #fff;
@@ -26,6 +25,7 @@
 
 	.panel-content {
 		position: relative;
+		min-height: 80px;
 	}
 }
 
@@ -37,7 +37,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, .7);
+	background: rgba(0, 0, 0, 0.7);
 	.backdrop-filter;
 
 	&.open {
@@ -98,7 +98,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, .7);
+	background: rgba(0, 0, 0, 0.7);
 	.backdrop-filter;
 
 	&.open {
@@ -137,7 +137,7 @@
 
 		&.active {
 			color: #fff;
-			background: #7EBB66;
+			background: #7ebb66;
 			font-weight: bold;
 		}
 
@@ -240,7 +240,6 @@
 	}
 }
 
-
 .bottom-btn-bar {
 	height: 40px;
 	.t-line;
@@ -264,8 +263,9 @@
 			border-left: solid 1px rgba(126, 187, 102, 0.5);
 		}
 		&:first-child {
-			&:before {	border-left: none;}
-
+			&:before {
+				border-left: none;
+			}
 		}
 	}
 }

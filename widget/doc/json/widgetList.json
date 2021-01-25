@@ -9,7 +9,7 @@
 		{ "name": "alert", "url": "" },
 		{ "name": "table", "url": "" },
 		{ "name": "form", "url": "" },
-		{ "name": "brush", "url": "" },
+		{ "name": "brush", "url": "tpl/widget/brush/index.html?dwz_callback=$.drawingBoardRender" },
 		{ "name": "tabs", "url": "" },
 		{ "name": "slide", "url": "" },
 		{ "name": "slideTab", "url": "" },
