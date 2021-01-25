@@ -1,0 +1,36 @@
+<div class="pop-header">
+	<span class="title">选择地区</span>
+	<a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a>
+</div>
+
+<div class="row">
+
+	<div class="col">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+				<ul class="list dwz-province"></ul>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+				<ul class="list dwz-city"></ul>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+				<ul class="list dwz-county"></ul>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script id="tpl-list" type="text/html">
+	{{each list as item}}
+	<li class="item" data-code="{{item.code}}" data-name="{{item.name}}">{{item.name}}</li>
+	{{/each}}
+</script>

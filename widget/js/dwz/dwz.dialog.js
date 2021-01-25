@@ -5,6 +5,7 @@ $.dialog = {
 	config: {
 		box$: '#dialog',
 		fullscreenClass: 'fullscreen',
+		actionSheetClass: 'actionSheet',
 		openClass: 'open',
 		frag: `<div id="dialog" class="pop-window unitBox">
 				<div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div>
@@ -51,6 +52,10 @@ $.dialog = {
 		$bgBox.addClass($.dialog.config.openClass);
 		if (op.pop == 'pic' || op.pop == 'login' || op.pop == 'fullscreen') {
 			$box.addClass($.dialog.config.fullscreenClass);
+		} else if (op.pop == 'actionSheet') {
+			$box.addClass($.dialog.config.actionSheetClass);
+		} else {
+			$box.addClass($.dialog.config.popClass);
 		}
 		$box.addClass($.dialog.config.openClass).translateY(document.documentElement.clientHeight + 'px');
 
@@ -116,12 +121,10 @@ $.dialog = {
 			$bgBox = this.$bgBox;
 
 		$box.animate({ y: document.documentElement.clientHeight }, 300, 'ease', function () {
-			$box.html('').removeClass($.dialog.config.fullscreenClass + ' ' + $.dialog.config.openClass);
+			$box.html('').removeClass($.dialog.config.fullscreenClass + ' ' + $.dialog.config.openClass + ' ' + $.dialog.config.actionSheetClass);
 			$box.triggerPageClear();
 		});
-
 		$bgBox.removeClass($.dialog.config.openClass);
-
 		this.isOpen = false;
 	},
 	getBox() {

@@ -3,7 +3,7 @@
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
 			<div class="header-title">
-				<div class="title">dialog对话框</div>
+				<div class="title">dialog弹出框</div>
 			</div>
 			<a class="bar-button" data-href="tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=dialog文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/dialog" target="navView" rel="doc"><i class="icon icon-doc"></i>文档</a>
 		</div>
@@ -13,6 +13,21 @@
 
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
+				<ul class="list">
+
+					<li class="item" onclick="$.dialog.open({url:'tpl/widget/dialog/dialog1.html', pop:'fullscreen'})">
+						<p class="flex-item">全屏模式dialog弹出框</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.dialog.open({
+						url: 'tpl/helper/popSelectRegion.html?dwz_callback=biz.helper.popRegionRender',
+						data: {code: '', province:'province', city: 'city', county: 'county', labelField:'destination'},
+						pop: 'actionSheet'
+					})">
+						<p class="flex-item">actionSheet选择省、市、区</p><i class="arrow-right"></i>
+					</li>
+
+				</ul>
 			</div>
 		</div>
 

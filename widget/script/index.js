@@ -30,6 +30,7 @@ var js_src = {
 		'js/biz.conf.js',
 		'js/biz.store.js',
 		'js/biz.common.js',
+		'js/biz.helper.js',
 		'js/biz.user.js',
 		'js/biz.home.js',
 		'js/biz.announce.js',

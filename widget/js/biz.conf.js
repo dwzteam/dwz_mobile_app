@@ -66,7 +66,11 @@ const biz = window.biz || {
 			DEV: './doc/json/widgetList.json',
 			REMOTE: '/widgetList'
 		},
-
+		// 省、市、区
+		regionList: {
+			DEV: './doc/json/region/test_{code}.json',
+			REMOTE: '/region/list?token={token}'
+		},
 		// 通知列表-首页
 		announce: {
 			DEV: './doc/json/announce.json',
