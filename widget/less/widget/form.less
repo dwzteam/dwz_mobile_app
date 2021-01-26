@@ -100,8 +100,7 @@ label {
 
 	.textarea {
 		width: 100%;
-		height: 102px;
-		font-size: 15px;
+		font-size: @l3;
 	}
 
 	.icon-search {
@@ -128,9 +127,7 @@ label {
 }
 
 .pageFormContent {
-	background: #fff;
 	position: relative;
-	.b-line;
 
 	.legend {
 		.flex-item;
@@ -141,12 +138,16 @@ label {
 		color: #999;
 	}
 	.item {
+		background: #fff;
 		position: relative;
 		.flex-wrap;
 		.align-center;
 		.t-line;
 		padding: 0 10px;
 		min-height: 50px;
+		&:last-of-type {
+			.tb-line;
+		}
 		input {
 			.flex-item;
 			padding: 2px 5px;
@@ -240,7 +241,6 @@ textarea:invalid {
 	background: url('../../image/icon/icon-invalid.svg') 100% center no-repeat;
 }
 
-input:read-only,
 textarea:read-only {
 	border-color: #9eabb3 #d5dbdf #d5dbdf #9eabb3;
 	background-color: #f6f6f6;
@@ -283,12 +283,10 @@ textarea:read-only {
 	font-size: 17px;
 	width: 100%;
 	margin: 10px 0;
-	&:first-child {
-		margin-top: 0;
-	}
 }
 
 .form-bar {
+	.t-line;
 	padding: 0 10px;
 	background: #fff;
 }

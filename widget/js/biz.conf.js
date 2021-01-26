@@ -50,6 +50,10 @@ const biz = window.biz || {
 			DEV: './doc/json/ajaxDone.json',
 			REMOTE: '/code'
 		},
+		feedback: {
+			DEV: './doc/json/ajaxDone.json',
+			REMOTE: '/feedback'
+		},
 		// 公安实名验证
 		userRealVerify: {
 			DEV: './doc/json/login.json',

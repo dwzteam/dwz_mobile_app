@@ -1,4 +1,6 @@
-<main>
+<form class="page-wrap" method="post" action="./doc/json/ajaxDone.json" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
+	<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
+
 	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
@@ -13,9 +15,87 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
+				<div class="pageFormContent unitBox">
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">出差事由</label>
+								<textarea class="textarea required" name="cause" rows="4" placeholder="请输入请假事由（必填）" maxlength="200" data-error="请输入请假事由"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-content dwz-destination">
+								<label class="name">目的城市</label>
+								<input type="hidden" name="province" class="required" data-error="请选择目的地">
+								<input type="hidden" name="city" class="required" data-error="请选择目的地">
+								<input type="hidden" name="county" class="required" data-error="请选择目的地">
+								<input type="text" name="destination" placeholder="请选择目的地" readonly>
+								<i class="arrow-right"></i>
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-content">
+								<label class="name">交通工具</label>
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-content">
+								<label class="name">单程往返</label>
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-content">
+								<label class="name">开始时间</label>
+								<input type="date" name="start_date" value="{{start_date}}" placeholder="请选择（必填）" class="required" data-error="请选择开始时间">
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-content">
+								<label class="name">结束时间</label>
+								<input type="date" name="end_date" value="{{end_date}}" placeholder="请选择（必填）" class="required" data-error="请选择结束时间">
+							</div>
+						</div>
+						<div class="item">
+							<div class="item-content">
+								<label class="name">请假天数</label>
+								<input type="number" name="day" placeholder="自动计算" class="required" min="1" data-error="请输入请假天数">
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-content">
+								<label class="name">同行人</label>
+								<input type="text" name="together" value="" placeholder="请选择（必填）" class="required" data-error="请选择开始时间">
+							</div>
+						</div>
+					</div>
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">电子签名</label>
+								<div class="dwz-sign-box sign-box pic">
+									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/common/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>
 
 	</div>
-</main>
+
+	<div class="form-bar">
+		<button class="form-submit active" type="submit">提交</button>
+	</div>
+</form>
