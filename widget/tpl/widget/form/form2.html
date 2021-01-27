@@ -1,4 +1,5 @@
-<main>
+<form class="page-wrap" method="post" action="./doc/json/ajaxDone.json" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
+
 	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
@@ -13,9 +14,53 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
+				<div class="pageFormContent">
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">图片组1</label>
+								<ul id="upload-preview-pic1" class="upload-preview"></ul>
+								<div class="upload-wrap" rel="#upload-preview-pic1" data-name="pic1[]">
+									<button type="button">Upload</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">图片组2</label>
+								<ul id="upload-preview-pic2" class="upload-preview"></ul>
+								<div class="upload-wrap" rel="#upload-preview-pic2" data-name="pic2[]">
+									<button type="button">Upload</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="margin-v">
+						<div class="item">
+							<div class="item-inner">
+								<label class="name">电子签名</label>
+								<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
+								<div class="dwz-sign-box sign-box pic">
+									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/helper/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
 
 			</div>
+
 		</div>
+	</div>
 
 	</div>
-</main>
+
+	<div class="form-bar">
+		<button class="form-submit active" type="submit">提交</button>
+	</div>
+</form>

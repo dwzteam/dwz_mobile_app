@@ -28,22 +28,30 @@
 					<div class="margin-v">
 						<div class="item">
 							<div class="item-content">
-								<label class="name">目的地</label>
+								<label class="name">省市区</label>
 								<input type="hidden" name="province">
 								<input type="hidden" name="city">
 								<input type="hidden" name="county">
-								<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择目的地" readonly onclick="$.dialog.open({
-									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-									data: {target:this, code: '', province:'province', city: 'city', county: 'county', labelField:'destination', 
-										callback: function(data) {
-											$.dialog.close();
-										}
-									},
-									pop: 'actionSheet'
-								})">
+								<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
+										url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+										data: {target:this, code: '',
+											callback: function(data) {
+												console.log(this, data)
+												var form = this.parentsByTag('form').get(0);
+												form.province.value = data.province;
+												form.city.value = data.city;
+												form.county.value = data.county;
+												form.destination.value = data.names;
+												
+												$.dialog.close();
+											}
+										},
+										pop: 'actionSheet'
+									})">
 								<i class="arrow-right"></i>
 							</div>
 						</div>
+
 						<div class="item">
 							<div class="item-content">
 								<label class="name">交通工具</label>
@@ -91,17 +99,7 @@
 						</div>
 					</div>
 
-					<div class="margin-v">
-						<div class="item">
-							<div class="item-inner">
-								<label class="name">电子签名</label>
-								<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
-								<div class="dwz-sign-box sign-box pic">
-									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/helper/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 
 			</div>

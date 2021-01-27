@@ -32,7 +32,7 @@ biz.helper = {
 		const $city = $box.find('ul.dwz-city');
 		const $county = $box.find('ul.dwz-county');
 
-		const op = $.extend({ target: null, province: 'province', city: 'city', county: 'county', labelField: 'region_names', callback: null }, params);
+		const op = $.extend({ target: null, callback: null }, params);
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
@@ -70,19 +70,12 @@ biz.helper = {
 											$items3.removeClass('active');
 											$li3.addClass('active');
 
-											// target 表单
-											const $form = $(op.target).parentsByTag('form');
-
-											const _data = {};
-											_data[op.province] = $li1.attr('data-code');
-											_data[op.city] = $li2.attr('data-code');
-											_data[op.county] = $li3.attr('data-code');
-											_data[op.labelField] = $li1.attr('data-name') + ' ' + $li2.attr('data-name') + ' ' + $li3.attr('data-name');
-
-											for (let key in _data) {
-												const $input = $form.find('input[name=' + key + ']');
-												$input.size() && $input.val(_data[key]);
-											}
+											const _data = {
+												province: $li1.attr('data-code'),
+												city: $li2.attr('data-code'),
+												county: $li3.attr('data-code'),
+												names: $li1.attr('data-name') + ' ' + $li2.attr('data-name') + ' ' + $li3.attr('data-name')
+											};
 
 											op.callback && op.callback.call($(op.target), _data);
 										});

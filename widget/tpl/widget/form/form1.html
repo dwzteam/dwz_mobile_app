@@ -24,9 +24,15 @@
 							<input type="hidden" name="county">
 							<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
 									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-									data: {target:this, code: '', province:'province', city: 'city', county: 'county', labelField:'destination', 
+									data: {target:this, code: '',
 										callback: function(data) {
 											console.log(this, data)
+											var form = this.parentsByTag('form').get(0);
+											form.province.value = data.province;
+											form.city.value = data.city;
+											form.county.value = data.county;
+											form.destination.value = data.names;
+											
 											$.dialog.close();
 										}
 									},
@@ -46,7 +52,7 @@
 								list: InterestStore.data,
 								callback: function(data) {
 									console.log(this, data)
-									const form = this.parentsByTag('form').get(0);
+									var form = this.parentsByTag('form').get(0);
 
 									form.interest_id.value = data.map(function(item){
 										return item.value

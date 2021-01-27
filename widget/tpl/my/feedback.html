@@ -11,7 +11,6 @@
 	<div class="content">
 
 		<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
-			<input type="hidden" name="sign_base64" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
 
 			<div class="scroll-content dwz-scroll">
 				<div class="scroll">
@@ -19,7 +18,7 @@
 					<div class="pageFormContent unitBox">
 						<div class="item">
 							<div class="item-inner">
-								<label class="name required">问题描述</label>
+								<label class="name">问题描述</label>
 								<textarea class="textarea required" name="content" placeholder="请描述你使用过程中遇到的问题"></textarea>
 							</div>
 						</div>
@@ -35,7 +34,7 @@
 
 						<div class="item">
 							<div class="item-inner">
-								<label class="name required">请留下您的联系方式方便与您联系</label>
+								<label class="name">请留下您的联系方式方便与您联系</label>
 								<input class="required" type="text" name="contact_info" placeholder="手机号或邮箱" maxlength="50" pattern=".{6,50}" data-error="请输入手机号或邮箱">
 							</div>
 						</div>
@@ -43,6 +42,7 @@
 						<div class="item">
 							<div class="item-inner">
 								<label class="name">电子签名</label>
+								<input type="hidden" name="sign_base64" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
 								<div class="dwz-sign-box sign-box pic">
 									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/helper/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
 								</div>
