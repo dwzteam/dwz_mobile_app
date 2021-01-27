@@ -4,7 +4,7 @@
 $.dialog = {
 	config: {
 		box$: '#dialog',
-		popClass: ['fullscreen', 'actionSheet', 'pic'],
+		popClass: ['fullscreen', 'actionSheet', 'pic', 'pop'],
 		openClass: 'open',
 		frag: `<div id="dialog" class="pop-window unitBox">
 				<div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div>

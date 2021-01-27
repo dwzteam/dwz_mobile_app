@@ -154,6 +154,11 @@
 		if ($.fn.clipboardTip) {
 			$('input.dwz-clipboard, textarea.dwz-clipboard', $p).clipboardTip();
 		}
+
+		// 处理必填元素label加红色星号
+		$('input.required, select.required, textarea.required', $p).each((index, elem) => {
+			$(elem.parentNode).find(':scope > label').addClass('required');
+		});
 	});
 
 	$.fn.extend({

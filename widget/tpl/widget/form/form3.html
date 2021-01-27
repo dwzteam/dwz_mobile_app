@@ -1,5 +1,4 @@
 <form class="page-wrap" method="post" action="./doc/json/ajaxDone.json" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
-	<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
 
 	<header>
 		<div class="toolbar">
@@ -15,7 +14,7 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
-				<div class="pageFormContent unitBox">
+				<div class="pageFormContent">
 
 					<div class="margin-v">
 						<div class="item">
@@ -28,23 +27,43 @@
 
 					<div class="margin-v">
 						<div class="item">
-							<div class="item-content dwz-destination">
+							<div class="item-content">
 								<label class="name">目的城市</label>
 								<input type="hidden" name="province" class="required" data-error="请选择目的地">
 								<input type="hidden" name="city" class="required" data-error="请选择目的地">
 								<input type="hidden" name="county" class="required" data-error="请选择目的地">
-								<input type="text" name="destination" placeholder="请选择目的地" readonly>
+								<input type="text" name="destination" placeholder="请选择目的地" readonly onclick="$.dialog.open({
+									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+									data: {target:this, code: '', province:'province', city: 'city', county: 'county', labelField:'destination', 
+										callback: function(data) {
+											$.dialog.close();
+										}
+									},
+									pop: 'actionSheet'
+								})">
 								<i class="arrow-right"></i>
 							</div>
 						</div>
 						<div class="item">
 							<div class="item-content">
 								<label class="name">交通工具</label>
+								<select name="traffic_vehicle" class="required" data-error="请选择交通工具">
+									<option value="">请选择</option>
+									<option value="1">飞机</option>
+									<option value="2">火车</option>
+									<option value="3">汽车</option>
+									<option value="4">其它</option>
+								</select>
 							</div>
 						</div>
 						<div class="item">
 							<div class="item-content">
 								<label class="name">单程往返</label>
+								<select name="traffic_type" class="required" data-error="请选择单程往返">
+									<option value="">请选择</option>
+									<option value="1">单程</option>
+									<option value="2">往返</option>
+								</select>
 							</div>
 						</div>
 						<div class="item">
@@ -57,12 +76,6 @@
 							<div class="item-content">
 								<label class="name">结束时间</label>
 								<input type="date" name="end_date" value="{{end_date}}" placeholder="请选择（必填）" class="required" data-error="请选择结束时间">
-							</div>
-						</div>
-						<div class="item">
-							<div class="item-content">
-								<label class="name">请假天数</label>
-								<input type="number" name="day" placeholder="自动计算" class="required" min="1" data-error="请输入请假天数">
 							</div>
 						</div>
 
@@ -82,6 +95,7 @@
 						<div class="item">
 							<div class="item-inner">
 								<label class="name">电子签名</label>
+								<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
 								<div class="dwz-sign-box sign-box pic">
 									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/common/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
 								</div>

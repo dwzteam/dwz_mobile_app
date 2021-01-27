@@ -32,7 +32,7 @@ biz.helper = {
 		const $city = $box.find('ul.dwz-city');
 		const $county = $box.find('ul.dwz-county');
 
-		const inputs = $.extend({ province: 'province', city: 'city', county: 'county', labelField: 'region_names', callback: null }, params);
+		const inputs = $.extend({ target: null, province: 'province', city: 'city', county: 'county', labelField: 'region_names', callback: null }, params);
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
@@ -71,7 +71,7 @@ biz.helper = {
 											$li3.addClass('active');
 
 											// console.log($li1.attr('data-name'), $li2.attr('data-name'), $li3.attr('data-name'), inputs);
-											const $rel = inputs.$box || $.navView.getBox();
+											const $rel = $(inputs.target).parentsByTag('form');
 
 											const _data = {};
 											_data[inputs.province] = $li1.attr('data-code');
@@ -84,7 +84,7 @@ biz.helper = {
 												$input.size() && $input.val(_data[key]);
 											}
 
-											inputs.callback && inputs.callback(_data);
+											inputs.callback && inputs.callback.call(inputs, _data);
 										});
 									}
 								});

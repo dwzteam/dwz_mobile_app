@@ -26,9 +26,17 @@
 	z-index: 1000;
 
 	.pop-content {
-		min-height: 60vmin;
+		min-height: 50vmin;
 		max-height: 88vh;
 		position: relative;
+		.txt-h2 {
+			color: #1d7df3;
+			text-align: center;
+			line-height: 30px;
+		}
+		.detail-content {
+			padding: 4px;
+		}
 	}
 
 	.pop-close {
@@ -48,9 +56,10 @@
 	}
 
 	&.fullscreen,
-	&.pic {
+	&.pic,
+	&.pop {
 		.pop-close {
-			.icon-del-x;
+			background-image: url('../../image/icon/icon-close-pop.svg');
 			position: absolute;
 			left: 50%;
 			bottom: 15%;
@@ -59,6 +68,17 @@
 	}
 	&.fullscreen {
 		background: @defaultBackground;
+	}
+	&.pop {
+		.pop-content {
+			width: 80vmin;
+			max-height: 60vh;
+			border-radius: 5px;
+			background: #fff;
+			padding: 10px;
+			margin: 0 auto;
+			overflow-y: auto;
+		}
 	}
 
 	&.actionSheet {

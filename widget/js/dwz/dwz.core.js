@@ -328,6 +328,11 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 			return dwz.hasClass(this, className || dwz.config.unitBox);
 		});
 	},
+	parentsByTag(tagName) {
+		return this.parentsUntil(function () {
+			return (this.tagName = tagName);
+		});
+	},
 	children(selector) {
 		return this.find(':scope > ' + (selector || '*'));
 	},

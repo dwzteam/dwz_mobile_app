@@ -19,17 +19,21 @@
 						<p class="flex-item">全屏模式dialog【登录页面就是这种方式】</p><i class="arrow-right"></i>
 					</li>
 
+					<li class="item" onclick="$.dialog.open({url:'tpl/widget/dialog/dialog2.html',pop:'pop'})">
+						<p class="flex-item">pop模式dialog【小窗口展示】</p><i class="arrow-right"></i>
+					</li>
+
 					<li class="item" onclick="$.dialog.open({
 						url:'tpl/helper/dialogPic.html?dwz_callback=biz.pageRender', 
 						data:{info: 'Web 3D效果展示', src: 'image/pic/3d_1.jpg'}, 
 						pop:'pic'
 					})">
-						<p class="flex-item">pop模式dialog【查看大图】</p><i class="arrow-right"></i>
+						<p class="flex-item">pic模式dialog【查看大图】</p><i class="arrow-right"></i>
 					</li>
 
 					<li class="item" onclick="$.dialog.open({
 						url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-						data: {code: '', province:'province', city: 'city', county: 'county', labelField:'region_names', 
+						data: {target:this, code: '', province:'province', city: 'city', county: 'county', labelField:'region_names', 
 							callback: function(data) {
 								$.alert.toast(JSON.stringify(data));
 								$.dialog.close();
