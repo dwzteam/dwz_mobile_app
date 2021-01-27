@@ -41,11 +41,9 @@
 		&:first-child {
 			border: none;
 		}
-
-		.item-content {
-			flex: 1;
-			line-height: 20px;
-			justify-content: center;
+		&.active {
+			background-color: #d9d9d9;
+			transition: none;
 		}
 		&.icon-wrap {
 			.align-center;
@@ -55,6 +53,12 @@
 				max-height: 66px;
 				border-radius: 50%;
 			}
+		}
+
+		.item-content {
+			flex: 1;
+			line-height: 20px;
+			justify-content: center;
 		}
 		.item-pic {
 			.box-shadow;
