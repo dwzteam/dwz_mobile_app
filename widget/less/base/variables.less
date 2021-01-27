@@ -5,7 +5,8 @@
 @infoColor: rgba(0, 0, 0, 0.6);
 @linkColor: #222;
 @linkColorActive: #ff480a;
-@borderColor: rgba(0, 0, 0, 0.2);
+@borderColor: rgba(240, 240, 240, 0.6);
+@borderColorDark: rgba(200, 200, 200, 0.6);
 @headerButtonTxt: #666;
 @tabTxtColor: #929292;
 @tabTxtColorActive: #ff480a;
@@ -13,12 +14,13 @@
 @btnTxtColorActive: #fff;
 
 // Background
-@defaultBackground: #f6f7fb;
-@hoverBackground: rgba(240, 240, 240, 0.8);
-@inputBackground: #f6f6f6;
-@btnBackground: #4eb3ff;
-@btnBackgroundActive: #ff480a;
-@tableBackground: rgba(216, 233, 255, 0.5);
+@defaultBg: #f6f7fb;
+@hoverBg: rgba(240, 240, 240, 0.8);
+@activeBg: rgba(225, 225, 225, 0.8);
+@inputBg: #f6f6f6;
+@btnBg: #4eb3ff;
+@btnBgActive: #ff480a;
+@tableBg: #fff;
 
 // 字号
 @l1: 18px; // 一级标题
@@ -69,7 +71,7 @@
 }
 
 // Line
-.boxLine(@b-width:'1px 1px 1px 1px', @c:rgba(204,204,204,0.5)) {
+.boxLine(@b-width:'1px 1px 1px 1px', @c:@borderColor) {
 	border-style: solid;
 	border-width: @b-width;
 	border-color: @c;
@@ -197,7 +199,7 @@
 
 // 手指按下或者鼠标移入
 .hover {
-	background-color: #d9d9d9 !important;
+	background-color: @hoverBg !important;
 	transition: none;
 }
 
@@ -209,7 +211,7 @@
 	justify-content: space-between;
 	width: 100%;
 	min-height: 10px;
-	background: @defaultBackground;
+	background: @defaultBg;
 }
 
 // 毛玻璃
