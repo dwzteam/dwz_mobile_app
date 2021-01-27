@@ -3,16 +3,15 @@
  */
 biz.announce = {
 	listRender(tpl, params) {
-		let $box = this,
-			tplWrap = $.templateWrap(tpl);
+		let tplWrap = $.templateWrap(tpl);
 
 		let html = template.render(tplWrap.tpl, {
 			UserInfo: UserInfo,
 			params: params
 		});
-		$box.html(html).initUI();
+		this.html(html).initUI();
 
-		let $form = $box.find('form.dwz-list-form'),
+		let $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = (loadMore) => {
@@ -45,8 +44,6 @@ biz.announce = {
 		$.listForm($form);
 	},
 	detailRender(tpl, params) {
-		let $box = this;
-
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.announce.detail, params),
@@ -61,7 +58,7 @@ biz.announce = {
 					UserInfo: UserInfo,
 					vo: json.data
 				});
-				$box.html(html).initUI();
+				this.html(html).initUI();
 			},
 			error: biz.ajaxError
 		});

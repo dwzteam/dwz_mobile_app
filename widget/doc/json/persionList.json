@@ -1,0 +1,39 @@
+{
+	"status": 1,
+	"info": "",
+	"data": {
+		"total": 5,
+		"list": [
+			{
+				"id": 1,
+				"name": "张慧华",
+				"department_id": 1,
+				"phone": "17767167745"
+			},
+			{
+				"id": 2,
+				"name": "杜权",
+				"department_id": 1,
+				"phone": ""
+			},
+			{
+				"id": 3,
+				"name": "吴平",
+				"department_id": 1,
+				"phone": ""
+			},
+			{
+				"id": 4,
+				"name": "张三",
+				"department_id": 2,
+				"phone": ""
+			},
+			{
+				"id": 5,
+				"name": "李四",
+				"department_id": 3,
+				"phone": ""
+			}
+		]
+	}
+}

@@ -22,20 +22,18 @@ biz.helper = {
 
 	// $.dialog.open 选择省、市、区 渲染函数
 	selectRegionRender(tpl, params) {
-		const $box = this,
-			tplWrap = $.templateWrap(tpl);
+		const op = $.extend({ target: null, callback: null }, params);
+		const tplWrap = $.templateWrap(tpl);
 
 		let html = template.render(tplWrap.tpl, {
 			UserInfo: UserInfo,
 			params: params
 		});
-		$box.html(html).initUI();
+		this.html(html).initUI();
 
-		const $province = $box.find('ul.dwz-province');
-		const $city = $box.find('ul.dwz-city');
-		const $county = $box.find('ul.dwz-county');
-
-		const op = $.extend({ target: null, callback: null }, params);
+		const $province = this.find('ul.dwz-province');
+		const $city = this.find('ul.dwz-city');
+		const $county = this.find('ul.dwz-county');
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
@@ -94,10 +92,9 @@ biz.helper = {
 
 	// $.alert.openDialog 多选 渲染函数
 	multipleSelectRender(tpl, params) {
+		const op = $.extend({ target: null, callback: null }, params);
 		let html = template.render(tpl, params);
 		this.html(html).initUI();
-
-		const op = $.extend({ target: null, callback: null }, params);
 
 		const $form = this.find('form').on('submit', (event) => {
 			const $inputs = $form.find('input[type=checkbox]:checked');
@@ -123,7 +120,41 @@ biz.helper = {
 
 	// $.filterPanel.open 查找带回 渲染函数
 	filterSelectRender(tpl, params) {
+		const op = $.extend({ target: null, callback: null }, params);
+		let tplWrap = $.templateWrap(tpl);
 		let html = template.render(tpl, params);
 		this.html(html).initUI();
+
+		const $form = this.find('form.dwz-list-form'),
+			$listBox = $form.find('ul.dwz-list-box');
+
+		$form.requestList = (loadMore) => {
+			$.ajax({
+				type: params.type || 'GET',
+				url: params.searchUrl,
+				dataType: 'json',
+				data: $form.serializeArray(),
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						let _html = template.render(tplWrap['tpl-list'], json.data);
+
+						let $items = $(_html);
+						if (loadMore) {
+							items.appendTo($listBox).hoverClass();
+						} else {
+							$listBox.html($items).initUI();
+						}
+
+						$items.click(function (event) {
+							op.callback && op.callback.call($(op.target), this.dataset);
+							$.filterPanel.close();
+						});
+					}
+				},
+				error: biz.ajaxError
+			});
+		};
+
+		$.listForm($form);
 	}
 };

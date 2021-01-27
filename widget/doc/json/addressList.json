@@ -1,28 +1,31 @@
 {
-    "status": 1,
-    "info": "",
-    "list": [
-        {
-            "id": 1,
-            "name": "张慧华",
-            "province_id": 12,
-            "city_id": 122,
-            "region_id": 1306,
-            "address": "浙江省杭州市余杭区文一西路1218号恒生科技园",
-            "postcode": "310000",
-            "phone": "17767167745",
-            "is_default": 1
-        },
-        {
-            "id": 1,
-            "name": "张三",
-            "province_id": 12,
-            "city_id": 122,
-            "region_id": 1306,
-            "address": "北京市海淀区",
-            "postcode": "310000",
-            "phone": "17767167745",
-            "is_default": 0
-        }
-    ]
+	"status": 1,
+	"info": "",
+	"data": {
+		"total": 2,
+		"list": [
+			{
+				"id": 1,
+				"name": "张慧华",
+				"province_id": 12,
+				"city_id": 122,
+				"region_id": 1306,
+				"address": "浙江省杭州市余杭区文一西路1218号恒生科技园",
+				"postcode": "310000",
+				"phone": "17767167745",
+				"is_default": 1
+			},
+			{
+				"id": 1,
+				"name": "张三",
+				"province_id": 12,
+				"city_id": 122,
+				"region_id": 1306,
+				"address": "北京市海淀区",
+				"postcode": "310000",
+				"phone": "17767167745",
+				"is_default": 0
+			}
+		]
+	}
 }

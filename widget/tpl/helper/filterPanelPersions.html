@@ -13,8 +13,8 @@
 
 		<div class="pageFormContent">
 			{{each filterItems as item}}
-			<div class="item no-line">
-				<label>{{item.label}}：</label>
+			<div class="item no-line mini">
+				<label style="width: 80px;">{{item.label}}：</label>
 				<div class="item-content">
 					<select class="flex-item" name="{{item.name}}">
 						<option value="">全部</option>
@@ -31,9 +31,17 @@
 	<div class="content">
 		<div class="scroll-content dwz-list">
 			<div class="scroll">
-				<ul class="list">
 
-				</ul>
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+				</div>
+
+				<ul class="list dwz-list-box"></ul>
+
+				<div class="pullUp">
+					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中...">更多...</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -42,3 +50,12 @@
 		<button class="form-submit active" type="submit">搜索</button>
 	</div>
 </form>
+
+<script id='tpl-list' type="text/html">
+	{{each list as item}}
+	<li class="item" {{each item as v k}} data-{{k}}="{{v}}" {{/each}}>
+		<span class="flex-item">{{item.name}}</span>
+		<i class="arrow-right"></i>
+	</li>
+	{{/each}}
+</script>

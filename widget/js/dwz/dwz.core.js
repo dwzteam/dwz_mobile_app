@@ -707,6 +707,11 @@ dwz.extend({
 			if (typeof content == 'string') {
 				let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
 				elem.innerHTML = content.replace(regDetectJs, ''); // 插入页面时，删除script标签
+			} else if (dwz.instanceOf(content)) {
+				elem.innerHTML = '';
+				content.each(function () {
+					elem.appendChild(this);
+				});
 			} else {
 				elem.innerHTML = content;
 			}
