@@ -149,6 +149,10 @@ dwz.extend({
 	get($obj, index) {
 		return dwz.instanceOf($obj) ? $obj.get(index) : $obj;
 	},
+	isSameTag(elem, name) {
+		return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
+	},
+
 	error(msg) {
 		throw new Error(msg);
 	},
@@ -330,7 +334,7 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 	},
 	parentsByTag(tagName) {
 		return this.parentsUntil(function () {
-			return (this.tagName = tagName);
+			return dwz.isSameTag(this, tagName);
 		});
 	},
 	children(selector) {
@@ -362,9 +366,6 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 			}
 		});
 		return flag;
-	},
-	nodeName(elem, name) {
-		return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 	}
 });
 

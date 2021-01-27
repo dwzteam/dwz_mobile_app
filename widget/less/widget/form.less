@@ -27,8 +27,48 @@ input {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-input[type='checkbox'] {
-	-webkit-appearance: checkbox;
+input[type='checkbox'],
+input[type='radio'] {
+	box-sizing: border-box;
+	-webkit-appearance: none; /*去除默认样式*/
+	visibility: hidden;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	background: transparent;
+	position: relative;
+	.flex-all-center;
+	width: 32px;
+	height: 100%;
+	&:after {
+		display: block;
+		width: 16px;
+		height: 16px;
+		content: ' ';
+		visibility: visible;
+		.flex-all-center;
+		background: url('../../image/form/checkbox/unchecked.svg') no-repeat center center;
+		background-size: 100% 100%;
+	}
+
+	&:checked {
+		&:after {
+			//content: "✓";
+			background-image: url('../../image/form/checkbox/checked.svg');
+		}
+	}
+
+	&.radio {
+		&:after {
+			background: none;
+		}
+
+		&:checked {
+			&:after {
+				background-image: none;
+			}
+		}
+	}
 }
 
 select {

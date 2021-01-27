@@ -32,6 +32,18 @@ const SexStore = $.extend({}, CommonStore, {
 	]
 });
 
+// 兴趣爱好
+const InterestStore = $.extend({}, CommonStore, {
+	data: [
+		{ id: 1, name: '阅读' },
+		{ id: 2, name: '写代码' },
+		{ id: 3, name: '户外运动' },
+		{ id: 4, name: '旅游' },
+		{ id: 5, name: '美食' },
+		{ id: 6, name: '其它' }
+	]
+});
+
 // 运输单状态
 const TransportStatus = $.extend({}, CommonStore, {
 	data: [

@@ -1,0 +1,23 @@
+<div class="alert-dialog-hd">
+	<span class="alert-dialog-title">{{page_title || '选择框'}}</span>
+</div>
+
+<form onsubmit="return false">
+
+	<div class="alert-dialog-bd">
+		{{each list as item}}
+		<div class="item">
+			<label class="flex-wrap justify-between align-center">
+				<span>{{item.name}}</span>
+				<input type="checkbox" name="term" value="{{item.id}}" data-name="{{item.name}}" class="required">
+			</label>
+		</div>
+		{{/each}}
+	</div>
+
+	<div class="alert-dialog-ft">
+		<button class="alert-btn-dialog default close" type="button">取消</button>
+		<button class="alert-btn-dialog primary" type="submit">确定</button>
+	</div>
+
+</form>

@@ -1,5 +1,5 @@
 biz.helper = {
-	reqRegionHtml: function (options) {
+	reqRegionHtml(options) {
 		const op = $.extend({ code: '', callback: null, tpl: '' }, options);
 		$.ajax({
 			type: 'GET',
@@ -18,7 +18,7 @@ biz.helper = {
 			error: biz.ajaxError
 		});
 	},
-	selectRegionRender: function (tpl, params) {
+	selectRegionRender(tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
 
@@ -32,7 +32,7 @@ biz.helper = {
 		const $city = $box.find('ul.dwz-city');
 		const $county = $box.find('ul.dwz-county');
 
-		const inputs = $.extend({ target: null, province: 'province', city: 'city', county: 'county', labelField: 'region_names', callback: null }, params);
+		const op = $.extend({ target: null, province: 'province', city: 'city', county: 'county', labelField: 'region_names', callback: null }, params);
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
@@ -70,21 +70,21 @@ biz.helper = {
 											$items3.removeClass('active');
 											$li3.addClass('active');
 
-											// console.log($li1.attr('data-name'), $li2.attr('data-name'), $li3.attr('data-name'), inputs);
-											const $rel = $(inputs.target).parentsByTag('form');
+											// target 表单
+											const $form = $(op.target).parentsByTag('form');
 
 											const _data = {};
-											_data[inputs.province] = $li1.attr('data-code');
-											_data[inputs.city] = $li2.attr('data-code');
-											_data[inputs.county] = $li3.attr('data-code');
-											_data[inputs.labelField] = $li1.attr('data-name') + ' ' + $li2.attr('data-name') + ' ' + $li3.attr('data-name');
+											_data[op.province] = $li1.attr('data-code');
+											_data[op.city] = $li2.attr('data-code');
+											_data[op.county] = $li3.attr('data-code');
+											_data[op.labelField] = $li1.attr('data-name') + ' ' + $li2.attr('data-name') + ' ' + $li3.attr('data-name');
 
 											for (let key in _data) {
-												const $input = $rel.find('input[name=' + key + ']');
+												const $input = $form.find('input[name=' + key + ']');
 												$input.size() && $input.val(_data[key]);
 											}
 
-											inputs.callback && inputs.callback.call(inputs, _data);
+											op.callback && op.callback.call($(op.target), _data);
 										});
 									}
 								});
@@ -93,6 +93,33 @@ biz.helper = {
 					});
 				});
 			}
+		});
+	},
+	multipleSelect(tpl, params) {
+		let html = template.render(tpl, params);
+		this.html(html).initUI();
+
+		const op = $.extend({ target: null, callback: null }, params);
+
+		const $form = this.find('form').on('submit', (event) => {
+			const $inputs = $form.find('input[type=checkbox]:checked');
+			if (!$inputs.size()) {
+				$.alert.error('至少选择一项');
+				return false;
+			}
+			const _data = [];
+
+			$inputs.each(function (index, item) {
+				_data.push({
+					value: item.value,
+					name: $(item).attr('data-name')
+				});
+			});
+
+			op.callback && op.callback.call($(op.target), _data);
+
+			$.alert.closeDialog();
+			return false;
 		});
 	}
 };

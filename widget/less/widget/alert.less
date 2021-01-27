@@ -29,7 +29,7 @@
 }
 
 .alert-dialog-hd {
-	padding: 1em 0 0.5em;
+	padding: 0.5em 0 0.5em;
 }
 
 .alert-dialog-title {
@@ -40,8 +40,13 @@
 .alert-dialog-bd {
 	padding: 0 10px;
 	font-size: @l3;
-	max-height: 360px;
+	max-height: 40vh;
 	color: @infoColor;
+	overflow-y: auto;
+
+	.item {
+		padding: 5px 0;
+	}
 }
 .alert-dialog-ft {
 	position: relative;
