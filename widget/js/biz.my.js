@@ -19,7 +19,7 @@ biz.my = {
 			// 运输单
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.transport),
+				url: biz.server.getUrl(biz.server.transport.task),
 				dataType: 'json',
 				data: data,
 				cache: false,
@@ -36,7 +36,7 @@ biz.my = {
 			// 通知
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.announce),
+				url: biz.server.getUrl(biz.server.announce.recommend),
 				dataType: 'json',
 				data: data,
 				cache: false,
@@ -44,7 +44,7 @@ biz.my = {
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
 						let _html = template.render(tplWrap['tpl-announce'], json);
-						$listBox.html(_html);
+						$listBox.html(_html).initUI();
 					}
 				},
 				error: biz.ajaxError

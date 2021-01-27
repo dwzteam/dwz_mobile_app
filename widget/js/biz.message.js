@@ -5,7 +5,7 @@ biz.message = {
 	removeItem({ id = null }) {
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.messageDel),
+			url: biz.server.getUrl(biz.server.message.del),
 			dataType: 'json',
 			data: { id: id },
 			cache: false,
@@ -34,7 +34,7 @@ biz.message = {
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'GET',
-				url: biz.server.getUrl(biz.server.messageList),
+				url: biz.server.getUrl(biz.server.message.list),
 				dataType: 'json',
 				data: data,
 				cache: false,
@@ -49,9 +49,9 @@ biz.message = {
 						let _html = template.render(tplWrap['tpl-list'], json.data);
 
 						if (loadMore) {
-							$listBox = $(_html).appendTo($listBox).touchOpenRight();
+							$(_html).appendTo($listBox).touchOpenRight().hoverClass();
 						} else {
-							$listBox.html(_html).find('.dwz-open-right').touchOpenRight();
+							$listBox.html(_html).initUI();
 						}
 					}
 				},

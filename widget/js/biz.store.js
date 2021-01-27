@@ -32,6 +32,15 @@ const SexStore = $.extend({}, CommonStore, {
 	]
 });
 
+// 部门
+const DepartmentStore = $.extend({}, CommonStore, {
+	data: [
+		{ id: 1, name: '技术部' },
+		{ id: 2, name: '市场部' },
+		{ id: 3, name: '财务部' }
+	]
+});
+
 // 兴趣爱好
 const InterestStore = $.extend({}, CommonStore, {
 	data: [

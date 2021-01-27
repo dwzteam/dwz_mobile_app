@@ -34,7 +34,9 @@
 								<input type="hidden" name="county">
 								<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
 										url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-										data: {target:this, code: '',
+										data: {
+											target:this, 
+											code: '',
 											callback: function(data) {
 												console.log(this, data)
 												var form = this.parentsByTag('form').get(0);
@@ -89,16 +91,34 @@
 
 					</div>
 
-
 					<div class="margin-v">
 						<div class="item">
 							<div class="item-content">
 								<label class="name">同行人</label>
-								<input type="text" name="together" value="" placeholder="请选择（必填）" class="required" data-error="请选择同行人">
+								<input type="hidden" name="together_id">
+								<input type="text" name="together_txt" value="" placeholder="请选择（必填）" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
+									url: 'tpl/helper/filterPanelPersions.html?dwz_callback=biz.helper.filterSelectRender',
+									data: {
+										target: this,
+										filterItems: [
+											{
+												label: '部门',
+												name: 'department',
+												options: DepartmentStore.data
+											}
+										],
+										callback: function(data) {
+											console.log(this, data)
+											var form = this.parentsByTag('form').get(0);
+				
+											
+										}
+									}
+								})">
+								<i class="arrow-right"></i>
 							</div>
 						</div>
 					</div>
-
 
 				</div>
 

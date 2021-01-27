@@ -182,29 +182,17 @@
 				});
 			});
 		},
-		activeClass(className) {
-			if (!className) className = 'active';
-
+		hoverClass(className = 'hover') {
 			return this.each(function () {
 				let $this = $(this);
 
 				if ($.event.hasTouch) {
-					$this.on('touchstart', function () {
-						$this.addClass(className);
-					});
-					$this.on('touchend', function () {
-						$this.removeClass(className);
-					});
+					$this.attr('ontouchstart', `$(this).addClass('${className}')`);
+					$this.attr('ontouchend', `$(this).removeClass('${className}')`);
 				} else {
-					$this.on('mousedown', function () {
-						$this.addClass(className);
-					});
-					$this.on('mouseup', function () {
-						$this.removeClass(className);
-					});
-					$this.on('mouseout', function () {
-						$this.removeClass(className);
-					});
+					$this.attr('onmousedown', `$(this).addClass('${className}')`);
+					$this.attr('onmouseup', `$(this).removeClass('${className}')`);
+					$this.attr('onmouseout', `$(this).removeClass('${className}')`);
 				}
 			});
 		},

@@ -73,87 +73,108 @@ const biz = window.biz || {
 		// 省、市、区
 		regionList: {
 			DEV: './doc/json/region/test_{code}.json',
-			REMOTE: '/region/list?token={token}'
+			REMOTE: '/region/list'
 		},
-		// 通知列表-首页
+		// 人员列表
+		persionList: {
+			DEV: './doc/json/persionList.json',
+			REMOTE: '/persion/list'
+		},
+
 		announce: {
-			DEV: './doc/json/announce.json',
-			REMOTE: '/announce/index'
+			// 通知列表-推荐
+			recommend: {
+				DEV: './doc/json/announce/list.json',
+				REMOTE: '/announce/recommend'
+			},
+			// 通知列表
+			list: {
+				DEV: './doc/json/announce/list.json',
+				REMOTE: '/announce/list'
+			},
+			// 通知详情
+			detail: {
+				DEV: './doc/json/announce/detail_{id}.json',
+				REMOTE: '/announce/detail'
+			}
 		},
-		// 通知列表
-		announceList: {
-			DEV: './doc/json/announce.json',
-			REMOTE: '/announce/list'
-		},
-		// 通知详情
-		announceDetail: {
-			DEV: './doc/json/announceDetail_{id}.json',
-			REMOTE: '/announce/detail'
-		},
-		// 运输单-首页
+
 		transport: {
-			DEV: './doc/json/transport.json',
-			REMOTE: '/transport'
-		},
-		// 运输单列表
-		transportList: {
-			DEV: './doc/json/transportList.json',
-			REMOTE: '/transport/list'
-		},
-		// 运输单详情
-		transportDetail: {
-			DEV: './doc/json/transportDetail.json',
-			REMOTE: '/transport/detail'
+			// 运输单-任务
+			task: {
+				DEV: './doc/json/transport/task.json',
+				REMOTE: '/transport'
+			},
+
+			// 运输单列表
+			list: {
+				DEV: './doc/json/transport/list.json',
+				REMOTE: '/transport/list'
+			},
+			// 运输单详情
+			detail: {
+				DEV: './doc/json/transport/detail.json',
+				REMOTE: '/transport/detail'
+			},
+
+			// 运输单开始运输
+			start: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/start'
+			},
+			// 运输单 完成
+			finish: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/finish'
+			},
+
+			// 运输单发货过磅
+			first: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/first'
+			},
+			// 运输单卸货过磅
+			last: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/last'
+			},
+			// 运输单过磅图图片上传，type: 1 发货过磅 2 卸货过磅 3 电子签名
+			picUpload: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/upload'
+			},
+			// 删除图片
+			picDel: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/picDel'
+			},
+			// 运输单位置上报
+			gpsUpload: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/transport/point'
+			}
 		},
 
-		// 运输单开始运输
-		transportStart: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/start'
-		},
-		// 运输单 完成
-		transportFinish: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/finish'
-		},
-
-		// 运输单发货过磅
-		transportFirst: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/first'
-		},
-		// 运输单卸货过磅
-		transportLast: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/last'
-		},
-		// 运输单过磅图图片上传，type: 1 发货过磅 2 卸货过磅 3 电子签名
-		transportUpload: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/upload'
-		},
-		// 运输单位置上报
-		transportPoint: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/transport/point'
+		message: {
+			list: {
+				DEV: './doc/json/messageList.json',
+				REMOTE: '/notice'
+			},
+			del: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/notice/delete'
+			}
 		},
 
-		messageList: {
-			DEV: './doc/json/messageList.json',
-			REMOTE: '/notice'
-		},
-		messageDel: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/notice/delete'
-		},
-
-		favoriteList: {
-			DEV: './doc/json/favoriteList.json',
-			REMOTE: '/RestApi/favoriteList'
-		},
-		favoriteDel: {
-			DEV: './doc/json/ajaxDone.json',
-			REMOTE: '/favorite/delete'
+		favorite: {
+			list: {
+				DEV: './doc/json/favoriteList.json',
+				REMOTE: '/RestApi/favoriteList'
+			},
+			del: {
+				DEV: './doc/json/ajaxDone.json',
+				REMOTE: '/favorite/delete'
+			}
 		},
 
 		uploadUserIcon: {

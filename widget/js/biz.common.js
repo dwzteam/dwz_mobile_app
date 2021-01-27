@@ -230,7 +230,7 @@ $.extend(biz, {
 		updTransport() {
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.transportList),
+				url: biz.server.getUrl(biz.server.transport.list),
 				dataType: 'json',
 				data: { pageNum: 1, status: 1 },
 				cache: false,
@@ -284,7 +284,7 @@ $.extend(biz, {
 					$box.trigger('location.change', biz.location);
 
 					if (biz.location.lastTime + 10 * 1000 < biz.location.timestamp) {
-						const _url = biz.server.getUrl(biz.server.transportPoint);
+						const _url = biz.server.getUrl(biz.server.transport.gpsUpload);
 						const _data = {
 							transport_id: biz.location.transport_id,
 							truck_id: biz.location.truck_id,

@@ -18,7 +18,7 @@ biz.announce = {
 		$form.requestList = (loadMore) => {
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.announceList),
+				url: biz.server.getUrl(biz.server.announce.list),
 				dataType: 'json',
 				data: $form.serializeArray(),
 				cache: false,
@@ -32,9 +32,9 @@ biz.announce = {
 
 						let _html = template.render(tplWrap['tpl-list'], json);
 						if (loadMore) {
-							$listBox.append(_html);
+							$(_html).appendTo($listBox).hoverClass();
 						} else {
-							$listBox.html(_html);
+							$listBox.html(_html).initUI();
 						}
 					}
 				},
@@ -49,7 +49,7 @@ biz.announce = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.announceDetail, params),
+			url: biz.server.getUrl(biz.server.announce.detail, params),
 			dataType: 'json',
 			data: { announce_id: params.id },
 			cache: false,

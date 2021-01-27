@@ -1,0 +1,44 @@
+<form class="page-wrap dwz-list-form" onsubmit="return false">
+	<input type="hidden" name="pageNum" value="1">
+
+	<header>
+		<div class="toolbar">
+			<div class="bar search-bar bar-reset">
+				<label class="item-input filter-keywords">
+					<button class="icon icon-search" type="button"></button>
+					<input type="search" class="dwz-disable-autofocus" name="keywords" value="{{keywords}}" placeholder="搜索关键字">
+				</label>
+			</div>
+		</div>
+
+		<div class="pageFormContent">
+			{{each filterItems as item}}
+			<div class="item no-line">
+				<label>{{item.label}}：</label>
+				<div class="item-content">
+					<select class="flex-item" name="{{item.name}}">
+						<option value="">全部</option>
+						{{each item.options as option}}
+						<option value="{{option.id}}">{{option.name}}</option>
+						{{/each}}
+					</select>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="scroll-content dwz-list">
+			<div class="scroll">
+				<ul class="list">
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="bottom-btn-bar">
+		<button class="form-submit" type="reset">重置</button>
+		<button class="form-submit active" type="submit">搜索</button>
+	</div>
+</form>

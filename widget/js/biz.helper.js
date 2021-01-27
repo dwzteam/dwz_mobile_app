@@ -1,4 +1,5 @@
 biz.helper = {
+	// 请求 省、市、区 html 片段
 	reqRegionHtml(options) {
 		const op = $.extend({ code: '', callback: null, tpl: '' }, options);
 		$.ajax({
@@ -18,6 +19,8 @@ biz.helper = {
 			error: biz.ajaxError
 		});
 	},
+
+	// $.dialog.open 选择省、市、区 渲染函数
 	selectRegionRender(tpl, params) {
 		const $box = this,
 			tplWrap = $.templateWrap(tpl);
@@ -88,7 +91,9 @@ biz.helper = {
 			}
 		});
 	},
-	multipleSelect(tpl, params) {
+
+	// $.alert.openDialog 多选 渲染函数
+	multipleSelectRender(tpl, params) {
 		let html = template.render(tpl, params);
 		this.html(html).initUI();
 
@@ -114,5 +119,11 @@ biz.helper = {
 			$.alert.closeDialog();
 			return false;
 		});
+	},
+
+	// $.filterPanel.open 查找带回 渲染函数
+	filterSelectRender(tpl, params) {
+		let html = template.render(tpl, params);
+		this.html(html).initUI();
 	}
 };

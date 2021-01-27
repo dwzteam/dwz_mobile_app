@@ -46,7 +46,7 @@
 						<div class="item-content">
 							<label class="name">兴趣爱好</label>
 							<input type="hidden" name="interest_id">
-							<input type="text" name="interest_id_txt" placeholder="请选择兴趣爱好" class="required" data-error="请选择兴趣爱好" readonly onclick="$.alert.openDialog('tpl/helper/multipleSelect.html?dwz_callback=biz.helper.multipleSelect', {
+							<input type="text" name="interest_id_txt" placeholder="请选择兴趣爱好" class="required" data-error="请选择兴趣爱好" readonly onclick="$.alert.openDialog('tpl/helper/multipleSelect.html?dwz_callback=biz.helper.multipleSelectRender', {
 								target: this,
 								page_title: '选择兴趣爱好',
 								list: InterestStore.data,

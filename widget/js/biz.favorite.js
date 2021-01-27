@@ -7,7 +7,7 @@ biz.favorite = {
 			okCall: function (event) {
 				$.ajax({
 					type: 'POST',
-					url: biz.server.getUrl(biz.server.favoriteDel),
+					url: biz.server.getUrl(biz.server.favorite.del),
 					dataType: 'json',
 					data: { id: id },
 					cache: false,
@@ -38,7 +38,7 @@ biz.favorite = {
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.favoriteList),
+				url: biz.server.getUrl(biz.server.favorite.list),
 				dataType: 'json',
 				data: data,
 				cache: false,
@@ -53,9 +53,9 @@ biz.favorite = {
 						let _html = template.render(tplWrap['tpl-list'], json.data);
 
 						if (loadMore) {
-							$(_html).appendTo($listBox).touchOpenRight();
+							$(_html).appendTo($listBox).touchOpenRight().hoverClass();
 						} else {
-							$listBox.html(_html).find('.dwz-open-right').touchOpenRight();
+							$listBox.html(_html).initUI();
 						}
 					}
 				},

@@ -23,7 +23,7 @@ biz.transport = {
 		$form.requestList = (loadMore) => {
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.transportList),
+				url: biz.server.getUrl(biz.server.transport.list),
 				dataType: 'json',
 				data: $form.serializeArray(),
 				cache: false,
@@ -37,9 +37,9 @@ biz.transport = {
 
 						let _html = template.render(tplWrap['tpl-list'], json.data);
 						if (loadMore) {
-							$listBox.append(_html);
+							$(_html).appendTo($listBox).hoverClass();
 						} else {
-							$listBox.html(_html);
+							$listBox.html(_html).initUI();
 						}
 					}
 				},
@@ -126,7 +126,7 @@ biz.transport = {
 		$form.on('submit', function () {
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.transportDetail),
+				url: biz.server.getUrl(biz.server.transport.detail),
 				dataType: 'json',
 				data: { transport_id: params.id },
 				cache: false,
@@ -214,7 +214,7 @@ biz.transport = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.transportDetail),
+			url: biz.server.getUrl(biz.server.transport.detail),
 			dataType: 'json',
 			data: { transport_id: params.id },
 			cache: false,
@@ -227,7 +227,7 @@ biz.transport = {
 				let html = template.render(tpl, {
 					vo: json.data,
 					location: biz.location,
-					form_url: biz.server.getUrl(biz.server.transportFirst)
+					form_url: biz.server.getUrl(biz.server.transport.first)
 				});
 				$box.html(html).initUI();
 
@@ -242,7 +242,7 @@ biz.transport = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.transportDetail),
+			url: biz.server.getUrl(biz.server.transport.detail),
 			dataType: 'json',
 			data: { transport_id: params.id },
 			cache: false,
@@ -255,7 +255,7 @@ biz.transport = {
 				let html = template.render(tpl, {
 					vo: json.data,
 					location: biz.location,
-					form_url: biz.server.getUrl(biz.server.transportLast)
+					form_url: biz.server.getUrl(biz.server.transport.last)
 				});
 				$box.html(html).initUI();
 
@@ -276,7 +276,7 @@ biz.transport = {
 		if (imgUrl) {
 			$.ajax({
 				type: 'POST',
-				url: biz.server.getUrl(biz.server.transportPicDel),
+				url: biz.server.getUrl(biz.server.transport.picDel),
 				dataType: 'json',
 				data: { id: transport_id, imgUrl: imgUrl, field: field },
 				cache: false,
@@ -316,7 +316,7 @@ biz.transport = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.transportStart),
+			url: biz.server.getUrl(biz.server.transport.start),
 			dataType: 'json',
 			data: { transport_id: vo.id },
 			cache: false,
@@ -349,7 +349,7 @@ biz.transport = {
 
 		$.ajax({
 			type: 'POST',
-			url: biz.server.getUrl(biz.server.transportFinish),
+			url: biz.server.getUrl(biz.server.transport.finish),
 			dataType: 'json',
 			data: { transport_id: vo.id },
 			cache: false,
