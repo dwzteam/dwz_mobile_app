@@ -110,7 +110,6 @@ function loadScripts(options) {
 		$.navTab.init({ openIndex: 0 });
 		$.navView.init();
 		$.filterPanel.init();
-		$.altPanel.init();
 
 		//插件注册
 		$.regPlugins.push(function ($p) {

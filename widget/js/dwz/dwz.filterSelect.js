@@ -7,7 +7,7 @@ $.filterSelect = {
 		openClass: 'open',
 		frag: '<div id="filter-select" class="unitBox"></div>',
 		bgBox$: '#mask-filter-select',
-		bgFrag: '<div id="mask-filter-select" class="mask-background"></div>'
+		bgFrag: '<div id="mask-filter-select" class="mask-bg"></div>'
 	},
 	isOpen: false,
 	$box: null,

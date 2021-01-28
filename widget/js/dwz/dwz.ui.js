@@ -127,17 +127,6 @@
 		if ($.fn.panel) {
 			$('div.dwz-panel.dwz-collapse', $p).panel();
 		}
-		if ($.altPanel) {
-			$('a[target=altPanel]', $p)
-				.touchwipe({
-					touch(event, pos) {
-						let $link = $(this);
-						$.altPanel.open({ url: $link.attr('data-href'), pos: pos });
-						event.stopPropagation();
-					}
-				})
-				.hrefFix();
-		}
 
 		if ($.fn.toggleSelectRef) {
 			$('select.toggleSelectRef', $p).each(function () {

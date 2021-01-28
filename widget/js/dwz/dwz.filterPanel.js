@@ -8,7 +8,7 @@ $.filterPanel = {
 		openClass: 'open',
 		frag: '<div id="filter-panel" class="unitBox"></div>',
 		bgBox$: '#mask-filter-panel',
-		bgFrag: '<div id="mask-filter-panel" class="mask-background"></div>'
+		bgFrag: '<div id="mask-filter-panel" class="mask-bg"></div>'
 	},
 	isOpen: false,
 	$box: null,

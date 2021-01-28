@@ -10,8 +10,8 @@ $.dialog = {
 				<div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div>
 				<div class="pop-content"></div>
 			</div>`,
-		bgBox$: '#mask-background',
-		bgFrag: '<div id="mask-background" class="mask-background"></div>'
+		bgBox$: '#mask-bg-dialog',
+		bgFrag: '<div id="mask-bg-dialog" class="mask-bg"></div>'
 	},
 	isOpen: false,
 	$box: null,
@@ -30,7 +30,7 @@ $.dialog = {
 			{
 				type: 'GET',
 				url: '',
-				pop: 'default',
+				pop: 'fullscreen',
 				external: false,
 				data: {},
 				callback: null
@@ -49,6 +49,11 @@ $.dialog = {
 		}
 
 		$bgBox.addClass($.dialog.config.openClass);
+		if ('actionSheet' == op.pop) {
+			$bgBox.removeClass('filter-blur');
+		} else {
+			$bgBox.addClass('filter-blur');
+		}
 
 		// pop 类型
 		if ($.inArray(op.pop, $.dialog.config.popClass)) {

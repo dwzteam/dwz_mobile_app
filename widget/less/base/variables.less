@@ -15,12 +15,14 @@
 
 // Background
 @defaultBg: #f6f7fb;
+@paneBg: #fff;
 @hoverBg: rgba(240, 240, 240, 0.8);
 @activeBg: rgba(225, 225, 225, 0.8);
 @inputBg: #f6f6f6;
 @btnBg: #4eb3ff;
 @btnBgActive: #ff480a;
 @tableBg: #fff;
+@maskBg: rgba(0, 0, 0, 0.6);
 
 // 字号
 @l1: 18px; // 一级标题
@@ -214,13 +216,24 @@
 	background: @defaultBg;
 }
 
-// 毛玻璃
-.backdrop-filter {
-	background: rgba(0, 0, 0, 0.1);
-	backdrop-filter: saturate(180%) blur(2px);
+// 毛玻璃 filter-blur
+.filter-blur {
+	backdrop-filter: saturate(80%) blur(2px);
 	// filter: blur(2px);
 }
+
 // 阴影
 .box-shadow {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+// 遮罩
+.mask-bg {
+	display: none;
+	.full-fixed;
+	background: @maskBg;
+
+	&.open {
+		display: block;
+	}
 }

@@ -1,29 +1,21 @@
-.mask-background {
-	display: none;
+#mask-bg-dialog {
 	z-index: 999;
-	.full-fixed;
-	.backdrop-filter;
-	background: rgba(0, 0, 0, 0.6) fixed;
-
-	&.open {
-		display: block;
-	}
-}
-
-.pop-header {
-	position: relative;
-	.flex-all-center;
-	height: 44px;
-	text-align: center;
-	line-height: 44px;
-	width: 100%;
-	.b-line;
 }
 
 .pop-window {
 	.full-fixed;
 	display: none;
 	z-index: 1000;
+
+	.pop-header {
+		position: relative;
+		.flex-all-center;
+		height: 44px;
+		text-align: center;
+		line-height: 44px;
+		width: 100%;
+		.b-line;
+	}
 
 	.pop-content {
 		min-height: 50vmin;
