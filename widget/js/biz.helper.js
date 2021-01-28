@@ -118,7 +118,7 @@ biz.helper = {
 	},
 
 	// $.filterPanel.open 查找带回 渲染函数
-	filterSelectRender(tpl, params) {
+	filterPanelRender(tpl, params) {
 		const op = $.extend({ target: null, callback: null }, params);
 
 		let html = template.render(tpl.html, params);
