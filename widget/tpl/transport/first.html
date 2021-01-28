@@ -17,15 +17,15 @@
 
 					{{if vo.status == 0}}
 					<div class="pageFormContent unitBox">
-						<div class="item">
-							<label class="name">净重(kg)</label>
+						<div class="form-item">
 							<div class="item-content">
+								<label>净重(kg)</label>
 								<input type="number" name="weigh_first_commit" value="{{vo.weigh_first_commit|filterInputNum}}" class="required" placeholder="请输入净重" min="0.00" max="100000.00" step="0.01" data-error="请输入净重">
 							</div>
 						</div>
-						<div class="item">
-							<div class="item-inner">
-								<label class="name">磅单照片</label>
+						<div class="form-item">
+							<label>磅单照片</label>
+							<div class="item-content">
 								<ul id="upload-preview-weight-first" class="upload-preview dwz-ctl-del">
 									{{each vo.weigh_first_pic as item}}
 									<li class="thumbnail">
@@ -43,15 +43,15 @@
 					</div>
 					{{else}}
 					<div class="pageFormContent unitBox">
-						<div class="item">
-							<label class="name">净重(kg)</label>
+						<div class="form-item">
 							<div class="item-content">
+								<label>净重(kg)</label>
 								<input type="number" name="weigh_first_commit" value="{{vo.weigh_first_commit}}" readonly>
 							</div>
 						</div>
-						<div class="item">
-							<div class="item-inner">
-								<label class="name">磅单照片</label>
+						<div class="form-item">
+							<label>磅单照片</label>
+							<div class="item-content">
 								<ul class="upload-preview">
 									{{each vo.weigh_first_pic as item}}
 									<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}

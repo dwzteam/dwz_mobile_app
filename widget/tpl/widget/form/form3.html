@@ -17,18 +17,18 @@
 				<div class="pageFormContent">
 
 					<div class="margin-v">
-						<div class="item">
-							<div class="item-inner">
-								<label class="name">出差事由</label>
+						<div class="form-item">
+							<label>出差事由</label>
+							<div class="item-content">
 								<textarea class="textarea required" name="cause" rows="4" placeholder="请输入出差事由（必填）" maxlength="200" data-error="请输入出差事由"></textarea>
 							</div>
 						</div>
 					</div>
 
 					<div class="margin-v">
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">省市区</label>
+								<label>省市区</label>
 								<input type="hidden" name="province">
 								<input type="hidden" name="city">
 								<input type="hidden" name="county">
@@ -54,9 +54,9 @@
 							</div>
 						</div>
 
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">交通工具</label>
+								<label>交通工具</label>
 								<select name="traffic_vehicle" class="required" data-error="请选择交通工具">
 									<option value="">请选择</option>
 									<option value="1">飞机</option>
@@ -66,9 +66,9 @@
 								</select>
 							</div>
 						</div>
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">单程往返</label>
+								<label>单程往返</label>
 								<select name="traffic_type" class="required" data-error="请选择单程往返">
 									<option value="">请选择</option>
 									<option value="1">单程</option>
@@ -76,15 +76,15 @@
 								</select>
 							</div>
 						</div>
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">开始时间</label>
+								<label>开始时间</label>
 								<input type="date" name="start_date" value="{{start_date}}" placeholder="请选择（必填）" class="required" data-error="请选择开始时间">
 							</div>
 						</div>
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">结束时间</label>
+								<label>结束时间</label>
 								<input type="date" name="end_date" value="{{end_date}}" placeholder="请选择（必填）" class="required" data-error="请选择结束时间">
 							</div>
 						</div>
@@ -92,9 +92,9 @@
 					</div>
 
 					<div class="margin-v">
-						<div class="item">
+						<div class="form-item">
 							<div class="item-content">
-								<label class="name">同行人</label>
+								<label>同行人</label>
 								<input type="hidden" name="together_id">
 								<input type="text" name="together_txt" value="" placeholder="请选择（必填）" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
 									url: 'tpl/helper/filterPanelPersions.html?dwz_callback=biz.helper.filterPanelRender',

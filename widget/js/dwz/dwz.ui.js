@@ -146,7 +146,7 @@
 
 		// 处理必填元素label加红色星号
 		$('input.required, select.required, textarea.required', $p).each((index, elem) => {
-			$(elem.parentNode).find(':scope > label').addClass('required');
+			$(elem).parentsUnitBox('form-item').find(':scope > label, :scope > .item-content > label').addClass('required');
 		});
 	});
 
@@ -249,17 +249,17 @@
 				{
 					ref: 'data-ref-box',
 					refVal: 'data-ref-val',
-					ctrShow: 'data-ctr-show'
+					ctrHide: 'data-ctr-hide'
 				},
 				options
 			);
 			return this.each(function () {
 				let $select = $(this);
 
-				function _checkRefHide(refVal, ctrShow) {
+				function _checkRefHide(refVal, ctrHide) {
 					let val = $select.val();
 
-					if (ctrShow) {
+					if (!ctrHide) {
 						if (val == refVal) return false;
 						if (refVal) {
 							let aTmp = refVal.split(',');
@@ -281,8 +281,8 @@
 						return false;
 					}
 				}
-				function _toggle($ref, refVal, ctrShow, ignoreOnly) {
-					if (_checkRefHide(refVal, ctrShow)) {
+				function _toggle($ref, refVal, ctrHide, ignoreOnly) {
+					if (_checkRefHide(refVal, ctrHide)) {
 						let bParentRef = false;
 
 						$ref
@@ -316,13 +316,13 @@
 				function _toggleAll() {
 					let refList = $select.attr(op.ref).split('|');
 					let refValList = $select.attr(op.refVal).split('|');
-					let ctrShow = $select.attr(op.ctrShow) || false;
+					let ctrHide = $select.attr(op.ctrHide) || false;
 					let ignoreOnly = $select.hasClass('ignoreOnly');
 
 					for (let i = 0; i < refList.length; i++) {
 						let $ref = $(refList[i]),
 							refVal = refValList[i];
-						_toggle($ref, refVal, ctrShow, ignoreOnly);
+						_toggle($ref, refVal, ctrHide, ignoreOnly);
 					}
 				}
 				_toggleAll();

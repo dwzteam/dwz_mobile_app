@@ -124,11 +124,7 @@ label {
 	}
 }
 
-.item {
-	.name {
-		width: 120px;
-	}
-
+.form-item {
 	.input {
 		width: 100%;
 		line-height: 24px;
@@ -165,20 +161,18 @@ label {
 
 	.legend {
 		.flex-item;
+		.padding-h;
 		align-items: center;
-		line-height: 44px;
-		padding: 0 10px;
+		line-height: 40px;
 		background: @defaultBg;
-		color: #999;
+		color: @infoColor;
 	}
-	.item {
+	.form-item {
 		background: #fff;
 		position: relative;
-		.flex-wrap;
-		.align-center;
+		.flex-wrap-v;
 		.t-line;
-		padding: 0 10px;
-		min-height: 50px;
+		padding: 10px;
 
 		&.mini {
 			min-height: 36px;
@@ -200,7 +194,6 @@ label {
 		label {
 			color: #777;
 			font-size: 15px;
-			width: 90px;
 			line-height: 24px;
 		}
 
@@ -210,42 +203,15 @@ label {
 			.flex-item;
 			font-size: 15px;
 
+			label {
+				width: 90px;
+			}
+
 			a,
 			span {
 				white-space: nowrap;
 				color: @linkColor;
 			}
-			.arrow-right {
-				right: 0;
-			}
-		}
-
-		.item-inner {
-			width: 100%;
-			font-size: 15px;
-			padding: 5px 0;
-
-			label {
-				display: block;
-				line-height: 30px;
-				padding: 0;
-				width: auto;
-			}
-
-			input[type='date'],
-			input[type='number'],
-			input[type='text'] {
-				padding: 5px 0;
-			}
-		}
-
-		.pre-wrap {
-			display: block;
-		}
-
-		.pre-wrap-box {
-			display: block;
-			padding: 10px 15px;
 		}
 
 		&.disabled {
@@ -267,7 +233,7 @@ label {
 	}
 
 	&.no-line {
-		.item {
+		.form-item {
 			border: none;
 			min-height: 40px;
 		}
@@ -319,13 +285,13 @@ textarea:read-only {
 
 .form-submit {
 	.button;
-	font-size: 17px;
+	font-size: @l2;
 	width: 100%;
 	margin: 10px 0;
 }
 
 .form-bar {
 	.t-line;
-	padding: 0 10px;
-	background: #fff;
+	.padding-h;
+	background: @paneBg;
 }
