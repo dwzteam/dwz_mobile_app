@@ -63,7 +63,8 @@ $.fn.extend({
 
 							let callback = dwz.getUrlCallback(url);
 							if (callback) {
-								callback.call($panel, html, _data);
+								const tpl = $.templateWrap(html);
+								callback.call($panel, tpl, _data);
 							} else {
 								$panel.html(html).initUI();
 							}

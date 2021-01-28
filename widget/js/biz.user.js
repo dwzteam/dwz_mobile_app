@@ -174,18 +174,16 @@ function authCheck(url) {
 
 // 登入页面
 function loginRender(tpl, params) {
-	let $box = this;
-
 	let json = {
 		form_url: biz.server.getLoginUrl(),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		login_sms_url: biz.server.getUrl(biz.server.loginSms)
 	};
 
-	let html = template.render(tpl, json);
-	$box.html(html).initUI();
+	let html = template.render(tpl.html, json);
+	this.html(html).initUI();
 
-	$box.find('form').each((index, form) => {
+	this.find('form').each((index, form) => {
 		let $form = $(form);
 		let checkFormValid = () => {
 			let $btn = $form.find('button.form-submit.active');
@@ -203,53 +201,45 @@ function loginRender(tpl, params) {
 }
 
 function forgetPwdRender(tpl, params) {
-	let $box = this;
-
 	let json = {
 		form_url: biz.server.getUrl(biz.server.forgetPwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
 	};
 
-	let html = template.render(tpl, json);
-	$box.html(html).initUI();
+	let html = template.render(tpl.html, json);
+	this.html(html).initUI();
 }
 
 function changePwdRender(tpl, params) {
-	let $box = this;
-
 	let json = {
 		form_url: biz.server.getUrl(biz.server.changePwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
 	};
 
-	let html = template.render(tpl, json);
-	$box.html(html).initUI();
+	let html = template.render(tpl.html, json);
+	this.html(html).initUI();
 }
 function changeMobileRender(tpl, params) {
-	let $box = this;
-
 	let json = {
 		form_url: biz.server.getUrl(biz.server.changeMobile),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		UserInfo: UserInfo
 	};
 
-	let html = template.render(tpl, json);
-	$box.html(html).initUI();
+	let html = template.render(tpl.html, json);
+	this.html(html).initUI();
 }
 
 // 用户注册页面
 function registerRender(tpl, params) {
-	let $box = this;
-
 	let json = {
 		form_url: biz.server.getUrl(biz.server.register),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
 	};
 
-	let html = template.render(tpl, json);
-	$box.html(html).initUI();
+	let html = template.render(tpl.html, json);
+	this.html(html).initUI();
 }
 
 // 用户注册表单提交回调函数
@@ -293,15 +283,6 @@ function authAjaxDone(json) {
 	}
 }
 
-// function userRealInfoAjaxDone(json) {
-// 	console.log(JSON.stringify(json));
-// 	if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
-// 		bizUtil.userRealVerify(json.data);
-// 	} else {
-// 		json.info && $.alert.error(json.info);
-// 	}
-// }
-
 function submitUserRealInfo(form) {
 	let $form = $(form);
 
@@ -310,21 +291,6 @@ function submitUserRealInfo(form) {
 	}
 
 	let data = $form.serializeMap();
-
-	// $.ajax({
-	// 	global: true,
-	// 	type: form.method || 'POST',
-	// 	url: $form.attr("action"),
-	// 	data: data,
-	// 	dataType: "json",
-	// 	cache: false,
-	// 	success: (json) => {
-	// 		if (!dwz.checkAjaxLogin(json)) { return; }
-	// 		if (!json.data) json.data = data;
-	// 		userRealInfoAjaxDone(json);
-	// 	},
-	// 	error: dwz.ajaxError
-	// });
 
 	bizUtil.userRealVerify(data); // 实名认证成功后保存用户信息
 
@@ -337,86 +303,71 @@ let bizUtil = {
 			return;
 		}
 
-		let baiduFace = api.require('baiduFaceLive');
-		baiduFace.closeFaceDetectView(function (ret, err) {
-			// console.log(JSON.stringify(ret));
-		});
+		const requestUserRealVerify = (base64img) => {
+			if (success) {
+				success(base64img);
+				return;
+			}
+			api.showProgress({
+				title: '正在上传图片...',
+				text: '先喝杯茶...',
+				modal: true
+			});
 
-		let safeTop = api.safeArea.top;
-		baiduFace.openFaceDetectView(
-			{
-				rect: {
-					x: 0,
-					y: safeTop > 20 ? safeTop : 0,
-					w: api.frameWidth,
-					h: window.screen.availHeight
+			if (!params.id_code) {
+				$.alert.error('身份证号必须');
+			}
+			if (!params.nickname) {
+				$.alert.error('真实姓名必须');
+			}
+
+			api.ajax(
+				{
+					url: ServerUrl.getUrl(biz.server.userRealVerify),
+					method: 'post',
+					data: {
+						values: {
+							img: base64img,
+							id_card: params.id_code,
+							real_name: params.nickname,
+							token: UserInfo.token
+						}
+					}
 				},
-				fixedOn: api.frameName,
-				fixed: true,
-				soundType: 0, // 0中文, 1英文, 2马来文
-				isSound: true
+				function (json, err) {
+					console.log(JSON.stringify(json));
+
+					api.hideProgress();
+					if (json) {
+						if (!json.id_code) {
+							json.id_code = params.id_code;
+						}
+						authAjaxDone(json);
+					} else {
+						console.log(JSON.stringify(err));
+					}
+				}
+			);
+		};
+
+		const module = api.require('dwzBaiduFaceLive');
+		module.faceLiveness(
+			{
+				debug: 0, // 调试开关(默认:0)：0, 1
+				cropType: 1, // 抠图类型(默认:1)：1:脸部, 2:大头照, 3:头像+肩膀
+				cropHeight: 300, // 抠图高的设定，为了保证好的抠图效果，要求高宽比是4:3，所以会在内部进行计算，只需要传入高即可，取值范围50 ~ 1200，默认480
+				quality: 70, // 抠图压缩质量，取值范围 20 ~ 100，默认100不压缩
+				eye: false, // 活体动作，眨眼(默认:false)
+				mouth: true, // 活体动作，张嘴(默认:false)
+				headRight: false, // 活体动作，向右转头(默认:false)
+				headLeft: false, // 活体动作，向左转头(默认:false)
+				headUp: false, // 活体动作，向上抬头(默认:false)
+				headDown: false, // 活体动作，向下低头(默认:false)
+				headLeftOrRight: false // 活体动作，摇头(默认:false)
 			},
 			function (ret, err) {
-				console.log(JSON.stringify(ret));
-				console.log(JSON.stringify(err));
-				if (ret.evenType == 'success') {
-					//由于base64数据量大，请不要用JSON.stringify(ret)调试
-					// console.log('最佳图片: '+ret.data.bestImage);
-					// console.log('眨眼睛: '+ret.data.liveEye);
-					// console.log('张张嘴: '+ret.data.liveMouth);
-					// console.log('向右转头: '+ret.data.yawRight);
-					// console.log('向左转头: '+ret.data.yawLeft);
-					// console.log('轻微抬头: '+ret.data.pitchUp);
-					// console.log('轻微低头: '+ret.data.pitchDown);
-					// console.log('摇摇头: '+ret.data.headLeftOrRight);
-					// console.log(JSON.stringify(ret.data.bestImage));
-
-					baiduFace.closeFaceDetectView(function (ret, err) {
-						// console.log(JSON.stringify(ret));
-					});
-
-					if (success) {
-						success(ret, err);
-						return;
-					}
-
-					api.showProgress({
-						title: '正在上传图片...',
-						text: '先喝杯茶...',
-						modal: true
-					});
-
-					if (!params.idcard) {
-						$.alert.error('身份证号必须');
-					}
-					if (!params.realname) {
-						$.alert.error('真实姓名必须');
-					}
-
-					api.ajax(
-						{
-							url: biz.server.getUrl(biz.server.userRealVerify),
-							method: 'post',
-							data: {
-								values: {
-									img: ret.data.bestImage,
-									idcard: params.idcard,
-									name: params.realname,
-									token: UserInfo.token
-								}
-							}
-						},
-						function (json, err) {
-							console.log(JSON.stringify(json));
-
-							api.hideProgress();
-							if (json) {
-								authAjaxDone(json);
-							} else {
-								console.log(JSON.stringify(err));
-							}
-						}
-					);
+				if (ret.status) {
+					requestUserRealVerify(ret.face);
 				} else {
 					if (ret.message) $.alert.toast(ret.message);
 				}

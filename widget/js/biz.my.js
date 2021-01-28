@@ -3,11 +3,10 @@
  */
 biz.my = {
 	render(tpl, params) {
-		let tplWrap = $.templateWrap(tpl);
 		let data = {
 			UserInfo: UserInfo
 		};
-		let html = template.render(tplWrap.tpl, data);
+		let html = template.render(tpl.html, data);
 		this.html(html).initUI();
 
 		let $form = this.find('form.dwz-list-form');
@@ -26,7 +25,7 @@ biz.my = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap.tpl_transport, json);
+						let _html = template.render(tpl.tpl_transport, json);
 						this.find('#transport-card-box').html(_html);
 					}
 				},
@@ -43,7 +42,7 @@ biz.my = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap.tpl_announce, json);
+						let _html = template.render(tpl.tpl_announce, json);
 						$listBox.html(_html).initUI();
 					}
 				},
@@ -54,7 +53,7 @@ biz.my = {
 		$.listForm($form);
 	},
 	settingRender(tpl, params) {
-		let html = template.render(tpl, { UserInfo: UserInfo });
+		let html = template.render(tpl.html, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
 		$('#exitSystemButton').touchwipe({

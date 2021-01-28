@@ -23,9 +23,8 @@ biz.helper = {
 	// $.dialog.open 选择省、市、区 渲染函数
 	selectRegionRender(tpl, params) {
 		const op = $.extend({ target: null, callback: null }, params);
-		const tplWrap = $.templateWrap(tpl);
 
-		let html = template.render(tplWrap.tpl, {
+		let html = template.render(tpl.html, {
 			UserInfo: UserInfo,
 			params: params
 		});
@@ -37,7 +36,7 @@ biz.helper = {
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
-			tpl: tplWrap.tpl_list,
+			tpl: tpl.tpl_list,
 			callback: function (html_1) {
 				$province.html(html_1);
 
@@ -50,7 +49,7 @@ biz.helper = {
 					// 请求城市
 					biz.helper.reqRegionHtml({
 						code: $li1.attr('data-code'),
-						tpl: tplWrap.tpl_list,
+						tpl: tpl.tpl_list,
 						callback: function (html_2) {
 							$city.html(html_2).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
 
@@ -62,7 +61,7 @@ biz.helper = {
 								// 请求区县
 								biz.helper.reqRegionHtml({
 									code: $li2.attr('data-code'),
-									tpl: tplWrap.tpl_list,
+									tpl: tpl.tpl_list,
 									callback: function (html_3) {
 										$county.html(html_3).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
 
@@ -93,7 +92,7 @@ biz.helper = {
 	// $.alert.openDialog 多选 渲染函数
 	multipleSelectRender(tpl, params) {
 		const op = $.extend({ target: null, callback: null }, params);
-		let html = template.render(tpl, params);
+		let html = template.render(tpl.html, params);
 		this.html(html).initUI();
 
 		const $form = this.find('form').on('submit', (event) => {
@@ -121,8 +120,8 @@ biz.helper = {
 	// $.filterPanel.open 查找带回 渲染函数
 	filterSelectRender(tpl, params) {
 		const op = $.extend({ target: null, callback: null }, params);
-		let tplWrap = $.templateWrap(tpl);
-		let html = template.render(tpl, params);
+
+		let html = template.render(tpl.html, params);
 		this.html(html).initUI();
 
 		const $form = this.find('form.dwz-list-form'),
@@ -136,7 +135,7 @@ biz.helper = {
 				data: $form.serializeArray(),
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap.tpl_list, json.data);
+						let _html = template.render(tpl.tpl_list, json.data);
 
 						let $items = $(_html);
 						if (loadMore) {

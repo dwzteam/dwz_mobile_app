@@ -52,7 +52,8 @@ $.filterPanel = {
 					}
 
 					if (op.callback) {
-						op.callback.call($box, html, $.extend(params, op.data));
+						const tpl = $.templateWrap(html);
+						op.callback.call($box, tpl, $.extend(params, op.data));
 					} else {
 						$box.html(html).initUI();
 					}

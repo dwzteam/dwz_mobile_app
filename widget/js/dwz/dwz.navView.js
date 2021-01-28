@@ -138,7 +138,8 @@ $.navView = {
 					}
 
 					if (op.callback) {
-						op.callback.call($box, html, _data);
+						const tpl = $.templateWrap(html);
+						op.callback.call($box, tpl, _data);
 					} else {
 						$box.html(html).initUI();
 					}

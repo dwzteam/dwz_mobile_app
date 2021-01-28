@@ -26,8 +26,7 @@ biz.favorite = {
 		});
 	},
 	listRender: function (tpl, params) {
-		let tplWrap = $.templateWrap(tpl);
-		let html = template.render(tplWrap.tpl, { UserInfo: UserInfo });
+		let html = template.render(tpl.html, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
 		let $form = this.find('form.dwz-list-form'),
@@ -50,7 +49,7 @@ biz.favorite = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap.tpl_list, json.data);
+						let _html = template.render(tpl.tpl_list, json.data);
 
 						if (loadMore) {
 							$(_html).appendTo($listBox).touchOpenRight().hoverClass();

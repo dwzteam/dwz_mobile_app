@@ -163,10 +163,10 @@ $.navTab = {
 				}
 
 				if (op.callback) {
-					op.callback.call($panel, html, $.extend(op.url.getParams(), op.data));
+					const tpl = $.templateWrap(html);
+					op.callback.call($panel, tpl, $.extend(op.url.getParams(), op.data));
 				} else {
-					$panel.html(html);
-					$panel.initUI();
+					$panel.html(html).initUI();
 				}
 
 				$tabItem.attr('data-loaded', 1); //navTab页面缓存

@@ -3,9 +3,7 @@
  */
 biz.announce = {
 	listRender(tpl, params) {
-		let tplWrap = $.templateWrap(tpl);
-
-		let html = template.render(tplWrap.tpl, {
+		let html = template.render(tpl.html, {
 			UserInfo: UserInfo,
 			params: params
 		});
@@ -29,7 +27,7 @@ biz.announce = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap.tpl_list, json);
+						let _html = template.render(tpl.tpl_list, json);
 						if (loadMore) {
 							$(_html).appendTo($listBox).hoverClass();
 						} else {
@@ -54,7 +52,7 @@ biz.announce = {
 			success: (json) => {
 				console.log(json);
 
-				let html = template.render(tpl, {
+				let html = template.render(tpl.html, {
 					UserInfo: UserInfo,
 					vo: json.data
 				});

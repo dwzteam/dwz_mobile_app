@@ -151,7 +151,8 @@
 						let callback = dwz.getUrlCallback(url);
 
 						if (callback) {
-							callback.call($box, html, params);
+							const tpl = $.templateWrap(html);
+							callback.call($box, tpl, params);
 						} else {
 							$box.html(html).initUI();
 						}

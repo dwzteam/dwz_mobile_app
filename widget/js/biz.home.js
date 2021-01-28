@@ -1,7 +1,6 @@
 biz.home = {
 	render(tpl, params) {
-		let tplWrap = $.templateWrap(tpl);
-		let html = template.render(tpl, {
+		let html = template.render(tpl.html, {
 			UserInfo,
 			params
 		});
@@ -21,7 +20,7 @@ biz.home = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap['tpl_home_ad'], json);
+						let _html = template.render(tpl.tpl_home_ad, json);
 						this.find('#home-ad-box').html(_html).initUI();
 					}
 				},
@@ -44,7 +43,7 @@ biz.home = {
 							}
 							return item;
 						});
-						let _html = template.render(tplWrap.tpl_home_widget, { widgetList: json.data });
+						let _html = template.render(tpl.tpl_home_widget, { widgetList: json.data });
 						this.find('#home-widget-box').html(_html).initUI();
 					}
 				},
@@ -55,7 +54,7 @@ biz.home = {
 		$.listForm($form);
 	},
 	aboutRender(tpl, params) {
-		let html = template.render(tpl, {
+		let html = template.render(tpl.html, {
 			version: window.api ? 'v' + api.appVersion : '',
 			env: biz.server.ENV
 		});

@@ -361,7 +361,7 @@ $.extend(biz, {
 	 * @param {*} params
 	 */
 	pageRender(tpl, params) {
-		const html = template.render(tpl, params);
+		const html = template.render(tpl.html, params);
 		this.html(html).initUI();
 	},
 	/**
@@ -370,7 +370,7 @@ $.extend(biz, {
 	 * @param {*} params
 	 */
 	iframeRender(tpl, params) {
-		const html = template.render(tpl, {
+		const html = template.render(tpl.html, {
 			page_title: decodeURI(params.page_title || 'iframe外部页面'),
 			page_url: decodeURI(params.page_url)
 		});

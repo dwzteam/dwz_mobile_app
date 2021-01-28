@@ -178,13 +178,13 @@ dwz.extend({
 	},
 	/**
 	 * 分离页面上的模板 <script id="sc-xxx" type="text/html"></script>
-	 * @param tpl
-	 * @returns {{tpl: (*|string), 'tpl_xxx1': (*|string), 'tpl_xxx2': (*|string)}}
+	 * @param html
+	 * @returns {{html: (*|string), 'tpl_xxx1': (*|string), 'tpl_xxx2': (*|string)}}
 	 */
-	templateWrap(tpl) {
-		let ret = { tpl: tpl || '' };
+	templateWrap(html) {
+		let ret = { html: html || '' };
 		let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
-		let jsContained = ret.tpl.match(regDetectJs);
+		let jsContained = ret.html.match(regDetectJs);
 		if (jsContained) {
 			// 分段取出js正则
 			let regGetJS = /<script(.|\n)*?>((.|\n|\r\n)*)?<\/script>/im;
@@ -202,7 +202,7 @@ dwz.extend({
 			}
 		}
 
-		ret.tpl = ret.tpl.replace(regDetectJs, '');
+		ret.html = ret.html.replace(regDetectJs, '');
 
 		return ret;
 	}

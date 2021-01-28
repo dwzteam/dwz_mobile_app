@@ -50,9 +50,7 @@ biz.baiduFace = {
 	 * @param {*} params
 	 */
 	testFaceRender(tpl, params) {
-		const tplWrap = $.templateWrap(tpl);
-
-		let html = template.render(tplWrap.tpl, params);
+		let html = template.render(tpl.html, params);
 		this.html(html).initUI();
 
 		let $imgBox = this.find('div.dwz-img-box');
@@ -75,7 +73,7 @@ biz.baiduFace = {
 					},
 					(ret) => {
 						if (ret.status) {
-							let imgHtml = template.render(tplWrap.tpl_img, ret);
+							let imgHtml = template.render(tpl.tpl_img, ret);
 							$imgBox.append(imgHtml);
 						}
 					}
@@ -91,7 +89,7 @@ biz.baiduFace = {
 					},
 					(ret) => {
 						if (ret.status) {
-							let imgHtml = template.render(tplWrap.tpl_img, ret);
+							let imgHtml = template.render(tpl.tpl_img, ret);
 							$imgBox.append(imgHtml);
 						}
 					}

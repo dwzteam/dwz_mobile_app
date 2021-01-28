@@ -8,16 +8,13 @@ biz.transport = {
 	 * @param {*} params
 	 */
 	listRender(tpl, params) {
-		const $box = this,
-			tplWrap = $.templateWrap(tpl);
-
-		let html = template.render(tplWrap.tpl, {
+		let html = template.render(tpl.html, {
 			UserInfo: UserInfo,
 			params: params
 		});
-		$box.html(html).initUI();
+		this.html(html).initUI();
 
-		const $form = $box.find('form.dwz-list-form'),
+		const $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
 		$form.requestList = (loadMore) => {
@@ -35,7 +32,7 @@ biz.transport = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap.tpl_list, json.data);
+						let _html = template.render(tpl.tpl_list, json.data);
 						if (loadMore) {
 							$(_html).appendTo($listBox).hoverClass();
 						} else {
@@ -52,9 +49,8 @@ biz.transport = {
 
 	// 运输单详情回调
 	detailRender(tpl, params) {
-		const $box = this,
-			tplWrap = $.templateWrap(tpl);
-		let html = template.render(tplWrap.tpl, { params: params });
+		const $box = this;
+		let html = template.render(tpl.html, { params: params });
 		$box.html(html).initUI();
 
 		const $sheetBox = $box.find('.sheet-box');
@@ -143,10 +139,10 @@ biz.transport = {
 						receive: json.data.receive || {},
 						ship: json.data.ship || {}
 					};
-					let html = template.render(tplWrap.tpl_sheet_box, _data);
+					let html = template.render(tpl.tpl_sheet_box, _data);
 					$sheetBox.html(html).initUI();
 
-					let html2 = template.render(tplWrap.tpl_receive_box, _data);
+					let html2 = template.render(tpl.tpl_receive_box, _data);
 					$receiveBox.html(html2);
 
 					$box.find('.dwz-btn-start').touchwipe({
@@ -210,8 +206,6 @@ biz.transport = {
 
 	// 录入发货过磅信息
 	firstRender(tpl, params) {
-		const $box = this;
-
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.transport.detail),
@@ -224,22 +218,20 @@ biz.transport = {
 					return;
 				}
 
-				let html = template.render(tpl, {
+				let html = template.render(tpl.html, {
 					vo: json.data,
 					location: biz.location,
 					form_url: biz.server.getUrl(biz.server.transport.first)
 				});
-				$box.html(html).initUI();
+				this.html(html).initUI();
 
-				$box.find('a.old-img-del').click(biz.transport.delPic);
+				this.find('a.old-img-del').click(biz.transport.delPic);
 			}
 		});
 	},
 
 	// 录入卸货过磅信息
 	lastRender(tpl, params) {
-		const $box = this;
-
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.transport.detail),
@@ -252,14 +244,14 @@ biz.transport = {
 					return;
 				}
 
-				let html = template.render(tpl, {
+				let html = template.render(tpl.html, {
 					vo: json.data,
 					location: biz.location,
 					form_url: biz.server.getUrl(biz.server.transport.last)
 				});
-				$box.html(html).initUI();
+				this.html(html).initUI();
 
-				$box.find('a.old-img-del').click(biz.transport.delPic);
+				this.find('a.old-img-del').click(biz.transport.delPic);
 			}
 		});
 	},
@@ -399,9 +391,8 @@ biz.transport = {
 
 	// 驾车路线页面
 	drivingRender(tpl, params) {
-		const $box = this,
-			tplWrap = $.templateWrap(tpl);
-		const html = template.render(tplWrap.tpl, { params: params });
+		const $box = this;
+		const html = template.render(tpl.html, { params: params });
 		$box.html(html).initUI();
 
 		const $mapBox = $box.find('.dwz-map-box');
@@ -431,7 +422,7 @@ biz.transport = {
 		// 路线导航
 		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
 			// console.log(JSON.stringify(route));
-			let _html = template.render(tplWrap.tpl_nav_info, { route, pointStart, pointEnd });
+			let _html = template.render(tpl.tpl_nav_info, { route, pointStart, pointEnd });
 			$box.find('.dwz-nav-info').html(_html);
 		});
 
@@ -477,7 +468,7 @@ biz.transport = {
 									lat: parseFloat(location[1])
 								});
 							});
-							let _html = template.render(tplWrap.tpl_list, {
+							let _html = template.render(tpl.tpl_list, {
 								list: _list
 							});
 							$list.html(_html);
@@ -498,7 +489,7 @@ biz.transport = {
 											pointEnd: _pointEnd
 										},
 										function (route) {
-											let _html = template.render(tplWrap.tpl_nav_info, route);
+											let _html = template.render(tpl.tpl_nav_info, route);
 											$box.find('.dwz-nav-info').html(_html);
 										}
 									);
