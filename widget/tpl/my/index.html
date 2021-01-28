@@ -73,7 +73,7 @@
 	</div>
 </form>
 
-<script id="tpl-transport" type="text/html">
+<script id="tpl_transport" type="text/html">
 	{{each data as item}}
 	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
 		<div class="flex-wrap">
@@ -96,7 +96,7 @@
 	{{/each}}
 </script>
 
-<script id="tpl-announce" type="text/html">
+<script id="tpl_announce" type="text/html">
 	{{each data as item}}
 	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
 		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>

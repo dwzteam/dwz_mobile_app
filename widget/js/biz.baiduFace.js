@@ -75,7 +75,7 @@ biz.baiduFace = {
 					},
 					(ret) => {
 						if (ret.status) {
-							let imgHtml = template.render(tplWrap['tpl-img'], ret);
+							let imgHtml = template.render(tplWrap.tpl_img, ret);
 							$imgBox.append(imgHtml);
 						}
 					}
@@ -91,7 +91,7 @@ biz.baiduFace = {
 					},
 					(ret) => {
 						if (ret.status) {
-							let imgHtml = template.render(tplWrap['tpl-img'], ret);
+							let imgHtml = template.render(tplWrap.tpl_img, ret);
 							$imgBox.append(imgHtml);
 						}
 					}

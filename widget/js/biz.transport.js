@@ -35,7 +35,7 @@ biz.transport = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap['tpl-list'], json.data);
+						let _html = template.render(tplWrap.tpl_list, json.data);
 						if (loadMore) {
 							$(_html).appendTo($listBox).hoverClass();
 						} else {
@@ -143,10 +143,10 @@ biz.transport = {
 						receive: json.data.receive || {},
 						ship: json.data.ship || {}
 					};
-					let html = template.render(tplWrap['tpl-sheet-box'], _data);
+					let html = template.render(tplWrap.tpl_sheet_box, _data);
 					$sheetBox.html(html).initUI();
 
-					let html2 = template.render(tplWrap['tpl-receive-box'], _data);
+					let html2 = template.render(tplWrap.tpl_receive_box, _data);
 					$receiveBox.html(html2);
 
 					$box.find('.dwz-btn-start').touchwipe({
@@ -431,7 +431,7 @@ biz.transport = {
 		// 路线导航
 		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
 			// console.log(JSON.stringify(route));
-			let _html = template.render(tplWrap['tpl-nav-info'], { route, pointStart, pointEnd });
+			let _html = template.render(tplWrap.tpl_nav_info, { route, pointStart, pointEnd });
 			$box.find('.dwz-nav-info').html(_html);
 		});
 
@@ -477,7 +477,7 @@ biz.transport = {
 									lat: parseFloat(location[1])
 								});
 							});
-							let _html = template.render(tplWrap['tpl-list'], {
+							let _html = template.render(tplWrap.tpl_list, {
 								list: _list
 							});
 							$list.html(_html);
@@ -498,7 +498,7 @@ biz.transport = {
 											pointEnd: _pointEnd
 										},
 										function (route) {
-											let _html = template.render(tplWrap['tpl-nav-info'], route);
+											let _html = template.render(tplWrap.tpl_nav_info, route);
 											$box.find('.dwz-nav-info').html(_html);
 										}
 									);

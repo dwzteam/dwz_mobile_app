@@ -33,7 +33,7 @@
 	</div>
 </form>
 
-<script id="tpl-list" type="text/html">
+<script id="tpl_list" type="text/html">
 	{{each list as item}}
 	<li class="item" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
 		<div class="icon-address"></div>
@@ -45,7 +45,7 @@
 	{{/each}}
 </script>
 
-<script id="tpl-nav-info" type="text/html">
+<script id="tpl_nav_info" type="text/html">
 	<div class="flex-item flex-all-center flex-vertical">
 		<p class="item-title1">{{route.time|formatTime}}</p>
 		<p class="item-info1">{{route.distance|formatDistance}}</p>

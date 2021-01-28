@@ -46,7 +46,7 @@ biz.message = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap['tpl-list'], json.data);
+						let _html = template.render(tplWrap.tpl_list, json.data);
 
 						if (loadMore) {
 							$(_html).appendTo($listBox).touchOpenRight().hoverClass();

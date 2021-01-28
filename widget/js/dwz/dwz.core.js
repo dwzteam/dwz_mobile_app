@@ -179,7 +179,7 @@ dwz.extend({
 	/**
 	 * 分离页面上的模板 <script id="sc-xxx" type="text/html"></script>
 	 * @param tpl
-	 * @returns {{tpl: (*|string), 'tpl-xxx1': (*|string), 'tpl-xxx2': (*|string)}}
+	 * @returns {{tpl: (*|string), 'tpl_xxx1': (*|string), 'tpl_xxx2': (*|string)}}
 	 */
 	templateWrap(tpl) {
 		let ret = { tpl: tpl || '' };

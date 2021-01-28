@@ -26,7 +26,7 @@ biz.my = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap['tpl-transport'], json);
+						let _html = template.render(tplWrap.tpl_transport, json);
 						this.find('#transport-card-box').html(_html);
 					}
 				},
@@ -43,7 +43,7 @@ biz.my = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap['tpl-announce'], json);
+						let _html = template.render(tplWrap.tpl_announce, json);
 						$listBox.html(_html).initUI();
 					}
 				},

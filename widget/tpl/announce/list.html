@@ -37,7 +37,7 @@
 	</div>
 </form>
 
-<script id="tpl-list" type="text/html">
+<script id="tpl_list" type="text/html">
 	{{each data as item}}
 	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
 		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>

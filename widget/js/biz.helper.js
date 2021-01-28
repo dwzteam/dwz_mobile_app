@@ -37,7 +37,7 @@ biz.helper = {
 
 		// 请求省份
 		biz.helper.reqRegionHtml({
-			tpl: tplWrap['tpl-list'],
+			tpl: tplWrap.tpl_list,
 			callback: function (html_1) {
 				$province.html(html_1);
 
@@ -50,7 +50,7 @@ biz.helper = {
 					// 请求城市
 					biz.helper.reqRegionHtml({
 						code: $li1.attr('data-code'),
-						tpl: tplWrap['tpl-list'],
+						tpl: tplWrap.tpl_list,
 						callback: function (html_2) {
 							$city.html(html_2).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
 
@@ -62,7 +62,7 @@ biz.helper = {
 								// 请求区县
 								biz.helper.reqRegionHtml({
 									code: $li2.attr('data-code'),
-									tpl: tplWrap['tpl-list'],
+									tpl: tplWrap.tpl_list,
 									callback: function (html_3) {
 										$county.html(html_3).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
 
@@ -136,7 +136,7 @@ biz.helper = {
 				data: $form.serializeArray(),
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tplWrap['tpl-list'], json.data);
+						let _html = template.render(tplWrap.tpl_list, json.data);
 
 						let $items = $(_html);
 						if (loadMore) {

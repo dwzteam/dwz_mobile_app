@@ -29,7 +29,7 @@ biz.announce = {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tplWrap['tpl-list'], json);
+						let _html = template.render(tplWrap.tpl_list, json);
 						if (loadMore) {
 							$(_html).appendTo($listBox).hoverClass();
 						} else {
