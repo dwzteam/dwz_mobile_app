@@ -124,7 +124,7 @@ $.navView = {
 			if (_data.ajaxDoneReload) {
 				$box.data('ajaxDoneReload', 1);
 			}
-			alert(op.url.isUrl());
+
 			if (op.external || op.url.isUrl()) {
 				op.url = decodeURI(op.url);
 				this.loadExternal(op.url);

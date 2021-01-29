@@ -39,14 +39,14 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-open-right" data-id="{{item.id}}" onclick="(function(item){
+	<li class="item dwz-open-right" data-id="{{item.id}}" data-title="{{item.title}}" data-url="{{item.url}}" onclick="(function(item){
 		if (item.url) {
 			$.navView.open({
 				page_title: item.title,
 				url: item.url
 			})
 		}
-	})({{item}})">
+	})(this.dataset)">
 		<div class="item-icon"><img src="./image/icon/icon-notice.svg"></div>
 		<div class="item-content">
 			<div class="flex-wrap">
