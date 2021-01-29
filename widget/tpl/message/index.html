@@ -39,7 +39,17 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-open-right" data-id="{{item.id}}">
+	<li class="item dwz-open-right" data-id="{{item.id}}" onclick="(function(item){
+		if (item.url) {
+			$.navView.open({
+				url: 'tpl/iframe_page.html?dwz_callback=biz.iframeRender',
+				data: {
+					page_title:item.title,
+					page_url: item.url
+				}
+			})
+		}
+	})({{item}})">
 		<div class="item-icon"><img src="./image/icon/icon-notice.svg"></div>
 		<div class="item-content">
 			<div class="flex-wrap">

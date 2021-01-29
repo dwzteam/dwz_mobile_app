@@ -6,16 +6,24 @@
 		"pagesize": 10,
 		"list": [
 			{
-				"id": 1,
-				"title": "DWZ Mobile v1.0.0发布",
-				"content": "DWZ 手机版 HTML5 + 原生 混合开发框架",
+				"id": 1000,
+				"url": "https://docs.apicloud.com/Client-API/Open-SDK/dwzBaiduFaceLive",
+				"title": "dwzBaiduFaceLive v1.0.1",
+				"content": "封装了新版百度开放平台的人脸识别采集 SDK，支持人脸识别截取头像，人脸图片分辨率设置，图片压缩比设置。",
+				"created_at": "2020-12-30"
+			},
+			{
+				"id": 999,
+				"url": "http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/README",
+				"title": "DWZ Mobile v1.0.0",
+				"content": "DWZ 手机版 HTML5 + 原生 混合开发框架，基于原生 JS 轻量级移动端开发框架。",
 				"created_at": "2020-11-28"
 			},
 			{
-				"id": 2,
-				"title": "dwzBaiduFaceLive v1.0.1发布",
-				"content": "封装了新版百度开放平台的人脸识别采集 SDK",
-				"created_at": "2020-12-30"
+				"id": 100,
+				"title": "DWZ 工作日志系统 v1.0.0",
+				"content": "DWZ框架 + ThinkPHP 实现小组工作日志系统，主要功能是可以清楚的看到一周，每人手上都有什么任务，方便合理安排和调整小组任务。",
+				"created_at": "2015-10-30"
 			}
 		]
 	}
