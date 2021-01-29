@@ -97,7 +97,7 @@
 								<label>同行人</label>
 								<input type="hidden" name="together_id">
 								<input type="text" name="together_txt" value="" placeholder="请选择（必填）" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
-									url: 'tpl/helper/filterPanelPersions.html?dwz_callback=biz.helper.filterPanelRender',
+									url: 'tpl/helper/filterPanelLookup.html?dwz_callback=biz.helper.filterPanelRender',
 									data: {
 										target: this,
 										searchUrl: biz.server.getUrl(biz.server.persionList),
