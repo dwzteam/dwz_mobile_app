@@ -151,6 +151,7 @@ $.navTab = {
 			return;
 		}
 
+		let params = $.extend(op.url.getParams(), op.data);
 		$.ajax({
 			type: op.type,
 			url: op.url,
@@ -164,9 +165,10 @@ $.navTab = {
 
 				if (op.callback) {
 					const tpl = $.templateWrap(html);
-					op.callback.call($panel, tpl, $.extend(op.url.getParams(), op.data));
+					op.callback.call($panel, tpl, params);
 				} else {
 					$panel.html(html).initUI();
+					$.execHelperFn($box, tpl, params);
 				}
 
 				$tabItem.attr('data-loaded', 1); //navTab页面缓存

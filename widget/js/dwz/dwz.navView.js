@@ -129,7 +129,7 @@ $.navView = {
 			$.ajax({
 				type: op.type,
 				url: op.url,
-				data: _data,
+				data: op.data,
 				success: (html) => {
 					$box.triggerPageClear();
 
@@ -137,11 +137,12 @@ $.navView = {
 						op.callback = dwz.getUrlCallback(op.url);
 					}
 
+					const tpl = $.templateWrap(html);
 					if (op.callback) {
-						const tpl = $.templateWrap(html);
 						op.callback.call($box, tpl, _data);
 					} else {
 						$box.html(html).initUI();
+						$.execHelperFn($box, tpl, _data);
 					}
 				},
 				error: dwz.ajaxError

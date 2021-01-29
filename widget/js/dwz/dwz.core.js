@@ -176,6 +176,13 @@ dwz.extend({
 		}
 		return null;
 	},
+	// 在页面render后，判断url参数中有没有helper函数，有就执行
+	execHelperFn($target, tpl, params) {
+		if (params.dwz_helper) {
+			const helperFn = dwz.eavl(params.dwz_helper);
+			helperFn && helperFn.call($target, tpl, params);
+		}
+	},
 	/**
 	 * 分离页面上的模板 <script id="sc-xxx" type="text/html"></script>
 	 * @param html

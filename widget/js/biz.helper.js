@@ -155,5 +155,30 @@ biz.helper = {
 		};
 
 		$.listForm($form);
+	},
+
+	// 主从表 删除子表元素
+	removeUnitBox(target, delId) {
+		const $target = $(target),
+			$scrollBox = $target.parentsUnitBox('scroll-content'),
+			$form = $target.parentsByTag('form');
+
+		$target.parentsUnitBox().remove();
+		$scrollBox.scrollTo({ y: 'end', duration: 800 });
+
+		if ($form.size() && delId) {
+			const delItem = $form.data('delItem') || [];
+			delItem.push(delId);
+			$form.data('delItem', delItem);
+		}
+	},
+
+	// 主从表 新增子表元素 dwz_callback=biz.pageRender?dwz_helper=biz.helper.itemDetailHelper
+	itemDetailHelper(tpl, params) {
+		const $itemDetailBox = this.find('.dwz-item-detail-box');
+		this.find('.dwz-item-detail-btn').click(() => {
+			$(tpl.tpl_item_detail).appendTo($itemDetailBox).initUI();
+			$itemDetailBox.parentsUnitBox('scroll-content').scrollTo({ y: 'end', duration: 800 });
+		});
 	}
 };

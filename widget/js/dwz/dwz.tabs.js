@@ -61,12 +61,13 @@ $.fn.extend({
 						success: (html) => {
 							$panel.triggerPageClear();
 
-							let callback = dwz.getUrlCallback(url);
+							const callback = dwz.getUrlCallback(url);
+							const tpl = $.templateWrap(html);
 							if (callback) {
-								const tpl = $.templateWrap(html);
 								callback.call($panel, tpl, _data);
 							} else {
 								$panel.html(html).initUI();
+								$.execHelperFn($box, tpl, _data);
 							}
 
 							$panel.attr('loaded', true);

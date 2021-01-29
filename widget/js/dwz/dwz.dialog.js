@@ -75,20 +75,21 @@ $.dialog = {
 				op.callback = dwz.getUrlCallback(op.url);
 			}
 
-			let params = op.url.getParams();
+			let params = $.extend(op.url.getParams(), op.data);
 			$.ajax({
 				global: !op.callback,
 				type: 'GET',
 				url: op.url,
-				data: params,
+				data: op.data,
 				success: (html) => {
 					$box.triggerPageClear();
 
+					const tpl = $.templateWrap(html);
 					if (op.callback) {
-						const tpl = $.templateWrap(html);
-						op.callback.call($box, tpl, $.extend(params, op.data));
+						op.callback.call($box, tpl, params);
 					} else {
 						$box.html(html).initUI();
+						$.execHelperFn($box, tpl, params);
 					}
 				},
 				error: dwz.ajaxError

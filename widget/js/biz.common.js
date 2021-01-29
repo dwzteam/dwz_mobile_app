@@ -363,6 +363,8 @@ $.extend(biz, {
 	pageRender(tpl, params) {
 		const html = template.render(tpl.html, params);
 		this.html(html).initUI();
+
+		$.execHelperFn(this, tpl, params);
 	},
 	/**
 	 * ifarme 加载外部页面回调函数

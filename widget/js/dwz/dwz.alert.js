@@ -134,27 +134,27 @@
 			this._open(this.config.types.confirm, msg, buttons);
 		},
 
-		openDialog(url, params) {
+		openDialog(url, data) {
 			$(this.config.box$).remove();
 
 			let $box = $($.alert.config.dialogFrag).appendTo($('body').get(0)).find('.alert-dialog');
 
 			if (url) {
-				params = $.extend(url.getParams(), params);
+				let params = $.extend(url.getParams(), data);
 				$.ajax({
 					type: 'GET',
 					url: url,
-					data: params,
+					data: data,
 					success: (html) => {
 						$box.triggerPageClear();
 
-						let callback = dwz.getUrlCallback(url);
-
+						const callback = dwz.getUrlCallback(url);
+						const tpl = $.templateWrap(html);
 						if (callback) {
-							const tpl = $.templateWrap(html);
 							callback.call($box, tpl, params);
 						} else {
 							$box.html(html).initUI();
+							$.execHelperFn($box, tpl, params);
 						}
 					},
 					error: dwz.ajaxError
