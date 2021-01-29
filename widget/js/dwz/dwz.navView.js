@@ -6,15 +6,17 @@ $.navView = {
 	config: {
 		zIndexStart: 100,
 		idStart: 'nav-view-',
-		frag:
-			'<div id="#boxId#" class="nav-view view-container pane box-shadow unitBox" style="display: none; z-index:#zIndex#">\
-            <header>\
-                <div class="toolbar">\
-                    <a class="bar-button back-button"><i class="icon icon-back"></i></a>\
-                </div>\
-            </header>\
-            <div class="content"></div>\
-        </div>'
+		frag: `<div id="#boxId#" class="nav-view view-container pane box-shadow unitBox" style="display: none; z-index:#zIndex#">
+			<main>
+				<header>
+					<div class="toolbar">
+						<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+						<div class="header-title"><div class="title">#page_title#</div></div>
+					</div>
+				</header>
+				<div class="content"></div>
+			</main>
+        </div>`
 	},
 	$list: [],
 
@@ -35,6 +37,7 @@ $.navView = {
 					rel: '_blank',
 					wipeClose: false,
 					history: true,
+					page_title: '', // 配制external使用
 					external: false,
 					type: 'GET',
 					url: '',
@@ -65,7 +68,8 @@ $.navView = {
 		}
 
 		if ($box.size() == 0) {
-			$('body').append($.navView.config.frag.replaceAll('#boxId#', boxId).replaceAll('#zIndex#', zIndex));
+			let page_title = op.page_title ? decodeURI(op.page_title) : '';
+			$('body').append($.navView.config.frag.replaceAll('#boxId#', boxId).replaceAll('#zIndex#', zIndex).replaceAll('#page_title#', page_title));
 
 			$box = $('#' + boxId).initUI();
 
@@ -120,33 +124,33 @@ $.navView = {
 			if (_data.ajaxDoneReload) {
 				$box.data('ajaxDoneReload', 1);
 			}
-
-			if (op.external) {
+			alert(op.url.isUrl());
+			if (op.external || op.url.isUrl()) {
+				op.url = decodeURI(op.url);
 				this.loadExternal(op.url);
-				return;
+			} else {
+				$.ajax({
+					type: op.type,
+					url: op.url,
+					data: op.data,
+					success: (html) => {
+						$box.triggerPageClear();
+
+						if (!op.callback) {
+							op.callback = dwz.getUrlCallback(op.url);
+						}
+
+						const tpl = $.templateWrap(html);
+						if (op.callback) {
+							op.callback.call($box, tpl, _data);
+						} else {
+							$box.html(html).initUI();
+							$.execHelperFn($box, tpl, _data);
+						}
+					},
+					error: dwz.ajaxError
+				});
 			}
-
-			$.ajax({
-				type: op.type,
-				url: op.url,
-				data: op.data,
-				success: (html) => {
-					$box.triggerPageClear();
-
-					if (!op.callback) {
-						op.callback = dwz.getUrlCallback(op.url);
-					}
-
-					const tpl = $.templateWrap(html);
-					if (op.callback) {
-						op.callback.call($box, tpl, _data);
-					} else {
-						$box.html(html).initUI();
-						$.execHelperFn($box, tpl, _data);
-					}
-				},
-				error: dwz.ajaxError
-			});
 
 			let hash = 'navView;' + op.rel + ';' + op.url;
 			if ($.history && op.history)

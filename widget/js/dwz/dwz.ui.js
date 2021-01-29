@@ -4,13 +4,8 @@
  */
 
 (function ($) {
-	$.config.frag.external = '<iframe src="{url}" style="width:100%;height:{{height}};" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>';
-	var url = 'http://localhost:8080/pro?a=1&b=张三&c=aaa';
-	url = encodeURI(url);
-	console.log(url);
-	url = decodeURI(url);
-	url = decodeURI(url);
-	console.log(url);
+	$.config.frag.external = '<iframe src="{url}" class="iframe-pages" frameborder="no" scrolling="auto" border="0" marginwidth="0" marginheight="0" allowfullscreen="true"></iframe>';
+
 	dwz.regPlugins.push(function ($p) {
 		if ($.fn.slide)
 			$('div.dwz-slide', $p).each(function () {

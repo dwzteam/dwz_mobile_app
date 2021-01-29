@@ -887,29 +887,18 @@ dwz.extend(String.prototype, {
 	isValidMail() {
 		return new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/).test(this.trim());
 	},
-	isSpaces() {
-		for (let i = 0; i < this.length; i += 1) {
-			let ch = this.charAt(i);
-			if (ch != ' ' && ch != '\n' && ch != '\t' && ch != '\r') {
-				return false;
-			}
-		}
-		return true;
-	},
 	isMobile() {
 		return new RegExp(/(^[0-9]{11,11}$)/).test(this);
 	},
 	isUrl() {
-		return new RegExp(/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/).test(this);
-	},
-	isExternalUrl() {
-		return this.isUrl() && this.indexOf('://' + document.domain) == -1;
+		return new RegExp(/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%#&=:]*)$/).test(this);
 	},
 	parseCurrency(num) {
 		let numberValue = parseFloat(this);
 		return parseFloat(numberValue.toFixed(num || 2));
 	}
 });
+
 /**
  * 扩展Number方法
  */

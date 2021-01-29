@@ -42,11 +42,8 @@
 	<li class="item dwz-open-right" data-id="{{item.id}}" onclick="(function(item){
 		if (item.url) {
 			$.navView.open({
-				url: 'tpl/iframe_page.html?dwz_callback=biz.iframeRender',
-				data: {
-					page_title:item.title,
-					page_url: item.url
-				}
+				page_title: item.title,
+				url: item.url
 			})
 		}
 	})({{item}})">
@@ -58,6 +55,8 @@
 			</div>
 			<p class="item-info3">{{item.content}}</p>
 		</div>
+
+		{{if item.url}}<i class="arrow-right"></i>{{/if}}
 
 		<div class="item-right">
 			<a class="del-btn" href="javascript:biz.message.removeItem({{item}})">删除</a>
