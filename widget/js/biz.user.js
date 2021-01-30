@@ -186,7 +186,7 @@ function loginRender(tpl, params) {
 	this.find('form').each((index, form) => {
 		let $form = $(form);
 		let checkFormValid = () => {
-			let $btn = $form.find('button.form-submit.active');
+			let $btn = $form.find('button.primary');
 			if ($form.valid(true)) {
 				$btn.removeAttr('disabled').removeClass('disabled');
 			} else {

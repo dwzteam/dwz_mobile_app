@@ -115,7 +115,7 @@ function loadScripts(options) {
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
 
-			$('li.item, a.grids-grid, .dwz-ctl-hover', $p).hoverClass('hover');
+			$('li.item, a.grids-grid, .button, .dwz-ctl-hover', $p).hoverClass('hover');
 			$('input[data-checkbox-radio]', $p).checkboxRadio();
 			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
 

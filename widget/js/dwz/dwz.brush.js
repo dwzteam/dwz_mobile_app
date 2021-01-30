@@ -163,10 +163,10 @@
 		drawingBoardRender: function (tpl, params) {
 			let $box = this;
 
-			let html = template.render(tpl, { params: params });
+			let html = template.render(tpl.html, { params: params });
 			$box.html(html).initUI();
 
-			setTimeout(function () {
+			setTimeout(() => {
 				let $canvas = $box.find('canvas');
 				let brush = new Brush({
 					$el: $box.find('canvas'), //canvas 选择器
@@ -203,7 +203,7 @@
 
 					$.dialog.close();
 				});
-			}, 1000);
+			}, 500);
 		}
 	});
 })(dwz);

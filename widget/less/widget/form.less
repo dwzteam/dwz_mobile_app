@@ -252,17 +252,23 @@ textarea:read-only {
 }
 
 .button {
-	display: block;
+	.flex-all-center;
+	padding: 0 10px;
 	height: 40px;
 	line-height: 40px;
 	color: @btnTxtColor;
 	border: none;
 	background: @btnBg;
-	font-size: 15px;
+	font-size: @l2;
 	border-radius: 8px;
-	text-align: center;
 	outline: none;
-
+	position: relative;
+	overflow: hidden;
+	&.hover:after {
+		content: ' ';
+		.full-abs;
+		background-color: @hoverBg;
+	}
 	// 电子签名按钮
 	&.sign {
 		border-radius: 5px;
@@ -273,7 +279,7 @@ textarea:read-only {
 		.flex-all-center;
 		.flex-item;
 	}
-	&.active {
+	&.primary {
 		background: @btnBgActive;
 		color: @btnTxtColorActive;
 	}
@@ -283,15 +289,29 @@ textarea:read-only {
 	}
 }
 
-.form-submit {
-	.button;
-	font-size: @l2;
-	width: 100%;
-	margin: 10px 0;
+.button-bar,
+.form-bar {
+	.padding-h;
+	.button {
+		width: 100%;
+		margin-top: 10px;
+		&:last-child {
+			margin-bottom: 10px;
+		}
+	}
 }
-
 .form-bar {
 	.t-line;
-	.padding-h;
 	background: @paneBg;
+}
+.form-button-group {
+	display: flex;
+	.button {
+		border-radius: 0;
+		flex: 1;
+		border-right: 1px solid @borderColor;
+		&:last-child {
+			border: none;
+		}
+	}
 }

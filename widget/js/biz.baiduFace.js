@@ -54,7 +54,7 @@ biz.baiduFace = {
 		this.html(html).initUI();
 
 		let $imgBox = this.find('div.dwz-img-box');
-		this.find('button.form-submit').click((event) => {
+		this.find('button').click((event) => {
 			if (params.isLiveness == 1) {
 				// 人脸采集（包含活体动作），默认就眨眼一下动作，其它动作通过参数配制
 				biz.baiduFace.faceLiveness(

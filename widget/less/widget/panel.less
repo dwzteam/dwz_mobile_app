@@ -88,10 +88,6 @@
 	display: none;
 	background: @defaultBg;
 	z-index: 901;
-
-	.form-submit {
-		border-radius: 0;
-	}
 }
 
 #mask-filter-select {
@@ -159,36 +155,6 @@
 						background: transparent;
 					}
 				}
-			}
-		}
-	}
-}
-
-.bottom-btn-bar {
-	height: 40px;
-	.t-line;
-	.flex-wrap;
-	.align-center;
-
-	.btn-item {
-		.button;
-		border: none;
-		border-radius: 0;
-		min-width: 60px;
-		position: relative;
-
-		&:before {
-			content: ' ';
-			position: absolute;
-			top: 6px;
-			bottom: 6px;
-			left: 0;
-			width: 1px;
-			border-left: solid 1px rgba(126, 187, 102, 0.5);
-		}
-		&:first-child {
-			&:before {
-				border-left: none;
 			}
 		}
 	}

@@ -14,8 +14,8 @@
 		<div class="pageFormContent">
 			{{each filterItems as item}}
 			<div class="form-item no-line mini">
-				<label style="width: 80px;">{{item.label}}：</label>
 				<div class="item-content">
+					<label style="width: 80px;">{{item.label}}：</label>
 					<select class="flex-item" name="{{item.name}}">
 						<option value="">全部</option>
 						{{each item.options as option}}
@@ -45,9 +45,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="bottom-btn-bar">
-		<button class="form-submit" type="reset">重置</button>
-		<button class="form-submit active" type="submit">搜索</button>
+	<div class="form-button-group">
+		<button class="button" type="reset">重置</button>
+		<button class="button primary" type="submit">搜索</button>
 	</div>
 </form>
 
