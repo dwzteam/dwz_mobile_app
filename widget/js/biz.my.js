@@ -83,7 +83,7 @@ biz.my = {
 		});
 	},
 	settingIconRender(tpl, params) {
-		let html = template.render(tpl, { UserInfo: UserInfo });
+		let html = template.render(tpl.html, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
 		// let $croppic = this.find('.croppic');

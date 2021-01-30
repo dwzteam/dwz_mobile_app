@@ -18,29 +18,40 @@
 						<p class="flex-item">头像</p><img id="setting_user_icon_img" src="{{UserInfo.headimgurl|showUserIcon}}"><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" target="navView" data-href="tpl/my/editRealname.html" rel="edit_realname">
-						<p class="flex-item">姓名</p><span class="item-info1">{{UserInfo.realname}}</span><i class="arrow-right"></i>
-					</li>
-					<li class="item" target="navView" data-href="tpl/my/changeMobile.html?dwz_callback=changeMobileRender" rel="changeMobile">
-						<p class="flex-item">手机号</p><span class="item-info1">{{UserInfo.mobile}}</span><i class="arrow-right"></i>
+					<li class="item" target="navView" data-href="tpl/my/userRealInfo.html?dwz_callback=biz.pageRender" rel="userRealInfo">
+						<p class="flex-item">姓名（<span style="color:blue">实名认证</span>）</p><span class="item-info1">{{UserInfo.realname}}</span><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" target="navView" data-href="tpl/my/changePwd.html?dwz_callback=changePwdRender" rel="changePwd">
+					<li class="item" onclick="$.navView.open({
+						url: 'tpl/my/changeMobile.html?dwz_callback=biz.pageRender',
+						data: {
+							form_url: biz.server.getUrl(biz.server.changeMobile),
+							sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
+						},
+						rel: 'changeMobile'
+					})">
+						<p class="flex-item ">手机号</p><span class="item-info1">{{UserInfo.mobile}}</span><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.navView.open({
+						url: 'tpl/my/changePwd.html?dwz_callback=biz.pageRender',
+						data: {
+							form_url: biz.server.getUrl(biz.server.changePwd),
+							sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
+						},
+						rel: 'changePwd'
+					})">
 						<p class="flex-item">修改密码</p><i class="arrow-right"></i>
 					</li>
 
 				</ul>
 
-				<div class="button-bar">
-					<button class="button" onclick="(function() {
-						$.alert.confirm('确定要退出登录吗？', {
-							okCall() {
-								UserInfoUtil.clear();
-								$.gotoLogin();
-							},
-							cancelCall() {}
-						});
-					})()">退出登录</button>
+				<div class="button-bar ">
+					<button class="button" onclick="(function() { 
+							$.alert.confirm( '确定要退出登录吗？', { 
+								okCall() { UserInfoUtil.clear(); $.gotoLogin(); }, 
+							}); 
+						})()">退出登录</button>
 				</div>
 
 			</div>

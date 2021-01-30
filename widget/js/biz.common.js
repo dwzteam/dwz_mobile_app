@@ -183,6 +183,33 @@ $.extend(biz, {
 		});
 	},
 
+	/**
+	 * 默认页面渲染回调函数
+	 * @param {*} tpl
+	 * @param {*} params
+	 */
+	pageRender(tpl, params) {
+		if (!params.UserInfo) {
+			params.UserInfo = UserInfo;
+		}
+		const html = template.render(tpl.html, params);
+		this.html(html).initUI();
+
+		$.execHelperFn(this, tpl, params);
+	},
+	/**
+	 * ifarme 加载外部页面回调函数
+	 * @param {*} tpl
+	 * @param {*} params
+	 */
+	iframeRender(tpl, params) {
+		const html = template.render(tpl.html, {
+			page_title: decodeURI(params.page_title || 'iframe外部页面'),
+			page_url: decodeURI(params.page_url)
+		});
+		this.html(html).initUI();
+	},
+
 	// 高德地图规划驾车路径
 	createDriving(options, callback) {
 		const op = $.extend(
@@ -354,29 +381,6 @@ $.extend(biz, {
 				}
 			);
 		}
-	},
-	/**
-	 * 默认页面渲染回调函数
-	 * @param {*} tpl
-	 * @param {*} params
-	 */
-	pageRender(tpl, params) {
-		const html = template.render(tpl.html, params);
-		this.html(html).initUI();
-
-		$.execHelperFn(this, tpl, params);
-	},
-	/**
-	 * ifarme 加载外部页面回调函数
-	 * @param {*} tpl
-	 * @param {*} params
-	 */
-	iframeRender(tpl, params) {
-		const html = template.render(tpl.html, {
-			page_title: decodeURI(params.page_title || 'iframe外部页面'),
-			page_url: decodeURI(params.page_url)
-		});
-		this.html(html).initUI();
 	},
 
 	/**

@@ -139,7 +139,7 @@ $.urlInterceptor = function (url) {
 	let pass = UserInfo.token ? true : false;
 
 	if (!pass) {
-		let uris = ['tpl/user/login.html', 'tpl/user/forgetPwd.html', 'tpl/user/register.html'];
+		let uris = ['tpl/user/login.html', 'tpl/user/forgetPwd.html', 'tpl/user/register.html', 'tpl/home.html'];
 
 		// 判断request URI 是否需要登入
 		if ($.inArray(url.getRequestURI(), uris)) {
@@ -152,25 +152,8 @@ $.urlInterceptor = function (url) {
 		return false;
 	}
 
-	return authCheck(url);
-};
-
-// 检测是否实名认证
-function authCheck(url) {
-	if (!UserInfo.isauth) {
-		let uris = ['tpl/driver.html'];
-
-		// 判断request URI 是否需要绑定
-		if (!dwz.inArray(url.getRequestURI(), uris)) {
-			return true;
-		}
-
-		$.dialog.open({ url: 'tpl/my/authCheck.html' });
-		return false;
-	}
-
 	return true;
-}
+};
 
 // 登入页面
 function loginRender(tpl, params) {
@@ -204,27 +187,6 @@ function forgetPwdRender(tpl, params) {
 	let json = {
 		form_url: biz.server.getUrl(biz.server.forgetPwd),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode)
-	};
-
-	let html = template.render(tpl.html, json);
-	this.html(html).initUI();
-}
-
-function changePwdRender(tpl, params) {
-	let json = {
-		form_url: biz.server.getUrl(biz.server.changePwd),
-		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
-		UserInfo: UserInfo
-	};
-
-	let html = template.render(tpl.html, json);
-	this.html(html).initUI();
-}
-function changeMobileRender(tpl, params) {
-	let json = {
-		form_url: biz.server.getUrl(biz.server.changeMobile),
-		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
-		UserInfo: UserInfo
 	};
 
 	let html = template.render(tpl.html, json);
@@ -270,16 +232,13 @@ function forgetAjaxDone(json) {
 
 function authAjaxDone(json) {
 	console.log(JSON.stringify(json));
-
 	$.navView.close(); // 关闭认证页面
 
 	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);
-
-		$.dialog.open({ url: 'tpl/my/authOk.html' });
+		$.alert.success('实名认证成功');
 	} else {
-		json.info && $.alert.error(json.info);
-		$.dialog.open({ url: 'tpl/my/authError.html' });
+		$.alert.success('实名认证失败');
 	}
 }
 
@@ -291,21 +250,20 @@ function submitUserRealInfo(form) {
 	}
 
 	let data = $form.serializeMap();
-
-	bizUtil.userRealVerify(data); // 实名认证成功后保存用户信息
+	window.api && bizUtil.userRealVerify(data);
 
 	return false;
 }
 
 let bizUtil = {
-	userRealVerify(params, success) {
+	userRealVerify(params, callback) {
 		if (!biz.checkPermission('camera', '摄像头')) {
 			return;
 		}
 
 		const requestUserRealVerify = (base64img) => {
-			if (success) {
-				success(base64img);
+			if (callback) {
+				callback(base64img);
 				return;
 			}
 			api.showProgress({
@@ -313,41 +271,26 @@ let bizUtil = {
 				text: '先喝杯茶...',
 				modal: true
 			});
-
-			if (!params.id_code) {
-				$.alert.error('身份证号必须');
-			}
-			if (!params.nickname) {
-				$.alert.error('真实姓名必须');
-			}
-
-			api.ajax(
-				{
-					url: ServerUrl.getUrl(biz.server.userRealVerify),
-					method: 'post',
-					data: {
-						values: {
-							img: base64img,
-							id_card: params.id_code,
-							real_name: params.nickname,
-							token: UserInfo.token
-						}
+			$.ajax({
+				type: 'POST',
+				url: biz.server.getUrl(biz.server.userRealVerify),
+				dataType: 'json',
+				data: {
+					img: base64img,
+					mobile: params.mobile,
+					realname: params.realname,
+					token: UserInfo.token
+				},
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						authAjaxDone(json);
 					}
 				},
-				function (json, err) {
-					console.log(JSON.stringify(json));
-
+				error: biz.ajaxError,
+				complete: () => {
 					api.hideProgress();
-					if (json) {
-						if (!json.id_code) {
-							json.id_code = params.id_code;
-						}
-						authAjaxDone(json);
-					} else {
-						console.log(JSON.stringify(err));
-					}
 				}
-			);
+			});
 		};
 
 		const module = api.require('dwzBaiduFaceLive');
