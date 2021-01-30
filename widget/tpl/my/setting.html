@@ -32,7 +32,15 @@
 				</ul>
 
 				<div class="button-bar">
-					<a id="exitSystemButton" class="button">退出登录</a>
+					<button class="button" onclick="(function() {
+						$.alert.confirm('确定要退出登录吗？', {
+							okCall() {
+								UserInfoUtil.clear();
+								$.gotoLogin();
+							},
+							cancelCall() {}
+						});
+					})()">退出登录</button>
 				</div>
 
 			</div>

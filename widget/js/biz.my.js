@@ -56,18 +56,6 @@ biz.my = {
 		let html = template.render(tpl.html, { UserInfo: UserInfo });
 		this.html(html).initUI();
 
-		$('#exitSystemButton').touchwipe({
-			touch() {
-				$.alert.confirm('确定要退出登录吗？', {
-					okCall() {
-						UserInfoUtil.clear();
-						$.gotoLogin();
-					},
-					cancelCall() {}
-				});
-			}
-		});
-
 		this.find('.dwz-user-icon').touchwipe({
 			touch() {
 				dwz.plus.chooseImage({
@@ -129,8 +117,7 @@ biz.my = {
 						y: (api.winHeight - 300) / 2,
 						borderColor: '#0f0',
 						borderWidth: 3,
-						//appearance: 'circular',
-						appearance: 'rectangle'
+						appearance: 'rectangle' // rectangle, circular
 					}
 				},
 				mode: 'image', // image, clip, all
