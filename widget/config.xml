@@ -58,8 +58,8 @@
 
 	<permission name="hardware"/>
 
-	<!--配置一个后台定位功能：-->
-	<!-- <preference name="backgroundMode" value="audio | location"/> -->
+	<!--配置后台定位功能：-->
+	<preference name="backgroundMode" value="location | fetch | remote-notification"/>
 	
     <feature name="dwzBaiduFaceLive">
         <param name="LicenseID_iOS" value="DwzMobileApp-face-ios"/>
