@@ -834,7 +834,7 @@ dwz.extend(String.prototype, {
 	},
 	getRequestURI() {
 		let indexOf = this.indexOf('?');
-		let uri = indexOf == -1 ? this : this.substr(0, indexOf);
+		let uri = indexOf == -1 ? this + '' : this.substr(0, indexOf);
 		return uri;
 	},
 	getParams(encode) {
