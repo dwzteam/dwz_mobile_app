@@ -89,7 +89,7 @@ biz.helper = {
 		});
 	},
 
-	// $.alert.openDialog 多选 渲染函数
+	// $.alert.prompt 多选 渲染函数
 	multipleSelectRender(tpl, params) {
 		const op = $.extend({ target: null, callback: null }, params);
 		let html = template.render(tpl.html, params);
@@ -112,7 +112,7 @@ biz.helper = {
 
 			op.callback && op.callback.call($(op.target), _data);
 
-			$.alert.closeDialog();
+			$.alert.close('prompt');
 			return false;
 		});
 	},

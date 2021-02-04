@@ -24,7 +24,7 @@
 				success: 'success',
 				confirm: 'confirm'
 			},
-			dialogFrag: '<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
+			promptFrag: '<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
 			boxFrag:
 				'<div id="alertMsgBox" class="alert-dialog-#type#">\
 					<div class="alert-mask"></div>\
@@ -70,9 +70,14 @@
 				});
 			}
 		},
-		close() {
-			$(this.config.box$).remove();
+		close(type = 'alert') {
+			if (type == 'prompt') {
+				$('#alertDialogBox').remove();
+			} else {
+				$(this.config.box$).remove();
+			}
 		},
+
 		error(msg, options) {
 			this._alert(this.config.types.error, msg, options);
 		},
@@ -134,10 +139,10 @@
 			this._open(this.config.types.confirm, msg, buttons);
 		},
 
-		openDialog(url, data) {
+		prompt(url, data) {
 			$(this.config.box$).remove();
 
-			let $box = $($.alert.config.dialogFrag).appendTo($('body').get(0)).find('.alert-dialog');
+			let $box = $($.alert.config.promptFrag).appendTo($('body').get(0)).find('.alert-dialog');
 
 			if (url) {
 				let params = $.extend(url.getParams(), data);
@@ -160,9 +165,6 @@
 					error: dwz.ajaxError
 				});
 			}
-		},
-		closeDialog() {
-			$('#alertDialogBox').remove();
 		}
 	};
 })(dwz);

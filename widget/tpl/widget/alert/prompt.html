@@ -2,7 +2,7 @@
 
 <form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, function (json) {
     if ($.isAjaxStatusOk(json)) {
-        $.alert.closeDialog();
+        $.alert.closePrompt();
     }
 })">
 	<input type="hidden" name="token" value="{{UserInfo.token}}">

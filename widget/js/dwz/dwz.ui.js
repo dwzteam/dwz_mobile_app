@@ -95,7 +95,7 @@
 				.touchwipe({
 					touch(event) {
 						let $link = $(this);
-						$.alert.openDialog($link.attr('data-href'));
+						$.alert.prompt($link.attr('data-href'));
 						event.stopPropagation();
 					}
 				})
@@ -107,7 +107,7 @@
 			});
 
 			$('#alertDialogBox .close', $p).click(function (event) {
-				$.alert.closeDialog();
+				$.alert.close('prompt');
 				event.preventDefault();
 			});
 		}
