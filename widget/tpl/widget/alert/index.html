@@ -16,13 +16,8 @@
 			<div class="scroll">
 				<ul class="list">
 
-					<li class="item" onclick="$.alert.confirm('确认删除吗？', {
-						okCall: function() {
-							console.log('okCall')
-						},
-						cancelCall: function() {}
-					})">
-						<p class="flex-item">确认（是/否）</p><i class="arrow-right"></i>
+					<li class="item" onclick="$.alert.toast('alert组件示例 toast')">
+						<p class="flex-item">toast提示</p><i class="arrow-right"></i>
 					</li>
 
 					<li class="item" onclick="$.alert.error('alert组件示例 error')">
@@ -33,12 +28,44 @@
 						<p class="flex-item">成功提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.warn('alert组件示例 warn')">
-						<p class="flex-item">警告提示</p><i class="arrow-right"></i>
+					<li class="item" onclick="$.alert.open({
+						msg: 'DWZ Mobile alert组件示例，基础提示'
+					})">
+						<p class="flex-item">基础提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.toast('alert组件示例 toast')">
-						<p class="flex-item">toast提示</p><i class="arrow-right"></i>
+					<li class="item" onclick="$.alert.open({
+						title: '自定义标题',
+						msg: 'DWZ Mobile alert组件示例，自定义标题'
+					})">
+						<p class="flex-item">自定义标题提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.open({
+						title: '自定义标题',
+						msg: 'DWZ Mobile alert组件示例，自定义标题 + 点击回调'
+					}, function(ret) {
+						$.alert.toast('buttonIndex: '+ret.buttonIndex)
+					})">
+						<p class="flex-item">自定义标题 + 点击回调</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.confirm({
+						msg: '确认要删除吗？'
+					}, function(ret) {
+						$.alert.toast('buttonIndex: '+ret.buttonIndex)
+					})">
+						<p class="flex-item">确认提示</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.alert.confirm({
+						title: '操作确认',
+						msg: '这个3个按钮的确认提醒',
+						buttons: ['是', '否', '取消']
+					}, function(ret) {
+						$.alert.toast('buttonIndex: '+ret.buttonIndex)
+					})">
+						<p class="flex-item">确认提示 + 自定义标题和按钮</p><i class="arrow-right"></i>
 					</li>
 
 					<li class="item" onclick="$.alert.prompt('tpl/widget/alert/prompt.html?dwz_callback=biz.pageRender', {
@@ -46,6 +73,7 @@
 					});">
 						<p class="flex-item">prompt自定义内容提示</p><i class="arrow-right"></i>
 					</li>
+
 
 				</ul>
 			</div>

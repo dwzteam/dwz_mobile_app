@@ -25,6 +25,7 @@ var js_src = {
 		'js/dwz/dwz.gps.js',
 		'js/dwz/dwz.amap.js',
 		'js/dwz/dwz.brush.js',
+		'js/dwz/dwz.widget.js',
 		'js/dwz/dwz.regional.zh.js',
 		'js/dwz/dwz.ui.js',
 		'js/biz.conf.js',

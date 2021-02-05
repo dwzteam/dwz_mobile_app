@@ -473,7 +473,7 @@ $.extend(biz, {
 			btns.push('高德地图');
 		}
 		if (btns.Length == 0) {
-			$.alert.error('手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。');
+			$.alert.open({ msg: '手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。' });
 		} else {
 			//console.log(bmapinstalled+"-"+amapinstalled);
 			api.actionSheet(

@@ -3,26 +3,24 @@
  */
 biz.favorite = {
 	removeItem: function ({ id = null }) {
-		$.alert.confirm('确认删除吗？', {
-			okCall: function (event) {
-				$.ajax({
-					type: 'POST',
-					url: biz.server.getUrl(biz.server.favorite.del),
-					dataType: 'json',
-					data: { id: id },
-					cache: false,
-					global: false,
-					success: (json) => {
-						if ($.isAjaxStatusOk(json)) {
-							$.navTab
-								.getBox()
-								.find('ul.list li[data-id="' + id + '"]')
-								.remove();
-						}
-					},
-					error: biz.ajaxError
-				});
-			}
+		$.alert.confirm({ msg: '确认删除吗？' }, (ret) => {
+			$.ajax({
+				type: 'POST',
+				url: biz.server.getUrl(biz.server.favorite.del),
+				dataType: 'json',
+				data: { id: id },
+				cache: false,
+				global: false,
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						$.navTab
+							.getBox()
+							.find('ul.list li[data-id="' + id + '"]')
+							.remove();
+					}
+				},
+				error: biz.ajaxError
+			});
 		});
 	},
 	listRender: function (tpl, params) {

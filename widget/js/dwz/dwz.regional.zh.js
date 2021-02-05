@@ -11,11 +11,9 @@
 	$.setRegional('alert', {
 		title: {
 			error: '错误',
-			info: '提示',
-			warn: '警告',
 			success: '成功',
 			confirm: '确认提示'
 		},
-		btnMsg: { ok: '确定', yes: '是', no: '否', cancel: '取消' }
+		btnMsg: { ok: '确定', cancel: '取消' }
 	});
 })(dwz);

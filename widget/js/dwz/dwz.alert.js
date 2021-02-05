@@ -5,28 +5,18 @@
 	$.setRegional('alert', {
 		title: {
 			error: '错误',
-			info: '提示',
-			warn: '警告',
 			success: '成功',
 			confirm: '确认提示'
 		},
-		btnMsg: { ok: '确定', yes: '是', no: '否', cancel: '取消' }
+		btnMsg: { ok: '确定', cancel: '取消' }
 	});
 
 	$.alert = {
 		config: {
 			box$: '#alertMsgBox',
-
-			types: {
-				error: 'error',
-				info: 'info',
-				warn: 'warn',
-				success: 'success',
-				confirm: 'confirm'
-			},
-			promptFrag: '<div id="alertDialogBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
+			promptFrag: '<div id="alertPromptBox"><div class="alert-mask"></div><div class="alert-dialog"></div></div>',
 			boxFrag:
-				'<div id="alertMsgBox" class="alert-dialog-#type#">\
+				'<div id="alertMsgBox">\
 					<div class="alert-mask"></div>\
 					<div class="alert-dialog">\
 						<div class="alert-dialog-hd"><strong class="alert-dialog-title">#title#</strong></div>\
@@ -39,32 +29,29 @@
 
 		/**
 		 *
-		 * @param {Object} type
-		 * @param {Object} msg
-		 * @param {Object} buttons [button1, button2]
+		 * @param String title
+		 * @param String msg
+		 * @param [String] buttons [button1, button2]
+		 * @param callback
 		 */
-		_open(type, msg, buttons) {
+		open({ title = $.regional.alert.title.info, msg = '', buttons = [$.regional.alert.btnMsg.ok] }, callback) {
 			$(this.config.box$).remove();
 			let butsHtml = '';
 			if (buttons) {
 				for (let i = 0; i < buttons.length; i++) {
-					butsHtml += this.config.btnFrag.replace('#butMsg#', buttons[i].name).replace('#class#', buttons[i].sn == 'ok' ? 'primary' : 'default');
+					butsHtml += this.config.btnFrag.replace('#butMsg#', buttons[i]).replace('#class#', i == 0 ? 'primary' : 'default');
 				}
 			}
-			let html = this.config.boxFrag.replace('#type#', type).replace('#title#', $.regional.alert.title[type]).replace('#message#', msg).replace('#butFragment#', butsHtml);
+			let html = this.config.boxFrag.replace('#title#', title).replace('#message#', msg).replace('#butFragment#', butsHtml);
 			$('body').append(html);
 
 			let $btns = $(this.config.box$).find('a.alert-btn-dialog');
 
 			for (let i = 0; i < buttons.length; i++) {
-				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, function (event) {
-					let index = event.data,
-						callback = buttons[index].call;
-					if (callback) {
-						callback(event);
-					}
+				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, (event) => {
+					let buttonIndex = event.data + 1;
+					callback && callback({ buttonIndex });
 					$.alert.close();
-
 					event.preventDefault();
 					event.stopPropagation();
 				});
@@ -72,71 +59,20 @@
 		},
 		close(type = 'alert') {
 			if (type == 'prompt') {
-				$('#alertDialogBox').remove();
+				$('#alertPromptBox').remove();
 			} else {
 				$(this.config.box$).remove();
 			}
 		},
 
-		error(msg, options) {
-			this._alert(this.config.types.error, msg, options);
+		error(msg, callback) {
+			this.open({ title: $.regional.alert.title.error, msg }, callback);
 		},
-		warn(msg, options) {
-			this._alert(this.config.types.warn, msg, options);
+		success(msg, callback) {
+			this.open({ title: $.regional.alert.title.success, msg }, callback);
 		},
-		success(msg, options) {
-			this._alert(this.config.types.success, msg, options);
-		},
-		toast(msg, options) {
-			let op = $.extend({ msg: msg, duration: 4000 }, options);
-			if (window.api) {
-				api.toast(op);
-				return;
-			}
-
-			$('#alert-toast').remove();
-			if (this._timer) {
-				clearTimeout(this._timer);
-				this._timer = null;
-			}
-
-			let $toast = $('<div id="alert-toast">' + op.msg + '</div>').appendTo($('body'));
-			$toast.animateCls('fadeInDown');
-
-			let me = this;
-			me._timer = setTimeout(function () {
-				clearTimeout(this._timer);
-				me._timer = null;
-				$toast.animateCls('fadeOutUp', function () {
-					$toast.remove();
-				});
-			}, op.duration);
-		},
-		_alert(type, msg, options) {
-			let op = $.extend({ okName: $.regional.alert.btnMsg.ok, okCall: null }, options);
-			let buttons = [{ sn: 'ok', name: op.okName, call: op.okCall }];
-			this._open(type, msg, buttons);
-		},
-		/**
-		 *
-		 * @param {Object} msg
-		 * @param {Object} options {okName, okCall, cancelName, cancelCall}
-		 */
-		confirm(msg, options) {
-			let op = $.extend(
-				{
-					okName: $.regional.alert.btnMsg.ok,
-					okCall: null,
-					cancelName: $.regional.alert.btnMsg.cancel,
-					cancelCall: null
-				},
-				options
-			);
-			let buttons = [
-				{ sn: 'cancel', name: op.cancelName, call: op.cancelCall },
-				{ sn: 'ok', name: op.okName, call: op.okCall }
-			];
-			this._open(this.config.types.confirm, msg, buttons);
+		confirm({ title = $.regional.alert.title.confirm, msg = '', buttons = [$.regional.alert.btnMsg.ok, $.regional.alert.btnMsg.cancel] }, callback) {
+			this.open({ title, msg, buttons }, callback);
 		},
 
 		prompt(url, data) {
@@ -165,6 +101,34 @@
 					error: dwz.ajaxError
 				});
 			}
+		},
+
+		toast(msg, options) {
+			let op = $.extend({ msg: msg, duration: 4000 }, options);
+			if (window.api) {
+				api.toast(op);
+				return;
+			}
+
+			let clearTimer = () => {
+				if (this._timer) {
+					clearTimeout(this._timer);
+					this._timer = null;
+				}
+			};
+
+			$('#alert-toast').remove();
+			clearTimer();
+
+			let $toast = $('<div id="alert-toast">' + op.msg + '</div>').appendTo($('body'));
+			$toast.animateCls('fadeInUp');
+
+			this._timer = setTimeout(() => {
+				clearTimer();
+				$toast.animateCls('fadeOutDown', () => {
+					$toast.remove();
+				});
+			}, op.duration);
 		}
 	};
 })(dwz);

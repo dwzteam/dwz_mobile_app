@@ -106,7 +106,7 @@
 				event.preventDefault();
 			});
 
-			$('#alertDialogBox .close', $p).click(function (event) {
+			$('#alertPromptBox .close', $p).click(function (event) {
 				$.alert.close('prompt');
 				event.preventDefault();
 			});

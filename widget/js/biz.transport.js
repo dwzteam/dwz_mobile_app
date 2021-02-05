@@ -289,8 +289,8 @@ biz.transport = {
 
 	// 弹出发货过磅确认
 	confirmFirst(vo) {
-		$.alert.confirm('出发前先录入发货过磅信息', {
-			okCall(event) {
+		$.alert.confirm({ msg: '出发前先录入发货过磅信息' }, (ret) => {
+			if (ret.buttonIndex == 1) {
 				$.navView.open({
 					url: 'tpl/transport/first.html?dwz_callback=biz.transport.firstRender',
 					data: vo,
@@ -322,8 +322,8 @@ biz.transport = {
 	},
 	// 弹出收货过磅确认
 	confirmFinish(vo) {
-		$.alert.confirm('完成前先录入卸货过磅信息', {
-			okCall(event) {
+		$.alert.confirm({ msg: '完成前先录入卸货过磅信息' }, (ret) => {
+			if (ret.buttonIndex == 1) {
 				$.navView.open({
 					url: 'tpl/transport/last.html?dwz_callback=biz.transport.lastRender',
 					data: vo,
@@ -361,11 +361,11 @@ biz.transport = {
 		const $sitePic = $('#upload-weigh_site_pic');
 
 		if ($pic.size() && $pic.find('.thumbnail').size() == 0) {
-			$.alert.error('请选择上传磅单图片');
+			$.alert.open({ msg: '请选择上传磅单图片' });
 			return false;
 		}
 		if ($sitePic.size() && $sitePic('.thumbnail').size() == 0) {
-			$.alert.error('请选择上传现场图片');
+			$.alert.open({ msg: '请选择上传现场图片' });
 			return false;
 		}
 
@@ -373,7 +373,7 @@ biz.transport = {
 		const $sign_url = $form.find('input.dwz-sign-input');
 		if ($sign_url.size()) {
 			if (!$sign_url.val() && $form.find('.dwz-sign-box').size()) {
-				$.alert.error('您还没有完成签字！');
+				$.alert.open({ msg: '您还没有完成签字！' });
 				return false;
 			}
 		}
