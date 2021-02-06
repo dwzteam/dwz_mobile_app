@@ -15,6 +15,7 @@
 		{ "name": "actionSheet", "url": "" },
 		{ "name": "calendar", "url": "" },
 		{ "name": "slideTab", "url": "" },
-		{ "name": "charts", "url": "" }
+		{ "name": "charts", "url": "" },
+		{ "name": "marquee", "url": "" }
 	]
 }

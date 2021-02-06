@@ -176,11 +176,22 @@ dwz.extend({
 		}
 		return null;
 	},
-	// 在页面render后，判断url参数中有没有helper函数，有就执行
+	eval(funcStr) {
+		let _evalFn = '(false || ' + funcStr + ')';
+		if (window.execScript) {
+			return window.execScript(_evalFn); // 给IE的特殊待遇
+		} else {
+			return window.eval(_evalFn); // 给其他大部分浏览器用的
+		}
+	},
+	// 在页面render后，判断url参数中有没有helper函数; 或者页面上有script js function，有就执行
 	execHelperFn($target, tpl, params) {
 		if (params.dwz_helper) {
 			const helperFn = dwz.eavl(params.dwz_helper);
 			helperFn && helperFn.call($target, tpl, params);
+		} else if (tpl.script && params.dwz_script == 'function') {
+			let _evalFn = dwz.eval(tpl.script);
+			_evalFn.call($target, tpl, params);
 		}
 	},
 	/**
@@ -189,7 +200,7 @@ dwz.extend({
 	 * @returns {{html: (*|string), 'tpl_xxx1': (*|string), 'tpl_xxx2': (*|string)}}
 	 */
 	templateWrap(html) {
-		let ret = { html: html || '' };
+		let ret = { html: html || '', script: '' };
 		let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
 		let jsContained = ret.html.match(regDetectJs);
 		if (jsContained) {
@@ -202,9 +213,11 @@ dwz.extend({
 				let $script = $(jsContained[i]),
 					_type = $script.attr('type'),
 					_id = $script.attr('id');
-				if (_type == 'text/html' && _id) {
-					let jsSection = jsContained[i].match(regGetJS);
-					ret[_id] = jsSection[2];
+				let jsSection = jsContained[i].match(regGetJS);
+				if (_type == 'text/html') {
+					ret[_id || 'default'] = jsSection[2];
+				} else if (!ret.script) {
+					ret.script = jsSection[2];
 				}
 			}
 		}

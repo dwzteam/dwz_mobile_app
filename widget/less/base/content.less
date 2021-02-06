@@ -317,3 +317,44 @@ figure {
 		width: 100%;
 	}
 }
+
+.dwz-marquee-txt,
+.dwz-marquee-list {
+	overflow: hidden;
+}
+
+ul.grid {
+	.tr {
+		color: @txtColor;
+		font-size: @l4;
+		.flex-wrap;
+
+		.td {
+			line-height: 30px;
+			.flex-wrap;
+
+			&.right {
+				justify-content: flex-end;
+				align-items: flex-end;
+			}
+			&.w30 {
+				width: 30px;
+			}
+			&.w40 {
+				width: 40px;
+			}
+			&.w60 {
+				width: 60px;
+			}
+			&.w80 {
+				width: 80px;
+			}
+			&.w100 {
+				width: 100px;
+			}
+			&.w120 {
+				width: 120px;
+			}
+		}
+	}
+}

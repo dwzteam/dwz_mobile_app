@@ -1,0 +1,131 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">marquee滚动</div>
+			</div>
+			<a class="bar-button" data-href="tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=marquee文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/marquee" target="navView" rel="doc"><i class="icon icon-doc"></i>文档</a>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="dwz-panel">
+					<div class="panel-header padding-h">
+						<label class="panel-title">marquee滚动文字</label>
+					</div>
+					<div class="panel-content dwz-marquee-txt" style="height:100px">
+						<div class="detail-content marquee-item">
+							DWZ Mobile 官方文档：封装了新版百度开放平台的人脸识别采集 SDK(活体检测)。人脸识别后可以精准截取头像，人脸抠图支持压缩比设定，从而解决了某些第三方实名认证接口图像大小不能超过 20K 的问题。[详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/apicloud/dwzBaiduFaceLive)
+						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="dwz-panel">
+					<div class="panel-header padding-h">
+						<label class="panel-title">marquee滚动列表</label>
+					</div>
+					<div class="panel-content padding-h">
+
+						<ul class="grid">
+							<li class="tr">
+								<div class="td w30"></div>
+								<div class="td flex-item">城市</div>
+								<div class="td w100 right">数量</div>
+								<div class="td w100 right">趋势</div>
+							</li>
+						</ul>
+						<div class="dwz-marquee-list">
+							<ul class="grid">
+								<li class="tr">
+									<div class="td w30">1</div>
+									<div class="td flex-item">北京</div>
+									<div class="td w100 right">2000万</div>
+									<div class="td w100 right"><i class="table-status-down"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">2</div>
+									<div class="td flex-item">上海</div>
+									<div class="td w100 right">2000万</div>
+									<div class="td w100 right"><i class="table-status-eq"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">3</div>
+									<div class="td flex-item">杭州</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-up"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">4</div>
+									<div class="td flex-item">广州</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-eq"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">5</div>
+									<div class="td flex-item">深圳</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-up"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">6</div>
+									<div class="td flex-item">成都</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-down"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">7</div>
+									<div class="td flex-item">重庆</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-up"></i></div>
+								</li>
+								<li class="tr">
+									<div class="td w30">8</div>
+									<div class="td flex-item">深圳</div>
+									<div class="td w100 right">1500万</div>
+									<div class="td w100 right"><i class="table-status-eq"></i></div>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+</main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		// 滚动列表文字
+		this.find('.dwz-marquee-txt').each(function(index, elem) {
+			new DwzMarquee({
+				$el: elem
+			});
+		});
+
+		// 滚动列表示例
+		this.find('.dwz-marquee-list').each(function(index, elem) {
+			new DwzMarquee({
+				$el: elem,
+				cls: "grid",
+				itemCls: "tr",
+				duration: 1000,
+				pageSize: 4
+			});
+		});
+
+	}
+</script>

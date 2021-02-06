@@ -6,7 +6,7 @@
 (function ($) {
 	$.config.frag.external = '<iframe src="{url}" class="iframe-pages" frameborder="no" scrolling="auto" border="0" marginwidth="0" marginheight="0" allowfullscreen="true"></iframe>';
 
-	dwz.regPlugins.push(function ($p) {
+	$.regPlugins.push(($p) => {
 		if ($.fn.slide)
 			$('div.dwz-slide', $p).each(function () {
 				let $box = $(this);
