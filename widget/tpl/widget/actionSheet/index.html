@@ -1,0 +1,42 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">actionSheet</div>
+			</div>
+
+			<a class="bar-button" data-href="tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=actionSheet文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/actionSheet" target="navView" rel="doc"><i class="icon icon-doc"></i>文档</a>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+				<ul class="list">
+
+					<li class="item" onclick="$.actionSheet.open({
+						title:'actionSheet组件示例',
+						buttons: ['按钮1', '按钮2', '按钮3']
+					}, function(ret){
+						$.alert.toast('buttonIndex: ' + ret.buttonIndex)
+					})">
+						<p class="flex-item">actionSheet组件示例1</p><i class="arrow-right"></i>
+					</li>
+
+					<li class="item" onclick="$.actionSheet.open({
+						title:'actionSheet组件示例',
+						buttons: ['按钮1', '按钮2', {txt:'删除', style:'color:red'}]
+					}, function(ret){
+						$.alert.toast('buttonIndex: ' + ret.buttonIndex)
+					})">
+						<p class="flex-item">actionSheet组件示例2</p><i class="arrow-right"></i>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</main>

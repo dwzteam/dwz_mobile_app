@@ -12,6 +12,8 @@
 		{ "name": "brush", "url": "tpl/widget/brush/index.html?dwz_callback=$.drawingBoardRender" },
 		{ "name": "tabs", "url": "" },
 		{ "name": "slide", "url": "" },
+		{ "name": "actionSheet", "url": "" },
+		{ "name": "calendar", "url": "" },
 		{ "name": "slideTab", "url": "" },
 		{ "name": "charts", "url": "" }
 	]

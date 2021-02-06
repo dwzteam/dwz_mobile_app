@@ -16,4 +16,8 @@
 		},
 		btnMsg: { ok: '确定', cancel: '取消' }
 	});
+
+	$.setRegional('actionSheet', {
+		cancelTxt: '取消'
+	});
 })(dwz);

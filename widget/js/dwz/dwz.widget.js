@@ -86,10 +86,10 @@ class DwzMarquee extends DwzWidget {
 	}
 
 	_animationEvent() {
-		var $marquee = this.findByCls(this.cls);
-		var $items = this.findByCls(this.itemCls);
-		var $first = $items.eq(0);
-		var itemHeight = $first.height();
+		let $marquee = this.findByCls(this.cls);
+		let $items = this.findByCls(this.itemCls);
+		let $first = $items.eq(0);
+		let itemHeight = $first.height();
 
 		$marquee.translate({ y: 0 });
 		$marquee.off(this.animationend).on(this.animationend, (event) => {
@@ -123,13 +123,13 @@ class DwzMarquee extends DwzWidget {
 			return;
 		}
 
-		var $marquee = this.findByCls(this.cls);
+		let $marquee = this.findByCls(this.cls);
 		if ($marquee.size() == 0) {
 			this.$el.html(`<div class="${this.cls}">${this.$el.html()}</div>`);
 			$marquee = this.findByCls(this.cls);
 		}
 
-		var $items = this.findByCls(this.itemCls);
+		let $items = this.findByCls(this.itemCls);
 		if (this.pageSize == 1 && $items.size() > 0 && $marquee.height() > this.$el.height()) {
 			$marquee.append($items.eq(0).clone(true));
 			$items = this.findByCls(this.itemCls);

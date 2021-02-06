@@ -48,7 +48,7 @@
 			let $btns = $(this.config.box$).find('a.alert-btn-dialog');
 
 			for (let i = 0; i < buttons.length; i++) {
-				$btns.eq(i).on($.event.hasTouch ? 'touchstart' : 'click', i, (event) => {
+				$btns.eq(i).click(i, (event) => {
 					let buttonIndex = event.data + 1;
 					callback && callback({ buttonIndex });
 					$.alert.close();
