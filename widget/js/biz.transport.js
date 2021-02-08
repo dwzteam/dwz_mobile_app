@@ -54,61 +54,59 @@ biz.transport = {
 		$box.html(html).initUI();
 
 		const $sheetBox = $box.find('.sheet-box');
-
 		const $mapBox = $box.find('.dwz-map-box');
-		const map = new AMap.Map($mapBox.get(0), {
-			// mapStyle: "amap://styles/grey",
-			zoom: biz.location.zoom
-		});
+
+		// 高德地图和gps定位持续上报模块有冲突，换成百度地图
+		const map = new BMap.Map($mapBox.get(0));
+		const bdPos = $.gps.bd_encrypt(biz.location.lat, biz.location.lng);
+		map.centerAndZoom(new BMap.Point(bdPos.lng, bdPos.lat), biz.location.zoom);
 
 		// 创建小车图标
 		const markers = {
-			car: $.amap.addMarker({
+			car: $.bmap.addMarker({
 				map: map,
-				position: [biz.location.lng, biz.location.lat],
-				content: '<div class="center-marker"><img src="./image/icon/marker-car.svg" class="icon-md"></div>'
+				iconUrl: './image/icon/marker-car.svg',
+				point: new BMap.Point(bdPos.lng, bdPos.lat),
+				iconWidth: 42,
+				iconHeight: 42,
+				anchor: new BMap.Size(21, 21)
 			}),
 			start: null,
-			end: null
+			end: [], // 多个卸货点
+			status: 0 // 发货状态
 		};
 
 		$(document).on('location.change', function (event) {
-			// console.log(JSON.stringify(event.data));
-
-			const gpsPos = new AMap.LngLat(biz.location.lng, biz.location.lat);
+			const gpsPos = new BMap.Point(bdPos.lng, bdPos.lat);
 			// 创建标注对象并添加到地图
-
 			markers.car.setPosition(gpsPos);
+			if (biz.location.lat || biz.location.lng) {
+				map.setCenter(gpsPos);
+			}
 
 			if (markers.start && (biz.location.lng || biz.location.lat)) {
 				const startPos = markers.start.getPosition();
 				const endPos = markers.end.getPosition();
 
 				// 设置小车角度
-				let deg = $.amap.calRotation({
+				let deg = $.bmap.calRotation({
 					map: map,
 					startPos: gpsPos,
 					endPos: endPos
 				});
-				markers.car.setAngle(deg);
+				markers.car.setRotation(deg);
 
 				const path = [gpsPos, endPos];
 				if (markers.polyline) {
 					markers.polyline.setPath(path);
 				} else {
 					//创建折线
-					markers.polyline = new AMap.Polyline({
-						map: map,
-						path: path,
-						lineCap: 'round',
-						isOutline: true,
-						outlineColor: 'white',
-						showDir: true,
+					markers.polyline = new BMap.Polyline(path, {
 						strokeColor: 'blue',
-						strokeWeight: 4,
-						borderWeight: 2,
+						strokeWeight: 2,
 						strokeOpacity: 0.5
 					});
+					map.addOverlay(markers.polyline); //增加折线
 				}
 			}
 		});
@@ -175,25 +173,35 @@ biz.transport = {
 					// 缓存当前运输单
 					biz.transport.vo = json.data;
 
-					const pointStart = new AMap.LngLat(json.data.ship.lng, json.data.ship.lat);
-
+					const pointStart = new BMap.Point(parseFloat(json.data.ship.lng), parseFloat(json.data.ship.lat));
+					setTimeout(() => {
+						if (!biz.location.lat || !biz.location.lng) {
+							map.setCenter(pointStart);
+						}
+					}, 500);
 					// 创建起点图标
-					markers.start = $.amap.addMarker({
+					markers.start = $.bmap.addMarker({
 						map: map,
-						position: pointStart,
-						content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
+						iconUrl: './image/icon/marker-start.svg',
+						point: pointStart,
+						iconWidth: 42,
+						iconHeight: 42,
+						anchor: new BMap.Size(21, 21)
 					});
+
 					// 创建终点图标
-					markers.end = $.amap.addMarker({
+					let pointEnd = $.gps.bd_encrypt(parseFloat(json.data.receive.lat), parseFloat(json.data.receive.lng));
+					markers.end = $.bmap.addMarker({
 						map: map,
-						position: [json.data.receive.lng, json.data.receive.lat],
-						content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
+						iconUrl: './image/icon/marker-end.svg',
+						point: new BMap.Point(pointEnd.lng, pointEnd.lat),
+						iconWidth: 28,
+						iconHeight: 42
 					});
 
-					// 缩放地图到合适的视野级别
-					map.setFitView([markers.car, markers.end]);
-
-					$(document).trigger('location.change', biz.location); // 测试路线
+					setTimeout(() => {
+						$(document).trigger('location.change', biz.location);
+					}, 800);
 				},
 				error: biz.ajaxError
 			});
@@ -387,190 +395,5 @@ biz.transport = {
 				$.ajaxDone(json);
 			}
 		});
-	},
-
-	// 驾车路线页面
-	drivingRender(tpl, params) {
-		const $box = this;
-		const html = template.render(tpl.html, { params: params });
-		$box.html(html).initUI();
-
-		const $mapBox = $box.find('.dwz-map-box');
-		const map = new AMap.Map($mapBox.get(0), {
-			zoom: biz.location.zoom
-		});
-
-		const pointStart = new AMap.LngLat(biz.location.lng, biz.location.lat);
-		const pointEnd = new AMap.LngLat(parseFloat(params.lng), parseFloat(params.lat));
-		map.setCenter(pointStart);
-
-		const markers = {
-			// 创建起点图标
-			start: $.amap.addMarker({
-				map: map,
-				position: pointStart,
-				content: '<div class="center-marker"><img src="./image/icon/marker-start.svg" class="icon-md"></div>'
-			}),
-			// 创建终点图标
-			end: $.amap.addMarker({
-				map: map,
-				position: pointEnd,
-				content: '<div class="dwz-marker icon-md"><img src="./image/icon/marker-end.svg"></div>'
-			})
-		};
-
-		// 路线导航
-		let driving = biz.createDriving({ map: map, pointStart: pointStart, pointEnd: pointEnd }, function (route) {
-			// console.log(JSON.stringify(route));
-			let _html = template.render(tpl.tpl_nav_info, { route, pointStart, pointEnd });
-			$box.find('.dwz-nav-info').html(_html);
-		});
-
-		const $form = $box.find('form.dwz-form');
-		const $sheetBox = $form.find('div.sheet-box');
-		const $inputEnd = $form.find('input[name=end]');
-		const $list = $form.find('ul.dwz-list');
-		$form.on('submit', function (event) {
-			console.log('search poi...');
-			event.preventDefault();
-
-			$sheetBox.removeClass('fold');
-
-			let keywords = $inputEnd.val().trim();
-			if (keywords) {
-				api.ajax(
-					{
-						url: $form.attr('action'),
-						method: 'get',
-						data: {
-							values: {
-								keywords: keywords
-							}
-						}
-					},
-					function (json, err) {
-						// console.log(JSON.stringify(json));
-						if (json.status == 1) {
-							let _list = [
-								{
-									name: params.name,
-									address: params.address,
-									lng: params.lng,
-									lat: params.lat
-								}
-							];
-							json.pois.forEach(function (item) {
-								let location = item.location.split(',');
-								_list.push({
-									name: item.cityname + item.adname + item.name,
-									address: item.address,
-									lng: parseFloat(location[0]),
-									lat: parseFloat(location[1])
-								});
-							});
-							let _html = template.render(tpl.tpl_list, {
-								list: _list
-							});
-							$list.html(_html);
-
-							$list.find('li.item').touchwipe({
-								touch() {
-									let $li = $(this);
-									$inputEnd.val($li.attr('data-name'));
-									$sheetBox.addClass('fold');
-
-									// 路线导航
-									driving && driving.clear();
-									let _pointEnd = new AMap.LngLat(parseFloat($li.attr('data-lng')), parseFloat($li.attr('data-lat')));
-									driving = biz.createDriving(
-										{
-											map: map,
-											pointStart: pointStart,
-											pointEnd: _pointEnd
-										},
-										function (route) {
-											let _html = template.render(tpl.tpl_nav_info, route);
-											$box.find('.dwz-nav-info').html(_html);
-										}
-									);
-								}
-							});
-						}
-					}
-				);
-			}
-		});
-
-		// 判断中文输入完成或者英文输入，触发事件
-		let isInputZh = false;
-		$inputEnd.on('compositionstart compositionend input focus', function (event) {
-			console.log(event.type, isInputZh);
-
-			switch (event.type) {
-				case 'compositionstart':
-					isInputZh = true;
-					break;
-				case 'compositionend':
-					isInputZh = false;
-					break;
-				default:
-					if (!isInputZh) $form.trigger('submit');
-					break;
-			}
-		});
-	},
-	/**
-	 * 嵌入高德导航
-	 */
-	mapNav() {
-		if (!biz.checkPermission('location', 'GPS定位')) {
-			return;
-		}
-
-		const vo = biz.transport.vo;
-		if (!vo) {
-			return;
-		}
-
-		$.navView.close();
-
-		// let startPos = $.gps.bd_decrypt(biz.location.lat, biz.location.lng);
-		// let endPos = $.gps.bd_decrypt(vo.receive.lat, vo.receive.lng);
-		let startPos = biz.location;
-		let endPos = vo.receive;
-		let aMapNavigation = api.require('aMapNavigation');
-		aMapNavigation.start(
-			{
-				start: {
-					lon: startPos.lng,
-					lat: startPos.lat
-				},
-				end: {
-					lon: endPos.lng,
-					lat: endPos.lat
-				},
-				type: 'drive',
-				strategy: 'fast',
-				mode: 'GPS',
-				styles: {
-					preference: {
-						night: false,
-						compass: false,
-						crossImg: false,
-						degree: 30,
-						yawReCal: false,
-						jamReCal: false,
-						alwaysBright: false
-					}
-				}
-			},
-			function (ret, err) {
-				if (ret) {
-					console.log(JSON.stringify(ret));
-				} else {
-					console.log(JSON.stringify(err));
-				}
-			}
-		);
 	}
 };

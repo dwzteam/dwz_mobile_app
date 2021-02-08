@@ -27,7 +27,7 @@
 		<div class="btn-group">
 			{{if receive.mobile}}
 			<a class="btn" href="tel:{{receive.mobile}}" target="redirect"><i class="icon icon-phone"></i><span>电话</span></a> {{/if}}
-			<a class="btn" href="javascript:$.navView.open({url:'tpl/transport/driving.html?dwz_callback=biz.transport.drivingRender', data:{{receive}}, rel:'driving'})"><i class="icon icon-map-nav"></i>导航</a>
+			<a class="btn" href="javascript:biz.openMapNav({{receive}})"><i class="icon icon-map-nav"></i>导航</a>
 		</div>
 	</li>
 </script>
