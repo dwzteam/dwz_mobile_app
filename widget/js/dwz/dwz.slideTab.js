@@ -87,11 +87,11 @@
 					// 添加当前activeClass
 					$contentUl.find(':scope>li').removeClass(op.activeClass).eq(currentIndex).addClass(op.activeClass);
 
-					if (op.onSwitchSlide) {
-						let $tab = $tabs.eq(currentIndex),
-							_href = $tab.attr('data-href'),
-							_params = _href.getParams();
-						if (_href && !$tab.attr('data-loaded')) {
+					let $tab = $tabs.eq(currentIndex),
+						_href = $tab.attr('data-href');
+					if (op.onSwitchSlide && _href) {
+						let _params = _href.getParams();
+						if (!$tab.attr('data-loaded')) {
 							$.ajax({
 								type: 'GET',
 								url: _href,
@@ -102,7 +102,7 @@
 									if ($img.size() > 0) {
 										_params.img_src = $img.attr('src');
 									}
-									op.onSwitchSlide.call($slide, _tpl, _params);
+									op.onSwitchSlide($slide, _tpl, _params);
 								},
 								error: dwz.ajaxError
 							});
