@@ -81,6 +81,16 @@ const biz = window.biz || {
 			REMOTE: '/persion/list'
 		},
 
+		calendar: {
+			dayDetail: {
+				DEV: './doc/json/calendar/dayDetail.json',
+				REMOTE: '/calendar/dayDetail'
+			},
+			monthStatistics: {
+				DEV: './doc/json/calendar/monthStatistics.json',
+				REMOTE: '/calendar/monthStatistics'
+			}
+		},
 		announce: {
 			// 通知列表-推荐
 			recommend: {

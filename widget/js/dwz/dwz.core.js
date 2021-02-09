@@ -187,11 +187,13 @@ dwz.extend({
 	// 在页面render后，判断url参数中有没有helper函数; 或者页面上有script js function，有就执行
 	execHelperFn($target, tpl, params) {
 		if (params.dwz_helper) {
-			const helperFn = dwz.eavl(params.dwz_helper);
+			let helperFn;
+			if (params.dwz_helper == 'script') {
+				if (tpl.script) helperFn = dwz.eval(tpl.script);
+			} else {
+				helperFn = dwz.eavl(params.dwz_helper);
+			}
 			helperFn && helperFn.call($target, tpl, params);
-		} else if (tpl.script && params.dwz_script == 'function') {
-			let _evalFn = dwz.eval(tpl.script);
-			_evalFn.call($target, tpl, params);
 		}
 	},
 	/**

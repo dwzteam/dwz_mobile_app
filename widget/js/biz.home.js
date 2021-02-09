@@ -39,7 +39,7 @@ biz.home = {
 					if ($.isAjaxStatusOk(json)) {
 						json.data.map((item) => {
 							if (!item.url) {
-								item.url = `tpl/widget/${item.name}/index.html?dwz_script=function`;
+								item.url = `tpl/widget/${item.name}/index.html?dwz_helper=script`;
 							}
 							return item;
 						});
