@@ -89,6 +89,10 @@ const biz = window.biz || {
 			monthStatistics: {
 				DEV: './doc/json/calendar/monthStatistics.json',
 				REMOTE: '/calendar/monthStatistics'
+			},
+			weekStatistics: {
+				DEV: './doc/json/calendar/weekStatistics.json',
+				REMOTE: '/calendar/weekStatistics'
 			}
 		},
 		announce: {
