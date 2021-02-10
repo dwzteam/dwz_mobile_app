@@ -16,6 +16,7 @@
 		{ "name": "calendar", "url": "" },
 		{ "name": "slideTab", "url": "" },
 		{ "name": "charts", "url": "" },
-		{ "name": "marquee", "url": "" }
+		{ "name": "marquee", "url": "" },
+		{ "name": "button", "url": "" }
 	]
 }

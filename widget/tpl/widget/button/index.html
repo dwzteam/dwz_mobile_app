@@ -1,0 +1,112 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">button按钮</div>
+			</div>
+			<a class="bar-button" data-href="tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=button文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/button" target="navView" rel="doc"><i class="icon icon-doc"></i>文档</a>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="dwz-panel">
+					<div class="panel-header padding-h">
+						<label class="panel-title">基础用法</label>
+					</div>
+					<div class="panel-content">
+						<div class="flex-flow">
+							<button class="button">默认按钮</button>
+							<button class="button primary">主要按钮</button>
+							<button class="button success">成功按钮</button>
+							<button class="button warning">警告按钮</button>
+							<button class="button danger">危险按钮</button>
+							<button class="button" disabled>禁用按钮</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+				<div class="dwz-panel">
+					<div class="panel-header padding-h">
+						<label class="panel-title">不同尺寸按钮</label>
+					</div>
+					<div class="panel-content">
+						<div class="flex-flow">
+							<button class="button">默认按钮</button>
+							<button class="button medium">中等按钮</button>
+							<button class="button small">小型按钮</button>
+							<button class="button mini">超小按钮</button>
+						</div>
+
+						<div class="flex-flow">
+							<button class="button primary">默认按钮</button>
+							<button class="button medium primary">中等按钮</button>
+							<button class="button small primary">小型按钮</button>
+							<button class="button mini primary">超小按钮</button>
+						</div>
+
+						<div class="flex-flow">
+							<button class="button success">默认按钮</button>
+							<button class="button medium success">中等按钮</button>
+							<button class="button small success">小型按钮</button>
+							<button class="button mini success">超小按钮</button>
+						</div>
+
+						<div class="flex-flow">
+							<button class="button warning">默认按钮</button>
+							<button class="button medium warning">中等按钮</button>
+							<button class="button small warning">小型按钮</button>
+							<button class="button mini warning">超小按钮</button>
+						</div>
+
+						<div class="flex-flow">
+							<button class="button danger">默认按钮</button>
+							<button class="button medium danger">中等按钮</button>
+							<button class="button small danger">小型按钮</button>
+							<button class="button mini danger">超小按钮</button>
+						</div>
+
+						<div class="flex-flow">
+							<button class="button primary" disabled>默认按钮</button>
+							<button class="button medium primary" disabled>中等按钮</button>
+							<button class="button small primary" disabled>小型按钮</button>
+							<button class="button mini primary" disabled>超小按钮</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		// 滚动列表文字
+		this.find('.dwz-marquee-txt').each(function(index, elem) {
+			new DwzMarquee({
+				$el: elem
+			});
+		});
+
+		// 滚动列表示例
+		this.find('.dwz-marquee-list').each(function(index, elem) {
+			new DwzMarquee({
+				$el: elem,
+				cls: "grid",
+				itemCls: "tr",
+				duration: 1000,
+				pageSize: 4
+			});
+		});
+
+	}
+</script>

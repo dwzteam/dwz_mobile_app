@@ -252,17 +252,15 @@ textarea:read-only {
 }
 
 .button {
-	display: block;
-	text-align: center;
+	.flex-all-center;
 	padding: 0 10px;
 	height: 40px;
-	line-height: 40px;
 	color: @btnTxtColor;
-	border: none;
+	border: 1px solid @btnBorderColor;
 	background: @btnBg;
-	font-size: @l2;
-	border-radius: 8px;
 	outline: none;
+	font-size: @l3;
+	border-radius: 5px;
 	position: relative;
 	overflow: hidden;
 	&.hover:after {
@@ -276,17 +274,53 @@ textarea:read-only {
 		background: #f5f5f5;
 		color: @infoColor;
 		height: 72px;
-		font-size: @l2;
+		border: none;
 		.flex-all-center;
 		.flex-item;
 	}
 	&.primary {
-		background: @btnBgActive;
-		color: @btnTxtColorActive;
+		border: @btnBorderColorPrimary;
+		background: @btnBgPrimary;
+		color: @btnTxtColorPrimary;
 	}
-	&.disabled {
-		background: #ccc;
-		color: @btnTxtColorActive;
+	&.success {
+		border: @btnBorderColorSuccess;
+		background: @btnBgSuccess;
+		color: @btnTxtColorSuccess;
+	}
+	&.warning {
+		border: @btnBorderColorWarning;
+		background: @btnBgWarning;
+		color: @btnTxtColorWarning;
+	}
+	&.danger {
+		border: @btnBorderColorDanger;
+		background: @btnBgDanger;
+		color: @btnTxtColorDanger;
+	}
+	&.disabled,
+	&[disabled] {
+		border-color: @btnBorderColorDisabled;
+		background: @btnBgDisabled;
+		color: @btnTxtColorDisabled;
+	}
+
+	&.medium {
+		height: 36px;
+	}
+
+	&.small {
+		height: 32px;
+		font-size: @l4;
+	}
+
+	&.mini {
+		height: 28px;
+		font-size: @l4;
+	}
+
+	&.is-round {
+		border-radius: 20px;
 	}
 }
 

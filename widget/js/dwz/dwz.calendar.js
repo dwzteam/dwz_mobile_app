@@ -7,18 +7,15 @@
 	const calendarFrag =
 		'<div class="calendar">\
 		<div class="dt">\
-			<div class="ym"><a href="javascript:"><span>Month Year</span></a></div>\
+			<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>\
 			<div class="pr"><a href="javascript:"></a></div>\
 			<div class="ne"><a href="javascript:"></a></div>\
 		</div>\
 		<div class="bd">\
 			<div class="slide-wrap"></div>\
 		</div>\
-		<div class="ympop" style="display:">\
+		<div class="ympop">\
 			<div class="ym">\
-				<div class="mm">\
-					<ul class="clearfix"></ul>\
-				</div>\
 				<div class="yy">\
 					<div class="yt">\
 						<div class="pr"><a href="javascript:;"></a></div>\
@@ -26,17 +23,21 @@
 					</div>\
 					<ul class="clearfix"></ul>\
 				</div>\
+				<div class="mm">\
+					<ul class="clearfix"></ul>\
+				</div>\
 			</div>\
-			<div class="Ft">\
-				<div class="le"><a class="bt ympopOkBut" href="#OK"><span>确定</span></a></div>\
-				<div class="ri"><a class="bt ympopCalcelBut" href="#Cancel"><span>取消</span></a></div>\
+			<div class="ympop-ft">\
+				<a class="button primary ympopOkBut" href="#OK"><span>确定</span></a>\
+				<a class="button ympopCalcelBut" href="#Cancel"><span>取消</span></a>\
 			</div>\
 		</div>\
 	</div>';
 
 	$.setRegional('calendar', {
 		dayNames: ['日', '一', '二', '三', '四', '五', '六'],
-		monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+		monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+		yearName: '年'
 	});
 
 	$.fn.calendar = function (options) {
@@ -89,7 +90,7 @@
 
 				generateCalendar(dp);
 
-				$ymdt.find('.ym span').text(monthNames[month - 1] + ' ' + year);
+				$ymdt.find('.ym span').text(year + $.regional.calendar.yearName + monthNames[month - 1]);
 				// 选择年月回调
 				if (op.changeYearMonthFn) {
 					op.changeYearMonthFn.call($ympop, { year: year, month: month });
@@ -179,7 +180,7 @@
 						let $yearLi = $year.find('li.selected'),
 							$monthLi = $month.find('li.selected');
 						if ($yearLi.hasClass('disabled') || $monthLi.hasClass('disabled')) return false;
-						$ymdt.find('.ym span').text($monthLi.find('a').text() + ' ' + $yearLi.find('a').text());
+						$ymdt.find('.ym span').text($yearLi.find('a').text() + $.regional.calendar.yearName + $monthLi.find('a').text());
 
 						let year = parseInt($yearLi.attr('value')),
 							month = parseInt($monthLi.attr('value'));
@@ -236,7 +237,7 @@
 					});
 				}
 
-				$ymdt.find('.ym span').text($month.find('li.selected').text() + ' ' + $year.find('li.selected').text());
+				$ymdt.find('.ym span').text($year.find('li.selected').text() + $.regional.calendar.yearName + $month.find('li.selected').text());
 				if (bShow) $ympop.show();
 			}
 

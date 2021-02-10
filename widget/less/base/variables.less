@@ -10,8 +10,6 @@
 @headerButtonTxt: #666;
 @tabTxtColor: #929292;
 @tabTxtColorActive: #ff480a;
-@btnTxtColor: #fff;
-@btnTxtColorActive: #fff;
 
 // Background
 @defaultBg: #f6f7fb;
@@ -19,10 +17,33 @@
 @hoverBg: rgba(220, 220, 220, 0.4);
 @activeBg: rgba(225, 225, 225, 0.8);
 @inputBg: #f6f6f6;
-@btnBg: #4eb3ff;
-@btnBgActive: #ff480a;
 @tableBg: #fff;
 @maskBg: rgba(0, 0, 0, 0.5);
+
+// button
+@btnBg: #ecf5ff;
+@btnBorderColor: #c6e2ff;
+@btnTxtColor: #4eb3ff;
+
+@btnBgPrimary: #4eb3ff;
+@btnBorderColorPrimary: #4eb3ff;
+@btnTxtColorPrimary: #fff;
+
+@btnBgSuccess: #67c23a;
+@btnBorderColorSuccess: #67c23a;
+@btnTxtColorSuccess: #fff;
+
+@btnBgWarning: #e6a23c;
+@btnBorderColorWarning: #e6a23c;
+@btnTxtColorWarning: #fff;
+
+@btnBgDanger: #ff480a;
+@btnBorderColorDanger: #ff480a;
+@btnTxtColorDanger: #fff;
+
+@btnBgDisabled: #c8c9cc;
+@btnBorderColorDisabled: #c8c9cc;
+@btnTxtColorDisabled: #fff;
 
 // 字号
 @l1: 18px; // 一级标题
@@ -145,6 +166,14 @@
 .flex-wrap-v {
 	.flex-wrap;
 	.flex-vertical;
+}
+.flex-flow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	& > .button {
+		margin: 5px;
+	}
 }
 .flex-item {
 	position: relative;
