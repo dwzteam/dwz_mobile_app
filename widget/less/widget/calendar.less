@@ -1,16 +1,12 @@
-.datechooser {
-	&:before {
-		content: ' ';
-		clear: both;
-	}
-}
-
 .calendar {
 	.box-line;
 	overflow: hidden;
 	min-width: 240px;
 	position: relative;
 	background: #fff;
+	a {
+		color: @titleColor;
+	}
 
 	.dt {
 		.b-line;
@@ -148,26 +144,28 @@
 			text-align: center;
 			text-decoration: none;
 			line-height: 32px;
-			color: #000;
 		}
-		li a:hover,
+
 		.selected a {
 			border-radius: 3px;
-			background: @btnBgPrimary;
-			color: @btnTxtColorPrimary;
 		}
-		.disabled a,
-		.disabled a:hover {
-			color: #999;
-			border: none;
-			background: none;
-			cursor: default;
+
+		.ympop-ft {
+			.t-line;
+			height: 50px;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			position: absolute;
+			bottom: 0px;
+			width: 100%;
+			.button {
+				min-width: 80px;
+			}
 		}
 	}
 	.bd {
-		background-color: #fff;
-		font-size: 12px;
-		color: #333333;
+		font-size: @l4;
 		font-weight: bold;
 		overflow: hidden;
 		width: 100%;
@@ -226,43 +224,27 @@
 				left: 50%;
 				margin-left: -2px;
 			}
-			&.sign {
-				&:before {
-					background-color: green;
-				}
-			}
-			&.leave {
-				&:before {
-					background-color: orange;
-				}
-			}
 		}
 	}
 
 	.selected {
 		a,
 		a:hover {
-			border-radius: 50%;
 			font-weight: bold;
 			background-color: @btnBgPrimary;
 			color: @btnTxtColorPrimary;
 		}
 	}
 	.inactive a {
-		color: #aaa;
+		color: #888;
 	}
-	.ympop-ft {
-		.t-line;
-		height: 50px;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		position: absolute;
-		bottom: 0px;
-		width: 100%;
-		.button {
-			min-width: 80px;
-		}
+
+	.disabled a,
+	.disabled a:hover {
+		color: @btnTxtColorDisabled;
+		border: none;
+		background: none;
+		cursor: default;
 	}
 
 	&.view-week {

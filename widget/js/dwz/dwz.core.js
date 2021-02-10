@@ -1108,6 +1108,9 @@ dwz.fn.extend({
 			dwz.data(this, name, value);
 		});
 	},
+	dataset() {
+		return this.size() === 0 ? {} : this.get(0).dataset;
+	},
 	css(key, value) {
 		if (value !== undefined) {
 			return this.each(function () {

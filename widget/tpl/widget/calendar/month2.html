@@ -1,0 +1,45 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">日历 + 自定义日期范围</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="dwz-calendar tb-line" minDate="{%y-3}-%M-%d" maxDate="%y-%M-{%d+3}"></div>
+
+				<ul class="list dwz-list-box"></ul>
+
+			</div>
+		</div>
+
+	</div>
+</main>
+
+<script id="tpl_list" type="text/html">
+	{{each data as item}}
+	<li class="item">
+		<div class="item-content">
+			<div class="item-title1">{{item.type}}</div>
+			<div class="item-info1">{{item.time}}</div>
+		</div>
+		<div class="item-info1 alt">+{{item.score}}分</div>
+	</li>
+	{{/each}}
+</script>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		const $calendar = this.find('.dwz-calendar');
+
+		$calendar.calendar({});
+	}
+</script>

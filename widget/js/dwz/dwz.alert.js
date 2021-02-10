@@ -8,7 +8,7 @@
 			success: '成功',
 			confirm: '确认提示'
 		},
-		btnMsg: { ok: '确定', cancel: '取消' }
+		btnTxt: { ok: '确定', cancel: '取消' }
 	});
 
 	$.alert = {
@@ -34,7 +34,7 @@
 		 * @param [String] buttons [button1, button2]
 		 * @param callback
 		 */
-		open({ title = $.regional.alert.title.info, msg = '', buttons = [$.regional.alert.btnMsg.ok] }, callback) {
+		open({ title = $.regional.alert.title.info, msg = '', buttons = [$.regional.alert.btnTxt.ok] }, callback) {
 			$(this.config.box$).remove();
 			let butsHtml = '';
 			if (buttons) {
@@ -71,7 +71,7 @@
 		success(msg, callback) {
 			this.open({ title: $.regional.alert.title.success, msg }, callback);
 		},
-		confirm({ title = $.regional.alert.title.confirm, msg = '', buttons = [$.regional.alert.btnMsg.ok, $.regional.alert.btnMsg.cancel] }, callback) {
+		confirm({ title = $.regional.alert.title.confirm, msg = '', buttons = [$.regional.alert.btnTxt.ok, $.regional.alert.btnTxt.cancel] }, callback) {
 			this.open({ title, msg, buttons }, callback);
 		},
 

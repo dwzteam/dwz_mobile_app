@@ -41,51 +41,39 @@
 		const $calendar = this.find('.dwz-calendar');
 
 		$calendar.calendar({
-			changeDayFn: (value) => {
-				console.log(value);
+			changeDayFn: ($day, value) => {
+				console.log($day.dataset(), value);
 
-				// 选中某天后，请求当天的事件
-				$.ajax({
-					type: 'GET',
-					url: biz.server.getUrl(biz.server.calendar.dayDetail),
-					dataType: 'json',
-					data: {
-						date: value
-					},
-					success: (json) => {
-						if ($.isAjaxStatusOk(json)) {
-							let _html = template.render(tpl.tpl_list, json);
-							this.find('.dwz-list-box').html(_html);
-						}
-					},
-					error: $.ajaxError
-				});
+				if ($day.hasClass('dot')) {
+					// 选中某天后，请求当天的事件
+					$.ajax({
+						type: 'GET',
+						url: biz.server.getUrl(biz.server.calendar.dayDetail),
+						dataType: 'json',
+						data: {
+							date: value
+						},
+						success: (json) => {
+							if ($.isAjaxStatusOk(json)) {
+								let _html = template.render(tpl.tpl_list, json);
+								this.find('.dwz-list-box').html(_html);
+							}
+						},
+						error: $.ajaxError
+					});
+				} else {
+					this.find('.dwz-list-box').html('');
+				}
+
 			},
 
 			refreshDayFn: ($days, dateWrap) => {
-				// 积分月统计，日历下面的小红点
-				$.ajax({
-					type: 'POST',
-					url: biz.server.getUrl(biz.server.calendar.monthStatistics),
-					dataType: 'json',
-					data: {
-						year: dateWrap.year,
-						month: dateWrap.month
-					},
-					success: (json) => {
-						if ($.isAjaxStatusOk(json)) {
-							let data = json.data;
-							$days.each(function(index) {
-								let day = index + 1;
-								for (let i = 0; i < data.length; i++) {
-									if (day == data[i]) {
-										$(this).addClass('dot');
-									}
-								}
-							});
-						}
-					},
-					error: $.ajaxError
+				// 日历下面的小红点（测试数据双数日期加小红点）
+				$days.each(function(index) {
+					let day = parseInt(this.dataset.day);
+					if (day % 2 == 0) {
+						$(this).addClass('dot');
+					}
 				});
 			}
 		});

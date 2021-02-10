@@ -4,40 +4,11 @@
  *
  */
 (function ($) {
-	const calendarFrag =
-		'<div class="calendar">\
-		<div class="dt">\
-			<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>\
-			<div class="pr"><a href="javascript:"></a></div>\
-			<div class="ne"><a href="javascript:"></a></div>\
-		</div>\
-		<div class="bd">\
-			<div class="slide-wrap"></div>\
-		</div>\
-		<div class="ympop">\
-			<div class="ym">\
-				<div class="yy">\
-					<div class="yt">\
-						<div class="pr"><a href="javascript:;"></a></div>\
-						<div class="ne"><a href="javascript:;"></a></div>\
-					</div>\
-					<ul class="clearfix"></ul>\
-				</div>\
-				<div class="mm">\
-					<ul class="clearfix"></ul>\
-				</div>\
-			</div>\
-			<div class="ympop-ft">\
-				<a class="button primary ympopOkBut" href="#OK"><span>确定</span></a>\
-				<a class="button ympopCalcelBut" href="#Cancel"><span>取消</span></a>\
-			</div>\
-		</div>\
-	</div>';
-
 	$.setRegional('calendar', {
 		dayNames: ['日', '一', '二', '三', '四', '五', '六'],
 		monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-		yearName: '年'
+		yearName: '年',
+		btnTxt: { ok: '确定', cancel: '取消' }
 	});
 
 	$.fn.calendar = function (options) {
@@ -47,7 +18,35 @@
 				miscBtnFn: null, //自定义按钮点击事件
 				changeDayFn: null, //选择日期点击事件
 				refreshDayFn: null, //刷新日期列表完成事件
-				viewType: 'month' // month, week
+				viewType: 'month', // month, week
+				frag: `<div class="calendar">
+					<div class="dt">
+						<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>
+						<div class="pr"><a href="javascript:"></a></div>
+						<div class="ne"><a href="javascript:"></a></div>
+					</div>
+					<div class="bd">
+						<div class="slide-wrap"></div>
+					</div>
+					<div class="ympop">
+						<div class="ym">
+							<div class="yy">
+								<div class="yt">
+									<div class="pr"><a href="javascript:;"></a></div>
+									<div class="ne"><a href="javascript:;"></a></div>
+								</div>
+								<ul class="clearfix"></ul>
+							</div>
+							<div class="mm">
+								<ul class="clearfix"></ul>
+							</div>
+						</div>
+						<div class="ympop-ft">
+							<a class="button primary ympopOkBut" href="javascript:;"><span>${$.regional.calendar.btnTxt.ok}</span></a>
+							<a class="button ympopCalcelBut" href="javascript:;"><span>${$.regional.calendar.btnTxt.cancel}</span></a>
+						</div>
+					</div>
+				</div>`
 			},
 			options
 		);
@@ -68,8 +67,7 @@
 			if ($this.attr('minDate')) opts.minDate = $this.attr('minDate');
 			if ($this.attr('maxDate')) opts.maxDate = $this.attr('maxDate');
 
-			$this.addClass('datechooser');
-			$(calendarFrag)
+			$(op.frag)
 				.appendTo($this)
 				.addClass('view-' + op.viewType);
 
@@ -147,13 +145,13 @@
 				for (let y = dw.year - 4; y < dw.year + 6; y++) {
 					let _className = dw.year == y ? 'selected' : '';
 					if (y < yearstart || y > yearend) _className += 'disabled';
-					yearFrag += '<li value="' + y + '" class="' + _className + '"><a href="javascript:">' + y + '</a></li>';
+					yearFrag += `<li value="${y}" class="${_className}"><a href="javascript:">${y}</a></li>`;
 				}
 				$year.html(yearFrag);
 
 				$.each($.regional.calendar.monthNames, function (i) {
 					let m = i + 1;
-					monthFrag += '<li value="' + m + '"' + (dw.month == m ? ' class="selected"' : '') + '><a href="javascript:">' + this + '</a></li>';
+					monthFrag += `<li value="${m}" ${dw.month == m ? ' class="selected"' : ''}><a href="javascript:">${this}</a></li>`;
 				});
 				$month.html(monthFrag);
 
@@ -264,7 +262,9 @@
 					monthStart.setMonth(monthStart.getMonth() - 1);
 					let prevDateWrap = dp.getDateWrap(monthStart);
 					for (let t = prevDateWrap.days - startDay + 1; t <= prevDateWrap.days; t++) {
-						aDay.push('<td class="inactive disabled" align="center"><a href="javascript:">' + t + '</a></td>');
+						let _date = new Date(dw.year, dw.month - 2, t);
+						let _ctrClass = _date >= minDate && _date <= maxDate ? '' : 'disabled';
+						aDay.push(`<td class="inactive ${_ctrClass}" align="center" data-day="${t}" data-value="${dp.formatDate(dp.changeDay(t, -1))}"><a href="javascript:">${t}</a></td>`);
 					}
 				}
 				let value = $this.attr('data-value');
@@ -272,29 +272,30 @@
 					let _date = new Date(dw.year, dw.month - 1, t);
 					let _ctrClass = _date >= minDate && _date <= maxDate ? '' : 'disabled';
 					if (value == dp.formatDate(_date)) {
-						aDay.push('<td align="center" class="selected ' + _ctrClass + '" day="' + t + '"><a href="javascript:">' + t + '</a></td>');
-					} else {
-						aDay.push('<td align="center" class="' + _ctrClass + '" day="' + t + '"><a href="javascript:">' + t + '</a></td>');
+						_ctrClass += (_ctrClass ? ' ' : '') + 'selected';
 					}
+					aDay.push(`<td align="center" class="${_ctrClass}" data-day="${t}" data-value="${dp.formatDate(dp.changeDay(t))}"><a href="javascript:">${t}</a></td>`);
 				}
 
 				for (let t = 1; t <= 42 - startDay - dw.days; t++) {
-					aDay.push('<td class="inactive disabled" align="center"><a href="javascript:">' + t + '</a></td>');
+					let _date = new Date(dw.year, dw.month, t);
+					let _ctrClass = _date >= minDate && _date <= maxDate ? '' : 'disabled';
+					aDay.push(`<td class="inactive ${_ctrClass}" align="center" data-day="${t}" data-value="${dp.formatDate(dp.changeDay(t, 1))}"><a href="javascript:">${t}</a></td>`);
 				}
 
 				let dayThStr = '',
 					dayStr = '';
 				$.each($.regional.calendar.dayNames, function (i) {
-					dayThStr += '<th><span>' + this + '</span></th>';
+					dayThStr += `<th><span>${this}</span></th>`;
 				});
-				dayThStr = '<tr>' + dayThStr + '</tr>';
+				dayThStr = `<tr>${dayThStr}</tr>`;
 
 				$.each(aDay, function (i) {
 					if (i % 7 == 0) dayStr += '<tr>';
 					dayStr += this;
 					if (i % 7 == 6) dayStr += '</tr>';
 				});
-				let _html = '<table class="di ' + _op.type + '">' + dayThStr + dayStr + '</table>';
+				let _html = `<table class="di ${_op.type}">${dayThStr + dayStr}</table>`;
 
 				return _html;
 			}
@@ -323,24 +324,24 @@
 					let _ctrClass = _date >= minDate && _date <= maxDate ? '' : 'disabled';
 
 					if (value == _dp.formatDate(_date)) {
-						_ctrClass += ' selected';
+						_ctrClass += (_ctrClass ? ' ' : '') + 'selected';
 					}
-					aDay.push('<td align="center" class="' + _ctrClass + '" day="' + _dw.day + '" chMonth="' + (_dw.month - dw.month) + '"><a href="javascript:">' + _dw.day + '</a></td>');
+					aDay.push(`<td align="center" class="${_ctrClass}" data-day="${_dw.day}" data-value="${dp.formatDate(dp.changeDay(_dw.day, _dw.month - dw.month))}"><a href="javascript:">${_dw.day}</a></td>`);
 				}
 
 				let dayThStr = '',
 					dayStr = '';
 				$.each($.regional.calendar.dayNames, function (i) {
-					dayThStr += '<th><span>' + this + '</span></th>';
+					dayThStr += `<th><span>${this}</span></th>`;
 				});
-				dayThStr = '<tr>' + dayThStr + '</tr>';
+				dayThStr = `<tr>${dayThStr}</tr>'`;
 
 				$.each(aDay, function (i) {
 					if (i % 7 == 0) dayStr += '<tr>';
 					dayStr += this;
 					if (i % 7 == 6) dayStr += '</tr>';
 				});
-				let _html = '<table class="di ' + _op.type + '">' + dayThStr + dayStr + '</table>';
+				let _html = `<table class="di ${_op.type}">${dayThStr + dayStr}</table>`;
 
 				return _html;
 			}
@@ -363,17 +364,21 @@
 					.touchwipe({
 						touch: function () {
 							let $day = $(this);
-							let value = dp.formatDate(dp.changeDay($day.attr('day'), $day.attr('chMonth')));
-							$this.attr('data-value', value);
+							let value = $day.attr('data-value');
 							$days.removeClass('selected');
 							$day.addClass('selected');
 
 							// 选择日期回调
 							if (op.changeDayFn) {
-								op.changeDayFn.call($day, value);
+								op.changeDayFn($day, value);
 							}
 						}
 					});
+
+				// 刷新日期列表完成事件
+				if (op.refreshDayFn) {
+					op.refreshDayFn($days, dp.getDateWrap());
+				}
 
 				// 选择日期回调
 				if (op.changeDayFn) {
@@ -382,15 +387,10 @@
 					});
 					if ($daySelected.size() > 0) {
 						let value = $this.attr('data-value');
-						op.changeDayFn.call($daySelected.eq(0), value);
+						op.changeDayFn($daySelected.eq(0), value);
 					} else {
-						op.changeDayFn.call($daySelected, '');
+						op.changeDayFn($daySelected, '');
 					}
-				}
-
-				// 刷新日期列表完成事件
-				if (op.refreshDayFn) {
-					op.refreshDayFn.call($this, $days, dp.getDateWrap());
 				}
 
 				// last view
