@@ -40,24 +40,29 @@
 		$calendar.calendar({
 			viewType: 'week',
 			changeDayFn: ($day, value) => {
-				console.log(value);
+				console.log($day.dataset(), value);
 
-				// 选中某天后，请求当天的事件
-				$.ajax({
-					type: 'GET',
-					url: biz.server.getUrl(biz.server.calendar.dayDetail),
-					dataType: 'json',
-					data: {
-						date: value
-					},
-					success: (json) => {
-						if ($.isAjaxStatusOk(json)) {
-							let _html = template.render(tpl.tpl_list, json);
-							this.find('.dwz-list-box').html(_html);
-						}
-					},
-					error: $.ajaxError
-				});
+				if ($day.hasClass('dot')) {
+
+					// 选中某天后，请求当天的事件
+					$.ajax({
+						type: 'GET',
+						url: biz.server.getUrl(biz.server.calendar.dayDetail),
+						dataType: 'json',
+						data: {
+							date: value
+						},
+						success: (json) => {
+							if ($.isAjaxStatusOk(json)) {
+								let _html = template.render(tpl.tpl_list, json);
+								this.find('.dwz-list-box').html(_html);
+							}
+						},
+						error: $.ajaxError
+					});
+				} else {
+					this.find('.dwz-list-box').html('');
+				}
 			},
 
 			refreshDayFn: ($days, dateWrap) => {
