@@ -334,7 +334,7 @@
 				$.each($.regional.calendar.dayNames, function (i) {
 					dayThStr += `<th><span>${this}</span></th>`;
 				});
-				dayThStr = `<tr>${dayThStr}</tr>'`;
+				dayThStr = `<tr>${dayThStr}</tr>`;
 
 				$.each(aDay, function (i) {
 					if (i % 7 == 0) dayStr += '<tr>';

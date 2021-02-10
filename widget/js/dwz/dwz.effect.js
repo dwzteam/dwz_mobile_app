@@ -31,6 +31,35 @@
 				${this._randomColorFactor(maxBlue)}, 
 				${opacity || '.3'}`;
 		},
+		colorRgba: function (options) {
+			let op = $.extend({ color: '#ffffff', opacity: 1 }, options);
+
+			let regHex = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/; // 16进制颜色值的正则
+			let regRgb = /^(rgb\(|RGB\()/; // rgb颜色值的正则
+			let color = op.color.toLowerCase(); // 把颜色值变成小写
+			if (regHex.test(color)) {
+				// 如果只有三位的值，需变成六位，如：#fff => #ffffff
+				if (color.length === 4) {
+					let colorNew = '#';
+					for (let i = 1; i < 4; i += 1) {
+						colorNew += color.slice(i, i + 1).concat(color.slice(i, i + 1));
+					}
+					color = colorNew;
+				}
+				// 处理六位的颜色值，转为RGB
+				let colorChange = [];
+				for (let i = 1; i < 7; i += 2) {
+					colorChange.push(parseInt('0x' + color.slice(i, i + 2)));
+				}
+				return 'rgba(' + colorChange.join(',') + ',' + op.opacity + ')';
+			} else if (regRgb.test(color)) {
+				// 把RGB的3个数值变成数组
+				let colorChange = color.replace(/(?:\(|\)|rgb|RGB)*/g, '').split(',');
+				return 'rgba(' + colorChange.join(',') + ',' + op.opacity + ')';
+			} else {
+				return color;
+			}
+		},
 		animate(ele, obj, duration, effectType, callback) {
 			for (let attr in obj) {
 				if (attr == 'width' || attr == 'height') {
