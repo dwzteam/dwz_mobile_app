@@ -18,7 +18,7 @@
 		 * @param {*} callback
 		 */
 		open({ title, buttons = [], cancelTxt = $.regional.actionSheet.cancelTxt }, callback) {
-			let html = `<div id="action-sheet" onclick="return $.actionSheet.close()">
+			let html = `<div id="action-sheet" onclick="return $.actionSheet.close(event)">
 				<div class="action-sheet-pane hide-down">
 					<div class="action-sheet-ul">
 						${title ? '<a class="action-sheet-title">' + title + '</a>' : ''}
@@ -30,7 +30,7 @@
 							.join('')}
 					</div>
 
-					<a class="action-sheet-cancel" onclick="return $.actionSheet.close()">${cancelTxt}</a>
+					<a class="action-sheet-cancel" onclick="return $.actionSheet.close(event)">${cancelTxt}</a>
 				</div>
 			</div>`;
 
@@ -47,23 +47,25 @@
 				$btns.eq(i).click(i, (event) => {
 					let buttonIndex = event.data + 1;
 					callback && callback({ buttonIndex });
-					event.preventDefault();
-					event.stopPropagation();
 
-					setTimeout(() => {
-						$.actionSheet.close();
-					}, 300);
+					$.actionSheet.close(event);
 				});
 			}
 		},
-		close() {
-			let $box = $(this.config.box$);
-			$box.find('.action-sheet-pane').addClass('hide-down');
-			setTimeout(() => {
-				$box.remove();
-			}, 300);
+		close(event) {
+			if (event) {
+				event.preventDefault();
+				event.stopPropagation();
+			}
 
-			return false;
+			let $box = $(this.config.box$);
+
+			if ($box.size() > 0) {
+				$box.find('.action-sheet-pane').addClass('hide-down');
+				setTimeout(() => {
+					$box.remove();
+				}, 300);
+			}
 		}
 	};
 })(dwz);
