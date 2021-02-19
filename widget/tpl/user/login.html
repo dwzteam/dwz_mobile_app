@@ -38,8 +38,8 @@
 								</div>
 
 								<div class="button-bar">
-									<button class="button primary" type="submit">登录</button>
-									<button class="button" type="button" onclick="biz.baiduFace.faceLogin()">人脸识别登录</button>
+									<button class="button primary" type="submit">登录</button> {{if !login_no_face}}
+									<button class="button" type="button" onclick="biz.baiduFace.faceLogin()">人脸识别登录</button>{{/if}}
 								</div>
 
 								<a data-href="tpl/user/register.html?dwz_callback=registerRender" target="dialog" data-pop="fullscreen" class="login-footer">还没有账号? 快速注册</a>

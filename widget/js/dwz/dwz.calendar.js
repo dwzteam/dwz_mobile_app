@@ -184,14 +184,14 @@
 							month = parseInt($monthLi.attr('value'));
 						dp.changeDate(year, month);
 						generateCalendar(dp);
-						$ympop.hide();
+						$ympop.removeClass('open');
 
 						if (!dp.hasDay()) {
 							$main.find('td.selected').trigger('click');
 						} //只有年月没有日期
 					});
 					$this.find(setting.ympopCalcelBut$).click(function () {
-						$ympop.hide();
+						$ympop.removeClass('open');
 					});
 
 					// last month
@@ -236,7 +236,7 @@
 				}
 
 				$ymdt.find('.ym span').text($year.find('li.selected').text() + $.regional.calendar.yearName + $month.find('li.selected').text());
-				if (bShow) $ympop.show();
+				if (bShow) $ympop.addClass('open');
 			}
 
 			function _monthBdHtml(dp, options) {

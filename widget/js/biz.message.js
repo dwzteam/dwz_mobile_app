@@ -2,7 +2,10 @@
  * @author 张慧华 <350863780@qq.com>
  */
 biz.message = {
-	removeItem({ id = null }) {
+	removeItem({ id = null }, event) {
+		if (event) {
+			event.stopPropagation();
+		}
 		$.ajax({
 			type: 'POST',
 			url: biz.server.getUrl(biz.server.message.del),

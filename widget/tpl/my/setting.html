@@ -47,9 +47,12 @@
 				</ul>
 
 				<div class="button-bar ">
-					<button class="button" onclick="(function() { 
-							$.alert.confirm( '确定要退出登录吗？', { 
-								okCall() { UserInfoUtil.clear(); $.gotoLogin(); }, 
+					<button class="button primary" onclick="(function() { 
+							$.alert.confirm( '确定要退出登录吗？', function(ret) {
+								if (ret.buttonIndex == 1) {
+									UserInfoUtil.clear();
+									$.gotoLogin(); 
+								}
 							}); 
 						})()">退出登录</button>
 				</div>

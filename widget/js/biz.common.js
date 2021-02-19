@@ -2,6 +2,32 @@
  * @author 张慧华 <350863780@qq.com>
  */
 
+// 检测用户登入状态
+$.urlInterceptor = function (url) {
+	let pass = UserInfo.token ? true : false;
+
+	if (!pass) {
+		// 配制无需登录的uri
+		let uris = ['tpl/user/', 'tpl/home.html'];
+
+		// 判断request URI 是否需要登入
+		let requestUri = url.getRequestURI();
+		for (let i = 0; i < uris.length; i++) {
+			if (requestUri.startsWith(uris[i])) {
+				pass = true;
+				break;
+			}
+		}
+	}
+
+	if (!pass) {
+		$.gotoLogin();
+		return false;
+	}
+
+	return true;
+};
+
 $._ajax = $.ajax;
 $.extend({
 	ajax(options) {

@@ -114,8 +114,8 @@ $.dialog = {
 			return;
 		}
 
-		$.alert.confirm(op.closeMsg, {
-			okCall() {
+		$.alert.confirm(op.closeMsg, (ret) => {
+			if (ret.buttonIndex == 1) {
 				$.dialog._closeDirect();
 			}
 		});

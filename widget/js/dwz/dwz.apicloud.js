@@ -160,12 +160,6 @@
 				//              strBase64 = strBase64.replace("data:image/jpeg;base64,", "");
 				if (op.callback) op.callback(strBase64);
 			};
-
-			//		    let bitmap = new plus.nativeObj.Bitmap("test");
-			//		    bitmap.load(imgPath, function(){
-			//			    let strBase64 = bitmap.toBase64Data();
-			//			    callback(strBase64);
-			//		    });
 		}
 	};
 

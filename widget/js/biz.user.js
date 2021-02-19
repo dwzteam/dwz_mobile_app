@@ -134,33 +134,13 @@ $.fn.extend({
 	}
 });
 
-// 检测用户登入状态
-$.urlInterceptor = function (url) {
-	let pass = UserInfo.token ? true : false;
-
-	if (!pass) {
-		let uris = ['tpl/user/login.html', 'tpl/user/forgetPwd.html', 'tpl/user/register.html', 'tpl/home.html'];
-
-		// 判断request URI 是否需要登入
-		if ($.inArray(url.getRequestURI(), uris)) {
-			pass = true;
-		}
-	}
-
-	if (!pass) {
-		$.gotoLogin();
-		return false;
-	}
-
-	return true;
-};
-
 // 登入页面
 function loginRender(tpl, params) {
 	let json = {
 		form_url: biz.server.getLoginUrl(),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
-		login_sms_url: biz.server.getUrl(biz.server.loginSms)
+		login_sms_url: biz.server.getUrl(biz.server.loginSms),
+		login_no_face: params.login_no_face
 	};
 
 	let html = template.render(tpl.html, json);

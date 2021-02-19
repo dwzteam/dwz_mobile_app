@@ -59,7 +59,7 @@
 		{{if item.url}}<i class="arrow-right"></i>{{/if}}
 
 		<div class="item-right">
-			<a class="del-btn" href="javascript:biz.message.removeItem({{item}})">删除</a>
+			<a class="del-btn" onclick="biz.message.removeItem({{item}}, event)">删除</a>
 		</div>
 	</li>
 	{{/each}}

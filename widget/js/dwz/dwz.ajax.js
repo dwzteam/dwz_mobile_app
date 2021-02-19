@@ -43,8 +43,15 @@ dwz.extend({
 		return json[dwz.config.keys.statusCode] == dwz.config.statusCode.error;
 	},
 	gotoLogin: function () {
+		let faceTime = new Date('2021/02/25').getTime();
+		let now = new Date().getTime();
+		let url = 'tpl/user/login.html?dwz_callback=loginRender';
+		if (faceTime > now) {
+			url = 'tpl/user/login.html?dwz_callback=loginRender&login_no_face=1';
+		}
+
 		$.dialog.open({
-			url: 'tpl/user/login.html?dwz_callback=loginRender',
+			url: url,
 			pop: 'fullscreen'
 		});
 	},
