@@ -139,6 +139,11 @@
 			$('input.dwz-clipboard, textarea.dwz-clipboard', $p).clipboardTip();
 		}
 
+		// 日期选择器
+		if ($.fn.calendar) {
+			$('input.dwz-calendar', $p).calendar();
+		}
+
 		// 处理必填元素label加红色星号
 		$('input.required, select.required, textarea.required', $p).each((index, elem) => {
 			$(elem).parentsUnitBox('form-item').find(':scope > label, :scope > .item-content > label').addClass('required');
