@@ -502,13 +502,12 @@ $.extend(biz, {
 			$.alert.open({ msg: '手机未安装百度地图或者高德地图，请保证手机有其中一个导航软件。' });
 		} else {
 			//console.log(bmapinstalled+"-"+amapinstalled);
-			api.actionSheet(
+			$.actionSheet.open(
 				{
 					title: '请选择需要跳转的导航软件',
-					cancelTitle: '取消',
 					buttons: btns
 				},
-				(ret, err) => {
+				(ret) => {
 					const index = ret.buttonIndex;
 					if (params[index - 1]) {
 						api.openApp(params[index - 1], (_ret, _err) => {

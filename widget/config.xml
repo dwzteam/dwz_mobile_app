@@ -42,6 +42,8 @@
 
 	<preference name="statusBarAppearance" value="true"/>
 
+	<preference name="useWKWebView" value="true"/>
+
 	<permission name="readPhoneState"/>
 
 	<permission name="camera"/>
