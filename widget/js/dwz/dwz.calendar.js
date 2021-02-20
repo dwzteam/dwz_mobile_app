@@ -8,7 +8,7 @@
 		dayNames: ['日', '一', '二', '三', '四', '五', '六'],
 		monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 		yearName: '年',
-		btnTxt: { ok: '确定', cancel: '取消' }
+		btnTxt: { ok: '确定', cancel: '取消', clean: '清除' }
 	});
 
 	$.fn.calendar = function (options) {
@@ -21,12 +21,18 @@
 				viewType: 'month', // month, week
 				frag: `<div class="calendar">
 					<div class="dt">
-						<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>
 						<div class="pr"><a href="javascript:"></a></div>
+						<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>
 						<div class="ne"><a href="javascript:"></a></div>
 					</div>
 					<div class="bd">
 						<div class="slide-wrap"></div>
+					</div>
+					<div class="df">
+						<button class="button mini cleanBtn">${$.regional.calendar.btnTxt.clean}</button>
+						<div class="flex-item"></div>
+						<button class="button mini cancelBtn">${$.regional.calendar.btnTxt.cancel}</button>
+						<button class="button mini primary okBtn">${$.regional.calendar.btnTxt.ok}</button>
 					</div>
 					<div class="ympop">
 						<div class="ym">
@@ -42,8 +48,8 @@
 							</div>
 						</div>
 						<div class="ympop-ft">
-							<a class="button primary ympopOkBut" href="javascript:;"><span>${$.regional.calendar.btnTxt.ok}</span></a>
-							<a class="button ympopCalcelBut" href="javascript:;"><span>${$.regional.calendar.btnTxt.cancel}</span></a>
+							<button class="button primary ympopOkBtn">${$.regional.calendar.btnTxt.ok}</button>
+							<button class="button ympopCalcelBtn">${$.regional.calendar.btnTxt.cancel}</button>
 						</div>
 					</div>
 				</div>`
@@ -54,28 +60,18 @@
 		const setting = {
 			ymdt$: '.dt',
 			ympop$: '.ympop',
-			ympopOkBut$: '.ympopOkBut',
-			ympopCalcelBut$: '.ympopCalcelBut',
+			ympopOkBtn$: '.ympopOkBtn',
+			ympopCalcelBtn$: '.ympopCalcelBtn',
 			bd$: '.bd',
+			df$: '.df', // footer
 			main$: '.bd .slide-wrap'
 		};
 
-		return this.each(function () {
-			let $this = $(this),
-				opts = { $box: $this };
-			if ($this.attr('dateFmt')) opts.pattern = $this.attr('dateFmt');
-			if ($this.attr('minDate')) opts.minDate = $this.attr('minDate');
-			if ($this.attr('maxDate')) opts.maxDate = $this.attr('maxDate');
-
-			$(op.frag)
-				.appendTo($this)
-				.addClass('view-' + op.viewType);
-
-			let $bd = $this.find(setting.bd$),
-				$main = $this.find(setting.main$),
-				$ymdt = $(setting.ymdt$),
+		function _init({ $this, $frag, dp, isInput = false }) {
+			let $bd = $frag.find(setting.bd$),
+				$main = $frag.find(setting.main$),
+				$ymdt = $frag.find(setting.ymdt$),
 				wrapW = $bd.width();
-			let dp = new Datepicker($this.attr('data-value'), opts);
 
 			if (op.viewType == 'week') {
 				$this.find('.dt .pr, .dt .ne').hide(); // 隐藏last, next按钮
@@ -84,7 +80,7 @@
 			// 切换月份/星期回调
 			function switchMonthOrWeekFn(year, month) {
 				let monthNames = $.regional.calendar.monthNames;
-				let $ympop = $this.find(setting.ympop$);
+				let $ympop = $frag.find(setting.ympop$);
 
 				generateCalendar(dp);
 
@@ -133,8 +129,8 @@
 			 */
 			function generateYmPop(dp, bShow) {
 				let dw = dp.getDateWrap();
-				let $ymdt = $this.find(setting.ymdt$);
-				let $ympop = $this.find(setting.ympop$);
+				let $ymdt = $frag.find(setting.ymdt$);
+				let $ympop = $frag.find(setting.ympop$);
 				let $year = $ympop.find('.yy ul.clearfix');
 				let $month = $ympop.find('.mm ul.clearfix');
 				let yearstart = dp.getMinDate().getFullYear();
@@ -143,7 +139,7 @@
 					monthFrag = '';
 
 				for (let y = dw.year - 4; y < dw.year + 6; y++) {
-					let _className = dw.year == y ? 'selected' : '';
+					let _className = dw.year == y ? 'selected ' : '';
 					if (y < yearstart || y > yearend) _className += 'disabled';
 					yearFrag += `<li value="${y}" class="${_className}"><a href="javascript:">${y}</a></li>`;
 				}
@@ -155,16 +151,13 @@
 				});
 				$month.html(monthFrag);
 
-				$year
-					.find('li')
-					.filter(function () {
-						return !$(this).hasClass('disabled');
-					})
-					.click(function () {
-						let $li = $(this);
+				$year.find('li').click(function () {
+					let $li = $(this);
+					if (!$li.hasClass('disabled')) {
 						$li.parent().find('li.selected').removeClass('selected');
 						$li.addClass('selected');
-					});
+					}
+				});
 				$month.find('li').click(function () {
 					let $li = $(this);
 					$li.parent().find('li.selected').removeClass('selected');
@@ -174,7 +167,7 @@
 				if (!$ympop.attr('event-ympop')) {
 					$ympop.attr('event-ympop', 1);
 
-					$this.find(setting.ympopOkBut$).click(function () {
+					$frag.find(setting.ympopOkBtn$).click(function () {
 						let $yearLi = $year.find('li.selected'),
 							$monthLi = $month.find('li.selected');
 						if ($yearLi.hasClass('disabled') || $monthLi.hasClass('disabled')) return false;
@@ -190,7 +183,7 @@
 							$main.find('td.selected').trigger('click');
 						} //只有年月没有日期
 					});
-					$this.find(setting.ympopCalcelBut$).click(function () {
+					$frag.find(setting.ympopCalcelBtn$).click(function () {
 						$ympop.removeClass('open');
 					});
 
@@ -210,7 +203,7 @@
 							let $li = $(this);
 							let year = parseInt($li.attr('value')) - 10;
 
-							if (year < yearstart) $li.addClass('disabled');
+							if (year < yearstart || year > yearend) $li.addClass('disabled');
 							else $li.removeClass('disabled');
 							if (i == 0) $li.addClass('selected');
 							else $li.removeClass('selected');
@@ -421,11 +414,64 @@
 					touch: function () {
 						// 自定义按钮回调
 						if (op.miscBtnFn) {
-							let value = $this.attr('data-value');
+							let value = '';
+							let $daySelected = $frag.find('table.current td.selected');
+							if ($daySelected.size()) {
+								value = $daySelected.attr('data-value');
+							}
 							op.miscBtnFn.call($miscBtn, value);
 						}
 					}
 				});
+			}
+		}
+
+		return this.each(function () {
+			let $this = $(this),
+				isInput = $this.is('input'),
+				opts = { $box: $this };
+			if ($this.attr('dateFmt')) opts.pattern = $this.attr('dateFmt');
+			if ($this.attr('minDate')) opts.minDate = $this.attr('minDate');
+			if ($this.attr('maxDate')) opts.maxDate = $this.attr('maxDate');
+
+			let dp = new Datepicker($this.val() || $this.attr('data-value'), opts);
+			if (isInput) {
+				$this.click((event) => {
+					let $frag = $(op.frag).addClass('view-' + op.viewType);
+					let $calendarBox = $('#dwz-calendar');
+					if ($calendarBox.size() == 0) {
+						$calendarBox = $(`<div id="dwz-calendar"></div>`).appendTo($('body'));
+						$calendarBox.click((event) => {
+							$('#dwz-calendar').remove();
+						});
+					}
+					// 禁止事件向上冒泡
+					$frag.appendTo($calendarBox).click((event) => {
+						event.stopPropagation();
+						event.preventDefault();
+					});
+					let $df = $frag.find(setting.df$);
+					$df.find('.cleanBtn').click((event) => {
+						$this.val('');
+						$calendarBox.remove();
+					});
+					$df.find('.cancelBtn').click((event) => {
+						$calendarBox.remove();
+					});
+					$df.find('.okBtn').click((event) => {
+						let $daySelected = $calendarBox.find('table.current td.selected');
+						if ($daySelected.size()) {
+							$this.val($daySelected.attr('data-value'));
+						}
+						$calendarBox.remove();
+					});
+
+					_init({ $this, $frag, dp, isInput });
+				});
+			} else {
+				let $frag = $(op.frag).addClass('view-' + op.viewType);
+				$frag.appendTo($this);
+				_init({ $this, $frag, dp, isInput });
 			}
 		});
 	};

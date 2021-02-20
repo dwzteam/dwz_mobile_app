@@ -78,7 +78,7 @@
 		prompt(url, data) {
 			$(this.config.box$).remove();
 
-			let $box = $($.alert.config.promptFrag).appendTo($('body').get(0)).find('.alert-dialog');
+			let $box = $($.alert.config.promptFrag).appendTo($('body')).find('.alert-dialog');
 
 			if (url) {
 				let params = $.extend(url.getParams(), data);

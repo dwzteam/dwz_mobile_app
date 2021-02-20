@@ -250,7 +250,7 @@
 					.replaceAll('#class#', op.className)
 					.replaceAll('#fontSize#', op.fontSize);
 
-				let $fly = $(html).appendTo($('body').get(0));
+				let $fly = $(html).appendTo($('body'));
 
 				setTimeout(function () {
 					$fly.css({ top: pos.top + op.y + 'px' });

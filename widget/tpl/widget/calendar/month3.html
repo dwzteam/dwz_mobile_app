@@ -1,0 +1,37 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">日历 + 自定义按钮</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="dwz-calendar tb-line" minDate="{%y-3}-%M-%d" maxDate="%y-%M-{%d+3}"></div>
+
+			</div>
+		</div>
+
+	</div>
+</main>
+
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		const $calendar = this.find('.dwz-calendar');
+
+		$calendar.calendar({
+			miscBtn: '<button>test</button>',
+			miscBtnFn: function(value) {
+				$.alert.toast(value)
+			}
+		});
+	}
+</script>

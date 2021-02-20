@@ -41,7 +41,6 @@
 			viewType: 'week',
 			changeDayFn: ($day, value) => {
 				console.log($day.dataset(), value);
-
 				if ($day.hasClass('dot')) {
 					// 选中某天后，请求当天的事件
 					$.ajax({
@@ -65,7 +64,7 @@
 			},
 
 			refreshDayFn: ($days, dateWrap) => {
-				// 积分月统计，日历下面的小红点
+				// 月统计，日历下面的小红点
 				$.ajax({
 					type: 'POST',
 					url: biz.server.getUrl(biz.server.calendar.weekStatistics),

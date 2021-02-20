@@ -1,0 +1,117 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">日历 + 自定义日期范围</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="pageFormContent unitBox">
+					<div class="form-item">
+						<div class="item-content">
+							<label>默认格式</label>
+							<input type="text" name="date1" value="" placeholder="请选择（必填）" class="dwz-calendar required" readonly data-error="请选择日期">
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>自定义格式</label>
+							<input type="text" name="date2" value="" placeholder="yyyy/MM/dd" dateFmt="yyyy/MM/dd" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>自定义格式</label>
+							<input type="text" name="date3" value="" placeholder="dd/MM/yyyy" dateFmt="dd/MM/yyyy" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>自定义格式</label>
+							<input type="text" name="date4" value="" placeholder="yyyy年MM月dd日" dateFmt="yyyy年MM月dd日" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>日期范围</label>
+							<input type="text" name="date4" value="" placeholder="2021-02-01 ~ 2021-03-15" minDate="2021-02-01" maxDate="2021-03-15" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>动态范围</label>
+							<input type="text" name="date5" value="" placeholder="动态格式%y-%M-%d或%y-%M" minDate="{%y-1}-%M-%d" maxDate="%y-%M-{%d+1}" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>动态范围</label>
+							<input type="text" name="date5" value="" placeholder="过去3个月" minDate="%y-{%M-3}" maxDate="%y-{%M+1}-0" class="dwz-calendar" readonly>
+						</div>
+					</div>
+					<div class="form-item">
+						<div class="item-content">
+							<label>动态范围</label>
+							<input type="text" name="date5" value="" placeholder="未来半年" minDate="%y-%M" maxDate="%y-{%M+7}-0" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>动态范围</label>
+							<input type="text" name="date5" value="" placeholder="过去10天" minDate="%y-%M-{%d-10}" maxDate="%y-%M-%d" class="dwz-calendar" readonly>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>动态范围</label>
+							<input type="text" name="date5" value="" placeholder="未来10天" minDate="%y-%M-%d" maxDate="%y-%M-{%d+10}" class="dwz-calendar" readonly>
+						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="detail-content">
+					<p class="blockquote">自定义日期范围：静态格式y-M-d或y-M或y</p>
+					<p>minDate="2000-01-15" maxDate="2012-12-15"</p>
+					<p>minDate="2000-01" maxDate="2012-12"</p>
+					<p>minDate="2000" maxDate="2012“</p>
+				</div>
+
+				<div class="divider"></div>
+				<div class="detail-content">
+					<p class="blockquote">自定义日期范围：动态格式%y-%M-%d或%y-%M</p>
+					<p>minDate="{%y-10}-%M-%d" maxDate="%y-%M-{%d+1}"</p>
+					<p>minDate="{%y-10}-%M" maxDate="{%y+10}-%M"</p>
+					<p>minDate="{%y-10}" maxDate="{%y+10}"</p>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		const $calendar = this.find('.dwz-calendar');
+
+		$calendar.calendar();
+	}
+</script>

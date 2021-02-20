@@ -1,3 +1,28 @@
+// input 日期选择框
+#dwz-calendar {
+	.box-shadow;
+	.full-fixed;
+	.flex-all-center;
+	background: @maskBg;
+	z-index: 1100;
+	.calendar {
+		width: 300px;
+
+		// input 日期选择框 底部工具栏
+		.df {
+			display: flex;
+			.button {
+				margin: 10px;
+			}
+		}
+	}
+}
+
+input.dwz-calendar {
+	background: url(../../image/icon/calendar/icon-calendar.svg) no-repeat right center;
+	background-size: 16px;
+}
+
 .calendar {
 	.box-line;
 	overflow: hidden;
@@ -10,6 +35,8 @@
 
 	.dt {
 		.b-line;
+		display: flex;
+		align-items: center;
 		height: 40px;
 		background-color: #fff;
 		background-repeat: repeat-x;
@@ -18,6 +45,7 @@
 			padding: 10px 23px;
 			text-align: center;
 			font-size: 14px;
+			flex: 1;
 		}
 		.ym span {
 			padding: 0 12px;
@@ -40,20 +68,14 @@
 			font-weight: bold;
 		}
 		.pr {
-			position: absolute;
-			top: 0px;
-			left: 10px;
+			a {
+				background: url('../../image/icon/calendar/icon-prev-month.svg') center center no-repeat;
+			}
 		}
 		.ne {
-			position: absolute;
-			top: 0px;
-			right: 10px;
-		}
-		.pr a {
-			background: url('../../image/icon/calendar/icon-prev-month.svg') center center no-repeat;
-		}
-		.ne a {
-			background: url('../../image/icon/calendar/icon-next-month.svg') center center no-repeat;
+			a {
+				background: url('../../image/icon/calendar/icon-next-month.svg') center center no-repeat;
+			}
 		}
 		.pr a,
 		.ne a {
@@ -63,13 +85,12 @@
 			background-size: 10px;
 		}
 		.miscBtn {
-			position: absolute;
-			top: 10px;
-			right: 8px;
-			width: 40px;
-			height: 40px;
-			color: #fff;
-			font-size: 12px;
+			.button;
+			margin: 0 10px;
+			width: 30px;
+			height: 28px;
+			color: @btnBgPrimary;
+			font-size: @l3;
 			text-indent: -10000px;
 			background: url('../../image/icon/calendar/icon-add.svg') center center no-repeat;
 			background-size: 100%;
@@ -181,6 +202,10 @@
 			width: 300%;
 			padding: 10px 0;
 		}
+	}
+	// input 日期选择框 底部工具栏
+	.df {
+		display: none;
 	}
 	tr {
 		height: 32px;

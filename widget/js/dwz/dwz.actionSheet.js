@@ -35,7 +35,7 @@
 			</div>`;
 
 			$(this.config.box$).remove();
-			let $box = $(html).appendTo($('body').get(0));
+			let $box = $(html).appendTo($('body'));
 			setTimeout(() => {
 				$box.find('.action-sheet-pane').removeClass('hide-down');
 			}, 50);

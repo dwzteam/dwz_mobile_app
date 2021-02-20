@@ -1059,7 +1059,7 @@ dwz.fn.extend({
 		});
 	},
 	hasClass(className) {
-		return this.size() === 0 || dwz.hasClass(this.get(0), className);
+		return this.size() !== 0 && dwz.hasClass(this.get(0), className);
 	},
 	addClass(classNames) {
 		return this.each(function () {
