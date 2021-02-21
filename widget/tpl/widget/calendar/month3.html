@@ -25,9 +25,7 @@
 <script type="text/javascript">
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
-		const $calendar = this.find('.dwz-calendar');
-
-		$calendar.calendar({
+		this.find('.dwz-calendar').calendar({
 			miscBtn: '<button>自定义按钮</button>',
 			miscBtnFn: function(value) {
 				$.alert.toast(value)
