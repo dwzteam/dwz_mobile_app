@@ -354,19 +354,26 @@
 					.filter(function () {
 						return !$(this).hasClass('disabled');
 					})
-					.touchwipe({
-						touch: function () {
-							let $day = $(this);
-							let value = $day.attr('data-value');
-							$days.removeClass('selected');
-							$day.addClass('selected');
+					.click(function (event) {
+						let $day = $(this);
+						let value = $day.attr('data-value');
+						dp.sDate = value; // 修改选中日期
+						$days.removeClass('selected');
+						$day.addClass('selected');
 
-							// 选择日期回调
-							if (op.changeDayFn) {
-								op.changeDayFn($day, value);
-							}
+						// 选择日期回调
+						if (op.changeDayFn) {
+							op.changeDayFn($day, value);
 						}
 					});
+
+				// 切换时选中状态调整
+				$days.each(function () {
+					let $day = $(this);
+					if ($day.attr('data-value') == dp.sDate) {
+						$day.trigger('click');
+					}
+				});
 
 				// 刷新日期列表完成事件
 				if (op.refreshDayFn) {
@@ -435,6 +442,8 @@
 			if ($this.attr('maxDate')) opts.maxDate = $this.attr('maxDate');
 
 			let dp = new Datepicker($this.val() || $this.attr('data-value'), opts);
+
+			// input日期选择器
 			if (isInput) {
 				$this.click((event) => {
 					let $frag = $(op.frag).addClass('view-' + op.viewType);
@@ -469,6 +478,7 @@
 					_init({ $this, $frag, dp, isInput });
 				});
 			} else {
+				//月日历、周日历
 				let $frag = $(op.frag).addClass('view-' + op.viewType);
 				$frag.appendTo($this);
 				_init({ $this, $frag, dp, isInput });
@@ -580,7 +590,8 @@
 					year--;
 					month = 12;
 				}
-				this.changeDate(year, month);
+				let days = this._getDays(year, month);
+				this.changeDate(year, month, dw.day > days ? days : dw.day);
 
 				callback && callback(year, month);
 			}
@@ -595,7 +606,8 @@
 					year++;
 					month = 1;
 				}
-				this.changeDate(year, month);
+				let days = this._getDays(year, month);
+				this.changeDate(year, month, dw.day > days ? days : dw.day);
 
 				callback && callback(year, month);
 			}

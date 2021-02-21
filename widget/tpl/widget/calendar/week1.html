@@ -62,6 +62,8 @@
 			},
 
 			refreshDayFn: ($days, dateWrap) => {
+				console.log($days, dateWrap)
+
 				// 月统计，日历下面的小红点
 				$.ajax({
 					type: 'POST',

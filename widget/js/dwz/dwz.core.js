@@ -1020,13 +1020,15 @@ dwz.fn.extend({
 		return this.trigger(dwz.event.type.pageClear, data);
 	},
 	click(data, fn) {
-		if ($.event.hasTouch && $.fn.touchwipe) {
-			return this.touchwipe({
-				touch: fn || data,
-				data: fn ? data : undefined
-			});
-		}
-		return this.on($.event.hasTouch ? 'touchstart' : 'click', data, fn);
+		// if ($.event.hasTouch && $.fn.touchwipe) {
+		// 	return this.touchwipe({
+		// 		touch: fn || data,
+		// 		data: fn ? data : undefined
+		// 	});
+		// }
+		// return this.on($.event.hasTouch ? 'touchstart' : 'click', data, fn);
+
+		return this.on('click', data, fn);
 	},
 	change(data, fn) {
 		return this.on('change', data, fn);
