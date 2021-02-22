@@ -9,7 +9,9 @@
 
 	<div class="content">
 
-		<div class="w-tabbar dwz-tabs full-abs">
+		<!-- <div class="login-logo"><img src="./image/dwz-team.svg"></div> -->
+
+		<div class="w-tabbar dwz-tabs full-size">
 			<div class="tab-bar">
 				<a class="tab-item active"><span>密码登录</span></a>
 				<a class="tab-item"><span>短信登录</span></a>
@@ -20,7 +22,6 @@
 					<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
 						<div class="scroll-content dwz-scroll">
 							<div class="scroll">
-
 								<div class="pageFormContent">
 									<div class="form-item">
 										<div class="item-content">
@@ -29,8 +30,9 @@
 									</div>
 
 									<div class="form-item">
-										<div class="item-content">
+										<div class="item-content dwz-ctl-eye">
 											<input type="password" name="password" value="123456" class="required" placeholder="请输入密码" maxlength="30" pattern=".{6,20}" data-error="请输入6~20位密码">
+											<i class="icon icon-eye"></i>
 											<a data-href="tpl/user/forgetPwd.html?dwz_callback=forgetPwdRender" target="dialog" data-pop="fullscreen">忘记密码</a>
 										</div>
 									</div>

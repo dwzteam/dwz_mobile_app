@@ -125,6 +125,23 @@ function loadScripts(options) {
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
 
+			// 密码显示隐藏
+			$('div.dwz-ctl-eye', $p).each(function () {
+				let $me = $(this),
+					$input = $me.find('input[type=text], input[type=password]'),
+					$icon = $me.find('.icon-eye');
+
+				$icon.click(() => {
+					if ($icon.hasClass('eye-open')) {
+						$icon.removeClass('eye-open');
+						$input.attr('type', 'password');
+					} else {
+						$icon.addClass('eye-open');
+						$input.attr('type', 'text');
+					}
+				});
+			});
+
 			$('li.item, a.grids-grid, .button, .dwz-ctl-hover', $p).hoverClass('hover');
 			$('input[data-checkbox-radio]', $p).checkboxRadio();
 			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
