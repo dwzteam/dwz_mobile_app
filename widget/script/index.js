@@ -101,6 +101,10 @@ function loadScripts(options) {
 
 		// 开启gps
 		biz.startLocation();
+
+		setTimeout(() => {
+			$('body').addClass(api.systemType);
+		}, 2000);
 	};
 
 	document.addEventListener('DOMContentLoaded', function () {
