@@ -90,6 +90,12 @@ $.extend(biz, {
 			'padding-top': biz.safeAreaTop + 'px'
 		});
 	},
+	getAppVersion() {
+		return window.api ? api.appVersion : 'dev';
+	},
+	getSystemType() {
+		return window.api ? api.systemType : 'web';
+	},
 	hasPermission(perms) {
 		const ret = api.hasPermission({
 			list: perms

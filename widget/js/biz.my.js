@@ -4,7 +4,9 @@
 biz.my = {
 	render(tpl, params) {
 		let data = {
-			UserInfo: UserInfo
+			UserInfo: UserInfo,
+			appVersion: biz.getAppVersion(),
+			env: biz.server.ENV
 		};
 		let html = template.render(tpl.html, data);
 		this.html(html).initUI();
@@ -53,7 +55,11 @@ biz.my = {
 		$.listForm($form);
 	},
 	settingRender(tpl, params) {
-		let html = template.render(tpl.html, { UserInfo: UserInfo });
+		let html = template.render(tpl.html, {
+			UserInfo: UserInfo,
+			appVersion: biz.getAppVersion(),
+			env: biz.server.ENV
+		});
 		this.html(html).initUI();
 
 		this.find('.dwz-user-icon').touchwipe({

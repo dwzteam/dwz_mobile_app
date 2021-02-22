@@ -2,7 +2,9 @@ biz.home = {
 	render(tpl, params) {
 		let html = template.render(tpl.html, {
 			UserInfo,
-			params
+			params,
+			appVersion: biz.getAppVersion(),
+			env: biz.server.ENV
 		});
 		this.html(html).initUI();
 
@@ -55,7 +57,7 @@ biz.home = {
 	},
 	aboutRender(tpl, params) {
 		let html = template.render(tpl.html, {
-			version: window.api ? 'v' + api.appVersion : '',
+			appVersion: biz.getAppVersion(),
 			env: biz.server.ENV
 		});
 		this.html(html).initUI();

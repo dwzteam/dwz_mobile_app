@@ -140,7 +140,9 @@ function loginRender(tpl, params) {
 		form_url: biz.server.getLoginUrl(),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		login_sms_url: biz.server.getUrl(biz.server.loginSms),
-		login_no_face: params.login_no_face
+		login_no_face: params.login_no_face,
+		appVersion: biz.getAppVersion(),
+		env: biz.server.ENV
 	};
 
 	let html = template.render(tpl.html, json);
