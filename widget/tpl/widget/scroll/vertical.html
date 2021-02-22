@@ -1,0 +1,25 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+			<div class="header-title">
+				<div class="title">纵向滚动</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+
+		<!-- 纵向滚动2层div结构 -->
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				{{set temp = [1,2,3,4,5,6,7,8,9,10]}} {{each temp}}
+				<p class="box-shadow" style="background: #fff; margin:10px; line-height: 40px; text-align: center;">{{$value}}</p> {{/each}}
+
+			</div>
+		</div>
+
+	</div>
+
+</main>

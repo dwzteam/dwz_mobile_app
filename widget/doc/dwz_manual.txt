@@ -132,6 +132,7 @@ pattern=".{1,20}"
 # JS模版 https://github.com/janl/mustache.js 【废弃】
 
 JS模板 腾讯art-template https://github.com/aui/art-template
+https://aui.github.io/art-template/zh-cn/docs/
 https://aui.github.io/art-template/docs/
 https://blog.csdn.net/pupilxiaoming/article/details/77118855
 
