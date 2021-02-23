@@ -92,6 +92,43 @@
 			var marker = new AMap.Marker(op);
 
 			return marker;
+		},
+
+		// 高德地图规划驾车路径
+		createDriving(options, callback) {
+			const op = $.extend(
+				{
+					map: null,
+					pointStart: { lng: 0, lat: 0 },
+					pointEnd: { lng: 0, lat: 0 },
+					policy: AMap.DrivingPolicy.REAL_TRAFFIC
+				},
+				options
+			);
+			//构造路线导航类
+			const driving = new AMap.Driving({
+				map: op.map,
+				hideMarkers: true,
+				policy: op.policy //AMap.DrivingPolicy.LEAST_DISTANCE 最短距离，AMap.DrivingPolicy.REAL_TRAFFIC 实时路况
+			});
+
+			// 根据起终点经纬度规划驾车导航路线
+			driving.search(new AMap.LngLat(op.pointStart.lng, op.pointStart.lat), new AMap.LngLat(op.pointEnd.lng, op.pointEnd.lat), function (status, result) {
+				// result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+				let route = {};
+				if (result.routes) {
+					route = result.routes[0];
+				}
+				if (status === 'complete') {
+					console.log('绘制驾车路线完成');
+				} else {
+					console.log('获取驾车数据失败：' + result);
+				}
+
+				callback && callback(route);
+			});
+
+			return driving;
 		}
 	};
 })(dwz);
