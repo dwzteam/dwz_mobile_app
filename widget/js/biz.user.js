@@ -15,19 +15,20 @@ let UserInfoUtil = {
 	update(data) {
 		console.log(JSON.stringify(data));
 
-		if (data.uid != undefined) UserInfo.uid = data.uid;
-		if (data.realname != undefined) UserInfo.realname = data.realname;
-		if (data.mobile != undefined) UserInfo.mobile = data.mobile;
-		if (data.token != undefined) UserInfo.token = data.token;
-		if (data.user_type != undefined) {
-			UserInfo.user_type = data.user_type;
-		}
-		if (data.sex != undefined) {
-			UserInfo.sex = data.sex == 1 ? 1 : 2;
+		const _attrMap = {
+			token: 'token',
+			mobile: 'mobile',
+			realname: 'realname',
+			address: 'address',
+			user_type: 'user_type',
+			headimgurl: 'headimgurl'
+		};
+		for (let [key, dbKey] of Object.entries(_attrMap)) {
+			// console.log(key + ': ' + dbKey);
+			if (data[dbKey] != undefined) UserInfo[key] = data[dbKey];
 		}
 
-		if (data.headimgurl != undefined) UserInfo.headimgurl = data.headimgurl;
-		if (data.address != undefined) UserInfo.address = data.address;
+		if (data.sex != undefined) UserInfo.sex = data.sex == 1 ? 1 : 2;
 
 		$.setStorage('APP_USER_INFO', UserInfo);
 	},
@@ -37,7 +38,7 @@ let UserInfoUtil = {
 	}
 };
 
-function initUserInfo() {
+function initUserInfo(callback) {
 	// 获取localStorage中用户信息
 	if (!UserInfo.token) {
 		UserInfo = $.getStorage('APP_USER_INFO') || {};
@@ -55,17 +56,20 @@ function initUserInfo() {
 			success: (json) => {
 				console.log(JSON.stringify(json));
 
-				if (json[dwz.config.keys.statusCode] == dwz.config.statusCode.ok) {
+				if ($.isAjaxStatusOk(json)) {
 					UserInfoUtil.update(json.data);
 				} else {
-					$.alert.toast(json[dwz.config.keys.message]);
+					json[dwz.config.keys.message] && $.alert.toast(json[dwz.config.keys.message]);
 					UserInfoUtil.clear();
 				}
-
-				dwz.checkAjaxLogin(json);
 			},
-			error: biz.ajaxError
+			error: biz.ajaxError,
+			complete: (xhr) => {
+				callback && callback();
+			}
 		});
+	} else {
+		callback && callback();
 	}
 }
 

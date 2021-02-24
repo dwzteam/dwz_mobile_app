@@ -13,7 +13,7 @@
 		.panel-title {
 			.flex-item;
 			font-weight: bold;
-			font-size: 16px;
+			font-size: @l3;
 		}
 
 		.panel-title-right {
@@ -30,9 +30,9 @@
 }
 
 .filter-title {
-	color: #333;
+	color: @titleColor;
 	padding: 5px 10px;
-	font-size: 16px;
+	font-size: @l3;
 	clear: both;
 }
 
@@ -43,7 +43,7 @@
 	li {
 		border-radius: 6px;
 		background: @inputBg;
-		color: #999;
+		color: @txtColor;
 		margin-right: 3%;
 		margin-bottom: 10px;
 		width: 22.75%;
@@ -52,15 +52,15 @@
 		overflow: hidden;
 		float: left;
 		text-align: center;
-		font-size: 14px;
+		font-size: @l4;
 
 		&:nth-child(4n) {
 			margin-right: 0;
 		}
 
 		&.active {
-			color: #fff;
-			background: #7ebb66;
+			color: @btnTxtColorPrimary;
+			background: @btnBgPrimary;
 			font-weight: bold;
 		}
 
@@ -102,7 +102,7 @@
 	left: 0;
 	display: none;
 	overflow: hidden;
-	background: #fff;
+	background: @paneBg;
 	z-index: 911;
 	transition: bottom 0.5s ease;
 

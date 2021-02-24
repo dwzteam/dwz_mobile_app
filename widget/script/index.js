@@ -114,13 +114,6 @@ function loadScripts(options) {
 			keys: { statusCode: 'status', message: 'info' }
 		});
 
-		$.dialog.init();
-		initUserInfo(); // 用户信息初始化
-
-		$.navTab.init({ openIndex: 0 });
-		$.navView.init();
-		$.filterPanel.init();
-
 		//插件注册
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
@@ -181,30 +174,39 @@ function loadScripts(options) {
 			});
 		});
 
-		//插件初始化
-		$(document).initUI();
+		$.dialog.init();
 
-		var ajaxbg = $('#progressBar').hide();
-		$(document)
-			.on('ajaxStart', function () {
-				ajaxbg.show();
-			})
-			.on('ajaxStop', function () {
-				ajaxbg.hide();
-			});
+		// 用户信息初始化
+		initUserInfo(function () {
+			$.navTab.init({ openIndex: 0 });
+			$.navView.init();
+			$.filterPanel.init();
 
-		if ($.history)
-			$.history.init(function (hash) {
-				//浏览器刷新监测地址栏, 根据hash定位
-				if (hash) {
-					var args = hash.split(';');
-					if (args.length == 2) {
-						$.navTab.open({ tabid: args[0], url: args[1] });
-					} else if (args.length == 3) {
-						$.navView.open({ url: args[2], rel: args[1] });
+			//插件初始化
+			$(document).initUI();
+
+			var ajaxbg = $('#progressBar').hide();
+			$(document)
+				.on('ajaxStart', function () {
+					ajaxbg.show();
+				})
+				.on('ajaxStop', function () {
+					ajaxbg.hide();
+				});
+
+			if ($.history)
+				$.history.init(function (hash) {
+					//浏览器刷新监测地址栏, 根据hash定位
+					if (hash) {
+						var args = hash.split(';');
+						if (args.length == 2) {
+							$.navTab.open({ tabid: args[0], url: args[1] });
+						} else if (args.length == 3) {
+							$.navView.open({ url: args[2], rel: args[1] });
+						}
 					}
-				}
-			});
+				});
+		});
 	});
 
 	document.addEventListener(
