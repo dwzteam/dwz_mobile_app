@@ -230,7 +230,14 @@
 
 // 手指按下或者鼠标移入
 .hover {
-	background-color: @hoverBg;
+	position: relative;
+	&::after {
+		content: ' ';
+		.full-abs;
+		z-index: 100;
+		background: @hoverBg;
+		pointer-events: none;
+	}
 }
 
 // 分隔线
