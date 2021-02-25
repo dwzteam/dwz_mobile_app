@@ -1,4 +1,4 @@
-.bg-size(@width: 30px, @height: 30px, @display:block, @size: 100%) {
+.bg-size(@width: 24px, @height: 24px, @display:block, @size: 100%) {
 	display: @display;
 	width: @width;
 	height: @height;
@@ -8,23 +8,39 @@
 }
 
 .icon {
-	.bg-size(25px, 25px , block);
+	.bg-size(24px, 24px , block);
 }
 
+// img 图标
 .img-icon {
-	position: relative;
-	display: block;
-	margin: 0;
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
+	.flex-all-center;
+	width: 64px;
+	height: 64px;
 	overflow: hidden;
 
 	img {
 		display: block;
-		width: 100%;
-		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
 		border: none;
+	}
+	&.medium {
+		width: 40px;
+		height: 40px;
+	}
+
+	&.small {
+		width: 24px;
+		height: 24px;
+	}
+
+	&.mini {
+		width: 16px;
+		height: 16px;
+	}
+	&.is-round {
+		border-radius: 50%;
+		.box-line;
 	}
 }
 
