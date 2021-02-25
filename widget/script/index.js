@@ -198,12 +198,14 @@ function loadScripts(options) {
 				$.history.init(function (hash) {
 					//浏览器刷新监测地址栏, 根据hash定位
 					if (hash) {
-						var args = hash.split(';');
-						if (args.length == 2) {
-							$.navTab.open({ tabid: args[0], url: args[1] });
-						} else if (args.length == 3) {
-							$.navView.open({ url: args[2], rel: args[1] });
-						}
+						setTimeout(function () {
+							var args = hash.split(';');
+							if (args.length == 2) {
+								$.navTab.open({ tabid: args[0], url: args[1] });
+							} else if (args.length == 3) {
+								$.navView.open({ url: args[2], rel: args[1] });
+							}
+						}, 2000);
 					}
 				});
 		});

@@ -114,7 +114,8 @@ gulp.task('serve-dev', () => {
 		port: 2020,
 		server: {
 			baseDir: ['./widget'],
-			index: 'index.html'
+			index: 'index.html',
+			middleware: require('./proxy') // 开发环境跨域代理
 		}
 	});
 	gulp.watch('widget/less/**/*', gulp.series('less-dev'));

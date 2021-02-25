@@ -10,8 +10,8 @@ const biz = window.biz || {
 		baseUrl: {
 			DEV: '',
 			TEST: '/app_proxy',
-			UAT: 'http://mobile.jui.org',
-			LIVE: 'http://mobile.jui.org'
+			UAT: 'https://mobile.jui.org',
+			LIVE: 'https://mobile.jui.org'
 		},
 		_verifyImg: {
 			DEV: './doc/verify.png',

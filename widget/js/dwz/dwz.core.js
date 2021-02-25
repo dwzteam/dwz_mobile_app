@@ -1547,7 +1547,7 @@ dwz.extend({
 
 		if (op.type == 'POST' && op.data) {
 			//Set the correct header, if data is being sent
-			if (op.type == 'POST' && op.contentType) dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
+			if (op.contentType) dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
 
 			postData = typeof op.data === 'string' ? op.data : dwz.param(op.data);
 		}
