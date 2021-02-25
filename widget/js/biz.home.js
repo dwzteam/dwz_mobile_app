@@ -4,7 +4,8 @@ biz.home = {
 			UserInfo,
 			params,
 			appVersion: biz.getAppVersion(),
-			env: biz.server.ENV
+			env: biz.server.ENV,
+			checkLiveTime: biz.checkLiveTime()
 		});
 		this.html(html).initUI();
 
