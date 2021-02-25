@@ -67,7 +67,15 @@
 .icon-back {
 	background-image: url('../../image/icon/icon-back.svg');
 	background-size: 70%;
+	&.is-light {
+		background-image: url('../../image/icon/icon-back-light.svg');
+	}
 }
+.icon-next {
+	.icon-back;
+	transform: rotate(180deg);
+}
+
 .icon-select-down {
 	background-image: url('../../image/icon/icon-select-down.svg');
 }

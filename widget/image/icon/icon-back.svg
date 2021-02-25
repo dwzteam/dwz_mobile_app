@@ -7,8 +7,8 @@
         <rect id="path-1" x="0" y="0" width="48" height="48"></rect>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="整租/合租" transform="translate(-30.000000, -67.000000)">
-            <g id="标题栏" transform="translate(0.000000, 40.000000)">
+        <g transform="translate(-30.000000, -67.000000)">
+            <g transform="translate(0.000000, 40.000000)">
                 <g id="Combined-Shape" transform="translate(30.000000, 27.000000)">
                     <mask id="mask-2" fill="white">
                         <use xlink:href="#path-1"></use>

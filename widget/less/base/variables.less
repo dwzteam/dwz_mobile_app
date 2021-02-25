@@ -160,12 +160,10 @@
 .flex-wrap {
 	display: flex;
 }
-.flex-vertical {
-	flex-direction: column;
-}
+
 .flex-wrap-v {
 	.flex-wrap;
-	.flex-vertical;
+	flex-direction: column;
 }
 .flex-flow {
 	display: flex;
@@ -201,13 +199,14 @@
 .justify-end {
 	justify-content: flex-end;
 }
-
 .justify-between {
 	justify-content: space-between;
 }
-
 .justify-around {
 	justify-content: space-around;
+}
+.justify-evenly {
+	justify-content: space-evenly;
 }
 
 // 上下左右居中
@@ -256,7 +255,7 @@
 }
 
 // 圆角
-.box-radius {
+.box-round {
 	border-radius: 5px;
 }
 

@@ -241,7 +241,7 @@ label {
 	}
 
 	// 圆角边框
-	&.box-radius {
+	&.box-round {
 		.margin-h;
 		.box-line;
 		.form-item {
@@ -267,6 +267,7 @@ textarea:read-only {
 }
 
 .button {
+	.box-round;
 	.flex-all-center;
 	padding: 0 10px;
 	height: 40px;
@@ -274,8 +275,7 @@ textarea:read-only {
 	border: 1px solid @btnBorderColor;
 	background: @btnBg;
 	outline: none;
-	font-size: @l3;
-	border-radius: 5px;
+	font-size: @l2;
 	position: relative;
 	overflow: hidden;
 	&.hover:after {
@@ -322,11 +322,12 @@ textarea:read-only {
 
 	&.medium {
 		height: 36px;
+		font-size: @l3;
 	}
 
 	&.small {
 		height: 32px;
-		font-size: @l4;
+		font-size: @l3;
 	}
 
 	&.mini {
