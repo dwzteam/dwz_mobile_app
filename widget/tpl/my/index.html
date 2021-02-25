@@ -98,7 +98,7 @@
 
 <script id="tpl_announce" type="text/html">
 	{{each data as item}}
-	<li class="item" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
 		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
 		<div class="item-content">
 			<div class="item-title1">{{item.title}}</div>

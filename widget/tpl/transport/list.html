@@ -29,7 +29,7 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item" onclick="$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'})">
+	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'})">
 		<div class="item-content">
 			<div class="flex-wrap">
 				<div class="item-title1 flex-item">{{item.transport_time}}<span class="txt-h3">· {{item.truck_num}}</span> </div>

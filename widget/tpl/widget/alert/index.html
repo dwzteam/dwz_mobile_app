@@ -16,32 +16,32 @@
 			<div class="scroll">
 				<ul class="list">
 
-					<li class="item" onclick="$.alert.toast('alert组件示例 toast')">
+					<li class="item dwz-ctl-hover" onclick="$.alert.toast('alert组件示例 toast')">
 						<p class="flex-item">toast提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.error('alert组件示例 error')">
+					<li class="item dwz-ctl-hover" onclick="$.alert.error('alert组件示例 error')">
 						<p class="flex-item">错误提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.success('alert组件示例 success')">
+					<li class="item dwz-ctl-hover" onclick="$.alert.success('alert组件示例 success')">
 						<p class="flex-item">成功提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.open({
+					<li class="item dwz-ctl-hover" onclick="$.alert.open({
 						msg: 'DWZ Mobile alert组件示例，基础提示'
 					})">
 						<p class="flex-item">基础提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.open({
+					<li class="item dwz-ctl-hover" onclick="$.alert.open({
 						title: '自定义标题',
 						msg: 'DWZ Mobile alert组件示例，自定义标题'
 					})">
 						<p class="flex-item">自定义标题提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.open({
+					<li class="item dwz-ctl-hover" onclick="$.alert.open({
 						title: '自定义标题',
 						msg: 'DWZ Mobile alert组件示例，自定义标题 + 点击回调'
 					}, function(ret) {
@@ -50,7 +50,7 @@
 						<p class="flex-item">自定义标题 + 点击回调</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.confirm({
+					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({
 						msg: '确认要删除吗？'
 					}, function(ret) {
 						$.alert.toast('buttonIndex: '+ret.buttonIndex)
@@ -58,7 +58,7 @@
 						<p class="flex-item">确认提示</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.confirm({
+					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({
 						title: '操作确认',
 						msg: '这个3个按钮的确认提醒',
 						buttons: ['是', '否', '取消']
@@ -68,12 +68,11 @@
 						<p class="flex-item">确认提示 + 自定义标题和按钮</p><i class="arrow-right"></i>
 					</li>
 
-					<li class="item" onclick="$.alert.prompt('tpl/widget/alert/prompt.html?dwz_callback=biz.pageRender', {
+					<li class="item dwz-ctl-hover" onclick="$.alert.prompt('tpl/widget/alert/prompt.html?dwz_callback=biz.pageRender', {
 						form_url: biz.server.getUrl(biz.server.changePwd)
 					});">
 						<p class="flex-item">prompt自定义内容提示</p><i class="arrow-right"></i>
 					</li>
-
 
 				</ul>
 			</div>
