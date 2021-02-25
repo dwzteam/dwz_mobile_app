@@ -1,0 +1,104 @@
+.button {
+	.box-round;
+	.flex-all-center;
+	padding: 0 10px;
+	height: 40px;
+	color: @btnTxtColor;
+	border: 1px solid @btnBorderColor;
+	background: @btnBg;
+	outline: none;
+	font-size: @l2;
+	position: relative;
+	overflow: hidden;
+	&.hover:after {
+		content: ' ';
+		.full-abs;
+		background-color: @hoverBg;
+	}
+	// 电子签名按钮
+	&.sign {
+		border-radius: 5px;
+		background: #f5f5f5;
+		color: @infoColor;
+		height: 72px;
+		border: none;
+		.flex-all-center;
+		.flex-item;
+	}
+	&.primary {
+		border: @btnBorderColorPrimary;
+		background: @btnBgPrimary;
+		color: @btnTxtColorPrimary;
+	}
+	&.success {
+		border: @btnBorderColorSuccess;
+		background: @btnBgSuccess;
+		color: @btnTxtColorSuccess;
+	}
+	&.warning {
+		border: @btnBorderColorWarning;
+		background: @btnBgWarning;
+		color: @btnTxtColorWarning;
+	}
+	&.danger {
+		border: @btnBorderColorDanger;
+		background: @btnBgDanger;
+		color: @btnTxtColorDanger;
+	}
+	&.disabled,
+	&[disabled] {
+		border-color: @btnBorderColorDisabled;
+		background: @btnBgDisabled;
+		color: @btnTxtColorDisabled;
+	}
+
+	&.medium {
+		height: 36px;
+		font-size: @l3;
+	}
+
+	&.small {
+		height: 32px;
+		font-size: @l3;
+	}
+
+	&.mini {
+		height: 28px;
+		font-size: @l4;
+	}
+
+	&.is-round {
+		border-radius: 20px;
+	}
+}
+
+.form-bar {
+	.t-line;
+	.padding-h;
+	.button {
+		width: 100%;
+		margin-top: 10px;
+		&:last-child {
+			margin-bottom: 10px;
+		}
+	}
+}
+.button-bar {
+	.button {
+		margin-right: 10px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+.button-group {
+	display: flex;
+	.button {
+		border-radius: 0;
+		flex: 1;
+		border-right: 1px solid @borderColor;
+		&:last-child {
+			border: none;
+		}
+	}
+}

@@ -6,7 +6,7 @@ $.navView = {
 	config: {
 		zIndexStart: 100,
 		idStart: 'nav-view-',
-		frag: `<div id="#boxId#" class="nav-view view-container pane box-shadow unitBox" style="display: none; z-index:#zIndex#">
+		frag: `<div id="#boxId#" class="nav-view view-container box-shadow unitBox" style="display: none; z-index:#zIndex#">
 			<main>
 				<header>
 					<div class="toolbar">
