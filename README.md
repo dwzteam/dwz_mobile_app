@@ -38,14 +38,17 @@ git clone https://github.com/dwzteam/dwz_mobile_app.git
    - 第一次运行，需要初始化工程 `npm intall`
    - 前端开发模式运行，会自动打开 chrome `npm run dev`
 
-> ### [DWZ Mobile 详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+> ### 详细文档
 
-> ### DWZ Mobile 开源项目仓库
+- [在线文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+- [文档工程 git 仓库](https://gitee.com/dwzteam/dwz_mobile_doc_v1)
+
+> ### 开源项目仓库
 
 - [Gitee 仓库](https://gitee.com/dwzteam/dwz_mobile_app)
 - [Gitbug 仓库](https://github.com/dwzteam/dwz_mobile_app)
 
-> ### DWZ Mobile Demo 演示
+> ### Demo 演示
 
 - 在线演示版，使用 chrome 开发模式设置手机版 `http://mobile.jui.org`
 - 安卓 Apk 安装测试版 `http://mobile.jui.org/apk/dwz_mobile_dev.apk`
