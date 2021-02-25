@@ -22,11 +22,11 @@
 	cursor: default;
 	user-select: none;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: @l3;
 	list-style-type: none;
 	text-align: left;
-	background-color: @paneBg;
 	.item {
+		background-color: @paneBg;
 		display: flex;
 		margin: 0;
 		padding: 10px 10px;
@@ -36,9 +36,6 @@
 		min-height: 44px;
 		line-height: 30px;
 		.t-line;
-		&:first-child {
-			border: none;
-		}
 		&.active {
 			background-color: @activeBg;
 			transition: none;
@@ -51,6 +48,14 @@
 				max-height: 64px;
 				border-radius: 50%;
 			}
+		}
+		&.is-round {
+			.box-round;
+			margin-top: 10px;
+		}
+		&:first-child {
+			border: none;
+			margin-top: 0;
 		}
 
 		.item-content {
@@ -125,9 +130,6 @@ ul.pic-list {
 	.item {
 		.flex-wrap;
 
-		padding: 5px 10px;
-		line-height: normal;
-
 		.item-pic {
 			.flex-all-center;
 			margin: 2px 10px 2px 0;
@@ -142,8 +144,6 @@ ul.pic-list {
 
 			img {
 				display: block;
-				//max-height: 90px;
-				//max-width: 120px;
 				width: 100%;
 			}
 		}
@@ -154,19 +154,19 @@ ul.pic-list {
 			position: relative;
 			overflow: hidden;
 			.item-tag {
-				color: #777;
+				color: @infoColor;
 				background-color: @inputBg;
 				border-radius: 3px;
 				padding: 0 2px;
 				margin-right: 4px;
-				font-size: 12px;
+				font-size: @l5;
 				display: inline-block;
 			}
 
 			.item-price,
 			.item-phone {
 				line-height: 24px;
-				font-size: 16px;
+				font-size: @l2;
 				color: @linkColorActive;
 			}
 		}
@@ -224,10 +224,10 @@ ul.pic-list {
 			.flex-item;
 			padding: 2px 5px;
 			height: 28px;
-			color: #111;
+			color: @titleColor;
 			border: 0;
 			vertical-align: middle;
-			font-size: 14px;
+			font-size: @l3;
 			line-height: 16px;
 			outline-offset: 0;
 			outline-style: none;
