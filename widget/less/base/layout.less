@@ -43,8 +43,10 @@
 }
 
 // 九宫格
-.grids-contant,
-.grids-contant2 {
+.grids-col-2,
+.grids-col-3,
+.grids-col-4,
+.grids-col-5 {
 	position: relative;
 	overflow: hidden;
 	text-align: center;
@@ -61,11 +63,11 @@
 		transform: scale(0.5);
 	}
 
-	.grids-grid {
+	.item {
 		display: block;
 		position: relative;
 		float: left;
-		padding: 10px 10px;
+		padding: 10px 0px;
 		box-sizing: border-box;
 		&:before {
 			content: '';
@@ -80,7 +82,7 @@
 			transform-origin: 0 0;
 			transform: scale(0.5);
 		}
-		.grids-grid-icon {
+		.item-icon {
 			width: 50px;
 			height: 50px;
 			margin: 0 auto;
@@ -89,28 +91,51 @@
 				height: 100%;
 			}
 		}
-		.grids-grid-label {
-			display: block;
+		.item-label {
+			.txt-line1;
 			text-align: center;
-			color: #666;
-			font-size: 14px;
+			color: @labelColor;
+			font-size: @l3;
+		}
+	}
+
+	&.no-line {
+		.item:before {
+			display: none;
 		}
 	}
 }
-.grids-contant {
-	.grids-grid:nth-child(3n):before {
+
+.grids-col-2 {
+	.item:nth-child(2n):before {
 		border-right-width: 0;
 	}
-	.grids-grid {
+	.item {
+		width: 50%;
+	}
+}
+.grids-col-3 {
+	.item:nth-child(3n):before {
+		border-right-width: 0;
+	}
+	.item {
 		width: 33.333333%;
 	}
 }
-.grids-contant2 {
-	.grids-grid:nth-child(2n):before {
+.grids-col-4 {
+	.item:nth-child(4n):before {
 		border-right-width: 0;
 	}
-	.grids-grid {
-		width: 50%;
+	.item {
+		width: 25%;
+	}
+}
+.grids-col-5 {
+	.item:nth-child(5n):before {
+		border-right-width: 0;
+	}
+	.item {
+		width: 20%;
 	}
 }
 

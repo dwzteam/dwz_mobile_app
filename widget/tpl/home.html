@@ -26,23 +26,23 @@
 					<label class="panel-title">原生模块示例（需打包APP）</label>
 				</div>
 				<div class="panel-content">
-					<div class="grids-contant">
+					<div class="grids-col-3">
 
 						<!-- 苹果审核时间测试 -->
 						{{if checkLiveTime}}
-						<a class="grids-grid" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.baiduFace.testFaceRender&isLiveness=1" rel="faceDetect">
-							<div class="grids-grid-icon"><img src="image/icon/module/faceLiveness.svg"></div>
-							<p class="grids-grid-label">人脸活体采集</p>
+						<a class="item" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.baiduFace.testFaceRender&isLiveness=1" rel="faceDetect">
+							<div class="item-icon"><img src="image/icon/module/faceLiveness.svg"></div>
+							<p class="item-label">人脸活体采集</p>
 						</a>
-						<a class="grids-grid" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.baiduFace.testFaceRender" rel="faceLiveness">
-							<div class="grids-grid-icon"><img src="image/icon/module/faceDetect.svg"></div>
-							<p class="grids-grid-label">人脸采集</p>
+						<a class="item" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.baiduFace.testFaceRender" rel="faceLiveness">
+							<div class="item-icon"><img src="image/icon/module/faceDetect.svg"></div>
+							<p class="item-label">人脸采集</p>
 						</a>
 						{{/if}}
 
-						<a class="grids-grid" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
-							<div class="grids-grid-icon"><img src="image/icon/icon-map-nav.svg"></div>
-							<p class="grids-grid-label">打开导航</p>
+						<a class="item" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
+							<div class="item-icon"><img src="image/icon/icon-map-nav.svg"></div>
+							<p class="item-label">打开导航</p>
 						</a>
 
 					</div>
@@ -56,7 +56,7 @@
 					<label class="panel-title">DWZ Mobile HTML5组件</label>
 				</div>
 				<div class="panel-content">
-					<div class="grids-contant" id="home-widget-box">
+					<div class="grids-col-4" id="home-widget-box">
 					</div>
 				</div>
 			</div>
@@ -84,9 +84,9 @@
 
 <script id="tpl_home_widget" type="text/html">
 	{{each widgetList as item}}
-	<a class="grids-grid" target="navView" data-href="{{@item.url}}" rel="widget">
-		<div class="grids-grid-icon"><img src="image/icon/widget/{{item.name}}.svg"></div>
-		<p class="grids-grid-label">{{item.name}}</p>
+	<a class="item" target="navView" data-href="{{@item.url}}" rel="widget">
+		<div class="item-icon"><img src="image/icon/widget/{{item.name}}.svg"></div>
+		<p class="item-label">{{item.name}}</p>
 	</a>
 	{{/each}}
 </script>
