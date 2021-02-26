@@ -130,7 +130,7 @@
 }
 
 // Fonts
-@fontEN: -apple-system-font, 'Helvetica Neue', 'Roboto', 'Segoe UI';
+@fontEN: -apple-system, 'Helvetica Neue', 'Roboto', 'Segoe UI';
 @fontCN: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei';
 @fontSans: sans-serif;
 @fontDefault: @fontEN, @fontCN, @fontSans;
@@ -161,10 +161,15 @@
 .flex-wrap {
 	display: flex;
 }
-
 .flex-wrap-v {
-	.flex-wrap;
+	display: flex;
 	flex-direction: column;
+}
+// 上下左右居中
+.flex-wrap-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .flex-flow {
 	display: flex;
@@ -208,13 +213,6 @@
 }
 .justify-evenly {
 	justify-content: space-evenly;
-}
-
-// 上下左右居中
-.flex-all-center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 // 清除左右浮动元素
