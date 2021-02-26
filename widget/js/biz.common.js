@@ -96,7 +96,7 @@ $.extend(biz, {
 	},
 	// 功能限制时间：人脸登录、安卓数据采集、App更新（用于配合上线app）
 	checkLiveTime() {
-		let limitTime = new Date('2021/02/25').getTime();
+		let limitTime = new Date('2021/02/05').getTime();
 		let now = new Date().getTime();
 
 		return limitTime <= now;
