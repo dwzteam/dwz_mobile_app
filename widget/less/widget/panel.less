@@ -1,14 +1,14 @@
 .dwz-panel {
 	position: relative;
-	background: #fff;
+	background: @paneBg;
 
 	.panel-header {
 		position: relative;
 		.flex-wrap-center;
 		.b-line;
 		min-height: 44px;
-		font-size: 14px;
-		color: @headerButtonTxt;
+		font-size: @l3;
+		color: @titleColor;
 
 		.panel-title {
 			.flex-item;
@@ -26,6 +26,12 @@
 	.panel-content {
 		position: relative;
 		min-height: 80px;
+	}
+
+	&.no-line {
+		.panel-header {
+			border: none;
+		}
 	}
 }
 
