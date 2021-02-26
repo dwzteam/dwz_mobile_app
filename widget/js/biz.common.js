@@ -370,8 +370,8 @@ $.extend(biz, {
 			geolocation.getCurrentPosition(
 				function (result) {
 					if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-						var point = result.point;
-						var gpsPos = $.gps.bd_encrypt(point.lat, point.lng);
+						const point = result.point;
+						const gpsPos = $.gps.bd_encrypt(point.lat, point.lng);
 						geolocationSuccess && geolocationSuccess(gpsPos, result);
 					} else {
 						geolocationError && geolocationError();

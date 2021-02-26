@@ -67,7 +67,7 @@ $.fn.extend({
 								callback.call($panel, tpl, _data);
 							} else {
 								$panel.html(html).initUI();
-								$.execHelperFn($box, tpl, _data);
+								$.execHelperFn($panel, tpl, _data);
 							}
 
 							$panel.attr('loaded', true);

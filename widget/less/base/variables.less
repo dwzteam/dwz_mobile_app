@@ -240,13 +240,11 @@
 
 // 分隔线
 .divider {
-	display: flex;
-	overflow: hidden;
-	align-items: center;
-	justify-content: space-between;
 	width: 100%;
 	min-height: 10px;
-	background: @defaultBg;
+	&.tb-line {
+		background: @defaultBg;
+	}
 }
 
 // 毛玻璃 filter-blur

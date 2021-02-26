@@ -168,7 +168,7 @@ $.navTab = {
 					op.callback.call($panel, tpl, params);
 				} else {
 					$panel.html(html).initUI();
-					$.execHelperFn($box, tpl, params);
+					$.execHelperFn($panel, tpl, params);
 				}
 
 				$tabItem.attr('data-loaded', 1); //navTab页面缓存
