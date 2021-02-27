@@ -25,12 +25,10 @@
 
 <script id="tpl_list" type="text/html">
 	{{each data as item}}
-
-	<li class="item">
+	<li class="item dwz-ctl-hover">
 		<div class="item-icon"><i class="dwz-icon-{{item}}"></i></div>
 		<p class="item-label">{{item}}</p>
 	</li>
-
 	{{/each}}
 </script>
 
@@ -45,7 +43,7 @@
 				console.log(json)
 				if ($.isAjaxStatusOk(json)) {
 					let _html = template.render(tpl.tpl_list, json);
-					this.find('ul.tpl_list').html(_html);
+					this.find('ul.tpl_list').html(_html).initUI();
 				}
 			},
 			error: biz.ajaxError

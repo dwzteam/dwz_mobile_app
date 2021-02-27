@@ -29,17 +29,17 @@
 
 						<!-- 苹果审核时间测试 -->
 						{{if checkLiveTime}}
-						<a class="item" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.baiduFace.testFaceRender&isLiveness=1" rel="faceDetect">
+						<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.baiduFace.testFaceRender&isLiveness=1" rel="faceDetect">
 							<div class="item-icon"><img src="image/icon/module/faceLiveness.svg"></div>
 							<p class="item-label">人脸活体采集</p>
 						</a>
-						<a class="item" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.baiduFace.testFaceRender" rel="faceLiveness">
+						<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.baiduFace.testFaceRender" rel="faceLiveness">
 							<div class="item-icon"><img src="image/icon/module/faceDetect.svg"></div>
 							<p class="item-label">人脸采集</p>
 						</a>
 						{{/if}}
 
-						<a class="item" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
+						<a class="item dwz-ctl-hover" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
 							<div class="item-icon"><img src="image/icon/icon-map-nav.svg"></div>
 							<p class="item-label">打开导航</p>
 						</a>
@@ -83,7 +83,7 @@
 
 <script id="tpl_home_widget" type="text/html">
 	{{each widgetList as item}}
-	<a class="item" target="navView" data-href="{{@item.url}}" rel="widget">
+	<a class="item dwz-ctl-hover" target="navView" data-href="{{@item.url}}" rel="widget">
 		<div class="item-icon"><img src="image/icon/widget/{{item.name}}.svg"></div>
 		<p class="item-label">{{item.name}}</p>
 	</a>
