@@ -33,7 +33,12 @@
 
 	.pop-close {
 		display: block;
-		.icon-close;
+		font-size: 24px;
+		color: @txtColor;
+		.dwz-icon;
+		&:before {
+			content: '\e6db';
+		}
 	}
 
 	.pop-info {
@@ -50,7 +55,10 @@
 	&.pic,
 	&.pop {
 		.pop-close {
-			background-image: url('../../image/icon/icon-close-pop.svg');
+			&:before {
+				content: '\e78d';
+			}
+			color: @lightTxtColor;
 			position: absolute;
 			left: 50%;
 			bottom: 15%;

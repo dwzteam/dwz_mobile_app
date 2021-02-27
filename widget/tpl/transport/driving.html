@@ -1,91 +1,54 @@
-<main>
+<form class="page-wrap page-transport dwz-form" method="get" action="https://restapi.amap.com/v3/place/text?key=682d127014e6e6ab17de8b4100977868">
 	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
-			<div class="header-title">环形堆叠图表</div>
-			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
+			<div class="search-box">
+				<div class="flex-wrap">
+					<label for="input-driving-end" style="color:#E5625C; white-space: nowrap;">起点·</label>
+					<input type="text" name="start" value="我的位置" class="flex-item b-line" readonly>
+				</div>
+				<div class="flex-wrap">
+					<label for="input-driving-end" style="color:#F5A623; white-space: nowrap;">终点·</label>
+					<input id="input-driving-end" type="search" name="end" value="{{params.address}}" class="flex-item">
+				</div>
+			</div>
+			<!-- <button class="button" type="submit" style="background: #31455A; line-height: 40px; border-radius: 20px; color: #fff; padding: 0 10px; margin: 0 5px; white-space: nowrap;">搜索</button> -->
 		</div>
 	</header>
 
 	<div class="content">
+		<div class="dwz-map-box"></div>
 
-		<div class="scroll-content dwz-scroll">
-			<div class="scroll">
-
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-1"></div>
-					<div class="flex-item" id="chart-percent-2"></div>
+		<div class="sheet-box sheet-top fold">
+			<div class="scroll-content dwz-scroll">
+				<div class="scroll">
+					<ul class="list icon-list2 dwz-list"></ul>
 				</div>
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-3"></div>
-					<div class="flex-item" id="chart-percent-4"></div>
-				</div>
-
 			</div>
 		</div>
+	</div>
+
+	<div class="bleed-margin flex-wrap-center dwz-nav-info" style="background: #fff;">
 
 	</div>
-</main>
+</form>
 
-<script type="text/javascript">
-	function helper(tpl, params) {
-		// console.log(this, tpl, params)
+<script id="tpl_list" type="text/html">
+{{each list as item}}
+<li class="item dwz-ctl-hover" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
+	<div class="icon-address"></div>
+	<div class="item-content">
+		<p class="item-title1">{{item.name}}</p>
+		<p class="item-info1">{{item.address}}</p>
+	</div>
+</li>
+{{/each}}
+</script>
 
-		const chart1 = new DwzChartCircle({
-			$el: this.find('#chart-percent-1'),
-			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
-			data: [10, 30, 20, 10, 30],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/home-active.svg',
-			textColor: '#0099DD',
-			textSize: '40px',
-			fgWidth: 15,
-			bgWidth: 3
-		});
-		const chart2 = new DwzChartCircle({
-			$el: this.find('#chart-percent-2'),
-			data: [20, 20, 20, 20, 20],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/message-active.svg',
-			textColor: '#0099DD',
-			sideType: 'onside',
-			fgWidth: 15,
-			bgWidth: 3
-		});
-		const chart3 = new DwzChartCircle({
-			$el: this.find('#chart-percent-3'),
-			bgColor: 'rgba(100, 50, 50, .8)',
-			data: [10, 30, 20, 10, 10],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/my-active.svg',
-			textColor: '#0099DD',
-			sideType: 'outside',
-			fgWidth: 10,
-			bgWidth: 3
-		});
-		const chart4 = new DwzChartCircle({
-			$el: this.find('#chart-percent-4'),
-			data: [10, 30, 20, 10, 30],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			textColor: '#0099DD',
-			sideType: 'inside',
-			fgWidth: 10,
-			bgWidth: 3
-		});
-
-		this.find('button.button').click((event) => {
-			let total = 0
-			const data = [];
-			for (let i = 0; i < 4; i++) {
-				let val = Math.round(Math.random() * 25);
-				total += val;
-				data.push(val);
-			}
-			data.push(100 - total);
-			chart1.setData(data);
-			chart2.setData(data);
-			chart3.setData(data);
-			chart4.setData(data);
-		});
-	}
+<script id="tpl_nav_info" type="text/html">
+<div class="flex-item flex-wrap-center flex-wrap-v">
+	<p class="item-title1">{{route.time|formatTime}}</p>
+	<p class="item-info1">{{route.distance|formatDistance}}</p>
+</div>
+<button class="button active flex-item" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
 </script>

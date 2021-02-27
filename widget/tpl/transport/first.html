@@ -2,90 +2,66 @@
 	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
-			<div class="header-title">环形堆叠图表</div>
-			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
+			<div class="header-title">录入发货过磅信息</div>
 		</div>
 	</header>
 
 	<div class="content">
 
-		<div class="scroll-content dwz-scroll">
-			<div class="scroll">
+		<form method="post" action="{{form_url}}" onsubmit="return biz.transport.formSubmitWeigh(this)">
+			<input type="hidden" name="transport_id" value="{{vo.id}}">
+			<div class="scroll-content dwz-scroll">
+				<div class="scroll">
 
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-1"></div>
-					<div class="flex-item" id="chart-percent-2"></div>
-				</div>
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-3"></div>
-					<div class="flex-item" id="chart-percent-4"></div>
-				</div>
+					{{if vo.status == 0}}
+					<div class="pageFormContent unitBox">
+						<div class="form-item">
+							<div class="item-content">
+								<label>净重(kg)</label>
+								<input type="number" name="weigh_first_commit" value="{{vo.weigh_first_commit|filterInputNum}}" class="required" placeholder="请输入净重" min="0.00" max="100000.00" step="0.01" data-error="请输入净重">
+							</div>
+						</div>
+						<div class="form-item">
+							<label>磅单照片</label>
+							<div class="item-content">
+								<ul id="upload-preview-weight-first" class="upload-preview dwz-ctl-del">
+									{{each vo.weigh_first_pic as item}}
+									<li class="thumbnail">
+										<a class="img-del old-img-del" href="javascript:"></a><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+								</ul>
+								<div class="upload-wrap" rel="#upload-preview-weight-first" data-name="__imgUrl[]">
+									<button type="button">Upload</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
+					<div class="form-bar">
+						<button class="button" type="submit">提交</button>
+					</div>
+					{{else}}
+					<div class="pageFormContent unitBox">
+						<div class="form-item">
+							<div class="item-content">
+								<label>净重(kg)</label>
+								<input type="number" name="weigh_first_commit" value="{{vo.weigh_first_commit}}" readonly>
+							</div>
+						</div>
+						<div class="form-item">
+							<label>磅单照片</label>
+							<div class="item-content">
+								<ul class="upload-preview">
+									{{each vo.weigh_first_pic as item}}
+									<li class="thumbnail"><img class="pic" src="{{item}}" data-src="{{item}}"></li>{{/each}}
+								</ul>
+							</div>
+						</div>
+					</div>
+					{{/if}}
+
+				</div>
 			</div>
-		</div>
+		</form>
 
 	</div>
 </main>
-
-<script type="text/javascript">
-	function helper(tpl, params) {
-		// console.log(this, tpl, params)
-
-		const chart1 = new DwzChartCircle({
-			$el: this.find('#chart-percent-1'),
-			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
-			data: [10, 30, 20, 10, 30],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/home-active.svg',
-			textColor: '#0099DD',
-			textSize: '40px',
-			fgWidth: 15,
-			bgWidth: 3
-		});
-		const chart2 = new DwzChartCircle({
-			$el: this.find('#chart-percent-2'),
-			data: [20, 20, 20, 20, 20],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/message-active.svg',
-			textColor: '#0099DD',
-			sideType: 'onside',
-			fgWidth: 15,
-			bgWidth: 3
-		});
-		const chart3 = new DwzChartCircle({
-			$el: this.find('#chart-percent-3'),
-			bgColor: 'rgba(100, 50, 50, .8)',
-			data: [10, 30, 20, 10, 10],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			img: './image/navTab/my-active.svg',
-			textColor: '#0099DD',
-			sideType: 'outside',
-			fgWidth: 10,
-			bgWidth: 3
-		});
-		const chart4 = new DwzChartCircle({
-			$el: this.find('#chart-percent-4'),
-			data: [10, 30, 20, 10, 30],
-			axis: ['产品', '前端', '后端', '测试', '运维'],
-			textColor: '#0099DD',
-			sideType: 'inside',
-			fgWidth: 10,
-			bgWidth: 3
-		});
-
-		this.find('button.button').click((event) => {
-			let total = 0
-			const data = [];
-			for (let i = 0; i < 4; i++) {
-				let val = Math.round(Math.random() * 25);
-				total += val;
-				data.push(val);
-			}
-			data.push(100 - total);
-			chart1.setData(data);
-			chart2.setData(data);
-			chart3.setData(data);
-			chart4.setData(data);
-		});
-	}
-</script>
