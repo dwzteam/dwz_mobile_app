@@ -18,6 +18,7 @@
 		{ "name": "charts", "url": "" },
 		{ "name": "marquee", "url": "" },
 		{ "name": "scroll", "url": "" },
-		{ "name": "button", "url": "" }
+		{ "name": "button", "url": "" },
+		{ "name": "icons", "url": "" }
 	]
 }

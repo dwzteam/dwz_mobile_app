@@ -1,3 +1,4 @@
+// 行列布局
 .row {
 	.flex-wrap;
 	width: 100%;
@@ -43,10 +44,10 @@
 }
 
 // 九宫格
-.grids-col-2,
-.grids-col-3,
-.grids-col-4,
-.grids-col-5 {
+.grid-col-2,
+.grid-col-3,
+.grid-col-4,
+.grid-col-5 {
 	position: relative;
 	overflow: hidden;
 	text-align: center;
@@ -83,18 +84,21 @@
 			transform: scale(0.5);
 		}
 		.item-icon {
-			width: 50px;
-			height: 50px;
+			.flex-wrap-center;
+			width: 40px;
+			height: 40px;
 			margin: 0 auto;
+			font-size: 30px;
+			color: @gridColTxtColor;
 			img {
-				width: 100%;
-				height: 100%;
+				width: 75%;
+				height: 75%;
 			}
 		}
 		.item-label {
 			.txt-line1;
 			text-align: center;
-			color: @infoColor;
+			color: @gridColTxtColor;
 			font-size: @l4;
 		}
 	}
@@ -106,7 +110,7 @@
 	}
 }
 
-.grids-col-2 {
+.grid-col-2 {
 	.item:nth-child(2n):before {
 		border-right-width: 0;
 	}
@@ -114,7 +118,7 @@
 		width: 50%;
 	}
 }
-.grids-col-3 {
+.grid-col-3 {
 	.item:nth-child(3n):before {
 		border-right-width: 0;
 	}
@@ -122,7 +126,7 @@
 		width: 33.333333%;
 	}
 }
-.grids-col-4 {
+.grid-col-4 {
 	.item:nth-child(4n):before {
 		border-right-width: 0;
 	}
@@ -130,12 +134,55 @@
 		width: 25%;
 	}
 }
-.grids-col-5 {
+.grid-col-5 {
 	.item:nth-child(5n):before {
 		border-right-width: 0;
 	}
 	.item {
 		width: 20%;
+	}
+}
+
+// 滚动文字
+.dwz-marquee-txt,
+.dwz-marquee-list {
+	overflow: hidden;
+}
+
+// 滚动表格
+ul.grid {
+	.tr {
+		color: @txtColor;
+		font-size: @l4;
+		.flex-wrap;
+
+		.td {
+			line-height: 30px;
+			.flex-wrap;
+
+			&.right {
+				justify-content: flex-end;
+				align-items: flex-end;
+			}
+			&.w30 {
+				width: 30px;
+			}
+			&.w40 {
+				width: 40px;
+			}
+			&.w60 {
+				width: 60px;
+			}
+			&.w80 {
+				width: 80px;
+			}
+			&.w100 {
+				width: 100px;
+			}
+			&.w120 {
+				width: 120px;
+			}
+		}
 	}
 }
 

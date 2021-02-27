@@ -235,7 +235,14 @@ figure {
 		white-space: nowrap;
 	}
 }
-
+// img 100%宽容器
+.item-pic {
+	overflow: hidden;
+	img {
+		display: block;
+		width: 100%;
+	}
+}
 // 文章类详细页面
 .detail-content {
 	.txt-desc;
@@ -245,10 +252,6 @@ figure {
 	.item-pic {
 		.box-shadow;
 		margin: 10px 0;
-		img {
-			display: block;
-			width: 100%;
-		}
 	}
 	.item-time {
 		font-size: @l3;
@@ -267,55 +270,4 @@ figure {
 	border-left: 4px solid @btnBgSuccess;
 	color: @txtColor;
 	padding: 0 0 0 10px;
-}
-
-// 100%宽容器
-.wp100 {
-	width: 100%;
-	overflow: hidden;
-	img {
-		display: block;
-		width: 100%;
-	}
-}
-
-.dwz-marquee-txt,
-.dwz-marquee-list {
-	overflow: hidden;
-}
-
-ul.grid {
-	.tr {
-		color: @txtColor;
-		font-size: @l4;
-		.flex-wrap;
-
-		.td {
-			line-height: 30px;
-			.flex-wrap;
-
-			&.right {
-				justify-content: flex-end;
-				align-items: flex-end;
-			}
-			&.w30 {
-				width: 30px;
-			}
-			&.w40 {
-				width: 40px;
-			}
-			&.w60 {
-				width: 60px;
-			}
-			&.w80 {
-				width: 80px;
-			}
-			&.w100 {
-				width: 100px;
-			}
-			&.w120 {
-				width: 120px;
-			}
-		}
-	}
 }
