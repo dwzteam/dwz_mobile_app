@@ -1,57 +1,91 @@
 <main>
-
 	<header>
 		<div class="toolbar">
-			<button class="bar-button back-button"><i class="icon icon-back"></i></button>
-			<div class="header-title">修改密码</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
+			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
 
 	<div class="content">
 
-		<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
-			<div class="scroll-content dwz-scroll">
-				<div class="scroll">
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
 
-					<div class="divider"></div>
-
-					<div class="pageFormContent unitBox">
-
-						<div class="form-item">
-							<div class="item-content">
-								<label>手机号</label>
-								<input class="required dwz-clipboard" type="tel" name="mobile" value="{{UserInfo.mobile}}" placeholder="请输入手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
-							</div>
-						</div>
-						<div class="form-item">
-							<div class="item-content">
-								<label>验证码</label>
-								<input class="required dwz-clipboard" type="tel" name="mobile_code" placeholder="请输入短信验证码" pattern="[0-9]{4,6}" maxlength="6" data-error="短信验证码不匹配！">
-								<a target="sendVerifyMs" data-href="{{sms_code_url}}" rel="input[name=mobile]" data-op="4">获取验证码</a>
-							</div>
-						</div>
-
-						<div class="form-item">
-							<div class="item-content">
-								<label>新密码</label>
-								<input class="required" type="password" name="password" placeholder="登录密码" maxlength="20" data-error="请输入密码">
-							</div>
-						</div>
-						<div class="form-item">
-							<div class="item-content">
-								<label>确认密码</label>
-								<input class="required" type="password" name="password_confirm" placeholder="确认登录密码" maxlength="20" data-error="请输入确认密码">
-							</div>
-						</div>
-					</div>
-
-					<div class="form-bar">
-						<button class="button primary" type="submit">提交</button>
-					</div>
-
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-1"></div>
+					<div class="flex-item" id="chart-percent-2"></div>
 				</div>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-3"></div>
+					<div class="flex-item" id="chart-percent-4"></div>
+				</div>
+
 			</div>
-		</form>
+		</div>
 
 	</div>
 </main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		const chart1 = new DwzChartCircle({
+			$el: this.find('#chart-percent-1'),
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
+			textSize: '40px',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart2 = new DwzChartCircle({
+			$el: this.find('#chart-percent-2'),
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart3 = new DwzChartCircle({
+			$el: this.find('#chart-percent-3'),
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
+			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
+		});
+	}
+</script>

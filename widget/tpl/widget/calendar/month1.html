@@ -1,8 +1,9 @@
 <main>
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-			<div class="header-title">日历 + 事件记录</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
+			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
 
@@ -11,9 +12,14 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
-				<div class="dwz-calendar tb-line"></div>
-
-				<ul class="list dwz-list-box"></ul>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-1"></div>
+					<div class="flex-item" id="chart-percent-2"></div>
+				</div>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-3"></div>
+					<div class="flex-item" id="chart-percent-4"></div>
+				</div>
 
 			</div>
 		</div>
@@ -21,57 +27,65 @@
 	</div>
 </main>
 
-<script id="tpl_list" type="text/html">
-	{{each data as item}}
-	<li class="item dwz-ctl-hover">
-		<div class="item-content">
-			<div class="item-title1">{{item.type}}</div>
-			<div class="item-info1">{{item.time}}</div>
-		</div>
-		<div class="item-info1 alt">+{{item.score}}分</div>
-	</li>
-	{{/each}}
-</script>
-
 <script type="text/javascript">
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
-		this.find('.dwz-calendar').calendar({
-			changeDayFn: ($day, value) => {
-				console.log($day.dataset(), value);
 
-				if ($day.hasClass('dot')) {
-					// 选中某天后，请求当天的事件
-					$.ajax({
-						type: 'GET',
-						url: biz.server.getUrl(biz.server.calendar.dayDetail),
-						dataType: 'json',
-						data: {
-							date: value
-						},
-						success: (json) => {
-							if ($.isAjaxStatusOk(json)) {
-								let _html = template.render(tpl.tpl_list, json);
-								this.find('.dwz-list-box').html(_html);
-							}
-						},
-						error: $.ajaxError
-					});
-				} else {
-					this.find('.dwz-list-box').html('');
-				}
+		const chart1 = new DwzChartCircle({
+			$el: this.find('#chart-percent-1'),
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
+			textSize: '40px',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart2 = new DwzChartCircle({
+			$el: this.find('#chart-percent-2'),
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart3 = new DwzChartCircle({
+			$el: this.find('#chart-percent-3'),
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
 
-			},
-
-			refreshDayFn: ($days, dateWrap) => {
-				// 日历下面的小红点（测试数据双数日期加小红点）
-				$days.each(function(index) {
-					let day = parseInt(this.dataset.day);
-					if (day % 2 == 0) {
-						$(this).addClass('dot');
-					}
-				});
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
 			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
 		});
 	}
 </script>

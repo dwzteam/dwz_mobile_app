@@ -1,9 +1,9 @@
-<form class="page-wrap" method="post" action="./doc/json/ajaxDone.json" onsubmit="return validateCallback(this, navViewAjaxDoneClose)">
-
+<main>
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-			<div class="header-title">表单提交 + 查找带回</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
+			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
 
@@ -12,83 +12,83 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
-				<div class="pageFormContent">
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-1"></div>
+					<div class="flex-item" id="chart-percent-2"></div>
+				</div>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-3"></div>
+					<div class="flex-item" id="chart-percent-4"></div>
+				</div>
 
-					<div class="margin-v">
-						<div class="form-item">
-							<label>出差事由</label>
-							<div class="item-content">
-								<textarea class="textarea required" name="cause" rows="4" placeholder="请输入出差事由（必填）" maxlength="200" data-error="请输入出差事由"></textarea>
-							</div>
-						</div>
-					</div>
+			</div>
+		</div>
 
-					<div class="margin-v">
-						<div class="form-item">
-							<div class="item-content">
-								<label>省市区</label>
-								<input type="hidden" name="province">
-								<input type="hidden" name="city">
-								<input type="hidden" name="county">
-								<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
-										url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-										data: {
-											target:this, 
-											code: '',
-											callback: function(data) {
-												console.log(this, data)
-												var form = this.parentsByTag('form').get(0);
-												form.province.value = data.province;
-												form.city.value = data.city;
-												form.county.value = data.county;
-												form.destination.value = data.names;
-												
-												$.dialog.close();
-											}
-										},
-										pop: 'actionSheet'
-									})">
-								<i class="arrow-right"></i>
-							</div>
-						</div>
+	</div>
+</main>
 
-						<div class="form-item">
-							<div class="item-content">
-								<label>交通工具</label>
-								<select name="traffic_vehicle" class="required" data-error="请选择交通工具">
-									<option value="">请选择</option>
-									<option value="1">飞机</option>
-									<option value="2">火车</option>
-									<option value="3">汽车</option>
-									<option value="4">其它</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-item">
-							<div class="item-content">
-								<label>单程往返</label>
-								<select name="traffic_type" class="required" data-error="请选择单程往返">
-									<option value="">请选择</option>
-									<option value="1">单程</option>
-									<option value="2">往返</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-item">
-							<div class="item-content">
-								<label>开始时间</label>
-								<input type="text" name="start_date" value="" minDate="%y-{%M-3}-%d" maxDate="%y-%M-%d" placeholder="请选择（必填）" class="required dwz-calendar" data-error="请选择开始时间" readonly>
-							</div>
-						</div>
-						<div class="form-item">
-							<div class="item-content">
-								<label>结束时间</label>
-								<input type="text" name="end_date" value="" minDate="%y-%M-{%d+1}" placeholder="请选择（必填）" class="required dwz-calendar" data-error="请选择结束时间" readonly>
-							</div>
-						</div>
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
 
-					</div>
+		const chart1 = new DwzChartCircle({
+			$el: this.find('#chart-percent-1'),
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
+			textSize: '40px',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart2 = new DwzChartCircle({
+			$el: this.find('#chart-percent-2'),
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart3 = new DwzChartCircle({
+			$el: this.find('#chart-percent-3'),
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
 
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
+			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
+		});
+	}
+</script>
 					<div class="margin-v">
 						<div class="form-item">
 							<div class="item-content">

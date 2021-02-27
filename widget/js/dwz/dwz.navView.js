@@ -10,7 +10,7 @@ $.navView = {
 			<main>
 				<header>
 					<div class="toolbar">
-						<a class="bar-button back-button"><i class="icon icon-back"></i></a>
+						<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
 						<div class="header-title">#page_title#</div>
 					</div>
 				</header>

@@ -1,54 +1,91 @@
-<form class="dwz-list-form page-wrap">
-	<input type="hidden" name="pageNum" value="1">
-
+<main>
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-			<div class="header-title">通知资讯</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
+			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
 
 	<div class="content">
 
-		<div class="scroll-content dwz-list">
+		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
-				<div class="pullDown">
-					<span class="pullDownIcon">&nbsp;</span>
-					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
-				</div>
-				<div class="empty_box" style="{{(list && list.length ? 'display:none' : '')}}">
-					<div class="empty-img">
-						<img src="image/browse-empty-bg.svg">
-					</div>
-					<p style="color:#999; text-align:center;">暂时还没有数据哦~</p>
-				</div>
-				<ul class="list pic-list dwz-list-box">
 
-				</ul>
-				<div class="pullUp">
-					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中...">更多...</span>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-1"></div>
+					<div class="flex-item" id="chart-percent-2"></div>
 				</div>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-3"></div>
+					<div class="flex-item" id="chart-percent-4"></div>
+				</div>
+
 			</div>
-
-			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
 		</div>
+
 	</div>
-</form>
+</main>
 
-<script id="tpl_list" type="text/html">
-	{{each data as item}}
-	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
-		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
-		<div class="item-content">
-			<div class="item-title1">{{item.title}}</div>
-			<div class="item-info2">{{item.content}}</div>
-			<div class="flex-item"></div>
-			<div class="flex-wrap">
-				<div class="txt-info txt-line1 flex-item">{{item.author}}</div>
-				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
-				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
-			</div>
-		</div>
-	</li>
-	{{/each}}
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		const chart1 = new DwzChartCircle({
+			$el: this.find('#chart-percent-1'),
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
+			textSize: '40px',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart2 = new DwzChartCircle({
+			$el: this.find('#chart-percent-2'),
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart3 = new DwzChartCircle({
+			$el: this.find('#chart-percent-3'),
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
+			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
+		});
+	}
 </script>

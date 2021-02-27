@@ -1,8 +1,8 @@
 <main>
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-			<div class="header-title">百分比环形图</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
 			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
@@ -21,15 +21,6 @@
 					<div class="flex-item" id="chart-percent-4"></div>
 				</div>
 
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-5"></div>
-					<div class="flex-item" id="chart-percent-6"></div>
-				</div>
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-7"></div>
-					<div class="flex-item" id="chart-percent-8"></div>
-				</div>
-
 			</div>
 		</div>
 
@@ -40,55 +31,64 @@
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
 
-		const chart1 = new DwzChartPercent({
+		const chart1 = new DwzChartCircle({
 			$el: this.find('#chart-percent-1'),
-			strokeLinecap: 'round',
-			startColor: '#0099DD',
-			endColor: '#1AFF00',
-			textColor: '#1AFF00',
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
 			textSize: '40px',
-			bgColor: 'rgba(200, 200, 200, .8)',
 			fgWidth: 15,
-			bgWidth: 3,
-			data: 25
+			bgWidth: 3
 		});
-		const chart2 = new DwzChartPercent({
+		const chart2 = new DwzChartCircle({
 			$el: this.find('#chart-percent-2'),
-			strokeLinecap: 'round',
-			textColor: '#7ED7FF',
-			bgColor: 'rgba(120, 100, 80, .8)',
-			fgWidth: 10,
-			bgWidth: 5,
-			data: 50
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
 		});
-		const chart3 = new DwzChartPercent({
+		const chart3 = new DwzChartCircle({
 			$el: this.find('#chart-percent-3'),
-			strokeLinecap: 'round',
-			startColor: '#07FCEE',
-			endColor: '#07FCEE',
-			textColor: '#07FCEE',
-			data: 75
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
 		});
 
-		const chart4 = new DwzChartPercent({
-			$el: this.find('#chart-percent-4'),
-			strokeLinecap: 'round',
-			startColor: '#0099DD',
-			endColor: '#7ED7FF',
-			textColor: '#7ED7FF',
-			data: 98
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
+			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
 		});
-		const chart5 = new DwzChartPercent({
-			$el: this.find('#chart-percent-5'),
-			strokeLinecap: 'butt',
-			startColor: '#0099DD',
-			endColor: '#1AFF00',
-			textColor: '#1AFF00',
-			fgWidth: 15,
-			bgWidth: 3,
-			data: 25
-		});
-		const chart6 = new DwzChartPercent({
+	}
+</script>hart6 = new DwzChartPercent({
 			$el: this.find('#chart-percent-6'),
 			strokeLinecap: 'butt',
 			startColor: '#0099DD',

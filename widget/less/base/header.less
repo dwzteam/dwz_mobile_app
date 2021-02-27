@@ -65,6 +65,8 @@ header {
 
 	.bar-button {
 		.flex-wrap-center;
+		.box-round;
+		overflow: hidden;
 		position: relative;
 		z-index: 1;
 		min-width: 36px;
@@ -81,13 +83,6 @@ header {
 		}
 	}
 
-	.icon-back {
-		margin: 0 10px 0 0;
-		width: 32px;
-		height: 32px;
-		background-position: left center;
-	}
-
 	&.is-float,
 	&.is-semi {
 		background: transparent;
@@ -96,6 +91,13 @@ header {
 		width: 100%;
 		z-index: 10;
 		border: none;
+	}
+	&.is-semi,
+	&.is-dark {
+		border-bottom: none;
+		.header-title {
+			color: @lightTxtColor;
+		}
 		.bar-button {
 			color: @headerLightBtnColor;
 		}
@@ -105,17 +107,5 @@ header {
 	}
 	&.is-dark {
 		background: @headerDarkBg;
-		border-bottom: none;
-		.icon-back {
-			background-image: url('../../image/icon/icon-back-light.svg');
-		}
-		.title,
-		.info-center {
-			color: @lightTxtColor;
-		}
-		.txt-button {
-			color: @lightTxtColor;
-			padding: 0 10px;
-		}
 	}
 }

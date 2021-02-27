@@ -1,9 +1,9 @@
-<form class="page-wrap" method="post" action="./doc/json/ajaxDone.json" onsubmit="return validateCallback(this, navViewAjaxDone)">
-
+<main>
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-			<div class="header-title">表单提交 + 主从表</div>
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">环形堆叠图表</div>
+			<button class="button mini"><i class="dwz-icon-refresh"></i>更新</button>
 		</div>
 	</header>
 
@@ -12,79 +12,80 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
-				<div class="pageFormContent">
-					<div class="legend">主表</div>
-
-					<div class="form-item">
-						<div class="item-content">
-							<label>房间号</label>
-							<input type="tel" name="sn" class="required" data-error="请输入房间号">
-						</div>
-					</div>
-					<div class="form-item">
-						<div class="item-content">
-							<label>户型</label>
-							<input class="required inline-right" type="number" name="room" maxlength="5" data-error="请输入户型-室"><span>室&nbsp;</span>
-							<input class="required inline-right" type="number" name="office" maxlength="5" data-error="请输入户型-厅"><span>厅&nbsp;</span>
-							<input class="required inline-right" type="number" name="toilet" maxlength="5" data-error="请输入户型-卫"><span>卫</span>
-						</div>
-					</div>
-					<div class="form-item">
-						<div class="item-content">
-							<label>明细表</label>
-							<select name="type" class="required toggleSelectRef" data-ref-box="#widget_form4_detail_box|#widget_form4_detail_btn" data-ref-val="1|1">
-								<option value="1">启用</option>
-								<option value="2">禁用</option>
-							</select>
-						</div>
-					</div>
-
-					<div id="widget_form4_detail_box" class="dwz-item-detail-box">
-						<div class="legend">明细表</div>
-
-						<div class="unitBox">
-							<div class="form-item">
-								<div class="item-content">
-									<label>姓名</label>
-									<input type="text" name="realname[]" placeholder="请输入姓名" class="required" maxlength="10" data-error="请输姓名">
-								</div>
-							</div>
-							<div class="form-item">
-								<div class="item-content">
-									<label>手机号</label>
-									<input type="tel" name="mobile[]" value="" class="required dwz-clipboard" placeholder="11位手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
-								</div>
-							</div>
-							<div class="divider"></div>
-						</div>
-					</div>
-
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-1"></div>
+					<div class="flex-item" id="chart-percent-2"></div>
 				</div>
-			</div>
-		</div>
-	</div>
+				<div class="flex-wrap-center">
+					<div class="flex-item" id="chart-percent-3"></div>
+					<div class="flex-item" id="chart-percent-4"></div>
+				</div>
 
-	<div class="form-bar pane">
-		<button id="widget_form4_detail_btn" class="button dwz-item-detail-btn" type="button">新增明细</button>
-		<button class="button primary" type="submit">提交</button>
-	</div>
-</form>
+			</div>
+		</div>
 
-<script id="tpl_item_detail" type="text/html">
-	<div class="unitBox">
-		<div class="form-item">
-			<div class="item-content">
-				<label>姓名</label>
-				<input type="text" name="realname[]" placeholder="请输入姓名" class="required" maxlength="10" data-error="请输姓名">
-				<a class="icon icon-del" onclick="biz.helper.removeUnitBox(this)"></a>
-			</div>
-		</div>
-		<div class="form-item">
-			<div class="item-content">
-				<label>手机号</label>
-				<input type="tel" name="mobile[]" value="" class="required dwz-clipboard" placeholder="11位手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
-			</div>
-		</div>
-		<div class="divider"></div>
 	</div>
+</main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		const chart1 = new DwzChartCircle({
+			$el: this.find('#chart-percent-1'),
+			color: ['#5E8FFF', '#0099DD', '#8C5DFF', '#5EFFF3', '#E78597'],
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/home-active.svg',
+			textColor: '#0099DD',
+			textSize: '40px',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart2 = new DwzChartCircle({
+			$el: this.find('#chart-percent-2'),
+			data: [20, 20, 20, 20, 20],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/message-active.svg',
+			textColor: '#0099DD',
+			sideType: 'onside',
+			fgWidth: 15,
+			bgWidth: 3
+		});
+		const chart3 = new DwzChartCircle({
+			$el: this.find('#chart-percent-3'),
+			bgColor: 'rgba(100, 50, 50, .8)',
+			data: [10, 30, 20, 10, 10],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			img: './image/navTab/my-active.svg',
+			textColor: '#0099DD',
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+		const chart4 = new DwzChartCircle({
+			$el: this.find('#chart-percent-4'),
+			data: [10, 30, 20, 10, 30],
+			axis: ['产品', '前端', '后端', '测试', '运维'],
+			textColor: '#0099DD',
+			sideType: 'inside',
+			fgWidth: 10,
+			bgWidth: 3
+		});
+
+		this.find('button.button').click((event) => {
+			let total = 0
+			const data = [];
+			for (let i = 0; i < 4; i++) {
+				let val = Math.round(Math.random() * 25);
+				total += val;
+				data.push(val);
+			}
+			data.push(100 - total);
+			chart1.setData(data);
+			chart2.setData(data);
+			chart3.setData(data);
+			chart4.setData(data);
+		});
+	}
 </script>

@@ -135,7 +135,7 @@ function loadScripts(options) {
 				});
 			});
 
-			$('.button, .dwz-ctl-hover', $p).hoverClass('hover');
+			$('header .bar-button, .button, .dwz-ctl-hover', $p).hoverClass('hover');
 			$('input[data-checkbox-radio]', $p).checkboxRadio();
 			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
 
