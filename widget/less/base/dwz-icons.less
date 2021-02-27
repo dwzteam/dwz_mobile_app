@@ -6,8 +6,8 @@
 	font-style: normal;
 }
 
-[class*=' dwz-icon-'],
-[class^='dwz-icon-'] {
+i[class*=' dwz-icon-'],
+i[class^='dwz-icon-'] {
 	font-family: dwz-icons !important;
 	speak: none;
 	font-style: normal;
@@ -1131,4 +1131,24 @@
 
 .dwz-icon-delete-solid:before {
 	content: '\e7c9';
+}
+
+.dwz-icon-loading {
+	animation: rotating 2s linear infinite;
+}
+
+.dwz-icon--right {
+	margin-left: 5px;
+}
+.dwz-icon--left {
+	margin-right: 5px;
+}
+
+@keyframes rotating {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
 }

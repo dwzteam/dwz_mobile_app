@@ -1,13 +1,15 @@
-.bg-size(@width: 24px, @height: 24px, @display:block, @size: 100%) {
+.bg-size(@width: 24px, @height: 24px, @display:block, @bgsize: 100%) {
 	display: @display;
 	width: @width;
 	height: @height;
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: @size;
+	background-size: @bgsize;
 }
 
-.icon {
+// 图标统一使用i标签
+i[class*=' icon-'],
+i[class^='icon-'] {
 	.bg-size(24px, 24px);
 	&.mini {
 		width: 16px;
@@ -128,11 +130,6 @@
 .icon-user {
 	background-image: url('../../image/icon/icon-user.svg');
 	background-size: 80%;
-}
-
-.icon-setting {
-	background-image: url('../../image/icon/icon-setting.svg');
-	background-size: 75%;
 }
 
 .icon-i {

@@ -18,7 +18,6 @@ header {
 	background: @headerBg;
 
 	.header-title {
-		display: flex;
 		flex: 1;
 		order: 4;
 		position: absolute;
@@ -26,13 +25,16 @@ header {
 		left: 0;
 		width: 100%;
 		height: 44px;
-		align-items: center;
+		line-height: 44px;
 		padding: 0 80px;
 		text-align: center;
 		font-size: @l1;
 		font-weight: 500;
 		transform: translateZ(0);
 		color: @titleColor;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	.search-title {
 		padding: 0 50px;
@@ -60,13 +62,7 @@ header {
 			right: 50px;
 		}
 	}
-	.title {
-		display: block;
-		overflow: hidden;
-		width: 100%;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
+
 	.bar-button {
 		.flex-wrap-center;
 		position: relative;
@@ -78,7 +74,11 @@ header {
 		border: none;
 		box-shadow: none;
 		background: none;
-		color: @headerButtonColor;
+		color: @headerBtnColor;
+		// 图标
+		i {
+			font-size: 24px;
+		}
 	}
 
 	.icon-back {
@@ -97,7 +97,7 @@ header {
 		z-index: 10;
 		border: none;
 		.bar-button {
-			color: @headerButtonColor;
+			color: @headerLightBtnColor;
 		}
 	}
 	&.is-semi {

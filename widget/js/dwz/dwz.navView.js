@@ -11,7 +11,7 @@ $.navView = {
 				<header>
 					<div class="toolbar">
 						<a class="bar-button back-button"><i class="icon icon-back"></i></a>
-						<div class="header-title"><div class="title">#page_title#</div></div>
+						<div class="header-title">#page_title#</div>
 					</div>
 				</header>
 				<div class="content"></div>
