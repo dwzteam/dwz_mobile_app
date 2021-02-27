@@ -163,8 +163,8 @@ $.navTab = {
 					op.callback = dwz.getUrlCallback(op.url);
 				}
 
+				const tpl = $.templateWrap(html);
 				if (op.callback) {
-					const tpl = $.templateWrap(html);
 					op.callback.call($panel, tpl, params);
 				} else {
 					$panel.html(html).initUI();

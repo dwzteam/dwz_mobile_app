@@ -19,7 +19,8 @@
 		.item-right {
 			.box-round;
 			overflow: hidden;
-			display: block;
+			display: flex;
+			justify-content: flex-end;
 			text-align: right;
 			color: @tabTxtColor;
 			height: 100%;
@@ -27,6 +28,7 @@
 
 			// dwz-icon图标
 			i {
+				.flex-wrap-center;
 				transition: all 200ms;
 				&.is-collapse {
 					transform: rotateZ(180deg);
