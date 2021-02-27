@@ -71,20 +71,20 @@
 </form>
 
 <script id="tpl_item_detail" type="text/html">
-<div class="unitBox">
-	<div class="form-item">
-		<div class="item-content">
-			<label>姓名</label>
-			<input type="text" name="realname[]" placeholder="请输入姓名" class="required" maxlength="10" data-error="请输姓名">
-			<a class="icon icon-del" onclick="biz.helper.removeUnitBox(this)"></a>
+	<div class="unitBox">
+		<div class="form-item">
+			<div class="item-content">
+				<label>姓名</label>
+				<input type="text" name="realname[]" placeholder="请输入姓名" class="required" maxlength="10" data-error="请输姓名">
+				<a class="icon" onclick="biz.helper.removeUnitBox(this)"><i class="dwz-icon-delete"></i></a>
+			</div>
 		</div>
-	</div>
-	<div class="form-item">
-		<div class="item-content">
-			<label>手机号</label>
-			<input type="tel" name="mobile[]" value="" class="required dwz-clipboard" placeholder="11位手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
+		<div class="form-item">
+			<div class="item-content">
+				<label>手机号</label>
+				<input type="tel" name="mobile[]" value="" class="required dwz-clipboard" placeholder="11位手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
+			</div>
 		</div>
+		<div class="divider"></div>
 	</div>
-	<div class="divider"></div>
-</div>
 </script>
