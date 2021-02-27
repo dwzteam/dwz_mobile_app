@@ -54,10 +54,9 @@ header {
 		}
 	}
 
-	&.is-float,
-	&.is-semi {
+	&.is-float {
+		.no-line;
 		background: transparent;
-		border: none;
 		position: relative;
 		.toolbar {
 			position: absolute;
@@ -68,7 +67,7 @@ header {
 	}
 	&.is-semi,
 	&.is-dark {
-		border-bottom: none;
+		.no-line;
 		.header-title {
 			color: @lightTxtColor;
 		}
@@ -78,6 +77,10 @@ header {
 	}
 	&.is-semi {
 		background: @headerSemiBg;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 10;
 	}
 	&.is-dark {
 		background: @headerDarkBg;
