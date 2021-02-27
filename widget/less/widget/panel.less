@@ -8,18 +8,30 @@
 		.b-line;
 		min-height: 44px;
 		font-size: @l3;
-		color: @titleColor;
 
 		.panel-title {
 			.flex-item;
 			font-weight: bold;
 			font-size: @l3;
+			color: @titleColor;
 		}
 
-		.panel-title-right {
-			.flex-wrap-center;
-			height: 100%;
+		.item-right {
+			.box-round;
+			overflow: hidden;
+			display: block;
+			text-align: right;
 			color: @tabTxtColor;
+			height: 100%;
+			min-width: 40px;
+
+			// dwz-icon图标
+			i {
+				transition: all 200ms;
+				&.is-collapse {
+					transform: rotateZ(180deg);
+				}
+			}
 		}
 	}
 

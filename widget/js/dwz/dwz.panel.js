@@ -4,8 +4,8 @@
 (function ($) {
 	let _config = {
 		panelCentent$: '.panel-content',
-		collapseBtn$: '.panel-title-right',
-		iconUpClass: 'icon-list-u'
+		collapseBtn$: '.item-right',
+		collapseClass: 'is-collapse'
 	};
 
 	$.fn.extend({
@@ -16,15 +16,13 @@
 				let $this = $(this);
 				let $btn = $this.find(op.collapseBtn$);
 				let $icon = $btn.find('i');
-				$btn.touchwipe({
-					touch(event) {
-						if ($icon.hasClass(op.iconUpClass)) {
-							$this.panelCollapse(op);
-						} else {
-							$this.panelExpand(op);
-						}
-						event.stopPropagation();
+				$btn.click((event) => {
+					if ($icon.hasClass(op.collapseClass)) {
+						$this.panelExpand(op);
+					} else {
+						$this.panelCollapse(op);
 					}
+					event.stopPropagation();
 				});
 			});
 		},
@@ -38,7 +36,7 @@
 				let $btn = $this.find(op.collapseBtn$);
 				let $icon = $btn.find('i');
 				$this.find(op.panelCentent$).show();
-				$icon.addClass(op.iconUpClass);
+				$icon.removeClass(op.collapseClass);
 			});
 		},
 		// 折叠
@@ -50,7 +48,7 @@
 				let $btn = $this.find(op.collapseBtn$);
 				let $icon = $btn.find('i');
 				$this.find(op.panelCentent$).hide();
-				$icon.removeClass(op.iconUpClass);
+				$icon.addClass(op.collapseClass);
 			});
 		}
 	});

@@ -57,11 +57,14 @@ header {
 	&.is-float,
 	&.is-semi {
 		background: transparent;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 10;
 		border: none;
+		position: relative;
+		.toolbar {
+			position: absolute;
+			bottom: -44px;
+			left: 0;
+			z-index: 10;
+		}
 	}
 	&.is-semi,
 	&.is-dark {

@@ -12,11 +12,12 @@
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
-				<!-- 可折叠面板 class="dwz-collapse" -->
+				<div class="divider"></div>
+
 				<div class="dwz-panel dwz-collapse">
 					<div class="panel-header padding-h">
-						<label class="panel-title">可折叠面板</label>
-						<a class="panel-title-right">更多<i class="icon icon-more"></i></a>
+						<label class="panel-title">普通面板</label>
+						<a class="item-right">更多<i class="dwz-icon-arrow-right"></i></a>
 					</div>
 					<div class="panel-content">
 						<div class="grid-col-3">
@@ -38,28 +39,325 @@
 
 				<div class="divider"></div>
 
-				<div class="dwz-panel margin-h box-round no-line">
+				<div class="dwz-panel dwz-collapse margin-h box-round no-line">
 					<div class="panel-header padding-h">
 						<label class="panel-title">圆角面板</label>
-						<a class="panel-title-right">更多<i class="dwz-icon-arrow-right"></i></a>
+						<a class="item-right">切换<i class="dwz-icon-arrow-up"></i></a>
 					</div>
 					<div class="panel-content">
-						<div class="detail-content">
-							<div class="grid-col-3 no-line">
-								<a class="item" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
-									<div class="item-icon"><img src="image/icon/service/setting.svg"></div>
-									<p class="item-label">设置</p>
-								</a>
-								<a class="item" target="navView" data-href="tpl/my/feedback.html?dwz_callback=" rel="feedback">
-									<div class="item-icon"><img src="image/icon/service/feedback.svg"></div>
-									<p class="item-label">反馈</p>
-								</a>
-								<a class="item" target="navView" data-href="tpl/about.html?dwz_callback=biz.home.aboutRender" rel="about">
-									<div class="item-icon"><img src="image/icon/service/about.svg"></div>
-									<p class="item-label">关于</p>
-								</a>
-							</div>
+						<div class="grid-col-3 no-line">
+							<a class="item" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting">
+								<div class="item-icon"><img src="image/icon/service/setting.svg"></div>
+								<p class="item-label">设置</p>
+							</a>
+							<a class="item" target="navView" data-href="tpl/my/feedback.html?dwz_callback=" rel="feedback">
+								<div class="item-icon"><img src="image/icon/service/feedback.svg"></div>
+								<p class="item-label">反馈</p>
+							</a>
+							<a class="item" target="navView" data-href="tpl/about.html?dwz_callback=biz.home.aboutRender" rel="about">
+								<div class="item-icon"><img src="image/icon/service/about.svg"></div>
+								<p class="item-label">关于</p>
+							</a>
 						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+				<!-- 可折叠 class="dwz-collapse" -->
+				<div class="dwz-panel dwz-collapse">
+					<div class="panel-header padding-h">
+						<label class="panel-title">折叠面板</label>
+						<a class="item-right">切换<i class="dwz-icon-arrow-up"></i></a>
+					</div>
+					<div class="panel-content">
+						<ul class="grid-col-3 tpl_list pane">
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-delete-solid"></i></div>
+								<p class="item-label">delete-solid</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-delete"></i></div>
+								<p class="item-label">delete</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-s-tools"></i></div>
+								<p class="item-label">s-tools</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-setting"></i></div>
+								<p class="item-label">setting</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-user-solid"></i></div>
+								<p class="item-label">user-solid</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-user"></i></div>
+								<p class="item-label">user</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-phone"></i></div>
+								<p class="item-label">phone</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-phone-outline"></i></div>
+								<p class="item-label">phone-outline</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-more"></i></div>
+								<p class="item-label">more</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-more-outline"></i></div>
+								<p class="item-label">more-outline</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-info"></i></div>
+								<p class="item-label">info</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-remove"></i></div>
+								<p class="item-label">remove</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-circle-plus"></i></div>
+								<p class="item-label">circle-plus</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-success"></i></div>
+								<p class="item-label">success</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-error"></i></div>
+								<p class="item-label">error</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-zoom-in"></i></div>
+								<p class="item-label">zoom-in</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-zoom-out"></i></div>
+								<p class="item-label">zoom-out</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-remove-outline"></i></div>
+								<p class="item-label">remove-outline</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-circle-plus-outline"></i></div>
+								<p class="item-label">circle-plus-outline</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-circle-check"></i></div>
+								<p class="item-label">circle-check</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-circle-close"></i></div>
+								<p class="item-label">circle-close</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-s-help"></i></div>
+								<p class="item-label">s-help</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-help"></i></div>
+								<p class="item-label">help</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-minus"></i></div>
+								<p class="item-label">minus</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-plus"></i></div>
+								<p class="item-label">plus</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-check"></i></div>
+								<p class="item-label">check</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-close"></i></div>
+								<p class="item-label">close</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-menu"></i></div>
+								<p class="item-label">menu</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-bottom-left"></i></div>
+								<p class="item-label">bottom-left</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-bottom-right"></i></div>
+								<p class="item-label">bottom-right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-back"></i></div>
+								<p class="item-label">back</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-right"></i></div>
+								<p class="item-label">right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-bottom"></i></div>
+								<p class="item-label">bottom</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-top"></i></div>
+								<p class="item-label">top</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-top-left"></i></div>
+								<p class="item-label">top-left</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-top-right"></i></div>
+								<p class="item-label">top-right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-arrow-left"></i></div>
+								<p class="item-label">arrow-left</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-arrow-right"></i></div>
+								<p class="item-label">arrow-right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-arrow-down"></i></div>
+								<p class="item-label">arrow-down</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-arrow-up"></i></div>
+								<p class="item-label">arrow-up</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-d-arrow-left"></i></div>
+								<p class="item-label">d-arrow-left</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-d-arrow-right"></i></div>
+								<p class="item-label">d-arrow-right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-video-pause"></i></div>
+								<p class="item-label">video-pause</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-video-play"></i></div>
+								<p class="item-label">video-play</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-refresh"></i></div>
+								<p class="item-label">refresh</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-refresh-right"></i></div>
+								<p class="item-label">refresh-right</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-refresh-left"></i></div>
+								<p class="item-label">refresh-left</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-finished"></i></div>
+								<p class="item-label">finished</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-sort"></i></div>
+								<p class="item-label">sort</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-sort-up"></i></div>
+								<p class="item-label">sort-up</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-sort-down"></i></div>
+								<p class="item-label">sort-down</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-loading"></i></div>
+								<p class="item-label">loading</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-view"></i></div>
+								<p class="item-label">view</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-date"></i></div>
+								<p class="item-label">date</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-edit"></i></div>
+								<p class="item-label">edit</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-edit-outline"></i></div>
+								<p class="item-label">edit-outline</p>
+							</li>
+
+							<li class="item dwz-ctl-hover">
+								<div class="item-icon"><i class="dwz-icon-search"></i></div>
+								<p class="item-label">search</p>
+							</li>
+
+						</ul>
 					</div>
 				</div>
 
