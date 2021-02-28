@@ -5,11 +5,11 @@
 			<div class="search-box">
 				<div class="flex-wrap">
 					<label for="input-driving-end" style="color:#E5625C; white-space: nowrap;">起点·</label>
-					<input type="text" name="start" value="我的位置" class="flex-item b-line" readonly>
+					<input type="text" name="start" value="我的位置" class="flex-1 b-line" readonly>
 				</div>
 				<div class="flex-wrap">
 					<label for="input-driving-end" style="color:#F5A623; white-space: nowrap;">终点·</label>
-					<input id="input-driving-end" type="search" name="end" value="{{params.address}}" class="flex-item">
+					<input id="input-driving-end" type="search" name="end" value="{{params.address}}" class="flex-1">
 				</div>
 			</div>
 			<!-- <button class="button" type="submit" style="background: #31455A; line-height: 40px; border-radius: 20px; color: #fff; padding: 0 10px; margin: 0 5px; white-space: nowrap;">搜索</button> -->
@@ -46,9 +46,9 @@
 </script>
 
 <script id="tpl_nav_info" type="text/html">
-<div class="flex-item flex-wrap-center flex-wrap-v">
+<div class="flex-1 flex-wrap-center flex-wrap-v">
 	<p class="item-title1">{{route.time|formatTime}}</p>
 	<p class="item-info1">{{route.distance|formatDistance}}</p>
 </div>
-<button class="button active flex-item" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
+<button class="button active flex-1" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
 </script>

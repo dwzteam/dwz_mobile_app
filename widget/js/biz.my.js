@@ -62,30 +62,28 @@ biz.my = {
 		});
 		this.html(html).initUI();
 
-		this.find('.dwz-user-icon').touchwipe({
-			touch() {
-				dwz.plus.chooseImage({
-					title: '修改用户头像',
-					maximum: 1,
-					callback(imgPath) {
-						if (!imgPath) {
-							return;
-						}
-
-						$.navView.open({
-							url: 'tpl/my/settingsIcon.html',
-							rel: 'mySettingsIcon',
-							data: { imgPath: imgPath },
-							callback: biz.my.settingIconRender
-						});
+		this.find('.dwz-user-icon').click((event) => {
+			dwz.plus.chooseImage({
+				title: '修改用户头像',
+				maximum: 1,
+				callback(imgPath) {
+					if (!imgPath) {
+						return;
 					}
-				});
 
-				// $.navView.open({
-				// 	url: 'tpl/test_croppic.html?dwz_callback=biz.my.settingIconRender',
-				// 	rel: 'test'
-				// });
-			}
+					$.navView.open({
+						url: 'tpl/my/settingsIcon.html',
+						rel: 'mySettingsIcon',
+						data: { imgPath: imgPath },
+						callback: biz.my.settingIconRender
+					});
+				}
+			});
+
+			// $.navView.open({
+			// 	url: 'tpl/test_croppic.html?dwz_callback=biz.my.settingIconRender',
+			// 	rel: 'test'
+			// });
 		});
 	},
 	settingIconRender(tpl, params) {

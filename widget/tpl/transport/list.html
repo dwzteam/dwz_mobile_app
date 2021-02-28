@@ -32,7 +32,7 @@
 	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'})">
 		<div class="item-content">
 			<div class="flex-wrap">
-				<div class="item-title1 flex-item">{{item.transport_time}}<span class="txt-h3">· {{item.truck_num}}</span> </div>
+				<div class="item-title1 flex-1">{{item.transport_time}}<span class="txt-h3">· {{item.truck_num}}</span> </div>
 				<div class="item-status2 {{item.status|showTransportStatus 'icon'}}">{{item.status|showTransportStatus}}</div>
 			</div>
 			<div class="item-info1">收货单位：{{item.receive_company_name}}</div>

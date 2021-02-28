@@ -4,7 +4,7 @@
 	<!-- is-float is-semi is-dark -->
 	<header class="is-semi">
 		<div class="toolbar">
-			<div class="flex-item"></div>
+			<div class="flex-1"></div>
 			<a class="bar-button" target="navView" data-href="tpl/my/setting.html?dwz_callback=biz.my.settingRender" rel="setting"><i class="dwz-icon-setting"></i></a>
 			<a class="bar-button" target="navView" data-href="tpl/about.html?dwz_callback=biz.home.aboutRender" rel="about"><i class="icon-i"></i></a>
 		</div>
@@ -24,7 +24,7 @@
 				</a>
 
 				<div class="dwz-panel">
-					<div class="panel-header padding-h">
+					<div class="panel-header">
 						<label class="panel-title">我的行程</label>
 						<a class="item-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.pageRender" rel="transport">查看更多<i class="dwz-icon-arrow-right"></i></a>
 					</div>
@@ -33,8 +33,8 @@
 
 				<div class="divider"></div>
 				<div class="dwz-panel dwz-collapse">
-					<div class="panel-header padding-h">
-						<label class="panel-title">会员服务</label>
+					<div class="panel-header">
+						<label class="panel-title blockquote">会员服务</label>
 						<a class="item-right"><i class="dwz-icon-arrow-up"></i></a>
 					</div>
 					<div class="panel-content">
@@ -58,7 +58,7 @@
 				<div class="divider"></div>
 
 				<div class="dwz-panel">
-					<div class="panel-header padding-h">
+					<div class="panel-header">
 						<label class="panel-title">通知资讯</label>
 						<a class="item-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="dwz-icon-arrow-right"></i></a>
 					</div>
@@ -78,7 +78,7 @@
 	{{each data as item}}
 	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
 		<div class="flex-wrap">
-			<div class="item-title1 flex-item"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
+			<div class="item-title1 flex-1"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
 			<div class="item-info1">{{item.status|showTransportStatus}}</div>
 		</div>
 
@@ -87,7 +87,7 @@
 				<div class="dot-start"></div>
 				<div class="dot-end"></div>
 			</div>
-			<div class="flex-item">
+			<div class="flex-1">
 				<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
 				<div class="item-info3">运输路线：{{item.transport_way}}</div>
 				<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
@@ -104,11 +104,11 @@
 		<div class="item-content">
 			<div class="item-title1">{{item.title}}</div>
 			<div class="item-info2">{{item.content}}</div>
-			<div class="flex-item"></div>
+			<div class="flex-1"></div>
 			<div class="flex-wrap">
-				<div class="txt-info txt-line1 flex-item">{{item.author}}</div>
-				<div class="txt-info txt-line1 flex-item center">阅读({{item.reading_num}})</div>
-				<div class="txt-info txt-line1 flex-item right">{{item.created_at}}</div>
+				<div class="txt-info txt-line1 flex-1">{{item.author}}</div>
+				<div class="txt-info txt-line1 flex-1 center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-1 right">{{item.created_at}}</div>
 			</div>
 		</div>
 	</li>

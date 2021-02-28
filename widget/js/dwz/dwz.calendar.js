@@ -30,7 +30,7 @@
 					</div>
 					<div class="df">
 						<button class="button mini cleanBtn">${$.regional.calendar.btnTxt.clean}</button>
-						<div class="flex-item"></div>
+						<div class="flex-1"></div>
 						<button class="button mini cancelBtn">${$.regional.calendar.btnTxt.cancel}</button>
 						<button class="button mini primary okBtn">${$.regional.calendar.btnTxt.ok}</button>
 					</div>

@@ -7,27 +7,25 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<div class="content pane">
 
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
 				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-1"></div>
-					<div class="flex-item" id="chart-percent-2"></div>
+					<div class="flex-1" id="chart-percent-1"></div>
+					<div class="flex-1" id="chart-percent-2"></div>
+					<div class="flex-1" id="chart-percent-3"></div>
 				</div>
 				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-3"></div>
-					<div class="flex-item" id="chart-percent-4"></div>
-				</div>
-
-				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-5"></div>
-					<div class="flex-item" id="chart-percent-6"></div>
+					<div class="flex-1" id="chart-percent-4"></div>
+					<div class="flex-1" id="chart-percent-5"></div>
+					<div class="flex-1" id="chart-percent-6"></div>
 				</div>
 				<div class="flex-wrap-center">
-					<div class="flex-item" id="chart-percent-7"></div>
-					<div class="flex-item" id="chart-percent-8"></div>
+					<div class="flex-1" id="chart-percent-7"></div>
+					<div class="flex-1" id="chart-percent-8"></div>
+					<div class="flex-1" id="chart-percent-9"></div>
 				</div>
 
 			</div>
@@ -37,104 +35,121 @@
 </main>
 
 <script type="text/javascript">
-function helper(tpl, params) {
-	// console.log(this, tpl, params)
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
 
-	const chart1 = new DwzChartPercent({
-		$el: this.find('#chart-percent-1'),
-		strokeLinecap: 'round',
-		startColor: '#0099DD',
-		endColor: '#1AFF00',
-		textColor: '#1AFF00',
-		textSize: '40px',
-		bgColor: 'rgba(200, 200, 200, .8)',
-		fgWidth: 15,
-		bgWidth: 3,
-		data: 25
-	});
-	const chart2 = new DwzChartPercent({
-		$el: this.find('#chart-percent-2'),
-		strokeLinecap: 'round',
-		textColor: '#7ED7FF',
-		bgColor: 'rgba(120, 100, 80, .8)',
-		fgWidth: 10,
-		bgWidth: 5,
-		data: 50
-	});
-	const chart3 = new DwzChartPercent({
-		$el: this.find('#chart-percent-3'),
-		strokeLinecap: 'round',
-		startColor: '#07FCEE',
-		endColor: '#07FCEE',
-		textColor: '#07FCEE',
-		data: 75
-	});
+		const chart1 = new DwzChartPercent({
+			$el: this.find('#chart-percent-1'),
+			strokeLinecap: 'round',
+			startColor: '#0099DD',
+			endColor: '#1AFF00',
+			textColor: '#1AFF00',
+			textSize: '40px',
+			bgColor: 'rgba(200, 200, 200, 0.6)',
+			fgWidth: 15,
+			bgWidth: 3,
+			data: 25
+		});
+		const chart2 = new DwzChartPercent({
+			$el: this.find('#chart-percent-2'),
+			strokeLinecap: 'round',
+			startColor: '#ff480a',
+			endColor: '#ff480a',
+			textColor: '#ff480a',
+			bgColor: 'rgba(255,72,10,0.5)',
+			fgWidth: 10,
+			bgWidth: 5,
+			data: 50
+		});
+		const chart3 = new DwzChartPercent({
+			$el: this.find('#chart-percent-3'),
+			strokeLinecap: 'butt',
+			startColor: '#0099DD',
+			endColor: '#1AFF00',
+			textColor: '#1AFF00',
+			fgWidth: 15,
+			bgWidth: 3,
+			data: 25
+		});
 
-	const chart4 = new DwzChartPercent({
-		$el: this.find('#chart-percent-4'),
-		strokeLinecap: 'round',
-		startColor: '#0099DD',
-		endColor: '#7ED7FF',
-		textColor: '#7ED7FF',
-		data: 98
-	});
-	const chart5 = new DwzChartPercent({
-		$el: this.find('#chart-percent-5'),
-		strokeLinecap: 'butt',
-		startColor: '#0099DD',
-		endColor: '#1AFF00',
-		textColor: '#1AFF00',
-		fgWidth: 15,
-		bgWidth: 3,
-		data: 25
-	});
-	const chart6 = new DwzChartPercent({
-		$el: this.find('#chart-percent-6'),
-		strokeLinecap: 'butt',
-		startColor: '#0099DD',
-		endColor: 'red',
-		textColor: 'red',
-		fgWidth: 10,
-		bgWidth: 10,
-		data: 50
-	});
-	const chart7 = new DwzChartPercent({
-		$el: this.find('#chart-percent-7'),
-		strokeLinecap: 'butt',
-		startColor: '#0099DD',
-		endColor: '#01A9F8',
-		textColor: '#01A9F8',
-		fgWidth: 8,
-		bgWidth: 6,
-		sideType: 'outside',
-		data: 75
-	});
-	const chart8 = new DwzChartPercent({
-		$el: this.find('#chart-percent-8'),
-		strokeLinecap: 'butt',
-		startColor: '#0099DD',
-		endColor: '#1AFF00',
-		textColor: '#1AFF00',
-		fgWidth: 8,
-		bgWidth: 6,
-		sideType: 'inside',
-		data: 98
-	});
+		const chart4 = new DwzChartPercent({
+			$el: this.find('#chart-percent-4'),
+			strokeLinecap: 'round',
+			startColor: '#0099DD',
+			endColor: '#7ED7FF',
+			textColor: '#7ED7FF',
+			data: 98
+		});
+		const chart5 = new DwzChartPercent({
+			$el: this.find('#chart-percent-5'),
+			strokeLinecap: 'round',
+			startColor: '#07FCEE',
+			endColor: '#07FCEE',
+			textColor: '#07FCEE',
+			data: 75
+		});
+		const chart6 = new DwzChartPercent({
+			$el: this.find('#chart-percent-6'),
+			strokeLinecap: 'butt',
+			startColor: '#00ffff',
+			endColor: '#26a1ff',
+			textColor: '#26a1ff',
+			fgWidth: 10,
+			bgWidth: 10,
+			data: 50
+		});
+		const chart7 = new DwzChartPercent({
+			$el: this.find('#chart-percent-7'),
+			strokeLinecap: 'butt',
+			startColor: '#4eb3ff',
+			endColor: '#4eb3ff',
+			textColor: '#4eb3ff',
+			bgColor: 'rgba(200, 200, 200, 0.6)',
+			fgWidth: 8,
+			bgWidth: 1,
+			sideType: 'outside',
+			data: 75
+		});
+		const chart8 = new DwzChartPercent({
+			$el: this.find('#chart-percent-8'),
+			strokeLinecap: 'butt',
+			startColor: '#0099DD',
+			endColor: '#1AFF00',
+			textColor: '#1AFF00',
+			bgColor: 'rgba(255,72,10,0.3)',
+			fgWidth: 8,
+			bgWidth: 4,
+			sideType: 'inside',
+			data: 98
+		});
+		const chart9 = new DwzChartPercent({
+			$el: this.find('#chart-percent-9'),
+			strokeLinecap: 'round',
+			startColor: '#ffcc00',
+			endColor: '#ff480a',
+			textColor: '#ff480a',
+			bgColor: 'rgba(255,72,10,0.3)',
+			fgWidth: 8,
+			bgWidth: 2,
+			sideType: 'inside',
+			data: 75
+		});
 
-	this.find('button.button').click((event) => {
-		const data1 = Math.round(Math.random() * 100);
-		const data2 = Math.round(Math.random() * 100);
-		const data3 = Math.round(Math.random() * 100);
-		const data4 = Math.round(Math.random() * 100);
+		this.find('button.button').click((event) => {
+			const data1 = Math.round(Math.random() * 100);
+			const data2 = Math.round(Math.random() * 100);
+			const data3 = Math.round(Math.random() * 100);
+			const data4 = Math.round(Math.random() * 100);
 
-		chart1.setData(data1);
-		chart2.setData(data2);
-		chart3.setData(data3);
-		chart4.setData(data4);
-		chart5.setData(data1);
-		chart6.setData(data2);
-		chart7.setData(data3);
-		chart8.setData(data4);
-	});
-}
+			chart1.setData(data1);
+			chart2.setData(data2);
+			chart3.setData(data3);
+			chart4.setData(data4);
+			chart5.setData(data1);
+			chart6.setData(data2);
+			chart7.setData(data3);
+			chart8.setData(data4);
+			chart9.setData(data1);
+		});
+	}
 </script>

@@ -61,23 +61,32 @@
 @l4: 13px; // 正文
 @l5: 12px; // 备注
 
+// 布局内外边距
+@marginH: 10px; // 水平边距(左右)
+@marginV: 10px; // 垂直边距(上下)
 .margin-h {
-	margin: 0 10px;
+	margin: 0 @marginH;
 }
 .margin-v {
-	margin: 10px 0;
+	margin: @marginV 0;
 }
 .margin-vh {
-	margin: 10px;
+	margin: @marginV @marginH;
 }
 .padding-h {
-	padding: 0 10px;
+	padding: 0 @marginH;
 }
 .padding-v {
-	padding: 10px 0;
+	padding: @marginV 0;
 }
 .padding-vh {
-	padding: 10px;
+	padding: @marginV @marginH;
+}
+.padding-l {
+	padding-left: @marginH;
+}
+.padding-r {
+	padding-right: @marginH;
 }
 
 // 用于iOS (iPhone和iPad)。当你点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景。要重设这个表现，你可以设置-webkit-tap-highlight-color为任何颜色。想要禁用这个高亮，设置颜色的alpha值为0即可
@@ -187,13 +196,21 @@
 		margin: 5px;
 	}
 }
-.flex-item {
+.flex-1 {
 	position: relative;
 	flex: 1;
 }
-.flex-item2 {
+.flex-2 {
 	position: relative;
 	flex: 2;
+}
+.flex-3 {
+	position: relative;
+	flex: 3;
+}
+.flex-4 {
+	position: relative;
+	flex: 4;
 }
 .align-center {
 	align-items: center;
@@ -267,6 +284,7 @@
 
 // 圆角
 .box-round {
+	overflow: hidden;
 	border-radius: 5px;
 }
 // 窗格
@@ -281,5 +299,24 @@
 
 	&.open {
 		display: block;
+	}
+}
+
+// 区块引用
+.blockquote {
+	display: flex;
+	align-items: center;
+	margin-left: -@marginH;
+	&:before {
+		position: relative;
+		content: '';
+		width: 4px;
+		height: 1.1em;
+		display: block;
+		overflow: hidden;
+		border-radius: 0 2px 2px 0;
+		background: @tabTxtColorActive;
+		color: transparent;
+		margin-right: 6px;
 	}
 }

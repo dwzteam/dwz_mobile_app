@@ -56,7 +56,7 @@ class DwzChartPercent extends DwzChartBase {
 	 * @param bgWidth: default 15
 	 * @param sideType: onside|inside|outside
 	 */
-	constructor({ $el, data = 0, strokeLinecap = 'round', rateColor = 0.7, bgColor = 'rgba(200, 200, 200, .8)', fgWidth = 10, bgWidth = 10, sideType = 'onside' }) {
+	constructor({ $el, data = 0, strokeLinecap = 'round', rateColor = 0.7, bgColor = 'rgba(200, 200, 200, .5)', fgWidth = 10, bgWidth = 10, sideType = 'onside' }) {
 		super(
 			$.extend(
 				{
@@ -175,7 +175,7 @@ class DwzChartCircle extends DwzChartBase {
 	 * @param bgWidth: default 15
 	 * @param sideType: onside|inside|outside
 	 */
-	constructor({ $el, data = [], bgColor = 'rgba(200, 200, 200, .8)', fgWidth = 10, bgWidth = 3, sideType = 'onside', color = [], axis = [], img = '', space = 1 }) {
+	constructor({ $el, data = [], bgColor = 'rgba(200, 200, 200, .5)', fgWidth = 10, bgWidth = 3, sideType = 'onside', color = [], axis = [], img = '', space = 1 }) {
 		super(
 			$.extend(
 				{

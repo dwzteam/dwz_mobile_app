@@ -15,28 +15,28 @@
 				<ul class="list">
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.toast('alert组件示例 toast')">
-						<p class="flex-item">toast提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">toast提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.error('alert组件示例 error')">
-						<p class="flex-item">错误提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">错误提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.success('alert组件示例 success')">
-						<p class="flex-item">成功提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">成功提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.open({
 						msg: 'DWZ Mobile alert组件示例，基础提示'
 					})">
-						<p class="flex-item">基础提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">基础提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.open({
 						title: '自定义标题',
 						msg: 'DWZ Mobile alert组件示例，自定义标题'
 					})">
-						<p class="flex-item">自定义标题提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">自定义标题提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.open({
@@ -45,7 +45,7 @@
 					}, function(ret) {
 						$.alert.toast('buttonIndex: '+ret.buttonIndex)
 					})">
-						<p class="flex-item">自定义标题 + 点击回调</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">自定义标题 + 点击回调</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({
@@ -53,7 +53,7 @@
 					}, function(ret) {
 						$.alert.toast('buttonIndex: '+ret.buttonIndex)
 					})">
-						<p class="flex-item">确认提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">确认提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({
@@ -63,13 +63,13 @@
 					}, function(ret) {
 						$.alert.toast('buttonIndex: '+ret.buttonIndex)
 					})">
-						<p class="flex-item">确认提示 + 自定义标题和按钮</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">确认提示 + 自定义标题和按钮</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.prompt('tpl/widget/alert/prompt.html?dwz_callback=biz.pageRender', {
 						form_url: biz.server.getUrl(biz.server.changePwd)
 					});">
-						<p class="flex-item">prompt自定义内容提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">prompt自定义内容提示</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 				</ul>

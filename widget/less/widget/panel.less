@@ -10,25 +10,29 @@
 		font-size: @l3;
 
 		.panel-title {
-			.flex-item;
+			.padding-h;
+			.flex-1;
 			font-weight: bold;
 			font-size: @l3;
 			color: @titleColor;
 		}
 
 		.item-right {
+			.padding-h;
 			.box-round;
 			overflow: hidden;
 			display: flex;
 			justify-content: flex-end;
+			align-items: center;
 			text-align: right;
-			color: @tabTxtColor;
-			height: 100%;
+			line-height: 100%;
 			min-width: 40px;
 
 			// dwz-icon图标
 			i {
 				.flex-wrap-center;
+				line-height: 30px;
+				color: @tabTxtColor;
 				transition: all 200ms;
 				&.is-collapse {
 					transform: rotateZ(180deg);
@@ -159,7 +163,7 @@
 				}
 			}
 
-			.flex-item;
+			.flex-1;
 
 			.r-line;
 

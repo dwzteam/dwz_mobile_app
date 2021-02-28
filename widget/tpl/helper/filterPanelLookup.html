@@ -16,7 +16,7 @@
 			<div class="form-item no-line mini">
 				<div class="item-content">
 					<label style="width: 80px;">{{item.label}}：</label>
-					<select class="flex-item" name="{{item.name}}">
+					<select class="flex-1" name="{{item.name}}">
 						<option value="">全部</option>
 						{{each item.options as option}}
 						<option value="{{option.id}}">{{option.name}}</option>
@@ -54,7 +54,7 @@
 <script id='tpl_list' type="text/html">
 	{{each list as item}}
 	<li class="item dwz-ctl-hover" {{each item as v k}} data-{{k}}="{{v}}" {{/each}}>
-		<span class="flex-item">{{item.name}}</span>
+		<span class="flex-1">{{item.name}}</span>
 		<i class="dwz-icon-arrow-right"></i>
 	</li>
 	{{/each}}
