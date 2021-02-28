@@ -15,20 +15,20 @@
 
 				<div class="divider"></div>
 
-				<div class="detail-content">
+				<article>
 					<p class="blockquote">自定义日期范围：静态格式y-M-d或y-M或y</p>
 					<p>minDate="2000-01-15" maxDate="2012-12-15"</p>
 					<p>minDate="2000-01" maxDate="2012-12"</p>
 					<p>minDate="2000" maxDate="2012”</p>
-				</div>
+				</article>
 
 				<div class="divider"></div>
-				<div class="detail-content">
+				<article>
 					<p class="blockquote">自定义日期范围：动态格式%y-%M-%d或%y-%M</p>
 					<p>minDate="{%y-10}-%M-%d" maxDate="%y-%M-{%d+1}"</p>
 					<p>minDate="{%y-10}-%M" maxDate="{%y+10}-%M"</p>
 					<p>minDate="{%y-10}" maxDate="{%y+10}"</p>
-				</div>
+				</article>
 
 			</div>
 		</div>
@@ -37,8 +37,8 @@
 </main>
 
 <script type="text/javascript">
-function helper(tpl, params) {
-	// console.log(this, tpl, params)
-	this.find('.dwz-calendar').calendar();
-}
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		this.find('.dwz-calendar').calendar();
+	}
 </script>
