@@ -20,6 +20,7 @@
 		{ "name": "scroll", "url": "" },
 		{ "name": "button", "url": "" },
 		{ "name": "icons", "url": "" },
+		{ "name": "layout", "url": "" },
 		{ "name": "about", "url": "tpl/about.html?dwz_callback=biz.home.aboutRender" }
 	]
 }

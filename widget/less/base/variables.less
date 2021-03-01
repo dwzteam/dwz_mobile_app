@@ -306,7 +306,9 @@
 .blockquote {
 	display: flex;
 	align-items: center;
-	margin-left: -@marginH;
+	&.panel-title {
+		margin-left: -@marginH;
+	}
 	&:before {
 		position: relative;
 		content: '';
