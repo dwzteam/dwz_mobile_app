@@ -21,25 +21,25 @@
 				viewType: 'month', // month, week
 				frag: `<div class="calendar">
 					<div class="dt">
-						<div class="pr"><a href="javascript:"><i class="dwz-icon-d-arrow-left"></i></a></div>
-						<div class="ym"><a href="javascript:"><span>Year Month</span><i class="dwz-icon-arrow-down"></i></a></div>
-						<div class="ne"><a href="javascript:"><i class="dwz-icon-d-arrow-right"></i></a></div>
+						<div class="pr dwz-ctl-hover"><a href="javascript:"><i class="dwz-icon-d-arrow-left"></i></a></div>
+						<div class="ym dwz-ctl-hover"><a href="javascript:"><span>Year Month</span><i class="dwz-icon-arrow-down"></i></a></div>
+						<div class="ne dwz-ctl-hover"><a href="javascript:"><i class="dwz-icon-d-arrow-right"></i></a></div>
 					</div>
 					<div class="bd">
 						<div class="slide-wrap"></div>
 					</div>
 					<div class="df">
-						<button class="button is-mini cleanBtn">${$.regional.calendar.btnTxt.clean}</button>
+						<button class="button is-mini cleanBtn dwz-ctl-hover">${$.regional.calendar.btnTxt.clean}</button>
 						<div class="flex-1"></div>
-						<button class="button is-mini cancelBtn">${$.regional.calendar.btnTxt.cancel}</button>
-						<button class="button is-mini primary okBtn">${$.regional.calendar.btnTxt.ok}</button>
+						<button class="button is-mini cancelBtn dwz-ctl-hover">${$.regional.calendar.btnTxt.cancel}</button>
+						<button class="button is-mini primary okBtn dwz-ctl-hover">${$.regional.calendar.btnTxt.ok}</button>
 					</div>
 					<div class="ympop">
 						<div class="ym">
 							<div class="yy">
 								<div class="yt">
-									<div class="pr"><a href="javascript:;"><i class="dwz-icon-d-arrow-left"></i></a></div>
-									<div class="ne"><a href="javascript:;"><i class="dwz-icon-d-arrow-right"></i></a></div>
+									<div class="pr dwz-ctl-hover"><a href="javascript:;"><i class="dwz-icon-d-arrow-left"></i></a></div>
+									<div class="ne dwz-ctl-hover"><a href="javascript:;"><i class="dwz-icon-d-arrow-right"></i></a></div>
 								</div>
 								<ul class="clearfix"></ul>
 							</div>
@@ -48,8 +48,8 @@
 							</div>
 						</div>
 						<div class="ympop-ft">
-							<button class="button primary ympopOkBtn">${$.regional.calendar.btnTxt.ok}</button>
-							<button class="button ympopCalcelBtn">${$.regional.calendar.btnTxt.cancel}</button>
+							<button class="button primary ympopOkBtn dwz-ctl-hover">${$.regional.calendar.btnTxt.ok}</button>
+							<button class="button ympopCalcelBtn dwz-ctl-hover">${$.regional.calendar.btnTxt.cancel}</button>
 						</div>
 					</div>
 				</div>`
@@ -73,6 +73,7 @@
 				$ymdt = $frag.find(setting.ymdt$),
 				wrapW = $bd.width();
 
+			$frag.find('.dwz-ctl-hover').hoverClass('hover');
 			if (op.viewType == 'week') {
 				$this.find('.dt .pr, .dt .ne').hide(); // 隐藏last, next按钮
 			}
