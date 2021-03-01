@@ -28,9 +28,9 @@ input.dwz-calendar {
 	overflow: hidden;
 	min-width: 240px;
 	position: relative;
-	background: #fff;
+	background: @paneBg;
 	a {
-		color: #000;
+		color: @titleColor;
 	}
 
 	.dt {
@@ -38,69 +38,40 @@ input.dwz-calendar {
 		display: flex;
 		align-items: center;
 		height: 40px;
-		background-color: #fff;
-		background-repeat: repeat-x;
+
 		position: relative;
 		.ym {
-			padding: 10px 23px;
+			padding: 0px 24px;
 			text-align: center;
-			font-size: 14px;
+			font-size: @l3;
 			flex: 1;
 		}
 		.ym span {
 			padding: 0 12px;
 			cursor: pointer;
-			&:after {
-				content: '';
-				display: inline-block;
-				width: 8px;
-				height: 8px;
-				margin: 0px 10px 5px;
-				border-top: 1px solid #000;
-				border-right: 1px solid #000;
-				transform: rotate(135deg);
-			}
 		}
 		.ym a {
+			display: inline-block;
 			text-decoration: none;
-			line-height: 21px;
-			color: #333;
+			line-height: 30px;
 			font-weight: bold;
 		}
-		.pr {
-			a {
-				background: url('../../image/icon/calendar/icon-prev-month.svg') center center no-repeat;
-			}
-		}
-		.ne {
-			a {
-				background: url('../../image/icon/calendar/icon-next-month.svg') center center no-repeat;
-			}
-		}
+
 		.pr a,
 		.ne a {
-			display: block;
+			.flex-wrap-center;
 			width: 40px;
 			height: 40px;
-			background-size: 10px;
 		}
 		.miscBtn {
-			.button;
 			margin: 0 10px;
-			width: 30px;
-			height: 28px;
-			color: @btnBgPrimary;
-			font-size: @l3;
-			text-indent: -10000px;
-			background: url('../../image/icon/calendar/icon-add.svg') center center no-repeat;
-			background-size: 100%;
 		}
 	}
 	.ympop {
 		display: none;
 		width: 100%;
 		font-size: @l3;
-		background-color: #fff;
+		background-color: @paneBg;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -134,25 +105,11 @@ input.dwz-calendar {
 		.pr {
 			left: 20px;
 		}
-		.pr a {
-			display: block;
-			width: 14px;
-			height: 14px;
-			border-left: 1px solid #444;
-			border-top: 1px solid #444;
-			transform: rotate(-45deg);
-		}
+
 		.ne {
 			right: 10px;
 		}
-		.ne a {
-			display: block;
-			width: 14px;
-			height: 14px;
-			border-right: 1px solid #444;
-			border-top: 1px solid #444;
-			transform: rotate(45deg);
-		}
+
 		ul {
 			padding-top: 3px;
 		}
@@ -249,7 +206,7 @@ input.dwz-calendar {
 				width: 4px;
 				height: 4px;
 				border-radius: 50%;
-				background-color: red;
+				background-color: @linkColorActive;
 				position: absolute;
 				bottom: 2px;
 				left: 50%;
@@ -267,30 +224,20 @@ input.dwz-calendar {
 		}
 	}
 	.inactive a {
-		color: #888;
+		color: @linkColorInactive;
 	}
 
 	.disabled a,
 	.disabled a:hover {
-		color: @btnTxtColorDisabled;
+		color: @linkColorDisabled;
 		border: none;
 		background: none;
 		cursor: default;
 	}
 
 	&.view-week {
-		.dt {
-			.ym span {
-				&:after {
-					display: none;
-				}
-			}
+		.dt .ym i {
+			display: none;
 		}
-	}
-}
-
-.tb-line {
-	.calendar {
-		border: none;
 	}
 }

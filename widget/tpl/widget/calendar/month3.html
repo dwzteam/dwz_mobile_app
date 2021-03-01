@@ -24,7 +24,7 @@
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
 		this.find('.dwz-calendar').calendar({
-			miscBtn: '<button>自定义按钮</button>',
+			miscBtn: '<button class="button is-mini is-circle"><i class="dwz-icon-plus"></i></button>',
 			miscBtnFn: function(value) {
 				$.alert.toast(value)
 			}

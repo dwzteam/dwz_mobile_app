@@ -21,9 +21,9 @@
 				viewType: 'month', // month, week
 				frag: `<div class="calendar">
 					<div class="dt">
-						<div class="pr"><a href="javascript:"></a></div>
-						<div class="ym"><a href="javascript:"><span>Year Month</span></a></div>
-						<div class="ne"><a href="javascript:"></a></div>
+						<div class="pr"><a href="javascript:"><i class="dwz-icon-d-arrow-left"></i></a></div>
+						<div class="ym"><a href="javascript:"><span>Year Month</span><i class="dwz-icon-arrow-down"></i></a></div>
+						<div class="ne"><a href="javascript:"><i class="dwz-icon-d-arrow-right"></i></a></div>
 					</div>
 					<div class="bd">
 						<div class="slide-wrap"></div>
@@ -38,8 +38,8 @@
 						<div class="ym">
 							<div class="yy">
 								<div class="yt">
-									<div class="pr"><a href="javascript:;"></a></div>
-									<div class="ne"><a href="javascript:;"></a></div>
+									<div class="pr"><a href="javascript:;"><i class="dwz-icon-d-arrow-left"></i></a></div>
+									<div class="ne"><a href="javascript:;"><i class="dwz-icon-d-arrow-right"></i></a></div>
 								</div>
 								<ul class="clearfix"></ul>
 							</div>
@@ -409,7 +409,7 @@
 
 			if (op.viewType == 'month') {
 				// 选择年月
-				$ymdt.find('.ym a').click(function () {
+				$ymdt.find('.ym').click(function () {
 					generateYmPop(dp, true);
 				});
 			}

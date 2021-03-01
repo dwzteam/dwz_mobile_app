@@ -5,6 +5,8 @@
 @infoColor: rgba(0, 0, 0, 0.5);
 @linkColor: #26a1ff;
 @linkColorActive: #ff480a;
+@linkColorInactive: #888;
+@linkColorDisabled: #bcbec2;
 @borderColor: rgba(240, 240, 240, 0.6);
 @borderColorDark: rgba(200, 200, 200, 0.6);
 @tabTxtColor: #929292;
@@ -148,6 +150,7 @@
 		border-color: @c;
 		transform-origin: 0 0;
 		transform: scale(0.5);
+		pointer-events: none;
 	}
 }
 .t-line {
