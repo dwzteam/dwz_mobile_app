@@ -46,7 +46,7 @@ $.fn.extend({
 				scrollX: false,
 				scrollY: true,
 				scroll$: op.scroll$,
-				touchmove: function (event, pos) {
+				touchmove(event, pos) {
 					if ($pullDown.size() > 0) {
 						if (pos.scrollY > 60) {
 							$pullDown.addClass('flip');
@@ -75,7 +75,7 @@ $.fn.extend({
 						}
 					}
 				},
-				touchend: function (event, pos) {
+				touchend(event, pos) {
 					// 列表刷新
 					if ($pullDown.size() > 0) {
 						if ($pullDown.hasClass('flip')) {
@@ -113,7 +113,7 @@ $.extend({
 			$list.scrollTo({ y: 0, duration: 800 });
 			return false;
 		});
-		setTimeout(function () {
+		setTimeout(() => {
 			$form.trigger('submit');
 		}, 300);
 
@@ -129,6 +129,9 @@ $.extend({
 				if ($page.size() && $form.total && $form.total > $list.find('li.item').size()) {
 					$page.val(parseInt($page.val()) + 1);
 					$form.requestList(true);
+					$list.data('dwz-load-more', 1); // 加载下一页时，禁用scroll复位
+				} else {
+					$list.data('dwz-load-more', 0);
 				}
 			}
 		});

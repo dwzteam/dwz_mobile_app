@@ -139,6 +139,12 @@
 							return;
 						}
 
+						if (op.touchend) op.touchend.call($main, event, pos);
+						// 加载下一页时，禁用scroll复位
+						if ($wrap.data('dwz-load-more') == 1) {
+							return;
+						}
+
 						if (op.scrollY && Math.abs(pos.dy) > 20) {
 							pos.scrollH = getScrollH();
 							if (pos.dy - currentPos.y < 0) {
@@ -179,8 +185,6 @@
 								$main.animate({ x: scrollX }, op.delayTime * 2, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'); // ease, linear
 							}
 						}
-
-						if (op.touchend) op.touchend.call($main, event, pos);
 					}
 				});
 			});
