@@ -6,7 +6,7 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<section>
 
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
@@ -18,60 +18,60 @@
 			</div>
 		</div>
 
-	</div>
+	</section>
 </main>
 
 <script id="tpl_list" type="text/html">
-{{each data as item}}
-<li class="item dwz-ctl-hover">
-	<div class="item-content">
-		<div class="item-title1">{{item.type}}</div>
-		<div class="item-info1">{{item.time}}</div>
-	</div>
-	<div class="item-info1 alt">+{{item.score}}分</div>
-</li>
-{{/each}}
+	{{each data as item}}
+	<li class="item dwz-ctl-hover">
+		<div class="item-content">
+			<div class="item-title1">{{item.type}}</div>
+			<div class="item-info1">{{item.time}}</div>
+		</div>
+		<div class="item-info1 alt">+{{item.score}}分</div>
+	</li>
+	{{/each}}
 </script>
 
 <script type="text/javascript">
-function helper(tpl, params) {
-	// console.log(this, tpl, params)
-	this.find('.dwz-calendar').calendar({
-		changeDayFn: ($day, value) => {
-			console.log($day.dataset(), value);
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		this.find('.dwz-calendar').calendar({
+			changeDayFn: ($day, value) => {
+				console.log($day.dataset(), value);
 
-			if ($day.hasClass('dot')) {
-				// 选中某天后，请求当天的事件
-				$.ajax({
-					type: 'GET',
-					url: biz.server.getUrl(biz.server.calendar.dayDetail),
-					dataType: 'json',
-					data: {
-						date: value
-					},
-					success: (json) => {
-						if ($.isAjaxStatusOk(json)) {
-							let _html = template.render(tpl.tpl_list, json);
-							this.find('.dwz-list-box').html(_html);
-						}
-					},
-					error: $.ajaxError
-				});
-			} else {
-				this.find('.dwz-list-box').html('');
-			}
-
-		},
-
-		refreshDayFn: ($days, dateWrap) => {
-			// 日历下面的小红点（测试数据双数日期加小红点）
-			$days.each(function(index) {
-				let day = parseInt(this.dataset.day);
-				if (day % 2 == 0) {
-					$(this).addClass('dot');
+				if ($day.hasClass('dot')) {
+					// 选中某天后，请求当天的事件
+					$.ajax({
+						type: 'GET',
+						url: biz.server.getUrl(biz.server.calendar.dayDetail),
+						dataType: 'json',
+						data: {
+							date: value
+						},
+						success: (json) => {
+							if ($.isAjaxStatusOk(json)) {
+								let _html = template.render(tpl.tpl_list, json);
+								this.find('.dwz-list-box').html(_html);
+							}
+						},
+						error: $.ajaxError
+					});
+				} else {
+					this.find('.dwz-list-box').html('');
 				}
-			});
-		}
-	});
-}
+
+			},
+
+			refreshDayFn: ($days, dateWrap) => {
+				// 日历下面的小红点（测试数据双数日期加小红点）
+				$days.each(function(index) {
+					let day = parseInt(this.dataset.day);
+					if (day % 2 == 0) {
+						$(this).addClass('dot');
+					}
+				});
+			}
+		});
+	}
 </script>

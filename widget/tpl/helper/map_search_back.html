@@ -1,5 +1,5 @@
-<div class="page-wrap">
-	<div class="header">
+<main>
+	<header>
 		<div class="toolbar">
 			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
 			<div class="search-bar flex-1">
@@ -11,11 +11,11 @@
 
 			<a class="bar-button button active dwz-ok-btn">确定</a>
 		</div>
-	</div>
+	</header>
 
 	<div class="dwz-map layout-semi-h"></div>
 
-	<div class="content">
+	<section>
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
 
@@ -23,19 +23,19 @@
 
 			</div>
 		</div>
-	</div>
-</div>
+	</section>
+</main>
 
 <script id="tpl_list" type="text/html">
-{{each list as item}}
-<li class="item dwz-ctl-hover">
-	<div class="flex-wrap">
-		<div class="icon icon-poi"></div>
-		<div class="flex-1">
-			<p class="item-title1">{{item.title}}</p>
-			<p class="item-info1">{{item.address}}</p>
+	{{each list as item}}
+	<li class="item dwz-ctl-hover">
+		<div class="flex-wrap">
+			<div class="icon icon-poi"></div>
+			<div class="flex-1">
+				<p class="item-title1">{{item.title}}</p>
+				<p class="item-info1">{{item.address}}</p>
+			</div>
 		</div>
-	</div>
-</li>
-{{/each}}
+	</li>
+	{{/each}}
 </script>

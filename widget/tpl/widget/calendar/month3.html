@@ -6,7 +6,7 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<section>
 
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
@@ -16,18 +16,18 @@
 			</div>
 		</div>
 
-	</div>
+	</section>
 </main>
 
 
 <script type="text/javascript">
-function helper(tpl, params) {
-	// console.log(this, tpl, params)
-	this.find('.dwz-calendar').calendar({
-		miscBtn: '<button>自定义按钮</button>',
-		miscBtnFn: function(value) {
-			$.alert.toast(value)
-		}
-	});
-}
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+		this.find('.dwz-calendar').calendar({
+			miscBtn: '<button>自定义按钮</button>',
+			miscBtnFn: function(value) {
+				$.alert.toast(value)
+			}
+		});
+	}
 </script>

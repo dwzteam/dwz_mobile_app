@@ -16,7 +16,7 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<section>
 		<div class="dwz-map-box"></div>
 
 		<div class="sheet-box sheet-top fold">
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<div class="bleed-margin flex-wrap-center dwz-nav-info" style="background: #fff;">
 
@@ -34,21 +34,21 @@
 </form>
 
 <script id="tpl_list" type="text/html">
-{{each list as item}}
-<li class="item dwz-ctl-hover" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
-	<div class="icon-address"></div>
-	<div class="item-content">
-		<p class="item-title1">{{item.name}}</p>
-		<p class="item-info1">{{item.address}}</p>
-	</div>
-</li>
-{{/each}}
+	{{each list as item}}
+	<li class="item dwz-ctl-hover" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
+		<div class="icon-address"></div>
+		<div class="item-content">
+			<p class="item-title1">{{item.name}}</p>
+			<p class="item-info1">{{item.address}}</p>
+		</div>
+	</li>
+	{{/each}}
 </script>
 
 <script id="tpl_nav_info" type="text/html">
-<div class="flex-1 flex-wrap-center flex-wrap-v">
-	<p class="item-title1">{{route.time|formatTime}}</p>
-	<p class="item-info1">{{route.distance|formatDistance}}</p>
-</div>
-<button class="button active flex-1" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
+	<div class="flex-1 flex-wrap-center flex-wrap-v">
+		<p class="item-title1">{{route.time|formatTime}}</p>
+		<p class="item-info1">{{route.distance|formatDistance}}</p>
+	</div>
+	<button class="button active flex-1" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
 </script>

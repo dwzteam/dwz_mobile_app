@@ -7,7 +7,7 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<section>
 
 		<div class="slideTab full-abs">
 			<div class="hd">
@@ -100,17 +100,16 @@
 			</div>
 		</div>
 
-
-	</div>
+	</section>
 </main>
 
 <script type="text/javascript">
-function helper(tpl, params) {
-	this.find('.slideTab').slideTab({
-		onSwitchSlide: ($itemBox, itemTpl, itemParams) => {
-			let itemHtml = template.render(itemTpl, itemParams);
-			$itemBox.html(itemHtml).initUI();
-		}
-	})
-}
+	function helper(tpl, params) {
+		this.find('.slideTab').slideTab({
+			onSwitchSlide: ($itemBox, itemTpl, itemParams) => {
+				let itemHtml = template.render(itemTpl, itemParams);
+				$itemBox.html(itemHtml).initUI();
+			}
+		})
+	}
 </script>

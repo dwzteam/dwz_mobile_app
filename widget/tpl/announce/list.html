@@ -8,7 +8,7 @@
 		</div>
 	</header>
 
-	<div class="content">
+	<section>
 
 		<div class="scroll-content dwz-list">
 			<div class="scroll">
@@ -32,23 +32,23 @@
 
 			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
 		</div>
-	</div>
+	</section>
 </form>
 
 <script id="tpl_list" type="text/html">
-{{each data as item}}
-<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
-	<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
-	<div class="item-content">
-		<div class="item-title1">{{item.title}}</div>
-		<div class="item-info2">{{item.content}}</div>
-		<div class="flex-1"></div>
-		<div class="flex-wrap">
-			<div class="txt-info txt-line1 flex-1">{{item.author}}</div>
-			<div class="txt-info txt-line1 flex-1 center">阅读({{item.reading_num}})</div>
-			<div class="txt-info txt-line1 flex-1 right">{{item.created_at}}</div>
+	{{each data as item}}
+	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
+		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
+		<div class="item-content">
+			<div class="item-title1">{{item.title}}</div>
+			<div class="item-info2">{{item.content}}</div>
+			<div class="flex-1"></div>
+			<div class="flex-wrap">
+				<div class="txt-info txt-line1 flex-1">{{item.author}}</div>
+				<div class="txt-info txt-line1 flex-1 center">阅读({{item.reading_num}})</div>
+				<div class="txt-info txt-line1 flex-1 right">{{item.created_at}}</div>
+			</div>
 		</div>
-	</div>
-</li>
-{{/each}}
+	</li>
+	{{/each}}
 </script>

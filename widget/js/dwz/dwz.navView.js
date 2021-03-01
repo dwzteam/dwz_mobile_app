@@ -14,7 +14,7 @@ $.navView = {
 						<div class="header-title">#page_title#</div>
 					</div>
 				</header>
-				<div class="content"></div>
+				<section></section>
 			</main>
         </div>`
 	},
