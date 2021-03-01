@@ -84,7 +84,7 @@ $.extend(biz, {
 	},
 	safeAreaTop: 0,
 	fixStatusBar($p) {
-		$p.find('header, dwz-fix-status-bar').css({
+		$p.find('header, .dwz-fix-status-bar').css({
 			'padding-top': biz.safeAreaTop + 'px'
 		});
 	},
