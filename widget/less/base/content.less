@@ -1,10 +1,3 @@
-// ios 第三方内容审核被拒，隐藏文档
-.ios {
-	a[rel='doc'] {
-		display: none;
-	}
-}
-
 .view-container {
 	.full-abs;
 	.flex-wrap-v;
@@ -20,6 +13,8 @@ main,
 	overflow: hidden;
 }
 
+// main的子标签：header, section, footer
+section,
 .content {
 	position: relative;
 	.flex-1;
@@ -221,19 +216,7 @@ main,
 		white-space: nowrap;
 	}
 }
-// img 100%宽容器
-.item-pic {
-	overflow: hidden;
-	img {
-		display: block;
-		width: 100%;
-	}
-}
 
-// 有联系的内容组
-section {
-	background: @paneBg;
-}
 // 独立完整的内容，文章类详细页面
 article,
 .detail-content {
@@ -253,7 +236,8 @@ article,
 	}
 }
 // 标签规定独立的流内容（图像、图表、照片、代码等等）
-figure {
+figure,
+.item-pic {
 	overflow: hidden;
 	img,
 	code {
