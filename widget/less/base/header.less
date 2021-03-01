@@ -10,11 +10,8 @@ header {
 		width: 100%;
 		padding: 6px;
 		min-height: 44px;
-		// 右对齐
-		&.right {
-			justify-content: flex-end;
-		}
 	}
+
 	.header-title {
 		flex: 1;
 		order: 4;
@@ -82,5 +79,16 @@ header {
 	}
 	&.is-dark {
 		background: @headerDarkBg;
+	}
+
+	// 右对齐
+	&.is-right {
+		.toolbar {
+			justify-content: flex-end;
+		}
+		&.is-float {
+			left: auto;
+			right: 0;
+		}
 	}
 }
