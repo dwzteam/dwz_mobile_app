@@ -1026,8 +1026,7 @@ dwz.fn.extend({
 		// 		data: fn ? data : undefined
 		// 	});
 		// }
-		// return this.on($.event.hasTouch ? 'touchstart' : 'click', data, fn);
-
+		// return this.on($.event.hasTouch ? 'touchend' : 'click', data, fn);
 		return this.on('click', data, fn);
 	},
 	change(data, fn) {
