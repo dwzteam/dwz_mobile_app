@@ -15,7 +15,7 @@
 			return this.each(function () {
 				let $this = $(this);
 				let $btn = $this.find(op.collapseBtn$);
-				let $icon = $btn.find('i');
+				let $icon = $btn.find('i.dwz-icon-arrow-up');
 				$btn.click((event) => {
 					if ($icon.hasClass(op.collapseClass)) {
 						$this.panelExpand(op);
@@ -34,7 +34,7 @@
 			return this.each(function () {
 				let $this = $(this);
 				let $btn = $this.find(op.collapseBtn$);
-				let $icon = $btn.find('i');
+				let $icon = $btn.find('i.dwz-icon-arrow-up');
 				$this.find(op.panelCentent$).show();
 				$icon.removeClass(op.collapseClass);
 			});
@@ -46,7 +46,7 @@
 			return this.each(function () {
 				let $this = $(this);
 				let $btn = $this.find(op.collapseBtn$);
-				let $icon = $btn.find('i');
+				let $icon = $btn.find('i.dwz-icon-arrow-up');
 				$this.find(op.panelCentent$).hide();
 				$icon.addClass(op.collapseClass);
 			});
