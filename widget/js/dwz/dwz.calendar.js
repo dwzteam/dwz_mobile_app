@@ -29,10 +29,10 @@
 						<div class="slide-wrap"></div>
 					</div>
 					<div class="df">
-						<button class="button mini cleanBtn">${$.regional.calendar.btnTxt.clean}</button>
+						<button class="button is-mini cleanBtn">${$.regional.calendar.btnTxt.clean}</button>
 						<div class="flex-1"></div>
-						<button class="button mini cancelBtn">${$.regional.calendar.btnTxt.cancel}</button>
-						<button class="button mini primary okBtn">${$.regional.calendar.btnTxt.ok}</button>
+						<button class="button is-mini cancelBtn">${$.regional.calendar.btnTxt.cancel}</button>
+						<button class="button is-mini primary okBtn">${$.regional.calendar.btnTxt.ok}</button>
 					</div>
 					<div class="ympop">
 						<div class="ym">

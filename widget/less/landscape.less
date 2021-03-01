@@ -1,0 +1,104 @@
+// 横屏样式
+.landscape {
+	.layout-row {
+		display: block;
+		width: 100%;
+
+		&:after {
+			display: table;
+			content: ' ';
+			clear: both;
+		}
+
+		.col-1,
+		.col-2,
+		.col-3,
+		.col-4,
+		.col-5,
+		.col-6,
+		.col-7,
+		.col-8,
+		.col-9,
+		.col-10,
+		.col-11,
+		.col-12 {
+			float: left;
+			position: relative;
+		}
+	}
+
+	// 九宫格
+	.grid-col-2 {
+		.item:nth-child(4n):before {
+			border-right-width: 0;
+		}
+		.item {
+			width: 12%;
+		}
+	}
+	.grid-col-3 {
+		.item:nth-child(6n):before {
+			border-right-width: 0;
+		}
+		.item {
+			width: 16.66666667%;
+		}
+	}
+	.grid-col-4 {
+		.item:nth-child(8n):before {
+			border-right-width: 0;
+		}
+		.item {
+			width: 12.5%;
+		}
+	}
+	.grid-col-5 {
+		.item:nth-child(10n):before {
+			border-right-width: 0;
+		}
+		.item {
+			width: 10%;
+		}
+	}
+
+	// flex 流式布局，根据item宽度适配
+	.flex-flow,
+	.layout-row {
+		.col-12 {
+			width: 100%;
+		}
+		.col-11 {
+			width: 91.66666667%;
+		}
+		.col-10 {
+			width: 83.33333333%;
+		}
+		.col-9 {
+			width: 75%;
+		}
+		.col-8 {
+			width: 66.66666667%;
+		}
+		.col-7 {
+			width: 58.33333333%;
+		}
+		.col-6 {
+			width: 50%;
+		}
+		.col-5 {
+			width: 41.66666667%;
+		}
+		.col-4 {
+			width: 33.33333333%;
+		}
+		.col-3 {
+			width: 25%;
+		}
+		.col-2 {
+			width: 16.66666667%;
+		}
+		.col-1 {
+			width: 8.33333333%;
+		}
+	}
+}

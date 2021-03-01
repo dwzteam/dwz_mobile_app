@@ -114,6 +114,40 @@ function loadScripts(options) {
 			keys: { statusCode: 'status', message: 'info' }
 		});
 
+		// media 定义html根节点font-size, 用于rem
+		(function () {
+			function screenChange() {
+				var op = {
+					width: document.documentElement.clientWidth,
+					height: document.documentElement.clientHeight
+				};
+				var $body = $('body');
+				var firstSize = $body.data('screen-size');
+				if (!firstSize) {
+					$body.data('screen-size', op);
+				}
+
+				// 处理安卓键盘弹出触发resize时，界面字体变小问题
+				if (!firstSize || firstSize.width + firstSize.height == op.width + op.height) {
+					var landscape = op.width > op.height;
+					var width = landscape ? op.width : op.height;
+					document.documentElement.style.fontSize = (width * 75) / 750 + 'px';
+
+					if (landscape) {
+						$body.addClass('landscape');
+					} else {
+						$body.removeClass('landscape');
+					}
+				}
+
+				// 处理横竖屏切换适配
+				$('div.slideBox').trigger('slide-resize');
+			}
+
+			screenChange();
+			window.addEventListener('resize', screenChange, false);
+		})();
+
 		//插件注册
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);

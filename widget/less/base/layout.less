@@ -1,46 +1,7 @@
-// 行列布局
-.row {
-	.flex-wrap;
-	width: 100%;
-	.col {
-		display: block;
-		.flex-1;
-	}
-	.col-3,
-	.col-3-3,
-	.col-4,
-	.col-4-4,
-	.col-5,
-	.col-5-5 {
-		width: 100%;
-	}
-	.col-3-1 {
-		width: 33.333333%;
-	}
-	.col-3-2 {
-		width: 66.666666%;
-	}
-	.col-4-1 {
-		width: 25%;
-	}
-	.col-4-2 {
-		width: 50%;
-	}
-	.col-4-3 {
-		width: 75%;
-	}
-	.col-5-1 {
-		width: 20%;
-	}
-	.col-5-2 {
-		width: 40%;
-	}
-	.col-5-3 {
-		width: 60%;
-	}
-	.col-5-4 {
-		width: 80%;
-	}
+.pos-abs-tr {
+	position: absolute !important;
+	top: 0px;
+	right: 0px;
 }
 
 // 九宫格
@@ -51,20 +12,9 @@
 	position: relative;
 	overflow: hidden;
 	text-align: center;
-	&:before {
-		content: '';
-		position: absolute;
-		box-sizing: border-box;
-		width: 200%;
-		height: 200%;
-		left: 0;
-		top: 0;
-		border-bottom: 1px solid @borderColor;
-		transform-origin: 0 0;
-		transform: scale(0.5);
-	}
 
 	.item {
+		.boxLine(0 1px 1px 0);
 		display: block;
 		position: relative;
 		float: left;
@@ -73,19 +23,6 @@
 		color: @gridColTxtColor;
 		&.hover {
 			color: @gridColTxtColorHover;
-		}
-		&:before {
-			content: '';
-			position: absolute;
-			box-sizing: border-box;
-			width: 200%;
-			height: 200%;
-			left: 0;
-			top: 0;
-			border-bottom: 1px solid @borderColor;
-			border-right: 1px solid @borderColor;
-			transform-origin: 0 0;
-			transform: scale(0.5);
 		}
 		.item-icon {
 			.flex-wrap-center;
@@ -108,11 +45,10 @@
 	&.no-line {
 		&:before,
 		.item:before {
-			display: none;
+			border: none;
 		}
 	}
 }
-
 .grid-col-2 {
 	.item:nth-child(2n):before {
 		border-right-width: 0;
@@ -126,7 +62,7 @@
 		border-right-width: 0;
 	}
 	.item {
-		width: 33.333333%;
+		width: 33.33333333%;
 	}
 }
 .grid-col-4 {
@@ -150,6 +86,76 @@
 .dwz-marquee-txt,
 .dwz-marquee-list {
 	overflow: hidden;
+}
+
+// 适配横竖屏布局
+.layout-row {
+	display: flex;
+	flex-direction: column;
+
+	.col-1,
+	.col-2,
+	.col-3,
+	.col-4,
+	.col-5,
+	.col-6,
+	.col-7,
+	.col-8,
+	.col-9,
+	.col-10,
+	.col-11,
+	.col-12 {
+		position: relative;
+	}
+}
+
+// flex 流式布局，根据item宽度适配
+.flex-flow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+
+	.col-1,
+	.col-2,
+	.col-3,
+	.col-4,
+	.col-5,
+	.col-6,
+	.col-7,
+	.col-8,
+	.col-9,
+	.col-10,
+	.col-11,
+	.col-12 {
+		position: relative;
+		flex-shrink: 0;
+		display: flex;
+	}
+
+	.col-12,
+	.col-11 {
+		width: 100%;
+	}
+	.col-10,
+	.col-9 {
+		width: 83.33333333%;
+	}
+	.col-8,
+	.col-7 {
+		width: 66.66666667%;
+	}
+	.col-6,
+	.col-5 {
+		width: 50%;
+	}
+	.col-4,
+	.col-3 {
+		width: 33.33333333%;
+	}
+	.col-2,
+	.col-1 {
+		width: 16.66666667%;
+	}
 }
 
 // 滚动表格
@@ -184,32 +190,6 @@ ul.grid {
 			}
 			&.w120 {
 				width: 120px;
-			}
-		}
-	}
-}
-
-// flex 流式布局，根据item宽度适配
-.flex-flow {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	.item {
-		position: relative;
-		flex-shrink: 0;
-		display: flex;
-		width: 50%;
-
-		&.padding-center {
-			.flex-wrap-center;
-			padding: 10px;
-			img {
-				width: 100%;
-			}
-			.icon-del-x {
-				position: absolute;
-				top: 10px;
-				right: 10px;
 			}
 		}
 	}

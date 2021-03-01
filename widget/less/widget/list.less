@@ -225,17 +225,16 @@ ul.pic-list {
 
 .hideBarCtl {
 	header,
-	.content {
+	&main > section,
+	&.page-wrap > section {
 		transition: all 0.5s ease;
 	}
 
 	&.hideBar {
-		header {
+		header,
+		&main > section,
+		&.page-wrap > section {
 			transform: translate3d(0px, -44px, 0px);
-		}
-
-		.content {
-			margin-top: -44px;
 		}
 	}
 }

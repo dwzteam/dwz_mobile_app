@@ -31,24 +31,40 @@
 
 // button
 @btnBg: #ecf5ff;
+@btnBgPlain: rgba(236, 245, 255, 0.3);
 @btnBorderColor: #c6e2ff;
 @btnTxtColor: #4eb3ff;
+@btnTxtColorPlain: #4eb3ff;
 
 @btnBgPrimary: #4eb3ff;
-@btnBorderColorPrimary: #4eb3ff;
+@btnBgPrimaryPlain: rgba(78, 179, 255, 0.2);
+@btnBorderColorPrimary: #c6e2ff;
 @btnTxtColorPrimary: #fff;
+@btnTxtColorPrimaryPlain: #4eb3ff;
 
 @btnBgSuccess: #67c23a;
+@btnBgSuccessPlain: rgba(103, 194, 58, 0.3);
 @btnBorderColorSuccess: #67c23a;
 @btnTxtColorSuccess: #fff;
+@btnTxtColorSuccessPlain: #67c23a;
+
+@btnBgInfo: #aaa;
+@btnBgInfoPlain: rgba(188, 190, 194, 0.3);
+@btnBorderColorInfo: #aaa;
+@btnTxtColorInfo: #fff;
+@btnTxtColorInfoPlain: #999;
 
 @btnBgWarning: #e6a23c;
+@btnBgWarningPlain: rgba(230, 162, 60, 0.3);
 @btnBorderColorWarning: #e6a23c;
 @btnTxtColorWarning: #fff;
+@btnTxtColorWarningPlain: #e6a23c;
 
 @btnBgDanger: #ff480a;
+@btnBgDangerPlain: rgba(255, 72, 10, 0.3);
 @btnBorderColorDanger: #ff480a;
 @btnTxtColorDanger: #fff;
+@btnTxtColorDangerPlain: #ff480a;
 
 @btnBgDisabled: #f4f4f5;
 @btnBorderColorDisabled: #e9e9eb;
@@ -112,38 +128,51 @@
 }
 
 // Line
-.boxLine(@b-width:'1px 1px 1px 1px', @c:@borderColor) {
-	border-style: solid;
-	border-width: @b-width;
-	border-color: @c;
-}
+.boxLine(@border-width:'1px 1px 1px 1px', @c:@borderColor) {
+	// border-style: solid;
+	// border-width: @border-width;
+	// border-color: @c;
 
+	position: relative;
+	overflow: hidden;
+	&:before {
+		content: '';
+		position: absolute;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		left: 0;
+		top: 0;
+		border-style: solid;
+		border-width: @border-width;
+		border-color: @c;
+		transform-origin: 0 0;
+		transform: scale(0.5);
+	}
+}
 .t-line {
 	.boxLine(1px 0 0 0);
 }
-
 .r-line {
 	.boxLine(0 1px 0 0);
 }
-
 .b-line {
 	.boxLine(0 0 1px 0);
 }
-
 .l-line {
 	.boxLine(0 0 0 1px);
 }
-
 .tb-line {
 	.boxLine(1px 0 1px 0);
 }
-
 .box-line {
 	.boxLine(1px 1px 1px 1px);
 }
-
 .no-line {
 	border: none !important;
+	&:before {
+		border: none;
+	}
 }
 
 // Fonts

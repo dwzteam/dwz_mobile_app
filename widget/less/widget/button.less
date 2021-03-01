@@ -14,57 +14,102 @@
 	// 电子签名按钮
 	&.sign {
 		border-radius: 5px;
-		background: #f5f5f5;
 		color: @infoColor;
 		height: 72px;
 		border: none;
 		.flex-wrap-center;
 		.flex-1;
 	}
+	&.plain {
+		background: @btnBgPlain;
+		color: @btnTxtColorPlain;
+	}
 	&.primary {
-		border: @btnBorderColorPrimary;
+		border-color: @btnBorderColorPrimary;
 		background: @btnBgPrimary;
 		color: @btnTxtColorPrimary;
+		&.plain {
+			background: @btnBgPrimaryPlain;
+			color: @btnTxtColorPrimaryPlain;
+		}
 	}
 	&.success {
-		border: @btnBorderColorSuccess;
+		border-color: @btnBorderColorSuccess;
 		background: @btnBgSuccess;
 		color: @btnTxtColorSuccess;
+		&.plain {
+			background: @btnBgSuccessPlain;
+			color: @btnTxtColorSuccessPlain;
+		}
+	}
+	&.info {
+		border-color: @btnBorderColorInfo;
+		background: @btnBgInfo;
+		color: @btnTxtColorInfo;
+		&.plain {
+			background: @btnBgInfoPlain;
+			color: @btnTxtColorInfoPlain;
+		}
 	}
 	&.warning {
-		border: @btnBorderColorWarning;
+		border-color: @btnBorderColorWarning;
 		background: @btnBgWarning;
 		color: @btnTxtColorWarning;
+		&.plain {
+			background: @btnBgWarningPlain;
+			color: @btnTxtColorWarningPlain;
+		}
 	}
 	&.danger {
-		border: @btnBorderColorDanger;
+		border-color: @btnBorderColorDanger;
 		background: @btnBgDanger;
 		color: @btnTxtColorDanger;
+		&.plain {
+			color: @btnTxtColorDanger;
+			background: @btnBgDangerPlain;
+			color: @btnTxtColorDangerPlain;
+		}
 	}
-	&.disabled,
+
 	&[disabled] {
 		border-color: @btnBorderColorDisabled;
 		background: @btnBgDisabled;
 		color: @btnTxtColorDisabled;
 	}
 
-	&.medium {
+	&.is-md {
 		height: 36px;
 		font-size: @l3;
 	}
 
-	&.small {
+	&.is-sm {
 		height: 32px;
 		font-size: @l3;
 	}
 
-	&.mini {
+	&.is-mini {
 		height: 28px;
 		font-size: @l4;
 	}
 
 	&.is-round {
 		border-radius: 20px;
+	}
+	&.is-circle {
+		overflow: hidden;
+		border-radius: 50%;
+		width: 40px;
+		&.is-md {
+			width: 36px;
+		}
+
+		&.is-sm {
+			width: 32px;
+		}
+
+		&.is-mini {
+			width: 28px;
+		}
 	}
 }
 

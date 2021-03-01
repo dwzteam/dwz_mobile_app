@@ -12,14 +12,14 @@
 			<div class="scroll">
 
 				<div class="flex-flow dwz-img-box">
-					<!-- <div class="item padding-center">
+					<!-- <figure class="col-6 padding-vh flex-wrap-center">
 						<img src="image/icon/module/faceLiveness.svg" alt="人脸图片">
-						<a class="icon icon-del-x" onclick="$(this).parent().remove()"></a>
-					</div>
-					<div class="item padding-center">
+						<a class="button danger is-mini is-circle pos-abs-tr" onclick="$(this).parent().remove()"><i class="dwz-icon-delete"></i></a>
+					</figure>
+					<figure class="col-6 padding-vh flex-wrap-center">
 						<img src="image/icon/module/faceDetect.svg" alt="人脸图片">
-						<a class="icon icon-del-x" onclick="$(this).parent().remove()"></a>
-					</div> -->
+						<a class="button danger is-mini is-circle pos-abs-tr" onclick="$(this).parent().remove()"><i class="dwz-icon-delete"></i></a>
+					</figure> -->
 				</div>
 			</div>
 		</div>
@@ -31,8 +31,8 @@
 </main>
 
 <script id="tpl_img" type="text/html">
-	<div class="item padding-center">
+	<figure class="col-6 padding-vh flex-wrap-center">
 		<img src="data:image/jpeg;base64,{{face}}" alt="人脸图片">
-		<a class="icon icon-del-x" onclick="$(this).parent().remove()"></a>
-	</div>
+		<a class="button danger is-mini is-circle pos-abs-tr" onclick="$(this).parent().remove()"><i class="dwz-icon-delete"></i></a>
+	</figure>
 </script>
