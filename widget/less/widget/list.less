@@ -231,10 +231,12 @@ ul.pic-list {
 	}
 
 	&.hideBar {
-		header,
+		header {
+			transform: translate3d(0px, -44px, 0px);
+		}
 		&main > section,
 		&.page-wrap > section {
-			transform: translate3d(0px, -44px, 0px);
+			margin-top: -44px;
 		}
 	}
 }

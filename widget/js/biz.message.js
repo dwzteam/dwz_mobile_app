@@ -43,7 +43,7 @@ biz.message = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						$form.total = json.data.total || json.data.length;
+						$form.listTotal(json.data.total, json.data.list);
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}

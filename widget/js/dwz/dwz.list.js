@@ -2,7 +2,7 @@
  * @author 张慧华 <350863780@qq.com>
  */
 $.fn.extend({
-	list: function (options) {
+	list(options) {
 		let op = $.extend(
 			{
 				pullDown$: 'div.pullDown',
@@ -19,6 +19,7 @@ $.fn.extend({
 		return this.each(function () {
 			let $wrap = $(this),
 				$main = $wrap.find(op.scroll$),
+				$form = op.$form, // 无限滚动表单
 				$pullDown = $wrap.find(op.pullDown$),
 				$pullUp = $wrap.find(op.pullUp$),
 				$pullDownLabel = $pullDown ? $pullDown.find(op.pullDownLabel$) : null,
@@ -27,7 +28,7 @@ $.fn.extend({
 			let $hideBarCtl = $wrap.parentsUnitBox().find('.hideBarCtl');
 
 			let pullDownMsg = { txt: '', flip: '' },
-				pullUpMsg = { txt: '', loading: '' };
+				pullUpMsg = { txt: '', loading: '', noMore: '' };
 			if ($pullDownLabel.size() > 0) {
 				pullDownMsg = {
 					txt: $pullDownLabel.html(),
@@ -38,7 +39,8 @@ $.fn.extend({
 				pullUpMsg = {
 					loadMoreTxt: $pullUpLabel.html(),
 					noMoreRecordsTxt: '',
-					loading: $pullUpLabel.attr('data-loading') || 'Loading...'
+					loading: $pullUpLabel.attr('data-loading') || 'Loading...',
+					noMore: $pullUpLabel.attr('data-no-more') || '没有更多'
 				};
 			}
 
@@ -58,11 +60,11 @@ $.fn.extend({
 					}
 
 					if ($pullUp.size() > 0) {
-						if (pos.scrollY + 30 < -pos.scrollH) {
-							$pullUp.addClass('loading');
+						if (pos.scrollY + 10 < -pos.scrollH) {
+							$pullUp.addClass('loading no-more');
 							$pullUpLabel.html(pullUpMsg.loading);
 						} else {
-							$pullUp.removeClass('loading');
+							$pullUp.removeClass('loading no-more');
 							$pullUpLabel.html(pullUpMsg.loadMoreTxt);
 						}
 					}
@@ -90,11 +92,15 @@ $.fn.extend({
 					//加载下一页
 					if ($pullUp.size() > 0) {
 						if ($pullUp.hasClass('loading')) {
+							let _ajaxTime = new Date().getTime();
 							setTimeout(function () {
 								$pullUp.removeClass('loading');
-								// let currentPos = $main.getComputedPos();
-								// if (currentPos.y < -30) $main.translate({y:(currentPos.y+30)+'px', duration:200});
-							}, 1000);
+								let _formData = $form.listTotal();
+								if (_formData.ajaxTime > _ajaxTime && !_formData.currentList.length) {
+									// $wrap.scrollTo({ y: 'end', duration: 300 });
+									$pullUpLabel.html(pullUpMsg.noMore).addClass('no-more');
+								}
+							}, 1500);
 
 							op.loadMoreFn.call($wrap, $pullUp);
 						}
@@ -102,6 +108,17 @@ $.fn.extend({
 				}
 			});
 		});
+	},
+	// 无限滚动form total
+	listTotal(total, currentList) {
+		if (total === undefined) {
+			return { total: this.total || 0, ajaxTime: this.ajaxTime, currentList: this.currentList };
+		} else {
+			this.total = parseInt(total || 0);
+			this.currentList = currentList || [];
+			if (!this.total) this.total = this.currentList.length;
+			this.ajaxTime = new Date().getTime();
+		}
 	}
 });
 
@@ -119,6 +136,7 @@ $.extend({
 
 		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
 		$list.list({
+			$form,
 			refreshFn() {
 				console.log('refreshFn...');
 				if ($page.size()) $page.val(1);
@@ -131,7 +149,8 @@ $.extend({
 					$form.requestList(true);
 					$list.data('dwz-load-more', 1); // 加载下一页时，禁用scroll复位
 				} else {
-					$list.data('dwz-load-more', 0);
+					$list.data('dwz-load-more', 2); // 已经是最后一页
+					$form.listTotal($form.total, []);
 				}
 			}
 		});

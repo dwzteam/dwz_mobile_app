@@ -27,7 +27,7 @@ biz.transport = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						$form.total = json.data.total || json.data.list ? json.data.list.length : 0;
+						$form.listTotal(json.data.total, json.data.list);
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}

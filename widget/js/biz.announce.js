@@ -22,7 +22,7 @@ biz.announce = {
 				global: false,
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						$form.total = json.total || json.data.length;
+						$form.listTotal(json.total, json.data);
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}

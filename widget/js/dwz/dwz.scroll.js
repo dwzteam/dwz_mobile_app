@@ -140,29 +140,31 @@
 						}
 
 						if (op.touchend) op.touchend.call($main, event, pos);
-						// 加载下一页时，禁用scroll复位
-						if ($wrap.data('dwz-load-more') == 1) {
-							return;
-						}
 
 						if (op.scrollY && Math.abs(pos.dy) > 20) {
+							let _dwzLoadMore = $wrap.data('dwz-load-more');
 							pos.scrollH = getScrollH();
 							if (pos.dy - currentPos.y < 0) {
 								// 定位到顶部
 								$main.animate({ y: 0 }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
-							} else if (pos.dy - currentPos.y > pos.scrollH) {
-								//定位到底部
+							} else if (pos.dy - currentPos.y > pos.scrollH && _dwzLoadMore != 1) {
+								//定位到底部, 但是 dwz-load-more == 1 时禁用
 								$main.animate({ y: -pos.scrollH }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
 								let speedY = $.speed.getY();
+								if (speedY < -812) speedY = -812; // 限制最大加速度
 								if (Math.abs(speedY) > 200) {
+									console.log(speedY);
 									let scrollPos = $main.getComputedPos();
 									let scrollY = speedY * ($wrap.get(0).clientHeight / 812) + scrollPos.y;
 									let dealyRate = Math.min(Math.abs(speedY), 2);
 
-									if (scrollY < -pos.scrollH) scrollY = -pos.scrollH;
-									else if (scrollY > 0) scrollY = 0;
+									if (scrollY < -pos.scrollH) {
+										if (_dwzLoadMore != 1) scrollY = -pos.scrollH; // dwz-load-more == 1 时禁用scroll复位
+									} else if (scrollY > 0) {
+										scrollY = 0;
+									}
 
 									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'); // ease, linear
 								}
