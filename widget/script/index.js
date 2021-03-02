@@ -128,7 +128,7 @@ function loadScripts(options) {
 				}
 
 				// 处理安卓键盘弹出触发resize时，界面字体变小问题
-				if (!firstSize || firstSize.width + firstSize.height != op.width + op.height) {
+				if (!window.api || !firstSize || firstSize.width + firstSize.height == op.width + op.height) {
 					var landscape = op.width > op.height;
 					var width = landscape ? op.width : op.height;
 					document.documentElement.style.fontSize = (width * 75) / 750 + 'px';
