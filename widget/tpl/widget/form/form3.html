@@ -90,7 +90,7 @@
 						<div class="form-item">
 							<div class="item-content">
 								<label>出差时长</label>
-								<input type="text" name="day" value="" placeholder="请选择（必填）" class="required" data-error="出差时长必须" readonly>
+								<input type="text" name="day" value="" placeholder="根据开始/结束时间自动计算" readonly>
 							</div>
 						</div>
 
@@ -148,12 +148,24 @@
 		var $start_date = $form.find('input[name=start_date]'),
 			$end_date = $form.find('input[name=end_date]'),
 			$day = $form.find('input[name=day]');
+		$start_date.add($end_date).change(calDay);
 
 		function calDay() {
-			var startDate = $start_date.val().parseDate('yyyy-MM-dd'),
-				endDate = $end_date.val().parseDate('yyyy-MM-dd');
+			var startVal = $start_date.val(),
+				endVal = $end_date.val(),
+				day = -1;
+			console.log(startVal, endVal)
+			if (startVal && endVal) {
+				var startDate = startVal.parseDate('yyyy-MM-dd'),
+					endDate = endVal.parseDate('yyyy-MM-dd');
 
-			return (endDate - startDate) / (1000 * 60 * 60 * 24);
+				day = (endDate - startDate) / (1000 * 60 * 60 * 24);
+				$day.val(day < 0 ? '' : day + 1);
+			} else {
+				$day.val('');
+			}
+
+			return day;
 		}
 		$form.on('submit', function() {
 			if (!$form.valid()) {
@@ -162,7 +174,7 @@
 
 			var day = calDay();
 			if (day < 0) {
-				$.alert.error('开始时间不能不于结束时间');
+				$.alert.error('开始时间不能大于结束时间');
 				return;
 			}
 

@@ -462,7 +462,7 @@
 					});
 					let $df = $frag.find(setting.df$);
 					$df.find('.cleanBtn').click((event) => {
-						$this.val('');
+						$this.val('').trigger('change', '');
 						$calendarBox.remove();
 					});
 					$df.find('.cancelBtn').click((event) => {
@@ -471,7 +471,8 @@
 					$df.find('.okBtn').click((event) => {
 						let $daySelected = $calendarBox.find('table.current td.selected');
 						if ($daySelected.size()) {
-							$this.val($daySelected.attr('data-value'));
+							let _val = $daySelected.attr('data-value');
+							$this.val(_val).trigger('change', _val);
 						}
 						$calendarBox.remove();
 					});

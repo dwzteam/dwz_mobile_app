@@ -963,7 +963,16 @@ dwz.fn.extend({
 			});
 		});
 	},
-
+	/**
+	 * 合并2个dwz对象
+	 * @param {*} selector
+	 * @param {*} context
+	 */
+	add(selector, context) {
+		let newObj = $(selector, context);
+		let elements = [...this.elements, ...newObj.elements];
+		return $(elements);
+	},
 	/**
 	 * $box.on('touchstart', {test:123}, function(event){
 	 * 		console.log(event, event.data);
