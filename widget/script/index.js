@@ -33,6 +33,7 @@ var js_src = {
 		'js/dwz/dwz.widget.chart.js',
 		'js/dwz/dwz.regional.zh.js',
 		'js/dwz/dwz.ui.js',
+		'js/dwz/dwz.ui.init.js',
 		'js/biz.conf.js',
 		'js/biz.store.js',
 		'js/biz.common.js',
@@ -114,100 +115,12 @@ function loadScripts(options) {
 			keys: { statusCode: 'status', message: 'info' }
 		});
 
-		// media 定义html根节点font-size, 用于rem
-		(function () {
-			function screenChange() {
-				var op = {
-					width: document.documentElement.clientWidth,
-					height: document.documentElement.clientHeight
-				};
-				var $body = $('body');
-				var firstSize = $body.data('screen-size');
-				if (!firstSize) {
-					$body.data('screen-size', op);
-				}
-
-				// 处理安卓键盘弹出触发resize时，界面字体变小问题
-				if (!window.api || !firstSize || firstSize.width + firstSize.height == op.width + op.height) {
-					var landscape = op.width > op.height;
-					var width = landscape ? op.width : op.height;
-					document.documentElement.style.fontSize = (width * 75) / 750 + 'px';
-
-					if (landscape) {
-						$body.addClass('landscape');
-					} else {
-						$body.removeClass('landscape');
-					}
-				}
-
-				// 处理横竖屏切换适配
-				$('div.slideBox').trigger('slide-resize');
-			}
-
-			screenChange();
-			window.addEventListener('resize', screenChange, false);
-		})();
-
 		//插件注册
 		$.regPlugins.push(function ($p) {
 			biz.fixStatusBar($p);
-
-			// 密码显示隐藏
-			$('div.dwz-ctl-eye', $p).each(function () {
-				let $me = $(this),
-					$input = $me.find('input[type=text], input[type=password]'),
-					$icon = $me.find('.icon-eye');
-
-				$icon.click(() => {
-					if ($icon.hasClass('eye-open')) {
-						$icon.removeClass('eye-open');
-						$input.attr('type', 'password');
-					} else {
-						$icon.addClass('eye-open');
-						$input.attr('type', 'text');
-					}
-				});
-			});
-
-			$('.dwz-ctl-hover, header .bar-button, .button, .item-right', $p).hoverClass('hover');
-			$('input[data-checkbox-radio]', $p).checkboxRadio();
-			$('a[target=ajaxTodo]', $p).ajaxTodo('active');
-
-			if ($.fn.previewUploadImg)
-				$('div.upload-wrap', $p).each(function () {
-					var $this = $(this);
-					var options = {
-						maxW: 70,
-						maxH: 70,
-						inputName: $this.attr('data-name') || 'pics[]'
-					};
-
-					var maxCount = $this.attr('data-max-count');
-					if (maxCount) {
-						options.maxCount = parseInt(maxCount);
-					}
-					$this.previewUploadImg(options);
-				});
-
-			if ($.fn.previewImg) $('ul.dwz-preview-img, ul.upload-preview', $p).previewImg();
-
-			if ($.fn.dropdown) $('div.dwz-dropdown', $p).dropdown();
-
-			// fix A链接href手机上不能跳转问题
-			if ($.fn.redirect) $('a[target=redirect]', $p).redirect();
-
-			// 发送手机验证码
-			if ($.fn.sendVerifyMs) $('a[target=sendVerifyMs]', $p).sendVerifyMs();
-			if ($.fn.fleshVerifyImg) $('img.fleshVerifyImg', $p).fleshVerifyImg();
-
-			$('div.dwz-scroll', $p).scroll();
-			$('div.dwz-scroll-x', $p).scroll({
-				scrollX: true,
-				scrollY: false,
-				scroll$: '.scroll-x'
-			});
 		});
 
+		$.ui.init();
 		$.dialog.init();
 
 		// 用户信息初始化
@@ -218,15 +131,6 @@ function loadScripts(options) {
 
 			//插件初始化
 			$(document).initUI();
-
-			var ajaxbg = $('#progressBar').hide();
-			$(document)
-				.on('ajaxStart', function () {
-					ajaxbg.show();
-				})
-				.on('ajaxStop', function () {
-					ajaxbg.hide();
-				});
 
 			if ($.history)
 				$.history.init(function (hash) {
@@ -244,21 +148,6 @@ function loadScripts(options) {
 				});
 		});
 	});
-
-	document.addEventListener(
-		'touchmove',
-		function (event) {
-			dwz.speed.cal(event); // 计算加速度
-			event.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-		},
-		{ passive: false }
-	); //passive 参数不能省略，用来兼容ios和android
-
-	// 处理窗口resize适配
-	window.onresize = function () {
-		$('div.dwz-slide').trigger('slide-resize');
-		$('div.nav-view').trigger('window-resize');
-	};
 }
 
 // 用于gulpfile.js编译js

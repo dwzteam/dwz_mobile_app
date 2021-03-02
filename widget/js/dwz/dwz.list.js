@@ -60,8 +60,8 @@ $.fn.extend({
 					}
 
 					if ($pullUp.size() > 0) {
-						if (pos.scrollY + 10 < -pos.scrollH) {
-							$pullUp.addClass('loading no-more');
+						if (pos.scrollY - 200 < -pos.scrollH) {
+							$pullUp.addClass('loading');
 							$pullUpLabel.html(pullUpMsg.loading);
 						} else {
 							$pullUp.removeClass('loading no-more');
@@ -94,13 +94,20 @@ $.fn.extend({
 						if ($pullUp.hasClass('loading')) {
 							let _ajaxTime = new Date().getTime();
 							setTimeout(function () {
-								$pullUp.removeClass('loading');
+								$pullUp.removeClass('loading no-more');
 								let _formData = $form.listTotal();
-								if (_formData.ajaxTime > _ajaxTime && !_formData.currentList.length) {
-									// $wrap.scrollTo({ y: 'end', duration: 300 });
-									$pullUpLabel.html(pullUpMsg.noMore).addClass('no-more');
+								if (_formData.ajaxTime > _ajaxTime) {
+									// 判断有没有下一页
+									if (_formData.currentList.length) {
+										setTimeout(() => {
+											$wrap.scrollTo({ y: 'end', duration: 300 });
+										}, 100);
+									} else {
+										$pullUpLabel.html(pullUpMsg.noMore);
+										$pullUp.addClass('no-more');
+									}
 								}
-							}, 1500);
+							}, 1000);
 
 							op.loadMoreFn.call($wrap, $pullUp);
 						}

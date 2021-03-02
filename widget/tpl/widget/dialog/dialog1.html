@@ -13,6 +13,31 @@
 					<p class="blockquote">dialog弹出框 fullscreen</p>
 					全屏模式弹出框主要用于登录等操作优先级最高的场景。
 				</article>
+
+				<div class="divider"></div>
+
+				<form onsubmit="return false">
+					<div class="pageFormContent">
+						<div class="form-item">
+							<div class="item-content">
+								<input type="tel" name="mobile" value="17767167745" class="required dwz-clipboard" placeholder="请输入手机号" maxlength="11" pattern="[0-9]{11,11}" data-error="请输入11位手机号">
+							</div>
+						</div>
+
+						<div class="form-item">
+							<div class="item-content dwz-ctl-eye">
+								<input type="password" name="password" value="123456" autocomplete="new-password" class="required" placeholder="请输入密码" maxlength="30" pattern=".{6,20}" data-error="请输入6~20位密码">
+								<i class="icon icon-eye"></i>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="form-bar">
+						<button class="button primary" type="submit">登录</button>
+					</div>
+				</form>
+
 			</div>
 		</div>
 	</section>

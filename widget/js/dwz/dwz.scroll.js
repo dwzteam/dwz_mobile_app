@@ -153,9 +153,8 @@
 							} else {
 								// 加速度处理
 								let speedY = $.speed.getY();
-								if (speedY < -812) speedY = -812; // 限制最大加速度
+								if (speedY < -1000) speedY = -1000; // 限制最大加速度
 								if (Math.abs(speedY) > 200) {
-									console.log(speedY);
 									let scrollPos = $main.getComputedPos();
 									let scrollY = speedY * ($wrap.get(0).clientHeight / 812) + scrollPos.y;
 									let dealyRate = Math.min(Math.abs(speedY), 2);
