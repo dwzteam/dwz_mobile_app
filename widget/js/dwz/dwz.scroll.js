@@ -22,7 +22,7 @@
 				{
 					scrollX: false,
 					scrollY: true,
-					delayTime: 400, // 效果持续时间
+					delayTime: 300, // 效果持续时间
 					touchstart: null,
 					touchmove: null, // touchmove事件触发scroll
 					touchend: null,
@@ -153,10 +153,10 @@
 							} else {
 								// 加速度处理
 								let speedY = $.speed.getY();
-								if (speedY < -1000) speedY = -1000; // 限制最大加速度
+
 								if (Math.abs(speedY) > 200) {
 									let scrollPos = $main.getComputedPos();
-									let scrollY = speedY * ($wrap.get(0).clientHeight / 812) + scrollPos.y;
+									let scrollY = (speedY / 2) * ($wrap.get(0).clientHeight / 812) + scrollPos.y;
 									let dealyRate = Math.min(Math.abs(speedY), 2);
 
 									if (scrollY < -pos.scrollH) {

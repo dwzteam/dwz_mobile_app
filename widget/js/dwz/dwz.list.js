@@ -28,7 +28,7 @@ $.fn.extend({
 			let $hideBarCtl = $wrap.parentsUnitBox().find('.hideBarCtl');
 
 			let pullDownMsg = { txt: '', flip: '' },
-				pullUpMsg = { txt: '', loading: '', more: '', noMore: '' };
+				pullUpMsg = { txt: '', loading: '', loadMoreTxt: '', noLoadMoreTxt: '' };
 			if ($pullDownLabel.size() > 0) {
 				pullDownMsg = {
 					txt: $pullDownLabel.html(),
@@ -37,11 +37,9 @@ $.fn.extend({
 			}
 			if ($pullUpLabel.size() > 0) {
 				pullUpMsg = {
-					loadMoreTxt: $pullUpLabel.html(),
-					noMoreRecordsTxt: '',
-					loading: $pullUpLabel.attr('data-loading') || 'Loading...',
-					more: $pullUpLabel.attr('data-more') || '向下滑动加载更多',
-					noMore: $pullUpLabel.attr('data-no-more') || '没有更多'
+					loadMoreTxt: $pullUpLabel.html() || '向下滑动加载更多',
+					noLoadMoreTxt: $pullUpLabel.attr('data-no-more') || '没有更多',
+					loading: $pullUpLabel.attr('data-loading') || 'Loading...'
 				};
 			}
 
@@ -61,12 +59,10 @@ $.fn.extend({
 					}
 
 					if ($pullUp.size() > 0) {
+						$pullUp.removeClass('loading data-more');
 						if (pos.scrollY - 200 < -pos.scrollH) {
 							$pullUp.addClass('loading');
 							$pullUpLabel.html(pullUpMsg.loading);
-						} else {
-							$pullUp.removeClass('loading data-more');
-							$pullUpLabel.html(pullUpMsg.loadMoreTxt);
 						}
 					}
 
@@ -106,10 +102,10 @@ $.fn.extend({
 				$pullUp.removeClass('loading data-more');
 				// 判断有没有下一页
 				if (_formData.currentList.length) {
-					$pullUpLabel.html(pullUpMsg.more);
+					$pullUpLabel.html(pullUpMsg.loadMoreTxt);
 					$pullUp.addClass('data-more');
 				} else {
-					$pullUpLabel.html(pullUpMsg.noMore);
+					$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
 					$pullUp.addClass('data-more');
 				}
 			});
