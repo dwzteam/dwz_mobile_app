@@ -22,15 +22,6 @@
 					<span class="name">{{UserInfo.realname}}</span>
 				</a>
 
-				<div class="dwz-panel">
-					<div class="panel-header">
-						<label class="panel-title">我的行程</label>
-						<a class="item-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.pageRender" rel="transport">查看更多<i class="dwz-icon-arrow-right"></i></a>
-					</div>
-					<div class="panel-content" id="transport-card-box"></div>
-				</div>
-
-				<div class="divider"></div>
 				<div class="dwz-panel dwz-collapse">
 					<div class="panel-header">
 						<label class="panel-title blockquote">会员服务</label>
@@ -58,11 +49,33 @@
 
 				<div class="dwz-panel">
 					<div class="panel-header">
+						<label class="panel-title">我的行程</label>
+						<a class="item-right" target="navView" data-href="tpl/transport/index.html?dwz_callback=biz.pageRender" rel="transport">查看更多<i class="dwz-icon-arrow-right"></i></a>
+					</div>
+					<div class="panel-content" id="transport-card-box">
+						<!-- 骨架屏 -->
+						<div class="dwz-skeleton">
+							<img src="image/pic/skeleton/transport-card.svg">
+						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="dwz-panel">
+					<div class="panel-header">
 						<label class="panel-title">通知资讯</label>
 						<a class="item-right" target="navView" data-href="tpl/announce/list.html?dwz_callback=biz.announce.listRender" rel="article">查看更多<i class="dwz-icon-arrow-right"></i></a>
 					</div>
 					<div class="panel-content">
-						<ul id="my-announce-box" class="list pic-list"></ul>
+						<ul id="my-announce-box" class="list pic-list">
+							<!-- 骨架屏 -->
+							<li class="dwz-skeleton">
+								<img src="image/pic/skeleton/announce-item.svg">
+								<img src="image/pic/skeleton/announce-item.svg">
+								<img src="image/pic/skeleton/announce-item.svg">
+							</li>
+						</ul>
 					</div>
 				</div>
 
