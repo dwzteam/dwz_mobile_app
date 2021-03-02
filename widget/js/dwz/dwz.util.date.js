@@ -338,7 +338,7 @@
 	 * dateFmt:%y-%M-%d
 	 * %y-%M-{%d+1}
 	 * ex: new Date().formatDateTm('%y-%M-{%d-1}')
-	 * 	new Date().formatDateTm('2012-1')
+	 * new Date().formatDateTm('2012-1')
 	 */
 	Date.prototype.formatDateTm = function (dateFmt) {
 		let y = this.getFullYear();
