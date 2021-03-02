@@ -423,13 +423,30 @@ dwz.extend({
 			return dwz.speed.pre.speedY;
 		},
 		/**
-		 * touchstart touchend 时清除加速度
+		 * touchstart touchend 时，清除加速度，初始化X,Y坐标
 		 */
 		clear(event) {
 			dwz.speed.pre.x = dwz.clientX(event);
 			dwz.speed.pre.y = dwz.clientY(event);
+			dwz.speed.pre.time = new Date().getTime();
 			dwz.speed.pre.speedX = 0;
 			dwz.speed.pre.speedY = 0;
+		},
+		//速度计算
+		_calFn() {
+			let clientX = dwz.clientX(event),
+				clientY = dwz.clientY(event),
+				distX = clientX - dwz.speed.pre.x,
+				distY = clientY - dwz.speed.pre.y,
+				now = new Date().getTime(),
+				t = now - dwz.speed.pre.time;
+			dwz.speed.pre.speedX = t > 0 ? (distX / t) * 1000 : distX;
+			dwz.speed.pre.speedY = t > 0 ? (distY / t) * 1000 : distY;
+
+			// 记录X,Y坐标
+			dwz.speed.pre.x = clientX;
+			dwz.speed.pre.y = clientY;
+			dwz.speed.pre.time = now;
 		},
 		/**
 		 * 计算移动数度，单位xx像素/每秒
@@ -437,33 +454,8 @@ dwz.extend({
 		 * @return {x: 0, y: 0, speedX: 0, speedY: 0, time: 0}
 		 */
 		cal(event) {
-			// 初始化X,Y坐标
-			if (!dwz.speed.init) {
-				dwz.speed.init = true;
-				dwz.speed.pre.x = dwz.clientX(event);
-				dwz.speed.pre.y = dwz.clientY(event);
-				dwz.speed.pre.time = new Date().getTime();
-			}
-
-			//速度计算
-			function _calFn() {
-				let clientX = dwz.clientX(event),
-					clientY = dwz.clientY(event),
-					distX = clientX - dwz.speed.pre.x,
-					distY = clientY - dwz.speed.pre.y,
-					now = new Date().getTime(),
-					t = now - dwz.speed.pre.time;
-				dwz.speed.pre.speedX = t > 0 ? (distX / t) * 1000 : distX;
-				dwz.speed.pre.speedY = t > 0 ? (distY / t) * 1000 : distY;
-
-				// 记录X,Y坐标
-				dwz.speed.pre.x = clientX;
-				dwz.speed.pre.y = clientY;
-				dwz.speed.pre.time = now;
-			}
-
-			if (new Date().getTime() - dwz.speed.pre.time > 100 || !dwz.speed.pre.speedY) {
-				_calFn();
+			if (new Date().getTime() - dwz.speed.pre.time > 120 || !dwz.speed.pre.speedY) {
+				dwz.speed._calFn();
 			}
 		}
 	},

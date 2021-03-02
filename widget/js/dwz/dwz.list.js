@@ -28,7 +28,7 @@ $.fn.extend({
 			let $hideBarCtl = $wrap.parentsUnitBox().find('.hideBarCtl');
 
 			let pullDownMsg = { txt: '', flip: '' },
-				pullUpMsg = { txt: '', loading: '', noMore: '' };
+				pullUpMsg = { txt: '', loading: '', more: '', noMore: '' };
 			if ($pullDownLabel.size() > 0) {
 				pullDownMsg = {
 					txt: $pullDownLabel.html(),
@@ -40,6 +40,7 @@ $.fn.extend({
 					loadMoreTxt: $pullUpLabel.html(),
 					noMoreRecordsTxt: '',
 					loading: $pullUpLabel.attr('data-loading') || 'Loading...',
+					more: $pullUpLabel.attr('data-more') || '向下滑动加载更多',
 					noMore: $pullUpLabel.attr('data-no-more') || '没有更多'
 				};
 			}
@@ -64,7 +65,7 @@ $.fn.extend({
 							$pullUp.addClass('loading');
 							$pullUpLabel.html(pullUpMsg.loading);
 						} else {
-							$pullUp.removeClass('loading no-more');
+							$pullUp.removeClass('loading data-more');
 							$pullUpLabel.html(pullUpMsg.loadMoreTxt);
 						}
 					}
@@ -92,26 +93,24 @@ $.fn.extend({
 					//加载下一页
 					if ($pullUp.size() > 0) {
 						if ($pullUp.hasClass('loading')) {
-							let _ajaxTime = new Date().getTime();
-							setTimeout(function () {
-								$pullUp.removeClass('loading no-more');
-								let _formData = $form.listTotal();
-								if (_formData.ajaxTime > _ajaxTime) {
-									// 判断有没有下一页
-									if (_formData.currentList.length) {
-										setTimeout(() => {
-											$wrap.scrollTo({ y: 'end', duration: 300 });
-										}, 100);
-									} else {
-										$pullUpLabel.html(pullUpMsg.noMore);
-										$pullUp.addClass('no-more');
-									}
-								}
-							}, 1000);
-
 							op.loadMoreFn.call($wrap, $pullUp);
 						}
 					}
+				}
+			});
+
+			// ajax 加载下一页完成事件
+			$form.on('dwz-ajax-done', () => {
+				let _formData = $form.listTotal();
+
+				$pullUp.removeClass('loading data-more');
+				// 判断有没有下一页
+				if (_formData.currentList.length) {
+					$pullUpLabel.html(pullUpMsg.more);
+					$pullUp.addClass('data-more');
+				} else {
+					$pullUpLabel.html(pullUpMsg.noMore);
+					$pullUp.addClass('data-more');
 				}
 			});
 		});
@@ -125,6 +124,8 @@ $.fn.extend({
 			this.currentList = currentList || [];
 			if (!this.total) this.total = this.currentList.length;
 			this.ajaxTime = new Date().getTime();
+
+			this.trigger('dwz-ajax-done');
 		}
 	}
 });
