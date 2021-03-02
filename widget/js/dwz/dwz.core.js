@@ -454,7 +454,7 @@ dwz.extend({
 		 * @return {x: 0, y: 0, speedX: 0, speedY: 0, time: 0}
 		 */
 		cal(event) {
-			if (new Date().getTime() - dwz.speed.pre.time > 120 || !dwz.speed.pre.speedY) {
+			if (new Date().getTime() - dwz.speed.pre.time > 100 || !dwz.speed.pre.speedY) {
 				dwz.speed._calFn();
 			}
 		}

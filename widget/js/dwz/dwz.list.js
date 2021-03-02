@@ -37,17 +37,30 @@ $.fn.extend({
 			}
 			if ($pullUpLabel.size() > 0) {
 				pullUpMsg = {
-					loadMoreTxt: $pullUpLabel.html() || '向下滑动加载更多',
-					noLoadMoreTxt: $pullUpLabel.attr('data-no-more') || '没有更多',
-					loading: $pullUpLabel.attr('data-loading') || 'Loading...'
+					loadMoreTxt: $pullUpLabel.html() || '加载更多',
+					noLoadMoreTxt: $pullUpLabel.attr('data-no-more') || '没有更多了',
+					loading: $pullUpLabel.attr('data-loading') || '加载中...'
 				};
 			}
 
+			let move_pos = { scrollY: 0, scrollH: 0 };
 			$wrap.scroll({
 				scrollX: false,
 				scrollY: true,
 				scroll$: op.scroll$,
+				touchstart(event, pos) {
+					let _formData = $form.listTotal();
+
+					$pullUp.removeClass('loading').addClass('data-more');
+					// 判断有没有下一页
+					if (_formData.currentList.length) {
+						$pullUpLabel.html(pullUpMsg.loadMoreTxt);
+					} else {
+						$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
+					}
+				},
 				touchmove(event, pos) {
+					move_pos = pos;
 					if ($pullDown.size() > 0) {
 						if (pos.scrollY > 60) {
 							$pullDown.addClass('flip');
@@ -59,10 +72,11 @@ $.fn.extend({
 					}
 
 					if ($pullUp.size() > 0) {
-						$pullUp.removeClass('loading data-more');
 						if (pos.scrollY - 200 < -pos.scrollH) {
 							$pullUp.addClass('loading');
 							$pullUpLabel.html(pullUpMsg.loading);
+						} else {
+							$pullUp.removeClass('loading');
 						}
 					}
 
@@ -99,14 +113,12 @@ $.fn.extend({
 			$form.on('dwz-ajax-done', () => {
 				let _formData = $form.listTotal();
 
-				$pullUp.removeClass('loading data-more');
+				$pullUp.removeClass('loading').addClass('data-more');
 				// 判断有没有下一页
 				if (_formData.currentList.length) {
 					$pullUpLabel.html(pullUpMsg.loadMoreTxt);
-					$pullUp.addClass('data-more');
 				} else {
 					$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
-					$pullUp.addClass('data-more');
 				}
 			});
 		});
