@@ -50,13 +50,14 @@ $.fn.extend({
 				scroll$: op.scroll$,
 				touchstart(event, pos) {
 					let _formData = $form.listTotal();
-
-					$pullUp.removeClass('loading').addClass('data-more');
-					// 判断有没有下一页
-					if (_formData.currentList.length) {
-						$pullUpLabel.html(pullUpMsg.loadMoreTxt);
-					} else {
-						$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
+					if (_formData.currentList) {
+						$pullUp.removeClass('loading').addClass('data-more');
+						// 判断有没有下一页
+						if (_formData.currentList.length) {
+							$pullUpLabel.html(pullUpMsg.loadMoreTxt);
+						} else {
+							$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
+						}
 					}
 				},
 				touchmove(event, pos) {
