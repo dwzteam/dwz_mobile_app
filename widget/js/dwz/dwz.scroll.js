@@ -22,7 +22,7 @@
 				{
 					scrollX: false,
 					scrollY: true,
-					delayTime: 500, // 效果持续时间
+					delayTime: 700, // 效果持续时间
 					touchstart: null,
 					touchmove: null, // touchmove事件触发scroll
 					touchend: null,
@@ -152,7 +152,7 @@
 								$main.animate({ y: -pos.scrollH }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
-								let speedY = $.speed.getY() / 2;
+								let speedY = $.speed.getY() / 4;
 
 								if (Math.abs(speedY) > 200) {
 									let scrollPos = $main.getComputedPos();
@@ -160,16 +160,17 @@
 									let scrollY = scrollLength + scrollPos.y;
 
 									if (scrollY < -pos.scrollH) {
-										let _nextPageH = _dwzLoadMore == 1 ? 100 : 0; // dwz-load-more == 1 时，下一页点位高度
+										let _nextPageH = _dwzLoadMore == 1 ? 80 : 0; // dwz-load-more == 1 时，下一页点位高度
 										scrollY = -pos.scrollH - _nextPageH;
 									} else if (scrollY > 0) {
 										scrollY = 0;
 									}
 
+									// 根据加速度计算动画时长
 									let dealyRate = Math.abs(scrollLength / 400);
 									dealyRate = Math.min(dealyRate, 1);
 
-									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.46, 0.45, 1)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
+									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.3, 0.1, 0.9)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
 								}
 							}
 						}
