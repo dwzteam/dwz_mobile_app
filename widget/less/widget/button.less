@@ -20,81 +20,100 @@
 		.flex-wrap-center;
 		.flex-1;
 	}
+
+	// 文字按钮
+	&.is-text {
+		background: transparent !important;
+		border: none !important;
+		color: @btnTxtColorPlain;
+	}
+	// 朴素按钮
 	&.is-plain {
 		background: @btnBgPlain;
 		color: @btnTxtColorPlain;
 	}
+	// 主要按钮
 	&.primary {
 		border-color: @btnBorderColorPrimary;
 		background: @btnBgPrimary;
 		color: @btnTxtColorPrimary;
-		&.is-plain {
+		&.is-plain,
+		&.is-text {
 			background: @btnBgPrimaryPlain;
 			color: @btnTxtColorPrimaryPlain;
 		}
 	}
+	// 成功按钮
 	&.success {
 		border-color: @btnBorderColorSuccess;
 		background: @btnBgSuccess;
 		color: @btnTxtColorSuccess;
-		&.is-plain {
+		&.is-plain,
+		&.is-text {
 			background: @btnBgSuccessPlain;
 			color: @btnTxtColorSuccessPlain;
 		}
 	}
+	// 信息按钮
 	&.info {
 		border-color: @btnBorderColorInfo;
 		background: @btnBgInfo;
 		color: @btnTxtColorInfo;
-		&.is-plain {
+		&.is-plain,
+		&.is-text {
 			background: @btnBgInfoPlain;
 			color: @btnTxtColorInfoPlain;
 		}
 	}
+	// 警告按钮
 	&.warning {
 		border-color: @btnBorderColorWarning;
 		background: @btnBgWarning;
 		color: @btnTxtColorWarning;
-		&.is-plain {
+		&.is-plain,
+		&.is-text {
 			background: @btnBgWarningPlain;
 			color: @btnTxtColorWarningPlain;
 		}
 	}
+	// 危险按钮
 	&.danger {
 		border-color: @btnBorderColorDanger;
 		background: @btnBgDanger;
 		color: @btnTxtColorDanger;
-		&.is-plain {
+		&.is-plain,
+		&.is-text {
 			color: @btnTxtColorDanger;
 			background: @btnBgDangerPlain;
 			color: @btnTxtColorDangerPlain;
 		}
 	}
-
+	// 禁用按钮
 	&[disabled] {
 		border-color: @btnBorderColorDisabled;
 		background: @btnBgDisabled;
 		color: @btnTxtColorDisabled;
 	}
-
+	// 中等按钮
 	&.is-md {
 		height: 36px;
 		font-size: @l3;
 	}
-
+	// 小型按钮
 	&.is-sm {
 		height: 32px;
 		font-size: @l3;
 	}
-
+	// 超小按钮
 	&.is-mini {
 		height: 28px;
 		font-size: @l4;
 	}
-
+	// 圆角按钮
 	&.is-round {
 		border-radius: 20px;
 	}
+	// 圆圈按钮
 	&.is-circle {
 		overflow: hidden;
 		border-radius: 50%;
