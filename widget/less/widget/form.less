@@ -16,14 +16,14 @@ textarea {
 }
 
 input {
-	-webkit-appearance: textfield;
 	background: none;
-	-webkit-rtl-ordering: logical;
 	user-select: text;
 	cursor: auto;
 	padding: 0;
 	border: 0;
-	font-size: 15px;
+	font-size: @l3;
+	-webkit-appearance: textfield;
+	-webkit-rtl-ordering: logical;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -75,7 +75,7 @@ select {
 	background: none;
 	border: none;
 	cursor: auto;
-	font-size: 15px;
+	font-size: @l3;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -184,8 +184,8 @@ label {
 		}
 
 		label {
-			color: #777;
-			font-size: 15px;
+			color: @labelColor;
+			font-size: @l3;
 			line-height: 24px;
 		}
 
@@ -193,7 +193,6 @@ label {
 			.flex-wrap;
 			.align-center;
 			.flex-1;
-			font-size: 15px;
 
 			label {
 				width: 90px;
@@ -207,7 +206,7 @@ label {
 		}
 
 		&.disabled {
-			color: #999;
+			color: @linkColorDisabled;
 		}
 
 		&.dwz-user-icon {
@@ -254,6 +253,5 @@ textarea:invalid {
 }
 
 textarea:read-only {
-	border-color: #9eabb3 #d5dbdf #d5dbdf #9eabb3;
-	background-color: #f6f6f6;
+	background-color: @inputBg;
 }

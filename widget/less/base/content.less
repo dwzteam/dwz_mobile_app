@@ -84,7 +84,7 @@ main > section,
 /* 正文描述 */
 .txt-desc {
 	font-size: @l4;
-	color: @txtColor;
+	color: @descColor;
 	line-height: 24px;
 }
 
@@ -236,6 +236,18 @@ article,
 	.item-time {
 		font-size: @l3;
 		color: @infoColor;
+	}
+
+	.item-content {
+		.flex-wrap;
+		.align-center;
+		font-size: @l3;
+		line-height: 24px;
+
+		label {
+			width: 90px;
+			color: @titleColor;
+		}
 	}
 }
 // 标签规定独立的流内容（图像、图表、照片、代码等等）
