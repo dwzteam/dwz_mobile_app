@@ -155,7 +155,7 @@
 								// 加速度处理
 								let speedY = $.speed.getY() / 4;
 
-								if (Math.abs(speedY) > 200) {
+								if (Math.abs(speedY) > 50) {
 									let scrollPos = $main.getComputedPos();
 									let scrollLength = speedY * ($wrap.height() / 812); // 滚动长度
 									let scrollY = scrollLength + scrollPos.y;
@@ -168,10 +168,10 @@
 									}
 
 									// 根据加速度计算动画时长
-									let dealyRate = Math.abs(scrollLength / 400);
+									let dealyRate = Math.abs(scrollLength / 200);
 									dealyRate = Math.min(dealyRate, 1);
 
-									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.3, 0.1, 0.9)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
+									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.3, 0.2, 0.9)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
 								}
 							}
 						}
