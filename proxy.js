@@ -4,7 +4,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const porxyMiddleware = createProxyMiddleware('/app_proxy', {
-	target: 'https://mobile.jui.org/test', // 换成自己的api接口baseUrl
+	target: 'http://office.7788sc.com/Web', // 换成自己的api接口baseUrl
 	changeOrigin: true,
 	pathRewrite: {
 		'^/app_proxy': ''

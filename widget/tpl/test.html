@@ -1,12 +1,110 @@
-<main>
+<form class="dwz-list-form page-wrap">
+	<input type="hidden" name="pageNum" value="1">
 	<header>
 		<div class="toolbar">
-			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
 			<div class="header-title">测试页面</div>
+		</div>
+		<div class="toolbar">
+			<div class="bar search-bar">
+				<label class="item-input filter-keywords">
+					<button class="icon icon-search" type="button"></button>
+					<input type="search" class="dwz-disable-autofocus" name="keywords" value="" placeholder="车号、挂车号">
+				</label>
+			</div>
 		</div>
 	</header>
 
 	<section>
-		<div style="background:#ffeef0;width:100%;height:44px;line-height:44px;text-align:center;font-weight:500;font-size:13px;">开发中，敬请期待...</div>
+
+		<div class="scroll-content dwz-list">
+			<div class="scroll">
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+				</div>
+
+				<div class="empty_box">
+					<div class="empty-img">
+						<img src="image/browse-empty-bg.svg">
+					</div>
+					<p class="txt-info is-center">暂时还没有数据哦~</p>
+				</div>
+
+				<ul class="list pic-list dwz-list-box"></ul>
+
+				<div class="pullUp">
+					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中..." data-no-more="没有更多了">加载更多</span>
+				</div>
+
+			</div>
+			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
+		</div>
+
 	</section>
-</main>
+</form>
+
+<script id="tpl_list" type="text/html">
+	{{each list as item}}
+	<li class="item dwz-ctl-hover" data-id="{{item.id}}">
+		<div class="item-content">
+			<div class="flex-wrap">
+				<div class="item-title1 flex-1">车号：{{item.car_no}}</div>
+				<span class="button danger is-mini is-text">{{item.back_c6}}</span>
+			</div>
+			<div class="item-info1">挂车号：{{item.trailer_no}}</div>
+			<div class="item-info1">车辆运输证号(挂)：{{item.ro_tr_pe_end}}</div>
+			<div class="item-info1">道路运输证号(头)：{{item.ro_tr_pe_head}}</div>
+			<div class="item-info1">资格证号：{{item.trailer_no}}</div>
+		</div>
+	</li>
+	{{/each}}
+</script>
+
+
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		let html = template.render(tpl.html, {
+			UserInfo: UserInfo
+		});
+		this.html(html).initUI();
+
+		let $form = this.find('form.dwz-list-form'),
+			$listBox = $form.find('ul.dwz-list-box');
+
+		$form.requestList = (loadMore) => {
+			let data = $form.serializeArray();
+			console.log(JSON.stringify(data));
+			$.ajax({
+				type: 'POST',
+				// url: '/app_proxy/Tymirfy02/search',
+				url: 'http://office.7788sc.com/Web/Tymirfy02/search',
+				dataType: 'json',
+				data: data,
+				cache: false,
+				global: false,
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						$form.listTotal(json.data.total, json.data.list);
+						if ($form.total) {
+							$form.find('.empty_box').hide();
+						}
+
+						let _html = template.render(tpl.tpl_list, json.data);
+
+						if (loadMore) {
+							$(_html).appendTo($listBox).hoverClass();
+						} else {
+							$listBox.html(_html).initUI();
+						}
+					}
+				},
+				error: biz.ajaxError
+			});
+		};
+
+		$.listForm($form);
+	}
+</script>
