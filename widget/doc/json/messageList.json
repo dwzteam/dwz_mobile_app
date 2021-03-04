@@ -1,9 +1,8 @@
 {
 	"status": 1,
+	"info": "",
 	"data": {
 		"total": 100,
-		"page": 1,
-		"pagesize": 10,
 		"list": [
 			{
 				"id": 1000,

@@ -93,12 +93,13 @@
 							let scrollY = -Math.round(pos.dy - currentPos.y);
 
 							if (scrollY > 0) {
-								scrollY = scrollY / 3;
+								scrollY = scrollY / (1 + scrollY / 200);
 							} else if (scrollY < -scrollH) {
-								scrollY = (scrollY + scrollH) / 3 - scrollH;
+								let _endOver = scrollY + scrollH;
+								scrollY = _endOver / (1 + Math.abs(_endOver) / 200) - scrollH;
 							}
 
-							$main.translateY(scrollY + 'px', 0);
+							$main.translateY(scrollY + 'px', 50, 'linear');
 
 							if ($topBtn.size() > 0) {
 								if (scrollY < -100) {
