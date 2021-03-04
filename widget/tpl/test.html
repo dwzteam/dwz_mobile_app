@@ -66,16 +66,16 @@
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
 
-		let html = template.render(tpl.html, {
+		var html = template.render(tpl.html, {
 			UserInfo: UserInfo
 		});
 		this.html(html).initUI();
 
-		let $form = this.find('form.dwz-list-form'),
+		var $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
 
-		$form.requestList = (loadMore) => {
-			let data = $form.serializeArray();
+		$form.requestList = function(loadMore) {
+			var data = $form.serializeArray();
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
@@ -83,16 +83,14 @@
 				url: 'http://office.7788sc.com/Web/Tymirfy02/search',
 				dataType: 'json',
 				data: data,
-				cache: false,
-				global: false,
-				success: (json) => {
+				success: function(json) {
 					if ($.isAjaxStatusOk(json)) {
 						$form.listTotal(json.data.total, json.data.list);
 						if ($form.total) {
 							$form.find('.empty_box').hide();
 						}
 
-						let _html = template.render(tpl.tpl_list, json.data);
+						var _html = template.render(tpl.tpl_list, json.data);
 
 						if (loadMore) {
 							$(_html).appendTo($listBox).hoverClass();
