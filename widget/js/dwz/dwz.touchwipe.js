@@ -95,14 +95,14 @@
 								config.touchmove.call(this, e, pos);
 							}
 						} else {
-							if (Math.abs(pos.dx) >= config.min_move_x) {
+							if (Math.abs(pos.dx) >= config.min_move_x && directionStart == 'horizontal') {
 								cancelTouch(); // touch完成取消touch事件
 								if (pos.dx > 0) {
 									config.wipeLeft.call(this, e, pos);
 								} else {
 									config.wipeRight.call(this, e, pos);
 								}
-							} else if (Math.abs(pos.dy) >= config.min_move_y) {
+							} else if (Math.abs(pos.dy) >= config.min_move_y && directionStart == 'vertical') {
 								cancelTouch(); // touch完成取消touch事件
 								if (pos.dy > 0) {
 									config.wipeUp.call(this, e, pos);

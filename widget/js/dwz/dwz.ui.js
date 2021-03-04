@@ -30,15 +30,14 @@
 		hoverClass(className = 'hover') {
 			return this.each(function () {
 				let $this = $(this);
-
-				if ($.event.hasTouch) {
-					$this.attr('ontouchstart', `$(this).addClass('${className}')`);
-					$this.attr('ontouchend', `$(this).removeClass('${className}')`);
-				} else {
-					$this.attr('onmousedown', `$(this).addClass('${className}')`);
-					$this.attr('onmouseup', `$(this).removeClass('${className}')`);
-					$this.attr('onmouseout', `$(this).removeClass('${className}')`);
-				}
+				$this.click((event) => {
+					$this.addClass(className);
+				});
+				$this.on('touchend mouseup mouseout', () => {
+					setTimeout(() => {
+						$this.removeClass(className);
+					}, 100);
+				});
 			});
 		},
 		touchOpenRight(option) {
