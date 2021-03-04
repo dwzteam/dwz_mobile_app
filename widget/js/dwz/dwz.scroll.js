@@ -99,7 +99,7 @@
 								scrollY = _endOver / (1 + Math.abs(_endOver) / 200) - scrollH;
 							}
 
-							$main.translateY(scrollY + 'px', 50, 'linear');
+							$main.translateY(scrollY + 'px', 0);
 
 							if ($topBtn.size() > 0) {
 								if (scrollY < -100) {
