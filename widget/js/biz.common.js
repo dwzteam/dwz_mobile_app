@@ -36,7 +36,7 @@ $.extend({
 		const op = $.extend({ data: {}, header: header }, options);
 
 		// DEV开发模型（json静态文件模拟接口），静态文件访问：POST请求统一改成GET
-		if (biz.server.ENV == 'DEV') {
+		if (op.url.startsWith('./doc/')) {
 			op.type = 'GET';
 		}
 

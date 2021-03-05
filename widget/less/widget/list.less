@@ -40,13 +40,16 @@
 				border-radius: 50%;
 			}
 		}
-		&.is-round {
-			.box-round;
-			margin-top: 10px;
-		}
 		&:first-child {
 			border: none;
-			margin-top: 0;
+		}
+		&.is-round {
+			.box-round;
+			.box-shadow;
+			margin: 10px 10px 0 10px;
+			&:last-child {
+				margin: 10px;
+			}
 		}
 
 		.item-content {
@@ -58,14 +61,33 @@
 			.box-line;
 		}
 		.item-icon {
-			display: flex;
-			align-items: center;
+			.flex-wrap-center;
 			margin-right: 10px;
+			width: 64px;
+			height: 64px;
+			overflow: hidden;
 			img {
 				display: block;
-				max-height: 40px;
-				max-width: 40px;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			&.is-round {
+				border-radius: 5px;
+			}
+			&.is-circle {
 				border-radius: 50%;
+			}
+			&.is-md {
+				width: 40px;
+				height: 40px;
+			}
+			&.is-sm {
+				width: 24px;
+				height: 24px;
+			}
+			&.is-mini {
+				width: 16px;
+				height: 16px;
 			}
 		}
 

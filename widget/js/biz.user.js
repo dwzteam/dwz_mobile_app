@@ -141,7 +141,7 @@ $.fn.extend({
 // 登入页面
 function loginRender(tpl, params) {
 	let json = {
-		form_url: biz.server.getLoginUrl(),
+		form_url: biz.server.getUrl(biz.server.login),
 		sms_code_url: biz.server.getUrl(biz.server.sendSmsCode),
 		login_sms_url: biz.server.getUrl(biz.server.loginSms),
 		login_no_face: params.login_no_face,

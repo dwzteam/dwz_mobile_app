@@ -37,15 +37,15 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-open-right dwz-ctl-hover" data-id="{{item.id}}" data-title="{{item.title}}" data-url="{{item.url}}" onclick="(function(item){
+	<li class="item dwz-open-right dwz-ctl-hover" onclick="(function(item){
 		if (item.url && biz.checkLiveTime()) {
 			$.navView.open({
 				page_title: item.title,
 				url: item.url
 			})
 		}
-	})(this.dataset)">
-		<div class="item-icon"><img src="./image/icon/icon-notice.svg"></div>
+	})({{item}})">
+		<div class="item-icon is-sm"><img src="./image/icon/icon-notice.svg"></div>
 		<div class="item-content">
 			<div class="flex-wrap">
 				<p class="item-title1 flex-1">{{item.title}}</p>

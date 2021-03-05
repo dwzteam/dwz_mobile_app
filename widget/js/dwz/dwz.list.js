@@ -71,7 +71,7 @@ $.fn.extend({
 					}
 
 					if ($pullUp.size() > 0) {
-						if (pos.scrollY - 200 < -pos.scrollH) {
+						if (pos.scrollY - 200 < -pos.scrollH && pos.scrollH > 20) {
 							$pullUp.addClass('loading');
 							$pullUpLabel.html(pullUpMsg.loading);
 						} else {

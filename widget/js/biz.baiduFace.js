@@ -106,7 +106,7 @@ biz.baiduFace = {
 			if (ret.status) {
 				$.ajax({
 					type: 'POST',
-					url: biz.server.getLoginUrl(),
+					url: biz.server.getUrl(biz.server.login),
 					dataType: 'json',
 					data: { faceBase64: ret.face },
 					cache: false,

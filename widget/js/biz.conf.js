@@ -17,7 +17,7 @@ const biz = window.biz || {
 			DEV: './doc/verify.png',
 			REMOTE: '/Public/verify'
 		},
-		_login: {
+		login: {
 			DEV: './doc/json/login.json',
 			REMOTE: '/login'
 		},
@@ -192,17 +192,18 @@ const biz = window.biz || {
 			REMOTE: '/upload'
 		},
 		getUrl(type, params) {
-			let _url = this.baseUrl[this.ENV] + type[this._flag()].replace('{token}', UserInfo.token);
+			let _url = type[this._flag()].replace('{token}', UserInfo.token);
 			if (params) {
 				_url = _url.replaceTm(params);
 			}
-			return _url;
+
+			if (_url.startsWith('./doc/')) {
+				return _url;
+			}
+			return this.baseUrl[this.ENV] + _url;
 		},
 		getVerifyImgUrl() {
 			return this.baseUrl[this.ENV] + this._verifyImg[this._flag()] + '?t=' + new Date().getTime();
-		},
-		getLoginUrl() {
-			return this.baseUrl[this.ENV] + this._login[this._flag()];
 		}
 	}
 };
