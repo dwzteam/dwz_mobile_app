@@ -37,7 +37,7 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-open-right dwz-ctl-hover" onclick="(function(item){
+	<li class="item dwz-open-right dwz-ctl-hover" data-id="{{item.id}}" onclick="(function(item){
 		if (item.url && biz.checkLiveTime()) {
 			$.navView.open({
 				page_title: item.title,

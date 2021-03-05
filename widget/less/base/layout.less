@@ -15,6 +15,9 @@
 
 	.item {
 		.boxLine(0 1px 1px 0);
+		&:before {
+			transform: scale(0.495, 0.5); // 处理border兼容问题
+		}
 		display: block;
 		position: relative;
 		float: left;

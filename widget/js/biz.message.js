@@ -15,8 +15,8 @@ biz.message = {
 			global: false,
 			success: (json) => {
 				if ($.isAjaxStatusOk(json)) {
-					$.navTab
-						.getBox()
+					$(event.target)
+						.parentsUnitBox()
 						.find('ul.list li[data-id="' + id + '"]')
 						.remove();
 				}
