@@ -112,7 +112,7 @@
 	-webkit-tap-highlight-color: @color;
 }
 
-// Line
+// 边框
 .boxLine(@border-width:'1px 1px 1px 1px', @c:@borderColor) {
 	// border-style: solid;
 	// border-width: @border-width;
@@ -154,6 +154,22 @@
 .box-line {
 	.boxLine(1px 1px 1px 1px);
 }
+.t-line,
+.r-line,
+.b-line,
+.l-line,
+.tb-line,
+.box-line {
+	// 加粗边框
+	&.is-bold {
+		border: @borderColor 1px solid;
+		&::before {
+			border: none;
+		}
+	}
+}
+
+// 去除边框
 .no-line {
 	border: none !important;
 	&:before {
