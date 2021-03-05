@@ -116,21 +116,22 @@ $.fn.extend({
 
 				$pullUp.removeClass('loading').addClass('data-more');
 				// 判断有没有下一页
-				if (_formData.currentList.length) {
-					$pullUpLabel.html(pullUpMsg.loadMoreTxt);
-				} else {
+				if (_formData.currentList.length < _formData.pagesize) {
 					$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
+				} else {
+					$pullUpLabel.html(pullUpMsg.loadMoreTxt);
 				}
 			});
 		});
 	},
 	// 无限滚动form total
-	listTotal(total, currentList) {
+	listTotal(total, currentList, pagesize) {
 		if (total === undefined) {
-			return { total: this.total || 0, ajaxTime: this.ajaxTime, currentList: this.currentList };
+			return { total: this.total || 0, ajaxTime: this.ajaxTime, currentList: this.currentList || [], pagesize: this.pagesize || 20 };
 		} else {
 			this.total = parseInt(total || 0);
 			this.currentList = currentList || [];
+			this.pagesize = pagesize;
 			if (!this.total) this.total = this.currentList.length;
 			this.ajaxTime = new Date().getTime();
 
@@ -142,7 +143,9 @@ $.fn.extend({
 $.extend({
 	listForm($form) {
 		let $list = $form.find('div.dwz-list');
-		$form.on('submit', function () {
+		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
+		$form.on('submit', () => {
+			if ($page.size()) $page.val(1);
 			$form.requestList();
 			$list.scrollTo({ y: 0, duration: 800 });
 			return false;
@@ -151,7 +154,6 @@ $.extend({
 			$form.trigger('submit');
 		}, 300);
 
-		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
 		$list.list({
 			$form,
 			refreshFn() {
