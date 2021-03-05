@@ -55,11 +55,11 @@
 
 			let ajaxbg = $('#progressBar').hide();
 			$(document)
-				.on('touchmove', (event) => {
-					$.speed.cal(event); // 计算加速度
-					event.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-				})
-				.on('touchstart', $.speed.clear)
+				// .on('touchmove', (event) => {
+				// 	$.speed.cal(event); // 计算加速度
+				// 	event.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+				// })
+				// .on('touchstart', $.speed.clear)
 				.on('ajaxStart', () => {
 					ajaxbg.show();
 				})

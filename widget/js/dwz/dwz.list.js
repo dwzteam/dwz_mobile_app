@@ -43,14 +43,13 @@ $.fn.extend({
 				};
 			}
 
-			let move_pos = { scrollY: 0, scrollH: 0 };
 			$wrap.scroll({
 				scrollX: false,
 				scrollY: true,
 				scroll$: op.scroll$,
 				touchstart(event, pos) {
 					let _formData = $form.listTotal();
-					if (_formData.currentList) {
+					if (_formData.currentList && $pullUp.size() > 0) {
 						$pullUp.removeClass('loading').addClass('data-more');
 						// 判断有没有下一页
 						if (_formData.currentList.length) {
@@ -61,7 +60,6 @@ $.fn.extend({
 					}
 				},
 				touchmove(event, pos) {
-					move_pos = pos;
 					if ($pullDown.size() > 0) {
 						if (pos.scrollY > 60) {
 							$pullDown.addClass('flip');

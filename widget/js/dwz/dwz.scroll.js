@@ -56,8 +56,9 @@
 					return scrollH > 0 ? scrollH : 0;
 				}
 
-				let startTime = 0,
-					endTime = 0;
+				let endTime = 0; // touchend 触发时间
+				let lastMovePos; // 上次touchmove位置
+				let currentMovePos; // 当前touchmove位置
 				let currentPos = { x: 0, y: 0 };
 				let direction = 'vertical';
 				if (op.scrollX) {
@@ -86,7 +87,10 @@
 							return;
 						}
 
-						startTime = timestamp;
+						if (currentMovePos && currentMovePos.timestamp > 100) {
+							lastMovePos = { x: currentMovePos.x, y: currentMovePos.y, timestamp: currentMovePos.timestamp }; // 记录上次touchmove 位置
+						}
+						currentMovePos = { x: pos.x, y: pos.y, timestamp }; // 记录当前touchmove 位置
 
 						if (op.scrollY) {
 							let scrollH = getScrollH();
@@ -140,6 +144,11 @@
 							return;
 						}
 
+						let _speed = $.speed.cal(currentMovePos, lastMovePos);
+						if (!_speed.x && !_speed.y) {
+							return;
+						}
+
 						if (op.touchend) op.touchend.call($main, event, pos);
 
 						if (op.scrollY && Math.abs(pos.dy) > 20) {
@@ -153,11 +162,11 @@
 								$main.animate({ y: -pos.scrollH }, op.delayTime, 'cubic-bezier(0.1, 0.57, 0.1, 1)');
 							} else {
 								// 加速度处理
-								let speedY = $.speed.getY() / 4;
+								let speedY = _speed.y;
 
 								if (Math.abs(speedY) > 50) {
 									let scrollPos = $main.getComputedPos();
-									let scrollLength = speedY * ($wrap.height() / 812); // 滚动长度
+									let scrollLength = speedY; // 滚动长度
 									let scrollY = scrollLength + scrollPos.y;
 
 									if (scrollY < -pos.scrollH) {
@@ -166,12 +175,12 @@
 									} else if (scrollY > 0) {
 										scrollY = 0;
 									}
-
+									console.log(scrollLength);
 									// 根据加速度计算动画时长
-									let dealyRate = Math.abs(scrollLength / 200);
+									let dealyRate = Math.abs(scrollLength / 400) + 0.2;
 									dealyRate = Math.min(dealyRate, 1);
 
-									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.3, 0.2, 0.9)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
+									$main.animate({ y: scrollY }, op.delayTime * dealyRate, 'cubic-bezier(0.25, 0.3, 0.1, 0.9)'); // ease, linear, cubic-bezier(0.25, 0.46, 0.45, 0.94)
 								}
 							}
 						}
@@ -184,7 +193,7 @@
 							} else {
 								// 加速度处理
 								let scrollPos = $main.getComputedPos();
-								let scrollX = dwz.speed.getX() + scrollPos.x;
+								let scrollX = _speed.x + scrollPos.x;
 
 								if (scrollX < -pos.scrollW) scrollX = -pos.scrollW;
 								else if (scrollX > 0) scrollX = 0;
