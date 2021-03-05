@@ -34,13 +34,17 @@
 						<div class="form-item">
 							<div class="item-content">
 								<label>新密码</label>
-								<input class="required" type="password" name="password" placeholder="登录密码" maxlength="20" data-error="请输入密码">
+								<input class="required" type="password" name="new_pass" placeholder="新密码" maxlength="20" data-pattern=".{6,20}" data-error="新密码至少6位">
 							</div>
 						</div>
 						<div class="form-item">
 							<div class="item-content">
 								<label>确认密码</label>
-								<input class="required" type="password" name="password_confirm" placeholder="确认登录密码" maxlength="20" data-error="请输入确认密码">
+								<input class="required valid-change" type="password" name="password_confirm" onchange="(function($input){
+									var $form = $input.parentsByTag('form');
+									var $new_pass = $form.find('input[name=new_pass]');
+									$input.data('valid-change', $input.val() == $new_pass.val())
+								})($(this))" placeholder="确认密码" maxlength="20" data-error="新密码和确认密码必须保持一致">
 							</div>
 						</div>
 					</div>

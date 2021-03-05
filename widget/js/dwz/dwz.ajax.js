@@ -312,6 +312,9 @@ function dialogAjaxDone(json) {
 							if (!result) {
 								errorMsg = $input.attr('data-error-max') || errorMsg;
 							}
+						} else if ($input.hasClass('valid-change') && this.onchange) {
+							this.onchange();
+							result = $input.data('valid-change') !== false;
 						}
 					}
 
