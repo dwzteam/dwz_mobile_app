@@ -424,6 +424,7 @@ dwz.extend({
 			let t = pos.timestamp - prePos.timestamp,
 				distX = pos.x - prePos.x,
 				distY = pos.y - prePos.y;
+
 			_speed.x = t > 0 ? (distX / t) * 1000 : distX; // 速度每秒n像素
 			_speed.y = t > 0 ? (distY / t) * 1000 : distY;
 			return _speed;

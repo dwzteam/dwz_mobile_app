@@ -27,8 +27,7 @@
 					touchmove: null, // touchmove事件触发scroll
 					touchend: null,
 					scroll$: '.scroll',
-					topBtn$: '.top-btn',
-					stopPropagationEvents: false
+					topBtn$: '.top-btn'
 				},
 				options
 			);
@@ -67,7 +66,7 @@
 
 				$wrap.touchwipe({
 					direction: direction,
-					stopPropagationEvents: op.stopPropagationEvents,
+					stopPropagationEvents: true,
 					touchstart(event, pos) {
 						currentPos = $main.getComputedPos();
 						if (op.scrollY) {
@@ -87,7 +86,7 @@
 							return;
 						}
 
-						if (currentMovePos && currentMovePos.timestamp > 100) {
+						if (currentMovePos && timestamp - currentMovePos.timestamp > 10) {
 							lastMovePos = { x: currentMovePos.x, y: currentMovePos.y, timestamp: currentMovePos.timestamp }; // 记录上次touchmove 位置
 						}
 						currentMovePos = { x: pos.x, y: pos.y, timestamp }; // 记录当前touchmove 位置
@@ -175,7 +174,7 @@
 									} else if (scrollY > 0) {
 										scrollY = 0;
 									}
-									console.log(scrollLength);
+
 									// 根据加速度计算动画时长
 									let dealyRate = Math.abs(scrollLength / 400) + 0.2;
 									dealyRate = Math.min(dealyRate, 1);
