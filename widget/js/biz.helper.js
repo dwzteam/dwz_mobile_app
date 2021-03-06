@@ -7,8 +7,6 @@ biz.helper = {
 			url: biz.server.getUrl(biz.server.regionList, { code: op.code }),
 			dataType: 'json',
 			data: {},
-			cache: false,
-			global: false,
 			success: (json) => {
 				if ($.isAjaxStatusOk(json)) {
 					let html = template.render(op.tpl, { list: json.data });

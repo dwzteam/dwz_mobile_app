@@ -42,7 +42,21 @@
 						<p class="flex-1">actionSheet模式【选择省、市、区】</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
+					<li class="divider"></li>
+					<li class="item">
+						<div class="dwz-sign-box sign-box pic">
+							<a class="button sign" type="button" onclick="$.dialog.open({
+								url: 'tpl/helper/signPop.html?dwz_callback=$.drawingBoardRender',
+								pop: 'actionSheet'
+							})">actionSheet模式【签名】</a>
+						</div>
+					</li>
+
+					<li class="item">
+						<input type="text" name="drug_sign_url" value="签名Base64串" class="dwz-sign-input flex-1">
+					</li>
 				</ul>
+
 			</div>
 		</div>
 
