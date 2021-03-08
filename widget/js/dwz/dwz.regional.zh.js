@@ -12,6 +12,7 @@
 
 	$.setRegional('alert', {
 		title: {
+			info: '提示',
 			error: '错误',
 			success: '成功',
 			confirm: '确认提示'

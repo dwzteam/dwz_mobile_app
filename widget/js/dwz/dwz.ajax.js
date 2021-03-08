@@ -290,8 +290,8 @@ function dialogAjaxDone(json) {
 						required = this.required || $input.hasClass('required'),
 						pattern = $input.attr('pattern') || $input.attr('data-pattern'),
 						errorMsg = $input.attr('data-error'),
-						dataMin = $input.attr('data-min'),
-						dataMax = $input.attr('data-max');
+						dataMin = $input.attr('min'),
+						dataMax = $input.attr('max');
 
 					if (!$input.hasClass('ignore')) {
 						if (dwz.config.rcheckableType.test(this.type)) {

@@ -6,10 +6,7 @@ $.dialog = {
 		box$: '#dialog',
 		popClass: ['fullscreen', 'actionSheet', 'pic', 'pop'],
 		openClass: 'open',
-		frag: `<div id="dialog" class="pop-window unitBox">
-				<div class="pop-header"><span class="title">弹出框</span><a class="pop-close" href="javascript:$.dialog.close()"><i class="icon icon-close"></i></a></div>
-				<div class="pop-content"></div>
-			</div>`,
+		frag: `<div id="dialog" class="pop-window unitBox"></div>`,
 		bgBox$: '#mask-bg-dialog',
 		bgFrag: '<div id="mask-bg-dialog" class="mask-bg"></div>'
 	},
@@ -32,6 +29,7 @@ $.dialog = {
 				url: '',
 				pop: 'fullscreen',
 				external: false,
+				page_title: '', // 配制external使用
 				data: {},
 				callback: null
 			},
@@ -67,7 +65,8 @@ $.dialog = {
 
 		if (op.url) {
 			if (op.external) {
-				this.loadExternal(op.url);
+				let page_title = op.page_title ? decodeURI(op.page_title) : 'dialog';
+				this.loadExternal(op.url, page_title);
 				return;
 			}
 
@@ -98,12 +97,18 @@ $.dialog = {
 
 		this.isOpen = true;
 	},
-	loadExternal(url) {
-		let $box = this.$box.html('<a class="video-close" href="javascript:$.dialog.close()"><i class="icon icon-close-dialog"></i></a><div class="pop-content"></div>');
-
-		let $content = $box.find('.pop-content');
-		let ih = $content.get(0).offsetHeight;
-		$content.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
+	loadExternal(url, page_title) {
+		let iframe_html = $.config.frag['external'].replaceAll('{url}', url);
+		let $box = this.$box.html(`
+		<main>
+			<header>
+				<div class="toolbar">
+					<a class="bar-button" onclick="$.dialog.close()"><i class="dwz-icon-close"></i></a>
+					<div class="header-title">${page_title}</div>
+				</div>
+			</header>
+			<section>${iframe_html}</section>
+		</main>`);
 	},
 
 	close(options) {

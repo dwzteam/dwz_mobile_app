@@ -55,11 +55,6 @@
 
 			let ajaxbg = $('#progressBar').hide();
 			$(document)
-				// .on('touchmove', (event) => {
-				// 	$.speed.cal(event); // 计算加速度
-				// 	event.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-				// })
-				// .on('touchstart', $.speed.clear)
 				.on('ajaxStart', () => {
 					ajaxbg.show();
 				})
@@ -123,28 +118,25 @@
 
 		if ($.dialog) {
 			$('a[target=dialog], li[target=dialog]', $p)
-				.touchwipe({
-					touch(event) {
-						let $link = $(this);
-						$.dialog.open({
-							url: $link.attr('data-href'),
-							pop: $link.attr('data-pop') || 'fullscreen'
-						});
-						event.stopPropagation();
-					}
+				.click(function (event) {
+					let $link = $(this);
+					$.dialog.open({
+						url: $link.attr('data-href'),
+						pop: $link.attr('data-pop') || 'fullscreen',
+						external: $link.attr('data-external') || false
+					});
+					event.stopPropagation();
 				})
 				.hrefFix();
 
-			$('img[target=dialog], a[target=dialog-pic]', $p).touchwipe({
-				touch(event) {
-					let $img = $(this);
-					$.dialog.open({
-						url: $img.attr('data-href'),
-						pop: 'pic',
-						data: { src: $img.attr('data-src') || $img.attr('src') }
-					});
-					event.stopPropagation();
-				}
+			$('img[target=dialog], a[target=dialog-pic]', $p).click(function (event) {
+				let $img = $(this);
+				$.dialog.open({
+					url: $img.attr('data-href'),
+					pop: 'pic',
+					data: { src: $img.attr('data-src') || $img.attr('src') }
+				});
+				event.stopPropagation();
 			});
 
 			$('#dialog .pop-down-close, #dialog .back-button', $p).click(function (event) {
@@ -155,12 +147,10 @@
 
 		if ($.alert) {
 			$('a[target=alertDialog]', $p)
-				.touchwipe({
-					touch(event) {
-						let $link = $(this);
-						$.alert.prompt($link.attr('data-href'));
-						event.stopPropagation();
-					}
+				.click(function (event) {
+					let $link = $(this);
+					$.alert.prompt($link.attr('data-href'));
+					event.stopPropagation();
 				})
 				.hrefFix();
 

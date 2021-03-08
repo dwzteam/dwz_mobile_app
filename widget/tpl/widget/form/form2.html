@@ -14,41 +14,36 @@
 
 				<div class="form-content">
 
-					<div class="margin-v">
-						<div class="form-item">
-							<label>图片组1</label>
-							<div class="item-content">
-								<ul id="upload-preview-pic1" class="upload-preview"></ul>
-								<div class="upload-wrap" rel="#upload-preview-pic1" data-name="pic1[]">
-									<button type="button">Upload</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-item">
-							<label>图片组2</label>
-							<div class="item-content">
-								<ul id="upload-preview-pic2" class="upload-preview"></ul>
-								<div class="upload-wrap" rel="#upload-preview-pic2" data-name="pic2[]">
-									<button type="button">Upload</button>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="margin-v">
-						<div class="form-item">
-							<label>电子签名</label>
-							<div class="item-content">
-								<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
-								<div class="dwz-sign-box sign-box pic">
-									<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/helper/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
-								</div>
+					<div class="form-item">
+						<label>图片组1</label>
+						<div class="item-content">
+							<ul id="upload-preview-pic1" class="upload-preview"></ul>
+							<div class="upload-wrap" rel="#upload-preview-pic1" data-name="pic1[]">
+								<button type="button">Upload</button>
 							</div>
 						</div>
 					</div>
 
+					<div class="form-item">
+						<label>图片组2</label>
+						<div class="item-content">
+							<ul id="upload-preview-pic2" class="upload-preview"></ul>
+							<div class="upload-wrap" rel="#upload-preview-pic2" data-name="pic2[]">
+								<button type="button">Upload</button>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<div class="form-item">
+						<label>电子签名</label>
+						<div class="item-content">
+							<input type="hidden" name="drug_sign_url" value="" class="required dwz-sign-input" data-error="您还没有完成签字！">
+							<div class="dwz-sign-box sign-box pic">
+								<a class="button sign" type="button" href="javascript:$.dialog.open({url:'tpl/helper/sign.html?dwz_callback=$.drawingBoardRender'})">点击完成签字</a>
+							</div>
+						</div>
+					</div>
 				</div>
 
 			</div>
