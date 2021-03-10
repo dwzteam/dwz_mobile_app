@@ -96,8 +96,10 @@
 							let scrollY = -Math.round(pos.dy - currentPos.y);
 
 							if (scrollY > 0) {
+								// 滚动超出顶部，平缓降低速度
 								scrollY = scrollY / (1 + scrollY / 200);
 							} else if (scrollY < -scrollH) {
+								// 滚动超出底部，平缓降低速度
 								let _endOver = scrollY + scrollH;
 								scrollY = _endOver / (1 + Math.abs(_endOver) / 200) - scrollH;
 							}

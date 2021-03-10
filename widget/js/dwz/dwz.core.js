@@ -83,6 +83,14 @@ dwz.extend({
 		}
 		return (1, eval)(str);
 	},
+	// 判断2个function相等
+	eqFunction(fn1, fn2) {
+		if (dwz.isFunction(fn1) && dwz.isFunction(fn2)) {
+			let _regexp = /^(function\s*)(\w*\b)/;
+			return fn1 === fn2 || fn1.toString().replace(_regexp, '$1') === fn2.toString().replace(_regexp, '$1');
+		}
+		return false;
+	},
 	isFunction(obj) {
 		return typeof obj === 'function';
 	},
@@ -457,9 +465,19 @@ dwz.extend({
 				};
 
 				_events[type] = _events[type] || [];
-				_events[type].push({ handler: handler, fn: fn });
 
-				elem.addEventListener(type, handler, { passive: false }); //passive 参数不能省略，用来兼容ios和android
+				// 判断重复事件
+				let _isEventBind = false;
+				for (let i = 0; i < _events[type].length; i++) {
+					if (dwz.eqFunction(fn, _events[type][i].fn)) {
+						_isEventBind = true;
+						break;
+					}
+				}
+				if (!_isEventBind) {
+					_events[type].push({ handler: handler, fn: fn });
+					elem.addEventListener(type, handler, { passive: false }); //passive 参数不能省略，用来兼容ios和android
+				}
 			});
 
 			dwz.data(elem, '_events', _events);
@@ -478,7 +496,7 @@ dwz.extend({
 					if (!fn) {
 						// 解绑全部相同类型的事件
 						elem.removeEventListener(type, _events[type][i].handler, false);
-					} else if (fn === _events[type][i].fn) {
+					} else if (dwz.eqFunction(fn, _events[type][i].fn)) {
 						elem.removeEventListener(type, _events[type][i].handler, false);
 						_events[type].splice(i, 1); // 清理dwz_data._events
 						break;
@@ -1246,17 +1264,7 @@ dwz.fn.extend({
 		}
 		return arr;
 	},
-	getPagerForm(pageNum) {
-		const $form = $(this.attr('rel')),
-			form = $form.get(0);
 
-		if (form) {
-			if (typeof pageNum == 'number') form[dwz.config.pageInfo.pageNum].value = pageNum;
-			else if (pageNum == 'next') form[dwz.config.pageInfo.pageNum].value = parseInt(form[dwz.config.pageInfo.pageNum].value) + 1;
-		}
-
-		return $form;
-	},
 	val(value) {
 		let hooks,
 			ret,
@@ -1456,14 +1464,12 @@ dwz.extend({
 		return dwz.extend(dwz.ajaxSettings, settings);
 	},
 	/**
-	 *
-	 *
+	 * ajax 请求返回结果转换
 	 * @param dwzXHR
 	 * @param options {dataType:'', converters{}}
 	 */
 	dataFilter(dwzXHR, options) {
-		let responseField = options.responseFields[options.dataType];
-		if (!responseField) responseField = options.responseFields['text'];
+		let responseField = options.responseFields[options.dataType] || 'responseText';
 		let result = dwzXHR[responseField] || dwzXHR.responseText,
 			converters = options.converters[options.dataType];
 

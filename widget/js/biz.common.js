@@ -246,6 +246,19 @@ $.extend(biz, {
 		});
 		this.html(html).initUI();
 	},
+	// 计算天数
+	calDayRange({ start, end, dateFmt = 'yyyy-MM-dd' }) {
+		let day = -Infinity;
+
+		if (start && end) {
+			let startDate = start.parseDate(dateFmt),
+				endDate = end.parseDate(dateFmt);
+
+			day = (endDate - startDate) / (1000 * 60 * 60 * 24) + 1;
+		}
+
+		return day;
+	},
 
 	location: {
 		lastTime: 0, // 上次ajax数据同步时间戳

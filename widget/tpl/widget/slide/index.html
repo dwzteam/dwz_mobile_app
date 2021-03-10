@@ -35,8 +35,33 @@
 					</div>
 				</div>
 
+				<p class="blockquote">事件测试</p>
+				<button id="button1" class="button">点击测试</button>
+				<button id="button2" class="button">绑定事件</button>
+
 			</div>
 		</div>
 
 	</section>
 </main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		var fn = /^(function\s*)(\w*\b)/
+
+		var testFn = function(a) {
+			alert(new Date())
+		}
+
+		var testFn2 = function(a) {
+			alert(new Date())
+		}
+		console.log($.eqFunction(testFn2, testFn))
+		alert(testFn.toString().replace(fn, '$1') === testFn2.toString().replace(fn, '$1'))
+
+		var $button1 = this.find('#button1');
+		this.find('#button2').click(function() {
+			$button1.click(testFn);
+		})
+	}
+</script>

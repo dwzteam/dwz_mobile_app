@@ -127,13 +127,24 @@ biz.helper = {
 
 		$form.requestList = (loadMore) => {
 			$.ajax({
-				type: params.type || 'GET',
+				type: params.searchMethod || 'GET',
 				url: params.searchUrl,
 				dataType: 'json',
 				data: $form.serializeArray(),
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let _html = template.render(tpl.tpl_list, json.data);
+						let list = json.data ? json.data.list || json.data : [];
+
+						// 兼容对象，把对象转换成数组
+						if (!$.isArray(list)) {
+							let _data = [];
+							for (let [id, name] of Object.entries(list)) {
+								// console.log(id + ':' + name);
+								_data.push({ id, name: name.name || name.title || name });
+							}
+							list = _data;
+						}
+						let _html = template.render(tpl.tpl_list, { list });
 
 						let $items = $(_html);
 						if (loadMore) {

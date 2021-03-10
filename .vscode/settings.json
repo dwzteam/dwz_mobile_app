@@ -1,0 +1,55 @@
+{
+	"editor.formatOnSave": true, // 文件保存自动格式化
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true //保存时eslint自动修复错误
+	},
+	"explorer.autoReveal": false,
+	"git.enableSmartCommit": true,
+	"git.autofetch": true, // vscode默认皮肤
+
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// html后缀文件，html 标签属性不换行
+	"[html]": {
+		// "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	"[vue]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"vetur.format.defaultFormatter.html": "js-beautify-html",
+	"vetur.format.defaultFormatter.js": "vscode-typescript",
+	"emmet.includeLanguages": {
+		"wxml": "html"
+	},
+	"explorer.confirmDelete": false,
+	"vetur.format.options.tabSize": 4,
+
+	//文档：https://github.com/beautify-web/js-beautify#css--html
+	"vetur.format.defaultFormatterOptions": {
+		"js-beautify-html": {
+			"wrap_attributes": "force", // 属性强制换行force, auto
+			"wrap_line_length": 200,
+			"end_with_newline": true,
+			"semi": false,
+			"singleQuote": true
+		}
+	},
+
+	//根据文件后缀名定义vue文件类型
+	"files.associations": {
+		// "*.html": "html",
+		"*.vue": "vue"
+	},
+	"workbench.activityBar.visible": true
+}

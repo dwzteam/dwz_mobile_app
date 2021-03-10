@@ -11,6 +11,20 @@ main,
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	// 深色页面
+	&.is-dark {
+		background: @headerDarkBg;
+		header {
+			.no-line;
+			.header-title {
+				color: @lightTxtColor;
+			}
+			.bar-button {
+				color: @headerLightBtnColor;
+			}
+			background: transparent;
+		}
+	}
 }
 
 // main的子标签：header, section, footer
@@ -85,14 +99,14 @@ main > section,
 .txt-desc {
 	font-size: @l4;
 	color: @descColor;
-	line-height: 24px;
+	line-height: 20px;
 }
 
 /* 正文备注 */
 .txt-info {
 	font-size: @l5;
 	color: @infoColor;
-	line-height: 22px;
+	line-height: 18px;
 }
 
 .txt-h1,
@@ -155,12 +169,13 @@ main > section,
 
 .item-status {
 	display: inline-block;
-	line-height: 20px;
-	width: 50px;
+	line-height: 24px;
+	min-width: 50px;
+	padding: 2px 5px;
 	overflow: hidden;
-	border-radius: 10px;
+	border-radius: 5px;
 	text-align: center;
-	color: #fff;
+	color: @lightTxtColor;
 	font-size: @l4;
 
 	&.primary {
@@ -201,6 +216,9 @@ main > section,
 	&.danger {
 		color: @btnBgDanger;
 	}
+}
+.txt-nowrap {
+	white-space: nowrap;
 }
 
 // 提示性文字样式
