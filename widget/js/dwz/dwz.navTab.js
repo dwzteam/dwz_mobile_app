@@ -128,7 +128,7 @@ $.navTab = {
 		}
 	},
 	/**
-	 *
+	 * 加载页面
 	 * @param args {tabid:'', index:-1, external:false, type:'GET', url:'', data:{}, callback: function(){}}
 	 */
 	load(args) {
@@ -176,18 +176,36 @@ $.navTab = {
 			error: dwz.ajaxError
 		});
 	},
+	/**
+	 * 重新加载当前页面
+	 * @param {*} url
+	 */
 	reload(url) {
-		this.load({ index: $.navTab._currentIndex, url: url });
+		if (!url) {
+			url = this.getTabs().eq(this._currentIndex).attr('data-href');
+		}
+		this.load({ index: this._currentIndex, url: url });
 	},
+	/**
+	 * 清除缓存并重新加载页面
+	 */
+	clearCache() {
+		this.getTabs().each((index, item) => $(item).removeAttr('data-loaded'));
+		this.reload();
+	},
+	/**
+	 * 加载外部页面
+	 * @param {*} $panel
+	 * @param {*} url
+	 */
 	loadExternal($panel, url) {
-		let ih = this.$box.get(0).offsetHeight;
-		$panel.html($.config.frag['external'].replaceAll('{url}', url).replaceAll('{{height}}', ih + 'px'));
+		$panel.html($.config.frag.external.replaceAll('{url}', url));
 	},
 	_indexTabId(tabid) {
 		if (!tabid) return -1;
 		let iOpenIndex = -1;
-		this.getTabs().each(function (index) {
-			if ($(this).attr('tabid') == tabid) {
+		this.getTabs().each((index, item) => {
+			if ($(item).attr('tabid') == tabid) {
 				iOpenIndex = index;
 				return;
 			}

@@ -17,7 +17,7 @@
 			<div class="tab-panel flex-wrap-v">
 				<div class="panel-item unitBox flex-1">
 
-					<form method="post" action="{{form_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
+					<form method="post" action="{{form_url}}" onsubmit="return $.validateCallback(this, loginAjaxDone)">
 						<div class="scroll-content dwz-scroll">
 							<div class="scroll">
 								<div class="form-content">
@@ -51,7 +51,7 @@
 				</div>
 
 				<div class="panel-item unitBox flex-1">
-					<form method="post" action="{{login_sms_url}}" onsubmit="return validateCallback(this, loginAjaxDone)">
+					<form method="post" action="{{login_sms_url}}" onsubmit="return $.validateCallback(this, loginAjaxDone)">
 						<div class="scroll-content dwz-scroll">
 							<div class="scroll">
 

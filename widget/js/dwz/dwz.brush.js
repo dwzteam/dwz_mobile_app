@@ -192,13 +192,11 @@
 					$signBox.html(imgHtml);
 
 					// 重签按钮
-					$signBox.find('.btn-txt').touchwipe({
-						touch: function (event) {
-							setTimeout(function () {
-								$signBox.html($signBox.data('btn_html'));
-								$signInput.val('');
-							}, 200);
-						}
+					$signBox.find('.btn-txt').click((event) => {
+						setTimeout(() => {
+							$signBox.html($signBox.data('btn_html'));
+							$signInput.val('');
+						}, 200);
 					});
 
 					$.dialog.close();

@@ -53,7 +53,16 @@
 					}, function(ret) {
 						$.alert.toast('buttonIndex: '+ret.buttonIndex)
 					})">
-						<p class="flex-1">确认提示</p><i class="dwz-icon-arrow-right"></i>
+						<p class="flex-1">确认提示 + 文字按钮</p><i class="dwz-icon-arrow-right"></i>
+					</li>
+
+					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({
+						msg: '确认要删除吗？',
+						theme: 'is-default'
+					}, function(ret) {
+						$.alert.toast('buttonIndex: '+ret.buttonIndex)
+					})">
+						<p class="flex-1">确认提示 + 默认按钮</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="item dwz-ctl-hover" onclick="$.alert.confirm({

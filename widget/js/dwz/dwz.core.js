@@ -1030,6 +1030,8 @@ dwz.fn.extend({
 		// 	});
 		// }
 		// return this.on($.event.hasTouch ? 'touchend' : 'click', data, fn);
+
+		this.on('touchstart', (event) => event.stopPropagation()); // 禁止事件冒泡
 		return this.on('click', data, fn);
 	},
 	change(data, fn) {

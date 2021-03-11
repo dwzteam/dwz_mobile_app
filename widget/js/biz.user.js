@@ -59,7 +59,7 @@ function initUserInfo(callback) {
 				if ($.isAjaxStatusOk(json)) {
 					UserInfoUtil.update(json.data);
 				} else {
-					json[dwz.config.keys.message] && $.alert.toast(json[dwz.config.keys.message]);
+					$.alert.toast(json[dwz.config.keys.message]);
 					UserInfoUtil.clear();
 				}
 			},
@@ -72,71 +72,6 @@ function initUserInfo(callback) {
 		callback && callback();
 	}
 }
-
-$.fn.extend({
-	fleshVerifyImg() {
-		return this.each(function () {
-			$(this).touchwipe({
-				touch() {
-					$(this).attr('src', biz.server.getVerifyImgUrl());
-				}
-			});
-		});
-	},
-	sendVerifyMs() {
-		return this.each(function () {
-			$(this).click(function () {
-				let $link = $(this),
-					rel = $link.attr('rel'),
-					op = $link.attr('data-op');
-
-				let mobile = $link.parentsUnitBox().find(rel).val();
-
-				if (!mobile || !mobile.isMobile()) {
-					$.alert.error('请输入您的11位手机号码');
-					return;
-				}
-
-				let sec = 60;
-				let $altMsg = $('<span class="count">重发(' + sec + 's)</span>').appendTo(this.parentNode);
-				$link.hide();
-				let timer = setInterval(function () {
-					$altMsg.text('重发(' + sec + 's)');
-					sec--;
-
-					if (sec <= 1) {
-						clearInterval(timer);
-						$altMsg.remove();
-						$link.show();
-					}
-				}, 1000);
-
-				$.ajax({
-					type: 'POST',
-					dataType: 'json',
-					url: $link.attr('data-href'),
-					data: {
-						mobile: mobile,
-						sign: $.md5(mobile + 'dwz_mobile'),
-						type: op
-					},
-					success: (json) => {
-						console.log(JSON.stringify(json));
-						let info = json[dwz.config.keys.message] || json.info;
-						if (isAjaxStatusError(json)) {
-							$.alert.error(info);
-							clearInterval(timer);
-							$altMsg.remove();
-							$link.show();
-						} else {
-							info && $.alert.success(info);
-						}
-					}
-				});
-			});
-		});
-	}
-});
 
 // 登入页面
 function loginRender(tpl, params) {

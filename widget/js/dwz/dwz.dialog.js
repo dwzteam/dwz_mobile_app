@@ -98,7 +98,7 @@ $.dialog = {
 		this.isOpen = true;
 	},
 	loadExternal(url, page_title) {
-		let iframe_html = $.config.frag['external'].replaceAll('{url}', url);
+		let iframe_html = $.config.frag.external.replaceAll('{url}', url);
 		let $box = this.$box.html(`
 		<main>
 			<header>

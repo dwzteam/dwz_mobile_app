@@ -192,8 +192,8 @@
 
 		// 图片删除按钮
 		if ($(previewElem).hasClass('dwz-ctl-del')) {
-			let $link = $('<a class="img-del"></a>').prependTo(thumb);
-			$link.click(function (event) {
+			let $link = $('<a class="img-del"><i class="dwz-icon-delete"></i></a>').prependTo(thumb);
+			$link.click((event) => {
 				$(thumb).remove();
 				event.stopPropagation();
 			});
@@ -223,37 +223,36 @@
 
 				let $button = $uploadWrap.find('button');
 				let selectCount = $previewElem.find('li').size();
-				if (selectCount + 1 >= op.maxCount) {
+				if (selectCount >= op.maxCount) {
 					$uploadWrap.hide();
 				}
-				$button.touchwipe({
-					touch() {
-						selectCount = $previewElem.find('li').size();
-						if (selectCount < op.maxCount) {
-							dwz.plus.chooseImage({
-								maximum: op.maxCount - selectCount,
-								destinationType: 'base64',
-								callback(base64Data) {
-									$.plus.getBase64Image({
-										imgPath: base64Data,
-										maxWidth: op.maxWidth,
-										maxHeight: op.maxHeight,
-										callback(strBase64) {
-											// console.log(strBase64)
-											previewUploadImg(previewElem, strBase64, op.inputName, op.maxW, op.maxH);
+				$button.click(() => {
+					selectCount = $previewElem.find('li').size();
+					if (selectCount < op.maxCount) {
+						dwz.plus.chooseImage({
+							maximum: op.maxCount - selectCount,
+							destinationType: 'base64',
+							callback(base64Data) {
+								if (!base64Data) return; // 取消拍照时，停止处理逻辑
+								$.plus.getBase64Image({
+									imgPath: base64Data,
+									maxWidth: op.maxWidth,
+									maxHeight: op.maxHeight,
+									callback(strBase64) {
+										// console.log(strBase64)
+										previewUploadImg(previewElem, strBase64, op.inputName, op.maxW, op.maxH);
+
+										if (op.callback) {
+											op.callback(base64Data, $previewElem);
 										}
-									});
-
-									if (selectCount + 1 >= op.maxCount) {
-										$uploadWrap.hide();
 									}
+								});
 
-									if (op.callback) {
-										op.callback(base64Data);
-									}
+								if (selectCount + 1 >= op.maxCount) {
+									$uploadWrap.hide();
 								}
-							});
-						}
+							}
+						});
 					}
 				});
 			});
@@ -267,14 +266,12 @@
 			return this.each(function () {
 				let $wrap = $(this);
 
-				$wrap.touchwipe({
-					touch(event) {
-						event.preventDefault();
-						event.stopPropagation();
+				$wrap.click((event) => {
+					event.preventDefault();
+					event.stopPropagation();
 
-						let $imgs = $wrap.find('img');
-						$.previewBigImg.open($imgs, event);
-					}
+					let $imgs = $wrap.find('img');
+					$.previewBigImg.open($imgs, event);
 				});
 			});
 		}
@@ -302,13 +299,11 @@
 				$('body').append('<div id="preview-big-img" style="display:none"></div>');
 				$previewBox = $('#preview-big-img');
 
-				$previewBox.touchwipe({
-					touch(event) {
-						event.preventDefault();
-						event.stopPropagation();
+				$previewBox.click((event) => {
+					event.preventDefault();
+					event.stopPropagation();
 
-						me.close(true);
-					}
+					me.close(true);
 				});
 			}
 

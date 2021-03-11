@@ -386,7 +386,7 @@ biz.transport = {
 			}
 		}
 
-		return validateCallback(form, function (json) {
+		return $.validateCallback(form, function (json) {
 			console.log(JSON.stringify(json));
 
 			if ($.isAjaxStatusOk(json)) {

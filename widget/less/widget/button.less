@@ -158,14 +158,22 @@
 	.button {
 		border-radius: 0;
 		flex: 1;
+		&.is-text {
+			.r-line;
+		}
+		&:last-child {
+			.no-line;
+		}
 	}
 	&.is-round {
 		.button {
 			&:first-child {
-				border-radius: 20px 0 0 20px;
+				border-top-left-radius: 20px;
+				border-bottom-left-radius: 20px;
 			}
 			&:last-child {
-				border-radius: 0 20px 20px 0;
+				border-top-right-radius: 20px;
+				border-bottom-right-radius: 20px;
 			}
 		}
 	}

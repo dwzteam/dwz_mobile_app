@@ -418,17 +418,15 @@
 			// 自定义按钮
 			if (op.miscBtn) {
 				let $miscBtn = $(op.miscBtn).appendTo($ymdt).addClass('miscBtn');
-				$miscBtn.touchwipe({
-					touch: function () {
-						// 自定义按钮回调
-						if (op.miscBtnFn) {
-							let value = '';
-							let $daySelected = $frag.find('table.current td.selected');
-							if ($daySelected.size()) {
-								value = $daySelected.attr('data-value');
-							}
-							op.miscBtnFn.call($miscBtn, value);
+				$miscBtn.click(() => {
+					// 自定义按钮回调
+					if (op.miscBtnFn) {
+						let value = '';
+						let $daySelected = $frag.find('table.current td.selected');
+						if ($daySelected.size()) {
+							value = $daySelected.attr('data-value');
 						}
+						op.miscBtnFn.call($miscBtn, value);
 					}
 				});
 			}

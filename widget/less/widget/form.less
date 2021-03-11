@@ -26,9 +26,8 @@ input {
 	-webkit-rtl-ordering: logical;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-input[type='checkbox'],
-input[type='radio'] {
+// checkbox, radio 默认样式调整
+input.is-checkbox {
 	box-sizing: border-box;
 	-webkit-appearance: none; /*去除默认样式*/
 	visibility: hidden;
@@ -57,16 +56,42 @@ input[type='radio'] {
 			background-image: url('../../image/form/checkbox/checked.svg');
 		}
 	}
+}
+// checkbox 开关样式
+input.is-switch {
+	width: 50px;
+	height: 32px;
+	position: relative;
+	border: 1px solid #dfdfdf;
+	background-color: #fdfdfd;
+	box-shadow: #dfdfdf 0 0 0 0 inset;
+	border-radius: 30px;
+	background-clip: content-box;
+	display: inline-block;
+	-webkit-appearance: none;
+	user-select: none;
+	outline: none;
 
-	&.radio {
-		&:after {
-			background: none;
-		}
+	transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
 
-		&:checked {
-			&:after {
-				background-image: none;
-			}
+	&:before {
+		content: '';
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		top: 0px;
+		left: 0;
+		border-radius: 30px;
+		background-color: #fff;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	}
+	&:checked {
+		box-shadow: @btnBgSuccess 0 0 0 16px inset;
+		background-color: @btnBgSuccess;
+		transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
+		&:before {
+			transition: left 0.3s;
+			left: 20px;
 		}
 	}
 }
@@ -113,38 +138,14 @@ label {
 	select {
 		display: inline-block;
 		width: 120px;
-		font-size: 13px;
+		font-size: @l3;
 		.box-line;
 	}
 
 	.limit {
 		display: inline-block;
-		color: #aaa;
+		color: @borderColor;
 		padding: 0 2px;
-	}
-}
-
-.form-item {
-	.input {
-		width: 100%;
-		line-height: 24px;
-		height: 24px;
-	}
-
-	.select {
-		width: 100%;
-		border: 0;
-		line-height: 24px;
-		height: 24px;
-	}
-
-	.textarea {
-		width: 100%;
-	}
-	// dwz-icon 图标
-	i {
-		font-size: @l2;
-		color: @infoColor;
 	}
 }
 
@@ -173,9 +174,10 @@ label {
 		&:last-of-type {
 			.tb-line;
 		}
-		input {
+		input,
+		textarea {
 			.flex-1;
-			padding: 2px 5px;
+			padding: 5px;
 
 			&.inline-right {
 				width: 40px;
@@ -203,7 +205,10 @@ label {
 		&.disabled {
 			color: @linkColorDisabled;
 		}
-
+		// dwz-icon 图标
+		i {
+			font-size: @l2;
+		}
 		&.dwz-user-icon {
 			.item-content {
 				justify-content: flex-end;
@@ -247,6 +252,7 @@ textarea:invalid {
 	background: url('../../image/icon/icon-invalid.svg') 100% center no-repeat;
 }
 
+input:read-only,
 textarea:read-only {
 	background-color: @inputBg;
 }

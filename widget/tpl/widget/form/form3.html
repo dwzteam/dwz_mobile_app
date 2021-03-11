@@ -27,14 +27,7 @@
 							<input type="hidden" name="province" />
 							<input type="hidden" name="city" />
 							<input type="hidden" name="county" />
-							<input
-								type="text"
-								name="destination"
-								class="required"
-								placeholder="省、市、区"
-								data-error="请选择省市区"
-								readonly
-								onclick="$.dialog.open({
+							<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
 										url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
 										data: {
 											target:this,
@@ -51,8 +44,7 @@
 											}
 										},
 										pop: 'actionSheet'
-									})"
-							/>
+									})" />
 							<i class="dwz-icon-arrow-right"></i>
 						</div>
 					</div>
@@ -104,15 +96,7 @@
 						<div class="item-content">
 							<label>同行人</label>
 							<input type="hidden" name="together_id" />
-							<input
-								type="text"
-								name="together_txt"
-								value=""
-								placeholder="请选择（必填）"
-								class="required"
-								readonly
-								data-error="请选择同行人"
-								onclick="$.filterPanel.open({
+							<input type="text" name="together_txt" value="" placeholder="请选择（必填）" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
 									url: 'tpl/helper/filterPanelLookup.html?dwz_callback=biz.helper.filterPanelRender',
 									data: {
 										target: this,
@@ -138,8 +122,7 @@
 											form.together_txt.value = data.name
 										}
 									}
-								})"
-							/>
+								})" />
 							<i class="dwz-icon-arrow-right"></i>
 						</div>
 					</div>
@@ -162,7 +145,7 @@
 		var $start_date = $form.find('input[name=start_date]'),
 			$end_date = $form.find('input[name=end_date]'),
 			$day = $form.find('input[name=day]');
-		$start_date.add($end_date).change(function () {
+		$start_date.add($end_date).change(function() {
 			var day = biz.calDayRange({
 				start: $start_date.val(),
 				end: $end_date.val()
@@ -171,7 +154,7 @@
 			$day.val(day < 1 ? '' : day);
 		});
 
-		$form.on('submit', function () {
+		$form.on('submit', function() {
 			if (!$form.valid()) {
 				return false;
 			}
@@ -185,7 +168,7 @@
 				return;
 			}
 
-			return validateCallback($form, navViewAjaxDoneClose);
+			return $.validateCallback($form, navViewAjaxDoneClose);
 		});
 	}
 </script>

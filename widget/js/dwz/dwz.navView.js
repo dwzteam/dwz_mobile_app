@@ -176,7 +176,7 @@ $.navView = {
 	loadExternal(url) {
 		let $box = this.$list[this.$list.length - 1];
 		let $content = $box.find('main>section');
-		$content.html($.config.frag['external'].replaceAll('{url}', url));
+		$content.html($.config.frag.external.replaceAll('{url}', url));
 	},
 	close(popHistory = true, local = true) {
 		let size = this.$list.length;

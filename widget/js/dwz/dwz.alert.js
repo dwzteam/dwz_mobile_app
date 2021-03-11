@@ -22,10 +22,10 @@
 					<div class="alert-dialog">\
 						<div class="alert-dialog-hd"><strong class="alert-dialog-title">#title#</strong></div>\
 						<div class="alert-dialog-bd">#message#</div>\
-						<div class="alert-dialog-ft">#butFragment#</div>\
+						<div class="alert-dialog-ft"><div class="button-group">#butFragment#</div></div>\
 					</div>\
 				</div>',
-			btnFrag: '<a href="javascript:" class="alert-btn-dialog #class#">#butMsg#</a>'
+			btnFrag: '<button class="dwz-ctl-hover button #class#">#butMsg#</button>'
 		},
 
 		/**
@@ -35,18 +35,19 @@
 		 * @param [String] buttons [button1, button2]
 		 * @param callback
 		 */
-		open({ title = $.regional.alert.title.info, msg = '', buttons = [$.regional.alert.btnTxt.ok] }, callback) {
+		open({ title = $.regional.alert.title.info, msg = '', theme, buttons = [$.regional.alert.btnTxt.ok] }, callback) {
 			$(this.config.box$).remove();
 			let butsHtml = '';
 			if (buttons) {
+				if (theme === undefined) theme = 'is-text';
 				for (let i = 0; i < buttons.length; i++) {
-					butsHtml += this.config.btnFrag.replace('#butMsg#', buttons[i]).replace('#class#', i == 0 ? 'primary' : 'default');
+					butsHtml += this.config.btnFrag.replace('#butMsg#', buttons[i]).replace('#class#', i == 0 ? `primary ${theme}` : theme);
 				}
 			}
 			let html = this.config.boxFrag.replace('#title#', title).replace('#message#', msg).replace('#butFragment#', butsHtml);
-			$('body').append(html);
+			$('body').append(html).initUI();
 
-			let $btns = $(this.config.box$).find('a.alert-btn-dialog');
+			let $btns = $(this.config.box$).find('.button');
 
 			for (let i = 0; i < buttons.length; i++) {
 				$btns.eq(i).click(i, (event) => {
@@ -72,8 +73,8 @@
 		success(msg, callback) {
 			this.open({ title: $.regional.alert.title.success, msg }, callback);
 		},
-		confirm({ title = $.regional.alert.title.confirm, msg = '', buttons = [$.regional.alert.btnTxt.ok, $.regional.alert.btnTxt.cancel] }, callback) {
-			this.open({ title, msg, buttons }, callback);
+		confirm({ title = $.regional.alert.title.confirm, msg = '', theme, buttons = [$.regional.alert.btnTxt.ok, $.regional.alert.btnTxt.cancel] }, callback) {
+			this.open({ title, msg, theme, buttons }, callback);
 		},
 
 		prompt(url, data) {
@@ -105,6 +106,8 @@
 		},
 
 		toast(msg, options) {
+			if (!msg) return;
+
 			let op = $.extend({ msg: msg, duration: 4000 }, options);
 			if (window.api) {
 				api.toast(op);

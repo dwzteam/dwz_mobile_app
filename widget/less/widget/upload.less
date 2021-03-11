@@ -48,15 +48,17 @@ ul.imgs {
 		}
 
 		.img-del {
-			display: block;
+			.button;
 			position: absolute;
 			top: 2px;
 			right: 2px;
-			width: 20px;
-			height: 20px;
-			background: url('../../image/icon/icon-del-x.svg') center center no-repeat;
-			background-size: 100%;
 			z-index: 1000;
+			border-color: @btnBorderColorDanger;
+			background: @btnBgDanger;
+			color: @btnTxtColorDanger;
+			border-radius: 50%;
+			width: 28px;
+			height: 28px;
 		}
 	}
 }

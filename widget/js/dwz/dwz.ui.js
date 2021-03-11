@@ -69,12 +69,10 @@
 				});
 
 				if (!$parent.attr('data-' + op.openClass)) {
-					$parent.attr('data-' + op.openClass, 1).touchwipe({
-						touch: () => {
-							setTimeout(() => {
-								$parent.find('.' + op.ctlClass).removeClass(op.openClass);
-							}, 500);
-						}
+					$parent.attr('data-' + op.openClass, 1).click(() => {
+						setTimeout(() => {
+							$parent.find('.' + op.ctlClass).removeClass(op.openClass);
+						}, 500);
 					});
 				}
 			});
@@ -190,6 +188,68 @@
 				}
 				_toggleAll();
 				$select.change(_toggleAll);
+			});
+		},
+		fleshVerifyImg() {
+			return this.each(function () {
+				$(this).touchwipe({
+					touch() {
+						$(this).attr('src', biz.server.getVerifyImgUrl());
+					}
+				});
+			});
+		},
+		sendVerifyMs() {
+			return this.each(function () {
+				$(this).click(function () {
+					let $link = $(this),
+						rel = $link.attr('rel'),
+						op = $link.attr('data-op');
+
+					let mobile = $link.parentsUnitBox().find(rel).val();
+
+					if (!mobile || !mobile.isMobile()) {
+						$.alert.error('请输入您的11位手机号码');
+						return;
+					}
+
+					let sec = 60;
+					let $altMsg = $('<span class="count">重发(' + sec + 's)</span>').appendTo(this.parentNode);
+					$link.hide();
+					let timer = setInterval(function () {
+						$altMsg.text('重发(' + sec + 's)');
+						sec--;
+
+						if (sec <= 1) {
+							clearInterval(timer);
+							$altMsg.remove();
+							$link.show();
+						}
+					}, 1000);
+
+					$.ajax({
+						type: 'POST',
+						dataType: 'json',
+						url: $link.attr('data-href'),
+						data: {
+							mobile: mobile,
+							sign: $.md5(mobile + 'dwz_mobile'),
+							type: op
+						},
+						success: (json) => {
+							console.log(JSON.stringify(json));
+							let info = json[dwz.config.keys.message] || json.info;
+							if (isAjaxStatusError(json)) {
+								$.alert.error(info);
+								clearInterval(timer);
+								$altMsg.remove();
+								$link.show();
+							} else {
+								info && $.alert.success(info);
+							}
+						}
+					});
+				});
 			});
 		}
 	});
