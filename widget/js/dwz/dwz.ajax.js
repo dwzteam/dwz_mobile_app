@@ -62,7 +62,7 @@
 		},
 		checkAjaxLogin(json) {
 			if ($.isAjaxStatusTimeout(json)) {
-				$.alert.toast(json[dwz.config.keys.message] || '用户登入');
+				$.alert.toast(json[dwz.config.keys.message]);
 				$.gotoLogin();
 
 				return false;
@@ -296,7 +296,7 @@ function dialogAjaxDone(json) {
 						val = $input.val(),
 						required = this.required || $input.hasClass('required'),
 						pattern = $input.attr('pattern') || $input.attr('data-pattern'),
-						errorMsg = $input.attr('data-error'),
+						errorMsg = $input.attr('data-error') || $input.attr('placeholder'),
 						dataMin = $input.attr('min'),
 						dataMax = $input.attr('max');
 
@@ -330,6 +330,16 @@ function dialogAjaxDone(json) {
 						return false;
 					}
 				});
+
+			// 图片上传 required 验证
+			$form.find('ul.upload-preview.required').each((index, elem) => {
+				let $elem = $(elem);
+				if (!$elem.hasClass('ignore') && 0 == $elem.find('.thumbnail').size()) {
+					let errorMsg = $elem.attr('data-error');
+					if (errorMsg) $.alert.error(errorMsg);
+					return false;
+				}
+			});
 
 			return result;
 		},

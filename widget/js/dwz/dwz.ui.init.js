@@ -198,7 +198,7 @@
 		}
 
 		// 处理必填元素label加红色星号
-		$('input.required, select.required, textarea.required', $p).each((index, elem) => {
+		$('input.required, select.required, textarea.required, ul.upload-preview.required', $p).each((index, elem) => {
 			$(elem).parentsUnitBox('form-item').find(':scope > label, :scope > .item-content > label').addClass('required');
 		});
 

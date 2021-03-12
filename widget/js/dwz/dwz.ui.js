@@ -168,9 +168,11 @@
 								$ref.hide();
 							}
 							$ref.addClass('ignoreRequired').find(':input').addClass('ignore');
+							$ref.find('ul.upload-preview').addClass('ignore');
 						}
 					} else {
 						$ref.show().removeClass('ignoreRequired').find(':input').removeClass('ignore');
+						$ref.find('ul.upload-preview').removeClass('ignore');
 					}
 				}
 

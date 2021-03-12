@@ -22,14 +22,34 @@
 							<input type="hidden" name="county">
 							<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
 									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-									data: {target:this, code: '',
+									data: {
+										target:this, code: '',
 										callback: function(data) {
-											console.log(this, data)
 											var form = this.parentsByTag('form').get(0);
 											form.province.value = data.province;
 											form.city.value = data.city;
 											form.county.value = data.county;
 											form.destination.value = data.names;
+
+											$.dialog.close();
+										}
+									},
+									pop: 'actionSheet'
+								})">
+							<i class="dwz-icon-arrow-right"></i>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>市区</label>
+							<input type="text" name="destination2" class="required" placeholder="二级联动" data-error="请选择省市区" readonly onclick="$.dialog.open({
+									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+									data: {
+										target:this, code: '330000',
+										callback: function(data) {
+											var form = this.parentsByTag('form').get(0);
+											form.destination2.value = data.names;
 
 											$.dialog.close();
 										}
@@ -81,7 +101,7 @@
 					<div class="form-item">
 						<div class="item-content">
 							<label>日期</label>
-							<input type="text" name="start_date" value="" placeholder="请选择（必填）" class="required dwz-calendar" data-error="请选择日期" readonly>
+							<input type="text" name="start_date" value="" placeholder="请选择" class="required dwz-calendar" data-error="请选择日期" readonly>
 						</div>
 					</div>
 					<div class="form-item">
@@ -115,7 +135,7 @@
 					<div class="form-item">
 						<label>备注</label>
 						<div class="item-content">
-							<textarea class="textarea required" name="info" rows="4" placeholder="请输入备注（必填）" maxlength="200" data-error="请输入备注"></textarea>
+							<textarea class="textarea required" name="info" rows="4" placeholder="请输入备注" maxlength="200" data-error="请输入备注"></textarea>
 						</div>
 					</div>
 

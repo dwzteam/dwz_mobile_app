@@ -132,12 +132,12 @@ function loadScripts(options) {
 			//插件初始化
 			$(document).initUI();
 
-			if ($.history)
+			$.history &&
 				$.history.init(function (hash) {
 					//浏览器刷新监测地址栏, 根据hash定位
 					if (hash) {
 						setTimeout(function () {
-							var args = hash.split(';');
+							let args = hash.split(';');
 							if (args.length == 2) {
 								$.navTab.open({ tabid: args[0], url: args[1] });
 							} else if (args.length == 3) {

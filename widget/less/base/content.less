@@ -169,14 +169,15 @@ main > section,
 
 .item-status {
 	display: inline-block;
-	line-height: 24px;
+	line-height: 20px;
+	height: 20px;
 	min-width: 50px;
-	padding: 2px 5px;
+	padding: 0px 10px;
 	overflow: hidden;
 	border-radius: 5px;
 	text-align: center;
 	color: @lightTxtColor;
-	font-size: @l4;
+	font-size: @l5;
 
 	&.primary {
 		background: @btnBgPrimary;
@@ -193,30 +194,30 @@ main > section,
 	&.danger {
 		background: @btnBgDanger;
 	}
+
+	&.is-circle {
+		border-radius: 12px;
+	}
+	&.is-outline {
+		background: transparent;
+		&.primary {
+			color: @btnBgPrimary;
+		}
+		&.success {
+			color: @btnBgSuccess;
+		}
+		&.info {
+			color: @btnBgInfo;
+		}
+		&.warning {
+			color: @btnBgWarning;
+		}
+		&.danger {
+			color: @btnBgDanger;
+		}
+	}
 }
 
-.item-status-outline {
-	line-height: 20px;
-	font-weight: bold;
-	padding: 0;
-	font-size: @l4;
-
-	&.primary {
-		color: @btnBgPrimary;
-	}
-	&.success {
-		color: @btnBgSuccess;
-	}
-	&.info {
-		color: @btnBgInfo;
-	}
-	&.warning {
-		color: @btnBgWarning;
-	}
-	&.danger {
-		color: @btnBgDanger;
-	}
-}
 .txt-nowrap {
 	white-space: nowrap;
 }

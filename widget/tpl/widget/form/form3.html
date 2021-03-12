@@ -15,7 +15,7 @@
 					<div class="form-item">
 						<label>出差事由</label>
 						<div class="item-content">
-							<textarea class="textarea required" name="cause" rows="4" placeholder="请输入出差事由（必填）" maxlength="200" data-error="请输入出差事由"></textarea>
+							<textarea class="textarea required" name="cause" rows="4" placeholder="请输入出差事由" maxlength="200" data-error="请输入出差事由"></textarea>
 						</div>
 					</div>
 
@@ -73,13 +73,13 @@
 					<div class="form-item">
 						<div class="item-content">
 							<label>开始时间</label>
-							<input type="text" name="start_date" value="" minDate="%y-{%M-3}-%d" maxDate="%y-{%M+1}-%d" placeholder="请选择（必填）" class="required dwz-calendar" data-error="请选择开始时间" readonly />
+							<input type="text" name="start_date" value="" minDate="%y-{%M-3}-%d" maxDate="%y-{%M+1}-%d" placeholder="请选择" class="required dwz-calendar" data-error="请选择开始时间" readonly />
 						</div>
 					</div>
 					<div class="form-item">
 						<div class="item-content">
 							<label>结束时间</label>
-							<input type="text" name="end_date" value="" minDate="%y-%M-%d" maxDate="%y-{%M+3}-%d" placeholder="请选择（必填）" class="required dwz-calendar" data-error="请选择结束时间" readonly />
+							<input type="text" name="end_date" value="" minDate="%y-%M-%d" maxDate="%y-{%M+3}-%d" placeholder="请选择" class="required dwz-calendar" data-error="请选择结束时间" readonly />
 						</div>
 					</div>
 
@@ -96,7 +96,7 @@
 						<div class="item-content">
 							<label>同行人</label>
 							<input type="hidden" name="together_id" />
-							<input type="text" name="together_txt" value="" placeholder="请选择（必填）" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
+							<input type="text" name="together_txt" value="" placeholder="请选择" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
 									url: 'tpl/helper/filterPanelLookup.html?dwz_callback=biz.helper.filterPanelRender',
 									data: {
 										target: this,

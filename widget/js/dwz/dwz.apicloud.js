@@ -172,7 +172,8 @@
 		thumb.appendChild(img);
 		previewElem.appendChild(thumb);
 
-		let inputElem = dwz.parseHTML('<input type="hidden" name="' + inputName + '" value="' + strBase64 + '">');
+		let inputBase64 = strBase64.replace('data:image/jpeg;base64,', '');
+		let inputElem = dwz.parseHTML('<input type="hidden" name="' + inputName + '" value="' + inputBase64 + '">');
 		thumb.appendChild(inputElem);
 
 		img.onload = function () {
@@ -218,7 +219,8 @@
 			);
 			return this.each(function () {
 				let $uploadWrap = $(this),
-					$previewElem = $($uploadWrap.attr('rel')),
+					rel = $uploadWrap.attr('rel'),
+					$previewElem = rel ? $(rel) : $uploadWrap.parent().find('.upload-preview'),
 					previewElem = $previewElem.get(0);
 
 				let $button = $uploadWrap.find('button');
