@@ -1,15 +1,31 @@
 biz.helper = {
+	// json data数据 转换成 object 对像数组
+	jsonDataList(json) {
+		let list = json.data ? json.data.list || json.data : [];
+
+		// 兼容对象，把对象转换成数组
+		if (!$.isArray(list)) {
+			let _data = [];
+			for (let [id, obj] of Object.entries(list)) {
+				// console.log(id + ':' + obj);
+				_data.push({ id, code: obj.code || obj.id, name: obj.name || obj.title || obj });
+			}
+			list = _data;
+		}
+		return list;
+	},
 	// 请求 省、市、区 html 片段
 	reqRegionHtml(options) {
-		const op = $.extend({ code: '', callback: null, tpl: '' }, options);
+		const op = $.extend({ url: '', code: '', valueName: '', labelName: '', callback: null, tpl: '' }, options);
 		$.ajax({
 			type: 'GET',
-			url: biz.server.getUrl(biz.server.regionList, { code: op.code }),
+			url: op.url || biz.server.getUrl(biz.server.regionList, { code: op.code }),
 			dataType: 'json',
-			data: {},
+			data: { code: op.code },
 			success: (json) => {
 				if ($.isAjaxStatusOk(json)) {
-					let html = template.render(op.tpl, { list: json.data });
+					let list = biz.helper.jsonDataList(json);
+					let html = template.render(op.tpl, { valueName: op.valueName, labelName: op.labelName, list });
 
 					op.callback(html);
 				}
@@ -17,74 +33,62 @@ biz.helper = {
 			error: biz.ajaxError
 		});
 	},
-
 	// $.dialog.open 选择省、市、区 渲染函数
 	selectRegionRender(tpl, params) {
-		const op = $.extend({ target: null, callback: null }, params);
+		const op = $.extend({ target: null, level: 3, url: '', code: '', valueName: 'code', labelName: 'name', callback: null }, params);
 
 		let html = template.render(tpl.html, {
-			UserInfo: UserInfo,
-			params: params
+			UserInfo,
+			params,
+			colList: new Array(op.level)
 		});
 		this.html(html).initUI();
 
-		const $province = this.find('ul.dwz-province');
-		const $city = this.find('ul.dwz-city');
-		const $county = this.find('ul.dwz-county');
+		const $ulList = this.find('ul.dwz-field');
+		function genUlHtml({ index = 0, code = '' }) {
+			const $ul = $ulList.eq(index);
+			biz.helper.reqRegionHtml({
+				url: op.url,
+				labelName: op.labelName,
+				valueName: op.valueName,
+				code,
+				tpl: tpl.tpl_list,
+				callback: (_html) => {
+					$ul.html(_html);
 
-		// 请求省份
-		biz.helper.reqRegionHtml({
-			tpl: tpl.tpl_list,
-			callback: function (html_1) {
-				$province.html(html_1);
+					const $items = $ul.find('li.item').click(function () {
+						const $li = $(this),
+							code = $li.attr('data-code');
 
-				const $items1 = $province.find('li.item').click(function () {
-					const $li1 = $(this);
-					$county.html('').parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
-					$items1.removeClass('active');
-					$li1.addClass('active');
+						$items.removeClass('active');
+						$li.addClass('active');
 
-					// 请求城市
-					biz.helper.reqRegionHtml({
-						code: $li1.attr('data-code'),
-						tpl: tpl.tpl_list,
-						callback: function (html_2) {
-							$city.html(html_2).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
+						$ul.attr('data-code', code);
+						$ul.attr('data-name', $li.attr('data-name'));
 
-							const $items2 = $city.find('li.item').click(function () {
-								const $li2 = $(this);
-								$items2.removeClass('active');
-								$li2.addClass('active');
+						if (index < op.level - 1) {
+							const $nextUl = $ulList.eq(index + 1);
+							$nextUl.html('').parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
+							genUlHtml({ index: index + 1, code }); // 递归调用
+						} else {
+							const _data = [];
 
-								// 请求区县
-								biz.helper.reqRegionHtml({
-									code: $li2.attr('data-code'),
-									tpl: tpl.tpl_list,
-									callback: function (html_3) {
-										$county.html(html_3).parentsUnitBox('dwz-scroll').scrollTo({ y: 0, duration: 300 });
-
-										const $items3 = $county.find('li.item').click(function () {
-											const $li3 = $(this);
-											$items3.removeClass('active');
-											$li3.addClass('active');
-
-											const _data = {
-												province: $li1.attr('data-code'),
-												city: $li2.attr('data-code'),
-												county: $li3.attr('data-code'),
-												names: $li1.attr('data-name') + ' ' + $li2.attr('data-name') + ' ' + $li3.attr('data-name')
-											};
-
-											op.callback && op.callback.call($(op.target), _data);
-										});
-									}
-								});
+							let _names = '';
+							$ulList.each((_index, _ul) => {
+								const _$ul = $(_ul);
+								const _item = { code: _$ul.attr('data-code'), name: _$ul.attr('data-name') };
+								_names += (_index == 0 ? '' : ' ') + _item.name;
+								_item.names = _names;
+								_data.push(_item);
 							});
+							op.callback && op.callback.call($(op.target), _data);
 						}
 					});
-				});
-			}
-		});
+				}
+			});
+		}
+
+		genUlHtml({ index: 0, code: op.code });
 	},
 
 	// $.alert.prompt 多选 渲染函数
@@ -117,7 +121,7 @@ biz.helper = {
 
 	// $.filterPanel.open 查找带回 渲染函数
 	filterPanelRender(tpl, params) {
-		const op = $.extend({ target: null, callback: null }, params);
+		const op = $.extend({ target: null, filterItems: [], callback: null }, params);
 
 		let html = template.render(tpl.html, params);
 		this.html(html).initUI();
@@ -133,17 +137,7 @@ biz.helper = {
 				data: $form.serializeArray(),
 				success: (json) => {
 					if ($.isAjaxStatusOk(json)) {
-						let list = json.data ? json.data.list || json.data : [];
-
-						// 兼容对象，把对象转换成数组
-						if (!$.isArray(list)) {
-							let _data = [];
-							for (let [id, name] of Object.entries(list)) {
-								// console.log(id + ':' + name);
-								_data.push({ id, name: name.name || name.title || name });
-							}
-							list = _data;
-						}
+						let list = biz.helper.jsonDataList(json);
 						let _html = template.render(tpl.tpl_list, { list });
 
 						let $items = $(_html);

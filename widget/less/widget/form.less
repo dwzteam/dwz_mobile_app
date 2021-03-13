@@ -174,7 +174,11 @@ label {
 		&:last-of-type {
 			.tb-line;
 		}
-		input,
+		input[type='text'],
+		input[type='password'],
+		input[type='date'],
+		input[type='datetime-local'],
+		input[type='number'],
 		textarea {
 			.flex-1;
 			padding: 5px;

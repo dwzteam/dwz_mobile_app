@@ -28,23 +28,22 @@
 							<input type="hidden" name="city" />
 							<input type="hidden" name="county" />
 							<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
-										url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-										data: {
-											target:this,
-											code: '',
-											callback: function(data) {
-												console.log(this, data)
-												var form = this.parentsByTag('form').get(0);
-												form.province.value = data.province;
-												form.city.value = data.city;
-												form.county.value = data.county;
-												form.destination.value = data.names;
+									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+									data: {
+										target:this,
+										callback: function(data) {
+											console.log(this, data);
+											var form = this.parentsByTag('form').get(0);
+											form.province.value = data[0].code;
+											form.city.value = data[1].code;
+											form.county.value = data[2].code;
+											form.destination.value = data[2].names;
 
-												$.dialog.close();
-											}
-										},
-										pop: 'actionSheet'
-									})" />
+											$.dialog.close();
+										}
+									},
+									pop: 'actionSheet'
+								})" />
 							<i class="dwz-icon-arrow-right"></i>
 						</div>
 					</div>
@@ -119,7 +118,7 @@
 											console.log(this, data)
 											var form = this.parentsByTag('form').get(0);
 											form.together_id.value = data.id;
-											form.together_txt.value = data.name
+											form.together_txt.value = data.name;
 										}
 									}
 								})" />

@@ -20,7 +20,7 @@
 	.pop-header {
 		position: relative;
 		.flex-wrap-center;
-		.b-line;
+		border-bottom: 1px solid @borderColor;
 		height: 44px;
 		line-height: 44px;
 		width: 100%;
@@ -90,14 +90,15 @@
 		.row {
 			.flex-1;
 			.col {
-				.l-line;
+				border-left: 1px solid @borderColor;
 				&:first-child {
-					.no-line;
+					border-left: none;
 				}
 			}
 
 			.list .item {
 				.no-line;
+				padding: 0 5px;
 			}
 		}
 		.button-group {

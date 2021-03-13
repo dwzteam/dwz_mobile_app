@@ -265,6 +265,8 @@ dwz.prototype.init = function (selector, context) {
 
 	// Handle HTML strings
 	if (typeof selector === 'string') {
+		selector = selector.trim(); // 字符类型选择器，去除空格
+
 		if (selector.startsWith('>')) {
 			selector = ':scope' + selector;
 		}
@@ -281,7 +283,8 @@ dwz.prototype.init = function (selector, context) {
 
 		if (contextSize > 1) {
 			for (let i = 0; i < this.context.length; i++) {
-				let elements = this.context[i].querySelectorAll(dwz.config.selector[selector] || selector);
+				let elements = [];
+				if (selector) this.context[i].querySelectorAll(dwz.config.selector[selector] || selector);
 
 				Array.prototype.push.apply(this.elements, elements);
 			}
@@ -289,7 +292,7 @@ dwz.prototype.init = function (selector, context) {
 			if (selector.indexOf('<') >= 0 && selector.indexOf('>') >= 0) {
 				this.elements = dwz.parseHTML(selector, true); // html字符串转dom
 			} else {
-				this.elements = this.context.querySelectorAll(dwz.config.selector[selector] || selector);
+				if (selector) this.elements = this.context.querySelectorAll(dwz.config.selector[selector] || selector);
 			}
 		}
 	} else if (dwz.instanceOf(selector)) {
@@ -1031,7 +1034,7 @@ dwz.fn.extend({
 		// }
 		// return this.on($.event.hasTouch ? 'touchend' : 'click', data, fn);
 
-		this.on('touchstart', (event) => event.stopPropagation()); // 禁止事件冒泡
+		// this.on('touchstart', (event) => event.stopPropagation()); // 禁止事件冒泡, 打开这行会影响父容器scroll
 		return this.on('click', data, fn);
 	},
 	change(data, fn) {

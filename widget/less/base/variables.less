@@ -300,6 +300,17 @@
 	&.tb-line {
 		background: @defaultBg;
 	}
+	&.is-line {
+		&:after {
+			content: ' ';
+			position: absolute;
+			top: 5px;
+			left: 0;
+			width: 100%;
+			pointer-events: none;
+			border-top: 1px solid @borderColor;
+		}
+	}
 }
 
 // 毛玻璃 filter-blur

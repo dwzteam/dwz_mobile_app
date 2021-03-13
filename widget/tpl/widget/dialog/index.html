@@ -37,7 +37,8 @@
 
 					<li class="item dwz-ctl-hover" onclick="$.dialog.open({
 						url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
-						data: {target:this, code: '', province:'province', city: 'city', county: 'county', labelField:'region_names',
+						data: {
+							target:this,
 							callback: function(data) {
 								$.alert.toast(JSON.stringify(data));
 								$.dialog.close();
@@ -46,6 +47,40 @@
 						pop: 'actionSheet'
 					})">
 						<p class="flex-1">actionSheet模式【选择省、市、区】</p><i class="dwz-icon-arrow-right"></i>
+					</li>
+
+					<li class="item dwz-ctl-hover" onclick="$.dialog.open({
+						url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+						data: {
+							target:this,
+							page_title: '二级联动',
+							level: 2,
+							code: '330000',
+							callback: function(data) {
+								$.alert.toast(JSON.stringify(data));
+								$.dialog.close();
+							}
+						},
+						pop: 'actionSheet'
+					})">
+						<p class="flex-1">actionSheet模式【二级联动】</p><i class="dwz-icon-arrow-right"></i>
+					</li>
+
+					<li class="item dwz-ctl-hover" onclick="$.dialog.open({
+						url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+						data: {
+							target:this,
+							page_title: '一级联动',
+							level: 1,
+							code: '330000',
+							callback: function(data) {
+								$.alert.toast(JSON.stringify(data));
+								$.dialog.close();
+							}
+						},
+						pop: 'actionSheet'
+					})">
+						<p class="flex-1">actionSheet模式【一级联动】</p><i class="dwz-icon-arrow-right"></i>
 					</li>
 
 					<li class="divider"></li>

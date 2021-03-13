@@ -16,20 +16,21 @@
 
 					<div class="form-item">
 						<div class="item-content">
-							<label>省市区</label>
+							<label>三级联动</label>
 							<input type="hidden" name="province">
 							<input type="hidden" name="city">
 							<input type="hidden" name="county">
 							<input type="text" name="destination" class="required" placeholder="省、市、区" data-error="请选择省市区" readonly onclick="$.dialog.open({
 									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
 									data: {
-										target:this, code: '',
+										target:this,
 										callback: function(data) {
+											console.log(data);
 											var form = this.parentsByTag('form').get(0);
-											form.province.value = data.province;
-											form.city.value = data.city;
-											form.county.value = data.county;
-											form.destination.value = data.names;
+											form.province.value = data[0].code;
+											form.city.value = data[1].code;
+											form.county.value = data[2].code;
+											form.destination.value = data[2].names;
 
 											$.dialog.close();
 										}
@@ -42,14 +43,44 @@
 
 					<div class="form-item">
 						<div class="item-content">
-							<label>市区</label>
-							<input type="text" name="destination2" class="required" placeholder="二级联动" data-error="请选择省市区" readonly onclick="$.dialog.open({
+							<label>二级联动</label>
+							<input type="text" name="destination2" class="required" placeholder="二级联动" data-error="请选择二级联动" readonly onclick="$.dialog.open({
 									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
 									data: {
-										target:this, code: '330000',
+										target:this, 
+										page_title: '二级联动',
+										level: 2,
+										code: '330000',
+										labelName: 'name',
 										callback: function(data) {
+											console.log(data);
 											var form = this.parentsByTag('form').get(0);
-											form.destination2.value = data.names;
+											form.destination2.value = data[1].names;
+
+											$.dialog.close();
+										}
+									},
+									pop: 'actionSheet'
+								})">
+							<i class="dwz-icon-arrow-right"></i>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>一级联动</label>
+							<input type="text" name="destination3" class="required" placeholder="一级联动" data-error="请选择一级联动" readonly onclick="$.dialog.open({
+									url: 'tpl/helper/dialogSelectRegion.html?dwz_callback=biz.helper.selectRegionRender',
+									data: {
+										target:this, 
+										page_title: '一级联动',
+										level: 1,
+										code: '330000',
+										labelName: 'name',
+										callback: function(data) {
+											console.log(data);
+											var form = this.parentsByTag('form').get(0);
+											form.destination3.value = data[0].names;
 
 											$.dialog.close();
 										}

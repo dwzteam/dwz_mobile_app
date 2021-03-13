@@ -1,36 +1,24 @@
 <div class="pop-header">
-	<span class="txt-h2">选择地区</span>
+	<span class="txt-h2">{{params.page_title || '选择地区'}}</span>
 	<a class="button is-text pos-abs-tr" href="javascript:$.dialog.close()"><i class="dwz-icon-close"></i></a>
 </div>
 
 <div class="row">
 
+	{{each colList}}
 	<div class="col">
 		<div class="scroll-content dwz-scroll">
 			<div class="scroll">
-				<ul class="list dwz-province"></ul>
+				<ul class="list dwz-field"></ul>
 			</div>
 		</div>
 	</div>
-	<div class="col">
-		<div class="scroll-content dwz-scroll">
-			<div class="scroll">
-				<ul class="list dwz-city"></ul>
-			</div>
-		</div>
-	</div>
-	<div class="col">
-		<div class="scroll-content dwz-scroll">
-			<div class="scroll">
-				<ul class="list dwz-county"></ul>
-			</div>
-		</div>
-	</div>
+	{{/each}}
 
 </div>
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-ctl-hover" data-code="{{item.code}}" data-name="{{item.name}}">{{item.name}}</li>
+	<li class="item flex-wrap-center" data-code="{{item[valueName]}}" data-name="{{item[labelName]}}">{{item[labelName]}}</li>
 	{{/each}}
 </script>
