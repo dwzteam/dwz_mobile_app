@@ -110,14 +110,15 @@ $.fn.extend({
 
 			// ajax 加载下一页完成事件
 			$form.on('dwz-ajax-done', () => {
-				let _formData = $form.listTotal();
-
-				$pullUp.removeClass('loading').addClass('data-more');
-				// 判断有没有下一页
-				if (_formData.currentList.length < _formData.pagesize) {
-					$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
-				} else {
-					$pullUpLabel.html(pullUpMsg.loadMoreTxt);
+				if ($pullUp.size() > 0) {
+					let _formData = $form.listTotal();
+					$pullUp.removeClass('loading').addClass('data-more');
+					// 判断有没有下一页
+					if (_formData.currentList.length < _formData.pagesize) {
+						$pullUpLabel.html(pullUpMsg.noLoadMoreTxt);
+					} else {
+						$pullUpLabel.html(pullUpMsg.loadMoreTxt);
+					}
 				}
 			});
 		});
