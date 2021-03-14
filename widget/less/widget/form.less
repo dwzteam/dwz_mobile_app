@@ -183,10 +183,12 @@ label {
 			.flex-1;
 			padding: 5px;
 
-			&.inline-right {
+			&.is-inline {
 				width: 40px;
+				background: #f6f6f6;
+			}
+			&.is-right {
 				text-align: right;
-				.box-line;
 			}
 		}
 
@@ -256,7 +258,7 @@ textarea:invalid {
 	background: url('../../image/icon/icon-invalid.svg') 100% center no-repeat;
 }
 
-input:read-only,
-textarea:read-only {
-	background-color: @inputBg;
-}
+// input:read-only,
+// textarea:read-only {
+// 	background-color: @inputBg;
+// }

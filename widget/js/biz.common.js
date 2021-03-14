@@ -357,12 +357,13 @@ $.extend(biz, {
 		);
 	},
 	getGPS: function (geolocationSuccess, geolocationError) {
-		if (!biz.checkPermission('location', 'gps定位')) {
-			geolocationError && geolocationError();
-			return;
-		}
 
 		if (window.api) {
+			if (!biz.checkPermission('location', 'gps定位')) {
+				geolocationError && geolocationError();
+				return;
+			}
+
 			const bmLocation = api.require('bmLocation');
 			bmLocation.singleLocation(
 				{

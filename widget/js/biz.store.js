@@ -6,11 +6,11 @@
 const CommonStore = {
 	data: [],
 	getData(params) {
-		const op = $.extend({ selectedId: '' }, params);
+		const op = $.extend({ id: '' }, params);
 		const data = [];
 		for (let i = 0; i < this.data.length; i++) {
 			data.push(this.data[i]);
-			data[i].selected = data[i].id == op.selectedId;
+			data[i].selected = data[i].id == op.id;
 		}
 		return data;
 	},
