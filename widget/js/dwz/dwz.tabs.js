@@ -14,7 +14,7 @@ $.fn.extend({
 				currentIndex: 0,
 				tab$: ':scope > .tab-bar > .tab-item',
 				panel$: ':scope > .tab-panel > .panel-item',
-				ajaxClass: 'j-ajax'
+				ajaxClass: 'dwz-ajax'
 			},
 			options
 		);
