@@ -161,7 +161,7 @@ $.navView = {
 							$.dialog.close({ popHistory: false });
 						} else {
 							$.navView.close(true, false);
-							$.navView.open({ url: url, rel: op.rel, history: false });
+							// $.navView.open({ url: url, rel: op.rel, history: false });
 						}
 					},
 					op.url
