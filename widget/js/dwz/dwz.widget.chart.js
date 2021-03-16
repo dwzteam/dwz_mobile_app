@@ -3,7 +3,7 @@
  * @author 张慧华
  */
 class DwzChartBase extends DwzWidget {
-	constructor({ $el, decimals = 0, animationStep = 5, animationInterval = 30, startColor = '#0099DD', endColor = '#7ED7FF', textColor = '#aaa', textSize = '40px' }) {
+	constructor({ $el, decimals = 0, animationStep = 5, animationInterval = 30, startColor = '#0099DD', endColor = '#7ED7FF', textColor = '#aaa', textSize = '30px', infoText = '', infoTextColor = '#aaa', infoTextSize = '14px' }) {
 		//调用实现父类的构造函数,相当于获得父类的this指向
 		super(arguments[0]);
 		this.decimals = decimals;
@@ -11,6 +11,9 @@ class DwzChartBase extends DwzWidget {
 		this.animationInterval = animationInterval;
 		this.textColor = textColor;
 		this.textSize = textSize;
+		this.infoText = infoText;
+		this.infoTextColor = infoTextColor;
+		this.infoTextSize = infoTextSize;
 
 		this.startRgba = $.colorRgba({ color: startColor });
 		this.endRgba = $.colorRgba({ color: endColor });
@@ -56,12 +59,15 @@ class DwzChartPercent extends DwzChartBase {
 	 * @param bgWidth: default 15
 	 * @param sideType: onside|inside|outside
 	 */
-	constructor({ $el, data = 0, strokeLinecap = 'round', rateColor = 0.7, bgColor = 'rgba(200, 200, 200, .5)', fgWidth = 10, bgWidth = 10, sideType = 'onside' }) {
+	constructor({ $el, data = 0, infoText = '', strokeLinecap = 'round', rateColor = 0.7, bgColor = 'rgba(200, 200, 200, .5)', fgWidth = 10, bgWidth = 10, sideType = 'onside' }) {
 		super(
 			$.extend(
 				{
 					textColor: '#aaa',
-					textSize: '40px',
+					textSize: '30px',
+					infoText: '',
+					infoTextColor: 'rgba(0,0,0,0.3)',
+					infoTextSize: '14px',
 					startColor: '#0099DD',
 					endColor: '#7ED7FF',
 					rateColor: 0.7
@@ -95,10 +101,11 @@ class DwzChartPercent extends DwzChartBase {
 			<circle class="svg-circle-2" style="display: none" cx="75" cy="75" r="57" fill="none" stroke="url(#lg-${
 				this.randomKey
 			}-2)" stroke-width="${fgWidth}" stroke-dasharray="0, 20000" transform="rotate(90,75,75)" stroke-linecap="${strokeLinecap}"></circle>
-			<text class="timer" text-anchor="middle" x="75" y="90" style="font-size: ${this.textSize};" fill="${this.textColor}">
-			<tspan class="number">--</tspan><tspan class="percent" style="font-size:.5em">%</tspan>	
+			<text class="timer" text-anchor="middle" x="80" y="${this.infoText ? 80 : 85}" style="font-size: ${this.textSize};" fill="${this.textColor}">
+				<tspan class="number">--</tspan><tspan class="percent" style="font-size:.5em">%</tspan>	
 			</text>
-			</svg>`;
+			<text text-anchor="middle" x="75" y="100" style="font-size: ${this.infoTextSize};" fill="rgba(0,0,0,0.4)">${this.infoText || ''}</text>
+		</svg>`;
 
 		this.$el.html(template);
 		this.$circle1 = this.$el.find('circle.svg-circle-1');
