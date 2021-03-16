@@ -85,7 +85,7 @@
 					$contentUl.animate({ x: leftPos }, op.delayTime, 'ease');
 
 					// 添加当前activeClass
-					$contentUl.find(':scope>li').removeClass(op.activeClass).eq(currentIndex).addClass(op.activeClass);
+					$slides.removeClass(op.activeClass).eq(currentIndex).addClass(op.activeClass);
 
 					let $tab = $tabs.eq(currentIndex),
 						_href = $tab.attr('data-href');

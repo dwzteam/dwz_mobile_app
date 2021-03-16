@@ -445,8 +445,7 @@ dwz.extend({
 		hasTouch: 'ontouchstart' in window,
 		type: {
 			pageClear: 'pageClear', // 用于重新ajaxLoad时，去除iscroll等需要特殊处理的资源
-			pageShow: 'pageShow',
-			pageHide: 'pageHide'
+			activated: 'activated'
 		},
 		add(elem, types, data, fn) {
 			let _events = dwz.data(elem, '_events') || {}; // 初始化{touchstart:[], touchend[]...}
@@ -1012,6 +1011,12 @@ dwz.fn.extend({
 	},
 	offPageClear(fn, data) {
 		return this.off(dwz.event.type.pageClear, fn, data);
+	},
+	onActivated(fn, data) {
+		return this.on(dwz.event.type.activated, fn, data);
+	},
+	offActivated(fn, data) {
+		return this.off(dwz.event.type.activated, fn, data);
 	},
 	/**
 	 * 关闭页面时回收页面内存

@@ -31,17 +31,17 @@ $.fn.extend({
 
 				$tab.each(function () {
 					$tab.click(function (event) {
-						switchTab($tabs, $panels, iTabIndex);
+						switchTab($box, $tabs, $panels, iTabIndex);
 
 						event.preventDefault();
 					});
 				});
 			});
 
-			switchTab($tabs, $panels, op.currentIndex);
+			switchTab($box, $tabs, $panels, op.currentIndex);
 		});
 
-		function switchTab($tabs, $panels, iTabIndex) {
+		function switchTab($box, $tabs, $panels, iTabIndex) {
 			let $tab = $tabs.eq(iTabIndex);
 			op.currentIndex = iTabIndex;
 
@@ -49,6 +49,10 @@ $.fn.extend({
 			$tab.addClass('active');
 
 			let $panel = $panels.removeClass('active').eq(op.currentIndex).addClass('active');
+
+			setTimeout(() => {
+				$box.trigger(dwz.event.type.activated, { $tab, $panel, $tabs, $panels, currentIndex: op.currentIndex });
+			}, 200);
 
 			if ($tab.hasClass(op.ajaxClass)) {
 				let url = $tab.attr('data-href');
