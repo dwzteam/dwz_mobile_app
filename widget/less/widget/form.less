@@ -179,8 +179,10 @@ label {
 		input[type='date'],
 		input[type='datetime-local'],
 		input[type='number'],
+		input[type='tel'],
 		textarea {
 			.flex-1;
+			min-width: 40px; // 兼容安卓低版本手机宽度自适应问题
 			padding: 5px;
 
 			&.is-inline {

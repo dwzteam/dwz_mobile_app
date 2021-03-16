@@ -1,7 +1,38 @@
+.pos-abs-tl {
+	position: absolute !important;
+	top: 0px;
+	left: 0px;
+	&.is-margin {
+		top: @marginV;
+		left: @marginH;
+	}
+}
 .pos-abs-tr {
 	position: absolute !important;
 	top: 0px;
 	right: 0px;
+	&.is-margin {
+		top: @marginV;
+		right: @marginH;
+	}
+}
+.pos-abs-bl {
+	position: absolute !important;
+	bottom: 0px;
+	left: 0px;
+	&.is-margin {
+		bottom: @marginV;
+		left: @marginH;
+	}
+}
+.pos-abs-br {
+	position: absolute !important;
+	bottom: 0px;
+	right: 0px;
+	&.is-margin {
+		bottom: @marginV;
+		right: @marginH;
+	}
 }
 
 // 九宫格
@@ -38,6 +69,7 @@
 				height: 75%;
 			}
 		}
+
 		.item-label {
 			.txt-line1;
 			text-align: center;
@@ -117,6 +149,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	&.is-left {
+		justify-content: flex-start;
+	}
 
 	.col-1,
 	.col-2,
@@ -133,6 +168,11 @@
 		position: relative;
 		flex-shrink: 0;
 		display: flex;
+
+		.item-pic {
+			max-height: 120px;
+			margin: 4px 4px;
+		}
 	}
 
 	.col-12,
