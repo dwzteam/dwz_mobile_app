@@ -104,13 +104,14 @@ class DwzChartPercent extends DwzChartBase {
 			<text class="timer" text-anchor="middle" x="80" y="${this.infoText ? 80 : 85}" style="font-size: ${this.textSize};" fill="${this.textColor}">
 				<tspan class="number">--</tspan><tspan class="percent" style="font-size:.5em">%</tspan>	
 			</text>
-			<text text-anchor="middle" x="75" y="100" style="font-size: ${this.infoTextSize};" fill="rgba(0,0,0,0.4)">${this.infoText || ''}</text>
+			<text class="infoText" text-anchor="middle" x="75" y="100" style="font-size: ${this.infoTextSize};" fill="rgba(0,0,0,0.4)">${this.infoText || ''}</text>
 		</svg>`;
 
 		this.$el.html(template);
 		this.$circle1 = this.$el.find('circle.svg-circle-1');
 		this.$circle2 = this.$el.find('circle.svg-circle-2');
 		this.$number = this.$el.find('tspan.number');
+		this.$infoText = this.$el.find('text.infoText');
 
 		this.render();
 	}
@@ -119,9 +120,13 @@ class DwzChartPercent extends DwzChartBase {
 		return (this.circleRadius * data) / 100;
 	}
 
-	setData(data) {
+	setData(data, infoText) {
 		if (data >= 0 && data <= 100) {
 			this.data = data;
+			if (infoText !== undefined) {
+				this.infoText = infoText;
+				this.$infoText.text(infoText);
+			}
 			this.render();
 		}
 	}

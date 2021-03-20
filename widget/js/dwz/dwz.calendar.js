@@ -640,8 +640,7 @@
 			return _dw;
 		},
 		parseDate: function (sDate) {
-			if (!sDate) return null;
-			return sDate.parseDate(this.opts.pattern);
+			return (sDate || this.sDate).parseDate(this.opts.pattern);
 		},
 		formatDate: function (date) {
 			return date.formatDate(this.opts.pattern);
@@ -670,4 +669,6 @@
 			return false;
 		}
 	});
+
+	$.Datepicker = Datepicker;
 })(dwz);

@@ -380,7 +380,7 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 		let elements = [];
 		for (let i = 0; i < this.length; i++) {
 			let elem = this.get(i),
-				flag = fn.call(elem, i);
+				flag = fn.call(elem, i, elem);
 			if (flag) elements.push(elem);
 		}
 
@@ -802,7 +802,7 @@ dwz.extend({
 		return xml;
 	},
 	parseHTML(content, more) {
-		let div = document.createElement('div');
+		let div = document.createElement(content.startsWith('<tr') ? 'tbody' : 'div');
 		div.innerHTML = content;
 
 		if (more) {
@@ -1549,7 +1549,11 @@ dwz.extend({
 			//Set the correct header, if data is being sent
 			if (op.contentType) dwzXHR.setRequestHeader('content-type', op.contentType); //post提交
 
-			postData = typeof op.data === 'string' ? op.data : dwz.param(op.data);
+			if (op.contentType.indexOf('application/json') >= 0) {
+				postData = typeof op.data === 'string' ? op.data : JSON.stringify(op.data);
+			} else {
+				postData = typeof op.data === 'string' ? op.data : dwz.param(op.data);
+			}
 		}
 
 		dwzXHR.onreadystatechange = function () {

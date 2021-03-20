@@ -316,10 +316,10 @@
 		return new Date(year, month - 1, date, hh, mm, ss);
 	}
 
-	Date.prototype.formatDate = function (dateFmt) {
+	Date.prototype.formatDate = function (dateFmt = 'yyyy-MM-dd') {
 		return formatDate(this, dateFmt);
 	};
-	String.prototype.parseDate = function (dateFmt) {
+	String.prototype.parseDate = function (dateFmt = 'yyyy-MM-dd') {
 		if (this.length < dateFmt.length) {
 			dateFmt = dateFmt.slice(0, this.length);
 		}
