@@ -917,7 +917,7 @@ dwz.extend(Number.prototype, {
 	roundFloat(n = 3) {
 		return Math.round(this * Math.pow(10, n)) / Math.pow(10, n);
 	},
-	formatCurrency(useComma) {
+	formatCurrency(useComma, useCent = true) {
 		let num = this;
 
 		num = num.toString().replace(/\$|\,/g, '');
@@ -940,7 +940,7 @@ dwz.extend(Number.prototype, {
 			}
 		}
 
-		return (sign ? '' : '-') + num + '.' + cents;
+		return (sign ? '' : '-') + num + (useCent ? '.' + cents : '');
 	},
 	parseCurrency(num) {
 		return parseFloat(this.toFixed(num || 2));

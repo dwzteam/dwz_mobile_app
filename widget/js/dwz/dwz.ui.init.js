@@ -31,9 +31,6 @@
 					$body.removeClass('landscape');
 				}
 			}
-
-			// 处理横竖屏切换适配
-			$('div.slideBox').trigger('slide-resize');
 		},
 		/**
 		 * document 加载完成调用
@@ -45,9 +42,8 @@
 				() => {
 					$.ui.screenChange();
 
-					// 处理窗口resize适配
-
-					$('div.dwz-slide').trigger('slide-resize');
+					// 处理窗口 resize、横竖屏切换 适配
+					$('div.dwz-slide, div.slide').trigger('slide-resize');
 					$('div.nav-view').trigger('window-resize');
 				},
 				false
