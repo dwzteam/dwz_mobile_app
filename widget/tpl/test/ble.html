@@ -73,18 +73,24 @@
 
 		var $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
-
+		var ble = api.require('ble');
 		$form.requestList = function(loadMore) {
-			var data = $form.serializeArray();
-			console.log(JSON.stringify(data));
 
-			var ble = api.require('ble');
-			ble.stopScan();
-			ble.scan({
-				// serviceUUIDs: ['', '']
+			ble.initManager({
+				single: true
 			}, function(ret) {
-				alert(JSON.stringify(ret))
+				console.log(JSON.stringify(ret));
+				if (ret.state == "poweredOn") {
+					ble.scan({
+						// serviceUUIDs: ['', '']
+					}, function(ret) {
+						alert(JSON.stringify(ret))
+					});
+				} else {
+					$.alert.error('初始化蓝牙管理器失败')
+				}
 			});
+
 		};
 
 		$.listForm($form);
