@@ -128,6 +128,7 @@ biz.helper = {
 
 		const $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
+		const $selectBtn = $form.find('.dwz-btn-select');
 
 		$form.requestList = (loadMore) => {
 			$.ajax({
@@ -147,10 +148,43 @@ biz.helper = {
 							$listBox.html($items).initUI();
 						}
 
-						$items.click(function (event) {
-							op.callback && op.callback.call($(op.target), this.dataset);
-							$.filterPanel.close();
-						});
+						if ($selectBtn.size()) {
+							$selectBtn.click((event) => {
+								let _list = [];
+
+								const $inputs = $form.find('input[type=checkbox]:checked, input[type=radio]:checked');
+								if (!$inputs.size()) {
+									if (params.selectSearchField && params.searchField) {
+										let _val = $form
+											.find('input[name=' + params.searchField + ']')
+											.val()
+											.trim();
+										if (_val) {
+											let _item = { searchField: params.searchField, name: _val };
+											_item[params.searchField] = _val;
+											_list.push(_item);
+										}
+									}
+
+									if (!_list.length) {
+										$.alert.error('至少选择一项');
+										return false;
+									}
+								}
+
+								$inputs.each((index, input) => {
+									_list.push(input.dataset);
+								});
+
+								op.callback && op.callback.call($(op.target), _list);
+								$.filterPanel.close();
+							});
+						} else {
+							$items.click((event) => {
+								op.callback && op.callback.call($(op.target), this.dataset);
+								$.filterPanel.close();
+							});
+						}
 					}
 				},
 				error: biz.ajaxError

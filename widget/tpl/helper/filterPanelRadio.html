@@ -1,0 +1,72 @@
+<form class="page-wrap dwz-list-form" onsubmit="return false">
+	<input type="hidden" name="pageNum" value="1" />
+
+	<header>
+		{{if searchTitle}}
+		<div class="toolbar">
+			<div class="header-title">{{searchTitle}}</div>
+		</div>
+		{{/if}} {{if searchField}}
+		<div class="toolbar">
+			<div class="bar search-bar bar-reset">
+				<label class="item-input filter-keywords">
+					<button class="icon icon-search" type="button"></button>
+					<input type="search" class="dwz-disable-autofocus" name="{{searchField}}" value="" placeholder="搜索关键字" />
+				</label>
+			</div>
+		</div>
+		{{/if}}
+
+		<div class="form-content">
+			{{each filterItems as item}} {{if item.value}}
+			<input type="hidden" name="{{item.name}}" value="{{item.value}}" /> {{else if item.options}}
+			<div class="form-item no-line is-mini">
+				<div class="item-content">
+					<label style="width: 80px">{{item.label}}：</label>
+					<select class="flex-1" name="{{item.name}}">
+						<option value="">全部</option>
+						{{each item.options as option}}
+						<option value="{{option.id}}">{{option.name}}</option>
+						{{/each}}
+					</select>
+				</div>
+			</div>
+			{{/if}} {{/each}}
+		</div>
+	</header>
+
+	<section>
+		<div class="scroll-content dwz-list">
+			<div class="scroll">
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
+				</div>
+
+				<ul class="list dwz-list-box"></ul>
+
+				<div class="pullUp">
+					<span class="pullUpIcon">&nbsp;</span>
+					<span class="pullUpLabel" data-loading="加载中...">更多...</span>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{if searchField}}
+	<div class="button-group">
+		<button class="button" type="reset">重置</button>
+		<button class="button primary dwz-btn-select" type="button">确定</button>
+	</div>
+	{{/if}}
+</form>
+
+<script id="tpl_list" type="text/html">
+	{{each list as item}}
+	<li class="item dwz-ctl-hover">
+		<label class="flex-wrap align-center">
+			<input type="radio" class="is-checkbox" name="checkbox" value="{{item.name}}" {{each item as v k}} data-{{k}}="{{v}}" {{/each}}>
+			<span class="flex-1">{{item.name}}</span>
+		</label>
+	</li>
+	{{/each}}
+</script>

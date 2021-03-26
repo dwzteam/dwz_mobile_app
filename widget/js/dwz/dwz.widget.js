@@ -60,13 +60,14 @@ class DwzWidget {
  * @author 张慧华
  */
 class DwzMarquee extends DwzWidget {
-	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, pageSize = 1 }) {
+	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, delay = 1000, pageSize = 1 }) {
 		//调用实现父类的构造函数,相当于获得父类的this指向
 		super(arguments[0]);
 		this.cls = cls;
 		this.itemCls = itemCls;
 		this.pageSize = pageSize;
 		this.duration = duration;
+		this.delay = delay;
 		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 
 		// 用于控制鼠标悬停
@@ -75,7 +76,7 @@ class DwzMarquee extends DwzWidget {
 
 		setTimeout(() => {
 			this.play();
-		}, 1000);
+		}, 200);
 
 		this.$el.on('mouseover', () => {
 			this.isOver = true;
@@ -103,7 +104,7 @@ class DwzMarquee extends DwzWidget {
 				() => {
 					this._animationEvent();
 				},
-				this.pageSize > 1 ? 1000 : 10
+				this.pageSize > 1 ? this.delay : 10
 			);
 		});
 
@@ -149,6 +150,15 @@ class DwzMarquee extends DwzWidget {
 		this.$el.html(html);
 		this.play();
 	}
+
+	appendItem(html) {
+		if (this.pageSize > 1) {
+			let $marquee = this.findByCls(this.cls);
+			$marquee.append(html);
+		}
+	}
+
+	removeItem(selecter) {}
 }
 
 $.extend({ DwzMarquee });

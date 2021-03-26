@@ -41,49 +41,49 @@
 						</ul>
 						<div class="dwz-marquee-list">
 							<ul class="grid">
-								<li class="tr">
+								<li class="tr" data-id="1">
 									<div class="td w30">1</div>
 									<div class="td flex-1">北京</div>
 									<div class="td w100 right">2000万</div>
 									<div class="td w100 right"><i class="table-status-down"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="2">
 									<div class="td w30">2</div>
 									<div class="td flex-1">上海</div>
 									<div class="td w100 right">2000万</div>
 									<div class="td w100 right"><i class="table-status-eq"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="3">
 									<div class="td w30">3</div>
 									<div class="td flex-1">杭州</div>
 									<div class="td w100 right">1500万</div>
 									<div class="td w100 right"><i class="table-status-up"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="4">
 									<div class="td w30">4</div>
 									<div class="td flex-1">广州</div>
 									<div class="td w100 right">1500万</div>
 									<div class="td w100 right"><i class="table-status-eq"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="5">
 									<div class="td w30">5</div>
 									<div class="td flex-1">深圳</div>
 									<div class="td w100 right">1500万</div>
 									<div class="td w100 right"><i class="table-status-up"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="6">
 									<div class="td w30">6</div>
 									<div class="td flex-1">成都</div>
 									<div class="td w100 right">1500万</div>
 									<div class="td w100 right"><i class="table-status-down"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="7">
 									<div class="td w30">7</div>
 									<div class="td flex-1">重庆</div>
 									<div class="td w100 right">1500万</div>
 									<div class="td w100 right"><i class="table-status-up"></i></div>
 								</li>
-								<li class="tr">
+								<li class="tr" data-id="8">
 									<div class="td w30">8</div>
 									<div class="td flex-1">深圳</div>
 									<div class="td w100 right">1500万</div>
@@ -101,6 +101,14 @@
 		</div>
 
 	</section>
+
+	<footer>
+		<div class="form-bar padding-h">
+			<button class="button primary" type="button">appendItem 插入</button>
+			<button class="button danger" type="button">removeItem 删除</button>
+		</div>
+	</footer>
+
 </main>
 
 <script type="text/javascript">
@@ -115,15 +123,28 @@
 		});
 
 		// 滚动列表示例
-		this.find('.dwz-marquee-list').each(function(index, elem) {
-			new DwzMarquee({
-				$el: elem,
-				cls: "grid",
-				itemCls: "tr",
-				duration: 1000,
-				pageSize: 4
-			});
+		var marquee = new DwzMarquee({
+			$el: this.find('.dwz-marquee-list'),
+			cls: "grid",
+			itemCls: "tr",
+			duration: 1000,
+			delay: 3000,
+			pageSize: 4
 		});
 
+		this.find('button.primary').click(function() {
+			marquee.appendItem(`<li class="tr">
+							<div class="td w30">#</div>
+							<div class="td flex-1">测试</div>
+							<div class="td w100 right">1500万</div>
+							<div class="td w100 right"><i class="table-status-eq"></i></div>
+						</li>`);
+		});
+
+		this.find('button.danger').click(function() {
+			marquee.removeItem(function() {
+
+			});
+		});
 	}
 </script>

@@ -125,14 +125,47 @@
 							<i class="dwz-icon-arrow-right"></i>
 						</div>
 					</div>
+
+					<div class="form-item">
+						<div class="item-content">
+							<label>手动输入</label>
+							<input type="hidden" name="together2_id" />
+							<input type="text" name="together2_txt" value="" placeholder="请选择" class="required" readonly data-error="请选择同行人" onclick="$.filterPanel.open({
+									url: 'tpl/helper/filterPanelRadio.html?dwz_callback=biz.helper.filterPanelRender',
+									data: {
+										target: this,
+										selectSearchField: true, // 选择输入框中的文字，默认为false
+										searchTitle: '输入同行人',
+										searchField: 'keywords',
+										searchMethod: 'POST',
+										searchUrl: biz.server.getUrl(biz.server.persionList),
+										filterItems: [
+											{
+												name: 'type',
+												value: 1
+											}
+										],
+										callback: function(data) {
+											console.log(this, data)
+											var form = this.parentsByTag('form').get(0);
+											form.together2_id.value = data[0].id;
+											form.together2_txt.value = data[0].name;
+										}
+									}
+								})" />
+							<i class="dwz-icon-arrow-right"></i>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<div class="form-bar pane">
-		<button class="button primary" type="submit">提交</button>
-	</div>
+	<footer>
+		<div class="form-bar padding-h">
+			<button class="button primary" type="submit">提交</button>
+		</div>
+	</footer>
 </form>
 
 <script type="text/javascript">
