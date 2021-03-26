@@ -78,42 +78,44 @@ main > section,
 .txt-h1 {
 	font-size: @l1;
 	color: @titleColor;
-	line-height: 28px;
 }
 
 /* 二级标题 */
 .txt-h2 {
 	font-size: @l2;
 	color: @titleColor;
-	line-height: 26px;
 }
 
 /* 三级标题 */
 .txt-h3 {
 	font-size: @l3;
 	color: @titleColor;
-	line-height: 24px;
 }
 
 /* 正文描述 */
 .txt-desc {
 	font-size: @l4;
 	color: @descColor;
-	line-height: 20px;
 }
 
 /* 正文备注 */
 .txt-info {
 	font-size: @l5;
 	color: @infoColor;
-	line-height: 18px;
 }
+
+// 辅助文字
+// .txt-help {
+// 	font-size: @l6;
+// 	color: @helpColor;
+// }
 
 .txt-h1,
 .txt-h2,
 .txt-h3,
 .txt-desc,
 .txt-info {
+	line-height: 1.6;
 	&.is-center {
 		text-align: center;
 	}
@@ -125,12 +127,6 @@ main > section,
 	}
 }
 
-.item-title1,
-.item-title2,
-.item-title3,
-.item-info1,
-.item-info2,
-.item-info3,
 .txt-line1,
 .txt-line2,
 .txt-line3 {
@@ -141,28 +137,10 @@ main > section,
 	-webkit-line-clamp: 1;
 }
 
-.item-title1,
-.item-title2,
-.item-title3 {
-	font-size: @l3;
-	color: @titleColor;
-}
-
-.item-info1,
-.item-info2,
-.item-info3 {
-	font-size: @l4;
-	color: @infoColor;
-}
-
-.item-title2,
-.item-info2,
 .txt-line2 {
 	-webkit-line-clamp: 2;
 }
 
-.item-title3,
-.item-info3,
 .txt-line3 {
 	-webkit-line-clamp: 3;
 }
@@ -224,19 +202,10 @@ main > section,
 
 // 提示性文字样式
 .alert-box {
-	.item-title1;
+	.txt-h3;
 	padding: 10px 10px;
 	background: @btnBg;
 	color: @btnTxtColor;
-	.button {
-		background: none;
-		border-radius: 15px;
-		height: 30px;
-		line-height: 30px;
-		padding: 0 8px;
-		margin-left: 8px;
-		white-space: nowrap;
-	}
 }
 
 // 独立完整的内容，文章类详细页面
@@ -279,7 +248,7 @@ figure,
 		width: 100%;
 	}
 	figcaption {
-		.item-info3;
+		.txt-info;
 	}
 }
 

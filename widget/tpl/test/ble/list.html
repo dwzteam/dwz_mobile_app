@@ -2,16 +2,16 @@
 	<input type="hidden" name="pageNum" value="1">
 	<header>
 		<div class="toolbar">
-			<div class="header-title">ble 蓝牙</div>
+			<div class="header-title">蓝牙设备</div>
 		</div>
-		<div class="toolbar">
+		<!-- <div class="toolbar">
 			<div class="bar search-bar">
 				<label class="item-input filter-keywords">
 					<button class="icon icon-search" type="button"></button>
 					<input type="search" class="dwz-disable-autofocus" name="keywords" value="" placeholder="车号、挂车号">
 				</label>
 			</div>
-		</div>
+		</div> -->
 	</header>
 
 	<section>
@@ -30,7 +30,9 @@
 					<p class="txt-info is-center">暂时还没有数据哦~</p>
 				</div>
 
-				<ul class="list pic-list dwz-list-box"></ul>
+				<ul class="list pic-list dwz-list-box">
+
+				</ul>
 
 				<div class="pullUp">
 					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中..." data-no-more="没有更多了">加载更多</span>
@@ -45,16 +47,30 @@
 
 <script id="tpl_list" type="text/html">
 	{{each list as item}}
-	<li class="item dwz-ctl-hover" data-id="{{item.id}}">
+	<li class="item dwz-ctl-hover" data-id="{{item.id}}" onclick="$.actionSheet.open({
+		title:'{{item.name}}',
+		buttons: ['设置密码', '查看详情', '删除']
+	}, function(ret){
+		$.alert.toast('buttonIndex: ' + ret.buttonIndex);
+
+		if (ret.buttonIndex == 1) {
+			var ble = api.require('ble');
+			ble.writeValueForCharacteristic({
+				peripheralUUID: '{{item.uuid}}',
+				value: 'AAA101220A1111111144'
+			}, function(ret) {
+				if (ret) {
+					api.alert({ msg: JSON.stringify(ret) });
+				}
+			});
+		}
+	})">
 		<div class="item-content">
-			<div class="flex-wrap">
-				<div class="item-title1 flex-1">车号：{{item.car_no}}</div>
-				<span class="button danger is-mini is-text">{{item.back_c6}}</span>
-			</div>
-			<div class="item-info1">挂车号：{{item.trailer_no}}</div>
-			<div class="item-info1">车辆运输证号(挂)：{{item.ro_tr_pe_end}}</div>
-			<div class="item-info1">道路运输证号(头)：{{item.ro_tr_pe_head}}</div>
-			<div class="item-info1">资格证号：{{item.trailer_no}}</div>
+			<div class="txt-h3 txt-line1 flex-1">name：{{item.name}}</div>
+			<div class="txt-info txt-line1">uuid：{{item.uuid}}</div>
+			<div class="txt-info txt-line1">advertisingName：{{item.advertisingName}}</div>
+			<div class="txt-info txt-line1">rssi：{{item.rssi}}</div>
+			<div class="txt-info">manufacturerData：{{item.manufacturerData}}</div>
 		</div>
 	</li>
 	{{/each}}
@@ -77,15 +93,35 @@
 		$form.requestList = function(loadMore) {
 
 			ble.initManager({
-				single: true
+				single: false
 			}, function(ret) {
 				console.log(JSON.stringify(ret));
 				if (ret.state == "poweredOn") {
+
 					ble.scan({
 						// serviceUUIDs: ['', '']
 					}, function(ret) {
-						alert(JSON.stringify(ret))
+						console.log(JSON.stringify(ret))
+
+						ble.getPeripheral(function(ret) {
+							if (ret) {
+								console.log(JSON.stringify(ret))
+
+								$form.listTotal(ret.peripherals.length, ret.peripherals);
+								if ($form.total) {
+									$form.find('.empty_box').hide();
+								}
+
+								var _html = template.render(tpl.tpl_list, {
+									list: ret.peripherals
+								});
+
+								$listBox.html(_html).initUI();
+							}
+						});
 					});
+
+
 				} else {
 					$.alert.error('初始化蓝牙管理器失败')
 				}

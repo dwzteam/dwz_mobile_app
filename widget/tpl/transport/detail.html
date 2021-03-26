@@ -19,8 +19,8 @@
 	<li class="item">
 		<div class="icon-receive">收</div>
 		<div class="item-content">
-			<p class="item-title1">{{receive.name || '未知'}}</p>
-			<p class="item-info1">{{receive.address}}</p>
+			<p class="txt-h3 txt-line1">{{receive.name || '未知'}}</p>
+			<p class="txt-desc txt-line1">{{receive.address}}</p>
 		</div>
 		<div class="btn-group">
 			{{if receive.mobile}}
@@ -34,10 +34,10 @@
 	<div class="widget-box">
 		<div class="padding-vh">
 			<div class="flex-wrap">
-				<div class="item-title1 flex-1">{{vo.transport_time}}<span class="txt-h3"> · {{vo.truck_num}}</span></div>
+				<div class="txt-h3 txt-line1 flex-1">{{vo.transport_time}}<span class="txt-h3"> · {{vo.truck_num}}</span></div>
 				<div class="item-status2 {{vo.status|showTransportStatus 'icon'}}">{{vo.status|showTransportStatus}}</div>
 			</div>
-			<div class="item-info1">运输路线：{{vo.transport_way}}</div>
+			<div class="txt-desc txt-line1">运输路线：{{vo.transport_way}}</div>
 		</div>
 	</div>
 

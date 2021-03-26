@@ -30,6 +30,7 @@ var js_src = {
 		'js/dwz/dwz.bmap.js',
 		'js/dwz/dwz.brush.js',
 		'js/dwz/dwz.widget.js',
+		'js/dwz/dwz.widget.countup.js',
 		'js/dwz/dwz.widget.chart.js',
 		'js/dwz/dwz.regional.zh.js',
 		'js/dwz/dwz.ui.js',

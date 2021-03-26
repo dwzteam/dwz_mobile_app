@@ -90,8 +90,8 @@
 	{{each data as item}}
 	<a class="transport-card" href="javascript:{{if item.transport_time}}$.navView.open({url:'tpl/transport/detail.html?dwz_callback=biz.transport.detailRender&id={{item.id}}&ajaxDoneReload=1', rel:'transportDetail'}){{/if}}">
 		<div class="flex-wrap">
-			<div class="item-title1 flex-1"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
-			<div class="item-info1">{{item.status|showTransportStatus}}</div>
+			<div class="txt-h3 txt-line1 flex-1"><span>{{item.transport_time || '暂无数据'}}</span>{{item.truck_num ? ' · '+item.truck_num : ''}}</div>
+			<div class="txt-info txt-line1">{{item.status|showTransportStatus}}</div>
 		</div>
 
 		<div class="flex-wrap">
@@ -100,9 +100,9 @@
 				<div class="dot-end"></div>
 			</div>
 			<div class="flex-1">
-				<div class="item-info1">收货单位：{{item.receive_company_name}}</div>
-				<div class="item-info3">运输路线：{{item.transport_way}}</div>
-				<div class="item-info1">发货单位：{{item.ship_company_name}}</div>
+				<div class="txt-info txt-line1">收货单位：{{item.receive_company_name}}</div>
+				<div class="txt-info txt-line3">运输路线：{{item.transport_way}}</div>
+				<div class="txt-info txt-line1">发货单位：{{item.ship_company_name}}</div>
 			</div>
 		</div>
 	</a>
@@ -114,8 +114,8 @@
 	<li class="item dwz-ctl-hover" onclick="$.navView.open({url:'tpl/announce/detail.html?dwz_callback=biz.announce.detailRender&id={{item.id}}', rel: 'announceDetail'})">
 		<div class="item-pic"><img src="{{@item.pic_url|showImg}}"></div>
 		<div class="item-content">
-			<div class="item-title1">{{item.title}}</div>
-			<div class="item-info2">{{item.content}}</div>
+			<div class="txt-h3 txt-line1">{{item.title}}</div>
+			<div class="txt-desc txt-line2">{{item.content}}</div>
 			<div class="flex-1"></div>
 			<div class="flex-wrap">
 				<div class="txt-info txt-line1 flex-1">{{item.author}}</div>

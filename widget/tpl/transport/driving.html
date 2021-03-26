@@ -38,8 +38,8 @@
 	<li class="item dwz-ctl-hover" data-name="{{item.name}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
 		<div class="icon-address"></div>
 		<div class="item-content">
-			<p class="item-title1">{{item.name}}</p>
-			<p class="item-info1">{{item.address}}</p>
+			<p class="txt-h3 txt-line1">{{item.name}}</p>
+			<p class="txt-info txt-line1">{{item.address}}</p>
 		</div>
 	</li>
 	{{/each}}
@@ -47,8 +47,8 @@
 
 <script id="tpl_nav_info" type="text/html">
 	<div class="flex-1 flex-wrap-center flex-wrap-v">
-		<p class="item-title1">{{route.time|formatTime}}</p>
-		<p class="item-info1">{{route.distance|formatDistance}}</p>
+		<p class="txt-h3 txt-line1">{{route.time|formatTime}}</p>
+		<p class="txt-info txt-line1">{{route.distance|formatDistance}}</p>
 	</div>
 	<button class="button active flex-1" type="button" onclick="biz.openMapNav({{pointEnd}})">开始导航</button>
 </script>

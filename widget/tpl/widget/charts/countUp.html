@@ -1,0 +1,50 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">滚动数字</div>
+			<button class="button is-mini"><i class="dwz-icon-refresh"></i>更新</button>
+		</div>
+	</header>
+
+	<section class="pane">
+
+		<div class="scroll-content dwz-scroll">
+			<div class="scroll">
+
+				<div class="flex-wrap-center">
+					<div class="flex-1" id="test-count-up-1">1000</div>
+					<div class="flex-1" id="test-count-up-2">200000</div>
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+</main>
+
+<script type="text/javascript">
+	function helper(tpl, params) {
+		// console.log(this, tpl, params)
+
+		const countUp1 = new DwzCountUp({
+			$el: this.find('#test-count-up-1')
+		});
+
+		const countUp2 = new DwzCountUp({
+			$el: this.find('#test-count-up-2'),
+			options: {
+				startVal: 20000
+			}
+		});
+
+		this.find('button.button').click((event) => {
+			let val = Math.round(Math.random() * 25);
+			countUp1.update(val);
+
+			countUp2.update(20000 + val);
+		});
+
+
+	}
+</script>
