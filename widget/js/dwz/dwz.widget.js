@@ -60,11 +60,12 @@ class DwzWidget {
  * @author 张慧华
  */
 class DwzMarquee extends DwzWidget {
-	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, delay = 1000, pageSize = 1 }) {
+	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, delay = 1000, selectIndex = 0, pageSize = 1 }) {
 		//调用实现父类的构造函数,相当于获得父类的this指向
 		super(arguments[0]);
 		this.cls = cls;
 		this.itemCls = itemCls;
+		this.selectIndex = selectIndex;
 		this.pageSize = pageSize;
 		this.duration = duration;
 		this.delay = delay;
@@ -76,6 +77,7 @@ class DwzMarquee extends DwzWidget {
 
 		setTimeout(() => {
 			this.play();
+			this._triggerActive();
 		}, 200);
 
 		this.$el.on('mouseover', () => {
@@ -86,9 +88,27 @@ class DwzMarquee extends DwzWidget {
 		});
 	}
 
+	_triggerActive() {
+		let $items = this.findByCls(this.itemCls);
+		let _length = $items.size();
+		let selectIndex = _length > this.selectIndex ? this.selectIndex : 0;
+		if (_length <= 0) {
+			selectIndex = -1;
+		}
+		this.trigger($.event.type.activated, {
+			$item: selectIndex >= 0 ? $items.eq(selectIndex) : null,
+			$items,
+			selectIndex
+		});
+	}
+
 	_animationEvent() {
 		let $marquee = this.findByCls(this.cls);
 		let $items = this.findByCls(this.itemCls);
+		if ($items.size() == 0) {
+			return;
+		}
+
 		let $first = $items.eq(0);
 		let itemHeight = $first.height();
 
@@ -100,7 +120,8 @@ class DwzMarquee extends DwzWidget {
 				$marquee.append($first);
 			}
 
-			setTimeout(
+			this._triggerActive();
+			this._timer = setTimeout(
 				() => {
 					this._animationEvent();
 				},
@@ -123,7 +144,7 @@ class DwzMarquee extends DwzWidget {
 		if (this.$el.size() == 0) {
 			return;
 		}
-
+		this.isOver = false;
 		let $marquee = this.findByCls(this.cls);
 		if ($marquee.size() == 0) {
 			this.$el.html(`<div class="${this.cls}">${this.$el.html()}</div>`);
@@ -140,25 +161,105 @@ class DwzMarquee extends DwzWidget {
 			if (this.pageSize > 1) {
 				this.$el.css({ height: $items.eq(0).height() * this.pageSize + 'px' });
 			}
-			setTimeout(() => {
-				this._animationEvent();
-			}, 500);
+			this._animationEvent();
 		}
 	}
 
+	_stop() {
+		this.isOver = true;
+		if (this._timer) {
+			clearTimeout(this._timer);
+			this._timer = null;
+		}
+	}
 	html(html) {
+		this._stop();
 		this.$el.html(html);
 		this.play();
+		this._triggerActive();
 	}
 
-	appendItem(html) {
+	appendItem(elem) {
 		if (this.pageSize > 1) {
+			this._stop();
 			let $marquee = this.findByCls(this.cls);
-			$marquee.append(html);
+			$marquee.append(elem);
+			this.play();
+			this._triggerActive();
 		}
 	}
 
-	removeItem(selecter) {}
+	removeItem(index) {
+		this.updateItem(index);
+	}
+
+	updateItem(index, elem) {
+		let $items = this.findByCls(this.itemCls);
+		this._stop();
+		if ($.isFunction(index)) {
+			$items.each((i, el) => {
+				if (index(i, el)) {
+					elem ? $(el).after(elem).remove() : $(el).remove();
+				}
+			});
+		} else if (index >= 0 && index < $items.size()) {
+			let $el = $items.eq(index);
+			elem ? $el.after(elem).remove() : $el.remove();
+		}
+		this.play();
+		this._triggerActive();
+	}
 }
 
-$.extend({ DwzMarquee });
+/**
+ * 滚动显示组件
+ * @author 张慧华
+ */
+class DwzFlyPop extends DwzWidget {
+	constructor({ $el = null, cls, delay = 3 * 1000 }) {
+		//调用实现父类的构造函数,相当于获得父类的this指向
+		super({ $el: $el || $('body') });
+		this.$items = [];
+		this.cls = cls;
+		this.delay = delay;
+		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
+	}
+
+	_triggerActive() {
+		this.trigger($.event.type.activated, this.$items.length > 0 ? this.$items[this.$items.length - 1] : null);
+	}
+
+	fly({ html = '', left = 0, top = 0 }) {
+		const $elem = $(html).appendTo(this.$el);
+		// const startPos = $elem.offset();
+		setTimeout(() => {
+			$elem.css({ left: left + 'px', top: top + 'px' }).addClass(this.cls);
+
+			$elem.off(this.animationend).on(this.animationend, (event) => {
+				$elem.off(this.animationend);
+				this._triggerActive();
+			});
+		}, this.delay);
+		this.$items.push($elem);
+	}
+
+	remove(index) {
+		if ($.isFunction(index)) {
+			this.$items.forEach((el, i) => {
+				if (index(i, el)) {
+					$(el).remove();
+				}
+			});
+		} else if (index >= 0 && index < this.$items.length) {
+			$items[index].remove();
+		}
+	}
+
+	clear() {
+		this.$items.forEach((elem) => {
+			$(elem).remove();
+		});
+	}
+}
+
+$.extend({ DwzMarquee, DwzFlyPop });
