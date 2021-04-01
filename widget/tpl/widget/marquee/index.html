@@ -105,6 +105,7 @@
 	<footer>
 		<div class="form-bar padding-h">
 			<button class="button primary" type="button">appendItem 插入</button>
+			<button class="button success" type="button">updateItem 更新</button>
 			<button class="button danger" type="button">removeItem 删除</button>
 		</div>
 	</footer>
@@ -132,6 +133,9 @@
 			pageSize: 4
 		});
 
+		marquee.on($.event.type.activated, function($item) {
+			console.log(new Date(), $item)
+		});
 		this.find('button.primary').click(function() {
 			marquee.appendItem(`<li class="tr">
 							<div class="td w30">#</div>
@@ -141,10 +145,27 @@
 						</li>`);
 		});
 
-		this.find('button.danger').click(function() {
-			marquee.removeItem(function() {
+		this.find('button.success').click(function() {
+			marquee.updateItem(0, `<li class="tr">
+							<div class="td w30">#</div>
+							<div class="td flex-1">测试</div>
+							<div class="td w100 right">1500万</div>
+							<div class="td w100 right"><i class="table-status-eq"></i></div>
+						</li>`);
+		});
 
-			});
+		this.find('button.danger').click(function() {
+			marquee.removeItem(0); // 删除第一个
+
+			// 删除全部
+			// marquee.removeItem((i, el) => {
+			// 	return true
+			// });
+
+			// 条件删除
+			// marquee.removeItem((i, el) => {
+			// 	return el.dataset.id > 2
+			// });
 		});
 	}
 </script>

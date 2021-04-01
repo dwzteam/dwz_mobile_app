@@ -31,8 +31,11 @@
  * ----------------------------------------------------------
  */
 (function () {
-	let MONTH_NAMES = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-	let DAY_NAMES = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+	$.setRegional('utilDate', {
+		MONTH_NAMES: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		DAY_NAMES: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+	});
+
 	function LZ(x) {
 		return (x < 0 || x > 9 ? '' : '0') + x;
 	}
@@ -45,6 +48,9 @@
 	 * @param {Object} format
 	 */
 	function formatDate(date, format) {
+		let MONTH_NAMES = $.regional.utilDate.MONTH_NAMES;
+		let DAY_NAMES = $.regional.utilDate.DAY_NAMES;
+
 		format = format + '';
 		let result = '';
 		let i_format = 0;
@@ -142,6 +148,9 @@
 	 * @param {Object} format
 	 */
 	function parseDate(val, format) {
+		let MONTH_NAMES = $.regional.utilDate.MONTH_NAMES;
+		let DAY_NAMES = $.regional.utilDate.DAY_NAMES;
+
 		val = val + '';
 		format = format + '';
 		let i_val = 0;
@@ -316,10 +325,10 @@
 		return new Date(year, month - 1, date, hh, mm, ss);
 	}
 
-	Date.prototype.formatDate = function (dateFmt = 'yyyy-MM-dd') {
+	Date.prototype.formatDate = function (dateFmt) {
 		return formatDate(this, dateFmt);
 	};
-	String.prototype.parseDate = function (dateFmt = 'yyyy-MM-dd') {
+	String.prototype.parseDate = function (dateFmt) {
 		if (this.length < dateFmt.length) {
 			dateFmt = dateFmt.slice(0, this.length);
 		}

@@ -227,27 +227,16 @@
 		margin: 5px;
 	}
 }
-.flex-1, .flex-2, .flex-3, .flex-4, .flex-5, .flex-6 {
-	position: relative;
+
+// 循环flex-1 ...
+.flex-loop(@counter) when (@counter > 0) {
+	.flex-loop((@counter - 1)); // 递归调用自身
+	.flex-@{counter} {
+		position: relative;
+		flex: @counter; // 每次调用时产生的样式代码
+	}
 }
-.flex-1 {
-	flex: 1;
-}
-.flex-2 {
-	flex: 2;
-}
-.flex-3 {
-	flex: 3;
-}
-.flex-4 {
-	flex: 4;
-}
-.flex-5 {
-	flex: 5;
-}
-.flex-6 {
-	flex: 6;
-}
+.flex-loop(60);
 
 .align-center {
 	align-items: center;

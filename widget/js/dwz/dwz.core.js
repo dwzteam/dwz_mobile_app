@@ -1114,7 +1114,7 @@ dwz.fn.extend({
 		});
 	},
 	data(name, value) {
-		if (typeof name === 'object' || value === undefined) {
+		if (typeof name === 'string' && value === undefined) {
 			return dwz.data(this.get(0), name);
 		}
 
@@ -1179,20 +1179,31 @@ dwz.fn.extend({
 	},
 	prepend(content) {
 		let elem = this.get(0);
-		$(content).each(function () {
-			elem.insertBefore(this, elem.firstChild);
+		$(content).each((i, el) => {
+			elem.insertBefore(el, elem.firstChild);
 		});
 		return this;
 	},
 	append(content) {
 		let elem = this.get(0);
-		$(content).each(function () {
-			elem.appendChild(this);
+		$(content).each((i, el) => {
+			elem.appendChild(el);
+		});
+		return this;
+	},
+	before(content) {
+		let pNode = this.parentNode();
+		$(content).each((i, el) => {
+			pNode.insertBefore(el, this.get(0));
 		});
 		return this;
 	},
 	after(content) {
-		return this.parent().append(content);
+		let pNode = this.parentNode();
+		$(content).each((i, el) => {
+			pNode.insertBefore(el, this.get(0).nextSibling);
+		});
+		return this;
 	},
 	prependTo(dest) {
 		if (dwz.instanceOf(dest)) dest = dest.get(0);

@@ -7,7 +7,7 @@
 	background-size: @bgsize;
 }
 .icon-size(@width: 24px, @height: 24px, @display:block, @bgsize: 100%) {
-	.bg-size(@width: 24px, @height: 24px, @display:block, @bgsize: 100%);
+	.bg-size(@width: @width, @height: @height, @display:@display, @bgsize: @bgsize);
 	font-size: @height * 0.8;
 	.flex-wrap-center;
 }

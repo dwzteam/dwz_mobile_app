@@ -357,7 +357,6 @@ $.extend(biz, {
 		);
 	},
 	getGPS: function (geolocationSuccess, geolocationError) {
-
 		if (window.api) {
 			if (!biz.checkPermission('location', 'gps定位')) {
 				geolocationError && geolocationError();
@@ -543,11 +542,11 @@ $.extend(
 			return value ? value : '';
 		},
 		showSex(value) {
-			var item = SexStore.getItem(value);
+			let item = SexStore.getItem(value);
 			return item.name;
 		},
 		showTransportStatus(value, fieldName) {
-			var item = TransportStatus.getItem(value);
+			let item = TransportStatus.getItem(value);
 			return item[fieldName || 'name'];
 		},
 		showImg(url, defaultImg) {
@@ -555,6 +554,10 @@ $.extend(
 		},
 		showUserIcon(url) {
 			return url || 'image/dwz-logo.svg';
+		},
+		showStore(id, store, name = 'name') {
+			let item = store.getItem(id);
+			return item[name];
 		}
 	},
 	biz.format
