@@ -28,11 +28,18 @@
 					tabW = 0, // sildeTab .hd li 单个宽度
 					headerUlW = 0; // header ul width
 
-				$tabs.each(function (index) {
-					let _tabW = $(this).width(true);
-					if (tabW < _tabW) tabW = _tabW;
-					headerUlW += _tabW;
-				});
+				let calTabW = () => {
+					tabW = 0;
+					headerUlW = 0;
+					$tabs.each(function (index) {
+						let _tabW = $(this).width(true);
+						if (tabW < _tabW) tabW = _tabW;
+						headerUlW += _tabW;
+					});
+					$headerUl.css({ width: headerUlW + 'px' });
+				};
+
+				calTabW();
 
 				let $slides = $contentUl.children();
 
@@ -110,13 +117,12 @@
 				}
 
 				if (count > 0) {
-					$headerUl.css({ width: headerUlW + 'px' });
-					// $contentUl.css({'width':contentUlW + 'px'});
 					$header.scroll({
 						scrollX: true,
 						scrollY: false,
 						scroll$: ':scope > ul',
-						stopPropagationEvents: true
+						stopPropagationEvents: true,
+						touchstart: calTabW
 					});
 					switchTab();
 					switchSlide();
