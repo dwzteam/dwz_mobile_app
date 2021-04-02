@@ -66,7 +66,7 @@
 
 				$wrap.touchwipe({
 					direction: direction,
-					stopPropagationEvents: true,
+					stopPropagationEvents: false,
 					touchstart(event, pos) {
 						currentPos = $main.getComputedPos();
 						if (op.scrollY) {

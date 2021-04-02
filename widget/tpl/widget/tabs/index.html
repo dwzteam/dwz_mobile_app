@@ -9,31 +9,119 @@
 
 	<section>
 
-		<div class="scroll-content dwz-scroll">
-			<div class="scroll">
 
-				<div class="w-tabbar dwz-tabs">
-					<div class="tab-bar">
-						<a class="tab-item"><span>tab1</span></a>
-						<a class="tab-item"><span>tab2</span></a>
-						<a class="tab-item"><span>tab3</span></a>
-					</div>
-					<div class="tab-panel">
-						<div class="panel-item">
-							<article>内容1</article>
-						</div>
-						<div class="panel-item">
-							<article>内容2</article>
-						</div>
 
-						<div class="panel-item">
-							<article>内容3</article>
-						</div>
-					</div>
+		<div class="w-tabbar dwz-tabs full-size">
+			<div class="tab-bar">
+				<a class="tab-item"><span>tab1</span></a>
+				<a class="tab-item"><span>tab2</span></a>
+				<a class="tab-item"><span>tab3</span></a>
+			</div>
+			<div class="tab-panel flex-wrap-v">
+				<div class="panel-item flex-1">
+					<article>内容1</article>
+				</div>
+				<div class="panel-item flex-1">
+					<article>内容2</article>
 				</div>
 
+				<div class="panel-item flex-1">
+
+					<div class="slideTab full-abs">
+						<div class="hd">
+							<ul>
+								<li>标题1</li>
+								<li>标题2</li>
+								<li>标题3</li>
+								<li>标题4</li>
+								<li>标题5</li>
+								<li>标题6</li>
+								<li>标题7</li>
+								<li>标题8</li>
+								<li>标题9</li>
+								<li>标题10</li>
+							</ul>
+						</div>
+						<div class="bd">
+							<ul>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容1
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容2
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容3
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容4
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容5
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容6
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容7
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容8
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容9
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="scroll-content dwz-scroll">
+										<div class="scroll">
+											内容10
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
+
 	</section>
 
 </main>
@@ -44,8 +132,15 @@
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
 
-		this.find('.dwz-tabs').onActivated(function(event) {
+		this.find('.dwz-tabs').onActivated((event) => {
 			console.log(event.data);
 		});
+
+		this.find('.slideTab').slideTab({
+			onSwitchSlide: ($itemBox, itemTpl, itemParams) => {
+				console.log($itemBox, itemTpl, itemParams);
+			}
+		})
+
 	}
 </script>

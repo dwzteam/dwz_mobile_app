@@ -18,6 +18,7 @@ class DwzWidget {
 		}
 
 		this.eventNames = { show: 'show', hide: 'hide' };
+		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 	}
 
 	find(selecter) {
@@ -69,7 +70,6 @@ class DwzMarquee extends DwzWidget {
 		this.pageSize = pageSize;
 		this.duration = duration;
 		this.delay = delay;
-		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 
 		// 用于控制鼠标悬停
 		this.isOver = false;
@@ -222,7 +222,6 @@ class DwzFlyPop extends DwzWidget {
 		this.$items = [];
 		this.cls = cls;
 		this.delay = delay;
-		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 	}
 
 	_triggerActive() {

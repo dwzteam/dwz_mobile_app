@@ -49,13 +49,12 @@
 					$slides = $contentUl.children();
 				}
 
-				let contentW = $content.width(), // sildeTab .bd 容器宽度
-					slideW = $slides.width(true), // sildeTab .bd li 单个面板宽度
-					contentUlW = 0;
+				let contentW = $content.width() || $('body').width(), // sildeTab .bd 容器宽度
+					// slideW = $slides.width(true); // sildeTab .bd li 单个面板宽度
+					slideW = contentW;
 				$slides.each(function (index) {
 					let _slideW = $(this).width(true);
 					if (slideW < _slideW) slideW = _slideW;
-					contentUlW += _slideW;
 				});
 
 				function switchTab(scollCurrent) {
