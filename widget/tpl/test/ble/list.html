@@ -4,14 +4,6 @@
 		<div class="toolbar">
 			<div class="header-title">蓝牙设备</div>
 		</div>
-		<!-- <div class="toolbar">
-			<div class="bar search-bar">
-				<label class="item-input filter-keywords">
-					<button class="icon icon-search" type="button"></button>
-					<input type="search" class="dwz-disable-autofocus" name="keywords" value="" placeholder="车号、挂车号">
-				</label>
-			</div>
-		</div> -->
 	</header>
 
 	<section>
@@ -33,10 +25,6 @@
 				<ul class="list pic-list dwz-list-box">
 
 				</ul>
-
-				<div class="pullUp">
-					<span class="pullUpIcon">&nbsp;</span><span class="pullUpLabel" data-loading="加载中..." data-no-more="没有更多了">加载更多</span>
-				</div>
 
 			</div>
 			<a href="javascript:void(0)" class="top-btn hide">回顶部</a>
@@ -70,7 +58,7 @@
 			<div class="txt-info txt-line1">uuid：{{item.uuid}}</div>
 			<div class="txt-info txt-line1">advertisingName：{{item.advertisingName}}</div>
 			<div class="txt-info txt-line1">rssi：{{item.rssi}}</div>
-			<div class="txt-info">manufacturerData：{{item.manufacturerData}}</div>
+			<!-- <div class="txt-info">manufacturerData：{{item.manufacturerData}}</div> -->
 		</div>
 	</li>
 	{{/each}}
@@ -87,48 +75,66 @@
 		});
 		this.html(html).initUI();
 
+		var $form = this,
+			$listBox = this.find('ul.dwz-list-box');
+		var ble = api.require('ble');
+
 		var $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
-		var ble = api.require('ble');
-		$form.requestList = function(loadMore) {
+		var _timer = null;
+		var _getPeripheral = function() {
+			ble.getPeripheral(function(ret) {
+				// console.log(JSON.stringify(ret))
+				ret.peripherals.forEach(function(item) {
+					console.log(item.name + ' ' + item.uuid + ' ### ' + item.rssi);
+				});
+
+				$form.listTotal(ret.peripherals.length, ret.peripherals);
+				if ($form.total) {
+					$form.find('.empty_box').hide();
+				}
+
+				var _html = template.render(tpl.tpl_list, {
+					list: ret.peripherals
+				});
+
+				$listBox.html(_html).initUI();
+			});
+		}
+		$form.requestList = function() {
 
 			ble.initManager({
-				single: false
+				single: true
 			}, function(ret) {
-				console.log(JSON.stringify(ret));
-				if (ret.state == "poweredOn") {
-
-					ble.scan({
-						// serviceUUIDs: ['', '']
-					}, function(ret) {
-						console.log(JSON.stringify(ret))
-
-						ble.getPeripheral(function(ret) {
-							if (ret) {
-								console.log(JSON.stringify(ret))
-
-								$form.listTotal(ret.peripherals.length, ret.peripherals);
-								if ($form.total) {
-									$form.find('.empty_box').hide();
-								}
-
-								var _html = template.render(tpl.tpl_list, {
-									list: ret.peripherals
-								});
-
-								$listBox.html(_html).initUI();
-							}
-						});
+				if (ret.state == "poweredOff") {
+					$.alert.error({
+						msg: "未开启蓝牙！"
 					});
+					ble.openBluetooth();
+				} else if (ret.state == "unauthorized") {
+					$.alert.error({
+						msg: "蓝牙未授权！"
+					});
+				} else if (ret.state == "poweredOn") {
 
-
-				} else {
-					$.alert.error('初始化蓝牙管理器失败')
+					ble.isScanning(function(ret) {});
+					ble.scan({
+						serviceUUIDs: []
+					}, function(ret) {
+						if (ret.status) {
+							if (_timer) {
+								clearInterval(_timer);
+								_timer = null;
+							}
+							_timer = setInterval(_getPeripheral, 5000);
+							setTimeout(_getPeripheral, 500);
+						}
+					});
 				}
 			});
-
 		};
 
 		$.listForm($form);
+
 	}
 </script>

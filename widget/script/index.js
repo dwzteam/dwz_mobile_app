@@ -102,7 +102,7 @@ function loadScripts(options) {
 		}
 
 		// 开启gps
-		biz.startLocation();
+		// biz.startLocation();
 
 		setTimeout(() => {
 			$('body').addClass(api.systemType);
