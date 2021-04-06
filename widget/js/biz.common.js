@@ -83,9 +83,14 @@ $.extend(biz, {
 		$.alert.toast('操作失败，请稍后再试！');
 	},
 	safeAreaTop: 0,
+	safeAreaBottom: 0,
 	fixStatusBar($p) {
 		$p.find('header, .dwz-fix-status-bar').css({
 			'padding-top': biz.safeAreaTop + 'px'
+		});
+
+		$p.find('footer, .dwz-fix-tab-bar').css({
+			'padding-bottom': biz.safeAreaBottom + 'px'
 		});
 	},
 	getAppVersion() {

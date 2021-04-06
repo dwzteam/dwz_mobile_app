@@ -68,6 +68,7 @@ function loadScripts(options) {
 
 	apiready = function () {
 		biz.safeAreaTop = api.safeArea.top;
+		biz.safeAreaBottom = api.safeArea.bottom;
 		biz.fixStatusBar($(document));
 
 		api.setStatusBarStyle({
