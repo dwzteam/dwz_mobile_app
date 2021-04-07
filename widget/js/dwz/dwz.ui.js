@@ -241,7 +241,7 @@
 						success: (json) => {
 							console.log(JSON.stringify(json));
 							let info = json[dwz.config.keys.message] || json.info;
-							if (isAjaxStatusError(json)) {
+							if ($.isAjaxStatusError(json)) {
 								$.alert.error(info);
 								clearInterval(timer);
 								$altMsg.remove();

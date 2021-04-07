@@ -10,7 +10,7 @@
 		<div class="toolbar">
 			<div class="bar search-bar bar-reset">
 				<label class="item-input filter-keywords">
-					<button class="icon icon-search" type="button"></button>
+					<i class="dwz-icon-search"></i>
 					<input type="search" class="dwz-disable-autofocus" name="{{searchField}}" value="" placeholder="搜索关键字" />
 				</label>
 			</div>
@@ -19,8 +19,7 @@
 
 		<div class="form-content">
 			{{each filterItems as item}} {{if item.value}}
-			<input type="hidden" name="{{item.name}}" value="{{item.value}}" />
-			{{else if item.options}}
+			<input type="hidden" name="{{item.name}}" value="{{item.value}}" /> {{else if item.options}}
 			<div class="form-item no-line is-mini">
 				<div class="item-content">
 					<label style="width: 80px">{{item.label}}：</label>

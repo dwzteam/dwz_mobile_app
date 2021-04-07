@@ -217,5 +217,59 @@ biz.helper = {
 			$(tpl.tpl_item_detail).appendTo($itemDetailBox).initUI();
 			$itemDetailBox.parentsUnitBox('scroll-content').scrollTo({ y: 'end', duration: 800 });
 		});
+	},
+
+	// 侧滑面板高级搜索
+	searchFilterHelper(tpl, params) {
+		const $form = params.$form;
+		const $filterForm = this.find('form');
+		const $inputs = $form.find(':hidden');
+
+		const setUlVal = ($ul, val) => {
+			$ul.find('li').removeClass('active');
+			const $li = $ul.find('li[data-value="' + val + '"]').addClass('active');
+			if ($li.size()) {
+				$ul.data('value', val);
+			}
+		};
+		$inputs.each((index, input) => {
+			const $ul = $filterForm.find('ul[data-name=' + input.name + ']');
+			if ($ul.size()) {
+				setUlVal($ul, input.value);
+
+				$ul.find('li[data-value]').click(function () {
+					var $li = $(this);
+					if (!$li.hasClass('active')) {
+						setUlVal($ul, $li.attr('data-value'));
+					}
+				});
+			}
+		});
+
+		$filterForm.on('reset', (event) => {
+			$filterForm.find('ul[data-name').each((index, ul) => {
+				setUlVal($(ul), '');
+			});
+		});
+
+		$filterForm.on('submit', (event) => {
+			$filterForm.find('ul[data-name').each((index, ul) => {
+				const $ul = $(ul);
+				const $input = $form.find('input[name=' + $ul.attr('data-name') + ']');
+				if ($input.size()) {
+					$input.val($ul.data('value'));
+				}
+			});
+
+			$filterForm.find('input').each((index, input) => {
+				const $input = $form.find('input[name=' + input.name + ']');
+				if ($input.size()) {
+					$input.val(input.value);
+				}
+			});
+
+			$form.trigger('submit');
+			$.filterPanel.close();
+		});
 	}
 };
