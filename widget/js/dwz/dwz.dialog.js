@@ -109,6 +109,7 @@ $.dialog = {
 			</header>
 			<section>${iframe_html}</section>
 		</main>`);
+		$box.initUI();
 	},
 
 	close(options) {
