@@ -54,7 +54,8 @@ var js_src = {
 function loadScripts(options) {
 	var BASE_URL = (options && options.BASE_URL) || './';
 	var op = {
-		env: (options && options.env) || 'dev', // env: dev, build
+		ENV: (options && options.ENV) || 'DEV', // DEV, TEST, UAT, LIVE
+		run_env: (options && options.run_env) || 'dev', // dev, build
 		iframe: (options && options.iframe) || false // 是否iframe嵌入的页面
 	};
 
@@ -62,7 +63,7 @@ function loadScripts(options) {
 		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"></script>');
 	});
 
-	js_src[op.env].forEach(function (path) {
+	js_src[op.run_env].forEach(function (path) {
 		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"></script>');
 	});
 
@@ -111,6 +112,8 @@ function loadScripts(options) {
 	};
 
 	document.addEventListener('DOMContentLoaded', function () {
+		if (op.ENV) biz.server.ENV = op.ENV;
+
 		$.extend($.config, {
 			pageInfo: { pageNum: 'pageNum' },
 			statusCode: { ok: 1, error: 0, timeout: 301 },

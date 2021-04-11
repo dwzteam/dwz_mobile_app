@@ -367,11 +367,10 @@ function dialogAjaxDone(json) {
 
 					if (url && url != 'javascript:') {
 						$.ajax({
-							type: 'POST',
+							type: this.attr('data-method') || 'POST',
 							url: url,
 							data: { active: beforeActive ? 0 : 1 },
 							dataType: 'json',
-							cache: false,
 							success: (json) => {
 								$.ajaxDone(json);
 

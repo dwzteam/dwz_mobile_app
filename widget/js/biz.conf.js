@@ -3,7 +3,7 @@
  */
 const biz = window.biz || {
 	server: {
-		ENV: 'DEV', // DEV,TEST,UAT,LIVE
+		ENV: 'LIVE', // DEV,TEST,UAT,LIVE
 		_flag() {
 			return $.inArray(this.ENV, ['TEST', 'UAT', 'LIVE']) ? 'REMOTE' : this.ENV;
 		},

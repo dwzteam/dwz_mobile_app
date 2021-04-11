@@ -11,35 +11,9 @@ biz.announce = {
 
 		let $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
+		let url = biz.server.getUrl(biz.server.announce.list);
 
-		$form.requestList = (loadMore) => {
-			$.ajax({
-				type: 'POST',
-				url: biz.server.getUrl(biz.server.announce.list),
-				dataType: 'json',
-				data: $form.serializeArray(),
-				cache: false,
-				global: false,
-				success: (json) => {
-					if ($.isAjaxStatusOk(json)) {
-						$form.listTotal(json.total, json.data);
-						if ($form.total) {
-							$form.find('.empty_box').hide();
-						}
-
-						let _html = template.render(tpl.tpl_list, json);
-						if (loadMore) {
-							$(_html).appendTo($listBox).hoverClass();
-						} else {
-							$listBox.html(_html).initUI();
-						}
-					}
-				},
-				error: biz.ajaxError
-			});
-		};
-
-		$.listForm($form);
+		biz.helper.listRender({ tpl, params, url, type: 'POST', $form, $listBox });
 	},
 	detailRender(tpl, params) {
 		$.ajax({

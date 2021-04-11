@@ -140,7 +140,7 @@ $.fn.extend({
 });
 
 $.extend({
-	listForm($form) {
+	listForm($form, triggerSubmit = true) {
 		let $list = $form.find('div.dwz-list');
 		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
 		$form.on('submit', () => {
@@ -149,9 +149,10 @@ $.extend({
 			$list.scrollTo({ y: 0, duration: 800 });
 			return false;
 		});
-		setTimeout(() => {
-			$form.trigger('submit');
-		}, 300);
+		triggerSubmit &&
+			setTimeout(() => {
+				$form.trigger('submit');
+			}, 300);
 
 		$list.list({
 			$form,

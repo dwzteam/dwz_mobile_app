@@ -97,7 +97,9 @@ dwz.extend({
 	isArray(arr) {
 		return Object.prototype.toString.call(arr) === '[object Array]';
 	},
-
+	isObject(obj) {
+		return Object.prototype.toString.call(obj) === '[object Object]';
+	},
 	instanceOf(object) {
 		if (!object) return false;
 

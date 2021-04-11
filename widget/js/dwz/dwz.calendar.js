@@ -381,18 +381,18 @@
 					op.refreshDayFn($days, dp.getDateWrap());
 				}
 
-				// 选择日期回调
-				if (op.changeDayFn) {
-					let $daySelected = $days.filter(function () {
-						return $(this).hasClass('selected');
-					});
-					if ($daySelected.size() > 0) {
-						let value = $this.attr('data-value');
-						op.changeDayFn($daySelected.eq(0), value);
-					} else {
-						op.changeDayFn($daySelected, '');
-					}
-				}
+				// 选择日期回调 重复触发changeDayFn，注释掉
+				// if (op.changeDayFn) {
+				// 	let $daySelected = $days.filter(function () {
+				// 		return $(this).hasClass('selected');
+				// 	});
+				// 	if ($daySelected.size() > 0) {
+				// 		let value = $this.attr('data-value');
+				// 		op.changeDayFn($daySelected.eq(0), value);
+				// 	} else {
+				// 		op.changeDayFn($daySelected, '');
+				// 	}
+				// }
 
 				// last view
 				let lastHtml = generateBdHtml(dp, { type: 'last' });

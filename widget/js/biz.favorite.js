@@ -31,35 +31,8 @@ biz.favorite = {
 
 		let $form = this.find('form.dwz-list-form'),
 			$listBox = $form.find('ul.dwz-list-box');
+		let url = biz.server.getUrl(biz.server.favorite.list);
 
-		$form.requestList = function (loadMore) {
-			let data = $form.serializeArray();
-			console.log(JSON.stringify(data));
-			$.ajax({
-				type: 'POST',
-				url: biz.server.getUrl(biz.server.favorite.list),
-				dataType: 'json',
-				data: data,
-				success: (json) => {
-					if ($.isAjaxStatusOk(json)) {
-						$form.listTotal(json.data.total, json.data.list);
-						if ($form.total) {
-							$form.find('.empty_box').hide();
-						}
-
-						let _html = template.render(tpl.tpl_list, json.data);
-
-						if (loadMore) {
-							$(_html).appendTo($listBox).touchOpenRight().hoverClass();
-						} else {
-							$listBox.html(_html).initUI();
-						}
-					}
-				},
-				error: biz.ajaxError
-			});
-		};
-
-		$.listForm($form);
+		biz.helper.listRender({ tpl, params, url, type: 'POST', $form, $listBox });
 	}
 };

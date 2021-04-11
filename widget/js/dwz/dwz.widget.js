@@ -109,15 +109,16 @@ class DwzMarquee extends DwzWidget {
 			return;
 		}
 
-		let $first = $items.eq(0);
-		let itemHeight = $first.height();
+		let itemHeight = $items.eq(0).height();
 
 		$marquee.translate({ y: 0 });
 		$marquee.off(this.animationend).on(this.animationend, (event) => {
 			$marquee.off(this.animationend);
 			$marquee.translate({ y: 0 });
-			if (this.isLastPlay) {
-				$marquee.append($first);
+
+			$items = this.findByCls(this.itemCls); // 防止removeItem后又被加回来的情况
+			if (this.isLastPlay && $items.size()) {
+				$marquee.append($items.eq(0));
 			}
 
 			this._triggerActive();
@@ -193,15 +194,22 @@ class DwzMarquee extends DwzWidget {
 		this.updateItem(index);
 	}
 
-	updateItem(index, elem) {
+	updateItem(index, elem, appendIfNone = false) {
 		let $items = this.findByCls(this.itemCls);
 		this._stop();
 		if ($.isFunction(index)) {
+			let _count = 0; // 满足匹配条件的数量
 			$items.each((i, el) => {
 				if (index(i, el)) {
+					_count++;
 					elem ? $(el).after(elem).remove() : $(el).remove();
 				}
 			});
+
+			if (!_count && appendIfNone) {
+				// 如果没有匹配数据就插入一条
+				this.findByCls(this.cls).append(elem);
+			}
 		} else if (index >= 0 && index < $items.size()) {
 			let $el = $items.eq(index);
 			elem ? $el.after(elem).remove() : $el.remove();

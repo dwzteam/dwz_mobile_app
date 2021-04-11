@@ -1,4 +1,44 @@
 biz.helper = {
+	/**
+	 * 通用无限滚动列表页面渲染函数
+	 */
+	listRender({ tpl, params, url, type = 'GET', $form, $listBox, callback }) {
+		$form.requestList = (loadMore) => {
+			let data = $form.serializeArray();
+			$.ajax({
+				type,
+				url,
+				dataType: 'json',
+				data,
+				success: (json) => {
+					if ($.isAjaxStatusOk(json)) {
+						let list = json.data.list || json.data || [];
+						if ($.isObject(list)) list = Object.values(list);
+
+						let total = json.data.total || json.total || list.length;
+						$form.listTotal(total, list);
+						if ($form.total) {
+							$form.find('.empty_box').hide();
+						}
+
+						let _html = template.render(tpl.tpl_list || tpl, { list, total, params: $.isFunction(params) ? params() : params });
+
+						if (loadMore) {
+							$(_html).appendTo($listBox).initUI();
+						} else {
+							$listBox.html(_html).initUI();
+						}
+
+						callback && callback();
+					}
+				},
+				error: biz.ajaxError
+			});
+		};
+
+		$.listForm($form);
+	},
+
 	// json data数据 转换成 object 对像数组
 	jsonDataList(json) {
 		let list = json.data ? json.data.list || json.data : [];
