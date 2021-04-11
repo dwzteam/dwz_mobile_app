@@ -220,7 +220,7 @@ biz.helper = {
 								$.filterPanel.close();
 							});
 						} else {
-							$items.click((event) => {
+							$items.click(function (event) {
 								op.callback && op.callback.call($(op.target), this.dataset);
 								$.filterPanel.close();
 							});
