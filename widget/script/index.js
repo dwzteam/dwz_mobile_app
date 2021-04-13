@@ -106,7 +106,7 @@ function loadScripts(options) {
 		// 开启gps
 		// biz.startLocation();
 
-		setTimeout(() => {
+		setTimeout(function () {
 			$('body').addClass(api.systemType);
 		}, 2000);
 	};
@@ -142,7 +142,7 @@ function loadScripts(options) {
 					//浏览器刷新监测地址栏, 根据hash定位
 					if (hash) {
 						setTimeout(function () {
-							let args = hash.split(';');
+							var args = hash.split(';');
 							if (args.length == 2) {
 								$.navTab.open({ tabid: args[0], url: args[1] });
 							} else if (args.length == 3) {

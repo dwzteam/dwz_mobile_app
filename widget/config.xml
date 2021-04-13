@@ -64,12 +64,15 @@
 	<!-- <preference name="backgroundMode" value="location | fetch | remote-notification"/> -->
 	<preference name="backgroundMode" value="bluetooth-central | bluetooth-peripheral"/>
 	
-    <feature name="dwzBaiduFaceLive">
+    <feature name="testBaiduFaceLive">
         <param name="LicenseID_iOS" value="DwzMobileApp-face-ios"/>
         <param name="LicenseFileName_iOS" value="idl-license.face-ios"/>
         <param name="LicenseID_Android" value="DwzMobileApp-face-android"/>
         <param name="LicenseFileName_Android" value="idl-license.face-android"/>
     </feature>
+	<!--将com.dwz.DwzMobileApp替换成您工程的包名-->
+    <provider android:authorities="com.dwz.DwzMobileApp.liantian.ac.provider" android:name="com.baidu.liantian.LiantianProvider" android:exported="true"/>
+
 
 	<feature name="bmLocation">
 		<param name="android_api_key" value="e4iq3bUaFzwgOorjFzIxYBMEi7rN9xup"/>

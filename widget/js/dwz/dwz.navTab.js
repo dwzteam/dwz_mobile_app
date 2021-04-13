@@ -189,9 +189,11 @@ $.navTab = {
 	/**
 	 * 清除缓存并重新加载页面
 	 */
-	clearCache() {
-		this.getTabs().each((index, item) => $(item).removeAttr('data-loaded'));
-		this.reload();
+	clearCache(reload = true) {
+		if (this.$box) {
+			this.getTabs().each((index, item) => $(item).removeAttr('data-loaded'));
+			reload && this.reload();
+		}
 	},
 	/**
 	 * 加载外部页面

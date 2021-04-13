@@ -23,8 +23,8 @@ let UserInfoUtil = {
 			user_type: 'user_type',
 			headimgurl: 'headimgurl'
 		};
-		for (let [key, dbKey] of Object.entries(_attrMap)) {
-			// console.log(key + ': ' + dbKey);
+		for (let key in _attrMap) {
+			let dbKey = _attrMap[key];
 			if (data[dbKey] != undefined) UserInfo[key] = data[dbKey];
 		}
 
@@ -35,6 +35,7 @@ let UserInfoUtil = {
 	clear() {
 		UserInfo = {};
 		$.setStorage('APP_USER_INFO', UserInfo);
+		$.navTab.clearCache(false);
 	}
 };
 

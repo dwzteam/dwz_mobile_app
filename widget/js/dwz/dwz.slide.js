@@ -59,7 +59,9 @@
 				}
 
 				if ($titsWrap.size()) {
-					$titsWrap.html('<li></li>'.repeat(count));
+					// $titsWrap.html('<li></li>'.repeat(count)); // 安卓4.x兼容问题
+					$titsWrap.html(new Array(count + 1).join('<li></li>'));
+
 					$tits = $titsWrap.find('> li');
 				}
 

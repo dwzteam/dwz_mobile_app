@@ -46,8 +46,9 @@ biz.helper = {
 		// 兼容对象，把对象转换成数组
 		if (!$.isArray(list)) {
 			let _data = [];
-			for (let [id, obj] of Object.entries(list)) {
-				// console.log(id + ':' + obj);
+
+			for (let id in list) {
+				let obj = list[id];
 				_data.push({ id, code: obj.code || obj.id, name: obj.name || obj.title || obj });
 			}
 			list = _data;
