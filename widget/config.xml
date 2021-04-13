@@ -70,8 +70,8 @@
         <param name="LicenseID_Android" value="DwzMobileApp-face-android"/>
         <param name="LicenseFileName_Android" value="idl-license.face-android"/>
     </feature>
-	<!--将com.dwz.DwzMobileApp替换成您工程的包名-->
-    <provider android:authorities="com.dwz.DwzMobileApp.liantian.ac.provider" android:name="com.baidu.liantian.LiantianProvider" android:exported="true"/>
+	<!--将com.dwz.DwzMobileApp替换成您工程的包名(dwzBaiduFaceLive-1.0.3（百度人脸高线采集4.1版）之后版本需要配制此项)-->
+    <!-- <provider android:authorities="com.dwz.DwzMobileApp.liantian.ac.provider" android:name="com.baidu.liantian.LiantianProvider" android:exported="true"/> -->
 
 
 	<feature name="bmLocation">
