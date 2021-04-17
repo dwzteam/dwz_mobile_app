@@ -12,8 +12,7 @@ biz.baiduFace = {
 				headRight: headRight, // 活体动作，向右转头(默认:false)
 				headLeft: headLeft, // 活体动作，向左转头(默认:false)
 				headUp: headUp, // 活体动作，向上抬头(默认:false)
-				headDown: headDown, // 活体动作，向下低头(默认:false)
-				headLeftOrRight: headLeftOrRight // 活体动作，摇头(默认:false)
+				headDown: headDown // 活体动作，向下低头(默认:false)
 			},
 			(ret, err) => {
 				if (!ret.status && ret.message) {

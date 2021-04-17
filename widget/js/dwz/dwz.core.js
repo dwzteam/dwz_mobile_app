@@ -872,7 +872,7 @@ dwz.extend(String.prototype, {
 	},
 	replaceTm: function (params) {
 		if (!params) return this;
-		return this.replace(RegExp('({[A-Za-z_]+[A-Za-z0-9_]*})', 'g'), function ($1) {
+		return this.replace(new RegExp('({[A-Za-z_]+[A-Za-z0-9_]*})', 'g'), function ($1) {
 			return params[$1.replace(/[{}]+/g, '')];
 		});
 	},

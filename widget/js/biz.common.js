@@ -536,6 +536,15 @@ $.extend(biz, {
 		percent(num, fractionDigits) {
 			var percentNum = num * 100;
 			return percentNum.toFixed(fractionDigits);
+		},
+		// 手机号脱敏
+		maskMobile(str) {
+			return biz.format.maskStr(str, 3);
+		},
+		// 脱敏
+		maskStr(str, startCount = 6) {
+			if (!str) return str;
+			return str.replace(new RegExp('(.{' + startCount + '}).*(.{4})', 'g'), '$1****$2');
 		}
 	}
 });

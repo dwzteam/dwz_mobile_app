@@ -163,7 +163,7 @@
 		}
 	};
 
-	function previewUploadImg(previewElem, strBase64, inputName, maxW, maxH) {
+	function previewUploadImg($uploadWrap, previewElem, strBase64, inputName, maxW, maxH) {
 		let thumb = document.createElement('li');
 		thumb.classList.add('thumbnail');
 
@@ -196,6 +196,7 @@
 			let $link = $('<a class="img-del"><i class="dwz-icon-delete"></i></a>').prependTo(thumb);
 			$link.click((event) => {
 				$(thumb).remove();
+				$uploadWrap.show();
 				event.stopPropagation();
 			});
 		}
@@ -242,7 +243,7 @@
 									maxHeight: op.maxHeight,
 									callback(strBase64) {
 										// console.log(strBase64)
-										previewUploadImg(previewElem, strBase64, op.inputName, op.maxW, op.maxH);
+										previewUploadImg($uploadWrap, previewElem, strBase64, op.inputName, op.maxW, op.maxH);
 
 										if (op.callback) {
 											op.callback(base64Data, $previewElem);

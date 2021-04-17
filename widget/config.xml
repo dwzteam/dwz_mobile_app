@@ -64,7 +64,7 @@
 	<!-- <preference name="backgroundMode" value="location | fetch | remote-notification"/> -->
 	<preference name="backgroundMode" value="bluetooth-central | bluetooth-peripheral"/>
 	
-    <feature name="testBaiduFaceLive">
+    <feature name="dwzBaiduFaceLive">
         <param name="LicenseID_iOS" value="DwzMobileApp-face-ios"/>
         <param name="LicenseFileName_iOS" value="idl-license.face-ios"/>
         <param name="LicenseID_Android" value="DwzMobileApp-face-android"/>
