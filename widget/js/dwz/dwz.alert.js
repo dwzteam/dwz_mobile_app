@@ -53,9 +53,12 @@
 				$btns.eq(i).click(i, (event) => {
 					let buttonIndex = event.data + 1;
 					callback && callback({ buttonIndex });
-					$.alert.close();
 					event.preventDefault();
 					event.stopPropagation();
+
+					setTimeout(() => {
+						$.alert.close();
+					}, 100);
 				});
 			}
 		},
@@ -109,10 +112,6 @@
 			if (!msg) return;
 
 			let op = $.extend({ msg: msg, duration: 4000 }, options);
-			if (window.api) {
-				api.toast(op);
-				return;
-			}
 
 			let clearTimer = () => {
 				if (this._timer) {

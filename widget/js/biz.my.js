@@ -4,7 +4,7 @@
 biz.my = {
 	render(tpl, params) {
 		let data = {
-			UserInfo: UserInfo,
+			UserInfo,
 			appVersion: biz.getAppVersion(),
 			env: biz.server.ENV
 		};
@@ -56,14 +56,14 @@ biz.my = {
 	},
 	settingRender(tpl, params) {
 		let html = template.render(tpl.html, {
-			UserInfo: UserInfo,
+			UserInfo,
 			appVersion: biz.getAppVersion(),
 			env: biz.server.ENV
 		});
 		this.html(html).initUI();
 
 		this.find('.dwz-user-icon').click((event) => {
-			dwz.plus.chooseImage({
+			$.plus.chooseImage({
 				title: '修改用户头像',
 				maximum: 1,
 				callback(imgPath) {
@@ -74,74 +74,136 @@ biz.my = {
 					$.navView.open({
 						url: 'tpl/my/settingsIcon.html',
 						rel: 'mySettingsIcon',
-						data: { imgPath: imgPath },
+						data: { imgPath, isDcloud: !!window.plus },
 						callback: biz.my.settingIconRender
 					});
 				}
 			});
-
-			// $.navView.open({
-			// 	url: 'tpl/test_croppic.html?dwz_callback=biz.my.settingIconRender',
-			// 	rel: 'test'
-			// });
 		});
 	},
 	settingIconRender(tpl, params) {
-		let html = template.render(tpl.html, { UserInfo: UserInfo });
+		let html = template.render(tpl.html, { UserInfo });
 		this.html(html).initUI();
 
-		// let $croppic = this.find('.croppic');
-		// $.croppic.render($croppic);
-		// $croppic.find('.btn-item').touchwipe({
-		// 	touch(){
-		// 		let imgCropData = $.croppic.imgCropData($croppic);
-		// 		console.log(imgCropData);
-		// 	}
-		// });
-
 		let headerH = biz.safeAreaTop + 44;
-		FNImageClip = api.require('FNImageClip');
-		FNImageClip.open(
-			{
-				rect: {
-					x: 0,
-					y: headerH,
-					w: api.winWidth,
-					h: api.winHeight - headerH
-				},
-				srcPath: params.imgPath,
-				highDefinition: false,
-				isHideGrid: true,
-				style: {
-					mask: 'rgba(0,0,0,0.6)',
-					clip: {
-						w: 300,
-						h: 300,
-						x: (api.winWidth - 300) / 2,
-						y: (api.winHeight - 300) / 2,
-						borderColor: '#0f0',
-						borderWidth: 3,
-						appearance: 'rectangle' // rectangle, circular
-					}
-				},
-				mode: 'image', // image, clip, all
-				fixedOn: api.frameName
-			},
-			function (ret, err) {
-				if (ret) {
-					console.log(JSON.stringify(ret));
-				} else {
-					alert(JSON.stringify(err));
-				}
-			}
-		);
-
+		let FNImageClip = null;
 		this.find('header .back-btn').touchwipe({
 			touch() {
 				$.navView.close();
-				FNImageClip.close();
+				FNImageClip && FNImageClip.close();
 			}
 		});
+
+		// 完成图片裁剪回调，上传图片
+		const cropImgCallabck = (strBase64) => {
+			console.log(strBase64);
+			if ($.isFunction(params.callbackFn)) {
+				params.callbackFn(strBase64);
+			} else {
+				$.ajax({
+					type: 'POST',
+					dataType: 'json',
+					global: true,
+					url: biz.server.getUrl(biz.server.uploadUserIcon),
+					data: {
+						type: 4,
+						imgUrl: strBase64
+					},
+					success: (json) => {
+						if (json.info) $.alert.toast(json.info);
+
+						let $myUserIcon = $('#my_user_icon_img');
+						if ($myUserIcon.size() > 0) {
+							$myUserIcon.attr('src', strBase64);
+						}
+						let $settomgUserIcon = $('#setting_user_icon_img');
+						if ($settomgUserIcon.size() > 0) {
+							$settomgUserIcon.attr('src', strBase64);
+						}
+
+						UserInfoUtil.update({
+							headimgurl: strBase64
+						});
+					}
+				});
+			}
+		};
+
+		if (window.plus) {
+			let $croppic = this.find('.croppic');
+			$.croppic.render($croppic);
+			$croppic.find('.header .txt-button').touchwipe({
+				touch() {
+					let imgCropData = $.croppic.imgCropData($croppic);
+
+					let clip = {
+						left: Math.floor(imgCropData.left) + 'px',
+						top: Math.floor(imgCropData.top) + 'px',
+						width: Math.floor(imgCropData.width) + 'px',
+						height: Math.floor(imgCropData.height) + 'px'
+					};
+					console.log(JSON.stringify(imgCropData));
+					console.log(JSON.stringify(clip));
+					// 裁剪头像图片
+					dwz.plus.clipImage(
+						{
+							src: imgCropData.src,
+							dst: '_doc/camera/croppic.jpg',
+							width: 'auto',
+							height: 'auto',
+							clip
+						},
+						(entry) => {
+							console.log(entry.toLocalURL());
+
+							dwz.plus.getBase64Image({
+								imgPath: entry.toLocalURL(),
+								maxWidth: 300,
+								maxHeight: 300,
+								callback: cropImgCallabck
+							});
+						}
+					);
+				}
+			});
+		} else if (window.api) {
+			FNImageClip = api.require('FNImageClip');
+			FNImageClip.open(
+				{
+					rect: {
+						x: 0,
+						y: headerH,
+						w: api.winWidth,
+						h: api.winHeight - headerH
+					},
+					srcPath: params.imgPath,
+					highDefinition: false,
+					isHideGrid: true,
+					style: {
+						mask: 'rgba(0,0,0,0.6)',
+						clip: {
+							w: 300,
+							h: 300,
+							x: (api.winWidth - 300) / 2,
+							y: (api.winHeight - 300) / 2,
+							borderColor: '#0f0',
+							borderWidth: 3,
+							appearance: 'rectangle' // rectangle, circular
+						}
+					},
+					mode: 'image', // image, clip, all
+					fixedOn: api.frameName
+				},
+				(ret, err) => {
+					if (ret) {
+						console.log(JSON.stringify(ret));
+					} else {
+						alert(JSON.stringify(err));
+					}
+				}
+			);
+		}
+
 		this.find('header .txt-button').touchwipe({
 			touch() {
 				FNImageClip.save(
@@ -150,51 +212,18 @@ biz.my = {
 						copyToAlbum: false,
 						quality: 1
 					},
-					function (ret, err) {
+					(ret, err) => {
 						if (ret) {
 							console.log(JSON.stringify(ret));
 
 							FNImageClip.close();
 							$.navView.close();
 
-							dwz.plus.getBase64Image({
-								destinationType: 'url',
+							$.plus.getBase64Image({
 								imgPath: ret.destPath,
 								maxWidth: 300,
 								maxHeight: 300,
-								callback(strBase64) {
-									console.log(strBase64);
-									if ($.isFunction(params.callbackFn)) {
-										params.callbackFn(strBase64);
-									} else {
-										$.ajax({
-											type: 'POST',
-											dataType: 'json',
-											global: true,
-											url: biz.server.getUrl(biz.server.uploadUserIcon),
-											data: {
-												type: 4,
-												imgUrl: strBase64
-											},
-											success: (json) => {
-												if (json.info) $.alert.toast(json.info);
-
-												let $myUserIcon = $('#my_user_icon_img');
-												if ($myUserIcon.size() > 0) {
-													$myUserIcon.attr('src', strBase64);
-												}
-												let $settomgUserIcon = $('#setting_user_icon_img');
-												if ($settomgUserIcon.size() > 0) {
-													$settomgUserIcon.attr('src', strBase64);
-												}
-
-												UserInfoUtil.update({
-													headimgurl: strBase64
-												});
-											}
-										});
-									}
-								}
+								callback: cropImgCallabck
 							});
 						} else {
 							alert(JSON.stringify(err));

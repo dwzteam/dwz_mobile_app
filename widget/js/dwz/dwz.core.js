@@ -1532,7 +1532,7 @@ dwz.extend({
 			postData = '';
 
 		if (!op.cache) {
-			url = op.url + (op.url.indexOf('?') == -1 ? '?' : '&') + 't=' + new Date().getTime();
+			url = op.url + (op.url.indexOf('?') == -1 ? '?' : '&') + '_t=' + new Date().getTime();
 		}
 
 		// 获取get参数

@@ -5,6 +5,7 @@ var js_src = {
 		'js/dwz/dwz.md5.js',
 		'js/dwz/dwz.util.date.js',
 		'js/dwz/dwz.apicloud.js',
+		'js/dwz/dwz.dcloud.js',
 		'js/dwz/dwz.history.js',
 		'js/dwz/dwz.touchwipe.js',
 		'js/dwz/dwz.effect.js',
@@ -67,6 +68,7 @@ function loadScripts(options) {
 		document.write('<script type="text/javascript" src="' + BASE_URL + path + '"></script>');
 	});
 
+	// apicloud 平台
 	apiready = function () {
 		biz.safeAreaTop = api.safeArea.top;
 		biz.safeAreaBottom = api.safeArea.bottom;
@@ -78,13 +80,13 @@ function loadScripts(options) {
 
 		// config.xml index.html 加载方式使用
 		$(window).on('hash.empty.pop', function () {
-			api.confirm(
+			$.alert.confirm(
 				{
 					title: '退出提示',
 					msg: '确定要退出程序吗？',
 					buttons: ['确定', '取消']
 				},
-				function (ret, err) {
+				function (ret) {
 					if (ret.buttonIndex == 1) {
 						api.closeWidget({
 							id: 'A6044188768662', //填写自己的id
@@ -103,14 +105,45 @@ function loadScripts(options) {
 			biz.initPermission(['camera', 'photos', 'location', 'storage']);
 		}
 
-		// 开启gps
-		// biz.startLocation();
-
 		setTimeout(function () {
 			$('body').addClass(api.systemType);
 		}, 2000);
 	};
 
+	// dcloud 平台
+	document.addEventListener(
+		'plusready',
+		function () {
+			var _safeArea = plus.navigator.getSafeAreaInsets();
+			biz.safeAreaTop = _safeArea.top;
+			biz.safeAreaBottom = _safeArea.bottom;
+			biz.fixStatusBar($(document));
+
+			$.plus.dcloudInit(); // dcloud兼容处理
+
+			plus.key.addEventListener(
+				'backbutton',
+				function (event) {
+					$.alert.confirm(
+						{
+							title: '退出提示',
+							msg: '确定要退出程序吗？',
+							buttons: ['确定', '取消']
+						},
+						function (ret) {
+							if (ret.buttonIndex == 1) {
+								plus.runtime.quit();
+							}
+						}
+					);
+				},
+				false
+			);
+		},
+		false
+	);
+
+	// html5 页面加载完成，初始化
 	document.addEventListener('DOMContentLoaded', function () {
 		if (op.ENV) biz.server.ENV = op.ENV;
 

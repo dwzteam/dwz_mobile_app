@@ -94,10 +94,14 @@ $.extend(biz, {
 		});
 	},
 	getAppVersion() {
-		return window.api ? api.appVersion : 'dev';
+		if (window.api) return api.appVersion;
+		if (window.plus) return plus.runtime.version;
+		return 'dev';
 	},
 	getSystemType() {
-		return window.api ? api.systemType : 'web';
+		if (window.api) return api.systemType;
+		if (window.plus) return plus.os.name;
+		return 'web';
 	},
 	// 功能限制时间：人脸登录、安卓数据采集、App更新（用于配合上线app）
 	checkLiveTime() {
@@ -114,49 +118,54 @@ $.extend(biz, {
 		return ret;
 	},
 	requestPermission(perms, callback) {
-		api.requestPermission(
-			{
-				list: perms,
-				code: 100001
-			},
-			function (ret, err) {
-				console.log(JSON.stringify(ret));
-				if (callback) {
-					callback(ret);
-				}
-			}
-		);
-	},
-	initPermission(premsList) {
-		api.requestPermission(
-			{
-				list: premsList
-			},
-			function (res) {
-				console.log(JSON.stringify(res));
-			}
-		);
-	},
-	checkPermission(permName, msg) {
-		const has = biz.hasPermission([permName]);
-		if (!has || !has[0] || !has[0].granted) {
-			api.confirm(
+		window.api &&
+			api.requestPermission(
 				{
-					title: '提醒',
-					msg: '没有获得 ' + (msg || permName) + ' 权限\n是否前往设置？',
-					buttons: ['去设置', '取消']
+					list: perms,
+					code: 100001
 				},
-				function (ret, err) {
-					if (1 == ret.buttonIndex) {
-						biz.requestPermission([permName]);
+				(ret, err) => {
+					console.log(JSON.stringify(ret));
+					if (callback) {
+						callback(ret);
 					}
 				}
 			);
-			return false;
+	},
+	initPermission(premsList) {
+		window.api &&
+			api.requestPermission(
+				{
+					list: premsList
+				},
+				(ret) => {
+					console.log(JSON.stringify(ret));
+				}
+			);
+	},
+	checkPermission(permName, msg) {
+		if (window.api) {
+			const has = biz.hasPermission([permName]);
+			if (!has || !has[0] || !has[0].granted) {
+				api.confirm(
+					{
+						title: '提醒',
+						msg: '没有获得 ' + (msg || permName) + ' 权限\n是否前往设置？',
+						buttons: ['去设置', '取消']
+					},
+					function (ret, err) {
+						if (1 == ret.buttonIndex) {
+							biz.requestPermission([permName]);
+						}
+					}
+				);
+				return false;
+			}
 		}
 		return true;
 	},
 	updateApp(result) {
+		if (!window.api) return;
 		if (api.systemType == 'android') {
 			api.download(
 				{
@@ -184,6 +193,7 @@ $.extend(biz, {
 		}
 	},
 	checkUpdate() {
+		if (!window.api) return;
 		const mam = api.require('mam');
 		mam.checkUpdate(function (ret, err) {
 			if (ret && ret.status) {

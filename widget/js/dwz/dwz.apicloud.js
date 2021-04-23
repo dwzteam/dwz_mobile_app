@@ -4,46 +4,6 @@
  */
 (function ($) {
 	$.plus = {
-		openImg(callback) {
-			let FNPhotograph = api.require('FNPhotograph');
-			let imageFilter = api.require('imageFilter');
-
-			FNPhotograph.open(
-				{
-					path: 'fs://savePath',
-					album: true,
-					quality: 'medium'
-				},
-				function (ret) {
-					if (ret.eventType == 'takePhoto') {
-						console.log(JSON.stringify(ret));
-						FNPhotograph.close();
-						let imgName = 'small_' + new Date().getTime() + '.jpg';
-						imageFilter.compress(
-							{
-								img: ret.imagePath,
-								quality: 0.5,
-								scale: 0.5,
-								save: {
-									imgPath: 'fs://smallImage',
-									imgName: imgName
-								}
-							},
-							function (e, err) {
-								console.log(JSON.stringify(e));
-								if (e.status) {
-									console.log('fs://smallImage/' + imgName);
-									callback('fs://smallImage/' + imgName);
-								} else {
-									console.log(JSON.stringify(err));
-								}
-							}
-						);
-					}
-				}
-			);
-		},
-
 		/**
 		 * 从摄像头或相册获取图片 {title:'', maximum:4, maxWidth:800, maxHeight:800, callback: null}
 		 * 使用miscCallback时需要自己处理，忽略maxWidth, maxHeight, callback
@@ -53,16 +13,14 @@
 			if (biz.checkPermission && !biz.checkPermission('camera', '摄像头')) {
 				return;
 			}
-			api.actionSheet(
+
+			$.actionSheet.open(
 				{
-					title: options.title || '上传图片',
-					cancelTitle: '取消',
+					title: '上传图片',
 					buttons: ['拍照', '从手机相册选择']
 				},
-				function (btn) {
-					/*actionSheet 按钮点击事件*/
-
-					switch (btn.buttonIndex) {
+				(ret) => {
+					switch (ret.buttonIndex) {
 						case 0:
 							break;
 						case 1:
@@ -83,7 +41,7 @@
 		captureImage(options) {
 			let op = $.extend(
 				{
-					sourceType: 'camera',
+					sourceType: 'camera', // camera, library
 					maxWidth: 800,
 					maxHeight: 800,
 					callback: null,
@@ -113,14 +71,13 @@
 					targetHeight: op.maxHeight,
 					saveToPhotoAlbum: false
 				},
-				function (ret, err) {
+				(ret, err) => {
 					if (ret) {
-						// alert(JSON.stringify(ret));
 						if (op.callback) {
 							op.callback(ret.base64Data || ret.data);
 						}
 					} else {
-						alert(JSON.stringify(err));
+						console.log(JSON.stringify(err));
 					}
 				}
 			);
@@ -157,7 +114,7 @@
 				let ctx = canvas.getContext('2d');
 				ctx.drawImage(img, 0, 0, width, height); /*绘图*/
 				let strBase64 = canvas.toDataURL('image/jpeg', 0.8);
-				//              strBase64 = strBase64.replace("data:image/jpeg;base64,", "");
+				// strBase64 = strBase64.replace("data:image/jpeg;base64,", "");
 				if (op.callback) op.callback(strBase64);
 			};
 		}
@@ -232,7 +189,7 @@
 				$button.click(() => {
 					selectCount = $previewElem.find('li').size();
 					if (selectCount < op.maxCount) {
-						dwz.plus.chooseImage({
+						$.plus.chooseImage({
 							maximum: op.maxCount - selectCount,
 							destinationType: 'base64',
 							callback(base64Data) {
@@ -265,7 +222,6 @@
 		 * @param options
 		 */
 		previewImg(options) {
-			let op = $.extend({ attrW: 'data-width', attrH: 'data-height', attrSrc: 'data-src' }, options);
 			return this.each(function () {
 				let $wrap = $(this);
 
@@ -310,8 +266,7 @@
 				});
 			}
 
-			let screenW = document.body.offsetWidth,
-				tpl = `<div class="dwz-slide" data-auto-play="false" data-loop="false" data-zoom="true" data-open-index="#currentIndex#">
+			let tpl = `<div class="dwz-slide" data-auto-play="false" data-loop="false" data-zoom="true" data-open-index="#currentIndex#">
 					<div class="bd"><ul>#li#</ul></div><div class="hd"><ul>#item#</ul></div>
 					</div>`;
 

@@ -230,7 +230,7 @@ let bizUtil = {
 				headDown: false, // 活体动作，向下低头(默认:false)
 				headLeftOrRight: false // 活体动作，摇头(默认:false)
 			},
-			function (ret, err) {
+			(ret) => {
 				if (ret.status) {
 					requestUserRealVerify(ret.face);
 				} else {
