@@ -66,7 +66,7 @@ biz.my = {
 			$.plus.chooseImage({
 				title: '修改用户头像',
 				maximum: 1,
-				callback(imgPath) {
+				callback(imgPath, entry) {
 					if (!imgPath) {
 						return;
 					}
@@ -74,7 +74,7 @@ biz.my = {
 					$.navView.open({
 						url: 'tpl/my/settingsIcon.html',
 						rel: 'mySettingsIcon',
-						data: { imgPath, isDcloud: !!window.plus },
+						data: { imgPath, imgBase64: entry ? entry.toLocalURL() : '' },
 						callback: biz.my.settingIconRender
 					});
 				}
@@ -82,21 +82,22 @@ biz.my = {
 		});
 	},
 	settingIconRender(tpl, params) {
-		let html = template.render(tpl.html, { UserInfo });
+		let html = template.render(tpl.html, { UserInfo, params });
 		this.html(html).initUI();
 
 		let headerH = biz.safeAreaTop + 44;
 		let FNImageClip = null;
-		this.find('header .back-btn').touchwipe({
-			touch() {
-				$.navView.close();
-				FNImageClip && FNImageClip.close();
-			}
+		this.find('header .back-btn').click(() => {
+			$.navView.close();
+			FNImageClip && FNImageClip.close();
 		});
 
 		// 完成图片裁剪回调，上传图片
 		const cropImgCallabck = (strBase64) => {
-			console.log(strBase64);
+			// console.log(strBase64);
+
+			$.navView.close();
+
 			if ($.isFunction(params.callbackFn)) {
 				params.callbackFn(strBase64);
 			} else {
@@ -132,39 +133,38 @@ biz.my = {
 		if (window.plus) {
 			let $croppic = this.find('.croppic');
 			$.croppic.render($croppic);
-			$croppic.find('.header .txt-button').touchwipe({
-				touch() {
-					let imgCropData = $.croppic.imgCropData($croppic);
 
-					let clip = {
-						left: Math.floor(imgCropData.left) + 'px',
-						top: Math.floor(imgCropData.top) + 'px',
-						width: Math.floor(imgCropData.width) + 'px',
-						height: Math.floor(imgCropData.height) + 'px'
-					};
-					console.log(JSON.stringify(imgCropData));
-					console.log(JSON.stringify(clip));
-					// 裁剪头像图片
-					dwz.plus.clipImage(
-						{
-							src: imgCropData.src,
-							dst: '_doc/camera/croppic.jpg',
-							width: 'auto',
-							height: 'auto',
-							clip
-						},
-						(entry) => {
-							console.log(entry.toLocalURL());
+			this.find('header .txt-button').click(() => {
+				let imgCropData = $.croppic.imgCropData($croppic);
 
-							dwz.plus.getBase64Image({
-								imgPath: entry.toLocalURL(),
-								maxWidth: 300,
-								maxHeight: 300,
-								callback: cropImgCallabck
-							});
-						}
-					);
-				}
+				let clip = {
+					left: Math.floor(imgCropData.left) + 'px',
+					top: Math.floor(imgCropData.top) + 'px',
+					width: Math.floor(imgCropData.width) + 'px',
+					height: Math.floor(imgCropData.height) + 'px'
+				};
+				console.log(JSON.stringify(imgCropData));
+				console.log(JSON.stringify(clip));
+				// 裁剪头像图片
+				dwz.plus.clipImage(
+					{
+						src: imgCropData.src,
+						dst: '_doc/camera/croppic.jpg',
+						width: 'auto',
+						height: 'auto',
+						clip
+					},
+					(entry) => {
+						console.log(entry.toLocalURL());
+
+						dwz.plus.getBase64Image({
+							imgPath: entry.toLocalURL(),
+							maxWidth: 300,
+							maxHeight: 300,
+							callback: cropImgCallabck
+						});
+					}
+				);
 			});
 		} else if (window.api) {
 			FNImageClip = api.require('FNImageClip');
@@ -202,10 +202,8 @@ biz.my = {
 					}
 				}
 			);
-		}
 
-		this.find('header .txt-button').touchwipe({
-			touch() {
+			this.find('header .txt-button').click(() => {
 				FNImageClip.save(
 					{
 						destPath: 'fs://image/croppic_' + new Date().getTime() + '.jpg',
@@ -217,7 +215,6 @@ biz.my = {
 							console.log(JSON.stringify(ret));
 
 							FNImageClip.close();
-							$.navView.close();
 
 							$.plus.getBase64Image({
 								imgPath: ret.destPath,
@@ -230,7 +227,7 @@ biz.my = {
 						}
 					}
 				);
-			}
-		});
+			});
+		}
 	}
 };

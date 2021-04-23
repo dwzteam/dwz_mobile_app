@@ -194,18 +194,25 @@
 							destinationType: 'base64',
 							callback(base64Data) {
 								if (!base64Data) return; // 取消拍照时，停止处理逻辑
-								$.plus.getBase64Image({
-									imgPath: base64Data,
-									maxWidth: op.maxWidth,
-									maxHeight: op.maxHeight,
-									callback(strBase64) {
-										// console.log(strBase64)
-										previewUploadImg($uploadWrap, previewElem, strBase64, op.inputName, op.maxW, op.maxH);
 
-										if (op.callback) {
-											op.callback(base64Data, $previewElem);
+								if (!$.isArray(base64Data)) {
+									// dcloud 文件
+									base64Data = [base64Data];
+								}
+
+								base64Data.forEach((imgStr) => {
+									$.plus.getBase64Image({
+										imgPath: imgStr,
+										maxWidth: op.maxWidth,
+										maxHeight: op.maxHeight,
+										callback(strBase64) {
+											previewUploadImg($uploadWrap, previewElem, strBase64, op.inputName, op.maxW, op.maxH);
+
+											if (op.callback) {
+												op.callback(base64Data, $previewElem);
+											}
 										}
-									}
+									});
 								});
 
 								if (selectCount + 1 >= op.maxCount) {

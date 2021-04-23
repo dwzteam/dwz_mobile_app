@@ -22,7 +22,7 @@
 								maxHeight: op.maxHeight,
 								callback(strBase64) {
 									if (op.callback) {
-										op.callback([strBase64]);
+										op.callback([strBase64], entry);
 									}
 								}
 							});
@@ -64,7 +64,7 @@
 							(entry) => {
 								arrayBase64.push(entry.toLocalURL());
 								if (ret.files.length == arrayBase64.length && op.callback) {
-									op.callback(arrayBase64);
+									op.callback(arrayBase64, entry);
 								}
 							},
 							(ret) => {
