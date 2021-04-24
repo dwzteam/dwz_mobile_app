@@ -51,12 +51,12 @@ $.fn.extend({
 			let $panel = $panels.removeClass('active').eq(op.currentIndex).addClass('active');
 
 			setTimeout(() => {
-				$box.trigger(dwz.event.type.activated, { $tab, $panel, $tabs, $panels, currentIndex: op.currentIndex });
+				$box.trigger($.event.type.activated, { $tab, $panel, $tabs, $panels, currentIndex: op.currentIndex });
 			}, 200);
 
 			if ($tab.hasClass(op.ajaxClass)) {
 				let url = $tab.attr('data-href');
-				if (url && !$panel.attr('loaded')) {
+				if (url && !$panel.attr('data-loaded')) {
 					let _data = url.getParams();
 					$.ajax({
 						type: 'GET',
@@ -74,7 +74,7 @@ $.fn.extend({
 								$.execHelperFn($panel, tpl, _data);
 							}
 
-							$panel.attr('loaded', true);
+							$panel.attr('data-loaded', true);
 						}
 					});
 				}
