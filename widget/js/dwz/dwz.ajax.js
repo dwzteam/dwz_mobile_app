@@ -87,13 +87,17 @@
 				if ($.isFunction(_data)) {
 					_data = _data.call(form, $form);
 
-					// 去除__开头字段
-					data.forEach(function (item, index) {
-						if (!item.name.startsWith('__')) {
-							_data.push(item);
-						}
-					});
-					data = _data;
+					if ($.isArray(_data)) {
+						// 去除__开头字段
+						data.forEach((item, index) => {
+							if (!item.name.startsWith('__')) {
+								_data.push(item);
+							}
+						});
+						data = _data;
+					} else if (_data === false) {
+						return false;
+					}
 				} else {
 					data.push({ name: '_data', value: JSON.stringify(_data) });
 				}

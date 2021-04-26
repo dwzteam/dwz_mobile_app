@@ -211,7 +211,7 @@ dwz.extend({
 	 * @param html
 	 * @returns {{html: (*|string), 'tpl_xxx1': (*|string), 'tpl_xxx2': (*|string)}}
 	 */
-	templateWrap(html) {
+	templateWrap(html = '') {
 		let ret = { html: html || '', script: '' };
 		let regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/gi;
 		let jsContained = ret.html.match(regDetectJs);

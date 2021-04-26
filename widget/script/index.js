@@ -56,7 +56,7 @@ function loadScripts(options) {
 	var BASE_URL = (options && options.BASE_URL) || './';
 	var op = {
 		ENV: (options && options.ENV) || 'DEV', // DEV, TEST, UAT, LIVE
-		run_env: (options && options.run_env) || 'build', // dev, build
+		run_env: (options && options.run_env) || 'dev', // dev, build
 		iframe: (options && options.iframe) || false // 是否iframe嵌入的页面
 	};
 
@@ -181,7 +181,7 @@ function loadScripts(options) {
 							} else if (args.length == 3) {
 								$.navView.open({ url: args[2], rel: args[1] });
 							}
-						}, 2000);
+						}, 1000);
 					}
 				});
 		});
