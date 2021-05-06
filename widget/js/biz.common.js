@@ -195,33 +195,34 @@ $.extend(biz, {
 	checkUpdate() {
 		if (!window.api) return;
 		const mam = api.require('mam');
-		mam.checkUpdate(function (ret, err) {
+		mam.checkUpdate((ret, err) => {
 			if (ret && ret.status) {
 				const result = ret.result;
 				if (result.update) {
 					const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
 
-					if (result.closed) {
-						api.alert(
+					if (result.closed && biz.server.ENV == 'LIVE') {
+						$.alert.confirm(
 							{
 								title: '有新的版本，请下载并安装',
 								msg,
 								buttons: ['确定']
 							},
-							function (ret, err) {
+							(ret) => {
 								if (ret.buttonIndex == 1) {
 									biz.updateApp(result);
 								}
 							}
 						);
 					} else {
-						api.confirm(
+						$.alert.confirm(
 							{
 								title: '有新的版本，是否下载并安装',
 								msg,
-								buttons: ['确定', '取消']
+								buttons: ['确定', '取消'],
+								theme: 'is-default'
 							},
-							function (ret, err) {
+							(ret) => {
 								if (ret.buttonIndex == 1) {
 									biz.updateApp(result);
 								}
