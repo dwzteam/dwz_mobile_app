@@ -131,7 +131,7 @@ $.dialog = {
 			$bgBox = this.$bgBox;
 
 		$box.animate({ y: document.documentElement.clientHeight }, 300, 'ease', () => {
-			$box.html('').removeClass($.dialog.config.popClass.join(' '));
+			$box.html('').removeClass($.dialog.config.popClass.join(' ')).removeClass($.dialog.config.openClass);
 			$box.triggerPageClear();
 		});
 		$bgBox.removeClass($.dialog.config.openClass);
