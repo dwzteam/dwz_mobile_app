@@ -94,9 +94,9 @@ $.extend(biz, {
 		});
 	},
 	getAppVersion() {
-		if (window.api) return api.appVersion;
-		if (window.plus) return plus.runtime.version;
-		return 'dev';
+		if (window.api) return `${api.appVersion} ${biz.server.ENV}(${api.systemType} ${api.systemVersion})`;
+		if (window.plus) return `${plus.runtime.version} ${biz.server.ENV}`;
+		return `dev (${biz.server.ENV})`;
 	},
 	getSystemType() {
 		if (window.api) return api.systemType;

@@ -655,7 +655,7 @@ dwz.extend({
 		}
 	},
 	prop(elem, name, value) {
-		if (!$.inArray(name, ['checked', 'selected', 'disabled'])) return false;
+		if (!$.inArray(name, ['checked', 'selected', 'disabled', 'readOnly'])) return false;
 
 		if (value === undefined) {
 			return elem[name];
