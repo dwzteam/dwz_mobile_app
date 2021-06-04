@@ -18,7 +18,6 @@ class DwzWidget {
 		}
 
 		this.eventNames = { show: 'show', hide: 'hide' };
-		this.animationend = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
 	}
 
 	find(selecter) {
@@ -112,8 +111,8 @@ class DwzMarquee extends DwzWidget {
 		let itemHeight = $items.eq(0).height();
 
 		$marquee.translate({ y: 0 });
-		$marquee.off(this.animationend).on(this.animationend, (event) => {
-			$marquee.off(this.animationend);
+		$marquee.off($.animationendNames).on($.animationendNames, (event) => {
+			$marquee.off($.animationendNames);
 			$marquee.translate({ y: 0 });
 
 			$items = this.findByCls(this.itemCls); // 防止removeItem后又被加回来的情况
@@ -162,7 +161,9 @@ class DwzMarquee extends DwzWidget {
 			if (this.pageSize > 1) {
 				this.$el.css({ height: $items.eq(0).height() * this.pageSize + 'px' });
 			}
-			this._animationEvent();
+			setTimeout(() => {
+				this._animationEvent();
+			}, this.delay);
 		}
 	}
 
@@ -242,8 +243,7 @@ class DwzFlyPop extends DwzWidget {
 		setTimeout(() => {
 			$elem.css({ left: left + 'px', top: top + 'px' }).addClass(this.cls);
 
-			$elem.off(this.animationend).on(this.animationend, (event) => {
-				$elem.off(this.animationend);
+			$elem.animationend((event) => {
 				this._triggerActive();
 			});
 		}, this.delay);

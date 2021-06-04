@@ -21,6 +21,7 @@
  */
 (function ($) {
 	$.extend({
+		animationendNames: 'webkitAnimationEnd animationend webkitTransitionEnd transitionend',
 		_randomColorFactor(maxColor) {
 			return Math.round(Math.random() * (maxColor || 255));
 		},
@@ -60,37 +61,39 @@
 				return color;
 			}
 		},
+
 		animate(ele, obj, duration, effectType, callback) {
 			for (let attr in obj) {
 				if (attr == 'width' || attr == 'height') {
 					$.transition(ele, {
 						transitionType: 'all',
-						duration: duration,
-						effectType: effectType
+						duration,
+						effectType
 					});
 					ele.style[attr] = obj[attr] + 'px';
+				} else if (attr == 'opacity') {
+					ele.style[attr] = obj[attr];
 				} else {
 					let x = obj.x || 0,
 						y = obj.y || 0;
 
-					if (obj.x !== undefined || obj.y !== undefined) {
-						$(ele).translate({
-							x: x + 'px',
-							y: y + 'px',
-							duration: duration,
-							effectType: effectType
-						});
-					}
+					$(ele).translate({
+						x: x + 'px',
+						y: y + 'px',
+						scale: obj.scale || -1,
+						duration,
+						effectType
+					});
 				}
 			}
 
 			if (callback) {
-				setTimeout(function () {
+				setTimeout(() => {
 					callback.call(ele);
 				}, (duration || 1) + 10);
 			}
 		},
-		// 设置transform偏移
+		// 设置动画延时效果
 		transition(ele, options) {
 			let op = $.extend({ transitionType: 'all', duration: 0, effectType: 'ease' }, options);
 			let $box = $(ele);
@@ -107,6 +110,16 @@
 	});
 
 	$.fn.extend({
+		// css动画完成后触发
+		animationend(callback) {
+			return this.each((elem, index) => {
+				const $elem = $(elem);
+				$elem.off($.animationendNames).on($.animationendNames, (event) => {
+					$elem.off($.animationendNames);
+					callback.call(elem, event);
+				});
+			});
+		},
 		animate(obj, duration, effectType, callback) {
 			$.animate(this.get(0), obj, duration, effectType, callback);
 			return this;
@@ -116,6 +129,7 @@
 				[
 					{
 						className: 'fadeOut animated',
+						duration,
 						after() {
 							this.hide();
 						}
@@ -129,6 +143,7 @@
 				[
 					{
 						className: 'fadeIn animated',
+						duration,
 						before() {
 							this.show();
 						},
@@ -143,8 +158,11 @@
 
 		// 设置transform偏移
 		translate(options) {
-			let op = $.extend({ x: '0px', y: '0px', z: '0px', duration: 0, effectType: 'ease' }, options);
-			op.transform = 'translate3d(' + op.x + ',' + op.y + ',' + op.z + ')';
+			let op = $.extend({ x: '0px', y: '0px', z: '0px', scale: -1, duration: 0, effectType: 'ease' }, options);
+			op.transform = `translate3d(${op.x}, ${op.y}, ${op.z})`;
+			if (op.scale > 0) {
+				op.transform += ` scale(${op.scale})`;
+			}
 			return this.translateCss(op);
 		},
 		translateCss(options) {
@@ -164,15 +182,15 @@
 		translateY(yStr, duration, effectType) {
 			return this.translate({
 				y: yStr,
-				duration: duration,
-				effectType: effectType
+				duration,
+				effectType
 			});
 		},
 		translateX(xStr, duration, effectType) {
 			return this.translate({
 				x: xStr,
-				duration: duration,
-				effectType: effectType
+				duration,
+				effectType
 			});
 		},
 		rotate(options) {
@@ -221,8 +239,8 @@
 			});
 		},
 
-		// 文字向上冒泡
-		effectBubble(options) {
+		// 文字向上/向下冒泡
+		effectBubble(options, animationend) {
 			let op = $.extend(
 				{
 					content: '+1',
@@ -230,7 +248,8 @@
 					duration: 500,
 					effectType: 'ease',
 					className: '',
-					fontSize: 2
+					flyIn: false
+					// fontSize: '20px'
 				},
 				options
 			);
@@ -241,24 +260,18 @@
 					width = $box.width(),
 					flyId = 'effect-fly-' + new Date().getTime();
 
-				let tpl = '<span id="#flyId#" class="effect-bubble-fly #class#" style="top:#top#px;left:#left#px;font-size: #fontSize#rem;">#content#</span>';
-				let html = tpl
-					.replaceAll('#left#', pos.left + width / 2)
-					.replaceAll('#top#', pos.top)
-					.replaceAll('#flyId#', flyId)
-					.replaceAll('#content#', op.content)
-					.replaceAll('#class#', op.className)
-					.replaceAll('#fontSize#', op.fontSize);
+				let html = `<span id="${flyId}" class="effect-bubble-fly ${op.className}" style="top:${pos.top + (op.flyIn ? op.y : 0)}px;left:${pos.left + width / 2}px; ${op.fontSize ? 'font-size:' + op.fontSize + '' : ''}">${op.content}</span>`;
 
 				let $fly = $(html).appendTo($('body'));
 
-				setTimeout(function () {
-					$fly.css({ top: pos.top + op.y + 'px' });
+				setTimeout(() => {
+					$fly.css({ top: pos.top + (op.flyIn ? 0 : op.y) + 'px' });
 				}, 10);
 
 				setTimeout(function () {
-					$fly.fadeOut(500, function () {
+					$fly.fadeOut(500, () => {
 						$fly.remove();
+						animationend && animationend();
 					});
 				}, op.duration || 500);
 			});
@@ -266,7 +279,7 @@
 
 		/**
 		 *
-		 * @param eList: [{className:'bounce', styles:'', animationend:null}] 动画列表
+		 * @param eList: [{className:'bounce', styles:'', duration:500, animationend:null}] 动画列表
 		 * @param animationend: 全部动画完成事件
 		 * @returns {*}
 		 */
@@ -274,14 +287,13 @@
 			return this.each(function () {
 				let $me = $(this);
 
-				let eventNames = 'webkitAnimationEnd animationend webkitTransitionEnd transitionend';
-
 				function animateStep(isFirst) {
 					if (eList && eList.length > 0) {
 						let eItem = $.extend(
 							{
 								className: '', // animate.css 动画 class
 								style: '', // css3动画样式
+								duration: 500,
 								before: null, // 自定义单个动画执行前回调
 								after: null // 自定义单个动画完成回调
 							},
@@ -293,12 +305,12 @@
 							let orig_style = $me.data('orig_style') || $me.attr('style');
 							if (orig_style) $me.data('orig_style', orig_style);
 
-							$me.off(eventNames);
+							$me.off($.animationendNames);
 							$me.removeClass($.animateCls.all + ' animated');
 						}
 
-						$me.on(eventNames, function () {
-							$me.off(eventNames);
+						$me.on($.animationendNames, function () {
+							$me.off($.animationendNames);
 
 							// 动画完成还原原始style
 							if (eList.length == 0) {
@@ -336,6 +348,7 @@
 								$me.attr('style', orig_style + eItem.style);
 							}
 							if (eItem.className) {
+								eItem.duration && $.transition($me, { duration: eItem.duration }); // 动画延时时间
 								$me.addClass(eItem.className).addClass('animated');
 							}
 						}, 50);

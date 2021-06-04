@@ -49,13 +49,13 @@
 				false
 			);
 
-			let ajaxbg = $('#progressBar').hide();
+			let ajaxbg = $('#progressBar').addClass('is-hide');
 			$(document)
 				.on('ajaxStart', () => {
-					ajaxbg.show();
+					ajaxbg.removeClass('is-hide');
 				})
 				.on('ajaxStop', () => {
-					ajaxbg.hide();
+					ajaxbg.addClass('is-hide');
 				});
 		}
 	};

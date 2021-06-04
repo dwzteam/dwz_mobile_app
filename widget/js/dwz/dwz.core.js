@@ -320,7 +320,11 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 		dwz.extend(dwz.fn, obj);
 	},
 	toArray() {
-		return this.elements;
+		const elemArr = [];
+		this.elements.forEach((elem, index) => {
+			elemArr.push(elem);
+		});
+		return elemArr;
 	},
 	size() {
 		return this.length;
@@ -336,6 +340,14 @@ dwz.fn = dwz.extend(dwz.prototype.init.prototype, {
 	},
 	last() {
 		return this.eq(this.elements.length - 1);
+	},
+	prev() {
+		let elem = this.get(0).previousElementSibling;
+		return elem ? $(elem) : null;
+	},
+	next() {
+		let elem = this.get(0).nextElementSibling;
+		return elem ? $(elem) : null;
 	},
 	parentNode() {
 		return this.get(0).parentNode;
@@ -1453,6 +1465,7 @@ dwz.extend({
 		global: false,
 		cache: false,
 		async: true, // 默认异步加载
+		timeout: 0,
 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		dataType: '*',
 		headers: {
@@ -1569,8 +1582,17 @@ dwz.extend({
 			}
 		}
 
+		// ajax 超时设置
+		if (op.timeout) {
+			setTimeout(() => {
+				if (!dwzXHR.dwz_ajax_done) dwzXHR.abort('timeout');
+			}, op.timeout);
+		}
+
 		dwzXHR.onreadystatechange = function () {
 			if (dwzXHR.readyState == 4) {
+				dwzXHR.dwz_ajax_done = true;
+
 				let protocol = /^([\w-]+:)\/\//.test(op.url) ? RegExp.$1 : window.location.protocol;
 				let isSuccess = (dwzXHR.status >= 200 && dwzXHR.status < 300) || dwzXHR.status === 304 || (dwzXHR.status == 0 && protocol == 'file:');
 
