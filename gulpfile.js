@@ -23,7 +23,7 @@ const less = require('gulp-less'),
 	// },
 	autoprefixer = require('gulp-autoprefixer'),
 	autoprefixer_opts = {
-		overrideBrowserslist: ['last 2 versions', 'Android >= 4.0', 'ios >= 6'],
+		overrideBrowserslist: ['> 1%', 'last 2 versions', 'Android >= 4.0', 'iOS >= 8.0'],
 		cascade: true, //是否美化属性值 默认：true 像这样：
 		//-webkit-transform: rotate(45deg);
 		//        transform: rotate(45deg);
