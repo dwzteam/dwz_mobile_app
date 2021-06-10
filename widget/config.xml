@@ -34,7 +34,7 @@
 
 	<preference name="fullScreen" value="false"/>
 
-	<preference name="autoUpdate" value="true"/>
+	<preference name="autoUpdate" value="fakse"/>
 
 	<preference name="smartUpdate" value="false"/>
 
