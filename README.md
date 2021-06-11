@@ -40,7 +40,7 @@ git clone https://github.com/dwzteam/dwz_mobile_app.git
 
 > ### 详细文档
 
-- [在线文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)
+- [在线文档](https://dwzteam.github.io/dwz_mobile_doc_v1)
 - [文档工程 git 仓库](https://gitee.com/dwzteam/dwz_mobile_doc_v1)
 
 > ### 开源项目仓库
