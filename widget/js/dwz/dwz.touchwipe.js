@@ -51,6 +51,8 @@
 				}
 
 				function onTouchMove(e) {
+					e.preventDefault(); // Android 4.x touchmove事件兼容问题
+
 					if (touchType) {
 						let pos = {
 							startX: startX,

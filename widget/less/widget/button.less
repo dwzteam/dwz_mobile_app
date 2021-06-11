@@ -1,6 +1,7 @@
 .button {
 	.box-round;
-	.flex-wrap-center;
+	// .flex-wrap-center;
+	text-align: center;
 	padding: 0 10px;
 	height: 40px;
 	color: @btnTxtColor;
@@ -10,7 +11,9 @@
 	font-size: @l2;
 	position: relative;
 	overflow: hidden;
-
+	* {
+		display: inline-block;
+	}
 	&.no-padding {
 		padding: 0;
 	}
