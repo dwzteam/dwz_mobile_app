@@ -107,6 +107,15 @@
 	padding-right: @marginH;
 }
 
+// 文本垂直居中
+.text-align-v(@vertical-align: middle) {
+	&:before {
+		display: inline-block;
+		content: '';
+		height: 100%;
+		vertical-align: middle;
+	}
+}
 // 用于iOS (iPhone和iPad)。当你点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景。要重设这个表现，你可以设置-webkit-tap-highlight-color为任何颜色。想要禁用这个高亮，设置颜色的alpha值为0即可
 .tapColor(@color:rgba(0,0,0,0)) {
 	-webkit-tap-highlight-color: @color;

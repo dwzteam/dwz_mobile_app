@@ -252,5 +252,17 @@
 			scrollY: false,
 			scroll$: '.scroll-x'
 		});
+
+		// 处理textarea文字上面滑动时，父容器也会上下滚动问题
+		const inputFocusTouchmove = (event) => {
+			event.stopPropagation();
+		};
+		$('textarea', $p)
+			.on('focus', (event) => {
+				$(event.target).on('touchmove', inputFocusTouchmove);
+			})
+			.on('blur', (event) => {
+				$(event.target).off('touchmove', inputFocusTouchmove);
+			});
 	});
 })(dwz);
