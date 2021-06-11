@@ -4,7 +4,7 @@
 	"data": {
 		"id": 2,
 		"title": "DWZ Mobile 官方文档",
-		"content": "[详细文档](http://dwzteam.gitee.io/dwz_mobile_doc_v1)",
+		"content": "[详细文档](https://dwzteam.github.io/dwz_mobile_doc_v1)",
 		"pic_url": "./image/pic/3d_2.jpg",
 		"author": "杭州大前端网络技术工作室",
 		"reading_num": 600,

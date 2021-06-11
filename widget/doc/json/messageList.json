@@ -13,7 +13,7 @@
 			},
 			{
 				"id": 999,
-				"url": "http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/README",
+				"url": "https://dwzteam.github.io/dwz_mobile_doc_v1/#/README",
 				"title": "DWZ Mobile v1.0.0",
 				"content": "DWZ 手机版 HTML5 + 原生 混合开发框架，基于原生 JS 轻量级移动端开发框架。",
 				"created_at": "2020-11-28"

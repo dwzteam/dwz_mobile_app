@@ -2,8 +2,8 @@
 	"status": 1,
 	"info": "",
 	"data": [
-		{ "name": "navTab", "url": "tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=navTab文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/navTab" },
-		{ "name": "navView", "url": "tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=navView文档&page_url=http://dwzteam.gitee.io/dwz_mobile_doc_v1/#/doc/h5/widget/navView" },
+		{ "name": "navTab", "url": "tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=navTab文档&page_url=https://dwzteam.github.io/dwz_mobile_doc_v1/#/doc/h5/widget/navTab" },
+		{ "name": "navView", "url": "tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=navView文档&page_url=https://dwzteam.github.io/dwz_mobile_doc_v1/#/doc/h5/widget/navView" },
 		{ "name": "dialog", "url": "" },
 		{ "name": "form", "url": "" },
 		{ "name": "alert", "url": "" },
