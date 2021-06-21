@@ -1,4 +1,4 @@
-biz.baiduFace = {
+biz.dwzBaiduFaceLive = {
 	faceLiveness({ debug = 0, cropType = 1, cropHeight = 300, quality = 70, eye = true, mouth = false, headRight = false, headLeft = false, headUp = false, headDown = false, headLeftOrRight = false }, callback) {
 		const module = api.require('dwzBaiduFaceLive');
 		module.faceLiveness(
@@ -56,7 +56,7 @@ biz.baiduFace = {
 		this.find('button').click((event) => {
 			if (params.isLiveness == 1) {
 				// 人脸采集（包含活体动作），默认就眨眼一下动作，其它动作通过参数配制
-				biz.baiduFace.faceLiveness(
+				biz.dwzBaiduFaceLive.faceLiveness(
 					{
 						debug: 1, // 调试开关(默认:0)：0, 1
 						cropType: 1, // 抠图类型(默认:1)：1:脸部, 2:大头照, 3:头像+肩膀
@@ -79,7 +79,7 @@ biz.baiduFace = {
 				);
 			} else {
 				// 人脸采集（不包含活体动作）
-				biz.baiduFace.faceDetect(
+				biz.dwzBaiduFaceLive.faceDetect(
 					{
 						debug: 0, // 调试开关(默认:0)：0, 1
 						cropType: 2, // 抠图类型(默认:1)：1:脸部, 2:大头照, 3:头像+肩膀
@@ -101,7 +101,7 @@ biz.baiduFace = {
 	 * 人脸识别登录系统
 	 */
 	faceLogin() {
-		biz.baiduFace.faceLiveness({ debug: 1 }, (ret) => {
+		biz.dwzBaiduFaceLive.faceLiveness({ debug: 1 }, (ret) => {
 			if (ret.status) {
 				$.ajax({
 					type: 'POST',

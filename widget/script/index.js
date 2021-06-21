@@ -47,7 +47,8 @@ var js_src = {
 		'js/biz.message.js',
 		'js/biz.favorite.js',
 		'js/biz.my.js',
-		'js/biz.baiduFace.js'
+		'js/biz.dwzBaiduFaceLive.js',
+		'js/biz.dwzBytedanceImageX.js'
 	],
 	build: ['script/all.min.js']
 };

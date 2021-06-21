@@ -52,16 +52,15 @@ function initUserInfo(callback) {
 			url: biz.server.getUrl(biz.server.userProfile),
 			dataType: 'json',
 			data: {},
-			cache: false,
-			global: false,
 			success: (json) => {
 				console.log(JSON.stringify(json));
 
 				if ($.isAjaxStatusOk(json)) {
 					UserInfoUtil.update(json.data);
 				} else {
-					$.alert.toast(json[dwz.config.keys.message]);
+					json[dwz.config.keys.message] && $.alert.toast(json[dwz.config.keys.message]);
 					UserInfoUtil.clear();
+					// $.gotoLogin();
 				}
 			},
 			error: biz.ajaxError,

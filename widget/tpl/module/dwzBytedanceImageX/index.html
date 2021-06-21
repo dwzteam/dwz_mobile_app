@@ -1,0 +1,32 @@
+<main>
+	<header>
+		<div class="toolbar">
+			<a class="bar-button back-button"><i class="dwz-icon-arrow-left"></i></a>
+			<div class="header-title">火山引擎+H5轮播</div>
+			<a class="bar-button" data-href="tpl/iframe_page.html?dwz_callback=biz.iframeRender&page_title=火山引擎文档&page_url=https://dwzteam.github.io/dwz_mobile_doc_v1/#/doc/apicloud/dwzBytedanceImageX/doc" target="navView" rel="doc"><i class="dwz-icon-document"></i>文档</a>
+		</div>
+	</header>
+
+	<section>
+
+		<div class="preview-big-img">
+
+			<div class="dwz-slide full-size">
+				<div class="bd">
+					<ul>
+						{{each imageList as item}}
+						<li>
+							<div class="pop-inner"><img src="{{item.src|showImg}}" data-src-imagex="{{item.url}}"></div>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+				<div class="hd">
+					<ul>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</main>

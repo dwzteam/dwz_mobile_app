@@ -57,7 +57,7 @@
 			alert(new Date())
 		}
 		console.log($.eqFunction(testFn2, testFn))
-		alert(testFn.toString().replace(fn, '$1') === testFn2.toString().replace(fn, '$1'))
+		console.log(testFn.toString().replace(fn, '$1') === testFn2.toString().replace(fn, '$1'))
 
 		var $button1 = this.find('#button1');
 		this.find('#button2').click(function() {
