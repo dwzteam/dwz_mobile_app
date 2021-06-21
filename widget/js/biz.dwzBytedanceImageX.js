@@ -26,9 +26,10 @@ biz.dwzBytedanceImageX = {
 							url: $img.attr('data-src-imagex') // 原图url
 						},
 						(ret) => {
-							// console.log(JSON.stringify(ret));
 							if (ret.status) {
 								img.src = ret.base64str;
+							} else {
+								console.log(JSON.stringify(ret));
 							}
 						}
 					);

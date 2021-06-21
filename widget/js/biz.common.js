@@ -8,7 +8,7 @@ $.urlInterceptor = function (url) {
 
 	if (!pass) {
 		// 配制无需登录的uri
-		let uris = ['tpl/user/', 'tpl/home.html'];
+		let uris = ['tpl/user/', 'tpl/module/', 'tpl/home.html'];
 
 		// 判断request URI 是否需要登入
 		let requestUri = url.getRequestURI();
@@ -195,45 +195,46 @@ $.extend(biz, {
 	checkUpdate() {
 		if (!window.api) return;
 		const mam = api.require('mam');
-		mam.checkUpdate((ret, err) => {
-			if (ret && ret.status) {
-				const result = ret.result;
-				if (result.update) {
-					const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
+		mam &&
+			mam.checkUpdate((ret, err) => {
+				if (ret && ret.status) {
+					const result = ret.result;
+					if (result.update) {
+						const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
 
-					if (result.closed && biz.server.ENV == 'LIVE') {
-						$.alert.confirm(
-							{
-								title: '有新的版本，请下载并安装',
-								msg,
-								buttons: ['确定']
-							},
-							(ret) => {
-								if (ret.buttonIndex == 1) {
-									biz.updateApp(result);
+						if (result.closed && biz.server.ENV == 'LIVE') {
+							$.alert.confirm(
+								{
+									title: '有新的版本，请下载并安装',
+									msg,
+									buttons: ['确定']
+								},
+								(ret) => {
+									if (ret.buttonIndex == 1) {
+										biz.updateApp(result);
+									}
 								}
-							}
-						);
-					} else {
-						$.alert.confirm(
-							{
-								title: '有新的版本，是否下载并安装',
-								msg,
-								buttons: ['确定', '取消'],
-								theme: 'is-default'
-							},
-							(ret) => {
-								if (ret.buttonIndex == 1) {
-									biz.updateApp(result);
+							);
+						} else {
+							$.alert.confirm(
+								{
+									title: '有新的版本，是否下载并安装',
+									msg,
+									buttons: ['确定', '取消'],
+									theme: 'is-default'
+								},
+								(ret) => {
+									if (ret.buttonIndex == 1) {
+										biz.updateApp(result);
+									}
 								}
-							}
-						);
+							);
+						}
 					}
+				} else {
+					$.alert.toast(err.msg);
 				}
-			} else {
-				$.alert.toast(err.msg);
-			}
-		});
+			});
 	},
 
 	/**
