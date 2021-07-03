@@ -106,7 +106,7 @@ $.navView = {
 
 			$box.show().translateX(document.documentElement.clientWidth + 'px');
 			setTimeout(function () {
-				$box.translateX('0px', 500, 'ease');
+				$box.translateX('0px', 300, 'ease');
 			}, 200);
 		}
 
@@ -189,7 +189,7 @@ $.navView = {
 			$.history.pop(local);
 		}
 
-		$box.animate({ x: document.documentElement.clientWidth }, 500, 'ease', function () {
+		$box.animate({ x: document.documentElement.clientWidth }, 300, 'ease', function () {
 			$box.triggerPageClear();
 			$box.remove();
 		});

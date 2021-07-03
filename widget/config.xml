@@ -3,15 +3,11 @@
 	<name>DwzMobileApp</name>
 
 	<description>
-
-		Example For APICloud.
-
+		DWZ Mobile Example For APICloud.
 	</description>
 
-	<author email="developer@apicloud.com" href="http://www.apicloud.com">
-
+	<author email="350863780@qq.com" href="http://www.apicloud.com">
 		Developer
-
 	</author>
 
 	<content src="index.html"/>
@@ -19,45 +15,25 @@
 	<access origin="*"/>
 
 	<preference name="pageBounce" value="false"/>
-
 	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
-
 	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
-
 	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
-
 	<preference name="hScrollBarEnabled" value="false"/>
-
 	<preference name="vScrollBarEnabled" value="false"/>
-
 	<preference name="autoLaunch" value="true"/>
-
 	<preference name="fullScreen" value="false"/>
-
 	<preference name="autoUpdate" value="fakse"/>
-
-	<preference name="smartUpdate" value="false"/>
-
+	<preference name="smartUpdate" value="true"/>
 	<preference name="debug" value="true"/>
-
 	<preference name="statusBarAppearance" value="true"/>
-
 	<preference name="useWKWebView" value="true"/>
-
 	<permission name="readPhoneState"/>
-
 	<permission name="camera"/>
-
 	<permission name="record"/>
-
 	<permission name="location"/>
-
 	<permission name="fileSystem"/>
-
 	<permission name="internet"/>
-
 	<permission name="bootCompleted"/>
-
 	<permission name="hardware"/>
 
 	<!--配置后台定位功能：-->

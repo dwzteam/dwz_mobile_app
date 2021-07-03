@@ -29,12 +29,10 @@ $.fn.extend({
 				if (op.currentIndex == iTabIndex) $tab.addClass('active');
 				else $tab.removeClass('active');
 
-				$tab.each(function () {
-					$tab.click(function (event) {
-						switchTab($box, $tabs, $panels, iTabIndex);
+				$tab.click((event) => {
+					switchTab($box, $tabs, $panels, iTabIndex);
 
-						event.preventDefault();
-					});
+					event.preventDefault();
 				});
 			});
 

@@ -142,7 +142,7 @@
 		}
 
 		if ($.alert) {
-			$('a[target=alertDialog]', $p)
+			$('a[target=alertPrompt]', $p)
 				.click(function (event) {
 					let $link = $(this);
 					$.alert.prompt($link.attr('data-href'));

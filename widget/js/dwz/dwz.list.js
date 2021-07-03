@@ -163,7 +163,7 @@ $.extend({
 			},
 			loadMoreFn() {
 				console.log('loadMoreFn...');
-				if ($page.size() && $form.total && $form.total > $list.find('li.item').size()) {
+				if ($page.size() && $form.total && $form.total >= $form.currentList.length) {
 					$page.val(parseInt($page.val()) + 1);
 					$form.requestList(true);
 					$list.data('dwz-load-more', 1); // 加载下一页时，禁用scroll复位
