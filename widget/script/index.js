@@ -57,7 +57,7 @@ function loadScripts(options) {
 	var BASE_URL = (options && options.BASE_URL) || './';
 	var op = {
 		ENV: (options && options.ENV) || 'DEV', // DEV, TEST, UAT, LIVE
-		run_env: (options && options.run_env) || 'build', // dev, build
+		run_env: (options && options.run_env) || 'dev', // dev, build
 		iframe: (options && options.iframe) || false // 是否iframe嵌入的页面
 	};
 
@@ -99,7 +99,7 @@ function loadScripts(options) {
 			);
 		});
 
-		biz.checkUpdate();
+		// biz.checkUpdate();
 
 		// 默认打开权限 ['camera','contacts','microphone','photos','location','notification','calendar-r','phone-call','phone-r','sms-r','storage-r','starage-w'];
 		if (api.systemType == 'android') {

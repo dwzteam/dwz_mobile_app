@@ -192,50 +192,63 @@ $.extend(biz, {
 	// 		});
 	// 	}
 	// },
-	// checkUpdate() {
-	// 	if (!window.api) return;
-	// 	const mam = api.require('mam');
-	// 	mam &&
-	// 		mam.checkUpdate((ret, err) => {
-	// 			if (ret && ret.status) {
-	// 				const result = ret.result;
-	// 				if (result.update) {
-	// 					const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
+	checkUpdate() {
+		if (!window.api) return;
+		const mam = api.require('mam');
+		// mam &&
+		// 	mam.checkUpdate((ret, err) => {
+		// 		if (ret && ret.status) {
+		// 			const result = ret.result;
+		// 			if (result.update) {
+		// 				const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
 
-	// 					if (result.closed && biz.server.ENV == 'LIVE') {
-	// 						$.alert.confirm(
-	// 							{
-	// 								title: '有新的版本，请下载并安装',
-	// 								msg,
-	// 								buttons: ['确定']
-	// 							},
-	// 							(ret) => {
-	// 								if (ret.buttonIndex == 1) {
-	// 									biz.updateApp(result);
-	// 								}
-	// 							}
-	// 						);
-	// 					} else {
-	// 						$.alert.confirm(
-	// 							{
-	// 								title: '有新的版本，是否下载并安装',
-	// 								msg,
-	// 								buttons: ['确定', '取消'],
-	// 								theme: 'is-default'
-	// 							},
-	// 							(ret) => {
-	// 								if (ret.buttonIndex == 1) {
-	// 									biz.updateApp(result);
-	// 								}
-	// 							}
-	// 						);
-	// 					}
-	// 				}
-	// 			} else {
-	// 				$.alert.toast(err.msg);
-	// 			}
-	// 		});
-	// },
+		// 				if (result.closed && biz.server.ENV == 'LIVE') {
+		// 					$.alert.confirm(
+		// 						{
+		// 							title: '有新的版本，请下载并安装',
+		// 							msg,
+		// 							buttons: ['确定']
+		// 						},
+		// 						(ret) => {
+		// 							if (ret.buttonIndex == 1) {
+		// 								biz.updateApp(result);
+		// 							}
+		// 						}
+		// 					);
+		// 				} else {
+		// 					$.alert.confirm(
+		// 						{
+		// 							title: '有新的版本，是否下载并安装',
+		// 							msg,
+		// 							buttons: ['确定', '取消'],
+		// 							theme: 'is-default'
+		// 						},
+		// 						(ret) => {
+		// 							if (ret.buttonIndex == 1) {
+		// 								biz.updateApp(result);
+		// 							}
+		// 						}
+		// 					);
+		// 				}
+		// 			}
+		// 		} else {
+		// 			$.alert.toast(err.msg);
+		// 		}
+		// 	});
+
+		api.addEventListener(
+			{
+				name: 'smartupdatefinish'
+			},
+			(ret, err) => {
+				$.alert.confirm({ msg: '云修复完成，重新启动应用' }, (ret) => {
+					if (ret.buttonIndex == 1) {
+						api.rebootApp();
+					}
+				});
+			}
+		);
+	},
 
 	/**
 	 * 默认页面渲染回调函数
