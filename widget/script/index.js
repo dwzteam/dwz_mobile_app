@@ -99,7 +99,7 @@ function loadScripts(options) {
 			);
 		});
 
-		// biz.checkUpdate();
+		biz.checkUpdate();
 
 		// 默认打开权限 ['camera','contacts','microphone','photos','location','notification','calendar-r','phone-call','phone-r','sms-r','storage-r','starage-w'];
 		if (api.systemType == 'android') {
