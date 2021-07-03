@@ -164,90 +164,97 @@ $.extend(biz, {
 		}
 		return true;
 	},
-	// updateApp(result) {
-	// 	if (!window.api) return;
-	// 	if (api.systemType == 'android') {
-	// 		api.download(
-	// 			{
-	// 				url: result.source,
-	// 				report: true
-	// 			},
-	// 			function (ret, err) {
-	// 				if (ret && !ret.state) {
-	// 					/* 下载进度 */
-	// 					$.alert.toast('正在下载应用' + ret.percent + '%');
-	// 				}
-	// 				if (ret && ret.state) {
-	// 					/* 下载完成 */
-	// 					const savePath = ret.savePath;
-	// 					api.installApp({
-	// 						appUri: savePath
-	// 					});
-	// 				}
-	// 			}
-	// 		);
-	// 	} else if (api.systemType == 'ios') {
-	// 		api.installApp({
-	// 			appUri: result.source
-	// 		});
-	// 	}
-	// },
+	updateApp(result) {
+		if (!window.api) return;
+		if (api.systemType == 'android') {
+			api.download(
+				{
+					url: result.source,
+					report: true
+				},
+				(ret, err) => {
+					if (ret && !ret.state) {
+						/* 下载进度 */
+						$.alert.toast('正在下载应用' + ret.percent + '%');
+					}
+					if (ret && ret.state) {
+						/* 下载完成 */
+						const savePath = ret.savePath;
+						api.installApp({
+							appUri: savePath
+						});
+					}
+				}
+			);
+		} else if (api.systemType == 'ios') {
+			api.installApp({
+				appUri: result.source
+			});
+		}
+	},
 	checkUpdate() {
 		if (!window.api) return;
 		const mam = api.require('mam');
-		// mam &&
-		// 	mam.checkUpdate((ret, err) => {
-		// 		if (ret && ret.status) {
-		// 			const result = ret.result;
-		// 			if (result.update) {
-		// 				const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
+		if (mam) {
+			mam.checkUpdate((ret, err) => {
+				if (ret && ret.status) {
+					const result = ret.result;
+					if (result.update) {
+						const msg = `新版本型号:${result.version};更新提示语:${result.updateTip};发布时间:${result.time}`;
 
-		// 				if (result.closed && biz.server.ENV == 'LIVE') {
-		// 					$.alert.confirm(
-		// 						{
-		// 							title: '有新的版本，请下载并安装',
-		// 							msg,
-		// 							buttons: ['确定']
-		// 						},
-		// 						(ret) => {
-		// 							if (ret.buttonIndex == 1) {
-		// 								biz.updateApp(result);
-		// 							}
-		// 						}
-		// 					);
-		// 				} else {
-		// 					$.alert.confirm(
-		// 						{
-		// 							title: '有新的版本，是否下载并安装',
-		// 							msg,
-		// 							buttons: ['确定', '取消'],
-		// 							theme: 'is-default'
-		// 						},
-		// 						(ret) => {
-		// 							if (ret.buttonIndex == 1) {
-		// 								biz.updateApp(result);
-		// 							}
-		// 						}
-		// 					);
-		// 				}
-		// 			}
-		// 		} else {
-		// 			$.alert.toast(err.msg);
-		// 		}
-		// 	});
-
-		api.addEventListener(
-			{
-				name: 'smartupdatefinish'
-			},
-			(ret, err) => {
-				$.alert.confirm({ msg: '云修复完成，重新启动应用' }, (ret) => {
-					if (ret.buttonIndex == 1) {
-						api.rebootApp();
+						if (result.closed && biz.server.ENV == 'LIVE') {
+							$.alert.confirm(
+								{
+									title: '有新的版本，请下载并安装',
+									msg,
+									buttons: ['确定']
+								},
+								(ret) => {
+									if (ret.buttonIndex == 1) {
+										biz.updateApp(result);
+									}
+								}
+							);
+						} else {
+							$.alert.confirm(
+								{
+									title: '有新的版本，是否下载并安装',
+									msg,
+									buttons: ['确定', '取消'],
+									theme: 'is-default'
+								},
+								(ret) => {
+									if (ret.buttonIndex == 1) {
+										biz.updateApp(result);
+									}
+								}
+							);
+						}
 					}
-				});
-			}
-		);
+				} else {
+					$.alert.toast(err.msg);
+				}
+			});
+
+			// 云修复
+			mam.checkSmartUpdate((ret, err) => {
+				if (ret) {
+					alert(JSON.stringify(ret));
+
+					$.alert.confirm({ msg: '有新的云修复，是否更新' }, (ret) => {
+						if (ret.buttonIndex == 1) {
+							mam.startSmartUpdate((ret, err) => {
+								if (ret && 3 == ret.state) {
+									api.rebootApp();
+								}
+							});
+						}
+					});
+				} else {
+					$.alert.toast(err.msg);
+				}
+			});
+		}
 	},
 
 	/**

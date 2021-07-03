@@ -22,8 +22,8 @@
 	<preference name="vScrollBarEnabled" value="false"/>
 	<preference name="autoLaunch" value="true"/>
 	<preference name="fullScreen" value="false"/>
-	<preference name="autoUpdate" value="true"/>
-	<preference name="smartUpdate" value="true"/>
+	<preference name="autoUpdate" value="false"/>
+	<preference name="smartUpdate" value="false"/>
 	<preference name="debug" value="true"/>
 	<preference name="statusBarAppearance" value="true"/>
 	<preference name="useWKWebView" value="true"/>
