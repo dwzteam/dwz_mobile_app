@@ -4,8 +4,8 @@
 biz.announce = {
 	listRender(tpl, params) {
 		let html = template.render(tpl.html, {
-			UserInfo: UserInfo,
-			params: params
+			UserInfo,
+			params
 		});
 		this.html(html).initUI();
 
@@ -21,13 +21,11 @@ biz.announce = {
 			url: biz.server.getUrl(biz.server.announce.detail, params),
 			dataType: 'json',
 			data: { announce_id: params.id },
-			cache: false,
-			global: false,
 			success: (json) => {
 				console.log(json);
 
 				let html = template.render(tpl.html, {
-					UserInfo: UserInfo,
+					UserInfo,
 					vo: json.data
 				});
 				this.html(html).initUI();

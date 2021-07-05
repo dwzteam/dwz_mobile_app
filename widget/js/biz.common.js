@@ -236,24 +236,37 @@ $.extend(biz, {
 				}
 			});
 
-			// 云修复
-			mam.checkSmartUpdate((ret, err) => {
-				if (ret) {
-					alert(JSON.stringify(ret));
+			// // 云修复
+			// mam.checkSmartUpdate((ret, err) => {
+			// 	if (ret) {
+			// 		alert(JSON.stringify(ret));
 
-					$.alert.confirm({ msg: '有新的云修复，是否更新' }, (ret) => {
+			// 		$.alert.confirm({ msg: '有新的云修复，是否更新' }, (ret) => {
+			// 			if (ret.buttonIndex == 1) {
+			// 				mam.startSmartUpdate((ret, err) => {
+			// 					if (ret && 3 == ret.state) {
+			// 						api.rebootApp();
+			// 					}
+			// 				});
+			// 			}
+			// 		});
+			// 	} else {
+			// 		$.alert.toast(err.msg);
+			// 	}
+			// });
+
+			api.addEventListener(
+				{
+					name: 'smartupdatefinish'
+				},
+				(ret, err) => {
+					$.alert.confirm({ msg: '云修复完成，重启APP' }, (ret) => {
 						if (ret.buttonIndex == 1) {
-							mam.startSmartUpdate((ret, err) => {
-								if (ret && 3 == ret.state) {
-									api.rebootApp();
-								}
-							});
+							api.rebootApp();
 						}
 					});
-				} else {
-					$.alert.toast(err.msg);
 				}
-			});
+			);
 		}
 	},
 

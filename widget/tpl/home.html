@@ -7,71 +7,73 @@
 		</div>
 	</header>
 
-	<div class="scroll-content dwz-list">
+	<section>
+		<div class="scroll-content dwz-list">
 
-		<div class="scroll">
-			<div class="pullDown">
-				<span class="pullDownIcon">&nbsp;</span>
-				<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
-			</div>
-
-			<div id="home-ad-box">
-				<!-- 骨架屏 -->
-				<div class="dwz-skeleton">
-					<img src="image/pic/skeleton/home.svg">
+			<div class="scroll">
+				<div class="pullDown">
+					<span class="pullDownIcon">&nbsp;</span>
+					<span class="pullDownLabel" data-flip="松开刷新">下拉刷新</span>
 				</div>
-			</div>
 
-			<div class="divider"></div>
-
-			<div class="dwz-panel">
-				<div class="panel-header">
-					<label class="panel-title blockquote">原生模块示例（需打包APP）</label>
-				</div>
-				<div class="panel-content">
-					<div class="grid-col-4">
-
-						<!-- 苹果审核时间测试 -->
-						{{if checkLiveTime}}
-						<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.dwzBaiduFaceLive.testFaceRender&isLiveness=1" rel="faceDetect">
-							<div class="item-icon"><img src="image/icon/module/faceLiveness.svg"></div>
-							<p class="item-label">人脸活体采集</p>
-						</a>
-						<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.dwzBaiduFaceLive.testFaceRender" rel="faceLiveness">
-							<div class="item-icon"><img src="image/icon/module/faceDetect.svg"></div>
-							<p class="item-label">人脸采集</p>
-						</a>
-						{{/if}}
-
-						<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBytedanceImageX/index.html?dwz_callback=biz.dwzBytedanceImageX.testConvertImgRender" rel="dwzBytedanceImageX">
-							<div class="item-icon"><img src="image/icon/module/dwzBytedanceImageX.svg"></div>
-							<p class="item-label">火山引擎</p>
-							<span class="badge badge-1">6</span>
-						</a>
-
-						<a class="item dwz-ctl-hover" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
-							<div class="item-icon"><img src="image/icon/icon-map-nav.svg"></div>
-							<p class="item-label">打开导航</p>
-						</a>
-
+				<div id="home-ad-box">
+					<!-- 骨架屏 -->
+					<div class="dwz-skeleton">
+						<img src="image/pic/skeleton/home.svg">
 					</div>
 				</div>
-			</div>
 
-			<div class="divider"></div>
+				<div class="divider"></div>
 
-			<div class="dwz-panel">
-				<div class="panel-header">
-					<label class="panel-title">DWZ Mobile HTML5组件</label>
-				</div>
-				<div class="panel-content">
-					<div class="grid-col-4" id="home-widget-box">
+				<div class="dwz-panel">
+					<div class="panel-header">
+						<label class="panel-title blockquote">原生模块示例（Android & iOS）</label>
+					</div>
+					<div class="panel-content">
+						<div class="grid-col-4">
+
+							<!-- 苹果审核时间测试 -->
+							{{if checkLiveTime}}
+							<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceLiveness.html?dwz_callback=biz.dwzBaiduFaceLive.testFaceRender&isLiveness=1" rel="faceDetect">
+								<div class="item-icon"><img src="image/icon/module/faceLiveness.svg"></div>
+								<p class="item-label">人脸活体采集</p>
+							</a>
+							<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBaiduFaceLive/faceDetect.html?dwz_callback=biz.dwzBaiduFaceLive.testFaceRender" rel="faceLiveness">
+								<div class="item-icon"><img src="image/icon/module/faceDetect.svg"></div>
+								<p class="item-label">人脸采集</p>
+							</a>
+							{{/if}}
+
+							<a class="item dwz-ctl-hover" target="navView" data-href="tpl/module/dwzBytedanceImageX/index.html?dwz_callback=biz.dwzBytedanceImageX.testConvertImgRender" rel="dwzBytedanceImageX">
+								<div class="item-icon"><img src="image/icon/module/dwzBytedanceImageX.svg"></div>
+								<p class="item-label">火山引擎</p>
+								<span class="badge badge-1">6</span>
+							</a>
+
+							<a class="item dwz-ctl-hover" href="javascript:biz.openMapNav({name: '恒生科技园', lng:120.005807,lat:30.278029})">
+								<div class="item-icon"><img src="image/icon/icon-map-nav.svg"></div>
+								<p class="item-label">打开导航</p>
+							</a>
+
+						</div>
 					</div>
 				</div>
-			</div>
 
+				<div class="divider"></div>
+
+				<div class="dwz-panel">
+					<div class="panel-header">
+						<label class="panel-title">DWZ Mobile HTML5组件</label>
+					</div>
+					<div class="panel-content">
+						<div class="grid-col-4" id="home-widget-box">
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
-	</div>
+	</section>
 </form>
 
 <script id="tpl_home_ad" type="text/html">
