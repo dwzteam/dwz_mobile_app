@@ -60,7 +60,7 @@ class DwzWidget {
  * @author 张慧华
  */
 class DwzMarquee extends DwzWidget {
-	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, delay = 1000, selectIndex = 0, pageSize = 1 }) {
+	constructor({ $el = null, cls = 'marquee', itemCls = 'marquee-item', duration = 10 * 1000, delay = 10, selectIndex = 0, pageSize = 1 }) {
 		//调用实现父类的构造函数,相当于获得父类的this指向
 		super(arguments[0]);
 		this.cls = cls;
@@ -104,7 +104,8 @@ class DwzMarquee extends DwzWidget {
 	_animationEvent() {
 		let $marquee = this.findByCls(this.cls);
 		let $items = this.findByCls(this.itemCls);
-		if ($items.size() == 0) {
+		const _size = $items.size();
+		if (_size == 0 || (_size > 1 && _size <= this.pageSize)) {
 			return;
 		}
 
@@ -121,12 +122,9 @@ class DwzMarquee extends DwzWidget {
 			}
 
 			this._triggerActive();
-			this._timer = setTimeout(
-				() => {
-					this._animationEvent();
-				},
-				this.pageSize > 1 ? this.delay : 10
-			);
+			this._timer = setTimeout(() => {
+				this._animationEvent();
+			}, this.delay || 10);
 		});
 
 		setTimeout(() => {
@@ -158,15 +156,21 @@ class DwzMarquee extends DwzWidget {
 		}
 
 		if ($items.size() > 1) {
-			if (this.pageSize > 1) {
-				this.$el.css({ height: $items.eq(0).height() * this.pageSize + 'px' });
-			}
+			this.resize($items);
 			setTimeout(() => {
 				this._animationEvent();
 			}, this.delay);
 		}
 	}
 
+	resize($items) {
+		if (!$items) {
+			$items = this.findByCls(this.itemCls);
+		}
+		if (this.pageSize > 1) {
+			this.$el.css({ height: $items.eq(0).height() * this.pageSize + 'px' });
+		}
+	}
 	_stop() {
 		this.isOver = true;
 		if (this._timer) {
@@ -176,7 +180,7 @@ class DwzMarquee extends DwzWidget {
 	}
 	html(html) {
 		this._stop();
-		this.$el.html(html);
+		this.$el.html(html).find('.dwz-ctl-hover').hoverClass('hover');
 		this.play();
 		this._triggerActive();
 	}

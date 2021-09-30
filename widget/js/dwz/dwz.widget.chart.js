@@ -253,6 +253,7 @@ class DwzChartCircle extends DwzChartBase {
 	setData(data) {
 		if ($.isArray(data) && data.length == this.data.length) {
 			this.data = data;
+			this.angleRadius = this._angleCal(data);
 			this.render();
 		}
 	}

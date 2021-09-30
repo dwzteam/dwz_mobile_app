@@ -422,8 +422,13 @@ dwz.extend({
 	getStorage(key) {
 		let str = localStorage.getItem(key);
 		if (str) {
-			return JSON.parse(str);
+			try {
+				return JSON.parse(str);
+			} catch (e) {
+				return {};
+			}
 		}
+		return {};
 	},
 	setStorage(key, data) {
 		localStorage.setItem(key, JSON.stringify(data));
@@ -1400,7 +1405,7 @@ dwz.extend({
 						(option.selected || i === index) &&
 						// Don't return options that are disabled or in a disabled optgroup
 						!option.disabled &&
-						(!option.parentNode.disabled || !dwz.nodeName(option.parentNode, 'optgroup'))
+						(!option.parentNode.disabled || !dwz.isSameTag(option.parentNode, 'optgroup'))
 					) {
 						// Get the specific value for the option
 						value = dwz(option).val();

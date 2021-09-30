@@ -56,8 +56,8 @@ var js_src = {
 function loadScripts(options) {
 	var BASE_URL = (options && options.BASE_URL) || './';
 	var op = {
-		ENV: (options && options.ENV) || 'DEV', // DEV, TEST, UAT, LIVE
-		run_env: (options && options.run_env) || 'dev', // dev, build
+		ENV: (options && options.ENV) || 'DEV', // API环境：DEV, TEST, UAT, LIVE
+		run_env: (options && options.run_env) || 'dev', // js打包：dev, build
 		iframe: (options && options.iframe) || false // 是否iframe嵌入的页面
 	};
 

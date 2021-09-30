@@ -19,6 +19,7 @@
 				<div class="flex-wrap-center">
 					<div class="flex-1" id="chart-percent-3"></div>
 					<div class="flex-1" id="chart-percent-4"></div>
+					<div class="flex-1" id="chart-percent-5"></div>
 				</div>
 
 			</div>
@@ -47,7 +48,6 @@
 			data: [20, 20, 20, 20, 20],
 			axis: ['产品', '前端', '后端', '测试', '运维'],
 			img: './image/navTab/message-active.svg',
-			textColor: '#0099DD',
 			sideType: 'onside',
 			fgWidth: 15,
 			bgWidth: 3
@@ -58,7 +58,6 @@
 			data: [10, 30, 20, 10, 10],
 			axis: ['产品', '前端', '后端', '测试', '运维'],
 			img: './image/navTab/my-active.svg',
-			textColor: '#0099DD',
 			sideType: 'outside',
 			fgWidth: 10,
 			bgWidth: 3
@@ -68,10 +67,18 @@
 			data: [10, 30, 20, 10, 30],
 			axis: ['产品', '前端', '后端', '测试', '运维'],
 			img: './image/icon/icon-map-nav.svg',
-			textColor: '#0099DD',
 			sideType: 'inside',
 			fgWidth: 10,
 			bgWidth: 3
+		});
+
+		const chart5 = new DwzChartCircle({
+			$el: this.find('#chart-percent-5'),
+			data: [50],
+			axis: ['占比'],
+			sideType: 'outside',
+			fgWidth: 10,
+			bgWidth: 1
 		});
 
 		this.find('button.button').click((event) => {

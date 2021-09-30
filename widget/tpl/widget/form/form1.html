@@ -119,7 +119,7 @@
 					<div class="form-item">
 						<div class="item-content">
 							<label>交通工具</label>
-							<select name="traffic_vehicle" class="required" data-error="请选择交通工具">
+							<select name="traffic_vehicle" class="required" data-error="请选择交通工具" onchange="alert($(this).val())">
 								<option value="">请选择</option>
 								<option value="1">飞机</option>
 								<option value="2">火车</option>
