@@ -124,7 +124,7 @@ $.navTab = {
 		if ($.dialog && $.dialog.isOpen) {
 			$.dialog.close();
 		} else {
-			if ($.navView) $.navView.close(false);
+			if ($.navView) $.navView.close();
 		}
 	},
 	/**
@@ -189,7 +189,7 @@ $.navTab = {
 	/**
 	 * 清除缓存并重新加载页面
 	 */
-	clearCache(reload = true) {
+	clearCache(reload = false) {
 		if (this.$box) {
 			this.getTabs().each((index, item) => $(item).removeAttr('data-loaded'));
 			reload && this.reload();

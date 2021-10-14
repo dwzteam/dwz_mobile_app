@@ -131,7 +131,6 @@ function loginAjaxDone(json) {
 	if ($.isAjaxStatusOk(json)) {
 		UserInfoUtil.update(json.data);
 
-		$.dialog.close();
 		$.navTab.open({
 			url: 'tpl/home.html?dwz_callback=biz.home.render',
 			tabid: 'home'

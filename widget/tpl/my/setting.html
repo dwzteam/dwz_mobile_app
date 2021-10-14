@@ -49,6 +49,7 @@
 							$.alert.confirm( '确定要退出登录吗？', function(ret) {
 								if (ret.buttonIndex == 1) {
 									UserInfoUtil.clear();
+									$.navTab.clearCache(false);
 									$.gotoLogin();
 								}
 							});
