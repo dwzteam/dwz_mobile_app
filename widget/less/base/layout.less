@@ -14,6 +14,224 @@
 	}
 }
 
+/* 外边距 */
+.margin-h {
+	margin: 0 @marginH;
+}
+.margin-v {
+	margin: @marginV 0;
+}
+.margin-vh {
+	margin: @marginV @marginH;
+}
+.margin-l {
+	margin-left: @marginH;
+}
+.margin-r {
+	margin-right: @marginH;
+}
+.margin-t {
+	margin-top: @marginV;
+}
+.margin-b {
+	margin-bottom: @marginV;
+}
+
+/* 内边距 */
+.padding-h {
+	padding: 0 @marginH;
+}
+.padding-v {
+	padding: @marginV 0;
+}
+.padding-vh {
+	padding: @marginV @marginH;
+}
+.padding-l {
+	padding-left: @marginH;
+}
+.padding-r {
+	padding-right: @marginH;
+}
+.padding-t {
+	padding-top: @marginV;
+}
+.padding-b {
+	padding-bottom: @marginV;
+}
+
+
+/* 外边距(大) */
+.margin-vh-lg {
+	margin: @marginV_lg @marginH_lg;
+}
+.margin-h-lg {
+	margin-left: @marginH_lg;
+	margin-right: @marginH_lg;
+}
+.margin-v-lg {
+	margin-top: @marginV_lg;
+	margin-bottom: @marginV_lg;
+}
+.margin-l-lg {
+	margin-left: @marginH_lg;
+}
+.margin-r-lg {
+	margin-right: @marginH_lg;
+}
+
+/* 内边距(大) */
+.padding-vh-lg {
+	padding: @marginV_lg @marginH_lg;
+}
+.padding-h-lg {
+	padding-left: @marginH_lg;
+	padding-right: @marginH_lg;
+}
+.padding-v-lg {
+	padding-top: @marginV_lg;
+	padding-bottom: @marginV_lg;
+}
+.padding-l-lg {
+	padding-left: @marginH_lg;
+}
+.padding-r-lg {
+	padding-right: @marginH_lg;
+}
+
+/* 外边距(小) */
+.margin-vh-sm {
+	margin: @marginV_sm @marginH_sm;
+}
+.margin-h-sm {
+	margin-left: @marginH_sm;
+	margin-right: @marginH_sm;
+}
+.margin-v-sm {
+	margin-top: @marginV_sm;
+	margin-bottom: @marginV_sm;
+}
+.margin-l-sm {
+	margin-left: @marginH_sm;
+}
+.margin-r-sm {
+	margin-right: @marginH_sm;
+}
+.margin-t-sm {
+	margin-top: @marginH_sm;
+}
+.margin-b-sm {
+	margin-bottom: @marginH_sm;
+}
+
+/* 内边距(小) */
+.padding-h-sm {
+	padding-left: @marginH_sm;
+	padding-right: @marginH_sm;
+}
+.padding-v-sm {
+	padding-top: @marginV_sm;
+	padding-bottom: @marginV_sm;
+}
+.padding-vh-sm {
+	padding: @marginV_sm @marginH_sm;
+}
+.padding-l-sm {
+	padding-left: @marginH_sm;
+}
+.padding-r-sm {
+	padding-right: @marginH_sm;
+}
+.padding-t-sm {
+	margin-top: @marginH_sm;
+}
+.padding-b-sm {
+	margin-bottom: @marginH_sm;
+}
+
+// 全屏 方案1
+.full-size {
+	width: 100%;
+	height: 100%;
+}
+// 全屏 方案2
+.full-abs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+// 全屏 方案3
+.full-fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+// flex 布局
+.flex-wrap {
+	display: flex;
+}
+.flex-wrap-v {
+	display: flex;
+	flex-direction: column;
+}
+// 上下左右居中
+.flex-wrap-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.flex-flow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	& > .button {
+		margin: 5px;
+	}
+}
+
+// 循环flex-1 ...
+.flex-loop(@counter) when (@counter > 0) {
+	.flex-loop((@counter - 1)); // 递归调用自身
+	.flex-@{counter} {
+		position: relative;
+		flex: @counter; // 每次调用时产生的样式代码
+	}
+}
+.flex-loop(60);
+
+.align-center {
+	align-items: center;
+}
+.align-start {
+	align-items: flex-start;
+}
+.align-end {
+	align-items: flex-end;
+}
+.justify-center {
+	justify-content: center;
+}
+.justify-start {
+	justify-content: flex-start;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.justify-around {
+	justify-content: space-around;
+}
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
 // 九宫格
 .grid-col-2,
 .grid-col-3,
@@ -26,7 +244,7 @@
 	.item {
 		.boxLine(0 1px 1px 0);
 		&:before {
-			transform: scale(0.495, 0.5); // 处理border兼容问题
+			transform: scale(0.5, 0.5); // 处理border兼容问题 0.495, 0.5
 		}
 		display: block;
 		position: relative;

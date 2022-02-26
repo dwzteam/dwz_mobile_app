@@ -25,7 +25,7 @@
 
 				<div class="panel-item flex-1">
 
-					<div class="slideTab full-abs">
+					<div class="dwz-slide-tab full-abs">
 						<div class="hd">
 							<ul>
 								<li>标题1</li>
@@ -125,7 +125,6 @@
 </main>
 
 
-
 <script type="text/javascript">
 	function helper(tpl, params) {
 		// console.log(this, tpl, params)
@@ -134,7 +133,7 @@
 			console.log(event.data);
 		});
 
-		this.find('.slideTab').slideTab({
+		this.find('.dwz-slide-tab').slideTab({
 			onSwitchSlide: ($itemBox, itemTpl, itemParams) => {
 				console.log($itemBox, itemTpl, itemParams);
 			}

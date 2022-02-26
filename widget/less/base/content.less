@@ -70,6 +70,84 @@ main > section,
 	white-space: pre-wrap;
 }
 
+
+/* 突显数字 */
+.txt-big1 {
+  font-size: @big1;
+}
+
+.txt-big2 {
+  font-size: @big2;
+}
+
+.txt-big3 {
+  font-size: @big3;
+}
+
+.txt-big4 {
+  font-size: @big4;
+}
+
+.txt-big5 {
+  font-size: @big5;
+}
+
+.txt-big1,
+.txt-big2,
+.txt-big3,
+.txt-big4,
+.txt-big5 {
+	&.is-primary {
+		color: @btnBgPrimary;
+	}
+}
+
+.txt-big1,
+.txt-big2,
+.txt-big3,
+.txt-big4,
+.txt-big5 {
+  &.is-success {color: @btnBgSuccess;}
+}
+
+.txt-big1,
+.txt-big2,
+.txt-big3,
+.txt-big4,
+.txt-big5 {
+  &.is-warning {color: @btnBgWarning;}
+}
+
+.txt-big1,
+.txt-big2,
+.txt-big3,
+.txt-big4,
+.txt-big5 {
+  &.is-danger {color: @btnBgDanger;}
+}
+
+.txt-big1,
+.txt-big2,
+.txt-big3,
+.txt-big4,
+.txt-big5 {
+  &.is-info {color: @btnBgInfo;}
+}
+
+// 突显数字 + 单位
+.num-item {
+	display: flex;
+	align-items: baseline;
+	font-size: @l3;
+	label {
+		padding-right: 10px;
+	}
+	.unit {
+		font-size: @l5;
+		opacity: 0.7;
+	}
+}
+
 // 段落缩进
 .text-indent {
 	text-indent: 26px;

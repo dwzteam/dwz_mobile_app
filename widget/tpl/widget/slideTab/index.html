@@ -9,7 +9,7 @@
 
 	<section>
 
-		<div class="slideTab full-abs">
+		<div class="dwz-slide-tab full-abs">
 			<div class="hd">
 				<ul>
 					<li>标题1</li>
@@ -105,7 +105,7 @@
 
 <script type="text/javascript">
 	function helper(tpl, params) {
-		this.find('.slideTab').slideTab({
+		this.find('.dwz-slide-tab').slideTab({
 			onSwitchSlide: ($itemBox, itemTpl, itemParams) => {
 				let itemHtml = template.render(itemTpl, itemParams);
 				$itemBox.html(itemHtml).initUI();

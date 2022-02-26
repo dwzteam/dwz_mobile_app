@@ -141,7 +141,7 @@ $.fn.extend({
 
 $.extend({
 	listForm($form, triggerSubmit = true) {
-		let $list = $form.find('div.dwz-list');
+		let $list = $form.find('div.dwz-scroll-list');
 		let $page = $form.find('input[name="' + dwz.config.pageInfo.pageNum + '"]');
 		$form.on('submit', () => {
 			if ($page.size()) $page.val(1);

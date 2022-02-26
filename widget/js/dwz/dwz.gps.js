@@ -2,7 +2,7 @@
 	$.gps = {
 		PI: 3.14159265358979324,
 		x_pi: (3.14159265358979324 * 3000.0) / 180.0,
-		delta: function (lat, lng) {
+		delta(lat, lng) {
 			// Krasovsky 1940
 			//
 			// a = 6378245.0, 1/f = 298.3
@@ -22,21 +22,21 @@
 		},
 
 		//WGS-84 to GCJ-02
-		gcj_encrypt: function (wgsLat, wgsLng) {
+		gcj_encrypt(wgsLat, wgsLng) {
 			if (this.outOfChina(wgsLat, wgsLng)) return { lat: wgsLat, lng: wgsLng };
 
 			let d = this.delta(wgsLat, wgsLng);
 			return { lat: wgsLat + d.lat, lng: wgsLng + d.lng };
 		},
 		//GCJ-02 to WGS-84
-		gcj_decrypt: function (gcjLat, gcjLng) {
+		gcj_decrypt(gcjLat, gcjLng) {
 			if (this.outOfChina(gcjLat, gcjLng)) return { lat: gcjLat, lng: gcjLng };
 
 			let d = this.delta(gcjLat, gcjLng);
 			return { lat: gcjLat - d.lat, lng: gcjLng - d.lng };
 		},
 		//GCJ-02 to WGS-84 exactly
-		// gcj_decrypt_exact: function (gcjLat, gcjLng) {
+		// gcj_decrypt_exact (gcjLat, gcjLng) {
 		// 	let initDelta = 0.01;
 		// 	let threshold = 0.000000001;
 		// 	let dLat = initDelta,
@@ -66,7 +66,7 @@
 		// 	return { lat: wgsLat, lng: wgsLng };
 		// },
 		//GCJ-02 to BD-09
-		bd_encrypt: function (gcjLat, gcjLng) {
+		bd_encrypt(gcjLat, gcjLng) {
 			let x = gcjLng,
 				y = gcjLat;
 			let z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * this.x_pi);
@@ -76,7 +76,7 @@
 			return { lat: bdLat, lng: bdLng };
 		},
 		//BD-09 to GCJ-02
-		bd_decrypt: function (bdLat, bdLng) {
+		bd_decrypt(bdLat, bdLng) {
 			let x = bdLng - 0.0065,
 				y = bdLat - 0.006;
 			let z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * this.x_pi);
@@ -87,7 +87,7 @@
 		},
 		//WGS-84 to Web mercator
 		//mercatorLat -> y mercatorLng -> x
-		mercator_encrypt: function (wgsLat, wgsLng) {
+		mercator_encrypt(wgsLat, wgsLng) {
 			let x = (wgsLng * 20037508.34) / 180;
 			let y = Math.log(Math.tan(((90 + wgsLat) * this.PI) / 360)) / (this.PI / 180);
 			y = (y * 20037508.34) / 180;
@@ -103,7 +103,7 @@
 		},
 		// Web mercator to WGS-84
 		// mercatorLat -> y mercatorLng -> x
-		mercator_decrypt: function (mercatorLat, mercatorLng) {
+		mercator_decrypt(mercatorLat, mercatorLng) {
 			let x = (mercatorLng / 20037508.34) * 180;
 			let y = (mercatorLat / 20037508.34) * 180;
 			y = (180 / this.PI) * (2 * Math.atan(Math.exp((y * this.PI) / 180)) - this.PI / 2);
@@ -120,7 +120,7 @@
              //*/
 		},
 		// two point's distance
-		distance: function (latA, lngA, latB, lngB) {
+		distance(latA, lngA, latB, lngB) {
 			let earthR = 6371000;
 			let x = Math.cos((latA * this.PI) / 180) * Math.cos((latB * this.PI) / 180) * Math.cos(((lngA - lngB) * this.PI) / 180);
 			let y = Math.sin((latA * this.PI) / 180) * Math.sin((latB * this.PI) / 180);
@@ -131,19 +131,19 @@
 			let distance = alpha * earthR;
 			return distance;
 		},
-		outOfChina: function (lat, lng) {
+		outOfChina(lat, lng) {
 			if (lng < 72.004 || lng > 137.8347) return true;
 			if (lat < 0.8293 || lat > 55.8271) return true;
 			return false;
 		},
-		transformLat: function (x, y) {
+		transformLat(x, y) {
 			let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
 			ret += ((20.0 * Math.sin(6.0 * x * this.PI) + 20.0 * Math.sin(2.0 * x * this.PI)) * 2.0) / 3.0;
 			ret += ((20.0 * Math.sin(y * this.PI) + 40.0 * Math.sin((y / 3.0) * this.PI)) * 2.0) / 3.0;
 			ret += ((160.0 * Math.sin((y / 12.0) * this.PI) + 320 * Math.sin((y * this.PI) / 30.0)) * 2.0) / 3.0;
 			return ret;
 		},
-		transformLng: function (x, y) {
+		transformLng(x, y) {
 			let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
 			ret += ((20.0 * Math.sin(6.0 * x * this.PI) + 20.0 * Math.sin(2.0 * x * this.PI)) * 2.0) / 3.0;
 			ret += ((20.0 * Math.sin(x * this.PI) + 40.0 * Math.sin((x / 3.0) * this.PI)) * 2.0) / 3.0;

@@ -73,6 +73,11 @@
 @btnTxtColorDisabled: #bcbec2;
 
 // 字号
+@big1: 36px; // 突显数字1
+@big2: 32px; // 突显数字2
+@big3: 28px; // 突显数字3
+@big4: 22px; // 突显数字4
+@big5: 20px; // 突显数字5
 @l1: 18px; // 一级标题
 @l2: 16px; // 二级标题
 @l3: 14px; // 三级标题
@@ -80,32 +85,15 @@
 @l5: 12px; // 备注
 
 // 布局内外边距
-@marginH: 10px; // 水平边距(左右)
-@marginV: 10px; // 垂直边距(上下)
-.margin-h {
-	margin: 0 @marginH;
-}
-.margin-v {
-	margin: @marginV 0;
-}
-.margin-vh {
-	margin: @marginV @marginH;
-}
-.padding-h {
-	padding: 0 @marginH;
-}
-.padding-v {
-	padding: @marginV 0;
-}
-.padding-vh {
-	padding: @marginV @marginH;
-}
-.padding-l {
-	padding-left: @marginH;
-}
-.padding-r {
-	padding-right: @marginH;
-}
+@marginH: 12px; // 水平边距(默认)
+@marginV: 12px; // 垂直边距(默认)
+@marginH_lg: 20px; // 水平边距(大)
+@marginV_lg: 20px; // page边距(大) 
+@marginH_sm: 8px; // 水平边距(小)
+@marginV_sm: 8px;	// 水平边距(小)
+// @marginH_mini: 4px; // 水平边距(超小)
+// @marginV_mini: 4px; // 水平边距(超小)
+
 
 // 文本垂直居中
 .text-align-v(@vertical-align: middle) {
@@ -192,88 +180,6 @@
 @fontSans: sans-serif;
 @fontDefault: @fontEN, @fontCN, @fontSans;
 
-// 全屏 方案1
-.full-size {
-	width: 100%;
-	height: 100%;
-}
-// 全屏 方案2
-.full-abs {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-// 全屏 方案3
-.full-fixed {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-
-// flex 布局
-.flex-wrap {
-	display: flex;
-}
-.flex-wrap-v {
-	display: flex;
-	flex-direction: column;
-}
-// 上下左右居中
-.flex-wrap-center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.flex-flow {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	& > .button {
-		margin: 5px;
-	}
-}
-
-// 循环flex-1 ...
-.flex-loop(@counter) when (@counter > 0) {
-	.flex-loop((@counter - 1)); // 递归调用自身
-	.flex-@{counter} {
-		position: relative;
-		flex: @counter; // 每次调用时产生的样式代码
-	}
-}
-.flex-loop(60);
-
-.align-center {
-	align-items: center;
-}
-.align-start {
-	align-items: flex-start;
-}
-.align-end {
-	align-items: flex-end;
-}
-.justify-center {
-	justify-content: center;
-}
-.justify-start {
-	justify-content: flex-start;
-}
-.justify-end {
-	justify-content: flex-end;
-}
-.justify-between {
-	justify-content: space-between;
-}
-.justify-around {
-	justify-content: space-around;
-}
-.justify-evenly {
-	justify-content: space-evenly;
-}
 
 // 清除左右浮动元素
 .clearfix {

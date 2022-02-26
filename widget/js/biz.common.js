@@ -1,7 +1,6 @@
 /**
  * @author 张慧华 <350863780@qq.com>
  */
-
 // 检测用户登入状态
 $.urlInterceptor = function (url) {
 	let pass = UserInfo.token ? true : false;
@@ -579,8 +578,11 @@ $.extend(biz, {
 			return (m / 1000).toFixed(1) + '公里';
 		},
 		percent(num, fractionDigits) {
-			var percentNum = num * 100;
+			let percentNum = num * 100;
 			return percentNum.toFixed(fractionDigits);
+		},
+		formatNumber(fractionDigits) {
+			return fractionDigits.toFixed(fractionDigits);
 		},
 		// 手机号脱敏
 		maskMobile(str) {
